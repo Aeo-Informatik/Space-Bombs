@@ -52,8 +52,8 @@ public class MapClass implements Map {
     }
     /**
      * get if the possition is passable
-     * @param x
-     * @param y
+     * @param x the x-coordinate
+     * @param y the y-coordinate
      * @return if th epossition is passable
      */
     public boolean getPassable(int x, int y) {
@@ -68,8 +68,8 @@ public class MapClass implements Map {
     }
     /**
      * set if the possition is passible
-     * @param x
-     * @param y
+     * @param x the x-coordinate
+     * @param y the y-coordinate
      * @param passable if the possition is passable
      */
     public void setPassable(int x,int y,int passable) {
@@ -77,8 +77,8 @@ public class MapClass implements Map {
     }
     /**
      * get if there is a block on that position
-     * @param x
-     * @param y
+     * @param x the x-coordinate
+     * @param y the y-coordinate
      * @return if there is a block on that position
      */
     public boolean getBlockposition(int x , int y) {
@@ -92,8 +92,8 @@ public class MapClass implements Map {
     }
     /**
      * set if there is a block on that position
-     * @param x
-     * @param y
+     * @param x the x-coordinate
+     * @param y the y-coordinate
      * @param blockposition if there is a block on that position
      */
     public void setBlockposition(int x,int y,int blockposition) {
