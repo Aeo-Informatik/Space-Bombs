@@ -91,11 +91,15 @@ public class PlayerClass implements Player{
     }
     
 
-    public boolean setImmortality() {
+    public boolean getImmortality() {
         return immortality;
     }
-
-    public void getImmortality(boolean immortality) {
+    
+    /**
+     * get if the player is immortal
+     * @return if the player is immortal
+     */
+    public void setImmortality(boolean immortality) {//God mode
         this.immortality = immortality;
     }
 
@@ -107,6 +111,10 @@ public class PlayerClass implements Player{
         this.spawnpoint = spawnpoint;
     }
     
+    /**
+     * the player returns to the spawnpoint and respawns there
+     * @return the coordinates of the spawnpoint
+     */
     public int[] respawn(){
         return coordinates;
         
