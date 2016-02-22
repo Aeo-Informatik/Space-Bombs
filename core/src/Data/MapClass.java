@@ -4,7 +4,7 @@ package Data;
  *
  * @author phinix
  */
-public class MapClass implements Map, GameObjects {
+public class MapClass implements Map {
     private int width;//width of the map
     private int height;//height of the map
     private int[][] passable ;//if the position is passaple
