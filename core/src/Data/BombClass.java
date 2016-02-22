@@ -18,10 +18,11 @@ public class BombClass implements Bomb{
         this.timer = timer;
     }
     /**
-     * set the Timer of the bomb;
-     * @param timer the Timer of the bomb
+     * get the range of the Bomb
+     * @return the range of the bomb
      */
     public int getRange() {
+        System.out.println(range);
         return range;
     }
     /**
@@ -36,6 +37,7 @@ public class BombClass implements Bomb{
      * @return the Timer of the bomb;
      */
     public int getTimer() {
+        System.out.println(timer);
         return timer;
     }
     /**
