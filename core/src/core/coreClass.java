@@ -85,5 +85,6 @@ public coreClass() {
      * @param data String from NetworkClient
      */
     public void analyseData(String data){}
-    data = NetworkClient.
+    data = NetworkClient.decode();
+    
     }
