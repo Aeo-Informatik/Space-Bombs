@@ -10,11 +10,11 @@ public class MapClass {
     private int[][] passable ;
     private int[][] blockposition;
     /**
-     * 
-     * @param width
-     * @param height
-     * @param passable
-     * @param blockposition 
+     * Construktor
+     * @param width of th map
+     * @param height of the map
+     * @param passable if the position is passaple
+     * @param blockposition if ther is a block on this position
      */
     public MapClass(int width, int height, int[][] passable, int[][] blockposition) {
         this.width = width;
@@ -23,60 +23,73 @@ public class MapClass {
         this.blockposition = blockposition;
     }
     /**
-     * 
-     * @return 
+     * get width of the map
+     * @return width of the map
      */
     public int getWidth() {
         return width;
     }
     /**
-     * 
-     * @param width 
+     * set width of the map
+     * @param width of the map
      */
     public void setWidth(int width) {
         this.width = width;
     }
     /**
-     * 
-     * @return 
+     * get height of the map
+     * @return height of the map
      */
     public int getHeight() {
         return height;
     }
     /**
-     * 
-     * @param height 
+     * set height of the map
+     * @param height of the map
      */
     public void setHeight(int height) {
         this.height = height;
     }
     /**
-     * 
-     * @return 
+     * get if the possition is passable
+     * @return if th epossition is passable
      */
-    public int[][] getPassable() {
-        return passable;
+    public boolean getPassable(int x, int y) {
+        if (passable[x][y]==1){
+            System.out.println("true");
+            return true;
+        }else{
+            System.out.println("false");
+            return false;
+        }
+                
     }
     /**
-     * 
-     * @param passable 
+     * set if the possition is passible
+     * @param passable if the possition is passable
      */
-    public void setPassable(int[][] passable) {
-        this.passable = passable;
+    public void setPassable(int x,int y,int passable) {
+        this.passable[x][y]=passable;
     }
     /**
-     * 
-     * @return 
+     * get if there is a block on that position
+     * @return if there is a block on that position
      */
-    public int[][] getBlockposition() {
-        return blockposition;
+    public boolean getBlockposition(int x , int y) {
+        if(blockposition[x][y]==1){
+            System.out.println("true");
+            return true;
+        }else{
+            System.out.println("true");
+            return false;
+        }
     }
     /**
-     * 
-     * @param blockposition 
+     * set if there is a block on that position
+     * @param blockposition if there is a block on that position
      */
-    public void setBlockposition(int[][] blockposition) {
-        this.blockposition = blockposition;
+    public void setBlockposition(int x,int y,int blockposition) {
+        this.blockposition[x][y]=blockposition;
     }
     
     
