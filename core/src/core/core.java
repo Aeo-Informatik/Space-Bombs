@@ -66,17 +66,17 @@ public void explode(Bomb bomb);
  * @param direction which direction
  * @return the coordinates of the player after his move
  */
-public tuple movePlayer(Player player, char direction);        
+public int[] movePlayer(Player player, char direction);        
         
 /**
  * checks how many coins are on a field
  * @param coordinates of the field
  * @return 
  */
-public Coin checkCoins(tuple coordinates);
+public Coin checkCoins(int[] coordinates);
 
 /**
- * looks for what the key that be pressed is used for
+ * looks for what the key that is pressed is used for
  * @param key 
  */
 public void hotkey(char key);
