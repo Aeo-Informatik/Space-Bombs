@@ -6,6 +6,9 @@
 
 package core;
 
+import java.util.regex.Pattern;
+import sun.net.NetworkClient;
+
 /**
  *
  * @author plonies_d
@@ -40,7 +43,7 @@ public coreClass() {
      * create an object map
      */    
     public void createMap(){
-        Map m = new Map(31,21,int[31][21],int[31][21]);
+        Data.MapClass m1 = new Data.MapClass(31, 21, map, map);
     }   
 
     /**
@@ -85,6 +88,5 @@ public coreClass() {
      * @param data String from NetworkClient
      */
     public void analyseData(String data){}
-    data = NetworkClient.decode();
-    
+    String[] newData = data.split(Pattern.quote("|"));
     }
