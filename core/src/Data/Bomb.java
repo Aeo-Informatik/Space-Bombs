@@ -13,7 +13,7 @@ public interface Bomb {
      * set the range of the bomb
      * @param range theRange of the bomb
      */
-    public void setrange (int range);
+    public void setRange (int range);
     
     /**
      * set the Timer of the bomb;
