@@ -4,10 +4,11 @@ package Data;
  *
  * @author phinix
  */
-public class BombClass implements Bomb{
+public class BombClass implements Bomb , GameObjects{
     
-    private int range;
-    private int timer;
+    private int range;//the range of the bomb
+    private int timer;//the timer of the bomb
+    
     /**
      * Coinstructor
      * @param range of the bomb
@@ -17,6 +18,7 @@ public class BombClass implements Bomb{
         this.range = range;
         this.timer = timer;
     }
+    
     /**
      * get the range of the Bomb
      * @return the range of the bomb
@@ -25,6 +27,7 @@ public class BombClass implements Bomb{
         System.out.println(range);
         return range;
     }
+    
     /**
      * set the range of the bomb
      * @param range theRange of the bomb
@@ -32,6 +35,7 @@ public class BombClass implements Bomb{
     public void setRange(int range) {
         this.range = range;
     }
+    
     /**
      * get the Timer of the bomb;
      * @return the Timer of the bomb;
@@ -40,6 +44,7 @@ public class BombClass implements Bomb{
         System.out.println(timer);
         return timer;
     }
+    
     /**
      * set the Timer of the bomb;
      * @param timer the Timer of the bomb
@@ -47,6 +52,4 @@ public class BombClass implements Bomb{
     public void setTimer(int timer) {
         this.timer = timer;
     }
-    
-    
 }

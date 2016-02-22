@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author phinix
  */
-public class PlayerClass implements Player{
+public class PlayerClass implements Player, GameObjects{
     private int life;//the life of the player
     private int[] coordinates;//coordinates of the player
     private int team ;//the team of the player
@@ -90,15 +90,14 @@ public class PlayerClass implements Player{
         this.coins = coins;
     }
     
-
-    public boolean getImmortality() {
-        return immortality;
-    }
-    
     /**
      * get if the player is immortal
      * @return if the player is immortal
      */
+    public boolean getImmortality() {
+        return immortality;
+    }
+
     public void setImmortality(boolean immortality) {//God mode
         this.immortality = immortality;
     }
@@ -116,8 +115,8 @@ public class PlayerClass implements Player{
      * @return the coordinates of the spawnpoint
      */
     public int[] respawn(){
-        return coordinates;
         
+        return coordinates;
     }
    
 }

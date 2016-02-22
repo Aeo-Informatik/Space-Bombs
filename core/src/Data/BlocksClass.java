@@ -4,9 +4,10 @@ package Data;
  *
  * @author phinix
  */
-public class BlocksClass implements Blocks{
+public class BlocksClass implements Blocks, GameObjects{
     private boolean destructible;//if the block is destructible
     private int coins;//how many coins will be droped after the desruction 
+    
     /**
      * 
      * @param destructible if the block is destructible
@@ -16,6 +17,7 @@ public class BlocksClass implements Blocks{
         this.destructible = destructible;
         this.coins = coins;
     }
+    
     /**
      * get if the block is destructible
      * @return if the block is destructible 
@@ -23,6 +25,7 @@ public class BlocksClass implements Blocks{
     public boolean getDestructible() {
         return destructible;
     }
+    
     /**
      * set if the block is destructible
      * @param destructible if the block is destructible
@@ -30,6 +33,7 @@ public class BlocksClass implements Blocks{
     public void setDestructible(boolean destructible) {
         this.destructible = destructible;
     }
+    
      /**
      * get how many coins will be droped afte the block is destroid
      * @return how Many Coins
@@ -37,6 +41,7 @@ public class BlocksClass implements Blocks{
     public int getCoins() {
         return coins;
     }
+    
     /**
      * set how many coins will be droped after 
      * the block is destroid
@@ -44,11 +49,5 @@ public class BlocksClass implements Blocks{
      */
     public void setCoins(int coins) {
         this.coins = coins;
-    }
-
-    
-
-
-    
-    
+    }    
 }

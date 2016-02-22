@@ -4,11 +4,11 @@ package Data;
  *
  * @author phinix
  */
-public class MapClass implements Map {
-    private int width;
-    private int height;
-    private int[][] passable ;
-    private int[][] blockposition;
+public class MapClass implements Map, GameObjects {
+    private int width;//width of the map
+    private int height;//height of the map
+    private int[][] passable ;//if the position is passaple
+    private int[][] blockposition;//if ther is a block on this position
     /**
      * Construktor
      * @param width of th map
