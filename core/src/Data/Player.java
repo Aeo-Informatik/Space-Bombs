@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface Player {
    
     int life =0;//the life of the player
-    int[] coordinates=[];//coordinates of the player
+    int[] coordinates=new int[1];//coordinates of the player
     int team =1;//the team of the player
     int coins =100;//coins of the player
     boolean immortality =true;//if the player is immortal
