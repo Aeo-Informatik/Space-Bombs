@@ -9,33 +9,44 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
  * @author plonies_d
  */
 class RecieveThread implements Runnable
-{
-	Socket sock=null;
-	BufferedReader recieve=null;
+{       
+        //Global Variable
+	Socket socket;
+        ArrayList<String> receivedData = new ArrayList<>();
 	
+        //Constructor
 	public RecieveThread(Socket sock) {
-		this.sock = sock;
-	}//end constructor
+		this.socket = sock;
+	}
         
-	public void run() {
-            try{
-		recieve = new BufferedReader(new InputStreamReader(this.sock.getInputStream()));//get inputstream
-		String msgRecieved = null;
+        //Starts automatically when creating this object
+	public void run() 
+        {
+            try 
+            {
+                //Get data from socket and parse it into an Object BufferedReader
+		BufferedReader recieve = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+		String msgRecieved;
+                
+                //Read all lines received from socket
 		while((msgRecieved = recieve.readLine())!= null)
-		{
-			System.out.println("From Server: " + msgRecieved);
-			System.out.println("Please enter something to send to server..");
+		{   
+                    //Debug
+                    System.out.println("From Server: " + msgRecieved);
+                    
 		}
+                
             }catch(Exception e)
             {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
-	}//end run
-}//end class recievethread
+	}
+}
 
