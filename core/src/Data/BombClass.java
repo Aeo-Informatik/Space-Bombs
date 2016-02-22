@@ -6,8 +6,8 @@ package Data;
  */
 public class BombClass implements Bomb{
     
-    private int range;//the range of the bomb
-    private int timer;//the timer of the bomb
+    private int range;
+    private int timer;
     /**
      * Coinstructor
      * @param range of the bomb

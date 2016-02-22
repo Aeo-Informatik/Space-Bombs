@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Data;
 
 /**
  *
- * @author cb0703
+ * @author phinix
  */
 public class CoinClass implements Coin{ 
     private int value;
@@ -48,7 +42,7 @@ public class CoinClass implements Coin{
     }
     /**
      * set the coordinates of the field
-     * @param tuple  the coordinates of the field
+     * @param coordinates  the coordinates of the field
      */
     public void setCoordinates(int[] coordinates) {
         this.coordinates = coordinates;

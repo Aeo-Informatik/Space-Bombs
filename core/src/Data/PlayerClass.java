@@ -4,6 +4,6 @@ package Data;
  *
  * @author phinix
  */
-public interface GameObjects {
+public class PlayerClass {
     
 }

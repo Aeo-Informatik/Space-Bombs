@@ -3,7 +3,7 @@ package Data;
 import java.util.ArrayList;
 /**
  *
- * @author cb0703
+ * @author phinix
  */
 
 public interface Player {

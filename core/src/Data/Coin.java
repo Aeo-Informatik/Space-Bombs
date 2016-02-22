@@ -2,7 +2,7 @@ package Data;
 
 /**
  *
- * @author cb0703
+ * @author phinix
  */
 public interface Coin {
     int value=1;//how many coins are laying on the field
@@ -16,7 +16,7 @@ public interface Coin {
     
     /**
      * set the coordinates of the field
-     * @param tuple  the coordinates of the field
+     * @param coordinates  the coordinates of the field
      */
     public void setCoordinates(int[] coordinates);
     

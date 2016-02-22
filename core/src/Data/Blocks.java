@@ -2,7 +2,7 @@ package Data;
 
 /**
  *
- * @author cb0703
+ * @author phinix
  */
 public interface Blocks {
     boolean destructible=true;//if the block is destructible

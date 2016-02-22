@@ -2,7 +2,7 @@ package Data;
 
 /**
  *
- * @author cb0703
+ * @author phinix
  */
 public class BlocksClass implements Blocks{
     private boolean destructible;//if the block is destructible
@@ -30,11 +30,18 @@ public class BlocksClass implements Blocks{
     public void setDestructible(boolean destructible) {
         this.destructible = destructible;
     }
-
+     /**
+     * get how many coins will be droped afte the block is destroid
+     * @return how Many Coins
+     */
     public int getCoins() {
         return coins;
     }
-
+    /**
+     * set how many coins will be droped after 
+     * the block is destroid
+     * @param Coins how many coins
+     */
     public void setCoins(int coins) {
         this.coins = coins;
     }
