@@ -5,13 +5,23 @@
  */
 package networkClient;
 
-/**
- *
- * @author plonies_d
- */
-import java.io.*;
-import java.net.*;
-public class Client {
+import java.net.Socket;
+
+public class Client implements ClientInterface{
+    
+    private Socket socket;
+    
+    public Client(String host, int port){
+        try{
+            this.socket = new Socket(host, port);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    /*
 	public static void main(String[] args)
 	{
 		try {
@@ -20,6 +30,48 @@ public class Client {
 			Thread thread = new Thread(sendThread);thread.start();
 			RecieveThread recieveThread = new RecieveThread(sock);
 			Thread thread2 =new Thread(recieveThread);thread2.start();
-		} catch (Exception e) {System.out.println(e.getMessage());} 
-	}
+                        
+		} catch(Exception e) 
+                {
+                    e.printStackTrace();
+                } 
+	}*/
+
+    @Override
+    public void sendData(String msgtoServer) {
+        try{
+            
+            SendThread sendThread = new SendThread(socket, msgtoServer);
+            Thread send = new Thread(sendThread);
+            send.start();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String receiveData() {
+        try{
+            
+            RecieveThread recieveThread = new RecieveThread(socket);
+            Thread receive =new Thread(recieveThread);
+            receive.start();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String encode(String data) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String decode(String data) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }
