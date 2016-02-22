@@ -4,7 +4,7 @@ package Data;
  *
  * @author cb0703
  */
-public class MapClass {
+public class MapClass implements Map {
     private int width;
     private int height;
     private int[][] passable ;
