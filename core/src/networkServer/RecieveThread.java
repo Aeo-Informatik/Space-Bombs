@@ -16,13 +16,13 @@ import java.util.ArrayList;
  *
  * @author plonies_d
  */
-class RecieveFromClientThread implements Runnable
+class RecieveThread implements Runnable
 {
 	Socket clientSocket=null;
 	BufferedReader brBufferedReader = null;
 	ArrayList<String> receivedMessage = new ArrayList<>();
         
-	public RecieveFromClientThread(Socket clientSocket)
+	public RecieveThread(Socket clientSocket)
 	{
 		this.clientSocket = clientSocket;
 	}//end constructor
@@ -64,4 +64,4 @@ class RecieveFromClientThread implements Runnable
            return receivedMessage;
        }
         
-}//end class RecieveFromClientThread
+}//end class RecieveThread

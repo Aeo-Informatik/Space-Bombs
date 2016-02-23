@@ -1,55 +1,99 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package networkServer;
-import java.io.*;
-import java.lang.*;
-import java.net.*;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
-/**
- *
- * @author qubasa
- */
+
 public class Server {
+    
+    private static boolean debug = false;
+    private static boolean stop = false;
+    
+    public static ArrayList<Socket> AcceptConnections(ServerSocket ss,  int maxConnections, int timeout) throws Exception
+    {
+        try{    
+            //If minConnections is higher as maxConnections throw exception
+            
+            //Save IP
+            ArrayList<String> ipTable = new ArrayList<>();
+            
+            //Save connection
+            ArrayList<Socket> pcConnections = new ArrayList<>();
+            
+            try{
+                //Start accepting connections
+                for(int i=0; stop == false && maxConnections > i; i++){       
+                        //Accept connection
+                        ss.setSoTimeout(timeout);
+                        Socket clientSocket = ss.accept();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        try{
-        
-            final int port = 4444;
+                        //Get IP address of connected pc
+                        String interceptedIp = clientSocket.getInetAddress().getHostAddress();
 
-                    System.out.println("Server waiting for connection on port " + port);
-                    ServerSocket serversocket = new ServerSocket(port);
-                    
-                    LogIn.setDebug(true);
-                    //Parameters: ServerSocket ss, int minConnections, int maxConnections, int timeout (in milliseconds)
-                    ArrayList<Socket> connections = LogIn.AcceptConnections(serversocket, 4, 10000);
+                        //Debug
+                        if(debug){
+                            System.out.println("Connection: " + i);
+                            System.out.println("Intercepted Ip:" + interceptedIp);
+                        }
 
-                    for(Socket c : connections){
-                        System.out.println("IP: " + c.getInetAddress().getHostAddress());
-                        System.out.println("-----------End IP-----------");
-                        
-                        RecieveFromClientThread recieve = new RecieveFromClientThread(c);
-                        Thread thread = new Thread(recieve);
-                        thread.start();
-                        
-                    }
-                    
-                    SendToClientThread send = new SendToClientThread(connections);
-                    Thread thread2 = new Thread(send);
-                    thread2.start();
-                    
-         
+                        //Get IPs already saved in array list if entry matches delete variable content
+                        for(int e=0; e < ipTable.size(); e++){
+                            String savedIp = ipTable.get(e);    
+
+                            if(savedIp.equals(interceptedIp)){
+                                interceptedIp = "";
+                                System.out.println("Ip has been already saved!");
+                            }
+                        }
+
+                        //If variable has been delted do nothing
+                        if(interceptedIp.isEmpty()){
+                            //Do nothing
+
+                            if(debug){
+                                System.out.println("Ip variable is empty!");
+                            }
+
+                        }else {   
+                            //Add ip to array list
+                            ipTable.add(interceptedIp);
+
+                            //Add connection object to array list
+                            pcConnections.add(clientSocket);
+
+                            if(debug)
+                            {
+                                System.out.println("Saved Ip:" + interceptedIp );
+                            }
+                        }
+                }
+            
+            // If timout is reached return the arraylist
+            }catch(SocketTimeoutException e){
+                if(debug){
+                    System.err.println("Timout a pc needed to long to connect.");
+                }
+                
+                return pcConnections;
+            }
+            
+            return pcConnections;
+            
         }catch(Exception e)
         {
-            System.err.println("BombermanServer: " + e);
+            throw e;
         }
-        
+    }
+    
+    public static void setDebug(boolean debug)
+    {
+        Server.debug = debug;
+    }
+    
+    public static void stopConnection(boolean stop){
+        Server.stop = stop; 
     }
     
 }

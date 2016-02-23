@@ -16,11 +16,11 @@ import java.util.ArrayList;
  *
  * @author plonies_d
  */
-class SendToClientThread implements Runnable
+class SendThread implements Runnable
 {
         ArrayList<Socket> connections;
 	
-	public SendToClientThread(ArrayList<Socket> connections)
+	public SendThread(ArrayList<Socket> connections)
 	{
                 this.connections = connections;
 	}
@@ -44,5 +44,5 @@ class SendToClientThread implements Runnable
 		}
 		catch(Exception ex){System.out.println(ex.getMessage());}	
 	}//end run
-}//end class SendToClientThread
+}//end class SendThread
 

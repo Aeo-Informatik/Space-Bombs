@@ -42,7 +42,7 @@ public class Client implements ClientInterface {
     public void receiveData() {
         try{
             
-            RecieveThread recieveThread = new RecieveThread(socket);
+            ReceiveThread recieveThread = new ReceiveThread(socket);
             Thread receive = new Thread(recieveThread);
             receive.start();
             

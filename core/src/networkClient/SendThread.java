@@ -5,7 +5,6 @@
  */
 package networkClient;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -29,11 +28,8 @@ class SendThread implements Runnable
                     
                     for(String msgToServer : ClientInterface.DATASEND){ 
                         
-                        //Encode msg to base64
-                        String encodedMsg = Base64.encode(msgToServer.getBytes("UTF-8"));
-                        
                         //Send string to server
-			print.println(encodedMsg);
+			print.println(msgToServer);
 			print.flush();
                     }
                     
@@ -43,7 +39,7 @@ class SendThread implements Runnable
                 
                 //Debug
                 if(socket.isConnected())
-                    System.err.println("Socket closed so SendThread closed also.");
+                    System.err.println("Socket closed thats why SendThread closed also.");
                 
             }catch(Exception e)
             {
