@@ -19,23 +19,6 @@ public class Client implements ClientInterface{
             e.printStackTrace();
         }
     }
-    
-    
-    /*
-	public static void main(String[] args)
-	{
-		try {
-			Socket sock = new Socket("localhost",444);
-			SendThread sendThread = new SendThread(sock);
-			Thread thread = new Thread(sendThread);thread.start();
-			RecieveThread recieveThread = new RecieveThread(sock);
-			Thread thread2 =new Thread(recieveThread);thread2.start();
-                        
-		} catch(Exception e) 
-                {
-                    e.printStackTrace();
-                } 
-	}*/
 
     @Override
     public void sendData(String msgtoServer) {

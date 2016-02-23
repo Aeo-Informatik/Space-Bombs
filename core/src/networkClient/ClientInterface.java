@@ -16,7 +16,7 @@ public interface ClientInterface {
     
     public String receiveData();
     
-    public String encoding(String data);
+    public String encode(String data);
     
     public String decode(String data);
     
