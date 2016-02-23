@@ -24,19 +24,6 @@ public class Client implements ClientInterface {
         }
     }
     
-    
-    //Encode & decode data
-    @Override
-    public void encodeData(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String decodeData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     //Send & receive data
     @Override
     public void sendData() {

@@ -22,8 +22,5 @@ public interface ClientInterface {
     
     public void receiveData();
     
-    public void encodeData(String data);
-    
-    public String decodeData();
      
 }

@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -29,10 +30,11 @@ class SendThread implements Runnable
                     
                     for(String msgToServer : ClientInterface.DATASEND){ 
                         
-                        //Send string to server
-
+                        //Encode msg to base64
+                        String encodedMsg = Base64.encode(msgToServer.getBytes("UTF-8"));
                         
-			print.println(msgToServer);
+                        //Send string to server
+			print.println(encodedMsg);
 			print.flush();
                     }
                     

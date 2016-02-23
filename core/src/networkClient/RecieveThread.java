@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -41,6 +42,9 @@ class RecieveThread implements Runnable
                     //Read all lines received from socket
                     while((msgRecieved = receive.readLine())!= null)
                     {   
+                        //Decode string to normal utf-8
+                        String decodedMsg = new String(Base64.decode(msgRecieved));
+                        
                         //Debug
                         System.out.println("Client received from Server: " + msgRecieved);
 
