@@ -13,12 +13,12 @@ import sun.net.NetworkClient;
  *
  * @author plonies_d
  */
-public class coreClass {
+public class CoreClass {
     
 int[][]map = new int [31][21]; //creates a matrix as map
 GameObjects [][] gameObject = new GameObjects [31][21]; //creates a matrix of gameObjects    
 
-public coreClass() {
+public CoreClass() {
 }
 
     public int[][] getMap() {
@@ -43,7 +43,7 @@ public coreClass() {
      * create an object map
      */    
     public void createMap(){
-        Data.MapClass m1 = new Data.MapClass(31, 21, map, map);
+        data.MapClass m1 = new data.MapClass(31, 21, map, map);
     }   
 
     /**

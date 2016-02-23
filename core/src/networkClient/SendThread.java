@@ -30,6 +30,8 @@ class SendThread implements Runnable
                     for(String msgToServer : ClientInterface.DATASEND){ 
                         
                         //Send string to server
+
+                        
 			print.println(msgToServer);
 			print.flush();
                     }

@@ -19,7 +19,7 @@ class RecieveThread implements Runnable
 {       
         //Global Variables & Objects
 	Socket socket;
-        BufferedReader recieve;
+        BufferedReader receive;
 	
         //Constructor
 	public RecieveThread(Socket sock) {
@@ -35,11 +35,11 @@ class RecieveThread implements Runnable
                 while(true)
                 {
                     //Get data from socket and parse it into an Object BufferedReader
-                    recieve = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+                    receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
                     String msgRecieved;
 
                     //Read all lines received from socket
-                    while((msgRecieved = recieve.readLine())!= null)
+                    while((msgRecieved = receive.readLine())!= null)
                     {   
                         //Debug
                         System.out.println("Client received from Server: " + msgRecieved);

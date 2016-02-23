@@ -10,7 +10,7 @@ package core;
  *
  * @author plonies_d
  */
-public interface core {
+public interface Core {
 
 int[][]map = new int [21][31]; //creates a matrix as map
 GameObjects [][] gameObject = new GameObjects [21][31]; //creates a matrix of gameObjects 
