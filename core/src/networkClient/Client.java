@@ -6,7 +6,6 @@
 package networkClient;
 
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class Client implements ClientInterface {
     
@@ -20,7 +19,7 @@ public class Client implements ClientInterface {
             this.socket = new Socket(host, port);
             
         }catch(Exception e){
-            e.printStackTrace();
+            
         }
     }
     
@@ -34,7 +33,7 @@ public class Client implements ClientInterface {
             send.start();
             
         }catch(Exception e){
-            e.printStackTrace();
+           
         }
     }
     
@@ -48,7 +47,7 @@ public class Client implements ClientInterface {
             receive.start();
             
         }catch(Exception e){
-            e.printStackTrace();
+           
         }
     }
 

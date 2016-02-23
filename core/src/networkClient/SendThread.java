@@ -6,8 +6,6 @@
 package networkClient;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -21,6 +19,7 @@ class SendThread implements Runnable
 		this.socket = socket;
 	}
         
+        @Override
 	public void run(){
             try{
                 
@@ -48,7 +47,7 @@ class SendThread implements Runnable
                 
             }catch(Exception e)
             {
-                e.printStackTrace();
+                
             }
 	}
 }

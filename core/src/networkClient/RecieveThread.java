@@ -8,9 +8,8 @@ package networkClient;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
+
 
 /**
  *
@@ -28,6 +27,7 @@ class RecieveThread implements Runnable
 	}
         
         //Starts automatically when creating this object
+        @Override
 	public void run() 
         {
             try 
@@ -55,7 +55,7 @@ class RecieveThread implements Runnable
                 
             }catch(Exception e)
             {
-                e.printStackTrace();
+                
             }
 	}
 }
