@@ -36,7 +36,7 @@ public class ServerTest
                 System.out.println("-----------End IP-----------");
                         
                 //Open receive thread for every client
-                RecieveThread recieve = new RecieveThread(socket);
+                ReceiveThread recieve = new ReceiveThread(socket);
                 Thread thread = new Thread(recieve);
                 thread.start();
             }

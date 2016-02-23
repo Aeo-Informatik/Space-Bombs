@@ -10,13 +10,13 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 
-class RecieveThread implements Runnable
+class ReceiveThread implements Runnable
 {       
     //Global variables & objects
     Socket socket;
         
     //Constructor
-    public RecieveThread(Socket socket)
+    public ReceiveThread(Socket socket)
     {
         this.socket = socket;
     }
