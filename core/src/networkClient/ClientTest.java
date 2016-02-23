@@ -12,16 +12,21 @@ package networkClient;
 public class ClientTest {
     
     public static void main(String[] args) {
-        Client client = new Client("127.0.0.1", 4444);
-        client.setDebug(true);
-        
-        //Send data to server
-        ClientInterface.DATASEND.add("Hello and ");
-        ClientInterface.DATASEND.add("welcome");
-        client.sendData();
-        
-        //Receive data from server
-        client.receiveData();
+        try{
+            Client client = new Client("127.0.0.1", 4444);
+            client.setDebug(true);
+
+            //Send data to server
+            ClientInterface.DATASEND.add("Hello and ");
+            ClientInterface.DATASEND.add("welcome");
+            client.sendData();
+
+            //Receive data from server
+            client.receiveData();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
 }

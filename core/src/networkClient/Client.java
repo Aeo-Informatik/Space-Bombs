@@ -16,7 +16,8 @@ public class Client implements ClientInterface {
     
     
     //Constructor
-    public Client(String host, int port){
+    public Client(String host, int port) throws Exception
+    {
         try{
             this.socket = new Socket(host, port);
             
@@ -25,7 +26,7 @@ public class Client implements ClientInterface {
             System.err.println("Error: Client() Couldn't connect to server");
                     
         }catch(Exception e){
-            e.printStackTrace();
+            throw e;
         }
     }
     
@@ -39,7 +40,7 @@ public class Client implements ClientInterface {
             send.start();
             
         }catch(Exception e){
-           e.printStackTrace();
+           throw e;
         }
     }
     
@@ -53,7 +54,7 @@ public class Client implements ClientInterface {
             receive.start();
             
         }catch(Exception e){
-           e.printStackTrace();
+           throw e;
         }
     }
     

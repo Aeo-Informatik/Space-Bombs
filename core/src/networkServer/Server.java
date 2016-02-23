@@ -8,13 +8,21 @@ import java.util.ArrayList;
 
 public class Server {
     
-    private static boolean debug = false;
-    private static boolean stop = false;
+    private static boolean DEBUG = false;
+    private static boolean STOP = false;
     
+    
+    /**
+     * Accepts all connections made to the server for a specific amount of time
+     * @param ss
+     * @param maxConnections
+     * @param timeout
+     * @return ArrayList<Socket>
+     * @throws Exception 
+     */
     public static ArrayList<Socket> AcceptConnections(ServerSocket ss,  int maxConnections, int timeout) throws Exception
     {
-        try{    
-            //If minConnections is higher as maxConnections throw exception
+        try{
             
             //Save IP
             ArrayList<String> ipTable = new ArrayList<>();
@@ -24,7 +32,7 @@ public class Server {
             
             try{
                 //Start accepting connections
-                for(int i=0; stop == false && maxConnections > i; i++){       
+                for(int i=0; STOP == false && maxConnections > i; i++){       
                         //Accept connection
                         ss.setSoTimeout(timeout);
                         Socket clientSocket = ss.accept();
@@ -33,7 +41,7 @@ public class Server {
                         String interceptedIp = clientSocket.getInetAddress().getHostAddress();
 
                         //Debug
-                        if(debug){
+                        if(DEBUG){
                             System.out.println("Connection: " + i);
                             System.out.println("Intercepted Ip:" + interceptedIp);
                         }
@@ -51,8 +59,7 @@ public class Server {
                         //If variable has been delted do nothing
                         if(interceptedIp.isEmpty()){
                             //Do nothing
-
-                            if(debug){
+                            if(DEBUG){
                                 System.out.println("Ip variable is empty!");
                             }
 
@@ -63,7 +70,7 @@ public class Server {
                             //Add connection object to array list
                             pcConnections.add(clientSocket);
 
-                            if(debug)
+                            if(DEBUG)
                             {
                                 System.out.println("Saved Ip:" + interceptedIp );
                             }
@@ -72,7 +79,7 @@ public class Server {
             
             // If timout is reached return the arraylist
             }catch(SocketTimeoutException e){
-                if(debug){
+                if(DEBUG){
                     System.err.println("Timout a pc needed to long to connect.");
                 }
                 
@@ -87,13 +94,15 @@ public class Server {
         }
     }
     
+    
+    //Getter & Setter
     public static void setDebug(boolean debug)
     {
-        Server.debug = debug;
+        Server.DEBUG = debug;
     }
     
     public static void stopConnection(boolean stop){
-        Server.stop = stop; 
+        Server.STOP = stop; 
     }
     
 }

@@ -21,6 +21,5 @@ public interface ClientInterface {
     public void sendData();
     
     public void receiveData();
-    
      
 }
