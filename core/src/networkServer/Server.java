@@ -108,7 +108,8 @@ public class Server implements ServerInterface {
         Server.DEBUG = debug;
     }
     
-    public static boolean getDebug(){
+    public static boolean getDebug()
+    {
         return Server.DEBUG;
     }
     
