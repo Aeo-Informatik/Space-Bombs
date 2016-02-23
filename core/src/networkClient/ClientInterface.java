@@ -6,18 +6,24 @@
 
 package networkClient;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hebendanz_l
  */
 public interface ClientInterface {
     
-    public void sendData(String data);
+    public static ArrayList<String> DATARECEIVED = new ArrayList<>();
     
-    public String receiveData();
+    public static ArrayList<String> DATASEND = new ArrayList<>();
     
-    public String encode(String data);
+    public void sendData();
     
-    public String decode(String data);
+    public void receiveData();
     
+    public void encodeData(String data);
+    
+    public String decodeData();
+     
 }

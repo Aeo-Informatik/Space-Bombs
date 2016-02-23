@@ -6,11 +6,15 @@
 package networkClient;
 
 import java.net.Socket;
+import java.util.ArrayList;
 
-public class Client implements ClientInterface{
+public class Client implements ClientInterface {
     
+    //Global Variables & Objects
     private Socket socket;
     
+    
+    //Constructor
     public Client(String host, int port){
         try{
             this.socket = new Socket(host, port);
@@ -19,12 +23,26 @@ public class Client implements ClientInterface{
             e.printStackTrace();
         }
     }
+    
+    
+    //Encode & decode data
+    @Override
+    public void encodeData(String data) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
-    public void sendData(String msgtoServer) {
+    public String decodeData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    //Send & receive data
+    @Override
+    public void sendData() {
         try{
             
-            SendThread sendThread = new SendThread(socket, msgtoServer);
+            SendThread sendThread = new SendThread(socket);
             Thread send = new Thread(sendThread);
             send.start();
             
@@ -32,13 +50,14 @@ public class Client implements ClientInterface{
             e.printStackTrace();
         }
     }
+    
 
     @Override
-    public String receiveData() {
+    public void receiveData() {
         try{
             
             RecieveThread recieveThread = new RecieveThread(socket);
-            Thread receive =new Thread(recieveThread);
+            Thread receive = new Thread(recieveThread);
             receive.start();
             
         }catch(Exception e){
@@ -46,15 +65,4 @@ public class Client implements ClientInterface{
         }
     }
 
-    @Override
-    public String encode(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String decode(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
 }

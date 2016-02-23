@@ -17,9 +17,9 @@ import java.util.ArrayList;
  */
 class RecieveThread implements Runnable
 {       
-        //Global Variable
+        //Global Variables & Objects
 	Socket socket;
-        ArrayList<String> receivedData = new ArrayList<>();
+        BufferedReader recieve;
 	
         //Constructor
 	public RecieveThread(Socket sock) {
@@ -31,17 +31,23 @@ class RecieveThread implements Runnable
         {
             try 
             {
-                //Get data from socket and parse it into an Object BufferedReader
-		BufferedReader recieve = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-		String msgRecieved;
-                
-                //Read all lines received from socket
-		while((msgRecieved = recieve.readLine())!= null)
-		{   
-                    //Debug
-                    System.out.println("From Server: " + msgRecieved);
-                    
-		}
+                //Runs the whole time
+                while(true)
+                {
+                    //Get data from socket and parse it into an Object BufferedReader
+                    recieve = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+                    String msgRecieved;
+
+                    //Read all lines received from socket
+                    while((msgRecieved = recieve.readLine())!= null)
+                    {   
+                        //Debug
+                        System.out.println("Client received from Server: " + msgRecieved);
+
+                        //Add received data to static arraylist
+                        ClientInterface.DATARECEIVED.add(msgRecieved);
+                    }
+                }
                 
             }catch(Exception e)
             {

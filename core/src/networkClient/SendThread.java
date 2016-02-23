@@ -10,37 +10,41 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-/**
- *
- * @author plonies_d
- */
+
 class SendThread implements Runnable
 {
-	Socket sock=null;
-	PrintWriter print=null;
-	BufferedReader brinput=null;
+	Socket socket;
 	
-	public SendThread(Socket sock)
+	public SendThread(Socket socket)
 	{
-		this.sock = sock;
-	}//end constructor
+		this.socket = socket;
+	}
+        
 	public void run(){
-		try{
-		if(sock.isConnected())
+            try{
+                
+		while(socket.isConnected())
 		{
-			System.out.println("Client connected to "+sock.getInetAddress() + " on port "+sock.getPort());
-			this.print = new PrintWriter(sock.getOutputStream(), true);	
-		while(true){
-			System.out.println("Type your message to send to server..type 'EXIT' to exit");
-			brinput = new BufferedReader(new InputStreamReader(System.in));
-			String msgtoServerString=null;
-			msgtoServerString = brinput.readLine();
-			this.print.println(msgtoServerString);
-			this.print.flush();
-		
-			if(msgtoServerString.equals("EXIT"))
-			break;
-			}//end while
-		sock.close();}}catch(Exception e){System.out.println(e.getMessage());}
-	}//end run method
-}//end class
+                    PrintWriter print = new PrintWriter(socket.getOutputStream(), true);	
+                    
+                    for(String msgToServer : ClientInterface.DATASEND){ 
+                        
+                        //Send string to server
+			print.println(msgToServer);
+			print.flush();
+                    }
+                    
+                    //Clears the arraylist 
+                    ClientInterface.DATASEND.clear();
+                }
+                
+                //Debug
+                if(socket.isConnected())
+                    System.err.println("Socket closed so SendThread closed also.");
+                
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+	}
+}
