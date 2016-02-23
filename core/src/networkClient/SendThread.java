@@ -6,7 +6,6 @@
 package networkClient;
 
 import java.io.PrintWriter;
-import java.net.ConnectException;
 import java.net.Socket;
 
 

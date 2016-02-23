@@ -35,7 +35,10 @@ public class Server implements ServerInterface {
                 //Start accepting connections
                 for(int i=0; stop == false && maxConnections > i; i++)
                 {       
-                        
+                        //Debug
+                        if(debug)
+                            System.out.println("Listening & accepting connections...");
+                            
                         //Accept connection and set timeout
                         ss.setSoTimeout(timeout);
                         Socket clientSocket = ss.accept();
@@ -58,33 +61,35 @@ public class Server implements ServerInterface {
                         }
 
                         //If variable has been delted do nothing
-                        if(ip.isEmpty()){
+                        if(ip.isEmpty())
+                        {
                             //Do nothing
                             if(debug)
                                 System.out.println("Ip variable is empty!");
                             
-
-                        }else {   
+                        }else 
+                        {   
                             //Add ip to array list
                             ipTable.add(ip);
 
                             //Add connection object to array list
                             pcConnections.add(clientSocket);
 
+                            //Debug
                             if(debug)
                                 System.out.println("Saved Ip:" + ip );
                             
                         }
                 }
                 
-                //Return arraylist if the maximum on clients are connected
+                //Return arraylist if the maximum number of clients are connected to the server
                 return pcConnections;
                 
             // If timout is reached return the arraylist
             }catch(SocketTimeoutException e)
             {
                 if(debug)
-                    System.err.println("Timout: A client needed too long to connect.");
+                    System.err.println("Timeout: A client needs too long to connect.");
                 
                 return pcConnections;
             }
