@@ -26,7 +26,7 @@ public class ServerTest
                     
                     
             //Accept all client connections and get them as socket object
-            ArrayList<Socket> connections = server.AcceptConnections(serversocket, 4, 40000);
+            ArrayList<Socket> connections = server.AcceptConnections(serversocket, 4, 20000);
                     
             //Opens for each client a separate receive thread
             for(Socket socket : connections)

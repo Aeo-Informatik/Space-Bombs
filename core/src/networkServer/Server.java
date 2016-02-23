@@ -31,14 +31,15 @@ public class Server implements ServerInterface {
             //Save connection
             ArrayList<Socket> pcConnections = new ArrayList<>();
             
+            //Debug
+            if(debug)
+                System.out.println("Listening & accepting connections on port " + ss.getLocalPort());
+            
             try{
                 //Start accepting connections
                 for(int i=0; stop == false && maxConnections > i; i++)
                 {       
-                        //Debug
-                        if(debug)
-                            System.out.println("Listening & accepting connections...");
-                            
+
                         //Accept connection and set timeout
                         ss.setSoTimeout(timeout);
                         Socket clientSocket = ss.accept();
