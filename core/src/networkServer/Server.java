@@ -6,10 +6,10 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 
-public class Server {
+public class Server implements ServerInterface {
     
-    private static boolean DEBUG = false;
-    private static boolean STOP = false;
+    private boolean debug = false;
+    private boolean stop = false;
     
     
     /**
@@ -20,7 +20,8 @@ public class Server {
      * @return ArrayList<Socket>
      * @throws Exception 
      */
-    public static ArrayList<Socket> AcceptConnections(ServerSocket ss,  int maxConnections, int timeout) throws Exception
+    @Override
+    public ArrayList<Socket> AcceptConnections(ServerSocket ss,  int maxConnections, int timeout) throws Exception
     {
         try{
             
@@ -32,7 +33,7 @@ public class Server {
             
             try{
                 //Start accepting connections
-                for(int i=0; STOP == false && maxConnections > i; i++)
+                for(int i=0; stop == false && maxConnections > i; i++)
                 {       
                         
                         //Accept connection and set timeout
@@ -43,7 +44,7 @@ public class Server {
                         String ip = clientSocket.getInetAddress().getHostAddress();
 
                         //Debug
-                        if(DEBUG)
+                        if(debug)
                             System.out.println("Connection: " + i + "\n" + "Intercepted Ip: " + ip);
                         
                         //Get ips already saved in array list if entry matches delete variable content
@@ -59,7 +60,7 @@ public class Server {
                         //If variable has been delted do nothing
                         if(ip.isEmpty()){
                             //Do nothing
-                            if(DEBUG)
+                            if(debug)
                                 System.out.println("Ip variable is empty!");
                             
 
@@ -70,7 +71,7 @@ public class Server {
                             //Add connection object to array list
                             pcConnections.add(clientSocket);
 
-                            if(DEBUG)
+                            if(debug)
                                 System.out.println("Saved Ip:" + ip );
                             
                         }
@@ -82,7 +83,7 @@ public class Server {
             // If timout is reached return the arraylist
             }catch(SocketTimeoutException e)
             {
-                if(DEBUG)
+                if(debug)
                     System.err.println("Timout: A client needed too long to connect.");
                 
                 return pcConnections;
@@ -96,17 +97,20 @@ public class Server {
     
     
     //Getter & setter
-    public static void setDebug(boolean debug)
+    @Override
+    public void setDebug(boolean debug)
     {
-        Server.DEBUG = debug;
+        this.debug = debug;
     }
     
-    public static boolean getDebug(){
-        return Server.DEBUG;
+    @Override
+    public boolean getDebug(){
+        return this.debug;
     }
     
-    public static void stopConnection(boolean stop){
-        Server.STOP = stop; 
+    @Override
+    public void setStopConnection(boolean stop){
+        this.stop = stop; 
     }
     
 }

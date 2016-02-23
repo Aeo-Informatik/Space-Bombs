@@ -18,11 +18,13 @@ class SendThread implements Runnable
         //Global variables & objects
         ArrayList<Socket> connections;
 	
+        
         //Constructor
 	public SendThread(ArrayList<Socket> connections)
 	{
                 this.connections = connections;
 	}
+        
         
         @Override
 	public void run() 
@@ -30,17 +32,24 @@ class SendThread implements Runnable
             try{
                     while(true)
                     {
-                        System.out.println("Please enter something to send back to client..");
-                        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-                        String msgToClient = input.readLine();
-                            
-                        for(Socket socket : connections)
+                        for(String msgToClient : ServerInterface.DATARECEIVED)
                         {
-                            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+                            //Debug
+                            if(new Server().getDebug())
+                                System.out.println("Send string " + msgToClient);
                             
-                            //Send message to client
-                            printWriter.println(msgToClient);
-                            printWriter.flush();
+                            for(Socket socket : connections)
+                            {
+                                //Debug
+                                if(new Server().getDebug())
+                                    System.out.println("Client to send it to: " + socket.getInetAddress().getHostAddress());
+                                
+                                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+                                
+                                //Send message to client
+                                printWriter.println(msgToClient);
+                                printWriter.flush();
+                            }
                         }
                     }
                     

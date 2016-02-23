@@ -15,7 +15,6 @@ class RecieveThread implements Runnable
 {       
     //Global variables & objects
     Socket socket;
-    ArrayList<String> receivedMessage = new ArrayList<>();
         
     //Constructor
     public RecieveThread(Socket socket)
@@ -37,11 +36,11 @@ class RecieveThread implements Runnable
                     while((messageString = bufferedReader.readLine())!= null)
                     {
                         //Debug
-                        if(Server.getDebug())
+                        if(new Server().getDebug())
                             System.out.println("Received: " + messageString);
                             
                         //Add received data to arraylist
-                        receivedMessage.add(messageString);
+                        ServerInterface.DATARECEIVED.add(messageString);
                     }
                 }
 
@@ -51,8 +50,4 @@ class RecieveThread implements Runnable
             }
     }
         
-    public ArrayList<String> getReceivedMessage()
-    {
-        return receivedMessage;
-    }     
 }

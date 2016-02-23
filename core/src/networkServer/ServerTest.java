@@ -11,49 +11,44 @@ import java.util.ArrayList;
  *
  * @author qubasa
  */
-public class ServerTest {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        try{
-        
+public class ServerTest 
+{
+    public static void main(String[] args) 
+    {
+        try
+        {
+            //Variables & objects
             final int port = 4444;
-
-                    System.out.println("Server waiting for connection on port " + port);
-                    ServerSocket serversocket = new ServerSocket(port);
+            ServerSocket serversocket = new ServerSocket(port);
+            Server server = new Server();   
+                
+            server.setDebug(true);
                     
-                    Server.setDebug(true);
                     
+            //Accept all client connections and get them as socket object
+            ArrayList<Socket> connections = server.AcceptConnections(serversocket, 4, 40000);
                     
-                    //Accept all client connections and get them as socket object
-                    ArrayList<Socket> connections = Server.AcceptConnections(serversocket, 4, 40000);
-                    
-                    //Opens for each client a separate receive thread
-                    for(Socket socket : connections)
-                    {
-                        //Debug
-                        System.out.println("IP: " + socket.getInetAddress().getHostAddress());
-                        System.out.println("-----------End IP-----------");
+            //Opens for each client a separate receive thread
+            for(Socket socket : connections)
+            {
+                //Debug
+                System.out.println("IP: " + socket.getInetAddress().getHostAddress());
+                System.out.println("-----------End IP-----------");
                         
-                        //Open receive thread for every client
-                        RecieveThread recieve = new RecieveThread(socket);
-                        Thread thread = new Thread(recieve);
-                        thread.start();
-                    }
+                //Open receive thread for every client
+                RecieveThread recieve = new RecieveThread(socket);
+                Thread thread = new Thread(recieve);
+                thread.start();
+            }
                     
-                    //Opens one thread to send back the data to every client
-                    SendThread send = new SendThread(connections);
-                    Thread thread2 = new Thread(send);
-                    thread2.start();
+            //Opens one thread to send back the data to every client
+            SendThread send = new SendThread(connections);
+            Thread thread2 = new Thread(send);
+            thread2.start();
                     
-         
         }catch(Exception e)
         {
             System.err.println("BombermanServer: " + e);
         }
-        
     }
-    
 }
