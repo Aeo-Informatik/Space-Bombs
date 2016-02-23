@@ -12,37 +12,42 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-/**
- *
- * @author plonies_d
- */
+
 class SendThread implements Runnable
-{
+{       
+        //Global variables & objects
         ArrayList<Socket> connections;
 	
+        //Constructor
 	public SendThread(ArrayList<Socket> connections)
 	{
                 this.connections = connections;
 	}
         
-	public void run() {
-		try{
+        @Override
+	public void run() 
+        {
+            try{
                     while(true)
                     {
                         System.out.println("Please enter something to send back to client..");
-                        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));//get userinput
-                        String msgToClientString = input.readLine();//get message to send to client
+                        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+                        String msgToClient = input.readLine();
                             
-                        for(Socket c : connections)
+                        for(Socket socket : connections)
                         {
-                            PrintWriter pwPrintWriter = new PrintWriter(new OutputStreamWriter(c.getOutputStream()));//get outputstream
+                            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
                             
-                            pwPrintWriter.println(msgToClientString);//send message to client with PrintWriter
-                            pwPrintWriter.flush();//flush the PrintWriter
+                            //Send message to client
+                            printWriter.println(msgToClient);
+                            printWriter.flush();
                         }
                     }
-		}
-		catch(Exception ex){System.out.println(ex.getMessage());}	
-	}//end run
-}//end class SendThread
+                    
+		}catch(Exception e)
+                {
+                    e.printStackTrace();
+                }	
+	}
+}
 

@@ -7,61 +7,52 @@ package networkServer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-/**
- *
- * @author plonies_d
- */
+
 class RecieveThread implements Runnable
-{
-	Socket clientSocket=null;
-	BufferedReader brBufferedReader = null;
-	ArrayList<String> receivedMessage = new ArrayList<>();
+{       
+    //Global variables & objects
+    Socket socket;
+    ArrayList<String> receivedMessage = new ArrayList<>();
         
-	public RecieveThread(Socket clientSocket)
-	{
-		this.clientSocket = clientSocket;
-	}//end constructor
+    //Constructor
+    public RecieveThread(Socket socket)
+    {
+        this.socket = socket;
+    }
         
         
-	public void run() 
-        {
-            try{
-                    brBufferedReader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));		
-
-                    String messageString;
-                    while(true)
+    @Override
+    public void run() 
+    {
+        try{
+                //Receive data from connected client
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));		
+                String messageString;
+                          
+                while(true)
+                {
+                    while((messageString = bufferedReader.readLine())!= null)
                     {
-                        while((messageString = brBufferedReader.readLine())!= null)
-                        {
-                            System.out.println("Client: " + messageString);
-                                if(messageString.equals("EXIT"))
-                                {
-                                        System.out.println("Exited with command EXIT");
-                                        break;
-                                    
-                                }
-
-                                receivedMessage.add(messageString);
-                        }
-
-                        this.clientSocket.close();
-                        System.exit(0);
+                        //Debug
+                        if(Server.getDebug())
+                            System.out.println("Received: " + messageString);
+                            
+                        //Add received data to arraylist
+                        receivedMessage.add(messageString);
                     }
-
                 }
-            catch(Exception ex)
+
+            }catch(Exception e)
             {
-                System.out.println(ex.getMessage());
+                e.printStackTrace();
             }
-        }
+    }
         
-       public ArrayList<String> getReceivedMessage(){
-           return receivedMessage;
-       }
-        
-}//end class RecieveThread
+    public ArrayList<String> getReceivedMessage()
+    {
+        return receivedMessage;
+    }     
+}

@@ -30,8 +30,12 @@ public class Client implements ClientInterface {
         }
     }
     
-    //Send & receive data
+    
     @Override
+    /**
+     * Opens a thread where it sends everything 
+     * from an arraylist named: ClientInterface.DATASEND
+     */
     public void sendData() {
         try{
 
@@ -46,6 +50,10 @@ public class Client implements ClientInterface {
     
 
     @Override
+    /**
+     * Opens a thread where it stores all incoming data into 
+     * an arraylist named: ClientInterface.DATARECEIVE
+     */
     public void receiveData() {
         try{
 

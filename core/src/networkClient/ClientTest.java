@@ -21,7 +21,7 @@ public class ClientTest {
             ClientInterface.DATASEND.add("welcome");
             client.sendData();
 
-            //Receive data from server
+            //Receive data from server please do this in a different thread
             client.receiveData();
             
         }catch(Exception e){

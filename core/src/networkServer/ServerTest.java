@@ -25,19 +25,25 @@ public class ServerTest {
                     ServerSocket serversocket = new ServerSocket(port);
                     
                     Server.setDebug(true);
-                    //Parameters: ServerSocket ss, int minConnections, int maxConnections, int timeout (in milliseconds)
+                    
+                    
+                    //Accept all client connections and get them as socket object
                     ArrayList<Socket> connections = Server.AcceptConnections(serversocket, 4, 40000);
-
-                    for(Socket c : connections){
-                        System.out.println("IP: " + c.getInetAddress().getHostAddress());
+                    
+                    //Opens for each client a separate receive thread
+                    for(Socket socket : connections)
+                    {
+                        //Debug
+                        System.out.println("IP: " + socket.getInetAddress().getHostAddress());
                         System.out.println("-----------End IP-----------");
                         
-                        RecieveThread recieve = new RecieveThread(c);
+                        //Open receive thread for every client
+                        RecieveThread recieve = new RecieveThread(socket);
                         Thread thread = new Thread(recieve);
                         thread.start();
-                        
                     }
                     
+                    //Opens one thread to send back the data to every client
                     SendThread send = new SendThread(connections);
                     Thread thread2 = new Thread(send);
                     thread2.start();
