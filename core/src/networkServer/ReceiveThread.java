@@ -35,7 +35,7 @@ class ReceiveThread implements Runnable
                     while((messageString = bufferedReader.readLine())!= null)
                     {
                         //Debug
-                        if(new Server().getDebug())
+                        if(Server.getDebug())
                             System.out.println("Received: " + messageString);
                             
                         //Add received data to arraylist

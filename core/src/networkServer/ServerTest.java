@@ -26,7 +26,7 @@ public class ServerTest
                     
                     
             //Accept all client connections and get them as socket object
-            ArrayList<Socket> connections = server.AcceptConnections(serversocket, 4, 20000);
+            ArrayList<Socket> connections = server.AcceptConnections(serversocket, 1, 20000);
                     
             //Opens for each client a separate receive thread
             for(Socket socket : connections)
@@ -36,8 +36,8 @@ public class ServerTest
                 System.out.println("-----------End IP-----------");
                         
                 //Open receive thread for every client
-                ReceiveThread recieve = new ReceiveThread(socket);
-                Thread thread = new Thread(recieve);
+                ReceiveThread receive = new ReceiveThread(socket);
+                Thread thread = new Thread(receive);
                 thread.start();
             }
                     

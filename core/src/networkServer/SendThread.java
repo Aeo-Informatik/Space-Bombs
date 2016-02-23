@@ -33,13 +33,13 @@ class SendThread implements Runnable
                         for(String msgToClient : ServerInterface.DATARECEIVED)
                         {
                             //Debug
-                            if(new Server().getDebug())
+                            if(Server.getDebug())
                                 System.out.println("Send string " + msgToClient);
                             
                             for(Socket socket : connections)
                             {
                                 //Debug
-                                if(new Server().getDebug())
+                                if(Server.getDebug())
                                     System.out.println("Client to send it to: " + socket.getInetAddress().getHostAddress());
                                 
                                 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -49,6 +49,8 @@ class SendThread implements Runnable
                                 printWriter.flush();
                             }
                         }
+                        
+                        ServerInterface.DATARECEIVED.clear();
                     }
                     
 		}catch(Exception e)
