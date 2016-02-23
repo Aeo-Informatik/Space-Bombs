@@ -6,6 +6,7 @@
 package networkClient;
 
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 
 
@@ -28,6 +29,10 @@ class SendThread implements Runnable
                     
                     for(String msgToServer : ClientInterface.DATASEND){ 
                         
+                        //Debug
+                        if(Client.getDebug())
+                            System.out.println("Send to server: " + msgToServer);
+                        
                         //Send string to server
 			print.println(msgToServer);
 			print.flush();
@@ -37,13 +42,13 @@ class SendThread implements Runnable
                     ClientInterface.DATASEND.clear();
                 }
                 
-                //Debug
-                if(socket.isConnected())
-                    System.err.println("Socket closed thats why SendThread closed also.");
+                System.err.println("Socket is not connected to server thats why SendThread also closed.");
                 
-            }catch(Exception e)
-            {
+            }catch(NullPointerException e){
+                System.err.println("Error: SendThread() Socket is not defined");
                 
+            }catch(Exception e){
+                e.printStackTrace();
             }
 	}
 }

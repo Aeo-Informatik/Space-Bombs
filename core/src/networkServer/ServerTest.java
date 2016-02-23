@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author qubasa
  */
-public class Test {
+public class ServerTest {
 
     /**
      * @param args the command line arguments

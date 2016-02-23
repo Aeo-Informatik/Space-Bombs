@@ -9,13 +9,19 @@ package networkClient;
  *
  * @author qubasa
  */
-public class Test {
+public class ClientTest {
     
     public static void main(String[] args) {
         Client client = new Client("127.0.0.1", 4444);
+        client.setDebug(true);
         
-        ClientInterface.DATASEND.add("Test");
+        //Send data to server
+        ClientInterface.DATASEND.add("Hello and ");
+        ClientInterface.DATASEND.add("welcome");
         client.sendData();
+        
+        //Receive data from server
+        client.receiveData();
     }
     
 }

@@ -41,18 +41,21 @@ class ReceiveThread implements Runnable
                     //Read all lines received from socket
                     while((msgRecieved = receive.readLine())!= null)
                     {   
-                        
                         //Debug
-                        System.out.println("Received from server: " + msgRecieved);
+                        if(Client.getDebug())
+                            System.out.println("Received from server: " + msgRecieved);
 
                         //Add received data to static arraylist
                         ClientInterface.DATARECEIVED.add(msgRecieved);
                     }
                 }
                 
+            }catch(NullPointerException e){
+                System.err.println("Error: ReceiveThread() Socket is not defined" );
+                
             }catch(Exception e)
             {
-                
+                e.printStackTrace();
             }
 	}
 }
