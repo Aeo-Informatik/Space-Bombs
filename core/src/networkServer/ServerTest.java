@@ -27,8 +27,13 @@ public class ServerTest
                     
             //Accept all client connections and get them as socket object
             ArrayList<Socket> connections = server.AcceptConnections(serversocket, 1, 20000);
-                    
-            //Opens for each client a separate receive thread
+               
+            //Open receive thread for every client
+            ReceiveThread receive = new ReceiveThread(connections);
+            Thread thread = new Thread(receive);
+            thread.start();
+            
+            /*//Opens for each client a separate receive thread
             for(Socket socket : connections)
             {
                 //Debug
@@ -39,12 +44,12 @@ public class ServerTest
                 ReceiveThread receive = new ReceiveThread(socket);
                 Thread thread = new Thread(receive);
                 thread.start();
-            }
+            }*/
                     
             //Opens one thread to send back the data to every client
-            SendThread send = new SendThread(connections);
-            Thread thread2 = new Thread(send);
-            thread2.start();
+            //SendThread send = new SendThread(connections);
+            //Thread thread2 = new Thread(send);
+            //thread2.start();
                     
         }catch(Exception e)
         {
