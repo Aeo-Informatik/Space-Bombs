@@ -18,7 +18,7 @@ public class CoreClass {
     
 int[][]map = new int [31][21]; //creates a matrix as map
 data.GameObjects [][] GameObjects = new data.GameObjects [31][21];// creates a matrix from GameObjects
-
+data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
 public CoreClass() {
 }
 
@@ -44,7 +44,7 @@ public CoreClass() {
      * create an object map
      */    
     public void createMap(){
-        data.MapClass m1 = new data.MapClass(31, 21, map, map);
+        data.MapClass m1 = new data.MapClass(31, 21);
     }   
 
     /**
@@ -69,11 +69,6 @@ public CoreClass() {
     
     }
     
-    /**
-     * implementation of the method KeyListener
-     * @param e 
-     */
-    public void keyTyped(KeyEvent e) {}
     
     /**
      * moves the player
@@ -83,7 +78,20 @@ public CoreClass() {
      */
     public int[] movePlayer(data.PlayerClass player, char direction, KeyEvent e){
         String key =" "+ e.getKeyChar();
-        
+        int[] coordinates = new int[1];
+        coordinates = p1.getCoordinates();
+             if(key=="d"&&true){
+             coordinates[0] = coordinates[0]+1;
+             }
+             if(key=="a"){
+              coordinates[0] = coordinates[0]-1;
+             }
+             
+             
+             
+             
+             
+             
     }        
     
     
