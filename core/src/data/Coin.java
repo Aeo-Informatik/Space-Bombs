@@ -16,9 +16,10 @@ public interface Coin {
     
     /**
      * set the coordinates of the field
-     * @param coordinates  the coordinates of the field
+     * @param x the x coordinate of the field
+     * @param y the y coordinate of the field
      */
-    public void setCoordinates(int[] coordinates);
+    public void setCoordinates(int x, int y);
     
     /**
      * get the value of the coin 

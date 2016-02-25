@@ -37,15 +37,18 @@ public class CoinClass implements Coin, GameObjects{
      * @return  the coordinates of the field
      */
     public int[] getCoordinates() {
-        System.out.println(coordinates);
+        System.out.println(coordinates[0]);
+        System.out.println(coordinates[1]);
         return coordinates;
     }
     /**
      * set the coordinates of the field
-     * @param coordinates  the coordinates of the field
+     * @param x the x coordinate of the field
+     * @param y the y coordinate of the field
      */
-    public void setCoordinates(int[] coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(int x, int y) {
+        this.coordinates[0] = x;
+        this.coordinates[1] = y;
     }
     
 }

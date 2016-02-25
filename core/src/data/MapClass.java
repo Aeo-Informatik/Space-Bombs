@@ -26,6 +26,7 @@ public class MapClass implements Map {
         this.passable = passable;
         this.blockposition = blockposition;
         int[] XY =new int[1];
+        //fill the ArrayList with the Spawnpoints
         XY[0]=0;    XY[1]=0;
         Spawn.set(0, XY);
         XY[0]=width;XY[1]=0;

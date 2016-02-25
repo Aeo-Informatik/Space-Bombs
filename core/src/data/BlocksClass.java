@@ -11,11 +11,11 @@ public class BlocksClass implements Blocks, GameObjects{
     /**
      * 
      * @param destructible if the block is destructible
-     * @param coins 
+     * @param coins the maximum of coins that the block can hold
      */
     public BlocksClass(boolean destructible, int coins) {
         this.destructible = destructible;
-        this.coins = coins;
+        this.coins=(int)(Math.random()*coins);
     }
     
     /**
@@ -45,7 +45,7 @@ public class BlocksClass implements Blocks, GameObjects{
     /**
      * set how many coins will be droped after 
      * the block is destroid
-     * @param Coins how many coins
+     * @param coins how many coins
      */
     public void setCoins(int coins) {
         this.coins = coins;
