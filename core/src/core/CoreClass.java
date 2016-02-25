@@ -6,6 +6,7 @@
 
 package core;
 
+import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
 import sun.net.NetworkClient;
 
@@ -16,7 +17,7 @@ import sun.net.NetworkClient;
 public class CoreClass {
     
 int[][]map = new int [31][21]; //creates a matrix as map
-GameObjects [][] gameObject = new GameObjects [31][21]; //creates a matrix of gameObjects    
+data.GameObjects [][] GameObjects = new data.GameObjects [31][21];// creates a matrix from GameObjects
 
 public CoreClass() {
 }
@@ -29,12 +30,12 @@ public CoreClass() {
         this.map = map;
     }
 
-    public GameObjects[][] getGameObject() {
-        return gameObject;
+    public data.GameObjects[][] getGameObject() {
+        return GameObjects;
     }
 
-    public void setGameObject(GameObjects[][] gameObject) {
-        this.gameObject = gameObject;
+    public void setGameObject(data.GameObjects[][] gameObject) {
+        this.GameObjects = gameObject;
     }
  
 
@@ -49,33 +50,52 @@ public CoreClass() {
     /**
      * updates the map 
      */
-    public int[][] updateMap(){}
+    public int[][] updateMap(){
+    
+    }
 
     /**
      * player can place a bomb
      */
-    public void placeBomb(){}
+    public void placeBomb(){
+    
+    }
 
     /**
          * looks for players and blocks that would be destroyed
     * @param bomb 
      */
-    public void explode(Bomb bomb){}
-
+    public void explode(data.BombClass bomb){
+    
+    }
+    
+    /**
+     * implementation of the method KeyListener
+     * @param e 
+     */
+    public void keyTyped(KeyEvent e) {}
+    
     /**
      * moves the player
      * @param player which player
      * @param direction which direction
      * @return the coordinates of the player after his move
      */
-    public int[] movePlayer(Player player, char direction){}        
+    public int[] movePlayer(data.PlayerClass player, char direction, KeyEvent e){
+        String key =" "+ e.getKeyChar();
         
+    }        
+    
+    
+    
     /**
      * checks how many coins are on a field
      * @param coordinates of the field
     * @return 
      */
-    public Coin checkCoins(int[] coordinates){}
+    public data.CoinClass checkCoins(int[] coordinates){
+    
+    }
 
     /**
      * looks for what the key that is pressed is used for
@@ -88,5 +108,7 @@ public CoreClass() {
      * @param data String from NetworkClient
      */
     public void analyseData(String data){}
-    String[] newData = data.split(Pattern.quote("|"));
+    //String[] newData = data.split(Pattern.quote("|"));
+    
+    
     }
