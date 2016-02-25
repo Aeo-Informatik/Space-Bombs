@@ -65,7 +65,7 @@ public CoreClass() {
          * looks for players and blocks that would be destroyed
     * @param bomb 
      */
-    public void explode(data.BombClass bomb){
+    public void explode(data.BombClass bomb){//Bumm
     
     }
     
