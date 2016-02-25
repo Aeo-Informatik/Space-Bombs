@@ -49,22 +49,33 @@ public class PlayerClass implements Player, GameObjects{
      * @return coordinates of the player 
      */
     public int[] getCoordinates() {
+        System.out.println(coordinates[0]);
+        System.out.println(coordinates[1]);
         return coordinates;
     }
     
     /**
      * set the coordinates of the player
-     * @param coordinates the coordinates of the player
+     * @param x the x coordinate
+     * @param y the x coordinate
      */
     public void setCoordinates(int x, int y) {
         this.coordinates[0] = x;
         this.coordinates[1] =y;
     }
-
+    
+    /**
+     * get the team of the player
+     * @return the team of the player
+     */
     public int getTeam() {
         return team;
     }
 
+    /**
+     * set the team of the player
+     * @param team the team of the player
+     */
     public void setTeam(int team) {
         this.team = team;
     }
@@ -101,6 +112,10 @@ public class PlayerClass implements Player, GameObjects{
         return immortality;
     }
 
+    /**
+     * set if the player is immortal
+     * @param immortality if the player isimmortal
+     */
     public void setImmortality(boolean immortality) {//God mode
         this.immortality = immortality;
     }
