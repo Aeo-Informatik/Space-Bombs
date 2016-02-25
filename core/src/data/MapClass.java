@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author phinix
@@ -9,6 +11,8 @@ public class MapClass implements Map {
     private int height;//height of the map
     private int[][] passable ;//if the position is passaple
     private int[][] blockposition;//if ther is a block on this position
+    private ArrayList<int[]>Spawn=new ArrayList();//the places where the different teams can spawn
+    
     /**
      * Construktor
      * @param width of th map
@@ -21,6 +25,17 @@ public class MapClass implements Map {
         this.height = height;
         this.passable = passable;
         this.blockposition = blockposition;
+        int[] XY =new int[1];
+        XY[0]=0;    XY[1]=0;
+        Spawn.set(0, XY);
+        XY[0]=width;XY[1]=0;
+        Spawn.set(1, XY);
+        XY[0]=0;    XY[1]=height;
+        Spawn.set(2, XY);
+        XY[0]=width;XY[1]=height;
+        Spawn.set(3, XY);
+        
+        
     }
     /**
      * get width of the map
@@ -98,6 +113,12 @@ public class MapClass implements Map {
      */
     public void setBlockposition(int x,int y,int blockposition) {
         this.blockposition[x][y]=blockposition;
+    }
+    
+    public int[] getSpawn (int team){
+        int[]Coordinates=new int[1];
+        Coordinates=Spawn.get(team);
+        return Coordinates;
     }
     
     

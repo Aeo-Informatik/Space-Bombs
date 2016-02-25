@@ -1,6 +1,6 @@
 package data;
 
-import java.util.ArrayList;
+
 
 /**
  *
@@ -9,10 +9,9 @@ import java.util.ArrayList;
 public class PlayerClass implements Player, GameObjects{
     private int life;//the life of the player
     private int[] coordinates;//coordinates of the player
-    private int team ;//the team of the player
+    private int team ;//the team of the player from 0 to 3
     private int coins ;//coins of the player
     private boolean immortality ;//if the player is immortal
-//    private ArrayList<int[]> spawnpoint =new ArrayList();//places where the player can respawn
     
     /**
      * Constructor
@@ -88,7 +87,7 @@ public class PlayerClass implements Player, GameObjects{
      * @param coins that will be added
      */
     public void addCoins(int coins){
-        
+        this.coins=+coins;
     }
     
     /**
