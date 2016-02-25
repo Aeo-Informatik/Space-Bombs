@@ -56,8 +56,9 @@ public class PlayerClass implements Player, GameObjects{
      * set the coordinates of the player
      * @param coordinates the coordinates of the player
      */
-    public void setCoordinates(int[] coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(int x, int y) {
+        this.coordinates[0] = x;
+        this.coordinates[1] =y;
     }
 
     public int getTeam() {
@@ -106,13 +107,7 @@ public class PlayerClass implements Player, GameObjects{
 
 
     
-    /**
-     * the player returns to the spawnpoint and respawns there
-     * @return the coordinates of the spawnpoint
-     */
-    public int[] respawn(){
-        
-        return coordinates;
-    }
+
+
    
 }
