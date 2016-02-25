@@ -69,7 +69,7 @@ public class MapClass implements Map {
      * @return if th epossition is passable
      */
     public boolean getPassable(int x, int y) {
-        if (passable[x][y]==1){
+        if (passable[x][y]==true){
             System.out.println("true");
             return true;
         }else{
@@ -84,7 +84,7 @@ public class MapClass implements Map {
      * @param y the y-coordinate
      * @param passable if the possition is passable
      */
-    public void setPassable(int x,int y,int passable) {
+    public void setPassable(int x,int y, boolean passable) {
         this.passable[x][y]=passable;
     }
     /**
