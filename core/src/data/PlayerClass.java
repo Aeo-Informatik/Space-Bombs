@@ -19,12 +19,15 @@ public class PlayerClass implements Player, GameObjects{
      * @param life the life of the player
      * @param team the team of the player
      * @param coins coins of the player
+     * @param x the x coordinate
+     * @param y the y coordinate
      */
-    public PlayerClass(int life, int team, int coins, int[] coordinates) {
+    public PlayerClass(int life, int team, int coins, int x,int y) {
         this.life = life;
         this.team = team;
         this.coins = coins;
-        this.coordinates=coordinates;
+        this.coordinates[0]=x;
+        this.coordinates[1]=y;
     }
     
     /**
