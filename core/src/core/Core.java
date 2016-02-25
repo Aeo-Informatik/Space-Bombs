@@ -13,7 +13,7 @@ package core;
 public interface Core {
 
 int[][]map = new int [21][31]; //creates a matrix as map
-GameObjects [][] gameObject = new GameObjects [21][31]; //creates a matrix of gameObjects 
+data.GameObjects [][] gameObject = new data.GameObjects [21][31]; //creates a matrix of gameObjects 
  
 /**
  * Setter for map
@@ -41,13 +41,13 @@ public int[][] updateMap();
  * Setter for gameObject
  * @param gameObject 
  */
-public void setGameObject(GameObjects[][] gameObject);
+public void setGameObject(data.GameObjects[][] gameObject);
 
 /**
  * Getter for gameObject
  * @return 
  */
-public GameObjects[][] getGameObject();
+public data.GameObjects[][] getGameObject();
 
 /**
  * player can place a bomb
@@ -58,7 +58,7 @@ public void placeBomb();
  * looks for players and blocks that would be destroyed
  * @param bomb 
  */
-public void explode(Bomb bomb);
+public void explode(data.BombClass bomb);
 
 /**
  * moves the player
@@ -66,14 +66,14 @@ public void explode(Bomb bomb);
  * @param direction which direction
  * @return the coordinates of the player after his move
  */
-public int[] movePlayer(Player player, char direction);        
+public int[] movePlayer(data.PlayerClass player, char direction);        
         
 /**
  * checks how many coins are on a field
  * @param coordinates of the field
  * @return 
  */
-public Coin checkCoins(int[] coordinates);
+public data.CoinClass checkCoins(int[] coordinates);
 
 /**
  * looks for what the key that is pressed is used for
