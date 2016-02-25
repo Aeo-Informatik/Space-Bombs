@@ -12,7 +12,7 @@ public class PlayerClass implements Player, GameObjects{
     private int team ;//the team of the player
     private int coins ;//coins of the player
     private boolean immortality ;//if the player is immortal
-    private ArrayList<int[]> spawnpoint =new ArrayList();//places where the player can respawn
+//    private ArrayList<int[]> spawnpoint =new ArrayList();//places where the player can respawn
     
     /**
      * Constructor
@@ -20,10 +20,11 @@ public class PlayerClass implements Player, GameObjects{
      * @param team the team of the player
      * @param coins coins of the player
      */
-    public PlayerClass(int life, int team, int coins) {
+    public PlayerClass(int life, int team, int coins, int[] coordinates) {
         this.life = life;
         this.team = team;
         this.coins = coins;
+        this.coordinates=coordinates;
     }
     
     /**
@@ -106,10 +107,7 @@ public class PlayerClass implements Player, GameObjects{
         return spawnpoint;
     }
 
-    public void setSpawnpoint(ArrayList<int[]> spawnpoint) {
-        this.spawnpoint = spawnpoint;
-    }
-    
+
     /**
      * the player returns to the spawnpoint and respawns there
      * @return the coordinates of the spawnpoint
