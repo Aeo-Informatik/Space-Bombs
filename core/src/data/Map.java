@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author phinix
@@ -9,6 +11,7 @@ public interface Map {
     int height=21;//height of the map
     int[][] passable =new int[0][1];//if the position is passaple
     int[][] blockposition=new int [1][0];//if ther is a block on this position
+    ArrayList<int[]>Spawn=new ArrayList();//the places where the different teams can spawn
     
     /**
      * set height of the map
@@ -65,4 +68,11 @@ public interface Map {
      * @param blockposition if there is a block on that position
      */
     public void setBlockposition(int x,int y,int blockposition);
+    
+    /**
+     * get the spawnpoint for a spezific team
+     * @param team the team of the player who wants to respawn
+     * @return the spawnpoint where the player can respawn
+     */
+    public int[] getSpawn (int team);
 }

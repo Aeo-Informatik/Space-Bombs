@@ -1,6 +1,6 @@
 package data;
 
-import java.util.ArrayList;
+
 
 /**
  *
@@ -9,21 +9,24 @@ import java.util.ArrayList;
 public class PlayerClass implements Player, GameObjects{
     private int life;//the life of the player
     private int[] coordinates;//coordinates of the player
-    private int team ;//the team of the player
+    private int team ;//the team of the player from 0 to 3
     private int coins ;//coins of the player
     private boolean immortality ;//if the player is immortal
-    private ArrayList<int[]> spawnpoint =new ArrayList();//places where the player can respawn
     
     /**
      * Constructor
      * @param life the life of the player
      * @param team the team of the player
      * @param coins coins of the player
+     * @param x the x coordinate
+     * @param y the y coordinate
      */
-    public PlayerClass(int life, int team, int coins) {
+    public PlayerClass(int life, int team, int coins, int x,int y) {
         this.life = life;
         this.team = team;
         this.coins = coins;
+        this.coordinates[0]=x;
+        this.coordinates[1]=y;
     }
     
     /**
@@ -32,6 +35,7 @@ public class PlayerClass implements Player, GameObjects{
      */
     public int getLife() {
         return life;
+        
     }
     
     /**
@@ -47,21 +51,33 @@ public class PlayerClass implements Player, GameObjects{
      * @return coordinates of the player 
      */
     public int[] getCoordinates() {
+        System.out.println(coordinates[0]);
+        System.out.println(coordinates[1]);
         return coordinates;
     }
     
     /**
      * set the coordinates of the player
-     * @param coordinates the coordinates of the player
+     * @param x the x coordinate
+     * @param y the x coordinate
      */
-    public void setCoordinates(int[] coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(int x, int y) {
+        this.coordinates[0] = x;
+        this.coordinates[1] =y;
     }
-
+    
+    /**
+     * get the team of the player
+     * @return the team of the player
+     */
     public int getTeam() {
         return team;
     }
 
+    /**
+     * set the team of the player
+     * @param team the team of the player
+     */
     public void setTeam(int team) {
         this.team = team;
     }
@@ -71,7 +87,7 @@ public class PlayerClass implements Player, GameObjects{
      * @param coins that will be added
      */
     public void addCoins(int coins){
-        
+        this.coins=+coins;
     }
     
     /**
@@ -98,25 +114,17 @@ public class PlayerClass implements Player, GameObjects{
         return immortality;
     }
 
+    /**
+     * set if the player is immortal
+     * @param immortality if the player isimmortal
+     */
     public void setImmortality(boolean immortality) {//God mode
         this.immortality = immortality;
     }
 
-    public ArrayList<int[]> getSpawnpoint() {
-        return spawnpoint;
-    }
 
-    public void setSpawnpoint(ArrayList<int[]> spawnpoint) {
-        this.spawnpoint = spawnpoint;
-    }
     
-    /**
-     * the player returns to the spawnpoint and respawns there
-     * @return the coordinates of the spawnpoint
-     */
-    public int[] respawn(){
-        
-        return coordinates;
-    }
+
+
    
 }

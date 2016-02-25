@@ -41,9 +41,10 @@ public interface Player {
     
     /**
      * set the coordinates of the player
-     * @param coordinates the coordinates of the player
+     * @param x the x coordinate
+     * @param y the y coordinate
      */
-    public void setCoordinates(int[] coordinates);
+    public void setCoordinates(int x, int y);
     
     /**
      * add coins to player`s coins
@@ -67,6 +68,5 @@ public interface Player {
      * the player returns to the spawnpoint and respawns there
      * @return the coordinates of the spawnpoint
      */
-    public int[] respawn();
-    
+
 }
