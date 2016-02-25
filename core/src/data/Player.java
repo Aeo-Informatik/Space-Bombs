@@ -67,6 +67,5 @@ public interface Player {
      * the player returns to the spawnpoint and respawns there
      * @return the coordinates of the spawnpoint
      */
-    public int[] respawn();
-    
+
 }

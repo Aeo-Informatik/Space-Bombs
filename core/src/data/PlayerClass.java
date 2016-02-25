@@ -33,6 +33,7 @@ public class PlayerClass implements Player, GameObjects{
      */
     public int getLife() {
         return life;
+        
     }
     
     /**
@@ -103,11 +104,8 @@ public class PlayerClass implements Player, GameObjects{
         this.immortality = immortality;
     }
 
-    public ArrayList<int[]> getSpawnpoint() {
-        return spawnpoint;
-    }
 
-
+    
     /**
      * the player returns to the spawnpoint and respawns there
      * @return the coordinates of the spawnpoint
