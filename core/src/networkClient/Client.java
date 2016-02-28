@@ -18,32 +18,37 @@ public class Client implements ClientInterface {
     //Constructor
     public Client(String host, int port) throws Exception
     {
-        try{
+        try
+        {
             this.socket = new Socket(host, port);
             
-        }catch(ConnectException e){
-         
+        }catch(ConnectException e)
+        {
             System.err.println("Error: Client() Couldn't connect to server");
                     
-        }catch(Exception e){
+        }catch(Exception e)
+        {
             throw e;
         }
     }
     
     
-    @Override
+
     /**
      * Opens a thread where it sends everything 
      * from an arraylist named: ClientInterface.DATASEND
      */
+    @Override
     public void sendData() {
         try{
-
+            ClientInterface.DATASEND.add("EXIT");
+            
             SendThread sendThread = new SendThread(socket);
             Thread send = new Thread(sendThread);
             send.start();
             
-        }catch(Exception e){
+        }catch(Exception e)
+        {
            throw e;
         }
     }

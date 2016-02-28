@@ -6,10 +6,33 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 
-public class Server implements ServerInterface {
+public class Server {
     
     private static boolean DEBUG = false;
     private static boolean STOP = false;
+    
+    
+    /**
+     * Starts the receive thread which will receive & send back the data. 
+     * The receive thread and will automatically start a send thread.
+     * @param socketList 
+     */
+    public void startServer(ArrayList<Socket> socketList)
+    {
+        
+        for(Socket socket : socketList)
+        {
+            if(DEBUG)
+                System.out.println("IP: " + socket.getInetAddress().getHostAddress());
+                System.out.println("-----------End IP-----------");
+                      
+
+            //Open receive thread for every client
+            ReceiveThread receive = new ReceiveThread(socket, socketList);
+            Thread thread = new Thread(receive);
+            thread.start();
+        }
+    }
     
     
     /**
@@ -20,7 +43,6 @@ public class Server implements ServerInterface {
      * @return ArrayList<Socket>
      * @throws Exception 
      */
-    @Override
     public ArrayList<Socket> AcceptConnections(ServerSocket ss,  int maxConnections, int timeout) throws Exception
     {
         try{
@@ -101,7 +123,7 @@ public class Server implements ServerInterface {
         }
     }
     
-    
+
     //Getter & setter
     public static void setDebug(boolean debug)
     {

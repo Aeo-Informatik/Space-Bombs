@@ -27,14 +27,14 @@ class SendThread implements Runnable
         {
             try
             {   
-                System.out.println("Send send opened");
+                System.out.println("Send thread opened");
+                
                 //Iterates through the message array list 
                 for(String msgToClient : dataToSend)
                 {
-                    System.out.println("Send send opened2");
                     //Debug
                     if(Server.getDebug())
-                        System.out.println("Send string " + msgToClient);
+                        System.out.println("Send: " + msgToClient);
                             
                     //Iterate through connected client list
                     for(int i=0; i < sock.size(); i++)
@@ -44,7 +44,7 @@ class SendThread implements Runnable
                         {
                             //Debug
                             if(Server.getDebug())
-                                System.out.println("Client to send it to: " + sock.get(i).getInetAddress().getHostAddress());
+                                System.out.println("To: " + sock.get(i).getInetAddress().getHostAddress());
                                     
                             //Create object to send data
                             PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(sock.get(i).getOutputStream()));
@@ -55,8 +55,6 @@ class SendThread implements Runnable
                                     
                         }else
                         {
-                            //Debug
-                            if(Server.getDebug())
                             System.err.println("SendThread(): Client disconnected with ip: " + sock.get(i).getInetAddress().getHostAddress());
                         }
                     }

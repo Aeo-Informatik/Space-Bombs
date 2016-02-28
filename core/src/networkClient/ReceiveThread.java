@@ -20,10 +20,12 @@ class ReceiveThread implements Runnable
 	Socket socket;
         BufferedReader receive;
 	
+        
         //Constructor
 	public ReceiveThread(Socket sock) {
 		this.socket = sock;
 	}
+        
         
         //Starts automatically when creating this object
         @Override
@@ -34,23 +36,24 @@ class ReceiveThread implements Runnable
                 //Runs the whole time
                 while(true)
                 {
-                    //Get data from socket and parse it into an Object BufferedReader
+                    //Get data from server and parse it into an Object BufferedReader
                     receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
                     String msgRecieved;
 
-                    //Read all lines received from socket
+                    //Read all lines received from server
                     while((msgRecieved = receive.readLine())!= null)
                     {   
                         //Debug
                         if(Client.getDebug())
                             System.out.println("Received from server: " + msgRecieved);
 
-                        //Add received data to static arraylist
-                        ClientInterface.DATARECEIVED.add(msgRecieved);
+                        //Start to analyse received data and execute apropriate functions
+                        System.out.println("/TODO/ Start analysis function");
                     }
                 }
                 
-            }catch(NullPointerException e){
+            }catch(NullPointerException e)
+            {
                 System.err.println("Error: ReceiveThread() Socket is not defined" );
                 
             }catch(Exception e)

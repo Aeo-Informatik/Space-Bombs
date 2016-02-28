@@ -21,35 +21,15 @@ public class ServerTest
             final int port = 4444;
             ServerSocket serversocket = new ServerSocket(port);
             Server server = new Server();   
-                
+               
+            
             server.setDebug(true);
                     
-                    
-            //Accept all client connections and get them as socket object
-            ArrayList<Socket> connections = server.AcceptConnections(serversocket, 1, 20000);
-               
-            //Open receive thread for every client
-            ReceiveThread receive = new ReceiveThread(connections);
-            Thread thread = new Thread(receive);
-            thread.start();
             
-            /*//Opens for each client a separate receive thread
-            for(Socket socket : connections)
-            {
-                //Debug
-                System.out.println("IP: " + socket.getInetAddress().getHostAddress());
-                System.out.println("-----------End IP-----------");
-                        
-                //Open receive thread for every client
-                ReceiveThread receive = new ReceiveThread(socket);
-                Thread thread = new Thread(receive);
-                thread.start();
-            }*/
-                    
-            //Opens one thread to send back the data to every client
-            //SendThread send = new SendThread(connections);
-            //Thread thread2 = new Thread(send);
-            //thread2.start();
+            //Accept all client connections and get them as socket object
+            ArrayList<Socket> socketList = server.AcceptConnections(serversocket, 1, 20000);
+            server.startServer(socketList);
+               
                     
         }catch(Exception e)
         {
