@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Random;
 
 
 
@@ -87,7 +88,9 @@ class Sockets
     public static boolean isSocketConnected()
     {
         try{
-            int random = (int) Math.random() * 10 +1;
+            Random rand = new Random(); 
+            int random = rand.nextInt(40);
+            System.out.println("RANDOM: " + random);
             
             if(random <= 3)
             {
