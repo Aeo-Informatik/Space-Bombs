@@ -53,9 +53,8 @@ public class Server {
             //Save connection
             ArrayList<Socket> pcConnections = new ArrayList<>();
             
-            //Debug
-            if(Server.DEBUG)
-                System.out.println("Listening & accepting connections on port " + ss.getLocalPort());
+
+            System.out.println("Listening & accepting connections on port " + ss.getLocalPort() + "\n");
             
             try{
                 //Start accepting connections
@@ -71,7 +70,8 @@ public class Server {
 
                         //Debug
                         if(Server.DEBUG)
-                            System.out.println("Connection: " + i + "\n" + "Intercepted Ip: " + ip);
+                            System.out.println("Connection: " + i + 1);
+                            System.out.println("Intercepted Ip: " + ip);
                         
                         //Get ips already saved in array list if entry matches delete variable content
                         for(int e=0; e < ipTable.size(); e++){
@@ -79,7 +79,8 @@ public class Server {
 
                             if(savedIp.equals(ip)){
                                 ip = "";
-                                System.out.println("Ip has been already saved!");
+                                if(Server.DEBUG)
+                                    System.out.println("Ip has been already saved!");
                             }
                         }
 
@@ -111,9 +112,16 @@ public class Server {
             // If timout is reached return the arraylist
             }catch(SocketTimeoutException e)
             {
-                if(Server.DEBUG)
-                    System.err.println("Timeout: A client needs too long to connect.");
-                
+               
+                if(pcConnections.size() <= 0)
+                {
+                    System.err.println("Timeout: No clients are connected!");
+                    
+                }else
+                {
+                    System.out.println("Timeout: Waiting aborted. A client needed too long to connect.");
+                }
+                    
                 return pcConnections;
             }
             
