@@ -27,7 +27,6 @@ class SendThread implements Runnable
         {
             try
             {   
-                System.out.println("Send thread opened");
                 
                 //Iterates through the message array list 
                 for(String msgToClient : dataToSend)
