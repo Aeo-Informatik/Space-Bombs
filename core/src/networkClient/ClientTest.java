@@ -16,13 +16,15 @@ public class ClientTest {
             Client client = new Client("127.0.0.1", 4444);
             client.setDebug(true);
 
-            //Send data to server
-            ClientInterface.DATASEND.add("Hello and ");
-            ClientInterface.DATASEND.add("welcome");
-            client.sendData();
-
-            //Receive data from server please do this in a different thread
             client.receiveData();
+            if(Sockets.isSocketConnected())
+            {
+                for(int i=0; i < 10; i++)
+                {
+                    ClientInterface.DATASEND.add("Test" +i);
+                }
+                client.sendData();
+            }
             
         }catch(Exception e){
             e.printStackTrace();
