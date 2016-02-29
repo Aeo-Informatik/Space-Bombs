@@ -91,7 +91,7 @@ class Sockets
             Random rand = new Random(); 
             int random = rand.nextInt(10);
             System.out.println("Loading please wait...");
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             System.out.println("Proceed!");
             if(random <= 3)
             {
