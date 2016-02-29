@@ -4,7 +4,7 @@ package data;
  *
  * @author phinix
  */
-public class CoinClass implements Coin, GameObjects{ 
+public class CoinClass implements GameObjects{ 
     private int value;//how many coins are laying on the field
     private int [] coordinates;//the coordinates of the field
 

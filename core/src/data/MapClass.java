@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author phinix
  */
-public class MapClass implements Map {
+public class MapClass{
     private int width;//width of the map
     private int height;//height of the map
     private boolean[][] passable=new boolean [31][21] ;//if the position is passaple

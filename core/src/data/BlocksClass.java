@@ -4,7 +4,7 @@ package data;
  *
  * @author phinix
  */
-public class BlocksClass implements Blocks, GameObjects{
+public class BlocksClass implements GameObjects{
     private boolean destructible;//if the block is destructible
     private int coins;//how many coins will be droped after the desruction 
     

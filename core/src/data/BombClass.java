@@ -4,7 +4,7 @@ package data;
  *
  * @author phinix
  */
-public class BombClass implements Bomb , GameObjects{
+public class BombClass implements GameObjects{
     
     private int range;//the range of the bomb
     private int timer;//the timer of the bomb

@@ -6,7 +6,7 @@ package data;
  *
  * @author phinix
  */
-public class PlayerClass implements Player, GameObjects{
+public class PlayerClass implements GameObjects{
     private int life;//the life of the player
     private int[] coordinates;//coordinates of the player
     private int team ;//the team of the player from 0 to 3
