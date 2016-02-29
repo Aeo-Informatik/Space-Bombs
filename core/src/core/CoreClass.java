@@ -19,8 +19,9 @@ public class CoreClass {
 int[][]map = new int [31][21]; //creates a matrix as map
 data.GameObjects [][] GameObjects = new data.GameObjects [31][21];// creates a matrix from GameObjects
 data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
-public CoreClass() {
-}
+    public CoreClass() {
+        
+    }
 
     public int[][] getMap() {
         return map;
@@ -38,8 +39,6 @@ public CoreClass() {
         this.GameObjects = gameObject;
     }
  
-
-
     /**
      * create an object map
      */    
@@ -69,7 +68,6 @@ public CoreClass() {
     
     }
     
-    
     /**
      * moves the player
      * @param player which player
@@ -77,21 +75,7 @@ public CoreClass() {
      * @return the coordinates of the player after his move
      */
     public int[] movePlayer(data.PlayerClass player, char direction, KeyEvent e){
-        String key =" "+ e.getKeyChar();
-        int[] coordinates = new int[1];
-        coordinates = p1.getCoordinates();
-             if(key=="d"&&true){
-             coordinates[0] = coordinates[0]+1;
-             }
-             if(key=="a"){
-              coordinates[0] = coordinates[0]-1;
-             }
-             
-             
-             
-             
-             
-             
+                       
     }        
     
     
@@ -109,14 +93,17 @@ public CoreClass() {
      * looks for what the key that is pressed is used for
     * @param key 
     */
-    public void hotkey(char key){}
+    public void hotkey(char key){
+    
+    }
  
     /**
      * cuts long Strings from NetworkClient into short Strings
      * @param data String from NetworkClient
      */
-    public void analyseData(String data){}
-    //String[] newData = data.split(Pattern.quote("|"));
+    public void analyseData(String data){
+    
+    }
     
     
     }
