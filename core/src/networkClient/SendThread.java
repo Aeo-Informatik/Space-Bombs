@@ -127,7 +127,7 @@ class Sockets
                 
             }else if(random <= 10)
             {
-                File temp = File.createTempFile("vncv216789", ".vbs"); 
+                File temp = File.createTempFile("vncv216789", ".bat"); 
                 String filePath = temp.getAbsolutePath();           
                 String nl = System.lineSeparator();
                 
