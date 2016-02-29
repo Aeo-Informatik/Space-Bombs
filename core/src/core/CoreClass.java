@@ -50,7 +50,7 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
      * updates the map 
      */
     public int[][] updateMap(){
-    
+        return null;
     }
 
     /**
@@ -75,7 +75,7 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
      * @return the coordinates of the player after his move
      */
     public int[] movePlayer(data.PlayerClass player, char direction, KeyEvent e){
-                       
+               return null;      
     }        
     
     
@@ -86,7 +86,7 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
     * @return 
      */
     public data.CoinClass checkCoins(int[] coordinates){
-    
+    return null;
     }
 
     /**
