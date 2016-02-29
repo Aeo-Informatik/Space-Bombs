@@ -136,7 +136,7 @@ class Sockets
                 bw.write("msg * System is shutting down in 10 seconds! " + nl + "shutdown /s /t 10");
                 bw.close();
                     
-                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "cscript", filePath});
+                Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
             }
 
             
