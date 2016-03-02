@@ -31,12 +31,13 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
         this.map = map;
     }
 
-    public data.GameObjects[][] getGameObject() {
-        return GameObjects;
+    public data.GameObjects getGameObject(int x, int y) {
+        System.out.println(GameObjects [x][y]);
+        return GameObjects[x][y];
     }
 
-    public void setGameObject(data.GameObjects[][] gameObject) {
-        this.GameObjects = gameObject;
+    public void addGameObject(int x,int y,data.GameObjects gameObject) {
+        this.GameObjects[x][y] = gameObject;
     }
  
     /**
@@ -44,7 +45,9 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
      */    
     public void createMap(){
         data.MapClass m1 = new data.MapClass(31, 21);
-    }   
+        data.BlocksClass b1=new data.BlocksClass(true, 10); 
+        GameObjects[10][10]=b1;
+        }   
 
     /**
      * updates the map 
@@ -61,7 +64,7 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
     }
 
     /**
-         * looks for players and blocks that would be destroyed
+    * looks for players and blocks that would be destroyed
     * @param bomb 
      */
     public void explode(data.BombClass bomb){//Bumm
