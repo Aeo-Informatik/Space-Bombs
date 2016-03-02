@@ -50,11 +50,17 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
         GameObjects[10][10]=b1;
         GameObjects[15][20]=b2;
         
-        data.BlocksClass bb=new data.BlocksClass(false, -100); 
+        data.BlocksClass bb=new data.BlocksClass(false, -100);
+        data.BlocksClass bbb=new data.BlocksClass(true, 3);
         
         //create the blocks that can be destroyed
-        
-        
+        for(int i=2;i<=18;i+=2){
+            for(int e=2; e<=28;e+=2){
+                if((int)(Math.random()*4)!=4){
+                   GameObjects[e][i]=bbb; 
+                }
+            }
+        }
         //create the blocks at the ends of the map
         for (int i=0;i<=30;i++){
            GameObjects[0][i]=bb;
