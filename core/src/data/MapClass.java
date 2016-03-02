@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class MapClass{
     private int width;//width of the map
     private int height;//height of the map
-    private boolean[][] passable=new boolean [31][21] ;//if the position is passaple
-    private int[][] blockposition=new int [31][21];//if ther is a block on this position
+    private boolean[][] passable=new boolean [30][20] ;//if the position is passaple
+    private int[][] blockposition=new int [30][20];//if ther is a block on this position
     private ArrayList<int[]>Spawn=new ArrayList();//the places where the different teams can spawn
     
     /**
