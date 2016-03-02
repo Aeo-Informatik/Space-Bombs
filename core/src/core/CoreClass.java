@@ -54,6 +54,24 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
                 }
             }
         }
+        for(int i=2;i<=18;i+=2){
+            if((int)(Math.random()*4)!=4){
+                GameObjects[1][i]=b2; 
+            }
+            if((int)(Math.random()*4)!=4){
+                GameObjects[29][i]=b2; 
+            }
+        }
+        for(int i=2;i<=28;i+=2){
+            if((int)(Math.random()*4)!=4){
+                GameObjects[i][1]=b2; 
+            }
+            if((int)(Math.random()*4)!=4){
+                GameObjects[i][19]=b2; 
+            }
+        }
+        
+        
         //create the blocks at the ends of the map
         for (int i=0;i<=30;i++){
            GameObjects[0][i]=b1;
