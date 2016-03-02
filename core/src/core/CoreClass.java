@@ -16,7 +16,7 @@ import sun.net.NetworkClient;
  */
 public class CoreClass {
     
-int[][]map = new int [30][20]; //creates a matrix as map
+int[][]map = new int [20][30]; //creates a matrix as map
 data.GameObjects [][] GameObjects = new data.GameObjects [20][30];// creates a matrix from GameObjects
 data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
     public CoreClass() {
@@ -44,7 +44,7 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
      * create an object map
      */    
     public void createMap(){
-        data.MapClass m1 = new data.MapClass(30, 20);
+        data.MapClass m1 = new data.MapClass(20, 30);
         data.BlocksClass b1=new data.BlocksClass(true, 10); 
         data.BlocksClass b2=new data.BlocksClass(false, 10); 
         GameObjects[10][10]=b1;
