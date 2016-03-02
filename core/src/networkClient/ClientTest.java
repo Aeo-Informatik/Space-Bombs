@@ -18,14 +18,12 @@ public class ClientTest {
 
             client.receiveData();
 
-            if(Sockets.isSocketConnected())
-            {
+
                 for(int i=0; i < 10; i++)
                 {
                     ClientInterface.DATASEND.add("Test" +i);
                 }
                 client.sendData();
-            }
             
         }catch(Exception e){
             e.printStackTrace();
