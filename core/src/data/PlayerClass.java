@@ -116,7 +116,7 @@ public class PlayerClass implements GameObjects{
 
     /**
      * set if the player is immortal
-     * @param immortality if the player isimmortal
+     * @param immortality if the player is immortal
      */
     public void setImmortality(boolean immortality) {//God mode
         this.immortality = immortality;
