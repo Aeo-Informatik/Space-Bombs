@@ -117,7 +117,4 @@ public class MapClass{
         Coordinates=Spawn.get(team);
         return Coordinates;
     }
-    
-    
-
 }
