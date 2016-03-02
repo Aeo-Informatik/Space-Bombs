@@ -87,7 +87,7 @@ public class PlayerClass implements GameObjects{
      * @param coins that will be added
      */
     public void addCoins(int coins){
-        this.coins=+coins;
+        this.coins+=coins;
     }
     
     /**
