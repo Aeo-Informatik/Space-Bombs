@@ -46,7 +46,12 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
     public void createMap(){
         data.MapClass m1 = new data.MapClass(31, 21);
         data.BlocksClass b1=new data.BlocksClass(true, 10); 
-        GameObjects[10][10]=b1;
+        data.BlocksClass b2=new data.BlocksClass(false, 10); 
+        GameObjects[10][10]=b1;GameObjects[15][20]=b2;
+        /*
+        
+        */
+        
         }   
 
     /**
