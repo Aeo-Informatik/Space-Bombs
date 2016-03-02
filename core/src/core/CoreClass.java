@@ -52,6 +52,9 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
         
         data.BlocksClass bb=new data.BlocksClass(false, -100); 
         
+        //create the blocks that can be destroyed
+        
+        
         //create the blocks at the ends of the map
         for (int i=0;i<=30;i++){
            GameObjects[0][i]=bb;
@@ -63,7 +66,7 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
            GameObjects[i][30]=bb;
         }
         
-        
+        //create the undestructible block raster
         for(int i=2;i<=18;i+=2){
             for(int e=2; e<=28;e+=2){
                GameObjects[e][i]=bb; 
