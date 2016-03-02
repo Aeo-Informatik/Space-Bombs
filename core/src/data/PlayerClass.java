@@ -120,11 +120,5 @@ public class PlayerClass implements GameObjects{
      */
     public void setImmortality(boolean immortality) {//God mode
         this.immortality = immortality;
-    }
-
-
-    
-
-
-   
+    }   
 }
