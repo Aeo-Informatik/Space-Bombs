@@ -44,38 +44,32 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
      * create an object map
      */    
     public void createMap(){
-        data.MapClass m1 = new data.MapClass(20, 30);
-        data.BlocksClass b1=new data.BlocksClass(true, 10); 
-        data.BlocksClass b2=new data.BlocksClass(false, 10); 
-        GameObjects[10][10]=b1;
-        GameObjects[15][20]=b2;
-        
-        data.BlocksClass bb=new data.BlocksClass(false, -100);
-        data.BlocksClass bbb=new data.BlocksClass(true, 3);
+        data.BlocksClass b1=new data.BlocksClass(false, -100);
+        data.BlocksClass b2=new data.BlocksClass(true, 3);
         
         //create the blocks that can be destroyed
         for(int i=2;i<=18;i+=2){
             for(int e=2; e<=28;e+=2){
                 if((int)(Math.random()*4)!=4){
-                   GameObjects[e][i]=bbb; 
+                   GameObjects[e][i]=b2; 
                 }
             }
         }
         //create the blocks at the ends of the map
         for (int i=0;i<=30;i++){
-           GameObjects[0][i]=bb;
-           GameObjects[20][i]=bb;
+           GameObjects[0][i]=b1;
+           GameObjects[20][i]=b1;
         }
         
         for (int i=0;i<=20;i++){
-           GameObjects[i][0]=bb;
-           GameObjects[i][30]=bb;
+           GameObjects[i][0]=b1;
+           GameObjects[i][30]=b1;
         }
         
         //create the undestructible block raster
         for(int i=2;i<=18;i+=2){
             for(int e=2; e<=28;e+=2){
-               GameObjects[e][i]=bb; 
+               GameObjects[e][i]=b1; 
             }
         }
             
