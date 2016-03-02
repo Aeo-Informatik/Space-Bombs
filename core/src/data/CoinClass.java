@@ -49,6 +49,5 @@ public class CoinClass implements GameObjects{
     public void setCoordinates(int x, int y) {
         this.coordinates[0] = x;
         this.coordinates[1] = y;
-    }
-    
+    }    
 }
