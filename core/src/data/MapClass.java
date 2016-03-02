@@ -85,7 +85,7 @@ public class MapClass{
      * @param passable if the possition is passable
      */
     public void setPassable(int x,int y, boolean passable) {
-        this.passable[x][y]=passable;
+        this.passable[y][x]=passable;
     }
     /**
      * get if there is a block on that position
@@ -94,7 +94,7 @@ public class MapClass{
      * @return if there is a block on that position
      */
     public boolean getBlockposition(int x , int y) {
-        if(blockposition[x][y]==1){
+        if(blockposition[y][x]==1){
             System.out.println("true");
             return true;
         }else{
@@ -109,7 +109,7 @@ public class MapClass{
      * @param blockposition if there is a block on that position
      */
     public void setBlockposition(int x,int y,int blockposition) {
-        this.blockposition[x][y]=blockposition;
+        this.blockposition[y][x]=blockposition;
     }
     
     public int[] getSpawn (int team){

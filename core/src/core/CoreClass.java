@@ -32,12 +32,12 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
     }
 
     public data.GameObjects getGameObject(int x, int y) {
-        System.out.println(GameObjects [x][y]);
-        return GameObjects[x][y];
+        System.out.println(GameObjects [y][x]);
+        return GameObjects[y][x];
     }
 
     public void addGameObject(int x,int y,data.GameObjects gameObject) {
-        this.GameObjects[x][y] = gameObject;
+        this.GameObjects[y][x] = gameObject;
     }
  
     /**
@@ -47,10 +47,15 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
         data.MapClass m1 = new data.MapClass(31, 21);
         data.BlocksClass b1=new data.BlocksClass(true, 10); 
         data.BlocksClass b2=new data.BlocksClass(false, 10); 
-        GameObjects[10][10]=b1;GameObjects[15][20]=b2;
-        /*
+        GameObjects[10][10]=b1;
+        GameObjects[15][20]=b2;
         
-        */
+        for (int i=0;i<=31;i++){
+           data.BlocksClass bb=new data.BlocksClass(false, -100); 
+           GameObjects[0][i]=bb;
+           GameObjects[21][i]=bb;
+        }
+        
         
         }   
 
