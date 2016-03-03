@@ -14,7 +14,21 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Main implements ApplicationListener {
+    
+    /**
+    * It is very common to draw a texture mapped to rectangular geometry. 
+    * It is also very common to draw the same texture or various regions of 
+    * that texture many times. It would be inefficient to send each rectangle 
+    * one at a time to the GPU to be drawn. Instead, many rectangles for the same 
+    * texture can be described and sent to the GPU all at once. 
+    * This is what the SpriteBatch class does.
+    */
     private SpriteBatch batch;
+    
+    /**
+     * LibGdx makes use of bitmap files (pngs) to render fonts. 
+     * Each glyph in the font has a corresponding TextureRegion.
+     */
     private BitmapFont font;
     
     
@@ -22,7 +36,8 @@ public class Main implements ApplicationListener {
      * Method called once when the application is created.
      */
     @Override
-    public void create() {        
+    public void create() {   
+        
         batch = new SpriteBatch();    
         font = new BitmapFont();
         font.setColor(Color.RED);
