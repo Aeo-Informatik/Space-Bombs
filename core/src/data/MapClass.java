@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MapClass{
     private int width;//width of the map
     private int height;//height of the map
-    private int[][] passable=new int [20][30];//if ther is a block on this position
+    private int[][] passable=new int [20][30];//0=passable 1=not passable
     private ArrayList<int[]>Spawn=new ArrayList();//the places where the different teams can spawn
     
     /**
@@ -84,7 +84,7 @@ public class MapClass{
      * @param y the y-coordinate
      * @param passable if this place is passable  
      */
-    public void setBlockposition(int x,int y,int passable) {
+    public void setPassable(int x,int y,int passable) {
         this.passable[y][x]=passable;
     }
     

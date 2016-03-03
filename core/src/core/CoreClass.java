@@ -17,6 +17,7 @@ public class CoreClass {
     
 data.GameObjects [][] GameObjects = new data.GameObjects [20][30];// creates a matrix from GameObjects
 data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
+data.MapClass m1 = new data.MapClass(20,30);
     public CoreClass() {
         
     }
@@ -42,23 +43,30 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
             for(int e=2; e<=28;e+=2){
                 if((int)(Math.random()*4)!=4){
                    GameObjects[e][i]=b2; 
+                   m1.setPassable(e, i, 1);
                 }
             }
         }
+        
         for(int i=2;i<=18;i++){
             if((int)(Math.random()*4)!=4){
-                GameObjects[1][i]=b2; 
+                GameObjects[1][i]=b2;
+                m1.setPassable(1, i, 1);
             }
             if((int)(Math.random()*4)!=4){
-                GameObjects[29][i]=b2; 
+                GameObjects[29][i]=b2;
+                m1.setPassable(29, i, 1);
             }
         }
+        
         for(int i=2;i<=28;i++){
             if((int)(Math.random()*4)!=4){
                 GameObjects[i][1]=b2; 
+                m1.setPassable(i, 1, 1);
             }
             if((int)(Math.random()*4)!=4){
                 GameObjects[i][19]=b2; 
+                m1.setPassable(i, 19, 1);
             }
         }
         
@@ -66,18 +74,23 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
         //create the blocks at the ends of the map
         for (int i=0;i<=30;i++){
            GameObjects[0][i]=b1;
+           m1.setPassable(0, i, 1);
            GameObjects[20][i]=b1;
+           m1.setPassable(20, i, 1);
         }
         
         for (int i=0;i<=20;i++){
            GameObjects[i][0]=b1;
+           m1.setPassable(i, 0, 1);
            GameObjects[i][30]=b1;
+           m1.setPassable(i, 30, 1);
         }
         
         //create the undestructible block raster
         for(int i=2;i<=18;i+=2){
             for(int e=2; e<=28;e+=2){
                GameObjects[e][i]=b1; 
+               m1.setPassable(e, i, 1);
             }
         }
             
