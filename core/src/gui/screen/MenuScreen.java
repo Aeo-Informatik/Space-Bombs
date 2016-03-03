@@ -6,7 +6,9 @@
 package gui.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import gui.camera.OrthoCamera;
+import gui.entity.Player;
 
 /**
  *
@@ -16,22 +18,35 @@ public class MenuScreen extends Screen{
     
     //The viewpoint of the player 
     private OrthoCamera camera;
+    private Player player;
     
     @Override
     public void create() {
+        //Set player camera
         camera = new OrthoCamera();
+        
+        //Spawn player at x=430 and y=100
+        player = new Player(new Vector2(430,100), new Vector2(0,0));
     }
 
     
     @Override
     public void render(SpriteBatch sb) {
+        //Takes the matrix and everything containing in it will be rendered. 
+        //The exact functionality is really complex with lots of math.
+        sb.setProjectionMatrix(camera.combined);
+        sb.begin();
         
+        player.render(sb);
+        
+        sb.end();
     }
 
     
     @Override
     public void update() {
         camera.update();
+        player.update();
     }
     
     
