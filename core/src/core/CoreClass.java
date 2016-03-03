@@ -6,6 +6,7 @@
 
 package core;
 
+import data.PlayerClass;
 import java.awt.event.KeyEvent;
 
 
@@ -116,12 +117,40 @@ data.MapClass m1 = new data.MapClass(20,30);
     
     /**
      * moves the player
-     * @param player which player
+     * @param x the x coordinate
+     * @param y the y coordinate
      * @param direction which direction
-     * @return the coordinates of the player after his move
      */
-    public int[] movePlayer(data.PlayerClass player, char direction, KeyEvent e){
-               return null;      
+    public void movePlayer(int x,int y, char direction){
+        
+        if (GameObjects[y][x]==data.PlayerClass){
+            data.PlayerClass p1;
+            p1 = (PlayerClass) GameObjects[y][x];
+            if(direction=='W'){
+                if(m1.getPassable(y-1, x)==0){
+                    GameObjects[y-1][x]=p1;
+                    GameObjects[y][x]=null;
+                }
+            }
+            if(direction=='A'){
+                if(m1.getPassable(y, x-1)==0){
+                    GameObjects[y][x-1]=p1;
+                    GameObjects[y][x]=null;
+                }
+            }  
+            if(direction=='D'){
+                if(m1.getPassable(y, x+1)==0){
+                    GameObjects[y][x+1]=p1;
+                    GameObjects[y][x]=null;
+                }
+            }
+            if(direction=='S'){
+                if(m1.getPassable(y+1, x)==0){
+                    GameObjects[y+1][x]=p1;
+                    GameObjects[y][x]=null;
+                }
+            }
+        }
     }        
     
     

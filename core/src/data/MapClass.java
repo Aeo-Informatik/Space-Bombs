@@ -69,13 +69,13 @@ public class MapClass{
      * @param y the y-coordinate
      * @return if this place is passable
      */
-    public boolean getPassable(int x , int y) {
+    public int getPassable(int x , int y) {
         if(passable[y][x]==1){
-            System.out.println("true");
-            return true;
+            System.out.println("false");
+            return 1;
         }else{
             System.out.println("true");
-            return false;
+            return 0;
         }
     }
     /**
