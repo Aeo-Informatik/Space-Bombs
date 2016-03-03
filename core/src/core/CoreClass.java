@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author plonies_d
+ * @author Domplo & phinix
  */
 public class CoreClass {
     
@@ -124,32 +124,38 @@ data.MapClass m1 = new data.MapClass(20,30);
     public void movePlayer(int x,int y, char direction){
         
         if (GameObjects[y][x]==data.PlayerClass){
+            
             data.PlayerClass p1;
             p1 = (PlayerClass) GameObjects[y][x];
+            
             if(direction=='W'){
                 if(m1.getPassable(y-1, x)==0){
                     GameObjects[y-1][x]=p1;
                     GameObjects[y][x]=null;
                 }
             }
+            
             if(direction=='A'){
                 if(m1.getPassable(y, x-1)==0){
                     GameObjects[y][x-1]=p1;
                     GameObjects[y][x]=null;
                 }
             }  
-            if(direction=='D'){
-                if(m1.getPassable(y, x+1)==0){
-                    GameObjects[y][x+1]=p1;
-                    GameObjects[y][x]=null;
-                }
-            }
+            
             if(direction=='S'){
                 if(m1.getPassable(y+1, x)==0){
                     GameObjects[y+1][x]=p1;
                     GameObjects[y][x]=null;
                 }
             }
+            
+            if(direction=='D'){
+                if(m1.getPassable(y, x+1)==0){
+                    GameObjects[y][x+1]=p1;
+                    GameObjects[y][x]=null;
+                }
+            }
+
         }
     }        
     
