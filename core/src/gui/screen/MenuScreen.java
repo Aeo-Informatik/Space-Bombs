@@ -22,27 +22,39 @@ public class MenuScreen extends Screen{
         camera = new OrthoCamera();
     }
 
+    
     @Override
     public void render(SpriteBatch sb) {
-    }
-
-    @Override
-    public void resize(int width, int height) {
-       
-    }
-
-    @Override
-    public void dispose() {
         
     }
 
+    
+    @Override
+    public void update() {
+        camera.update();
+    }
+    
+    
+    @Override
+    public void resize(int width, int height) {
+       camera.resize();
+    }
+
+    
     @Override
     public void pause() {
         
     }
 
+    
     @Override
     public void resume() {
+        
+    }
+
+    
+    @Override
+    public void dispose() {
         
     }
     

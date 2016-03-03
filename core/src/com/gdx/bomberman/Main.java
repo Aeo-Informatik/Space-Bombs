@@ -63,6 +63,7 @@ public class Main implements ApplicationListener {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
         if(currentScreen != null)
+            ScreenManager.getCurrentScreen().update();
             ScreenManager.getCurrentScreen().render(batch);
         
         //Test
