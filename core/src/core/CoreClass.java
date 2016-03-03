@@ -40,21 +40,21 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
     }
  
     /**
-     * create an object map
+     * create the blocks of the map
      */    
     public void createMap(){
         data.BlocksClass b1=new data.BlocksClass(false, -100);
         data.BlocksClass b2=new data.BlocksClass(true, 3);
         
         //create the blocks that can be destroyed
-        for(int i=2;i<=18;i+=2){
+        for(int i=2;i<=18;i++){
             for(int e=2; e<=28;e+=2){
                 if((int)(Math.random()*4)!=4){
                    GameObjects[e][i]=b2; 
                 }
             }
         }
-        for(int i=2;i<=18;i+=2){
+        for(int i=2;i<=18;i++){
             if((int)(Math.random()*4)!=4){
                 GameObjects[1][i]=b2; 
             }
@@ -62,7 +62,7 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
                 GameObjects[29][i]=b2; 
             }
         }
-        for(int i=2;i<=28;i+=2){
+        for(int i=2;i<=28;i++){
             if((int)(Math.random()*4)!=4){
                 GameObjects[i][1]=b2; 
             }
