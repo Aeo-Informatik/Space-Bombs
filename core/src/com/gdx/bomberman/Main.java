@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import gui.screen.MenuScreen;
+import gui.screen.ScreenManager;
+import static gui.screen.ScreenManager.currentScreen;
 
 public class Main implements ApplicationListener {
     
@@ -36,10 +39,13 @@ public class Main implements ApplicationListener {
      * Method called once when the application is created.
      */
     @Override
-    public void create() {   
+    public void create() 
+    {   
         
         batch = new SpriteBatch();    
         font = new BitmapFont();
+        ScreenManager.setScreen(new MenuScreen());
+        
         font.setColor(Color.RED);
     }
     
@@ -50,12 +56,16 @@ public class Main implements ApplicationListener {
      * Game logic updates are usually also performed in this method.
      */
     @Override
-    public void render() {    
+    public void render() 
+    {    
         //Clear screen
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         
+        if(currentScreen != null)
+            ScreenManager.getCurrentScreen().render(batch);
+        
+        //Test
         batch.begin();
         font.draw(batch, "Hello World", 200, 200);
         batch.end();
@@ -68,8 +78,10 @@ public class Main implements ApplicationListener {
      * The parameters are the new width and height the screen has been resized to in pixels.
      */
     @Override
-    public void resize(int width, int height) {
-        
+    public void resize(int width, int height) 
+    {
+        if(currentScreen != null)
+            ScreenManager.getCurrentScreen().resize(width, height);
         
     }
     
@@ -79,7 +91,11 @@ public class Main implements ApplicationListener {
      * A good place to save the game state.
      */
     @Override
-    public void pause() {
+    public void pause() 
+    {
+        
+        if(currentScreen != null)
+            ScreenManager.getCurrentScreen().pause();
         
     }
     
@@ -88,7 +104,12 @@ public class Main implements ApplicationListener {
      * Called when the application is destroyed
      */
     @Override
-    public void dispose() {
+    public void dispose() 
+    {
+        
+        if(currentScreen != null)
+            ScreenManager.getCurrentScreen().dispose();
+        
         batch.dispose();
         font.dispose();
     }
@@ -98,6 +119,9 @@ public class Main implements ApplicationListener {
      * This method is only called on Android, when the application resumes from a paused state.
      */
     @Override
-    public void resume() {
+    public void resume() 
+    {
+        if(currentScreen != null)
+            ScreenManager.getCurrentScreen().resume();
     }
 }

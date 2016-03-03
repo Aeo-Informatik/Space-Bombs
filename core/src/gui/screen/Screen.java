@@ -13,7 +13,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public abstract class Screen {
     
+    /**
+     * WICHTIG:
+     * Diese Klasse trägt zur Übersichtlichkeit bei indem sie die Lifecycle Methoden
+     * von Main.java übernimmt und an alle weiteren Screen Methoden (MenuScreen, GameScreen ecc.)
+     * weitergibt. Das ist praktisch damit nicht jeder Funktionsaufruf in der Main.java passieren muss sondern
+     * die Main.java nur diese hier definierten Funktionen triggern muss. 
+     * Die hier genannten Funktionen sind dann in den Screen Methoden implementiert und 
+     * werden in den entsprechenden Klassen auch ausgeführt.
+     */
+    
     public abstract void create();
+    
+    public abstract void update();
     
     public abstract void render(SpriteBatch sb);
     
