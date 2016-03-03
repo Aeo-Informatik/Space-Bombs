@@ -15,19 +15,10 @@ import java.awt.event.KeyEvent;
  */
 public class CoreClass {
     
-int[][]map = new int [20][30]; //creates a matrix as map
 data.GameObjects [][] GameObjects = new data.GameObjects [20][30];// creates a matrix from GameObjects
 data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
     public CoreClass() {
         
-    }
-
-    public int[][] getMap() {
-        return map;
-    }
-
-    public void setMap(int[][] map) {
-        this.map = map;
     }
 
     public data.GameObjects getGameObject(int x, int y) {
@@ -96,17 +87,10 @@ data.PlayerClass p1 = new data.PlayerClass(100,0,50,0,0);
         }   
 
     /**
-     * updates the map 
-     */
-    public int[][] updateMap(){
-        return null;
-    }
-
-    /**
      * player can place a bomb
      */
-    public void placeBomb(){
-    
+    public void placeBomb(int x,int y){
+        
     }
 
     /**

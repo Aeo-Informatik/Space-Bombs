@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class MapClass{
     private int width;//width of the map
     private int height;//height of the map
-    private boolean[][] passable=new boolean [20][30] ;//if the position is passaple
-    private int[][] blockposition=new int [20][30];//if ther is a block on this position
+    private int[][] passable=new int [20][30];//if ther is a block on this position
     private ArrayList<int[]>Spawn=new ArrayList();//the places where the different teams can spawn
     
     /**
@@ -62,54 +61,31 @@ public class MapClass{
     public void setHeight(int height) {
         this.height = height;
     }
+
+
     /**
-     * get if the possition is passable
+     * get if this place is passable
      * @param x the x-coordinate
      * @param y the y-coordinate
-     * @return if th epossition is passable
+     * @return if this place is passable
      */
-    public boolean getPassable(int x, int y) {
-        if (passable[x][y]==true){
+    public boolean getPassable(int x , int y) {
+        if(passable[y][x]==1){
             System.out.println("true");
             return true;
         }else{
-            System.out.println("false");
+            System.out.println("true");
             return false;
         }
-                
     }
     /**
-     * set if the possition is passible
+     * set if this place is passable
      * @param x the x-coordinate
      * @param y the y-coordinate
-     * @param passable if the possition is passable
+     * @param passable if this place is passable  
      */
-    public void setPassable(int x,int y, boolean passable) {
+    public void setBlockposition(int x,int y,int passable) {
         this.passable[y][x]=passable;
-    }
-    /**
-     * get if there is a block on that position
-     * @param x the x-coordinate
-     * @param y the y-coordinate
-     * @return if there is a block on that position
-     */
-    public boolean getBlockposition(int x , int y) {
-        if(blockposition[y][x]==1){
-            System.out.println("true");
-            return true;
-        }else{
-            System.out.println("true");
-            return false;
-        }
-    }
-    /**
-     * set if there is a block on that position
-     * @param x the x-coordinate
-     * @param y the y-coordinate
-     * @param blockposition if there is a block on that position
-     */
-    public void setBlockposition(int x,int y,int blockposition) {
-        this.blockposition[y][x]=blockposition;
     }
     
     public int[] getSpawn (int team){
