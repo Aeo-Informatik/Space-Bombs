@@ -39,11 +39,13 @@ public abstract class Entity {
     }
     
     
+    //Get current position on screen
     public Vector2 getPosition()
     {
         return pos;
     }
     
+    //Sets the direction in which the entity should move
     public void setDirection(float x, float y)
     {
         direction.set(x, y);

@@ -29,17 +29,25 @@ public class MainPlayer extends Entity{
     }
 
 
-    //Update is the same as render only that it doesn't have the SpriteBatch Object
+    
     @Override
     public void render(SpriteBatch sb)
     {
+        //Draws the player if he stands still
+        sb.draw(textureRegion, pos.x, pos.y);
+        
+        //Changes the position of the texture 
         pos.add(direction);
+        
         
         //Input handling and moving the player in pixels
         if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
         {
             //Velocity the texture moves in x and y axis
+            //this is the method inherited from Entity.java class
             setDirection(-150, 0);
+            
+            //Draw the walking animation
             sb.draw(animation(TextureManager.p1WalkingLeftAnim), pos.x, pos.y);
             
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
@@ -61,18 +69,26 @@ public class MainPlayer extends Entity{
             setDirection(0, 0);
     }
     
- 
+    
+    //Give as parameter an Animation Object from the TextureManager class 
+    // and it will return the frame that should be drawn
     private TextureRegion animation(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
         this.stateTime += Gdx.graphics.getDeltaTime(); 
         
-        /*Obtains the current frame. This is given by the animation for the current time. The second variable is the looping. Passing in true, we tell the animation to restart after it reaches the last frame.*/
+        /*
+        Obtains the current frame. This is given by the animation for the current time. 
+        The second variable is the looping. 
+        Passing in true, we tell the animation to restart after it reaches the last frame.
+        */
         currentFrame = animation.getKeyFrame(stateTime, true);
         
         return currentFrame;
     }
 
+    
+    //Update is the same as render only that it doesn't have the SpriteBatch Object
     @Override
     public void update() {
         

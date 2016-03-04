@@ -44,6 +44,9 @@ public class Main implements ApplicationListener {
         TextureManager.load();
         batch = new SpriteBatch();    
         font = new BitmapFont();
+        
+        //Sets the currentScreen to the GameScreen.java that means everything like
+        //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
         ScreenManager.setScreen(new GameScreen());
         
     }
