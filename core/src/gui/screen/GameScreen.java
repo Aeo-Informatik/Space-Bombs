@@ -7,6 +7,7 @@ package gui.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.entity.Player;
 
@@ -14,7 +15,7 @@ import gui.entity.Player;
  *
  * @author qubasa
  */
-public class MenuScreen extends Screen{
+public class GameScreen extends Screen{
     
     //The viewpoint of the player 
     private OrthoCamera camera;
@@ -26,7 +27,7 @@ public class MenuScreen extends Screen{
         camera = new OrthoCamera();
         
         //Spawn player at x=430 and y=100
-        player = new Player(new Vector2(430,100), new Vector2(0,0));
+        player = new Player(new Vector2(430,100), new Vector2(0,0), TextureManager.p1);
     }
 
     

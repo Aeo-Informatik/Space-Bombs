@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 
@@ -16,9 +17,10 @@ import gui.TextureManager;
  * @author qubasa
  */
 public class Player extends Entity{
-
-    public Player(Vector2 pos, Vector2 direction) {
-        super(TextureManager.PLAYER, pos, direction);
+    
+    
+    public Player(Vector2 pos, Vector2 direction, TextureRegion textureRegion) {
+        super(textureRegion, pos, direction, 200, 200);
     }
 
     @Override
@@ -33,6 +35,7 @@ public class Player extends Entity{
         {
             //Velocity the texture moves in x and y axis
             setDirection(-150, 0);
+            
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
             setDirection(150, 0);  

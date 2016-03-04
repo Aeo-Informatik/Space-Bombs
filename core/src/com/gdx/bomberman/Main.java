@@ -12,7 +12,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import gui.screen.MenuScreen;
+import gui.TextureManager;
+import gui.screen.GameScreen;
 import gui.screen.ScreenManager;
 import static gui.screen.ScreenManager.currentScreen;
 
@@ -41,12 +42,11 @@ public class Main implements ApplicationListener {
     @Override
     public void create() 
     {   
-        
+        TextureManager.load();
         batch = new SpriteBatch();    
         font = new BitmapFont();
-        ScreenManager.setScreen(new MenuScreen());
+        ScreenManager.setScreen(new GameScreen());
         
-        font.setColor(Color.RED);
     }
     
         
@@ -65,11 +65,6 @@ public class Main implements ApplicationListener {
         if(currentScreen != null)
             ScreenManager.getCurrentScreen().update();
             ScreenManager.getCurrentScreen().render(batch);
-        
-        //Test
-        batch.begin();
-        font.draw(batch, "Hello World", 200, 200);
-        batch.end();
     }
     
     

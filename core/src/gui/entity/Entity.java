@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -16,14 +17,13 @@ import com.badlogic.gdx.math.Vector2;
  */
 public abstract class Entity {
     
-    protected Texture texture;
+    protected TextureRegion textureRegion;
     protected Vector2 pos, direction;
     
-    
-    public Entity(Texture texture, Vector2 pos, Vector2 direction){
+    public Entity(TextureRegion textureRegion, Vector2 pos, Vector2 direction, int cutX, int cutY){
         this.pos = pos;
         this.direction = direction;
-        this.texture = texture;
+        this.textureRegion = textureRegion;
     }
     
     public abstract void update();
@@ -31,7 +31,10 @@ public abstract class Entity {
     
     public void render(SpriteBatch sb)
     {
-        sb.draw(texture, pos.x, pos.y);
+        //texture = the texture to be drawn
+        //pos.x/pos.y = the coordinates where to draw the texture in the screen
+        //cutX/cutY = to cut out one portion of the texture
+        sb.draw(textureRegion, pos.x, pos.y);
     }
     
     
