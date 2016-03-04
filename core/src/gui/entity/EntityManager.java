@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import gui.TextureManager;
 
 /**
  *
@@ -23,7 +24,9 @@ public class EntityManager {
     {
         //Spawn mainPlayer at x=430 and y=100, the second argument is the direction in which the player
         //should move on creation x=0 y=0 means no movement
-        mainPlayer = new MainPlayer(new Vector2(430,100), new Vector2(0,0));
+        mainPlayer = new MainPlayer(new Vector2(430,100), new Vector2(0,0), 
+                TextureManager.p1WalkingUpAnim, TextureManager.p1WalkingDownAnim, 
+                TextureManager.p1WalkingRightAnim, TextureManager.p1WalkingLeftAnim);
     }
     
     
@@ -58,7 +61,5 @@ public class EntityManager {
     {
         entities.add(entity);
     }
-    
-    
     
 }
