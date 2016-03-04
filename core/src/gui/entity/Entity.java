@@ -19,6 +19,8 @@ public abstract class Entity {
     protected TextureRegion textureRegion;
     protected Vector2 pos, direction;
     
+    //The first parameter is the image that should be drawn the second one is the position x, y
+    //and the third is the movement direction and speed in which the texture moves x,y.
     public Entity(TextureRegion textureRegion, Vector2 pos, Vector2 direction){
         this.pos = pos;
         this.direction = direction;
@@ -33,7 +35,6 @@ public abstract class Entity {
     {
         //texture = the texture to be drawn
         //pos.x/pos.y = the coordinates where to draw the texture in the screen
-        //cutX/cutY = to cut out one portion of the texture
         sb.draw(textureRegion, pos.x, pos.y);
     }
     

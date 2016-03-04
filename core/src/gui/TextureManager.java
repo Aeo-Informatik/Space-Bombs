@@ -46,6 +46,14 @@ public class TextureManager {
         p1WalkingUpAnim = new Animation(0.3f, new TextureRegion(p1WalkingUp, 0, 0, 18, 22), new TextureRegion(p1WalkingUp, 18, 0, 18, 22), 
 				new TextureRegion(p1WalkingUp, 36, 0, 18, 22), new TextureRegion(p1WalkingUp, 54, 0, 18, 22));
         
+        p1WalkingRight = loadTexture("data/player1/walking-right.png");
+        p1WalkingRightAnim = new Animation(0.3f, new TextureRegion(p1WalkingRight, 0, 0, 18, 22), new TextureRegion(p1WalkingRight, 18, 0, 18, 22), 
+				new TextureRegion(p1WalkingRight, 36, 0, 18, 22), new TextureRegion(p1WalkingRight, 54, 0, 18, 22));
+        
+        p1WalkingLeft = loadTexture("data/player1/walking-left.png");
+        p1WalkingLeftAnim = new Animation(0.3f, new TextureRegion(p1WalkingLeft, 0, 0, 18, 22), new TextureRegion(p1WalkingLeft, 18, 0, 18, 22), 
+				new TextureRegion(p1WalkingLeft, 36, 0, 18, 22), new TextureRegion(p1WalkingLeft, 54, 0, 18, 22));
+        
         p1SpawnPosition = new TextureRegion(p1WalkingUp, 0, 0, 18, 22);
     }
 }

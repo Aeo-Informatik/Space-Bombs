@@ -18,11 +18,13 @@ public class EntityManager {
     private final Array<Entity> entities = new Array<Entity>();
     private final MainPlayer mainPlayer;
     
+    
     public EntityManager()
     {
-        //Spawn player at x=430 and y=100, the second argument is the direction
+        //Spawn mainPlayer at x=430 and y=100, the second argument is the direction
         mainPlayer = new MainPlayer(new Vector2(430,100), new Vector2(0,0));
     }
+    
     
     public void update()
     {

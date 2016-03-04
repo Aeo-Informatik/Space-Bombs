@@ -6,11 +6,9 @@
 package gui.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
-import gui.entity.MainPlayer;
+
 
 /**
  *

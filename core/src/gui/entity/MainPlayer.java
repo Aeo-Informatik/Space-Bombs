@@ -31,7 +31,7 @@ public class MainPlayer extends Entity{
 
     //Update is the same as render only that it doesn't have the SpriteBatch Object
     @Override
-    public void update()
+    public void render(SpriteBatch sb)
     {
         pos.add(direction);
         
@@ -40,24 +40,29 @@ public class MainPlayer extends Entity{
         {
             //Velocity the texture moves in x and y axis
             setDirection(-150, 0);
+            sb.draw(animation(TextureManager.p1WalkingLeftAnim), pos.x, pos.y);
             
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
             setDirection(150, 0);  
+            sb.draw(animation(TextureManager.p1WalkingRightAnim), pos.x, pos.y);
             
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
         {
             setDirection(0, 150);
+            sb.draw(animation(TextureManager.p1WalkingUpAnim), pos.x, pos.y);
             
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
             setDirection(0, -150);
+            sb.draw(animation(TextureManager.p1WalkingDownAnim), pos.x, pos.y);
             
         }else
             setDirection(0, 0);
     }
     
-    public TextureRegion animation(Animation animation)
+ 
+    private TextureRegion animation(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
         this.stateTime += Gdx.graphics.getDeltaTime(); 
@@ -66,6 +71,11 @@ public class MainPlayer extends Entity{
         currentFrame = animation.getKeyFrame(stateTime, true);
         
         return currentFrame;
+    }
+
+    @Override
+    public void update() {
+        
     }
 
     
