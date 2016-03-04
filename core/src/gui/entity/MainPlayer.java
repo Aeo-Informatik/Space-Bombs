@@ -28,7 +28,15 @@ public class MainPlayer extends Entity{
     private Animation walkAnimRight;
     private Animation walkAnimLeft;
     
-    //Constructor
+    /**
+     * 
+     * @param pos
+     * @param direction
+     * @param walkAnimUp
+     * @param walkAnimDown
+     * @param walkAnimRight
+     * @param walkAnimLeft 
+     */
     public MainPlayer(Vector2 pos, Vector2 direction, Animation walkAnimUp, 
             Animation walkAnimDown, Animation walkAnimRight, Animation walkAnimLeft) 
     {
@@ -40,12 +48,32 @@ public class MainPlayer extends Entity{
         this.walkAnimRight = walkAnimRight;
     }
 
-
+    /**
+     * Update is the same as render only that it doesn't have the SpriteBatch Object.
+     * It is used for game logic updates.
+     */
+    @Override
+    public void update() {
+        
+    }
     
+    /**
+     * Draws the player to screen
+     * @param sb 
+     */
     @Override
     public void render(SpriteBatch sb)
     {
-               
+          inputMovePlayer(sb);          
+    }
+    
+    
+    /**
+     * Moves the player if keyboard input is received
+     * @param sb 
+     */
+    private void inputMovePlayer(SpriteBatch sb)
+    {
         //Changes the position of the texture 
         pos.add(direction);
         
@@ -110,10 +138,15 @@ public class MainPlayer extends Entity{
                     break;
             }
 
-        }
-                
+        }   
     }
     
+    
+    /**
+     * Gets the frame out of the animation
+     * @param animation
+     * @return 
+     */
     private TextureRegion getFrame(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
@@ -128,15 +161,5 @@ public class MainPlayer extends Entity{
         
         return currentFrame;
     }
-    
-    
-    //Update is the same as render only that it doesn't have the SpriteBatch Object
-    @Override
-    public void update() {
-        
-    }
-
-    
-
-    
+      
 }
