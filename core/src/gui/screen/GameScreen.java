@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
+import gui.entity.EntityManager;
 import gui.entity.MainPlayer;
 
 /**
@@ -19,15 +20,14 @@ public class GameScreen extends Screen{
     
     //The viewpoint of the player 
     private OrthoCamera camera;
-    private MainPlayer mainPlayer;
+    private EntityManager entityManager;
     
     @Override
     public void create() {
         //Set mainPlayer camera
         camera = new OrthoCamera();
         
-        //Spawn player at x=430 and y=100, the second argument is the direction
-        mainPlayer = new MainPlayer(new Vector2(430,100), new Vector2(0,0));
+        entityManager = new EntityManager();
     }
 
     
@@ -36,10 +36,10 @@ public class GameScreen extends Screen{
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
+        
         sb.begin();
-        
-        mainPlayer.render(sb);
-        
+        //Things to draw to screen come in here
+        entityManager.render(sb);
         sb.end();
     }
 
@@ -47,7 +47,7 @@ public class GameScreen extends Screen{
     @Override
     public void update() {
         camera.update();
-        mainPlayer.update();
+        entityManager.update();
     }
     
     

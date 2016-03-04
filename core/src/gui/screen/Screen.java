@@ -18,13 +18,12 @@ public abstract class Screen {
      * Diese Klasse trägt zur Übersichtlichkeit bei indem sie die Lifecycle Methoden
      * von Main.java übernimmt und an alle weiteren Screen Methoden (MenuScreen, GameScreen ecc.)
      * weitergibt. Das ist praktisch damit nicht jeder Funktionsaufruf in der Main.java passieren muss sondern
-     * die Main.java nur diese hier definierten Funktionen triggern muss. 
-     * Die hier genannten Funktionen sind dann in den Screen Methoden implementiert und 
-     * werden in den entsprechenden Klassen auch ausgeführt.
+     * die Main.java nur die hier definierten Funktionen triggern muss. 
      */
     
     public abstract void create();
     
+     //Update is the same as render only that it doesn't have the SpriteBatch Object
     public abstract void update();
     
     public abstract void render(SpriteBatch sb);

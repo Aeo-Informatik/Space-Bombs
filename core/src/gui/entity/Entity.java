@@ -19,12 +19,13 @@ public abstract class Entity {
     protected TextureRegion textureRegion;
     protected Vector2 pos, direction;
     
-    public Entity(TextureRegion textureRegion, Vector2 pos, Vector2 direction, int cutX, int cutY){
+    public Entity(TextureRegion textureRegion, Vector2 pos, Vector2 direction){
         this.pos = pos;
         this.direction = direction;
         this.textureRegion = textureRegion;
     }
     
+    //Update is the same as render only that it doesn't have the SpriteBatch Object
     public abstract void update();
     
     

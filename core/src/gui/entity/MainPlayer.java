@@ -7,8 +7,8 @@ package gui.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
@@ -20,15 +20,18 @@ import gui.TextureManager;
 public class MainPlayer extends Entity{
     
 
-    private float tiltAnimationStateTime;
+    private float stateTime;
+    TextureRegion currentFrame;
     
     //Constructor
     public MainPlayer(Vector2 pos, Vector2 direction) {
-        super(TextureManager.p1SpawnPosition, pos, direction, 200, 200);
+        super(TextureManager.p1SpawnPosition, pos, direction);
     }
 
+
+    
     @Override
-    public void update() 
+    public void render(SpriteBatch sb)
     {
         pos.add(direction);
         
@@ -54,8 +57,20 @@ public class MainPlayer extends Entity{
             setDirection(0, 0);
     }
     
-    public void goLeftAnim()
+    public TextureRegion animation(Animation animation)
     {
+        /* Adds the time elapsed since the last render to the stateTime.*/
+        this.stateTime += Gdx.graphics.getDeltaTime(); 
+        
+        /*Obtains the current frame. This is given by the animation for the current time. The second variable is the looping. Passing in true, we tell the animation to restart after it reaches the last frame.*/
+        currentFrame = animation.getKeyFrame(stateTime, true);
+        
+        return currentFrame;
+    }
+
+    //Update is the same as render only that it doesn't have the SpriteBatch Object
+    @Override
+    public void update() {
         
     }
     

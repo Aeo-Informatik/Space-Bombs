@@ -26,7 +26,7 @@ public class TextureManager {
     public static Animation p1WalkingRightAnim;
     
     public static Texture p1WalkingLeft;
-    public static Animation p1WalkingUpLeft;
+    public static Animation p1WalkingLeftAnim;
     
     public static TextureRegion p1SpawnPosition;
     
