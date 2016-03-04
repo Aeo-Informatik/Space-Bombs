@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
-import gui.entity.Player;
+import gui.entity.MainPlayer;
 
 /**
  *
@@ -19,15 +19,15 @@ public class GameScreen extends Screen{
     
     //The viewpoint of the player 
     private OrthoCamera camera;
-    private Player player;
+    private MainPlayer mainPlayer;
     
     @Override
     public void create() {
-        //Set player camera
+        //Set mainPlayer camera
         camera = new OrthoCamera();
         
-        //Spawn player at x=430 and y=100
-        player = new Player(new Vector2(430,100), new Vector2(0,0), TextureManager.p1);
+        //Spawn player at x=430 and y=100, the second argument is the direction
+        mainPlayer = new MainPlayer(new Vector2(430,100), new Vector2(0,0));
     }
 
     
@@ -38,7 +38,7 @@ public class GameScreen extends Screen{
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         
-        player.render(sb);
+        mainPlayer.render(sb);
         
         sb.end();
     }
@@ -47,7 +47,7 @@ public class GameScreen extends Screen{
     @Override
     public void update() {
         camera.update();
-        player.update();
+        mainPlayer.update();
     }
     
     

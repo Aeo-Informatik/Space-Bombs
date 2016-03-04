@@ -7,6 +7,7 @@ package gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -15,11 +16,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureManager {
     
-    public static Texture players;
-    public static TextureRegion p1;
-    public static TextureRegion p2;
-    public static TextureRegion p3;
-    public static TextureRegion p4;
+    public static Animation p1WalkingDownAnim;
+    public static Texture p1WalkingDown;
+    
+    public static Texture p1WalkingUp;
+    public static Animation p1WalkingUpAnim;
+    
+    public static Texture p1WalkingRight;
+    public static Animation p1WalkingRightAnim;
+    
+    public static Texture p1WalkingLeft;
+    public static Animation p1WalkingUpLeft;
+    
+    public static TextureRegion p1SpawnPosition;
     
     public static Texture loadTexture (String file) 
     {
@@ -28,12 +37,15 @@ public class TextureManager {
     
     public static void load () 
     {
+        p1WalkingDown = loadTexture("data/player1/walking-down.png");
+        p1WalkingDownAnim = new Animation(0.3f, new TextureRegion(p1WalkingDown, 0, 0, 18, 22), new TextureRegion(p1WalkingDown, 18, 0, 18, 22), 
+				new TextureRegion(p1WalkingDown, 36, 0, 18, 22), new TextureRegion(p1WalkingDown, 54, 0, 18, 22));
         
         
-        players = loadTexture("pants_icons.png");
-        p1 = new TextureRegion(players, 0, 0, 184/4 , 28);
-        p2 = new TextureRegion(players, 46, 0, 184/4 , 28);
-        p3 = new TextureRegion(players, 92, 0, 184/4 , 28);
-        p4 = new TextureRegion(players, 138, 0, 184/4 , 28);
+        p1WalkingUp = loadTexture("data/player1/walking-up.png");
+        p1WalkingUpAnim = new Animation(0.3f, new TextureRegion(p1WalkingUp, 0, 0, 18, 22), new TextureRegion(p1WalkingUp, 18, 0, 18, 22), 
+				new TextureRegion(p1WalkingUp, 36, 0, 18, 22), new TextureRegion(p1WalkingUp, 54, 0, 18, 22));
+        
+        p1SpawnPosition = new TextureRegion(p1WalkingUp, 0, 0, 18, 22);
     }
 }
