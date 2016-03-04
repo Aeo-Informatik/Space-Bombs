@@ -29,9 +29,9 @@ public class MainPlayer extends Entity{
     }
 
 
-    
+    //Update is the same as render only that it doesn't have the SpriteBatch Object
     @Override
-    public void render(SpriteBatch sb)
+    public void update()
     {
         pos.add(direction);
         
@@ -68,10 +68,7 @@ public class MainPlayer extends Entity{
         return currentFrame;
     }
 
-    //Update is the same as render only that it doesn't have the SpriteBatch Object
-    @Override
-    public void update() {
-        
-    }
+    
+
     
 }
