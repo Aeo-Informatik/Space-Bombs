@@ -22,10 +22,11 @@ public class MainPlayer extends Entity{
 
     private float stateTime;
     TextureRegion currentFrame;
+    private String lastMovementKeyPressed;
     
     //Constructor
     public MainPlayer(Vector2 pos, Vector2 direction) {
-        super(TextureManager.p1SpawnPosition, pos, direction);
+        super(TextureManager.p1StaticUp, pos, direction);
     }
 
 
@@ -33,13 +34,9 @@ public class MainPlayer extends Entity{
     @Override
     public void render(SpriteBatch sb)
     {
-        //Draws the player if he stands still
-        sb.draw(textureRegion, pos.x, pos.y);
-        
         //Changes the position of the texture 
         pos.add(direction);
-        
-        
+                
         //Input handling and moving the player in pixels
         if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
         {
@@ -50,23 +47,58 @@ public class MainPlayer extends Entity{
             //Draw the walking animation
             sb.draw(animation(TextureManager.p1WalkingLeftAnim), pos.x, pos.y);
             
+            lastMovementKeyPressed = "LEFT";
+            
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
             setDirection(150, 0);  
             sb.draw(animation(TextureManager.p1WalkingRightAnim), pos.x, pos.y);
+            
+            lastMovementKeyPressed = "RIGHT";
             
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
         {
             setDirection(0, 150);
             sb.draw(animation(TextureManager.p1WalkingUpAnim), pos.x, pos.y);
             
+            lastMovementKeyPressed = "UP";
+            
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
             setDirection(0, -150);
             sb.draw(animation(TextureManager.p1WalkingDownAnim), pos.x, pos.y);
             
+            lastMovementKeyPressed = "DOWN";
+            
         }else
             setDirection(0, 0);
+        
+        
+        //Draws the player if he stands still
+        if(lastMovementKeyPressed != null)
+        {
+            switch(lastMovementKeyPressed)
+            {
+                case "LEFT":
+                    sb.draw(TextureManager.p1StaticLeft, pos.x, pos.y);
+                    break;
+
+                case "RIGHT":
+                    sb.draw(TextureManager.p1StaticRight, pos.x, pos.y);
+                break;
+
+                case "UP":
+                    sb.draw(TextureManager.p1StaticUp, pos.x, pos.y);
+                    break;
+
+                case "DOWN":
+                    sb.draw(TextureManager.p1StaticDown, pos.x, pos.y);
+                    break;
+
+                default:
+                    sb.draw(TextureManager.p1StaticUp, pos.x, pos.y);
+            }
+        }
     }
     
     
