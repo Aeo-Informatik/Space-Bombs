@@ -21,7 +21,7 @@ public class ClientTest {
 
             for(int i=0; i < 10; i++)
             {
-                ClientInterface.DATASEND.add("Test" +i);
+                Client.DATASEND.add("Test " +i);
             }
             client.sendData();
             

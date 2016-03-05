@@ -7,12 +7,14 @@ package networkClient;
 
 import java.net.ConnectException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Client implements ClientInterface {
     
     //Global Variables & Objects
     private Socket socket;
     private static boolean DEBUG = false;
+    public static ArrayList<String> DATASEND = new ArrayList<>(); 
     
     
     //Constructor
@@ -41,7 +43,7 @@ public class Client implements ClientInterface {
     @Override
     public void sendData() {
         try{
-            ClientInterface.DATASEND.add("EXIT");
+            Client.DATASEND.add("EXIT");
             
             SendThread sendThread = new SendThread(socket);
             Thread send = new Thread(sendThread);

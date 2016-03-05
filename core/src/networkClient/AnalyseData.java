@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import gui.Constants;
 import java.net.Socket;
 
 /**
@@ -28,7 +29,7 @@ public class AnalyseData {
             Syntax for receiving data: funktion|arguments|player
             */
             String[] parameters = receivedData.split("|");
-            String playerIdString = Integer.toString(ClientInterface.PLAYERID);
+            String playerIdString = Integer.toString(Constants.PLAYERID);
 
             //Check if the minimum arguments are given
             if (parameters.length < 3)
@@ -46,8 +47,10 @@ public class AnalyseData {
                         //Check if the received ip address matches with the local one
                         if(socket.getInetAddress().getHostAddress().equals(parameters[2]))
                         {
-                            ClientInterface.PLAYERID = Integer.parseInt(parameters[1]);
-                        }
+                            Constants.PLAYERID = Integer.parseInt(parameters[1]);
+                            System.out.println("Player id is now: " + Constants.PLAYERID);
+                        }else
+                            System.out.println("Message is not for this device");
                         break;
 
                 }  

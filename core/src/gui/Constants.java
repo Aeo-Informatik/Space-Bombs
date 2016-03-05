@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hebendanz_l
@@ -12,5 +14,8 @@ package gui;
 public class Constants {
     public static int WIDTH = 800;
     public static int HEIGHT = 480;
+    
+    
+    public static int PLAYERID = 0;
     
 }

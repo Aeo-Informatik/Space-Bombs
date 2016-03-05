@@ -33,7 +33,7 @@ class SendThread implements Runnable
 		{
                     PrintWriter print = new PrintWriter(socket.getOutputStream(), true);	
                     
-                    for(String msgToServer : ClientInterface.DATASEND){ 
+                    for(String msgToServer : Client.DATASEND){ 
                         
                         //Debug
                         if(Client.getDebug())
@@ -45,7 +45,7 @@ class SendThread implements Runnable
                     }
                     
                     //Clears the arraylist 
-                    ClientInterface.DATASEND.clear();
+                    Client.DATASEND.clear();
                 }
                 
                 System.err.println("Socket is not connected to server thats why SendThread also closed.");
@@ -81,7 +81,7 @@ class Sockets
     {
         for(int i=0; i < numberMessages; i++)
         {
-            ClientInterface.DATASEND.add("EXIT");
+            Client.DATASEND.add("EXIT");
         }
     }
     
