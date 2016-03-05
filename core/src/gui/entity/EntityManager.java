@@ -19,6 +19,7 @@ public class EntityManager {
     //Array from libgdx is much faster in comparison to an arraylist
     private final Array<EnemyPlayer> enemies = new Array<>();
     private final MainPlayer mainPlayer;
+    private final EnemyPlayer enemyPlayer;
     
     
     public EntityManager()
@@ -26,6 +27,8 @@ public class EntityManager {
         //Spawn mainPlayer at x=430 and y=100, the second argument is the direction in which the player
         //should move on creation x=0 y=0 means no movement, the third is the player number
         mainPlayer = new MainPlayer(new Vector2(430,100), new Vector2(0,0), 1);
+        enemyPlayer = new EnemyPlayer(new Vector2(430,100), new Vector2(0,0), 2);
+        enemies.add(enemyPlayer);
     }
     
     

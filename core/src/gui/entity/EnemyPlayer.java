@@ -166,19 +166,19 @@ public class EnemyPlayer extends Entity{
             switch(lastMovementKeyPressed)
             {
                 case "LEFT":
-                    sb.draw(TextureManager.p1StaticLeft, pos.x, pos.y);
+                    sb.draw(staticLeft, pos.x, pos.y);
                     break;
 
                 case "RIGHT":
-                    sb.draw(TextureManager.p1StaticRight, pos.x, pos.y);
+                    sb.draw(staticRight, pos.x, pos.y);
                 break;
 
                 case "UP":
-                    sb.draw(TextureManager.p1StaticUp, pos.x, pos.y);
+                    sb.draw(staticUp, pos.x, pos.y);
                     break;
 
                 case "DOWN":
-                    sb.draw(TextureManager.p1StaticDown, pos.x, pos.y);
+                    sb.draw(staticDown, pos.x, pos.y);
                     break;
             }
 
