@@ -54,6 +54,9 @@ public class AnalyseData {
                         Constants.PLAYERID = Integer.parseInt(parameters[1]);
                         System.out.println("-----Player id is now: " + Constants.PLAYERID);
                         break;
+                        
+                        
+                        
                     default:
                         System.err.println("ERROR: Command received from server is not valid");
                 }  
