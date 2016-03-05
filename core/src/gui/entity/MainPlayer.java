@@ -23,31 +23,88 @@ public class MainPlayer extends Entity{
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     
-    private Animation walkAnimUp;
-    private Animation walkAnimDown;
-    private Animation walkAnimRight;
-    private Animation walkAnimLeft;
+    //Player animation when he is moving around
+    private final Animation walkAnimUp;
+    private final Animation walkAnimDown;
+    private final Animation walkAnimRight;
+    private final Animation walkAnimLeft;
     
-    /**
-     * 
-     * @param pos
-     * @param direction
-     * @param walkAnimUp
-     * @param walkAnimDown
-     * @param walkAnimRight
-     * @param walkAnimLeft 
-     */
-    public MainPlayer(Vector2 pos, Vector2 direction, Animation walkAnimUp, 
-            Animation walkAnimDown, Animation walkAnimRight, Animation walkAnimLeft) 
+    //Player Static image when he stands still
+    private final TextureRegion staticUp;
+    private final TextureRegion staticDown;
+    private final TextureRegion staticRight;
+    private final TextureRegion staticLeft;
+
+    
+    public MainPlayer(Vector2 pos, Vector2 direction, int player) 
     {
         super(null, pos, direction);
         
-        this.walkAnimUp = walkAnimUp;
-        this.walkAnimDown = walkAnimDown;
-        this.walkAnimLeft = walkAnimLeft;
-        this.walkAnimRight = walkAnimRight;
+            switch(player)
+            {
+                case 1:
+                    this.walkAnimUp = TextureManager.p1WalkingUpAnim;
+                    this.walkAnimDown = TextureManager.p1WalkingDownAnim;
+                    this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
+                    this.walkAnimRight = TextureManager.p1WalkingRightAnim;
+                    
+                    this.staticUp = TextureManager.p1StaticUp;
+                    this.staticDown = TextureManager.p1StaticDown;
+                    this.staticLeft = TextureManager.p1StaticLeft;
+                    this.staticRight = TextureManager.p1StaticRight;
+                    break;
+
+                case 2:
+                    this.walkAnimUp = TextureManager.p2WalkingUpAnim;
+                    this.walkAnimDown = TextureManager.p2WalkingDownAnim;
+                    this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
+                    this.walkAnimRight = TextureManager.p2WalkingRightAnim;
+                    
+                    this.staticUp = TextureManager.p2StaticUp;
+                    this.staticDown = TextureManager.p2StaticDown;
+                    this.staticLeft = TextureManager.p2StaticLeft;
+                    this.staticRight = TextureManager.p2StaticRight;
+                    break;
+
+                case 3:
+                    this.walkAnimUp = TextureManager.p2WalkingUpAnim;
+                    this.walkAnimDown = TextureManager.p2WalkingDownAnim;
+                    this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
+                    this.walkAnimRight = TextureManager.p2WalkingRightAnim;
+                    
+                    this.staticUp = TextureManager.p2StaticUp;
+                    this.staticDown = TextureManager.p2StaticDown;
+                    this.staticLeft = TextureManager.p2StaticLeft;
+                    this.staticRight = TextureManager.p2StaticRight;
+                    break;
+
+                case 4:
+                    this.walkAnimUp = TextureManager.p2WalkingUpAnim;
+                    this.walkAnimDown = TextureManager.p2WalkingDownAnim;
+                    this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
+                    this.walkAnimRight = TextureManager.p2WalkingRightAnim;
+                    
+                    this.staticUp = TextureManager.p2StaticUp;
+                    this.staticDown = TextureManager.p2StaticDown;
+                    this.staticLeft = TextureManager.p2StaticLeft;
+                    this.staticRight = TextureManager.p2StaticRight;
+                    break;
+                
+                default:
+                    System.err.println("ERROR: Wrong player number in MainPlayer. Using default p1");
+                    this.walkAnimUp = TextureManager.p1WalkingUpAnim;
+                    this.walkAnimDown = TextureManager.p1WalkingDownAnim;
+                    this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
+                    this.walkAnimRight = TextureManager.p1WalkingRightAnim;
+                    
+                    this.staticUp = TextureManager.p1StaticUp;
+                    this.staticDown = TextureManager.p1StaticDown;
+                    this.staticLeft = TextureManager.p1StaticLeft;
+                    this.staticRight = TextureManager.p1StaticRight;
+            }
     }
 
+    
     /**
      * Update is the same as render only that it doesn't have the SpriteBatch Object.
      * It is used for game logic updates.
@@ -64,7 +121,7 @@ public class MainPlayer extends Entity{
     @Override
     public void render(SpriteBatch sb)
     {
-          inputMovePlayer(sb);          
+        inputMovePlayer(sb);          
     }
     
     
@@ -122,19 +179,19 @@ public class MainPlayer extends Entity{
             switch(lastMovementKeyPressed)
             {
                 case "LEFT":
-                    sb.draw(TextureManager.p1StaticLeft, pos.x, pos.y);
+                    sb.draw(staticLeft, pos.x, pos.y);
                     break;
 
                 case "RIGHT":
-                    sb.draw(TextureManager.p1StaticRight, pos.x, pos.y);
+                    sb.draw(staticRight, pos.x, pos.y);
                 break;
 
                 case "UP":
-                    sb.draw(TextureManager.p1StaticUp, pos.x, pos.y);
+                    sb.draw(staticUp, pos.x, pos.y);
                     break;
 
                 case "DOWN":
-                    sb.draw(TextureManager.p1StaticDown, pos.x, pos.y);
+                    sb.draw(staticDown, pos.x, pos.y);
                     break;
             }
 
@@ -155,7 +212,7 @@ public class MainPlayer extends Entity{
         /*
         Obtains the current frame. This is given by the animation for the current time. 
         The second variable is the looping. 
-        Passing in true, we tell the animation to restart after it reaches the last frame.
+        Passing in true, will tell the animation to restart after it reaches the last frame.
         */
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
         
