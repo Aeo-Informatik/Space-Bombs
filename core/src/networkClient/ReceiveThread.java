@@ -44,7 +44,7 @@ class ReceiveThread implements Runnable
                     while((msgRecieved = receive.readLine())!= null)
                     {   
                         //Debug
-                        if(Client.getDebug())
+                        if(Client.DEBUG)
                             System.out.println("Received from server: " + msgRecieved);
 
                         //Start to analyse received data and execute apropriate functions

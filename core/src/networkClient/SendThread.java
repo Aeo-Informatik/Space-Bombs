@@ -36,7 +36,7 @@ class SendThread implements Runnable
                     for(String msgToServer : Client.DATASEND){ 
                         
                         //Debug
-                        if(Client.getDebug())
+                        if(Client.DEBUG)
                             System.out.println("Send to server: " + msgToServer);
                         
                         //Send string to server

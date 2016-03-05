@@ -13,7 +13,9 @@ public class Client implements ClientInterface {
     
     //Global Variables & Objects
     private Socket socket;
-    private static boolean DEBUG = false;
+    
+    //Static Varibales
+    public static boolean DEBUG = false;
     public static ArrayList<String> DATASEND = new ArrayList<>(); 
     
     
@@ -71,14 +73,5 @@ public class Client implements ClientInterface {
         }catch(Exception e){
            throw e;
         }
-    }
-    
-    //Getter & setter
-    public static boolean getDebug(){
-        return Client.DEBUG;
-    }
-    
-    public static void setDebug(boolean debug){
-        Client.DEBUG = debug;
     }
 }

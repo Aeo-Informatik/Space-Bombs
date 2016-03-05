@@ -13,17 +13,17 @@ public class ClientTest {
     
     public static void main(String[] args) {
         try{
-            Client client = new Client("10.5.34", 4444);
-            client.setDebug(true);
+            Client client = new Client("127.0.0.1", 4444);
+            Client.DEBUG = true;
 
             client.receiveData();
 
-
+            /*
             for(int i=0; i < 10; i++)
             {
                 Client.DATASEND.add("Test " +i);
             }
-            client.sendData();
+            client.sendData();*/
             
             
         }catch(Exception e){

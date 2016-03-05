@@ -20,15 +20,19 @@ public class Server {
     public void startServer(ArrayList<Socket> socketList)
     {
         
-        for(Socket socket : socketList)
+        for(int i =0; i < socketList.size(); i++)
         {
             if(DEBUG)
-                System.out.println("IP: " + socket.getInetAddress().getHostAddress());
+                System.out.println("IP: " + socketList.get(i).getInetAddress().getHostAddress());
                 System.out.println("-----------End IP-----------");
-                      
+            
+            //Bind every client to their playerId (1, 2, 3, 4)
+            //Message to send: registerPlayerId|playerId|*
+            String registerCommand = "registerPlayerId|" + Integer.toString(i +1) + "|*";
+            sendToSpecificClient(socketList.get(i), registerCommand);
 
             //Open receive thread for every client
-            ReceiveThread receive = new ReceiveThread(socket, socketList);
+            ReceiveThread receive = new ReceiveThread(socketList.get(i), socketList);
             Thread thread = new Thread(receive);
             thread.start();
         }
@@ -132,6 +136,13 @@ public class Server {
     }
     
 
+    public void sendToSpecificClient(Socket socket, String message)
+    {
+        SendThread send = new SendThread(socket, message);
+        Thread thread = new Thread(send);
+        thread.start();
+    }
+    
     //Getter & setter
     public static void setDebug(boolean debug)
     {

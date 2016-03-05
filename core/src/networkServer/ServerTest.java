@@ -27,7 +27,7 @@ public class ServerTest
                     
             
             //Accept all client connections and get them as socket object
-            ArrayList<Socket> socketList = server.AcceptConnections(serversocket, 4, 15000);
+            ArrayList<Socket> socketList = server.AcceptConnections(serversocket, 4, 10000);
             server.startServer(socketList);
                
                     

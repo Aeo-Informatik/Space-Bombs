@@ -28,13 +28,20 @@ public class AnalyseData {
             /*
             Syntax for receiving data: funktion|arguments|player
             */
-            String[] parameters = receivedData.split("|");
+            String[] parameters = receivedData.split("\\|");
             String playerIdString = Integer.toString(Constants.PLAYERID);
-
+            
+            
+            //DEBUG
+            if(Client.DEBUG)
+                for(String param : parameters)
+                    System.out.println("Splited command: " + param);
+            
+            
             //Check if the minimum arguments are given
             if (parameters.length < 3)
             {
-                System.err.println("ERROR: received data with invalid length");
+                System.err.println("ERROR: received data with invalid length " + receivedData);
                 
             //Check if it targets this device with playerId or astrix
             } else if (parameters[parameters.length - 1].equals(playerIdString) || parameters[parameters.length - 1].equals("*"))
@@ -42,17 +49,13 @@ public class AnalyseData {
 
                 switch (parameters[0]) 
                 {
-                    //Message to receive: registerPlayerId|1|ipAddress|*
+                    //Message to receive: registerPlayerId|1|*
                     case "registerPlayerId":
-                        //Check if the received ip address matches with the local one
-                        if(socket.getInetAddress().getHostAddress().equals(parameters[2]))
-                        {
-                            Constants.PLAYERID = Integer.parseInt(parameters[1]);
-                            System.out.println("Player id is now: " + Constants.PLAYERID);
-                        }else
-                            System.out.println("Message is not for this device");
+                        Constants.PLAYERID = Integer.parseInt(parameters[1]);
+                        System.out.println("-----Player id is now: " + Constants.PLAYERID);
                         break;
-
+                    default:
+                        System.err.println("ERROR: Command received from server is not valid");
                 }  
             }
 
