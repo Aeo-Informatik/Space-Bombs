@@ -48,7 +48,7 @@ class ReceiveThread implements Runnable
                             System.out.println("Received from server: " + msgRecieved);
 
                         //Start to analyse received data and execute apropriate functions
-                        System.out.println("/TODO/ Start analysis function");
+                        new AnalyseData(socket).analyse(msgRecieved);
                     }
                 }
                 
