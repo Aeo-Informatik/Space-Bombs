@@ -18,7 +18,7 @@ public class ServerTest
         try
         {
             //Variables & objects
-            final int port = 4444;
+            final int port = 13199;
             ServerSocket serversocket = new ServerSocket(port);
             Server server = new Server();   
                
