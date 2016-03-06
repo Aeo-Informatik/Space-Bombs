@@ -5,6 +5,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 class SendThread implements Runnable
@@ -13,7 +15,6 @@ class SendThread implements Runnable
         ArrayList<Socket> sock;
         ArrayList<String> dataToSend;
 	
-        
         //Constructor
 	public SendThread(ArrayList<Socket> sock, ArrayList<String> dataToSend)
 	{
@@ -21,11 +22,10 @@ class SendThread implements Runnable
                 this.dataToSend = dataToSend;
 	}
         
+        //Constructor 2 for sending to a spefic client
         boolean oneClientOnly = false;
         Socket socket1;
         String message1;
-        
-        //Constructor 2 for sending to a spefic client
         public SendThread(Socket socket1, String message1)
         {
             this.oneClientOnly = true;
@@ -97,7 +97,14 @@ class SendThread implements Runnable
                     
             }catch(Exception e)
             {
-                e.printStackTrace();
+                try 
+                {
+                    throw e;
+                } catch (Exception ex) 
+                {
+                    System.err.println("Couldnt throw exception in SendThread printed it instead.");
+                    ex.printStackTrace();
+                }
             }	
 	}
 }

@@ -14,14 +14,15 @@ public class Server {
     
     /**
      * Starts the receive thread which will receive & send back the data. 
-     * The receive thread and will automatically start a send thread.
+     * Before that happens every client gets a unique player id like player1 but only 1 is transmitted.
      * @param socketList 
      */
     public void startServer(ArrayList<Socket> socketList)
     {
-        
+        //Gets connected client list as input and iterates over them
         for(int i =0; i < socketList.size(); i++)
         {
+            //DEBUG
             if(DEBUG)
                 System.out.println("IP: " + socketList.get(i).getInetAddress().getHostAddress());
                 System.out.println("-----------End IP-----------");
@@ -138,9 +139,17 @@ public class Server {
 
     public void sendToSpecificClient(Socket socket, String message)
     {
-        SendThread send = new SendThread(socket, message);
-        Thread thread = new Thread(send);
-        thread.start();
+        try
+        {   
+            //Open send thread with the second constructor 
+            SendThread send = new SendThread(socket, message);
+            Thread thread = new Thread(send);
+            thread.start();
+            
+        }catch(Exception e)
+        {
+            throw e;
+        }
     }
     
     //Getter & setter

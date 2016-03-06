@@ -66,7 +66,15 @@ class ReceiveThread implements Runnable
 
         }catch(Exception e)
         {
-            e.printStackTrace();
+            try 
+                {
+                    throw e;
+                    
+                } catch (Exception ex) 
+                {
+                    System.err.println("Couldnt throw exception in ReceiveThread printed it instead.");
+                    ex.printStackTrace();
+                }
         }
     }
         

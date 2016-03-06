@@ -38,6 +38,8 @@ public class Main implements ApplicationListener {
     private BitmapFont font;
     
     
+    private Client client;
+    
     /**
      * Method called once when the application is created.
      */
@@ -46,7 +48,7 @@ public class Main implements ApplicationListener {
     {   
         try {
             //Start Client
-            Client client = new Client("127.0.0.1", 13199);
+            client = new Client("127.0.0.1", 13199);
             Client.DEBUG = true;
             
             //Listen for incomming data
