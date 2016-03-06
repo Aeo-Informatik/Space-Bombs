@@ -54,10 +54,18 @@ class SendThread implements Runnable
             }catch(NullPointerException e)
             {
                 System.err.println("Error: SendThread() Socket is not defined");
+                throw e;
                 
             }catch(Exception e)
             {
-                e.printStackTrace();
+                try 
+                {
+                    throw e;
+                } catch (Exception ex) 
+                {
+                    System.err.println("Couldnt throw exception in SendThread printed it instead.");
+                    ex.printStackTrace();
+                }
             }
 	}
 }

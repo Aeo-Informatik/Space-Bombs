@@ -8,7 +8,6 @@ package gui.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import gui.TextureManager;
 
 /**
  *
@@ -17,9 +16,9 @@ import gui.TextureManager;
 public class EntityManager {
     
     //Array from libgdx is much faster in comparison to an arraylist
-    private final Array<EnemyPlayer> enemies = new Array<>();
-    private final MainPlayer mainPlayer;
-    private final EnemyPlayer enemyPlayer;
+    private Array<EnemyPlayer> enemies = new Array<>();
+    private MainPlayer mainPlayer;
+    private EnemyPlayer enemyPlayer;
     
     
     public EntityManager()

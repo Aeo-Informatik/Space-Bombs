@@ -25,7 +25,8 @@ public class Client implements ClientInterface {
         }catch(ConnectException e)
         {
             System.err.println("Error: Client() Couldn't connect to server");
-                    
+            throw e;
+            
         }catch(Exception e)
         {
             throw e;

@@ -15,6 +15,9 @@ import gui.TextureManager;
 import gui.screen.GameScreen;
 import gui.screen.ScreenManager;
 import static gui.screen.ScreenManager.currentScreen;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import networkClient.Client;
 
 public class Main implements ApplicationListener {
     
@@ -41,6 +44,22 @@ public class Main implements ApplicationListener {
     @Override
     public void create() 
     {   
+        try {
+            //Start Client
+            Client client = new Client("127.0.0.1", 13199);
+            Client.DEBUG = true;
+            
+            //Listen for incomming data
+            client.receiveData();
+        
+        //If an error occurs shut application down
+        } catch (Exception e) 
+        {
+            System.err.println(e.toString());
+            System.exit(0);
+        }
+        
+        
         TextureManager.load();
         batch = new SpriteBatch();    
         font = new BitmapFont();
