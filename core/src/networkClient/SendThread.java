@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -19,21 +20,24 @@ import java.util.Random;
 class SendThread implements Runnable
 {
 	Socket socket;
+        ArrayList<String> dataToSend;
 	
-	public SendThread(Socket socket)
+	public SendThread(Socket socket, ArrayList<String> dataToSend)
 	{
 		this.socket = socket;
+                this.dataToSend = dataToSend;
 	}
         
         @Override
 	public void run(){
             try{
                 
-		while(socket.isConnected())
+		if(socket.isConnected())
 		{
                     PrintWriter print = new PrintWriter(socket.getOutputStream(), true);	
                     
-                    for(String msgToServer : Client.DATASEND){ 
+                    for(String msgToServer : this.dataToSend)
+                    { 
                         
                         //Debug
                         if(Client.DEBUG)
@@ -44,16 +48,15 @@ class SendThread implements Runnable
 			print.flush();
                     }
                     
-                    //Clears the arraylist 
-                    Client.DATASEND.clear();
-                }
+                }else
+                    System.err.println("Socket is not connected to server thats why SendThread also closed.");
                 
-                System.err.println("Socket is not connected to server thats why SendThread also closed.");
-                
-            }catch(NullPointerException e){
+            }catch(NullPointerException e)
+            {
                 System.err.println("Error: SendThread() Socket is not defined");
                 
-            }catch(Exception e){
+            }catch(Exception e)
+            {
                 e.printStackTrace();
             }
 	}
@@ -77,14 +80,6 @@ class SendThread implements Runnable
 
 class Sockets
 {
-    public static void messagesCheck(int numberMessages)
-    {
-        for(int i=0; i < numberMessages; i++)
-        {
-            Client.DATASEND.add("EXIT");
-        }
-    }
-    
     public static boolean isSocketConnected()
     {
         try{

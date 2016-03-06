@@ -13,11 +13,7 @@ public class Client implements ClientInterface {
     
     //Global Variables & Objects
     private Socket socket;
-    
-    //Static Varibales
     public static boolean DEBUG = false;
-    public static ArrayList<String> DATASEND = new ArrayList<>(); 
-    
     
     //Constructor
     public Client(String host, int port) throws Exception
@@ -38,16 +34,13 @@ public class Client implements ClientInterface {
     
     
 
-    /**
-     * Opens a thread where it sends everything 
-     * from an arraylist named: ClientInterface.DATASEND
-     */
     @Override
-    public void sendData() {
+    public void sendData(ArrayList<String> dataToSend) {
         try{
-            Client.DATASEND.add("EXIT");
+            //Signals server that the message ends here
+            dataToSend.add("EXIT");
             
-            SendThread sendThread = new SendThread(socket);
+            SendThread sendThread = new SendThread(socket, dataToSend);
             Thread send = new Thread(sendThread);
             send.start();
             

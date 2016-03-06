@@ -5,6 +5,8 @@
  */
 package networkClient;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author qubasa
@@ -18,12 +20,14 @@ public class ClientTest {
 
             client.receiveData();
 
-            /*
+            ArrayList<String> sendData = new ArrayList<>();
+            
+            
             for(int i=0; i < 10; i++)
             {
-                Client.DATASEND.add("Test " +i);
+                sendData.add("Test " +i);
             }
-            client.sendData();*/
+            client.sendData(sendData);
             
             
         }catch(Exception e){
