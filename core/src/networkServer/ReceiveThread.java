@@ -33,13 +33,13 @@ class ReceiveThread implements Runnable
         try{
             while(true)
             {
-                 //Check if the client is connected
-                if(socket.isConnected())
-                {
+
                         //Receive data from connected client
                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));		
                         String receivedMsg = null;
                             
+                        try
+                        {
                             //Read the data from the buffer and add it to the arraylist
                             while(!(receivedMsg = bufferedReader.readLine()).equals("EXIT"))
                             {
@@ -51,17 +51,19 @@ class ReceiveThread implements Runnable
                                 //Add received data to arraylist
                                 receivedData.add(receivedMsg);
                             }
-
+                            
+                        }catch(NullPointerException e)
+                        {
+                            System.err.println("All clients have disconnected shutting down server!");
+                            System.exit(0);
+                        }
                             
                             //Opens one thread to send back the data to every client
                             SendThread send = new SendThread(socketList, receivedData);
                             Thread thread = new Thread(send);
                             thread.start();
                             
-                }else
-                {
-                    System.err.println("ReceiveThread(): Client disconnected with ip: " + socket.getInetAddress().getHostAddress());
-                }
+
             }
 
         }catch(Exception e)

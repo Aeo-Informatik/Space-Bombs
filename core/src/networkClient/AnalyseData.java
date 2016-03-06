@@ -50,12 +50,15 @@ public class AnalyseData {
                 switch (parameters[0]) 
                 {
                     //Message to receive: registerPlayerId|1|*
-                    case "registerPlayerId":
+                    case "registerMainPlayerId":
                         Constants.PLAYERID = Integer.parseInt(parameters[1]);
                         System.out.println("-----Player id is now: " + Constants.PLAYERID);
                         break;
                         
-                        
+                    //Message to receive: registerEnemyPlayers|3|1
+                    //General: registerEnemyPlayers|amount|target
+                    case "registerEnemyPlayers":
+                            break;
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");

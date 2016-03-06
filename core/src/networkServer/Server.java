@@ -29,7 +29,7 @@ public class Server {
             
             //Bind every client to their playerId (1, 2, 3, 4)
             //Message to send: registerPlayerId|playerId|*
-            String registerCommand = "registerPlayerId|" + Integer.toString(i +1) + "|*";
+            String registerCommand = "registerMainPlayerId|" + Integer.toString(i +1) + "|*";
             sendToSpecificClient(socketList.get(i), registerCommand);
 
             //Open receive thread for every client
