@@ -11,12 +11,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import gui.Constants;
 import gui.TextureManager;
 import gui.screen.GameScreen;
 import gui.screen.ScreenManager;
 import static gui.screen.ScreenManager.currentScreen;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import networkClient.Client;
 
 public class Main implements ApplicationListener {
@@ -48,7 +47,7 @@ public class Main implements ApplicationListener {
     {   
         try {
             //Start Client
-            client = new Client("127.0.0.1", 13199);
+            client = new Client(Constants.HOST, Constants.PORT);
             Client.DEBUG = true;
             
             //Listen for incomming data

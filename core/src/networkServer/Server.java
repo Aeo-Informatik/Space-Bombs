@@ -25,13 +25,10 @@ public class Server {
             //DEBUG
             if(DEBUG)
                 System.out.println("IP: " + socketList.get(i).getInetAddress().getHostAddress());
-                System.out.println("-----------End IP-----------");
+                System.out.println("-----------End IP List-----------");
             
-            //Bind every client to their playerId (1, 2, 3, 4)
-            //Message to send: registerPlayerId|playerId|*
-            String registerCommand = "registerMainPlayerId|" + Integer.toString(i +1) + "|*";
-            sendToSpecificClient(socketList.get(i), registerCommand);
-
+            setupGame(i, socketList);
+                
             //Open receive thread for every client
             ReceiveThread receive = new ReceiveThread(socketList.get(i), socketList);
             Thread thread = new Thread(receive);
@@ -39,6 +36,24 @@ public class Server {
         }
     }
     
+    
+    private void setupGame(int i, ArrayList<Socket> socketList)
+    {
+        String playerId = Integer.toString(i +1);     
+                
+        //Bind every client to their playerId (1, 2, 3, 4)
+        //Message to send: registerPlayerId|playerId|*
+        String registerCommand = "registerMainPlayerId|" + playerId + "|*";
+        sendToOne(socketList.get(i), registerCommand);
+            
+        //Message to receive: registerEnemyPlayers|3|1
+        //General: registerEnemyPlayers|amount|target
+        String registerEnemiesCommand = "registerEnemyPlayers|" + 
+            Integer.toString(socketList.size()-1) + "|*";
+        sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
+        
+        
+    }
     
     /**
      * Accepts all connections made to the server for a specific amount of time
@@ -137,7 +152,7 @@ public class Server {
     }
     
 
-    public void sendToSpecificClient(Socket socket, String message)
+    public void sendToOne(Socket socket, String message)
     {
         try
         {   
@@ -150,6 +165,13 @@ public class Server {
         {
             throw e;
         }
+    }
+    
+    public void sendToAll(ArrayList<Socket> socketList, ArrayList<String> dataToSend)
+    {
+        SendThread send = new SendThread(socketList, dataToSend);
+        Thread thread = new Thread(send);
+        thread.start();
     }
     
     //Getter & setter

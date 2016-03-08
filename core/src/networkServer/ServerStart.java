@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author qubasa
  */
-public class ServerTest 
+public class ServerStart 
 {
     public static void main(String[] args) 
     {

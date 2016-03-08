@@ -16,19 +16,8 @@ import com.badlogic.gdx.utils.Array;
 public class EntityManager {
     
     //Array from libgdx is much faster in comparison to an arraylist
-    private Array<EnemyPlayer> enemies = new Array<>();
-    private MainPlayer mainPlayer;
-    private EnemyPlayer enemyPlayer;
-    
-    
-    public EntityManager()
-    {
-        //Spawn mainPlayer at x=430 and y=100, the second argument is the direction in which the player
-        //should move on creation x=0 y=0 means no movement, the third is the player number
-        mainPlayer = new MainPlayer(new Vector2(430,100), new Vector2(0,0), 1);
-        enemyPlayer = new EnemyPlayer(new Vector2(430,100), new Vector2(0,0), 2);
-        enemies.add(enemyPlayer);
-    }
+    private static Array<EnemyPlayer> enemies = new Array<>();
+    private static MainPlayer mainPlayer;
     
     
     //Update is the same as render only that it doesn't have the SpriteBatch Object
@@ -41,7 +30,8 @@ public class EntityManager {
         }
         
         //Executes the update function in the mainPlayer object
-        mainPlayer.update();
+        if(mainPlayer != null)
+            mainPlayer.update();
     }
     
     
@@ -54,13 +44,20 @@ public class EntityManager {
         }
         
         //Executes the render function in the mainPlayer object
-        mainPlayer.render(sb);
+        if(mainPlayer != null)
+            mainPlayer.render(sb);
     }
     
-    //Add an entity object to the arraylist
-    public void addEntity(EnemyPlayer enemy)
+
+    public static void spawnEnemyPlayer(int x, int y, int playerId)
     {
-        enemies.add(enemy);
+        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+        enemies.add(enemyPlayer);
     }
     
+    
+    public static void spawnMainPlayer(int x, int y, int playerId)
+    {
+        mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+    }
 }
