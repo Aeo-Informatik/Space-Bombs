@@ -74,13 +74,17 @@ public class AnalyseData{
                         //Spawn enemy players
                         for(int i=0; i < Constants.AMOUNTENEMYPLAYERS; i++)
                         {
-                            if(i != Constants.PLAYERID)
-                                EntityManager.spawnEnemyPlayer(50 + i*10, 0, i);
+                            if(i+1 == Constants.PLAYERID)
+                            {
+                                i++;
+                            }
+                                
+                            EntityManager.spawnEnemyPlayer(50 + i*10, 0, i+1);
                         }
                         
                         //DEBUG
                         if(Client.DEBUG)
-                            System.out.println("Spawend all players!");
+                            System.out.println("Spawned all players!");
                         break;
                         
                         

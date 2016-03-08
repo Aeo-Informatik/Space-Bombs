@@ -108,7 +108,7 @@ public class EnemyPlayer extends Entity{
     {
         //Changes the position of the texture 
         pos.add(direction);
-        movePlayer(sb, "LEFT");
+        movePlayer(sb, "RIGHT");
         
     }
     

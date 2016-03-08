@@ -47,7 +47,7 @@ public class Server {
         sendToOne(socketList.get(i), registerCommand);
             
         //Message to receive: registerEnemyPlayers|3|1
-        //General: registerEnemyPlayers|amount|target
+        //General: registerEnemyPlayers|amount|target //
         String registerEnemiesCommand = "registerEnemyPlayers|" + 
             Integer.toString(socketList.size()-1) + "|*";
         sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
