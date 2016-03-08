@@ -20,6 +20,7 @@ public class EnemyPlayer extends Entity{
 
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
+    private SpriteBatch sb;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -108,8 +109,12 @@ public class EnemyPlayer extends Entity{
     {
         //Changes the position of the texture 
         pos.add(direction);
-        movePlayer(sb, "RIGHT");
         
+        if(this.sb == null)
+            this.sb = sb;
+        
+        //movePlayer(sb, "RIGHT");
+            
     }
     
     @Override
@@ -118,7 +123,7 @@ public class EnemyPlayer extends Entity{
     }
     
     
-    public void movePlayer(SpriteBatch sb, String direction)
+    public void movePlayer(String direction)
     {
          //Input handling and moving the player
         if(direction.equalsIgnoreCase("LEFT"))

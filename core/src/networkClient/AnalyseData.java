@@ -87,6 +87,8 @@ public class AnalyseData{
                             System.out.println("Spawned all players!");
                         break;
                         
+                    case "moveEnemyPlayer":
+                        break;
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");
