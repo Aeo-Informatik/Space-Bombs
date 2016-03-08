@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Server {
     
-    private static boolean DEBUG = false;
+    public static boolean DEBUG = false;
     private static boolean STOP = false;
     
     
@@ -174,16 +174,6 @@ public class Server {
         thread.start();
     }
     
-    //Getter & setter
-    public static void setDebug(boolean debug)
-    {
-        Server.DEBUG = debug;
-    }
-    
-    public static boolean getDebug()
-    {
-        return Server.DEBUG;
-    }
     
     public static void setStopConnection(boolean stop){
         Server.STOP = stop; 

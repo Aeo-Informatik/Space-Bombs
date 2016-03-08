@@ -44,7 +44,7 @@ class ReceiveThread implements Runnable
                             while(!(receivedMsg = bufferedReader.readLine()).equals("EXIT"))
                             {
                                 //Debug
-                                if(Server.getDebug())
+                                if(Server.DEBUG)
                                     System.out.println("From: " + socket.getInetAddress().getHostAddress());
                                     System.out.println("Received: " + receivedMsg);
 

@@ -23,7 +23,7 @@ public class ServerStart
             Server server = new Server();   
                
             
-            server.setDebug(true);
+            Server.DEBUG = true;
                     
             
             //Accept all client connections and get them as socket object

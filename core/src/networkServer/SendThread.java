@@ -44,7 +44,7 @@ class SendThread implements Runnable
                     for(String msgToClient : dataToSend)
                     {
                         //Debug
-                        if(Server.getDebug())
+                        if(Server.DEBUG)
                             System.out.println("Send: " + msgToClient);
 
                         //Iterate through connected client list
@@ -54,7 +54,7 @@ class SendThread implements Runnable
                             if(sock.get(i).isConnected())
                             {
                                 //Debug
-                                if(Server.getDebug())
+                                if(Server.DEBUG)
                                     System.out.println("To: " + sock.get(i).getInetAddress().getHostAddress());
 
                                 //Create object to send data
@@ -76,9 +76,10 @@ class SendThread implements Runnable
                     if(socket1.isConnected())
                     {
                         //Debug
-                        if(Server.getDebug())
-                            System.out.println("One Message To: " + socket1.getInetAddress().getHostAddress());
-                            System.out.println("Message: " + message1);
+                        if(Server.DEBUG)
+                            System.out.println("Send: " + message1);
+                            System.out.println("To: " + socket1.getInetAddress().getHostAddress());
+                            
                         
                         //Create object to send data
                         PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket1.getOutputStream()));
