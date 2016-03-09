@@ -60,8 +60,8 @@ public class AnalyseData{
                                 System.out.println("-----Player id is now: " + Constants.PLAYERID);
                             
                         }else
-                            System.err.println("ERROR: registerEnemyPlayers wrong number of parameters");
-                            System.out.println(Arrays.toString(parameters));
+                            System.err.println("ERROR: registerMainPlayerId wrong number of parameters");
+                            System.err.println(Arrays.toString(parameters));
                         break;
                        
                         
@@ -77,7 +77,7 @@ public class AnalyseData{
                                 System.out.println("Amount of enemy Players: " + Constants.AMOUNTENEMYPLAYERS);
                         }else
                             System.err.println("ERROR: registerEnemyPlayers wrong number of parameters");
-                            System.out.println(Arrays.toString(parameters));
+                            System.err.println(Arrays.toString(parameters));
                         break;
                     
                         
@@ -118,7 +118,7 @@ public class AnalyseData{
                             }
                         }else 
                             System.err.println("ERROR: moveEnemyPlayer wrong number of parameters");
-                            System.out.println(Arrays.toString(parameters));
+                            System.err.println(Arrays.toString(parameters));
                         break;
                         
                     default:
