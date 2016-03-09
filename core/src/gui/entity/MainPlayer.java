@@ -11,7 +11,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import gui.Constants;
 import gui.TextureManager;
+import java.util.ArrayList;
+import networkClient.Client;
 
 /**
  *
@@ -22,6 +25,8 @@ public class MainPlayer extends Entity{
 
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
+    private Client client;
+    ArrayList<String> sendData;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -36,9 +41,19 @@ public class MainPlayer extends Entity{
     private final TextureRegion staticLeft;
 
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int player) 
+    public MainPlayer(Vector2 pos, Vector2 direction, int player) throws Exception 
     {
         super(null, pos, direction);
+        
+        try
+        {
+            this.client = new Client(Constants.HOST, Constants.PORT);
+            this.sendData = new ArrayList<>();
+            
+        }catch(Exception e)
+        {
+           throw e; 
+        }
         
             switch(player)
             {
@@ -145,6 +160,8 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
             
             lastMovementKeyPressed = "LEFT";
+            //General: moveEnemyPlayer|playerId|direction|target
+            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*");
             
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
@@ -153,6 +170,7 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
             
             lastMovementKeyPressed = "RIGHT";
+            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*");
             
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
         {
@@ -161,6 +179,7 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
             
             lastMovementKeyPressed = "UP";
+            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*");
             
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
@@ -169,6 +188,7 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
             
             lastMovementKeyPressed = "DOWN";
+            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*");
             
         }else
         {
@@ -195,7 +215,10 @@ public class MainPlayer extends Entity{
                     break;
             }
 
-        }   
+        }
+        
+        //Send data to server
+        client.sendData(sendData);
     }
     
     
