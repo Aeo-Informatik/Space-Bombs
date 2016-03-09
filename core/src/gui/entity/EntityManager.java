@@ -56,8 +56,15 @@ public class EntityManager {
     }
     
     
-    public static void spawnMainPlayer(int x, int y, int playerId)
+    public static void spawnMainPlayer(int x, int y, int playerId) throws Exception
     {
-        mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+        try 
+        {
+            mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+        
+        } catch (Exception e) 
+        {
+            throw e;
+        }
     }
 }
