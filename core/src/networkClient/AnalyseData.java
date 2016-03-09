@@ -6,8 +6,10 @@
 package networkClient;
 
 import gui.Constants;
+import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
 import java.net.Socket;
+import java.util.Arrays;
 
 /**
  *
@@ -45,26 +47,40 @@ public class AnalyseData{
 
                 switch (parameters[0]) 
                 {
+                    
                     //Message to receive: registerPlayerId|1|*
                     //General: registerPlayerId|id|target
                     case "registerMainPlayerId":
-                        Constants.PLAYERID = Integer.parseInt(parameters[1]);
-                        
-                        //DEBUG
-                        if(Client.DEBUG)
-                            System.out.println("-----Player id is now: " + Constants.PLAYERID);
+                        if(parameters.length == 3)
+                        {
+                            Constants.PLAYERID = Integer.parseInt(parameters[1]);
+
+                            //DEBUG
+                            if(Client.DEBUG)
+                                System.out.println("-----Player id is now: " + Constants.PLAYERID);
+                            
+                        }else
+                            System.err.println("ERROR: registerEnemyPlayers wrong number of parameters");
+                            System.out.println(Arrays.toString(parameters));
                         break;
+                       
                         
                     //Message to receive: registerEnemyPlayers|3|1
                     //General: registerEnemyPlayers|amount|target
                     case "registerEnemyPlayers":
-                        Constants.AMOUNTENEMYPLAYERS = Integer.parseInt(parameters[1]);
-                        
-                        //DEBUG
-                        if(Client.DEBUG)
-                            System.out.println("Amount of enemy Players: " + Constants.AMOUNTENEMYPLAYERS);
+                        if(parameters.length == 3)
+                        {
+                            Constants.AMOUNTENEMYPLAYERS = Integer.parseInt(parameters[1]);
+
+                            //DEBUG
+                            if(Client.DEBUG)
+                                System.out.println("Amount of enemy Players: " + Constants.AMOUNTENEMYPLAYERS);
+                        }else
+                            System.err.println("ERROR: registerEnemyPlayers wrong number of parameters");
+                            System.out.println(Arrays.toString(parameters));
                         break;
                     
+                        
                     //Message to receive: spawnPlayers|1
                     //General: spawnPlayers|target
                     case "spawnPlayers":
@@ -72,14 +88,14 @@ public class AnalyseData{
                         EntityManager.spawnMainPlayer(50, 0, Constants.PLAYERID);
                         
                         //Spawn enemy players
-                        for(int i=0; i < Constants.AMOUNTENEMYPLAYERS; i++)
+                        for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)
                         {
-                            if(i+1 == Constants.PLAYERID)
+                            if(i == Constants.PLAYERID)
                             {
                                 i++;
                             }
                                 
-                            EntityManager.spawnEnemyPlayer(50 + i*10, 0, i+1);
+                            EntityManager.spawnEnemyPlayer(50 + i*10, 0, i);
                         }
                         
                         //DEBUG
@@ -87,7 +103,22 @@ public class AnalyseData{
                             System.out.println("Spawned all players!");
                         break;
                         
+                    
+                    //Message to receive: moveEnemyPlayer|2|LEFT|*
+                    //General: moveEnemyPlayer|playerId|direction|target
                     case "moveEnemyPlayer":
+                        if(parameters.length == 4)
+                        {
+                            for(EnemyPlayer enemy : EntityManager.enemies)
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.movePlayer(parameters[2]);
+                                }
+                            }
+                        }else 
+                            System.err.println("ERROR: moveEnemyPlayer wrong number of parameters");
+                            System.out.println(Arrays.toString(parameters));
                         break;
                         
                     default:

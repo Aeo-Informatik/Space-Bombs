@@ -16,8 +16,8 @@ import com.badlogic.gdx.utils.Array;
 public class EntityManager {
     
     //Array from libgdx is much faster in comparison to an arraylist
-    private static Array<EnemyPlayer> enemies = new Array<>();
-    private static MainPlayer mainPlayer;
+    public static Array<EnemyPlayer> enemies = new Array<>();
+    public static MainPlayer mainPlayer;
     
     
     //Update is the same as render only that it doesn't have the SpriteBatch Object

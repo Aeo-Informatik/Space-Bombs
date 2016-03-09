@@ -21,6 +21,7 @@ public class EnemyPlayer extends Entity{
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     private SpriteBatch sb;
+    private int playerId = 0;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -35,11 +36,13 @@ public class EnemyPlayer extends Entity{
     private final TextureRegion staticLeft;
     
     
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int player) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId) 
     {
         super(null, pos, direction);
         
-        switch(player)
+        this.playerId = playerId;
+        
+        switch(playerId)
         {
             case 1:
                 this.walkAnimUp = TextureManager.p1WalkingUpAnim;
@@ -90,7 +93,7 @@ public class EnemyPlayer extends Entity{
                 break;
                 
             default:
-                System.err.println("ERROR: Wrong player number: " + player + " in EnemyPlayer. Using default p1");
+                System.err.println("ERROR: Wrong player number: " + playerId + " in EnemyPlayer. Using default p1");
                 this.walkAnimUp = TextureManager.p1WalkingUpAnim;
                 this.walkAnimDown = TextureManager.p1WalkingDownAnim;
                 this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
@@ -187,6 +190,16 @@ public class EnemyPlayer extends Entity{
             }
 
         }   
+    }
+    
+    public int getPlayerId()
+    {
+        return this.playerId;
+    }
+    
+    public void setPlayerid(int playerId)
+    {
+        this.playerId = playerId;
     }
     
     /**
