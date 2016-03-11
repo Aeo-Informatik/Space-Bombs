@@ -36,6 +36,7 @@ public class Client {
         }
     }
         
+    
     public void sendData(String dataToSend)
     {
         try
@@ -51,10 +52,19 @@ public class Client {
         }
     }
     
+    
     public void receiveData()
     {
-        ClientReceiveThread recieveThread = new ClientReceiveThread(socket);
-        Thread receive = new Thread(recieveThread);
-        receive.start();
+        try
+        {
+            ClientReceiveThread recieveThread = new ClientReceiveThread(socket);
+            Thread receive = new Thread(recieveThread);
+            receive.start();
+            
+        }catch(Exception e)
+        {
+            System.err.println("ERROR: Something went wrong by receiving some data " + e);
+            throw e;
+        }
     }
 }

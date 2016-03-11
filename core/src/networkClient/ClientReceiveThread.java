@@ -28,7 +28,7 @@ public class ClientReceiveThread implements Runnable {
         try
         {
             //Runs the whole time
-            while(true)
+            while(socket.isConnected())
             {
                 //Get data from server and parse it into an Object BufferedReader
                 BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
@@ -45,6 +45,8 @@ public class ClientReceiveThread implements Runnable {
                     new AnalyseData(socket).analyse(dataReceived);
                 }
             }
+            
+            System.err.println("NOTE: Receive thread closed because there is no connection to the server.");
             
         }catch(Exception e)
         {
