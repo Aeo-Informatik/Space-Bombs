@@ -148,6 +148,7 @@ public class MainPlayer extends Entity{
     {
         //Changes the position of the texture 
         pos.add(direction);
+        String moveCommand ="";
         
         //Input handling and moving the player
         if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
@@ -161,7 +162,7 @@ public class MainPlayer extends Entity{
             
             lastMovementKeyPressed = "LEFT";
             //General: moveEnemyPlayer|playerId|direction|target
-            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*");
+            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
             
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
@@ -170,7 +171,7 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
             
             lastMovementKeyPressed = "RIGHT";
-            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*");
+            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
             
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
         {
@@ -179,7 +180,7 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
             
             lastMovementKeyPressed = "UP";
-            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*");
+            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
             
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
@@ -188,7 +189,7 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
             
             lastMovementKeyPressed = "DOWN";
-            sendData.add("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*");
+            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
             
         }else
         {
@@ -218,7 +219,7 @@ public class MainPlayer extends Entity{
         }
         
         //Send data to server
-        client.sendData(sendData);
+        client.sendData(moveCommand);
     }
     
     

@@ -5,10 +5,10 @@
  */
 package networkClient;
 
+import com.badlogic.gdx.net.Socket;
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
-import java.net.Socket;
 import java.util.Arrays;
 
 /**
