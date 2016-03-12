@@ -37,7 +37,7 @@ public class ServerStart
                
         }catch(Exception e)
         {
-            System.err.println("ERROR: Unexpected error has been thrown " + e);
+            System.err.println("ERROR: Unexpected error has been thrown in main" + e);
             System.exit(0);
         }
     }
