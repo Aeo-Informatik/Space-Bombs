@@ -37,7 +37,8 @@ public class ServerStart
                
         }catch(Exception e)
         {
-            System.err.println("BombermanServer: " + e);
+            System.err.println("ERROR: Unexpected error has been thrown " + e);
+            System.exit(0);
         }
     }
 }

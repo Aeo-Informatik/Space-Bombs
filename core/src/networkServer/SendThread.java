@@ -82,15 +82,8 @@ class SendThread implements Runnable
                     
             }catch(Exception e)
             {
-                try 
-                {
-                    throw e;
-                    
-                } catch (Exception ex) 
-                {
-                    System.err.println("Couldnt throw exception in SendThread printed it instead.");
-                    ex.printStackTrace();
-                }
+                System.err.println("ERROR: Unexpected error in sendThread " +e);
+                System.exit(0);
             }	
 	}
 }

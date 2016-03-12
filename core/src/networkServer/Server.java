@@ -38,38 +38,46 @@ public class Server {
      */
     public void startGame(ArrayList<Socket> socketList)
     {
-        //Gets connected client list as input and iterates over them
-        for(int i =0; i < socketList.size(); i++)
+        try
         {
+            //Gets connected client list as input and iterates over them
+            for(int i =0; i < socketList.size(); i++)
+            {
+                //Debug
+                if(DEBUG)
+                    System.out.println("------Start Setup Game------");
+
+                String playerId = Integer.toString(i +1);     
+
+                /*-------------------SETUP GAME---------------------*/
+                //Bind every client to their playerId (1, 2, 3, 4)
+                //Message to send: registerPlayerId|playerId|*
+                String registerCommand = "registerMainPlayerId|" + playerId + "|*";
+                sendToOne(socketList.get(i), registerCommand);
+
+                //Message to receive: registerEnemyPlayers|3|1
+                //General: registerEnemyPlayers|amount|target //
+                String registerEnemiesCommand = "registerEnemyPlayers|" + 
+                Integer.toString(socketList.size()-1) + "|*";
+                sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
+
+
+                /*-------------------END SETUP GAME---------------------*/
+                //Open forward thread for every client
+                ServerForwardThread receive = new ServerForwardThread(socketList.get(i), socketList);
+                Thread thread = new Thread(receive);
+                thread.start();
+            }
+
             //Debug
             if(DEBUG)
-                System.out.println("------Start Setup Game------");
+                System.out.println("------End Setup Game------");
             
-            String playerId = Integer.toString(i +1);     
-            
-            /*-------------------SETUP GAME---------------------*/
-            //Bind every client to their playerId (1, 2, 3, 4)
-            //Message to send: registerPlayerId|playerId|*
-            String registerCommand = "registerMainPlayerId|" + playerId + "|*";
-            sendToOne(socketList.get(i), registerCommand);
-
-            //Message to receive: registerEnemyPlayers|3|1
-            //General: registerEnemyPlayers|amount|target //
-            String registerEnemiesCommand = "registerEnemyPlayers|" + 
-            Integer.toString(socketList.size()-1) + "|*";
-            sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
-            
-            
-            /*-------------------END SETUP GAME---------------------*/
-            //Open forward thread for every client
-            ServerForwardThread receive = new ServerForwardThread(socketList.get(i), socketList);
-            Thread thread = new Thread(receive);
-            thread.start();
+        }catch(Exception e)
+        {
+            System.err.println("ERROR: Unexpected error in startGame " +e);
+            throw e;
         }
-        
-        //Debug
-        if(DEBUG)
-            System.out.println("------End Setup Game------");
     }
     
     
@@ -116,7 +124,7 @@ public class Server {
                 if(pcConnections.size() <= 0)
                 {
                     System.err.println("Timeout: No clients are connected!");
-                    System.exit(1);
+                    throw e;
                 }else
                 {
                     System.out.println("Timeout: Waiting aborted. A client needed too long to connect.");

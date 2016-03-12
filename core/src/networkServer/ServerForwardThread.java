@@ -80,6 +80,7 @@ public class ServerForwardThread implements Runnable
             {
                 System.err.println("ERROR: Unexpected error occurred in forward thread " +e);
                 e.printStackTrace();
+                System.exit(0);
             }
         }
             
