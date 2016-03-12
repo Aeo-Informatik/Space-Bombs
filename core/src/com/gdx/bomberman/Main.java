@@ -37,7 +37,7 @@ public class Main implements ApplicationListener {
     private BitmapFont font;
     
     
-    private Client client;
+    public static Client client;
     
     /**
      * Method called once when the application is created.

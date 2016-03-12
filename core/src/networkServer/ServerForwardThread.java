@@ -49,7 +49,7 @@ public class ServerForwardThread implements Runnable
                 while((dataReceived = receive.readLine())!= null)
                 {   
                     //Debug
-                    if(networkServer.Server.DEBUG)
+                    if(Server.DEBUG)
                         System.out.println("Received from client: " + dataReceived);
                         System.out.println("From: " + socket.getInetAddress().getHostAddress());
                            
@@ -65,7 +65,7 @@ public class ServerForwardThread implements Runnable
                         printWriter.flush();
 
                         //Debug
-                        if(networkServer.Server.DEBUG)
+                        if(Server.DEBUG)
                             System.out.println("Send to client: " + dataReceived);
                             System.out.println("To: " + clientConnections.get(i).getInetAddress().getHostAddress()); 
                         }

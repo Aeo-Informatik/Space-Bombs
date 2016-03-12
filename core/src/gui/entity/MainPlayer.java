@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class MainPlayer extends Entity{
         
         try
         {
-            this.client = new Client(Constants.HOST, Constants.PORT);
+            this.client = Main.client;
             this.sendData = new ArrayList<>();
             
         }catch(Exception e)
