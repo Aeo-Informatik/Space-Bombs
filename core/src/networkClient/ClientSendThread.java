@@ -5,13 +5,14 @@
  */
 package networkClient;
 
-import com.badlogic.gdx.net.Socket;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.SocketException;
 import java.util.Random;
 
 /**
@@ -48,11 +49,19 @@ public class ClientSendThread implements Runnable {
                 print.flush();
 
             }else
-                System.err.println("ERROR: Socket is not connected to server. ");
+                System.err.println("ERROR: SendThread() socket is not connected to server. ");
       
+            
+        }catch(SocketException e)
+        {
+            System.err.println("ERROR: Sending data failed because I couldn't connect to server " + e);
+            System.exit(1);
+            
         }catch(Exception e)
         {
-            throw e;
+            System.err.println("ERROR: Something in sendThread() went wrong " + e);
+            e.printStackTrace();
+            System.exit(1);
         }
     }
     

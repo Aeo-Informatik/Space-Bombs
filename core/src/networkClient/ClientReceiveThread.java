@@ -5,9 +5,10 @@
  */
 package networkClient;
 
-import com.badlogic.gdx.net.Socket;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.Socket;
+import java.net.SocketException;
 
 /**
  *
@@ -28,29 +29,42 @@ public class ClientReceiveThread implements Runnable {
         try
         {
             //Runs the whole time
-            while(socket.isConnected())
+            while(!Thread.currentThread().isInterrupted())
             {
-                //Get data from server and parse it into an Object BufferedReader
-                BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-                String dataReceived;
+                try
+                {
+                    //Get data from server and parse it into an Object BufferedReader
+                    BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+                    String dataReceived;
 
-                //Read all lines received from server
-                while((dataReceived = receive.readLine())!= null)
-                {   
-                    //Debug
-                    if(networkClient.Client.DEBUG)
-                        System.out.println("Received from server: " + dataReceived);
+                    //Read all lines received from server
+                    while((dataReceived = receive.readLine())!= null)
+                    {   
+                        //Debug
+                        if(networkClient.Client.DEBUG)
+                            System.out.println("Received from server: " + dataReceived);
 
-                    //Start to analyse received data and execute apropriate functions
-                    new AnalyseData(socket).analyse(dataReceived);
+                        //Start to analyse received data and execute apropriate functions
+                        new AnalyseData().analyse(dataReceived);
+                    }
+                    
+                }catch(NullPointerException e)
+                {
+                    System.err.println("ERROR: ReceiveThread() Client disconnected closing receive thread");
+                    Thread.currentThread().interrupt();
                 }
             }
             
-            System.err.println("NOTE: Receive thread closed because there is no connection to the server.");
+        }catch(SocketException e)
+        {
+            System.err.println("ERROR: Receiving data failed because I couldn't reach the server " + e);
+            System.exit(1);
             
         }catch(Exception e)
         {
             System.err.println("ERROR: Something went wrong in receiving data " + e);
+            e.printStackTrace();
+            System.exit(1);
         }
     }
     

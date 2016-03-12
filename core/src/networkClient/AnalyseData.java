@@ -5,7 +5,6 @@
  */
 package networkClient;
 
-import com.badlogic.gdx.net.Socket;
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
@@ -17,11 +16,10 @@ import java.util.Arrays;
  */
 public class AnalyseData{
     
-    private Socket socket;
-    private EntityManager entityManager;
     
-    public AnalyseData(Socket socket){
-        this.socket = socket;
+    public AnalyseData()
+    {
+        
     }
     
     
