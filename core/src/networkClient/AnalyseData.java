@@ -16,13 +16,7 @@ import java.util.Arrays;
  */
 public class AnalyseData{
     
-    
-    public AnalyseData()
-    {
-        
-    }
-    
-    
+
     protected void analyse(String receivedData){
         
         try

@@ -5,7 +5,6 @@
  */
 package networkClient;
 
-import com.badlogic.gdx.Gdx;
 import java.net.Socket;
 
 

@@ -41,10 +41,10 @@ public class Server {
         //Gets connected client list as input and iterates over them
         for(int i =0; i < socketList.size(); i++)
         {
-            //DEBUG
+            //Debug
             if(DEBUG)
-                System.out.println("IP: " + socketList.get(i).getInetAddress().getHostAddress());
-
+                System.out.println("------Start Setup Game------");
+            
             String playerId = Integer.toString(i +1);     
             
             /*-------------------SETUP GAME---------------------*/
@@ -69,7 +69,7 @@ public class Server {
         
         //Debug
         if(DEBUG)
-            System.out.println("------End Client List------");
+            System.out.println("------End Setup Game------");
     }
     
     
