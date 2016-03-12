@@ -23,7 +23,9 @@ public class StartClient {
             client.receiveData();
             client.sendData("TEST");
             
-            
+            Client client2 = new Client(Constants.HOST, Constants.PORT);
+            client2.receiveData();
+            client2.sendData("TEST");
         }catch(Exception e)
         {
             System.err.println("ERROR: Something went wrong in the StartClient class " + e);

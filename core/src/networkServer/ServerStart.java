@@ -19,18 +19,22 @@ public class ServerStart
         {
             //Variables & objects
             final int port = 13199;
-            ServerSocket serversocket = new ServerSocket(port);
-            Server server = new Server();   
-               
+            final int minConnections = 1;
+            final int maxConnections = 4;
+            final int timeout = 10000;
             
+            //Initialise server object
+            Server server = new Server(port, minConnections, maxConnections);   
+               
+            //Set debug output to true
             Server.DEBUG = true;
                     
-            
             //Accept all client connections and get them as socket object
-            ArrayList<Socket> socketList = server.AcceptConnections(serversocket, 4, 10000);
-            server.startServer(socketList);
+            ArrayList<Socket> socketList = server.AcceptConnections(timeout);
+            
+            //Starts the game
+            server.startGame(socketList);
                
-                    
         }catch(Exception e)
         {
             System.err.println("BombermanServer: " + e);

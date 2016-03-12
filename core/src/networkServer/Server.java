@@ -1,23 +1,42 @@
 package networkServer;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Server {
     
     public static boolean DEBUG = false;
-    private static boolean STOP = false;
+    private ServerSocket serverSocket;
+    private int minConnections;
+    private int maxConnections;
     
+    public Server(int port, int minConnections, int maxConnections) throws Exception
+    {
+        try 
+        {
+            this.serverSocket = new ServerSocket(port);
+            this.minConnections = minConnections;
+            this.maxConnections = maxConnections;
+            
+        }catch(Exception e) 
+        {
+            System.err.println("ERROR: Something went wrong on creating the server: " +e);
+            throw e;
+        }
+    }
     
     /**
-     * Starts the receive thread which will receive & send back the data. 
-     * Before that happens every client gets a unique player id like player1 but only 1 is transmitted.
+     * Starts the forward thread which will receive & send back the data. 
+     * Before that happens every client gets a unique player id like player1 or player2.
      * @param socketList 
      */
-    public void startServer(ArrayList<Socket> socketList)
+    public void startGame(ArrayList<Socket> socketList)
     {
         //Gets connected client list as input and iterates over them
         for(int i =0; i < socketList.size(); i++)
@@ -25,105 +44,66 @@ public class Server {
             //DEBUG
             if(DEBUG)
                 System.out.println("IP: " + socketList.get(i).getInetAddress().getHostAddress());
-                System.out.println("-----------End IP List-----------");
+
+            String playerId = Integer.toString(i +1);     
             
-            setupGame(i, socketList);
-                
-            //Open receive thread for every client
-            ReceiveThread receive = new ReceiveThread(socketList.get(i), socketList);
+            /*-------------------SETUP GAME---------------------*/
+            //Bind every client to their playerId (1, 2, 3, 4)
+            //Message to send: registerPlayerId|playerId|*
+            String registerCommand = "registerMainPlayerId|" + playerId + "|*";
+            sendToOne(socketList.get(i), registerCommand);
+
+            //Message to receive: registerEnemyPlayers|3|1
+            //General: registerEnemyPlayers|amount|target //
+            String registerEnemiesCommand = "registerEnemyPlayers|" + 
+            Integer.toString(socketList.size()-1) + "|*";
+            sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
+            
+            
+            /*-------------------END SETUP GAME---------------------*/
+            //Open forward thread for every client
+            ServerForwardThread receive = new ServerForwardThread(socketList.get(i), socketList);
             Thread thread = new Thread(receive);
             thread.start();
         }
+        
+        //Debug
+        if(DEBUG)
+            System.out.println("------End Client List------");
     }
     
-    
-    private void setupGame(int i, ArrayList<Socket> socketList)
-    {
-        String playerId = Integer.toString(i +1);     
-                
-        //Bind every client to their playerId (1, 2, 3, 4)
-        //Message to send: registerPlayerId|playerId|*
-        String registerCommand = "registerMainPlayerId|" + playerId + "|*";
-        sendToOne(socketList.get(i), registerCommand);
-            
-        //Message to receive: registerEnemyPlayers|3|1
-        //General: registerEnemyPlayers|amount|target //
-        String registerEnemiesCommand = "registerEnemyPlayers|" + 
-            Integer.toString(socketList.size()-1) + "|*";
-        sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
-        
-        
-    }
     
     /**
-     * Accepts all connections made to the server for a specific amount of time
-     * @param ss
-     * @param maxConnections
+     * Opens a time windows where everyone can connect to the server.
+     * After this time windows closed or all clients connected this method returns the connected clients list.
      * @param timeout
-     * @return ArrayList<Socket>
+     * @return
      * @throws Exception 
      */
-    public ArrayList<Socket> AcceptConnections(ServerSocket ss,  int maxConnections, int timeout) throws Exception
+    public ArrayList<Socket> AcceptConnections(int timeout) throws Exception
     {
         try{
-            
-            //Save IP
-            ArrayList<String> ipTable = new ArrayList<>();
-            
             //Save connection
             ArrayList<Socket> pcConnections = new ArrayList<>();
             
-
-            System.out.println("Listening & accepting connections on port " + ss.getLocalPort() + "\n");
-            
-            try{
+            System.out.println("Listening & accepting connections on port " + serverSocket.getLocalPort() + "\n");
+            try
+            {
                 //Start accepting connections
-                for(int i=0; STOP == false && maxConnections > i; i++)
+                for(int i=0; maxConnections > i; i++)
                 {       
+                    //Accept connection and set timeout
+                    serverSocket.setSoTimeout(timeout);
+                    Socket clientSocket = serverSocket.accept();
 
-                        //Accept connection and set timeout
-                        ss.setSoTimeout(timeout);
-                        Socket clientSocket = ss.accept();
+                    //Debug
+                    if(Server.DEBUG)
+                        System.out.println("-----New Client-----");
+                        System.out.println("Number: " + i + 1);
+                        System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
 
-                        //Get IP address of connected pc
-                        String ip = clientSocket.getInetAddress().getHostAddress();
-
-                        //Debug
-                        if(Server.DEBUG)
-                            System.out.println("Connection: " + i + 1);
-                            System.out.println("Intercepted Ip: " + ip);
-                        
-                        //Get ips already saved in array list if entry matches delete variable content
-                        for(int e=0; e < ipTable.size(); e++){
-                            String savedIp = ipTable.get(e);    
-
-                            if(savedIp.equals(ip)){
-                                ip = "";
-                                if(Server.DEBUG)
-                                    System.out.println("Ip has been already saved!");
-                            }
-                        }
-
-                        //If variable has been delted do nothing
-                        if(ip.isEmpty())
-                        {
-                            //Do nothing
-                            if(Server.DEBUG)
-                                System.out.println("Ip variable is empty!");
-                            
-                        }else 
-                        {   
-                            //Add ip to array list
-                            ipTable.add(ip);
-
-                            //Add connection object to array list
-                            pcConnections.add(clientSocket);
-
-                            //Debug
-                            if(Server.DEBUG)
-                                System.out.println("Saved Ip:" + ip );
-                            
-                        }
+                    //Add connection object to array list
+                    pcConnections.add(clientSocket);
                 }
                 
                 //Return arraylist if the maximum number of clients are connected to the server
@@ -136,7 +116,7 @@ public class Server {
                 if(pcConnections.size() <= 0)
                 {
                     System.err.println("Timeout: No clients are connected!");
-                    
+                    System.exit(1);
                 }else
                 {
                     System.out.println("Timeout: Waiting aborted. A client needed too long to connect.");
@@ -147,11 +127,17 @@ public class Server {
             
         }catch(Exception e)
         {
+            System.err.println("ERROR: Something went wrong in accepting connections " + e);
             throw e;
         }
     }
     
-
+    
+    /**
+     * Send one message to one client.
+     * @param socket
+     * @param message 
+     */
     public void sendToOne(Socket socket, String message)
     {
         try
@@ -163,20 +149,30 @@ public class Server {
             
         }catch(Exception e)
         {
+            System.err.println("ERROR: Send to one had an unexcpected error " +e);
             throw e;
         }
     }
     
+    
+    /**
+     * Send multiple messages in arraylist to everyone.
+     * @param socketList
+     * @param dataToSend 
+     */
     public void sendToAll(ArrayList<Socket> socketList, ArrayList<String> dataToSend)
     {
-        SendThread send = new SendThread(socketList, dataToSend);
-        Thread thread = new Thread(send);
-        thread.start();
-    }
-    
-    
-    public static void setStopConnection(boolean stop){
-        Server.STOP = stop; 
+        try
+        { 
+            SendThread send = new SendThread(socketList, dataToSend);
+            Thread thread = new Thread(send);
+            thread.start();
+            
+        }catch(Exception e)
+        {
+            System.err.println("ERROR: Send to all had an unexpected error " +e);
+            throw e;
+        }
     }
     
 }
