@@ -38,8 +38,8 @@ public class ServerForwardThread implements Runnable
         {
             try
             {
-                //Set timeout exception after 15 seconds
-                socket.setSoTimeout(15000);
+                //Set timeout exception after 15 seconds or 0 = never
+                socket.setSoTimeout(0);
                     
                 //Get data from server and parse it into an Object BufferedReader
                 BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));

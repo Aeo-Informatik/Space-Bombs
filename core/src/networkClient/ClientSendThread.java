@@ -35,23 +35,17 @@ public class ClientSendThread implements Runnable {
     {
         try
         {
-            //Check if client is connected to server
-            if(socket.isConnected())
-            {
-                PrintWriter print = new PrintWriter(socket.getOutputStream(), true);	
 
-                //Debug
-                if(networkClient.Client.DEBUG)
-                    System.out.println("Send to server: " + dataToSend);
+            PrintWriter print = new PrintWriter(socket.getOutputStream(), true);	
 
-                //Send string to server
-                print.println(dataToSend);
-                print.flush();
+            //Debug
+            if(networkClient.Client.DEBUG)
+                System.out.println("Send to server: " + dataToSend);
 
-            }else
-                System.err.println("ERROR: SendThread() socket is not connected to server. ");
-      
-            
+            //Send string to server
+            print.println(dataToSend);
+            print.flush();
+  
         }catch(SocketException e)
         {
             System.err.println("ERROR: Sending data failed because I couldn't connect to server " + e);

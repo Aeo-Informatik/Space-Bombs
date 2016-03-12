@@ -164,6 +164,9 @@ public class MainPlayer extends Entity{
             //General: moveEnemyPlayer|playerId|direction|target
             moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
             
+            //Send data to server
+            client.sendData(moveCommand);
+            
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
             setDirection(150, 0);  
@@ -172,6 +175,9 @@ public class MainPlayer extends Entity{
             
             lastMovementKeyPressed = "RIGHT";
             moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
+            
+            //Send data to server
+            client.sendData(moveCommand);
             
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
         {
@@ -182,6 +188,9 @@ public class MainPlayer extends Entity{
             lastMovementKeyPressed = "UP";
             moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
             
+            //Send data to server
+            client.sendData(moveCommand);
+            
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
             setDirection(0, -150);
@@ -190,6 +199,9 @@ public class MainPlayer extends Entity{
             
             lastMovementKeyPressed = "DOWN";
             moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
+            
+            //Send data to server
+            client.sendData(moveCommand);
             
         }else
         {
@@ -218,8 +230,6 @@ public class MainPlayer extends Entity{
 
         }
         
-        //Send data to server
-        client.sendData(moveCommand);
     }
     
     
