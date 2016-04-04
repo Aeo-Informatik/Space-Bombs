@@ -121,7 +121,7 @@ data.MapClass m1 = new data.MapClass(20,30);
      * @param y the y coordinate
      * @param direction which direction
      */
-    public void movePlayer(int x,int y, char direction){
+  /*  public void movePlayer(int x,int y, char direction){
         
         if (GameObjects[y][x]==data.PlayerClass){
             
@@ -157,7 +157,7 @@ data.MapClass m1 = new data.MapClass(20,30);
             }
 
         }
-    }        
+    }   */     
     
     
     

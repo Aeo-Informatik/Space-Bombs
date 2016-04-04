@@ -21,7 +21,7 @@ public class ServerStart
             final int port = 13199;
             final int minConnections = 1;
             final int maxConnections = 4;
-            final int timeout = 10000;
+            final int timeout = 20000;
             
             //Initialise server object
             Server server = new Server(port, minConnections, maxConnections);   
@@ -38,7 +38,7 @@ public class ServerStart
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error has been thrown in main" + e);
-            System.exit(0);
+            System.exit(0); 
         }
     }
 }
