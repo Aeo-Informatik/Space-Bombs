@@ -145,5 +145,30 @@ public class TextureManager {
         p2WalkingLeftAnim = new Animation(0.3f, new TextureRegion(p2WalkingLeft, 0, 0, 17, 22), new TextureRegion(p2WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p2WalkingLeft, 34, 0, 17, 22), new TextureRegion(p2WalkingLeft, 51, 0, 17, 22));
         p2StaticLeft = new TextureRegion(p2WalkingLeft, 0, 0, 17, 22);
+        
+        
+         /*---------------------------------PLAYER 3---------------------------------------*/
+        p3WalkingDown = loadTexture("data/player3/walking-down.png");
+        p3WalkingDownAnim = new Animation(0.3f, new TextureRegion(p3WalkingDown, 0, 0, 18, 22), new TextureRegion(p3WalkingDown, 18, 0, 18, 22), 
+				new TextureRegion(p3WalkingDown, 36, 0, 18, 22), new TextureRegion(p3WalkingDown, 54, 0, 18, 22));
+        p3StaticDown = new TextureRegion(p3WalkingDown, 0, 0, 18, 22);
+        
+        
+        p3WalkingUp = loadTexture("data/player3/walking-up.png");
+        p3WalkingUpAnim = new Animation(0.3f, new TextureRegion(p3WalkingUp, 0, 0, 18, 22), new TextureRegion(p3WalkingUp, 18, 0, 18, 22), 
+				new TextureRegion(p3WalkingUp, 36, 0, 18, 22), new TextureRegion(p3WalkingUp, 54, 0, 18, 22));
+        p3StaticUp = new TextureRegion(p3WalkingUp, 0, 0, 18, 22);
+        
+        
+        p3WalkingRight = loadTexture("data/player3/walking-right.png");
+        p3WalkingRightAnim = new Animation(0.3f, new TextureRegion(p3WalkingRight, 0, 0, 17, 22), new TextureRegion(p3WalkingRight, 17, 0, 17, 22), 
+				new TextureRegion(p3WalkingRight, 34, 0, 17, 22), new TextureRegion(p3WalkingRight, 51, 0, 17, 22));
+        p3StaticRight = new TextureRegion(p3WalkingRight, 0, 0, 17, 22);
+        
+        
+        p3WalkingLeft = loadTexture("data/player3/walking-left.png");
+        p3WalkingLeftAnim = new Animation(0.3f, new TextureRegion(p3WalkingLeft, 0, 0, 17, 22), new TextureRegion(p3WalkingLeft, 17, 0, 17, 22), 
+				new TextureRegion(p3WalkingLeft, 34, 0, 17, 22), new TextureRegion(p3WalkingLeft, 51, 0, 17, 22));
+        p3StaticLeft = new TextureRegion(p3WalkingLeft, 0, 0, 17, 22);
     }
 }
