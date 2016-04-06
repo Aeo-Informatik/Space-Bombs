@@ -29,6 +29,7 @@ public class ServerStart
             //Set debug output to true
             Server.DEBUG = true;
                     
+            
             //Accept all client connections and get them as socket object
             ArrayList<Socket> socketList = server.AcceptConnections(timeout);
             
