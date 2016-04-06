@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import gui.screen.GameScreen;
 import java.net.Socket;
 
 
@@ -14,6 +15,7 @@ import java.net.Socket;
  */
 public class Client {
     
+    private GameScreen gameScreen;
     private Socket socket;
     public static boolean DEBUG = false;
     

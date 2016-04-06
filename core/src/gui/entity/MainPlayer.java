@@ -27,7 +27,6 @@ public class MainPlayer extends Entity{
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     private Client client;
-    ArrayList<String> sendData;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -49,7 +48,6 @@ public class MainPlayer extends Entity{
         try
         {
             this.client = Main.client;
-            this.sendData = new ArrayList<>();
             
         }catch(Exception e)
         {
