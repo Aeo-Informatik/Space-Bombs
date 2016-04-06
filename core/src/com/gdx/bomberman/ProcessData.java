@@ -17,7 +17,9 @@ import networkClient.Client;
 public class ProcessData extends Main
 {
     
-    public static void processReceivedData(String receivedData){
+    public void processReceivedData(String receivedData){
+        
+        sb.begin();
         
         try
         {
@@ -119,6 +121,8 @@ public class ProcessData extends Main
         {
             e.printStackTrace();
         }
+        
+        sb.end();
     }
     
 }

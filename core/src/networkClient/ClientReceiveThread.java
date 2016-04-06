@@ -46,7 +46,7 @@ public class ClientReceiveThread implements Runnable {
                             System.out.println("Received from server: " + dataReceived);
 
                         //Start to analyse received data and execute apropriate functions
-                        ProcessData.processReceivedData(dataReceived);
+                       new ProcessData().processReceivedData(dataReceived);
                     }
                     
                 }catch(NullPointerException e)

@@ -28,13 +28,13 @@ public class Main implements ApplicationListener {
     * texture can be described and sent to the GPU all at once. 
     * This is what the SpriteBatch class does.
     */
-    private SpriteBatch batch;
+    protected SpriteBatch sb;
     
     /**
      * LibGdx makes use of bitmap files (pngs) to render fonts. 
      * Each glyph in the font has a corresponding TextureRegion.
      */
-    private BitmapFont font;
+    protected BitmapFont font;
     
     
     public static Client client;
@@ -66,7 +66,7 @@ public class Main implements ApplicationListener {
         
         
         TextureManager.load();
-        batch = new SpriteBatch();    
+        sb = new SpriteBatch();    
         font = new BitmapFont();
 
     }
@@ -86,7 +86,7 @@ public class Main implements ApplicationListener {
         
         if(currentScreen != null)
             ScreenManager.getCurrentScreen().update();
-            ScreenManager.getCurrentScreen().render(batch);
+            ScreenManager.getCurrentScreen().render(sb);
     }
     
     
@@ -128,7 +128,7 @@ public class Main implements ApplicationListener {
         if(currentScreen != null)
             ScreenManager.getCurrentScreen().dispose();
         
-        batch.dispose();
+        sb.dispose();
         font.dispose();
     }
     
