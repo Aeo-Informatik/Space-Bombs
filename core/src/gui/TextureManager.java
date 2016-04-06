@@ -173,27 +173,27 @@ public class TextureManager {
     
     
      /*---------------------------------PLAYER 4---------------------------------------*/
-        p3WalkingDown = loadTexture("data/player3/walking-down.png");
-        p3WalkingDownAnim = new Animation(0.3f, new TextureRegion(p3WalkingDown, 0, 0, 18, 22), new TextureRegion(p3WalkingDown, 18, 0, 18, 22), 
-				new TextureRegion(p3WalkingDown, 36, 0, 18, 22), new TextureRegion(p3WalkingDown, 54, 0, 18, 22));
-        p3StaticDown = new TextureRegion(p3WalkingDown, 0, 0, 18, 22);
+        p4WalkingDown = loadTexture("data/player4/walking-down.png");
+        p4WalkingDownAnim = new Animation(0.3f, new TextureRegion(p4WalkingDown, 0, 0, 18, 22), new TextureRegion(p4WalkingDown, 18, 0, 18, 22), 
+				new TextureRegion(p4WalkingDown, 36, 0, 18, 22), new TextureRegion(p4WalkingDown, 54, 0, 18, 22));
+        p4StaticDown = new TextureRegion(p4WalkingDown, 0, 0, 18, 22);
         
         
-        p3WalkingUp = loadTexture("data/player3/walking-up.png");
-        p3WalkingUpAnim = new Animation(0.3f, new TextureRegion(p3WalkingUp, 0, 0, 18, 22), new TextureRegion(p3WalkingUp, 18, 0, 18, 22), 
-				new TextureRegion(p3WalkingUp, 36, 0, 18, 22), new TextureRegion(p3WalkingUp, 54, 0, 18, 22));
-        p3StaticUp = new TextureRegion(p3WalkingUp, 0, 0, 18, 22);
+        p4WalkingUp = loadTexture("data/player4/walking-up.png");
+        p4WalkingUpAnim = new Animation(0.3f, new TextureRegion(p4WalkingUp, 0, 0, 18, 22), new TextureRegion(p4WalkingUp, 18, 0, 18, 22), 
+				new TextureRegion(p4WalkingUp, 36, 0, 18, 22), new TextureRegion(p4WalkingUp, 54, 0, 18, 22));
+        p4StaticUp = new TextureRegion(p4WalkingUp, 0, 0, 18, 22);
         
         
-        p3WalkingRight = loadTexture("data/player3/walking-right.png");
-        p3WalkingRightAnim = new Animation(0.3f, new TextureRegion(p3WalkingRight, 0, 0, 17, 22), new TextureRegion(p3WalkingRight, 17, 0, 17, 22), 
-				new TextureRegion(p3WalkingRight, 34, 0, 17, 22), new TextureRegion(p3WalkingRight, 51, 0, 17, 22));
-        p3StaticRight = new TextureRegion(p3WalkingRight, 0, 0, 17, 22);
+        p4WalkingRight = loadTexture("data/player4/walking-right.png");
+        p4WalkingRightAnim = new Animation(0.3f, new TextureRegion(p4WalkingRight, 0, 0, 17, 22), new TextureRegion(p4WalkingRight, 17, 0, 17, 22), 
+				new TextureRegion(p4WalkingRight, 34, 0, 17, 22), new TextureRegion(p4WalkingRight, 51, 0, 17, 22));
+        p4StaticRight = new TextureRegion(p4WalkingRight, 0, 0, 17, 22);
         
         
-        p3WalkingLeft = loadTexture("data/player3/walking-left.png");
-        p3WalkingLeftAnim = new Animation(0.3f, new TextureRegion(p3WalkingLeft, 0, 0, 17, 22), new TextureRegion(p3WalkingLeft, 17, 0, 17, 22), 
-				new TextureRegion(p3WalkingLeft, 34, 0, 17, 22), new TextureRegion(p3WalkingLeft, 51, 0, 17, 22));
-        p3StaticLeft = new TextureRegion(p3WalkingLeft, 0, 0, 17, 22);
+        p4WalkingLeft = loadTexture("data/player4/walking-left.png");
+        p4WalkingLeftAnim = new Animation(0.3f, new TextureRegion(p4WalkingLeft, 0, 0, 17, 22), new TextureRegion(p4WalkingLeft, 17, 0, 17, 22), 
+				new TextureRegion(p4WalkingLeft, 34, 0, 17, 22), new TextureRegion(p4WalkingLeft, 51, 0, 17, 22));
+        p4StaticLeft = new TextureRegion(p4WalkingLeft, 0, 0, 17, 22);
     }
 }
