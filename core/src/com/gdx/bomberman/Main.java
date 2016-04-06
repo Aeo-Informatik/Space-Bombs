@@ -37,7 +37,7 @@ public class Main implements ApplicationListener {
     private BitmapFont font;
     
     
-    private Client client;
+    public static Client client;
     
     /**
      * Method called once when the application is created.
@@ -56,7 +56,7 @@ public class Main implements ApplicationListener {
         //If an error occurs shut application down
         } catch (Exception e) 
         {
-            System.err.println(e.toString());
+            System.err.println("ERROR: Client could't connect to server " + e);
             System.exit(0);
         }
         

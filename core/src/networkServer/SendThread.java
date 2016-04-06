@@ -20,7 +20,7 @@ class SendThread implements Runnable
                 this.dataToSend = dataToSend;
 	}
         
-        //Constructor 2 for sending to a spefic client
+        //Constructor 2 for sending to a specific client
         boolean oneClientOnly = false;
         Socket socket1;
         String message1;
@@ -50,60 +50,40 @@ class SendThread implements Runnable
                         //Iterate through connected client list
                         for(int i=0; i < sock.size(); i++)
                         {
-                            //Check if client is connected
-                            if(sock.get(i).isConnected())
-                            {
-                                //Debug
-                                if(Server.DEBUG)
-                                    System.out.println("To: " + sock.get(i).getInetAddress().getHostAddress());
 
-                                //Create object to send data
-                                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(sock.get(i).getOutputStream()));
+                            //Debug
+                            if(Server.DEBUG)
+                                System.out.println("To: " + sock.get(i).getInetAddress().getHostAddress());
 
-                                //Send message to client
-                                printWriter.println(msgToClient);
-                                printWriter.flush();
+                            //Create object to send data
+                            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(sock.get(i).getOutputStream()));
 
-                            }else
-                            {
-                                System.err.println("SendThread(): Cannot reach client with ip: " + sock.get(i).getInetAddress().getHostAddress());
-                            }
+                            //Send message to client
+                            printWriter.println(msgToClient);
+                            printWriter.flush();
                         }
                     }//Quits thread after all messages have been send
                     
                 }else
                 {
-                    if(socket1.isConnected())
-                    {
-                        //Debug
-                        if(Server.DEBUG)
-                            System.out.println("Send: " + message1);
-                            System.out.println("To: " + socket1.getInetAddress().getHostAddress());
-                            
-                        
-                        //Create object to send data
-                        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket1.getOutputStream()));
 
-                        //Send message to client
-                        printWriter.println(message1);
-                        printWriter.flush();    
+                    //Debug
+                    if(Server.DEBUG)
+                        System.out.println("Send: " + message1);
+                        System.out.println("To: " + socket1.getInetAddress().getHostAddress());
                             
-                    }else
-                        {
-                            System.err.println("SendThread(): Cannot reach client with ip: " + socket1.getInetAddress().getHostAddress());
-                        }
+                    //Create object to send data
+                    PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket1.getOutputStream()));
+
+                    //Send message to client
+                    printWriter.println(message1);
+                    printWriter.flush();    
                 }
                     
             }catch(Exception e)
             {
-                try 
-                {
-                    throw e;
-                } catch (Exception ex) 
-                {
-                    System.err.println("Couldnt throw exception in SendThread printed it instead.");
-                    ex.printStackTrace();
-                }
+                System.err.println("ERROR: Unexpected error in sendThread " +e);
+                System.exit(0);
             }	
 	}
 }

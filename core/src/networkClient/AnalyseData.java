@@ -8,7 +8,6 @@ package networkClient;
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
-import java.net.Socket;
 import java.util.Arrays;
 
 /**
@@ -17,14 +16,7 @@ import java.util.Arrays;
  */
 public class AnalyseData{
     
-    private Socket socket;
-    private EntityManager entityManager;
-    
-    public AnalyseData(Socket socket){
-        this.socket = socket;
-    }
-    
-    
+
     protected void analyse(String receivedData){
         
         try
@@ -35,14 +27,9 @@ public class AnalyseData{
             String[] parameters = receivedData.split("\\|");
             String playerIdString = Integer.toString(Constants.PLAYERID);
 
-            
-            //Check if the minimum arguments are given
-            if (parameters.length < 2)
-            {
-                System.err.println("ERROR: received data with invalid length " + receivedData);
-                
+ 
             //Check if it targets this device with playerId or astrix
-            } else if (parameters[parameters.length - 1].equals(playerIdString) || parameters[parameters.length - 1].equals("*"))
+            if (parameters[parameters.length - 1].equals(playerIdString) || parameters[parameters.length - 1].equals("*"))
             {
 
                 switch (parameters[0]) 
@@ -57,11 +44,10 @@ public class AnalyseData{
 
                             //DEBUG
                             if(Client.DEBUG)
-                                System.out.println("-----Player id is now: " + Constants.PLAYERID);
+                                System.out.println("NOTE: Player id is now: " + Constants.PLAYERID);
                             
                         }else
                             System.err.println("ERROR: registerMainPlayerId wrong number of parameters");
-                            System.err.println(Arrays.toString(parameters));
                         break;
                        
                         
@@ -74,33 +60,36 @@ public class AnalyseData{
 
                             //DEBUG
                             if(Client.DEBUG)
-                                System.out.println("Amount of enemy Players: " + Constants.AMOUNTENEMYPLAYERS);
+                                System.out.println("NOTE: Amount of enemy Players: " + Constants.AMOUNTENEMYPLAYERS);
                         }else
                             System.err.println("ERROR: registerEnemyPlayers wrong number of parameters");
-                            System.err.println(Arrays.toString(parameters));
                         break;
                     
                         
                     //Message to receive: spawnPlayers|1
                     //General: spawnPlayers|target
                     case "spawnPlayers":
-                        //Spawn main player
-                        EntityManager.spawnMainPlayer(50, 0, Constants.PLAYERID);
-                        
-                        //Spawn enemy players
-                        for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)
+                        if(parameters.length == 2)
                         {
-                            if(i == Constants.PLAYERID)
+                            //Spawn main player
+                            EntityManager.spawnMainPlayer(50, 0, Constants.PLAYERID);
+
+                            //Spawn enemy players
+                            for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)
                             {
-                                i++;
+                                if(i == Constants.PLAYERID)
+                                {
+                                    i++;
+                                }
+
+                                EntityManager.spawnEnemyPlayer(50 + i*10, 0, i);
                             }
-                                
-                            EntityManager.spawnEnemyPlayer(50 + i*10, 0, i);
-                        }
-                        
-                        //DEBUG
-                        if(Client.DEBUG)
-                            System.out.println("Spawned all players!");
+
+                            //DEBUG
+                            if(Client.DEBUG)
+                                System.out.println("Spawned all players!");
+                        }else 
+                            System.err.println("ERROR: spawnPlayer received data with invalid parameter length");
                         break;
                         
                     
@@ -118,11 +107,11 @@ public class AnalyseData{
                             }
                         }else 
                             System.err.println("ERROR: moveEnemyPlayer wrong number of parameters");
-                            System.err.println(Arrays.toString(parameters));
                         break;
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");
+                        System.err.println(receivedData);
                 }  
             }
 
