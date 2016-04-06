@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gui.gdx.map;
+package gui.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
