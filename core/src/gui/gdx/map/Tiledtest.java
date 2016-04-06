@@ -21,12 +21,13 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
  *
  * @author pl0614
  */
-public class Tiledtest implements Screen {
+public class Tiledtest extends Map 
+{
     private TiledMap map;
     private OrthogonalTiledMapRenderer render;
     private OrthographicCamera camera;
 
-    @Override
+
     public void show() {
         TmxMapLoader loader = new TmxMapLoader();
         map = loader.load("assest/map.tmx");
@@ -34,7 +35,7 @@ public class Tiledtest implements Screen {
         camera = new OrthographicCamera();
     }
 
-    @Override
+
     public void render(float f) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -43,27 +44,27 @@ public class Tiledtest implements Screen {
 
     }
 
-    @Override
+
     public void resize(int height, int width) {
         camera.viewportHeight = height;
         camera.viewportWidth = width;
         camera.update();
     }
 
-    @Override
+
     public void pause() {
     }
 
-    @Override
+
     public void resume() {
     }
 
-    @Override
+
     public void hide() {
         dispose();
     }
 
-    @Override
+
     public void dispose() {
         map.dispose();
         render.dispose();
