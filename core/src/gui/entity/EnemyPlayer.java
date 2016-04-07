@@ -197,7 +197,7 @@ public class EnemyPlayer extends Entity{
         return this.playerId;
     }
     
-    public void setPlayerid(int playerId)
+    public void setPlayerId(int playerId)
     {
         this.playerId = playerId;
     }
