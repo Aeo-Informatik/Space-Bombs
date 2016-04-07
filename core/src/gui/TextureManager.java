@@ -201,7 +201,7 @@ public class TextureManager {
         p4StaticLeft = new TextureRegion(p4WalkingLeft, 0, 0, 17, 22);
         
         
-        /*---------------------------------BOMB---------------------------------------*/
+        /*---------------------------------BOMB1---------------------------------------*/
         b1Burns = loadTexture("normal-bomb_anim.png");
         b1BurnsAnim = new Animation(0.3f, new TextureRegion(b1Burns, 0, 0, 16, 16), new TextureRegion(b1Burns, 16, 0, 14, 16),
                                 new TextureRegion(b1Burns, 30, 0, 14, 16));

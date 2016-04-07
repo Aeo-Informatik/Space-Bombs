@@ -251,5 +251,5 @@ public class MainPlayer extends Entity{
         
         return currentFrame;
     }
-      
+    
 }
