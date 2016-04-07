@@ -36,9 +36,7 @@ public class GameScreen extends Screen{
     
     @Override
     public void render(SpriteBatch sb) 
-    {
-        MapManager.getCurrentMap().render(sb);
-
+    { 
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
@@ -46,6 +44,9 @@ public class GameScreen extends Screen{
         sb.begin();
         //Things to draw to screen come in here
         entityManager.render(sb);
+        
+        //Render Map
+        MapManager.getCurrentMap().render(sb);
         
         //Starts thread to render incoming server calls
         ProcessData processData = new ProcessData();
