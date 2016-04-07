@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package networkClient;
+package com.gdx.bomberman;
 
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
-import java.util.Arrays;
+import networkClient.Client;
 
 /**
  *
  * @author qubasa
  */
-public class AnalyseData{
+public class ProcessData extends Main
+{
     
-
-    protected void analyse(String receivedData){
+    public static void processReceivedData(String receivedData){
         
         try
         {
