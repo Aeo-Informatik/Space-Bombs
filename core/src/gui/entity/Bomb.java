@@ -20,18 +20,36 @@ import gui.TextureManager;
 public class Bomb extends Entity{
     
     private float stateTime;
-    private String lastMovementKeyPressed = "UP";
+    //private String lastMovementKeyPressed = "UP";
     private SpriteBatch sb;
+    private int bombId=0;
     
    
          
-    private final Animation b1BurnsAnim;
+    //private final Animation b1BurnsAnim;
+    //private final TextureRegion b1StaticBurns;
     
 
 
-    public Bomb(Vector2 pos, Vector2 direction) {
+    public Bomb(Vector2 pos, Vector2 direction,int id) {
         super(null, pos, direction);
-        b1BurnsAnim=TextureManager.b1BurnsAnim;
+        bombId=id;
+        /*switch(bombId)
+        {
+            case 1:
+
+                this.b1BurnsAnim = TextureManager.b1BurnsAnim;
+                    
+                this.b1StaticBurns = TextureManager.b1StaticBurns;
+
+                break;
+            default:
+                System.err.println("ERROR: Wrong player number: " + bombId + " in EnemyPlayer. Using default p1");
+                this.b1BurnsAnim = TextureManager.b1BurnsAnim;
+                    
+                this.b1StaticBurns = TextureManager.b1StaticBurns;
+        }*/
+    
     }
     
     
@@ -69,4 +87,13 @@ public class Bomb extends Entity{
         
         return currentFrame;
     }
+
+    public int getBombId() {
+        return bombId;
+    }
+
+    public void setBombId(int bombId) {
+        this.bombId = bombId;
+    }
+    
 }
