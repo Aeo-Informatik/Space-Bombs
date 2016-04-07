@@ -26,15 +26,15 @@ public class Bomb extends Entity{
     
    
          
-    //private final Animation b1BurnsAnim;
-    //private final TextureRegion b1StaticBurns;
+    private final Animation b1BurnsAnim;
+    private final TextureRegion b1StaticBurns;
     
 
 
     public Bomb(Vector2 pos, Vector2 direction,int id) {
         super(null, pos, direction);
         bombId=id;
-        /*switch(bombId)
+        switch(bombId)
         {
             case 1:
 
@@ -48,7 +48,7 @@ public class Bomb extends Entity{
                 this.b1BurnsAnim = TextureManager.b1BurnsAnim;
                     
                 this.b1StaticBurns = TextureManager.b1StaticBurns;
-        }*/
+        }
     
     }
     
