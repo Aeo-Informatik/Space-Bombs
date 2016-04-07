@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gdx.bomberman;
+package networkClient;
 
+import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
@@ -18,8 +19,6 @@ public class ProcessData extends Main
 {
     
     public void processReceivedData(String receivedData){
-        
-        sb.begin();
         
         try
         {
@@ -122,7 +121,6 @@ public class ProcessData extends Main
             e.printStackTrace();
         }
         
-        sb.end();
     }
     
 }

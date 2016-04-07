@@ -5,7 +5,6 @@
  */
 package networkClient;
 
-import com.gdx.bomberman.ProcessData;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;

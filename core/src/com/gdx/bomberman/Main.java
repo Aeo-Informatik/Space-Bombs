@@ -28,13 +28,13 @@ public class Main implements ApplicationListener {
     * texture can be described and sent to the GPU all at once. 
     * This is what the SpriteBatch class does.
     */
-    protected SpriteBatch sb;
+    private SpriteBatch sb;
     
     /**
      * LibGdx makes use of bitmap files (pngs) to render fonts. 
      * Each glyph in the font has a corresponding TextureRegion.
      */
-    protected BitmapFont font;
+    private BitmapFont font;
     
     
     public static Client client;
