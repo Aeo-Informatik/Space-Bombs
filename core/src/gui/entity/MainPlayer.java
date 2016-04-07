@@ -28,6 +28,9 @@ public class MainPlayer extends Entity{
     private String lastMovementKeyPressed = "UP";
     private Client client;
     private ArrayList Bombs;
+    private ArrayList x;
+    private ArrayList y;
+    
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -185,6 +188,9 @@ public class MainPlayer extends Entity{
             
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
             
+            //sb.draw(getFrame()), x.get(0), y.get(0));
+            
+            
             lastMovementKeyPressed = "UP";
             moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
             
@@ -206,7 +212,10 @@ public class MainPlayer extends Entity{
         }else if (Gdx.input.isKeyPressed(Keys.E) || Gdx.input.isKeyPressed(Keys.E))
         {
             setDirection(0,0);
-            Bomb b1 =new Bomb(super.getPosition(),direction,1);   
+            Bomb b1 =new Bomb(super.getPosition(),direction,1); 
+            Bombs.add(b1.getB1StaticBurns());
+            x.add(pos.x);
+            y.add(pos.y);
             sb.draw(b1.getB1StaticBurns(),pos.x,pos.y);
             
             switch(lastMovementKeyPressed)
