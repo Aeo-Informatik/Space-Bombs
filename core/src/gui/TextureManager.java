@@ -87,6 +87,10 @@ public class TextureManager {
     public static Animation p4WalkingLeftAnim;
     public static TextureRegion p4StaticLeft;
     
+    //Bomb
+    public static Texture b1Burns;
+    public static Animation b1BurnsAnim;
+    public static TextureRegion b1StaticBurns;
     
     public static Texture loadTexture (String file) 
     {
@@ -195,5 +199,12 @@ public class TextureManager {
         p4WalkingLeftAnim = new Animation(0.3f, new TextureRegion(p4WalkingLeft, 0, 0, 17, 22), new TextureRegion(p4WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p4WalkingLeft, 34, 0, 17, 22), new TextureRegion(p4WalkingLeft, 51, 0, 17, 22));
         p4StaticLeft = new TextureRegion(p4WalkingLeft, 0, 0, 17, 22);
+        
+        
+        /*---------------------------------BOMB---------------------------------------*/
+        b1Burns = loadTexture("normal-bomb_anim.png");
+        b1BurnsAnim = new Animation(0.3f, new TextureRegion(b1Burns, 0, 0, 29, 28), new TextureRegion(b1Burns, 31, 0, 29, 28),
+                                new TextureRegion(b1Burns, 64, 0, 29, 28));
+        b1StaticBurns = new TextureRegion(b1Burns, 0, 0, 29,28);
     }
 }
