@@ -22,6 +22,7 @@ public class GameScreen extends Screen{
     //The viewpoint of the player 
     public static OrthoCamera camera;
     private EntityManager entityManager;
+    private Thread processDataThread;
     
     @Override
     public void create() 
@@ -31,6 +32,9 @@ public class GameScreen extends Screen{
         
         MapManager.setMap(new BasicMap());
         MapManager.getCurrentMap().create();
+        
+        ProcessData processData = new ProcessData();
+        processDataThread = new Thread(processData);
     }
 
     
@@ -49,9 +53,10 @@ public class GameScreen extends Screen{
         MapManager.getCurrentMap().render(sb);
         
         //Starts thread to render incoming server calls
-        ProcessData processData = new ProcessData();
-        Thread processDataThread = new Thread(processData);
-        processDataThread.start();
+        if(processDataThread.isAlive() == false)
+        {
+            processDataThread.start();
+        }
         
         sb.end();
     }
@@ -91,6 +96,7 @@ public class GameScreen extends Screen{
     public void dispose() 
     {
         MapManager.getCurrentMap().dispose();
+        
     }
     
 }

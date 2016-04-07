@@ -11,17 +11,16 @@ package gui.map;
  */
 public class MapManager 
 {
-    public static Map currentMap;
+    public static Map currentMap = null;
     
     public static void setMap(Map map){
         
-        if(map != null)
+        if(currentMap != null)
         {
             currentMap.dispose();
         }
         
         currentMap = map;
-        currentMap.create();
     }
     
     

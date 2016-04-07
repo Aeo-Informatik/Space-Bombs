@@ -51,7 +51,7 @@ public class ClientReceiveThread implements Runnable {
 
                         //Adds the data to the BlockingQueue
                        queue.add(dataReceived);
-                       Thread.sleep(500);
+                       Thread.sleep(100);
                     }
                     
                 }catch(NullPointerException e)
