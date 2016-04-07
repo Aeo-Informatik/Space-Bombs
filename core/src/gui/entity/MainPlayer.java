@@ -218,7 +218,7 @@ public class MainPlayer extends Entity{
             //Send data to server
             client.sendData(moveCommand);
             
-        }else if (Gdx.input.isKeyPressed(Keys.E))
+        }else if (Gdx.input.isKeyPressed(Keys.E) || Gdx.input.isKeyPressed(Keys.SPACE))
         {
             //Create Bomb Object
             Bomb bomb = new Bomb(super.getPosition(),direction,1); 
