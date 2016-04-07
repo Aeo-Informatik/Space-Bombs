@@ -8,6 +8,8 @@ package gui.screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
+import gui.map.BasicMap;
+import gui.map.MapManager;
 import networkClient.ProcessData;
 
 
@@ -26,11 +28,17 @@ public class GameScreen extends Screen{
     {
         this.camera = new OrthoCamera();
         this.entityManager = new EntityManager();
+        
+        MapManager.setMap(new BasicMap());
+        MapManager.getCurrentMap().create();
     }
 
     
     @Override
-    public void render(SpriteBatch sb) {
+    public void render(SpriteBatch sb) 
+    {
+        MapManager.getCurrentMap().render(sb);
+
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
@@ -53,6 +61,7 @@ public class GameScreen extends Screen{
     {
         camera.update();
         entityManager.update();
+        MapManager.getCurrentMap().update();
     }
     
     
@@ -66,21 +75,21 @@ public class GameScreen extends Screen{
     @Override
     public void pause() 
     {
-        
+        MapManager.getCurrentMap().pause();
     }
 
     
     @Override
     public void resume() 
     {
-        
+        MapManager.getCurrentMap().resume();
     }
 
     
     @Override
     public void dispose() 
     {
-        
+        MapManager.getCurrentMap().dispose();
     }
     
 }
