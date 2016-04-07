@@ -19,7 +19,6 @@ public class EntityManager {
     public static Array<EnemyPlayer> enemies = new Array<>();
     public static MainPlayer mainPlayer;
     
-    
     //Update is the same as render only that it doesn't have the SpriteBatch Object
     public void update()
     {

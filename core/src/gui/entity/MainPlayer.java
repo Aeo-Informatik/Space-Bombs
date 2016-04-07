@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
+import gui.screen.GameScreen;
 import java.util.ArrayList;
 import networkClient.Client;
 
@@ -152,6 +153,7 @@ public class MainPlayer extends Entity{
         //Changes the position of the texture 
         pos.add(direction);
         String moveCommand ="";
+        int cameraSpeed = 3;
         
         //Input handling and moving the player
         if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
@@ -159,7 +161,11 @@ public class MainPlayer extends Entity{
             //Set the speed the texture moves in x and y axis
             //this is the method inherited from Entity.java class
             setDirection(-150, 0);
-
+            
+            //Move camera x,y
+            GameScreen.camera.translate( -1 * cameraSpeed,0);
+            
+            
             //Draw the walking animation
             sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
             
@@ -173,6 +179,7 @@ public class MainPlayer extends Entity{
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
             setDirection(150, 0);  
+            GameScreen.camera.translate(cameraSpeed,0);
             
             sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
             
@@ -185,6 +192,7 @@ public class MainPlayer extends Entity{
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
         {
             setDirection(0, 150);
+            GameScreen.camera.translate(0, cameraSpeed);
             
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
             
@@ -200,6 +208,7 @@ public class MainPlayer extends Entity{
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
             setDirection(0, -150);
+            GameScreen.camera.translate(0, -1 * cameraSpeed);
             
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
             

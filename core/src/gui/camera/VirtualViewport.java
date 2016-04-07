@@ -22,11 +22,13 @@ public class VirtualViewport {
         return virtualHeight;  
     }  
   
+    //Constructor 1
     public VirtualViewport(float virtualWidth, float virtualHeight) 
     {  
         this(virtualWidth, virtualHeight, false);  
     }  
   
+    //Constructor 2
     public VirtualViewport(float virtualWidth, float virtualHeight, boolean shrink) 
     {  
         this.virtualWidth = virtualWidth;  

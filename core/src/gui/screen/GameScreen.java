@@ -18,7 +18,7 @@ import networkClient.ProcessData;
 public class GameScreen extends Screen{
     
     //The viewpoint of the player 
-    private OrthoCamera camera;
+    public static OrthoCamera camera;
     private EntityManager entityManager;
     
     @Override
