@@ -209,33 +209,17 @@ public class MainPlayer extends Entity{
             //Send data to server
             client.sendData(moveCommand);
             
-        }else if (Gdx.input.isKeyPressed(Keys.E) || Gdx.input.isKeyPressed(Keys.E))
+        }else if (Gdx.input.isKeyPressed(Keys.E))
         {
-            setDirection(0,0);
-            Bomb b1 =new Bomb(super.getPosition(),direction,1); 
-            Bombs.add(b1.getB1StaticBurns());
+            //Create Bomb Object
+            Bomb bomb = new Bomb(super.getPosition(),direction,1); 
+            Bombs.add(bomb.getB1StaticBurns());
+            
             x.add(pos.x);
             y.add(pos.y);
-            sb.draw(b1.getB1StaticBurns(),pos.x,pos.y);
             
-            switch(lastMovementKeyPressed)
-            {
-                case "LEFT":
-                    sb.draw(staticLeft, pos.x, pos.y);
-                    break;
-
-                case "RIGHT":
-                    sb.draw(staticRight, pos.x, pos.y);
-                break;
-
-                case "UP":
-                    sb.draw(staticUp, pos.x, pos.y);
-                    break;
-
-                case "DOWN":
-                    sb.draw(staticDown, pos.x, pos.y);
-                    break;
-            }
+            //Draw Bomb Entity
+            sb.draw(bomb.getB1StaticBurns(),pos.x,pos.y);
             
         }else
         {

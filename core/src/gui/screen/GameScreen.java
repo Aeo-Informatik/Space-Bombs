@@ -8,6 +8,7 @@ package gui.screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
+import networkClient.ProcessData;
 
 
 /**
@@ -38,6 +39,12 @@ public class GameScreen extends Screen{
         sb.begin();
         //Things to draw to screen come in here
         entityManager.render(sb);
+        
+        //Starts thread to render incoming server calls
+        ProcessData processData = new ProcessData();
+        Thread processDataThread = new Thread(processData);
+        processDataThread.start();
+        
         sb.end();
     }
 

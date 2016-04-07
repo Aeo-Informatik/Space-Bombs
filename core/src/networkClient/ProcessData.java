@@ -9,19 +9,22 @@ import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
-import networkClient.Client;
+
 
 /**
  *
  * @author qubasa
  */
-public class ProcessData extends Main
+public class ProcessData implements Runnable
 {
-    
-    public void processReceivedData(String receivedData){
-        
+    @Override
+    public void run() 
+    {
         try
         {
+            //Read from BlockingQueue
+            String receivedData = ClientReceiveThread.queue.take().toString();
+            
             /*
             Syntax for receiving data: funktion|arguments|player
             */
@@ -118,9 +121,9 @@ public class ProcessData extends Main
 
         }catch(Exception e)
         {
+            System.err.println("ERROR: ProcessDataThread() Something went wrong " + e);
             e.printStackTrace();
         }
-        
     }
     
 }

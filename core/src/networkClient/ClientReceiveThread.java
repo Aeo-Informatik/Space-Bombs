@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  *
@@ -17,6 +19,9 @@ import java.net.SocketException;
 public class ClientReceiveThread implements Runnable {
 
     private Socket socket;
+    
+    //To be able to communicate between Threads
+    protected static BlockingQueue queue = new ArrayBlockingQueue(2048);
     
     public ClientReceiveThread(Socket socket)
     {
@@ -44,8 +49,9 @@ public class ClientReceiveThread implements Runnable {
                         if(networkClient.Client.DEBUG)
                             System.out.println("Received from server: " + dataReceived);
 
-                        //Start to analyse received data and execute apropriate functions
-                       new ProcessData().processReceivedData(dataReceived);
+                        //Adds the data to the BlockingQueue
+                       queue.add(dataReceived);
+                       Thread.sleep(500);
                     }
                     
                 }catch(NullPointerException e)

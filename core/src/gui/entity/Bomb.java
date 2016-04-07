@@ -24,36 +24,32 @@ public class Bomb extends Entity{
     private SpriteBatch sb;
     private int bombId=0;
     
-   
-         
+ 
     private  Animation b1BurnsAnim;
     private  TextureRegion b1StaticBurns;    
 
-
-    public Bomb(Vector2 pos, Vector2 direction,int id) {
+    //Constructor
+    public Bomb(Vector2 pos, Vector2 direction,int id)
+    {
         super(null, pos, direction);
+        
         bombId=id;
         switch(bombId)
         {
             case 1:
-
-                this.b1BurnsAnim = TextureManager.b1BurnsAnim;
-                    
+                this.b1BurnsAnim = TextureManager.b1BurnsAnim;   
                 this.b1StaticBurns = TextureManager.b1StaticBurns;
-
                 break;
+                
             default:
                 System.err.println("ERROR: Wrong player number: " + bombId + " in EnemyPlayer. Using default p1");
-                this.b1BurnsAnim = TextureManager.b1BurnsAnim;
-                    
+                this.b1BurnsAnim = TextureManager.b1BurnsAnim; 
                 this.b1StaticBurns = TextureManager.b1StaticBurns;
         }
     
     }
     
-    
-    
-    
+
     @Override
     public void render(SpriteBatch sb)
     {
