@@ -22,11 +22,10 @@ public class GameScreen extends Screen{
     private EntityManager entityManager;
     
     @Override
-    public void create() {
-        //Set mainPlayer camera
-        camera = new OrthoCamera();
-        
-        entityManager = new EntityManager();
+    public void create() 
+    {
+        this.camera = new OrthoCamera();
+        this.entityManager = new EntityManager();
     }
 
     
@@ -50,32 +49,37 @@ public class GameScreen extends Screen{
 
     
     @Override
-    public void update() {
+    public void update() 
+    {
         camera.update();
         entityManager.update();
     }
     
     
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height) 
+    {
        camera.resize();
     }
 
     
     @Override
-    public void pause() {
+    public void pause() 
+    {
         
     }
 
     
     @Override
-    public void resume() {
+    public void resume() 
+    {
         
     }
 
     
     @Override
-    public void dispose() {
+    public void dispose() 
+    {
         
     }
     
