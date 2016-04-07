@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import com.gdx.bomberman.ProcessData;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -45,7 +46,7 @@ public class ClientReceiveThread implements Runnable {
                             System.out.println("Received from server: " + dataReceived);
 
                         //Start to analyse received data and execute apropriate functions
-                        new AnalyseData().analyse(dataReceived);
+                        ProcessData.processReceivedData(dataReceived);
                     }
                     
                 }catch(NullPointerException e)

@@ -45,6 +45,10 @@ public class Main implements ApplicationListener {
     @Override
     public void create() 
     {   
+        //Sets the currentScreen to the GameScreen.java that means everything like
+        //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
+        ScreenManager.setScreen(new GameScreen());
+        
         try {
             //Start Client
             client = new Client(Constants.HOST, Constants.PORT);
@@ -64,11 +68,7 @@ public class Main implements ApplicationListener {
         TextureManager.load();
         batch = new SpriteBatch();    
         font = new BitmapFont();
-        
-        //Sets the currentScreen to the GameScreen.java that means everything like
-        //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
-        ScreenManager.setScreen(new GameScreen());
-        
+
     }
     
         
