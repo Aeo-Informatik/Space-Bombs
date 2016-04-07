@@ -42,7 +42,7 @@ public class Bomb extends Entity{
                 break;
                 
             default:
-                System.err.println("ERROR: Wrong player number: " + bombId + " in EnemyPlayer. Using default p1");
+                System.err.println("ERROR: Wrong bomb number: " + bombId + " in Bomb. Using default b1");
                 this.b1BurnsAnim = TextureManager.b1BurnsAnim; 
                 this.b1StaticBurns = TextureManager.b1StaticBurns;
         }

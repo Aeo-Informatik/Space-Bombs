@@ -9,6 +9,24 @@ package gui.map;
  *
  * @author qubasa
  */
-public class MapManager {
+public class MapManager 
+{
+    public static Map currentMap;
     
+    public static void setMap(Map map){
+        
+        if(map != null)
+        {
+            currentMap.dispose();
+        }
+        
+        currentMap = map;
+        currentMap.create();
+    }
+    
+    
+    public static Map getCurrentMap()
+    {
+        return currentMap;
+    }   
 }
