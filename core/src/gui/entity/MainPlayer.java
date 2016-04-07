@@ -27,6 +27,7 @@ public class MainPlayer extends Entity{
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     private Client client;
+    private ArrayList Bombs;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -201,6 +202,31 @@ public class MainPlayer extends Entity{
             
             //Send data to server
             client.sendData(moveCommand);
+            
+        }else if (Gdx.input.isKeyPressed(Keys.E) || Gdx.input.isKeyPressed(Keys.E))
+        {
+            setDirection(0,0);
+            Bomb b1 =new Bomb(super.getPosition(),direction,1);   
+            sb.draw(b1.getB1StaticBurns(),pos.x,pos.y);
+            
+            switch(lastMovementKeyPressed)
+            {
+                case "LEFT":
+                    sb.draw(staticLeft, pos.x, pos.y);
+                    break;
+
+                case "RIGHT":
+                    sb.draw(staticRight, pos.x, pos.y);
+                break;
+
+                case "UP":
+                    sb.draw(staticUp, pos.x, pos.y);
+                    break;
+
+                case "DOWN":
+                    sb.draw(staticDown, pos.x, pos.y);
+                    break;
+            }
             
         }else
         {

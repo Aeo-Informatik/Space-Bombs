@@ -26,9 +26,8 @@ public class Bomb extends Entity{
     
    
          
-    private final Animation b1BurnsAnim;
-    private final TextureRegion b1StaticBurns;
-    
+    private  Animation b1BurnsAnim;
+    private  TextureRegion b1StaticBurns;    
 
 
     public Bomb(Vector2 pos, Vector2 direction,int id) {
@@ -94,6 +93,22 @@ public class Bomb extends Entity{
 
     public void setBombId(int bombId) {
         this.bombId = bombId;
+    }
+
+    public Animation getB1BurnsAnim() {
+        return b1BurnsAnim;
+    }
+
+    public void setB1BurnsAnim(Animation b1BurnsAnim) {
+        this.b1BurnsAnim = b1BurnsAnim;
+    }
+
+    public TextureRegion getB1StaticBurns() {
+        return b1StaticBurns;
+    }
+
+    public void setB1StaticBurns(TextureRegion b1StaticBurns) {
+        this.b1StaticBurns = b1StaticBurns;
     }
     
 }
