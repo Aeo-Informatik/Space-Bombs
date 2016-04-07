@@ -71,10 +71,9 @@ public class ServerForwardThread implements Runnable
                         }
                     }
 
-            }catch(SocketException | NullPointerException | SocketTimeoutException e)
+            }catch(SocketException | SocketTimeoutException e)
             {
-                System.err.println("ERROR: Server ReceiveThread() Client disconnected closing receive thread. " + e);
-                e.printStackTrace();
+                System.err.println("Server ReceiveThread() Client disconnected closing receive thread. " + e);
                 Thread.currentThread().interrupt();
                 
             }catch(Exception e)

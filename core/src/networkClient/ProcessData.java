@@ -39,7 +39,7 @@ public class ProcessData implements Runnable
                 switch (parameters[0]) 
                 {
                     
-                    //Message to receive: registerPlayerId|1|*
+                    //SAVE PLAYER ID
                     //General: registerPlayerId|id|target
                     case "registerMainPlayerId":
                         if(parameters.length == 3)
@@ -55,7 +55,7 @@ public class ProcessData implements Runnable
                         break;
                        
                         
-                    //Message to receive: registerEnemyPlayers|3|1
+                    //REGISTER ENEMY PLAYERS
                     //General: registerEnemyPlayers|amount|target
                     case "registerEnemyPlayers":
                         if(parameters.length == 3)
@@ -70,7 +70,7 @@ public class ProcessData implements Runnable
                         break;
                     
                         
-                    //Message to receive: spawnPlayers|1
+                    //SPAWN PLAYERS
                     //General: spawnPlayers|target
                     case "spawnPlayers":
                         if(parameters.length == 2)
@@ -97,7 +97,7 @@ public class ProcessData implements Runnable
                         break;
                         
                     
-                    //Message to receive: moveEnemyPlayer|2|LEFT|*
+                    //MOVE ENEMY PLAYER
                     //General: moveEnemyPlayer|playerId|direction|target
                     case "moveEnemyPlayer":
                         if(parameters.length == 4)
