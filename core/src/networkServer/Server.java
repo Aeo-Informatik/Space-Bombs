@@ -1,12 +1,10 @@
 package networkServer;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 public class Server {
@@ -59,8 +57,8 @@ public class Server {
                 //General: registerEnemyPlayers|amount|target //
                 String registerEnemiesCommand = "registerEnemyPlayers|" + 
                 Integer.toString(socketList.size()-1) + "|*";
+                
                 sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
-
 
                 /*-------------------END SETUP GAME---------------------*/
                 //Open forward thread for every client
@@ -76,7 +74,7 @@ public class Server {
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error in startGame " +e);
-            throw e;
+            e.printStackTrace();
         }
     }
     

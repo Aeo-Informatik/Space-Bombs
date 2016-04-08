@@ -31,7 +31,7 @@ public class MainPlayer extends Entity{
     private ArrayList Bombs;
     private ArrayList x;
     private ArrayList y;
-    
+    private boolean sendStopOnce = true;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -173,6 +173,7 @@ public class MainPlayer extends Entity{
             if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP))
             {
                 lastMovementKeyPressed = "LEFT";
+                sendStopOnce = true;
                 
                 //General: moveEnemyPlayer|playerId|direction|target
                 moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
@@ -195,6 +196,8 @@ public class MainPlayer extends Entity{
             if(Gdx.input.isKeyJustPressed(Keys.D) || Gdx.input.isKeyJustPressed(Keys.RIGHT))
             {
                 lastMovementKeyPressed = "RIGHT";
+                sendStopOnce = true;
+                
                 moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
 
                 //Send data to server
@@ -215,6 +218,8 @@ public class MainPlayer extends Entity{
             if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP))
             {
                 lastMovementKeyPressed = "UP";
+                sendStopOnce = true;
+                
                 moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
 
                 //Send data to server
@@ -235,6 +240,8 @@ public class MainPlayer extends Entity{
             if(Gdx.input.isKeyJustPressed(Keys.S) || Gdx.input.isKeyJustPressed(Keys.DOWN))
             {
                 lastMovementKeyPressed = "DOWN";
+                sendStopOnce = true;
+                
                 moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
 
                 //Send data to server
@@ -244,6 +251,16 @@ public class MainPlayer extends Entity{
         /*------------------NO MOVEMENT------------------*/    
         }else
         {
+            if(sendStopOnce)
+            {
+                moveCommand = "stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*";
+
+                //Send data to server
+                client.sendData(moveCommand);
+                
+                sendStopOnce = false;
+            }
+            
             //Sets the texture to no movement
             setDirection(0, 0);
             

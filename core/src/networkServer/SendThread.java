@@ -62,6 +62,8 @@ class SendThread implements Runnable
                             printWriter.println(msgToClient);
                             printWriter.flush();
                         }
+                        
+                        Thread.sleep(100);
                     }//Quits thread after all messages have been send
                     
                 }else
