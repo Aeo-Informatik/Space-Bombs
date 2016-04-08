@@ -167,11 +167,15 @@ public class EnemyPlayer extends Entity{
         }
     }
     
-    public void stopPlayer()
+    public void stopPlayer(float x, float y)
     {
         //Sets the texture to no movement
         setDirection(0, 0);
             
+        //Sets the positon where to draw the player.
+        this.pos.set(x, y);
+        
+        
         //Draws the player if he stands still
         switch(lastMovementKeyPressed)
         {

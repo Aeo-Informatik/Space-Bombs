@@ -115,6 +115,23 @@ public class ProcessData implements Runnable
                                 System.err.println("ERROR: moveEnemyPlayer wrong number of parameters");
                             break;
 
+                            
+                        //STOP ENEMY PLAYER
+                        //General: moveEnemyPlayer|playerId|x|y|target
+                        case "stopEnemyPlayer":
+                            if(parameters.length == 5)
+                            {
+                                for(EnemyPlayer enemy : EntityManager.enemies)
+                                {
+                                    if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                    {
+                                        enemy.stopPlayer(Float.parseFloat(parameters[2]), Float.parseFloat(parameters[3]));
+                                    }
+                                }
+                            }else
+                                System.err.println("ERROR: stopEnemyPlayer wrong number of parameters");
+                            break;
+                            
                         default:
                             System.err.println("ERROR: Command received from server is not valid");
                             System.err.println(receivedData);

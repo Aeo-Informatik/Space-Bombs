@@ -156,6 +156,7 @@ public class MainPlayer extends Entity{
         int cameraSpeed = 3;
         
         //Input handling and moving the player
+        /*------------------WALKING LEFT------------------*/
         if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
         {
             //Set the speed the texture moves in x and y axis
@@ -165,71 +166,82 @@ public class MainPlayer extends Entity{
             //Move camera x,y
             GameScreen.camera.translate( -1 * cameraSpeed,0);
             
-            
             //Draw the walking animation
             sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
             
-            lastMovementKeyPressed = "LEFT";
-            //General: moveEnemyPlayer|playerId|direction|target
-            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
-            
-            //Send data to server
-            client.sendData(moveCommand);
-            
+            //Block of code that gets executed just once upon button press
+            if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP))
+            {
+                lastMovementKeyPressed = "LEFT";
+                
+                //General: moveEnemyPlayer|playerId|direction|target
+                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
+
+                //Send data to server
+                client.sendData(moveCommand);
+            }
+           
+        /*------------------WALKING RIGHT------------------*/
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
-            setDirection(150, 0);  
+            setDirection(150, 0);
+            
             GameScreen.camera.translate(cameraSpeed,0);
             
+            //Draw the walking animation
             sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
             
-            lastMovementKeyPressed = "RIGHT";
-            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
+            //Block of code that gets executed just once upon button press
+            if(Gdx.input.isKeyJustPressed(Keys.D) || Gdx.input.isKeyJustPressed(Keys.RIGHT))
+            {
+                lastMovementKeyPressed = "RIGHT";
+                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
+
+                //Send data to server
+                client.sendData(moveCommand);
+            }
             
-            //Send data to server
-            client.sendData(moveCommand);
-            
+        /*------------------WALKING UP------------------*/
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
         {
             setDirection(0, 150);
+            
             GameScreen.camera.translate(0, cameraSpeed);
             
+            //Draw the walking animation
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
             
-            //sb.draw(getFrame()), x.get(0), y.get(0));
-            
-            
-            lastMovementKeyPressed = "UP";
-            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
-            
-            //Send data to server
-            client.sendData(moveCommand);
-            
+            //Block of code that gets executed just once upon button press
+            if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP))
+            {
+                lastMovementKeyPressed = "UP";
+                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
+
+                //Send data to server
+                client.sendData(moveCommand);
+            }
+        
+        /*------------------WALKING DOWN------------------*/
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
             setDirection(0, -150);
+            
             GameScreen.camera.translate(0, -1 * cameraSpeed);
             
+            //Draw the walking animation
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
             
-            lastMovementKeyPressed = "DOWN";
-            moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
+            //Block of code that gets executed just once upon button press
+            if(Gdx.input.isKeyJustPressed(Keys.S) || Gdx.input.isKeyJustPressed(Keys.DOWN))
+            {
+                lastMovementKeyPressed = "DOWN";
+                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
+
+                //Send data to server
+                client.sendData(moveCommand);
+            }
             
-            //Send data to server
-            client.sendData(moveCommand);
-            
-        }else if (Gdx.input.isKeyPressed(Keys.E) || Gdx.input.isKeyPressed(Keys.SPACE))
-        {
-            //Create Bomb Object
-            Bomb bomb = new Bomb(super.getPosition(),direction,1); 
-            Bombs.add(bomb.getB1StaticBurns());
-            
-            x.add(pos.x);
-            y.add(pos.y);
-            
-            //Draw Bomb Entity
-            sb.draw(bomb.getB1StaticBurns(),pos.x,pos.y);
-            
+        /*------------------NO MOVEMENT------------------*/    
         }else
         {
             //Sets the texture to no movement
@@ -257,6 +269,26 @@ public class MainPlayer extends Entity{
 
         }
         
+        
+        /*------------------PLACING BOMB------------------*/
+        if (Gdx.input.isKeyPressed(Keys.SPACE))
+        {
+            //Create Bomb Object
+            Bomb bomb = new Bomb(super.getPosition(),direction,1); 
+            Bombs.add(bomb.getB1StaticBurns());
+            
+            x.add(pos.x);
+            y.add(pos.y);
+            
+            //Draw bomb
+            sb.draw(bomb.getB1StaticBurns(),pos.x,pos.y);
+            
+            //Block of code that gets executed just once upon button press
+            if(Gdx.input.isKeyJustPressed(Keys.SPACE))
+            {
+                
+            }
+        }
     }
     
     
