@@ -78,7 +78,7 @@ public class ProcessData implements Runnable
                             if(parameters.length == 2)
                             {
                                 //Spawn main player
-                                EntityManager.spawnMainPlayer(50, 0, Constants.PLAYERID);
+                                EntityManager.spawnMainPlayer(50, 50, Constants.PLAYERID);
 
                                 //Spawn enemy players
                                 for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)

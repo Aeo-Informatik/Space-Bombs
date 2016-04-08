@@ -11,9 +11,21 @@ import java.util.ArrayList;
  *
  * @author qubasa
  */
-public class ServerStart 
+public class ServerStart implements Runnable
 {
-    public static void main(String[] args) 
+
+    public static void main(String [] args)
+    {
+        startServer();
+    }
+    
+    @Override
+    public void run() 
+    {
+        startServer();
+    }
+    
+    public static void startServer()
     {
         try
         {
@@ -42,4 +54,5 @@ public class ServerStart
             System.exit(0); 
         }
     }
+    
 }

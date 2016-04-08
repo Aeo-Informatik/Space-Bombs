@@ -17,6 +17,7 @@ import gui.screen.GameScreen;
 import gui.screen.ScreenManager;
 import static gui.screen.ScreenManager.currentScreen;
 import networkClient.Client;
+import networkServer.ServerStart;
 
 public class Main implements ApplicationListener {
     
@@ -45,6 +46,11 @@ public class Main implements ApplicationListener {
     @Override
     public void create() 
     {   
+        
+        //Starts the server ----- FOR DEBUG PURPOSES ONLY
+        new Thread(new ServerStart()).start();
+        
+        
         //Sets the currentScreen to the GameScreen.java that means everything like
         //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
         ScreenManager.setScreen(new GameScreen());

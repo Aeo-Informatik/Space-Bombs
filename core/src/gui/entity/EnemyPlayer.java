@@ -164,33 +164,35 @@ public class EnemyPlayer extends Entity{
             
             lastMovementKeyPressed = "DOWN";
             
-        }else
-        {
-            //Sets the texture to no movement
-            setDirection(0, 0);
+        }
+    }
+    
+    public void stopPlayer()
+    {
+        //Sets the texture to no movement
+        setDirection(0, 0);
             
-            //Draws the player if he stands still
-            switch(lastMovementKeyPressed)
-            {
-                case "LEFT":
-                    sb.draw(staticLeft, pos.x, pos.y);
-                    break;
-
-                case "RIGHT":
-                    sb.draw(staticRight, pos.x, pos.y);
+        //Draws the player if he stands still
+        switch(lastMovementKeyPressed)
+        {
+            case "LEFT":
+                sb.draw(staticLeft, pos.x, pos.y);
                 break;
 
-                case "UP":
-                    sb.draw(staticUp, pos.x, pos.y);
-                    break;
+            case "RIGHT":
+                sb.draw(staticRight, pos.x, pos.y);
+                break;
 
-                case "DOWN":
-                    sb.draw(staticDown, pos.x, pos.y);
-                    break;
-            }
+            case "UP":
+                sb.draw(staticUp, pos.x, pos.y);
+                break;
 
-        }   
+            case "DOWN":
+                sb.draw(staticDown, pos.x, pos.y);
+                break;
+        } 
     }
+    
     
     public int getPlayerId()
     {
