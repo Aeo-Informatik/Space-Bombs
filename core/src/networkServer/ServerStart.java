@@ -23,6 +23,7 @@ public class ServerStart implements Runnable
     public void run() 
     {
         startServer();
+        Server.DEBUG = false;
     }
     
     public static void startServer()

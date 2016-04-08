@@ -21,7 +21,7 @@ public class ClientReceiveThread implements Runnable {
     private Socket socket;
     
     //To be able to communicate between Threads
-    protected static BlockingQueue queue = new ArrayBlockingQueue(2048);
+    protected static BlockingQueue queue = new ArrayBlockingQueue(4080);
     
     public ClientReceiveThread(Socket socket)
     {

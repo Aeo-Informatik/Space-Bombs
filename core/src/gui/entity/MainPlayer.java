@@ -152,8 +152,8 @@ public class MainPlayer extends Entity{
     {
         //Changes the position of the texture 
         pos.add(direction);
-        String moveCommand ="";
-        int cameraSpeed = 3;
+        String moveCommand = "";
+        int cameraSpeed = 2;
         
         //Input handling and moving the player
         /*------------------WALKING LEFT------------------*/
