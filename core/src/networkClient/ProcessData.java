@@ -5,7 +5,7 @@
  */
 package networkClient;
 
-import com.gdx.bomberman.Main;
+
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;

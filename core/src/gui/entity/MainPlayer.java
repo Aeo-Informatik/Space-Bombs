@@ -306,6 +306,18 @@ public class MainPlayer extends Entity{
                 
             }
         }
+        
+        /*------------------ZOOM INTO GAME------------------*/
+        if (Gdx.input.isKeyPressed(Keys.Z))
+        {
+            GameScreen.camera.zoom += 0.02;
+        }
+        
+        /*------------------ZOOM OUT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Keys.U))
+        {
+            GameScreen.camera.zoom -= 0.02;
+        }
     }
     
     

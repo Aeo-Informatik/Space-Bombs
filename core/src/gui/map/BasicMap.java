@@ -39,7 +39,7 @@ public class BasicMap extends Map
     public void render(SpriteBatch sb) 
     {
         //tiledMapRenderer.setView(GameScreen.camera);
-        tiledMapRenderer.render();
+        //tiledMapRenderer.render();
     }
 
     @Override
