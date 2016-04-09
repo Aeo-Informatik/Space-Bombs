@@ -8,7 +8,6 @@ package gui.screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
-import gui.map.BasicMap;
 import gui.map.MapManager;
 import networkClient.ProcessData;
 
@@ -23,6 +22,7 @@ public class GameScreen extends Screen{
     public static OrthoCamera camera;
     private EntityManager entityManager;
     private Thread processDataThread;
+    private MapManager mapManager;
     
     @Override
     public void create() 
@@ -30,8 +30,8 @@ public class GameScreen extends Screen{
         this.camera = new OrthoCamera();
         this.entityManager = new EntityManager();
         
-        MapManager.setMap(new BasicMap());
-        MapManager.getCurrentMap().create();
+        this.mapManager = new MapManager("maps/BasicMap.tmx");
+        mapManager.create();
         
         ProcessData processData = new ProcessData();
         processDataThread = new Thread(processData);
@@ -48,12 +48,12 @@ public class GameScreen extends Screen{
         sb.begin();
         
         //Render Map
-        MapManager.getCurrentMap().render(sb);
+        mapManager.render(sb);
         
-        //Things to draw to screen come in here
+        //Render Entites 
         entityManager.render(sb);
         
-        //Starts thread to render incoming server calls
+        //Starts one thread to render incoming server calls
         if(processDataThread.isAlive() == false)
         {
             processDataThread.start();
@@ -68,7 +68,7 @@ public class GameScreen extends Screen{
     {
         camera.update();
         entityManager.update();
-        MapManager.getCurrentMap().update();
+        mapManager.update();
     }
     
     
@@ -82,22 +82,21 @@ public class GameScreen extends Screen{
     @Override
     public void pause() 
     {
-        MapManager.getCurrentMap().pause();
+        mapManager.pause();
     }
 
     
     @Override
     public void resume() 
     {
-        MapManager.getCurrentMap().resume();
+        mapManager.resume();
     }
 
     
     @Override
     public void dispose() 
     {
-        MapManager.getCurrentMap().dispose();
-        
+        mapManager.dispose();
     }
     
 }

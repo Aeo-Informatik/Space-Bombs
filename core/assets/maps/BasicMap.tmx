@@ -8,6 +8,7 @@
    eJztwwENAAAMw6DOv+kLOSSsmqqqqu8ezqADhQ==
   </data>
  </layer>
+ <objectgroup name="entities" width="30" height="30"/>
  <layer name="Blocks" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMAqoB5ixYFrbh88d9LaXkByt7B0o/w5U/NIajNo7au+ovaP2jhR7AawrAFI=

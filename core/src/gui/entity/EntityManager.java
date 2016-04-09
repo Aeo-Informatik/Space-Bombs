@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import gui.map.MapManager;
 
 /**
  *
@@ -18,7 +19,7 @@ public class EntityManager {
     //Array from libgdx is much faster in comparison to an arraylist
     public static Array<EnemyPlayer> enemies = new Array<>();
     public static MainPlayer mainPlayer;
-    
+
     //Update is the same as render only that it doesn't have the SpriteBatch Object
     public void update()
     {

@@ -5,27 +5,78 @@
  */
 package gui.map;
 
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import gui.screen.GameScreen;
+
+
 /**
  *
  * @author qubasa
  */
-public class MapManager 
+public class MapManager extends Map
 {
-    public static Map currentMap = null;
+    private TiledMap tiledMap;
+    private TiledMapRenderer tiledMapRenderer;
+    private String mapSelection;
     
-    public static void setMap(Map map){
-        
-        if(currentMap != null)
-        {
-            currentMap.dispose();
-        }
-        
-        currentMap = map;
+    public MapManager(String mapSelection)
+    {
+        this.mapSelection = mapSelection;
     }
     
-    
-    public static Map getCurrentMap()
+    @Override
+    public void create() 
     {
-        return currentMap;
-    }   
+        tiledMap = new TmxMapLoader().load(mapSelection);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+    }
+
+    @Override
+    public void update() 
+    {
+        
+    }
+
+    @Override
+    public void render(SpriteBatch sb) 
+    {
+        //tiledMapRenderer.setView(GameScreen.camera);
+        tiledMapRenderer.render();
+    }
+
+    @Override
+    public void resize(int width, int height) 
+    {
+        
+    }
+
+    @Override
+    public void dispose() 
+    {
+        
+    }
+
+    @Override
+    public void pause() 
+    {
+        
+    }
+
+    @Override
+    public void resume() 
+    {
+        
+    }
+    
+    public TiledMap getTiledMap()
+    {
+        return tiledMap;
+    }
+    
 }
