@@ -39,8 +39,8 @@ public class BasicMap extends Map
     @Override
     public void render(SpriteBatch sb) 
     {
-        tiledMapRenderer.setView(GameScreen.camera);
-        tiledMapRenderer.render();
+        //tiledMapRenderer.setView(GameScreen.camera);
+        //tiledMapRenderer.render();
     }
 
     @Override
