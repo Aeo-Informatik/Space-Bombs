@@ -153,7 +153,7 @@ public class MainPlayer extends Entity{
         //Changes the position of the texture 
         pos.add(direction);
         String moveCommand = "";
-        int cameraSpeed = 2;
+        float cameraSpeed = 2.51f; // DO NOT CHANGE
         
         //Input handling and moving the player
         /*------------------WALKING LEFT------------------*/
@@ -287,7 +287,7 @@ public class MainPlayer extends Entity{
         }
         
         
-        /*------------------PLACING BOMB------------------*/
+        /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyPressed(Keys.SPACE))
         {
             //Create Bomb Object

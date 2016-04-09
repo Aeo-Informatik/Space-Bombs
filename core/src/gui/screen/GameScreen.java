@@ -45,10 +45,10 @@ public class GameScreen extends Screen{
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
         
-        sb.begin();
-        
         //Render Map
         mapManager.render(sb);
+        
+        sb.begin();
         
         //Render Entites 
         entityManager.render(sb);
