@@ -170,7 +170,7 @@ public class MainPlayer extends Entity{
             sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
             
             //Block of code that gets executed just once upon button press
-            if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP))
+            if(Gdx.input.isKeyJustPressed(Keys.A) || Gdx.input.isKeyJustPressed(Keys.LEFT))
             {
                 lastMovementKeyPressed = "LEFT";
                 sendStopOnce = true;
@@ -311,12 +311,20 @@ public class MainPlayer extends Entity{
         if (Gdx.input.isKeyPressed(Keys.Z))
         {
             GameScreen.camera.zoom += 0.02;
+            GameScreen.camera.setPosition(pos.x, pos.y);
         }
         
         /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.U))
         {
             GameScreen.camera.zoom -= 0.02;
+            GameScreen.camera.setPosition(pos.x, pos.y);
+        }
+        
+        /*------------------CAMERA CENTERS PLAYER------------------*/
+        if (Gdx.input.isKeyPressed(Keys.P))
+        {
+            GameScreen.camera.setPosition(pos.x, pos.y);
         }
     }
     

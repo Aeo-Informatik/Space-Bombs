@@ -46,11 +46,12 @@ public class GameScreen extends Screen{
         sb.setProjectionMatrix(camera.combined);
         
         sb.begin();
-        //Things to draw to screen come in here
-        entityManager.render(sb);
         
         //Render Map
         MapManager.getCurrentMap().render(sb);
+        
+        //Things to draw to screen come in here
+        entityManager.render(sb);
         
         //Starts thread to render incoming server calls
         if(processDataThread.isAlive() == false)

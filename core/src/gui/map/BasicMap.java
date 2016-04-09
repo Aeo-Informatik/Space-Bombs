@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import gui.screen.GameScreen;
 
 
 /**
@@ -38,8 +39,8 @@ public class BasicMap extends Map
     @Override
     public void render(SpriteBatch sb) 
     {
-        //tiledMapRenderer.setView(GameScreen.camera);
-        //tiledMapRenderer.render();
+        tiledMapRenderer.setView(GameScreen.camera);
+        tiledMapRenderer.render();
     }
 
     @Override

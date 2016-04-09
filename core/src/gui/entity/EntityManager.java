@@ -60,7 +60,7 @@ public class EntityManager {
         try 
         {
             mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
-        
+            
         } catch (Exception e) 
         {
             throw e;
