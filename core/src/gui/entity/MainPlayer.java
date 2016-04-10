@@ -50,6 +50,9 @@ public class MainPlayer extends Entity{
     {
         super(null, pos, direction);
         
+        //Set camera position to players position
+        GameScreen.camera.setPosition(pos.x, pos.y);
+        
         try
         {
             this.client = Main.client;
@@ -140,7 +143,8 @@ public class MainPlayer extends Entity{
     @Override
     public void render(SpriteBatch sb)
     {
-        inputMovePlayer(sb);          
+        inputMovePlayer(sb);   
+        inputDoPlayer(sb);
     }
     
     
@@ -285,8 +289,15 @@ public class MainPlayer extends Entity{
             }
 
         }
-        
-        
+    }
+    
+    
+    /**
+     * Action the player can make like placing a bomb
+     * @param sb 
+     */
+    private void inputDoPlayer(SpriteBatch sb)
+    {
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyPressed(Keys.SPACE))
         {
