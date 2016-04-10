@@ -19,7 +19,7 @@ import networkClient.ProcessData;
 public class GameScreen extends Screen{
     
     //The viewpoint of the player 
-    public static OrthoCamera camera;
+    private OrthoCamera camera;
     private EntityManager entityManager;
     private Thread processDataThread;
     private MapManager mapManager;
@@ -28,12 +28,13 @@ public class GameScreen extends Screen{
     public void create() 
     {
         this.camera = new OrthoCamera();
-        this.entityManager = new EntityManager();
+        this.entityManager = new EntityManager(camera);
         
-        this.mapManager = new MapManager("maps/BasicMap.tmx");
+        this.mapManager = new MapManager(camera);
+        mapManager.setMap("maps/BasicMap.tmx");
         mapManager.create();
         
-        ProcessData processData = new ProcessData();
+        ProcessData processData = new ProcessData(entityManager);
         processDataThread = new Thread(processData);
     }
 

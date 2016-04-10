@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
-import gui.screen.GameScreen;
+import gui.camera.OrthoCamera;
 import java.util.ArrayList;
 import networkClient.Client;
 
@@ -32,6 +32,7 @@ public class MainPlayer extends Entity{
     private ArrayList x;
     private ArrayList y;
     private boolean sendStopOnce = true;
+    private OrthoCamera camera;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -46,12 +47,12 @@ public class MainPlayer extends Entity{
     private final TextureRegion staticLeft;
 
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int player) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera) throws Exception 
     {
         super(null, pos, direction);
         
         //Set camera position to players position
-        GameScreen.camera.setPosition(pos.x, pos.y);
+        camera.setPosition(pos.x, pos.y);
         
         try
         {
@@ -132,7 +133,33 @@ public class MainPlayer extends Entity{
      * It is used for game logic updates.
      */
     @Override
-    public void update() {
+    public void update() 
+    {
+        float oldY = pos.y;
+        float oldX = pos.x;
+        
+        switch(getMovingDirection())
+        {
+            
+            case "LEFT":
+                System.out.println("LEFT");
+                break;
+            
+            case "RIGHT":
+                break;
+                
+            case "UP":
+                break;
+                
+            case "DOWN":
+                break;
+            
+            case "NOMOVEMENT":
+                break;
+                
+            default:
+                System.err.println("ERROR in MainPlayer Update() wrong switch variable " + getMovingDirection());
+        }
         
     }
     
@@ -147,6 +174,28 @@ public class MainPlayer extends Entity{
         inputDoPlayer(sb);
     }
     
+    
+    public String getMovingDirection()
+    {
+        if(direction.x < 0)
+        {
+            return "LEFT";
+
+        }else if(direction.x > 0)
+        {
+            return "RIGHT";
+            
+        }else if(direction.y < 0)
+        {
+            return "DOWN";
+            
+        }else if(direction.y > 0)
+        {
+            return "UP";
+        }
+        
+        return "NOMOVEMENT";
+    }
     
     /**
      * Moves the player if keyboard input is received
@@ -168,7 +217,7 @@ public class MainPlayer extends Entity{
             setDirection(-150, 0);
             
             //Move camera x,y
-            GameScreen.camera.translate( -1 * cameraSpeed,0);
+            camera.translate( -1 * cameraSpeed,0);
             
             //Draw the walking animation
             sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
@@ -191,7 +240,7 @@ public class MainPlayer extends Entity{
         {
             setDirection(150, 0);
             
-            GameScreen.camera.translate(cameraSpeed,0);
+            camera.translate(cameraSpeed,0);
             
             //Draw the walking animation
             sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
@@ -213,7 +262,7 @@ public class MainPlayer extends Entity{
         {
             setDirection(0, 150);
             
-            GameScreen.camera.translate(0, cameraSpeed);
+            camera.translate(0, cameraSpeed);
             
             //Draw the walking animation
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
@@ -235,7 +284,7 @@ public class MainPlayer extends Entity{
         {
             setDirection(0, -150);
             
-            GameScreen.camera.translate(0, -1 * cameraSpeed);
+            camera.translate(0, -1 * cameraSpeed);
             
             //Draw the walking animation
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
@@ -321,21 +370,21 @@ public class MainPlayer extends Entity{
         /*------------------ZOOM INTO GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.Z))
         {
-            GameScreen.camera.zoom += 0.02;
-            GameScreen.camera.setPosition(pos.x, pos.y);
+            camera.zoom += 0.02;
+            camera.setPosition(pos.x, pos.y);
         }
         
         /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.U))
         {
-            GameScreen.camera.zoom -= 0.02;
-            GameScreen.camera.setPosition(pos.x, pos.y);
+            camera.zoom -= 0.02;
+            camera.setPosition(pos.x, pos.y);
         }
         
         /*------------------CAMERA CENTERS PLAYER------------------*/
         if (Gdx.input.isKeyPressed(Keys.P))
         {
-            GameScreen.camera.setPosition(pos.x, pos.y);
+            camera.setPosition(pos.x, pos.y);
         }
     }
     

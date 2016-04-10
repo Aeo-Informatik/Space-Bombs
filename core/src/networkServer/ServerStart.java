@@ -33,8 +33,8 @@ public class ServerStart implements Runnable
             //Variables & objects
             final int port = 13199;
             final int minConnections = 1;
-            final int maxConnections = 4;
-            final int timeout = 7000;
+            final int maxConnections = 1;
+            final int timeout = 20000;
             
             //Initialise server object
             Server server = new Server(port, minConnections, maxConnections);   

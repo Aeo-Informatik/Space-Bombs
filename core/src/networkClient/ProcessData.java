@@ -17,6 +17,13 @@ import gui.entity.EntityManager;
  */
 public class ProcessData implements Runnable
 {
+    private EntityManager entityManager;
+    
+    public ProcessData(EntityManager entityManager)
+    {
+        this.entityManager = entityManager;
+    }
+    
     @Override
     public void run() 
     {
@@ -78,7 +85,7 @@ public class ProcessData implements Runnable
                             if(parameters.length == 2)
                             {
                                 //Spawn main player
-                                EntityManager.spawnMainPlayer(50, 50, Constants.PLAYERID);
+                                entityManager.spawnMainPlayer(50, 50, Constants.PLAYERID);
 
                                 //Spawn enemy players
                                 for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)
@@ -88,7 +95,7 @@ public class ProcessData implements Runnable
                                         i++;
                                     }
 
-                                    EntityManager.spawnEnemyPlayer(50 + i*10, 0, i);
+                                    entityManager.spawnEnemyPlayer(50 + i*10, 0, i);
                                 }
 
                                 //DEBUG
@@ -104,7 +111,7 @@ public class ProcessData implements Runnable
                         case "moveEnemyPlayer":
                             if(parameters.length == 4)
                             {
-                                for(EnemyPlayer enemy : EntityManager.enemies)
+                                for(EnemyPlayer enemy : entityManager.getEnemieArray())
                                 {
                                     if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                     {
@@ -121,7 +128,7 @@ public class ProcessData implements Runnable
                         case "stopEnemyPlayer":
                             if(parameters.length == 5)
                             {
-                                for(EnemyPlayer enemy : EntityManager.enemies)
+                                for(EnemyPlayer enemy : entityManager.getEnemieArray())
                                 {
                                     if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                     {

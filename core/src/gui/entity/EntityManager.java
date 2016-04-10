@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import gui.camera.OrthoCamera;
 
 /**
  *
@@ -15,9 +16,16 @@ import com.badlogic.gdx.utils.Array;
  */
 public class EntityManager {
     
+    private OrthoCamera camera;
+    
+    public EntityManager(OrthoCamera camera)
+    {
+        this.camera = camera;
+    }
+    
     //Array from libgdx is much faster in comparison to an arraylist
-    public static Array<EnemyPlayer> enemies = new Array<>();
-    public static MainPlayer mainPlayer;
+    private Array<EnemyPlayer> enemies = new Array<>();
+    private MainPlayer mainPlayer;
 
     //Update is the same as render only that it doesn't have the SpriteBatch Object
     public void update()
@@ -48,22 +56,33 @@ public class EntityManager {
     }
     
 
-    public static void spawnEnemyPlayer(int x, int y, int playerId)
+    public void spawnEnemyPlayer(int x, int y, int playerId)
     {
         EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
         enemies.add(enemyPlayer);
     }
     
     
-    public static void spawnMainPlayer(int x, int y, int playerId) throws Exception
+    public void spawnMainPlayer(int x, int y, int playerId) throws Exception
     {
         try 
         {
-            mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+            mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId, camera);
             
         } catch (Exception e) 
         {
             throw e;
         }
+    }
+    
+    //Getter & Setter
+    public Array<EnemyPlayer> getEnemieArray()
+    {
+        return enemies;
+    }
+    
+    public MainPlayer getMainPlayer()
+    {
+        return mainPlayer;
     }
 }
