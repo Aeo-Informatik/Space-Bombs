@@ -16,7 +16,8 @@ import gui.TextureManager;
  *
  * @author qubasa
  */
-public class EnemyPlayer extends Entity{
+public class EnemyPlayer extends Entity
+{
 
     private float stateTime;
     private String lastMovementKeyPressed = "UP";

@@ -19,17 +19,17 @@ public class EntityManager {
     //Vatiables
     private OrthoCamera camera;
     
+    //Array from libgdx is much faster in comparison to an arraylist
+    private Array<EnemyPlayer> enemies = new Array<>();
+    private MainPlayer mainPlayer;
+    
     //Constructor
     public EntityManager(OrthoCamera camera)
     {
         this.camera = camera;
     }
     
-    //Array from libgdx is much faster in comparison to an arraylist
-    private Array<EnemyPlayer> enemies = new Array<>();
-    private MainPlayer mainPlayer;
 
-    
     public void render(SpriteBatch sb)
     {
         //For every Enemy Player Object that is stored in the arraylist execute the render function in it

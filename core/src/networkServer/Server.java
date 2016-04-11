@@ -105,7 +105,8 @@ public class Server {
                     //Debug
                     if(Server.DEBUG)
                         System.out.println("-----New Client-----");
-                        System.out.println("Number: " + i + 1);
+                        int y = i +1;
+                        System.out.println("Number: " + y);
                         System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
 
                     //Add connection object to array list

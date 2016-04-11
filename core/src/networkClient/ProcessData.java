@@ -98,7 +98,7 @@ public class ProcessData implements Runnable
                                         i++;
                                     }
 
-                                    entityManager.spawnEnemyPlayer(50 + i*10, 0, i);
+                                    entityManager.spawnEnemyPlayer(50 + i*100, 0, i);
                                 }
 
                                 //DEBUG
