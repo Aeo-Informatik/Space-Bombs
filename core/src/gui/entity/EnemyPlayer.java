@@ -110,16 +110,16 @@ public class EnemyPlayer extends Entity
     @Override
     public void render(SpriteBatch sb)
     {
-   
+        //Changes the position of the texture by adding the number of pixels 
+        //in which the player should go to the position
+        pos.add(direction);
     }
     
     
     @Override
     public void update() 
     {
-        //Changes the position of the texture by adding the number of pixels 
-        //in which the player should go to the position
-        pos.add(direction);
+
     }
     
     
@@ -129,6 +129,7 @@ public class EnemyPlayer extends Entity
      */
     public void movePlayer(String direction, SpriteBatch sb)
     {
+        
          //Input handling and moving the player
         if(direction.equalsIgnoreCase("LEFT"))
         {

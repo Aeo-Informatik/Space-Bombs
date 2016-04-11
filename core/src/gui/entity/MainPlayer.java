@@ -133,7 +133,6 @@ public class MainPlayer extends Entity
     @Override
     public void update() 
     {
-        pos.add(direction);
         
         float oldY = pos.y;
         float oldX = pos.x;
@@ -169,6 +168,7 @@ public class MainPlayer extends Entity
     @Override
     public void render(SpriteBatch sb)
     {
+        pos.add(direction);
         inputMovePlayer(sb);   
         inputDoPlayer(sb);
     }
