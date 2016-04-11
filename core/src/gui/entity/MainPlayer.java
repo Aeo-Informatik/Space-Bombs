@@ -28,9 +28,6 @@ public class MainPlayer extends Entity{
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     private Client client;
-    private ArrayList Bombs;
-    private ArrayList x;
-    private ArrayList y;
     private boolean sendStopOnce = true;
     private OrthoCamera camera;
     
@@ -353,9 +350,6 @@ public class MainPlayer extends Entity{
             //Create Bomb Object
             Bomb bomb = new Bomb(super.getPosition(),direction,1); 
             Bombs.add(bomb.getB1StaticBurns());
-            
-            x.add(pos.x);
-            y.add(pos.y);
             
             //Draw bomb
             sb.draw(bomb.getB1StaticBurns(),pos.x,pos.y);

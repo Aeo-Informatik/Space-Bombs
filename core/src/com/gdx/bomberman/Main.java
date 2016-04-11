@@ -48,7 +48,7 @@ public class Main implements ApplicationListener {
     {   
         
         //Starts the server ----- FOR BUILDING PURPOSES ONLY
-        new Thread(new ServerStart()).start();
+        //new Thread(new ServerStart()).start();
         
         
         //Sets the currentScreen to the GameScreen.java that means everything like
