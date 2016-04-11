@@ -386,7 +386,7 @@ public class MainPlayer extends Entity
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
         {
             System.out.println("Quit game with Keyboard [ESC]");
-            System.exit(0);
+            Gdx.app.exit();
         }
     }
     

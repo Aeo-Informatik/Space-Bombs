@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package networkServer;
+import com.badlogic.gdx.Gdx;
 import gui.Constants;
 import java.net.*;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ServerStart implements Runnable
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error has been thrown in main" + e);
-            System.exit(0); 
+            Gdx.app.exit();
         }
     }
     
@@ -61,7 +62,7 @@ public class ServerStart implements Runnable
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error has been thrown in main" + e);
-            System.exit(0); 
+            Gdx.app.exit();
         }
     }
 }

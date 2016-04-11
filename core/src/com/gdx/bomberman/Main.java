@@ -72,7 +72,7 @@ public class Main implements ApplicationListener {
         } catch (Exception e) 
         {
             System.err.println("ERROR: Client could't connect to server " + e);
-            System.exit(0);
+            Gdx.app.exit();
         }
     }
     
