@@ -14,9 +14,17 @@ public class Constants {
     public static int WIDTH = 800;
     public static int HEIGHT = 480;
     
-    public static String HOST = "127.0.0.1";
-    public static int PORT = 13199;
+    //Client config
+    public static String CLIENTHOST = "127.0.0.1";
+    public static int CLIENTPORT = 13199;
     
-     public static int PLAYERID = 0;
-     public static int AMOUNTENEMYPLAYERS = 0;
+    //Ingame variable
+    public static int PLAYERID = 0;
+    public static int AMOUNTENEMYPLAYERS = 0;
+    
+    //Server config
+    public static int SERVERPORT = 13199;
+    public static int MINPLAYERS = 1;
+    public static int MAXPLAYERS = 4;
+    public static int SERVERTIMEOUT = 20000; // 20 seconds
 }

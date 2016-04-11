@@ -57,7 +57,7 @@ public class Main implements ApplicationListener {
         
         try {
             //Start Client
-            client = new Client(Constants.HOST, Constants.PORT);
+            client = new Client(Constants.CLIENTHOST, Constants.CLIENTPORT);
             Client.DEBUG = true;
             
             //Listen for incomming data

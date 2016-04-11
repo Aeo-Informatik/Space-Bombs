@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package networkServer;
+import gui.Constants;
 import java.net.*;
 import java.util.ArrayList;
 
@@ -30,21 +31,16 @@ public class ServerStart implements Runnable
     {
         try
         {
-            //Variables & objects
-            final int port = 13199;
-            final int minConnections = 1;
-            final int maxConnections = 1;
-            final int timeout = 20000;
             
             //Initialise server object
-            Server server = new Server(port, minConnections, maxConnections);   
+            Server server = new Server(Constants.SERVERPORT, Constants.MINPLAYERS, Constants.MAXPLAYERS);   
                
             //Set debug output to true
             Server.DEBUG = true;
                     
             
             //Accept all client connections and get them as socket object
-            ArrayList<Socket> socketList = server.AcceptConnections(timeout);
+            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERTIMEOUT);
             
             //Starts the game
             server.startGame(socketList);
