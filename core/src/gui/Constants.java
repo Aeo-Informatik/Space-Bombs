@@ -23,7 +23,7 @@ public class Constants {
     public static int CLIENTPORT = 13199;
     
     //Server config
-    public static boolean LOCALSERVER = true;
+    public static boolean LOCALSERVER = false;
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 4;

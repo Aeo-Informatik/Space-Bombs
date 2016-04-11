@@ -6,6 +6,7 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +15,8 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author qubasa
  */
-public abstract class Entity {
+public abstract class Entity
+{
     
     protected TextureRegion textureRegion;
     protected Vector2 pos, direction;

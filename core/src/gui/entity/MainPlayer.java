@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -132,7 +133,6 @@ public class MainPlayer extends Entity
     @Override
     public void update() 
     {
-        
         float oldY = pos.y;
         float oldX = pos.x;
         

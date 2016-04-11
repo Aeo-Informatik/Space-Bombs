@@ -149,7 +149,6 @@ public class ProcessData implements Runnable
                             System.err.println(receivedData);
                     }  
                 }
-
             }catch(Exception e)
             {
                 System.err.println("ERROR: ProcessDataThread() Something went wrong " + e);
