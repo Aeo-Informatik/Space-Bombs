@@ -25,6 +25,6 @@ public class Constants {
     //Server config
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 4;
+    public static int MAXPLAYERS = 1;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
 }
