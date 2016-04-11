@@ -100,7 +100,9 @@ public class ProcessData implements Runnable
 
                                     entityManager.spawnEnemyPlayer(50 + i*100, 0, i, sb);
                                 }
-
+                                
+                                Constants.PLAYERSPAWNED = true;
+                                
                                 //DEBUG
                                 if(Client.DEBUG)
                                     System.out.println("Spawned all players!");

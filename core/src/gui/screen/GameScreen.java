@@ -83,6 +83,12 @@ public class GameScreen extends Screen{
     {
        camera.resize();
        mapManager.resize(width, height);
+       
+       //If screen gets resized set camera to player position
+       if(Constants.PLAYERSPAWNED)
+       {
+            camera.setPosition(entityManager.getMainPlayer().getPosition().x, entityManager.getMainPlayer().getPosition().y);
+       }
     }
 
     

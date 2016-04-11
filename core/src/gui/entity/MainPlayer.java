@@ -403,5 +403,23 @@ public class MainPlayer extends Entity
         
         return currentFrame;
     }
+ 
     
+    /*------------------ GETTER & SETTER ------------------*/
+    @Override
+    public Vector2 getPosition()
+    {
+        return pos;
+    }
+    
+    public Vector2 getDirection()
+    {
+        return direction;
+    }
+    
+    public void setPosition(Vector2 pos)
+    {
+        this.pos = pos;
+    }
+
 }
