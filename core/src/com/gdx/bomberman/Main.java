@@ -50,9 +50,11 @@ public class Main implements ApplicationListener {
         sb = new SpriteBatch();    
         font = new BitmapFont();
         
-        //Starts the server ----- FOR BUILDING PURPOSES ONLY
-        new Thread(new ServerStart()).start();
-        
+        //Starts a local server for 1 Player
+        if(Constants.LOCALSERVER)
+        {
+            new Thread(new ServerStart()).start();
+        }
         
         //Sets the currentScreen to the GameScreen.java that means everything like
         //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
