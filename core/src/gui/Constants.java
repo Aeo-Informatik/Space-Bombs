@@ -14,7 +14,7 @@ public class Constants {
     //Window config
     public static int SCREENWIDTH = 800;
     public static int SCREENHEIGHT = 480;
-    public static boolean FULLSCREEN = false;
+    public static boolean FULLSCREEN = true;
     public static String WINDOWTITEL = "XBlast Reloaded";
     
     
@@ -22,17 +22,18 @@ public class Constants {
     public static String CLIENTHOST = "127.0.0.1";
     public static int CLIENTPORT = 13199;
     
-    
-    //Ingame variable
-    public static int PLAYERID = 0;
-    public static int AMOUNTENEMYPLAYERS = 0;
-    public static String MAPPATH = "maps/BasicMap.tmx";
-    public static volatile boolean PLAYERSPAWNED = false;
-    
     //Server config
     public static boolean LOCALSERVER = true;
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 4;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
+    
+    
+        
+    //Ingame variable do not change!
+    public static int PLAYERID = 0;
+    public static int AMOUNTENEMYPLAYERS = 0;
+    public static String MAPPATH = "maps/BasicMap.tmx";
+    public static volatile boolean PLAYERSPAWNED = false;
 }

@@ -381,6 +381,13 @@ public class MainPlayer extends Entity
         {
             camera.setPosition(pos.x, pos.y);
         }
+        
+        /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Keys.ESCAPE))
+        {
+            System.out.println("Quit game with Keyboard [ESC]");
+            System.exit(0);
+        }
     }
     
     
