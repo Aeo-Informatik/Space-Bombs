@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import gui.Constants;
 import gui.camera.OrthoCamera;
 
 
@@ -22,13 +23,12 @@ public class MapManager
 {
     private TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
-    private String mapPath;
     private OrthoCamera camera;
     
     public MapManager(OrthoCamera camera)
     {
         this.camera = camera;
-        this.tiledMap = new TmxMapLoader().load(mapPath);
+        this.tiledMap = new TmxMapLoader().load(Constants.MAPPATH);
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
     }
     
@@ -53,11 +53,4 @@ public class MapManager
     {
         return tiledMap;
     }
-    
-    //Getter & Setter
-    public void setMap(String mapPath)
-    {
-        this.mapPath = mapPath;
-    }
-    
 }

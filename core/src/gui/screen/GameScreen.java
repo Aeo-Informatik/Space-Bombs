@@ -38,7 +38,6 @@ public class GameScreen extends Screen{
         this.entityManager = new EntityManager(camera);
         
         this.mapManager = new MapManager(camera);
-        mapManager.setMap(Constants.MAPPATH);
         
         ProcessData processData = new ProcessData(entityManager, sb);
         processDataThread = new Thread(processData);
