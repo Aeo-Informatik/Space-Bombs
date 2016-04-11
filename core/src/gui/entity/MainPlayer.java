@@ -140,7 +140,6 @@ public class MainPlayer extends Entity{
         {
             
             case "LEFT":
-                System.out.println("LEFT");
                 break;
             
             case "RIGHT":
