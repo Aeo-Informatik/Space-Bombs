@@ -51,7 +51,7 @@ public class ProcessData implements Runnable
                     switch (parameters[0]) 
                     {
 
-                        //SAVE PLAYER ID
+                        /**------------------SAVE PLAYER ID------------------**/
                         //General: registerPlayerId|id|target
                         case "registerMainPlayerId":
                             if(parameters.length == 3)
@@ -67,7 +67,7 @@ public class ProcessData implements Runnable
                             break;
 
 
-                        //REGISTER ENEMY PLAYERS
+                        /**------------------REGISTER ENEMY PLAYERS------------------**/
                         //General: registerEnemyPlayers|amount|target
                         case "registerEnemyPlayers":
                             if(parameters.length == 3)
@@ -82,7 +82,7 @@ public class ProcessData implements Runnable
                             break;
 
 
-                        //SPAWN PLAYERS
+                        /**------------------SPAWN ALL PLAYERS------------------**/
                         //General: spawnPlayers|target
                         case "spawnPlayers":
                             if(parameters.length == 2)
@@ -98,7 +98,7 @@ public class ProcessData implements Runnable
                                         i++;
                                     }
 
-                                    entityManager.spawnEnemyPlayer(50 + i*100, 0, i);
+                                    entityManager.spawnEnemyPlayer(50 + i*100, 0, i, sb);
                                 }
 
                                 //DEBUG
@@ -109,7 +109,7 @@ public class ProcessData implements Runnable
                             break;
 
 
-                        //MOVE ENEMY PLAYER
+                        /**------------------MOVE ENEMY PLAYER------------------**/
                         //General: moveEnemyPlayer|playerId|direction|target
                         case "moveEnemyPlayer":
                             if(parameters.length == 4)
@@ -126,7 +126,7 @@ public class ProcessData implements Runnable
                             break;
 
                             
-                        //STOP ENEMY PLAYER
+                        /**------------------STOP ENEMY PLAYER------------------**/
                         //General: moveEnemyPlayer|playerId|x|y|target
                         case "stopEnemyPlayer":
                             if(parameters.length == 5)

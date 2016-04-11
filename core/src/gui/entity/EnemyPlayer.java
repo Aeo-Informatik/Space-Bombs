@@ -205,6 +205,32 @@ public class EnemyPlayer extends Entity
         } 
     }
     
+    /**
+     * Draws a still standing enemy texture the position is given through the constructor
+     * @param sb
+     * @param direction 
+     */
+    public void spawnEnemy(SpriteBatch sb, String direction)
+    {
+        switch(direction)
+        {
+            case "LEFT":
+                sb.draw(staticLeft, pos.x, pos.y);
+                break;
+
+            case "RIGHT":
+                sb.draw(staticRight, pos.x, pos.y);
+                break;
+
+            case "UP":
+                sb.draw(staticUp, pos.x, pos.y);
+                break;
+
+            case "DOWN":
+                sb.draw(staticDown, pos.x, pos.y);
+                break;
+        } 
+    }
     
     /**
     * Gets the frame out of the animation

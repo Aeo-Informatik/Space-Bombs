@@ -58,11 +58,20 @@ public class EntityManager {
     }
     
     /**--------------------SPAWN FUNCTIONS--------------------**/
-    public void spawnEnemyPlayer(int x, int y, int playerId)
+    
+    /**
+     * Creates renders and adds a EnemyPlayer Object to the array
+     * @param x
+     * @param y
+     * @param playerId
+     * @param sb 
+     */
+    public void spawnEnemyPlayer(int x, int y, int playerId, SpriteBatch sb)
     {
         try
         {
             EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+            enemyPlayer.spawnEnemy(sb, "UP");
             enemies.add(enemyPlayer);
             
         }catch(Exception e)
@@ -71,7 +80,13 @@ public class EntityManager {
         }
     }
     
-    
+    /**
+     * Creates a MainPlayer Object and saves it in EntityManager
+     * @param x
+     * @param y
+     * @param playerId
+     * @throws Exception 
+     */
     public void spawnMainPlayer(int x, int y, int playerId) throws Exception
     {
         try 
