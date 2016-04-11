@@ -46,14 +46,17 @@ public class Main implements ApplicationListener {
     @Override
     public void create() 
     {   
+        TextureManager.load();
+        sb = new SpriteBatch();    
+        font = new BitmapFont();
         
         //Starts the server ----- FOR BUILDING PURPOSES ONLY
-        //new Thread(new ServerStart()).start();
+        new Thread(new ServerStart()).start();
         
         
         //Sets the currentScreen to the GameScreen.java that means everything like
         //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
-        ScreenManager.setScreen(new GameScreen());
+        ScreenManager.setScreen(new GameScreen(sb));
         
         try {
             //Start Client
@@ -69,12 +72,6 @@ public class Main implements ApplicationListener {
             System.err.println("ERROR: Client could't connect to server " + e);
             System.exit(0);
         }
-        
-        
-        TextureManager.load();
-        sb = new SpriteBatch();    
-        font = new BitmapFont();
-
     }
     
         

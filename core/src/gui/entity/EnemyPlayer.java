@@ -36,11 +36,12 @@ public class EnemyPlayer extends Entity{
     private final TextureRegion staticLeft;
     
     
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, SpriteBatch sb) 
     {
         super(null, pos, direction);
         
         this.playerId = playerId;
+        this.sb = sb;
         
         switch(playerId)
         {
@@ -112,9 +113,6 @@ public class EnemyPlayer extends Entity{
     {
         //Changes the position of the texture 
         pos.add(direction);
-        
-        if(this.sb == null)
-            this.sb = sb;
         
         //movePlayer(sb, "RIGHT");
             

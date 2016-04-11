@@ -17,10 +17,12 @@ import gui.camera.OrthoCamera;
 public class EntityManager {
     
     private OrthoCamera camera;
+    private SpriteBatch sb;
     
-    public EntityManager(OrthoCamera camera)
+    public EntityManager(OrthoCamera camera, SpriteBatch sb)
     {
         this.camera = camera;
+        this.sb = sb;
     }
     
     //Array from libgdx is much faster in comparison to an arraylist
@@ -58,7 +60,7 @@ public class EntityManager {
 
     public void spawnEnemyPlayer(int x, int y, int playerId)
     {
-        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId, sb);
         enemies.add(enemyPlayer);
     }
     

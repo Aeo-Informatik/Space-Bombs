@@ -23,12 +23,18 @@ public class GameScreen extends Screen{
     private EntityManager entityManager;
     private Thread processDataThread;
     private MapManager mapManager;
+    private SpriteBatch sb;
+    
+    public GameScreen(SpriteBatch sb)
+    {
+        this.sb = sb;
+    }
     
     @Override
     public void create() 
     {
         this.camera = new OrthoCamera();
-        this.entityManager = new EntityManager(camera);
+        this.entityManager = new EntityManager(camera, sb);
         
         this.mapManager = new MapManager(camera);
         mapManager.setMap("maps/BasicMap.tmx");
