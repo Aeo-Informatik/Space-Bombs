@@ -50,7 +50,6 @@ public class MainPlayer extends Entity
         
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
-        
         try
         {
             this.client = Main.client;
@@ -360,19 +359,26 @@ public class MainPlayer extends Entity
         }
         
         
-        /*------------------ZOOM INTO GAME------------------*/
+        /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.Z))
         {
-            camera.zoom += 0.02;
-            camera.setPosition(pos.x, pos.y);
+            if(camera.zoom < 2.5)
+            {
+                camera.zoom += 0.02;
+                camera.setPosition(pos.x, pos.y);
+            }
+            
         }
         
         
-        /*------------------ZOOM OUT GAME------------------*/
+        /*------------------ZOOM INTO GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.U))
         {
-            camera.zoom -= 0.02;
-            camera.setPosition(pos.x, pos.y);
+            if(camera.zoom > 0.5)
+            {
+                camera.zoom -= 0.02;
+                camera.setPosition(pos.x, pos.y);
+            }
         }
         
         

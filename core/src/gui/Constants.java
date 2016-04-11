@@ -14,7 +14,7 @@ public class Constants {
     //Window config
     public static int SCREENWIDTH = 800;
     public static int SCREENHEIGHT = 480;
-    public static boolean FULLSCREEN = true;
+    public static boolean FULLSCREEN = false;
     public static String WINDOWTITEL = "XBlast Reloaded";
     
     
@@ -31,7 +31,7 @@ public class Constants {
     
     
         
-    //Ingame variable do not change!
+    //Ingame variable DO NOT CHANGE!
     public static int PLAYERID = 0;
     public static int AMOUNTENEMYPLAYERS = 0;
     public static String MAPPATH = "maps/BasicMap.tmx";
