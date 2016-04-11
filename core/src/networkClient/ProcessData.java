@@ -6,6 +6,7 @@
 package networkClient;
 
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
@@ -18,10 +19,12 @@ import gui.entity.EntityManager;
 public class ProcessData implements Runnable
 {
     private EntityManager entityManager;
+    private SpriteBatch sb;
     
-    public ProcessData(EntityManager entityManager)
+    public ProcessData(EntityManager entityManager, SpriteBatch sb)
     {
         this.entityManager = entityManager;
+        this.sb = sb;
     }
     
     @Override
@@ -115,7 +118,7 @@ public class ProcessData implements Runnable
                                 {
                                     if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                     {
-                                        enemy.movePlayer(parameters[2]);
+                                        enemy.movePlayer(parameters[2], sb);
                                     }
                                 }
                             }else 
@@ -132,7 +135,7 @@ public class ProcessData implements Runnable
                                 {
                                     if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                     {
-                                        enemy.stopPlayer(Float.parseFloat(parameters[2]), Float.parseFloat(parameters[3]));
+                                        enemy.stopPlayer(Float.parseFloat(parameters[2]), Float.parseFloat(parameters[3]), sb);
                                     }
                                 }
                             }else

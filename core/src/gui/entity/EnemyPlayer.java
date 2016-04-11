@@ -20,7 +20,6 @@ public class EnemyPlayer extends Entity{
 
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
-    private SpriteBatch sb;
     private int playerId = 0;
     
     //Player animation when he is moving around
@@ -36,12 +35,11 @@ public class EnemyPlayer extends Entity{
     private final TextureRegion staticLeft;
     
     
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, SpriteBatch sb) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId) 
     {
         super(null, pos, direction);
         
         this.playerId = playerId;
-        this.sb = sb;
         
         switch(playerId)
         {
@@ -111,20 +109,24 @@ public class EnemyPlayer extends Entity{
     @Override
     public void render(SpriteBatch sb)
     {
-        //Changes the position of the texture 
-        pos.add(direction);
-        
-        //movePlayer(sb, "RIGHT");
-            
+   
     }
+    
     
     @Override
-    public void update() {
-        
+    public void update() 
+    {
+        //Changes the position of the texture by adding the number of pixels 
+        //in which the player should go to the position
+        pos.add(direction);
     }
     
     
-    public void movePlayer(String direction)
+    /**
+     * Moves the player accordingly to the direction specified.
+     * @param direction 
+     */
+    public void movePlayer(String direction, SpriteBatch sb)
     {
          //Input handling and moving the player
         if(direction.equalsIgnoreCase("LEFT"))
@@ -165,7 +167,14 @@ public class EnemyPlayer extends Entity{
         }
     }
     
-    public void stopPlayer(float x, float y)
+    
+    /**
+     * Stops the player movements and render him on given positions
+     * @param x int
+     * @param y int
+     * @param sb SpriteBatch
+     */
+    public void stopPlayer(float x, float y, SpriteBatch sb)
     {
         //Sets the texture to no movement
         setDirection(0, 0);
@@ -196,21 +205,11 @@ public class EnemyPlayer extends Entity{
     }
     
     
-    public int getPlayerId()
-    {
-        return this.playerId;
-    }
-    
-    public void setPlayerId(int playerId)
-    {
-        this.playerId = playerId;
-    }
-    
     /**
-     * Gets the frame out of the animation
-     * @param animation
-     * @return 
-     */
+    * Gets the frame out of the animation
+    * @param animation
+    * @return 
+    */
     private TextureRegion getFrame(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
@@ -224,6 +223,17 @@ public class EnemyPlayer extends Entity{
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
         
         return currentFrame;
+    }
+    
+    /**--------------------GETTER & SETTER--------------------**/
+    public int getPlayerId()
+    {
+        return this.playerId;
+    }
+    
+    public void setPlayerId(int playerId)
+    {
+        this.playerId = playerId;
     }
     
 }

@@ -6,6 +6,7 @@
 package gui.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
@@ -34,13 +35,12 @@ public class GameScreen extends Screen{
     public void create() 
     {
         this.camera = new OrthoCamera();
-        this.entityManager = new EntityManager(camera, sb);
+        this.entityManager = new EntityManager(camera);
         
         this.mapManager = new MapManager(camera);
-        mapManager.setMap("maps/BasicMap.tmx");
-        mapManager.create();
+        mapManager.setMap(Constants.MAPPATH);
         
-        ProcessData processData = new ProcessData(entityManager);
+        ProcessData processData = new ProcessData(entityManager, sb);
         processDataThread = new Thread(processData);
     }
 
@@ -52,20 +52,22 @@ public class GameScreen extends Screen{
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
         
-        //Render Map
+        //Map loading into screen
         mapManager.render(sb);
         
+        //BEGIN DRAWING
         sb.begin();
         
-        //Render Entites 
+        //Render entities
         entityManager.render(sb);
         
-        //Starts one thread to render incoming server calls
+        //Render incoming server calls
         if(processDataThread.isAlive() == false)
         {
             processDataThread.start();
         }
         
+        //END DRAWING
         sb.end();
     }
 
@@ -74,8 +76,6 @@ public class GameScreen extends Screen{
     public void update() 
     {
         camera.update();
-        entityManager.update();
-        mapManager.update();
     }
     
     
@@ -83,20 +83,19 @@ public class GameScreen extends Screen{
     public void resize(int width, int height) 
     {
        camera.resize();
+       mapManager.resize(width, height);
     }
 
     
     @Override
     public void pause() 
     {
-        mapManager.pause();
     }
 
     
     @Override
     public void resume() 
     {
-        mapManager.resume();
     }
 
     

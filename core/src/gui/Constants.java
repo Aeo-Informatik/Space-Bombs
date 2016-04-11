@@ -11,8 +11,11 @@ package gui;
  */
 public class Constants {
     
-    public static int WIDTH = 800;
-    public static int HEIGHT = 480;
+    //Windows config
+    public static int SCREENWIDTH = 800;
+    public static int SCREENHEIGHT = 480;
+    public static boolean FULLSCREEN = false;
+    public static String WINDOWTITEL = "XBlast Reloaded";
     
     //Client config
     public static String CLIENTHOST = "127.0.0.1";
@@ -21,10 +24,12 @@ public class Constants {
     //Ingame variable
     public static int PLAYERID = 0;
     public static int AMOUNTENEMYPLAYERS = 0;
+    public static String MAPPATH = "maps/BasicMap.tmx";
+    
     
     //Server config
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 4;
-    public static int SERVERTIMEOUT = 30000; // 20 seconds
+    public static int SERVERTIMEOUT = 20000; // 20 seconds
 }

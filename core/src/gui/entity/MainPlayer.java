@@ -15,16 +15,16 @@ import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
-import java.util.ArrayList;
 import networkClient.Client;
 
 /**
  *
  * @author qubasa
  */
-public class MainPlayer extends Entity{
+public class MainPlayer extends Entity
+{
     
-
+    //General Variables
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     private Client client;
@@ -133,6 +133,8 @@ public class MainPlayer extends Entity{
     @Override
     public void update() 
     {
+        pos.add(direction);
+        
         float oldY = pos.y;
         float oldX = pos.x;
         
@@ -200,12 +202,9 @@ public class MainPlayer extends Entity{
      */
     private void inputMovePlayer(SpriteBatch sb)
     {
-        //Changes the position of the texture 
-        pos.add(direction);
         String moveCommand = "";
         float cameraSpeed = 2.51f; // DO NOT CHANGE
         
-        //Input handling and moving the player
         /*------------------WALKING LEFT------------------*/
         if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
         {
@@ -360,6 +359,7 @@ public class MainPlayer extends Entity{
             }
         }
         
+        
         /*------------------ZOOM INTO GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.Z))
         {
@@ -367,12 +367,14 @@ public class MainPlayer extends Entity{
             camera.setPosition(pos.x, pos.y);
         }
         
+        
         /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.U))
         {
             camera.zoom -= 0.02;
             camera.setPosition(pos.x, pos.y);
         }
+        
         
         /*------------------CAMERA CENTERS PLAYER------------------*/
         if (Gdx.input.isKeyPressed(Keys.P))

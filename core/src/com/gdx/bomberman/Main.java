@@ -17,7 +17,6 @@ import gui.screen.GameScreen;
 import gui.screen.ScreenManager;
 import static gui.screen.ScreenManager.currentScreen;
 import networkClient.Client;
-import networkServer.ServerStart;
 
 public class Main implements ApplicationListener {
     

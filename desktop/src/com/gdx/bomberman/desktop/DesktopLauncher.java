@@ -10,9 +10,10 @@ import gui.Constants;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = Constants.WIDTH;
-                config.height = Constants.HEIGHT;
-                config.title = "Bomberman Reloaded";
+                config.width = Constants.SCREENWIDTH;
+                config.height = Constants.SCREENHEIGHT;
+                config.fullscreen = Constants.FULLSCREEN;
+                config.title = Constants.WINDOWTITEL;
                 
 		new LwjglApplication(new Main(), config);
 	}

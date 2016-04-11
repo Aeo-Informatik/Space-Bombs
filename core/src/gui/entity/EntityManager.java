@@ -16,33 +16,19 @@ import gui.camera.OrthoCamera;
  */
 public class EntityManager {
     
+    //Vatiables
     private OrthoCamera camera;
-    private SpriteBatch sb;
     
-    public EntityManager(OrthoCamera camera, SpriteBatch sb)
+    //Constructor
+    public EntityManager(OrthoCamera camera)
     {
         this.camera = camera;
-        this.sb = sb;
     }
     
     //Array from libgdx is much faster in comparison to an arraylist
     private Array<EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
 
-    //Update is the same as render only that it doesn't have the SpriteBatch Object
-    public void update()
-    {
-        //For every Enemy Player Object that is stored in the arraylist execute the update function in it
-        for(EnemyPlayer enemy: enemies)
-        {
-            enemy.update();
-        }
-        
-        //Executes the update function in the mainPlayer object
-        if(mainPlayer != null)
-            mainPlayer.update();
-    }
-    
     
     public void render(SpriteBatch sb)
     {
@@ -57,11 +43,32 @@ public class EntityManager {
             mainPlayer.render(sb);
     }
     
-
+    
+    public void update()
+    {
+        //For every Enemy Player Object that is stored in the arraylist execute the update function in it
+        for(EnemyPlayer enemy: enemies)
+        {
+            enemy.update();
+        }
+        
+        //Executes the update function in the mainPlayer object
+        if(mainPlayer != null)
+            mainPlayer.update();
+    }
+    
+    /**--------------------SPAWN FUNCTIONS--------------------**/
     public void spawnEnemyPlayer(int x, int y, int playerId)
     {
-        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId, sb);
-        enemies.add(enemyPlayer);
+        try
+        {
+            EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+            enemies.add(enemyPlayer);
+            
+        }catch(Exception e)
+        {
+            throw e;
+        }
     }
     
     
@@ -77,12 +84,21 @@ public class EntityManager {
         }
     }
     
-    //Getter & Setter
+
+    /**--------------------GETTER & SETTER--------------------**/
+    /**
+     * 
+     * @return Array<EnemyPlayer>
+     */
     public Array<EnemyPlayer> getEnemieArray()
     {
         return enemies;
     }
     
+    /**
+     * 
+     * @return MainPlayer
+     */
     public MainPlayer getMainPlayer()
     {
         return mainPlayer;
