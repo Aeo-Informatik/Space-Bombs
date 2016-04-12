@@ -30,8 +30,13 @@ public class ProcessData
     {
         try
         {
-            //Read from BlockingQueue
-            String receivedData = ClientReceiveThread.queue.take().toString();
+            String receivedData = "";
+            
+            if(ClientReceiveThread.queue.size() != 0)
+            {
+                receivedData = ClientReceiveThread.queue.take().toString();
+            }
+
             
             //Split received data
             String[] parameters = receivedData.split("\\|");

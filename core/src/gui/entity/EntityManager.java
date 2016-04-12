@@ -32,21 +32,17 @@ public class EntityManager {
 
     public void render(SpriteBatch sb)
     {
-        System.out.println("Before rendering");
         //For every Enemy Player Object that is stored in the arraylist execute the render function in it
         for(EnemyPlayer enemy: enemies)
         {
-            System.out.println("Render enemie");
             enemy.render(sb);
         }
         
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)
         {
-            System.out.println("Render MAIN player");
             mainPlayer.render(sb);
         }
-        System.out.println("Finished rendering");
     }
     
     
