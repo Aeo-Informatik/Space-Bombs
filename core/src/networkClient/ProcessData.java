@@ -99,7 +99,7 @@ public class ProcessData
                                 if(Constants.PROCESSDATADEBUG)
                                     System.out.println("Spawning enemie with player id: " + i);
                                 
-                                entityManager.spawnEnemyPlayer(50 + i*100, 0, i);
+                                entityManager.spawnEnemyPlayer(200 + i*100, 0, i);
                             }
 
                             Constants.PLAYERSPAWNED = true;

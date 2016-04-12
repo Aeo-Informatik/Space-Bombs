@@ -25,6 +25,13 @@ public class EnemyPlayer extends Entity
     private int playerId = 0;
     private SpriteBatch sb;
     
+    //Online render variables
+    private boolean executeMovePlayer = false;
+    private boolean executeStopPlayer = true;
+    private String moveDirection = "";
+    private float stopX = pos.x; 
+    private float stopY = pos.y;
+    
     //Player animation when he is moving around
     private final Animation walkAnimUp;
     private final Animation walkAnimDown;
@@ -110,17 +117,44 @@ public class EnemyPlayer extends Entity
     }
 
     
+    @Override
+    public void update() 
+    {
+            
+    }
+    
+    
+    @Override
+    public void render(SpriteBatch sb)
+    {
+        if(this.executeStopPlayer)
+        {
+            stopPlayer(this.stopX, this.stopY);
+        }
+        
+        if(this.executeMovePlayer)
+        {
+            movePlayer(this.moveDirection);
+        }
+        
+    }
+    
     /**
      * Moves the player accordingly to the direction specified.
-     * @param direction 
+     * @param movement 
      */
     public void movePlayer(String movement)
     {
+        //If triggered from outside it will be rendered/activated in the object till stopPlayer gets called
+        this.moveDirection = movement;
+        this.executeMovePlayer = true;
+        this.executeStopPlayer = false;
+        
         //Changes the position of the texture by adding the number of pixels 
         //in which the player should go to the position
         pos.add(this.direction);
         
-        switch(movement)
+        switch(this.moveDirection)
         {
             case "LEFT":
             //Set the speed the texture moves in x and y axis
@@ -151,9 +185,7 @@ public class EnemyPlayer extends Entity
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
             lastMovementKeyPressed = "DOWN";
             break;
-            
-            default:
-                System.err.println("ERROR: In EnemyPlayer movePlayer() wrong movement: " + movement);
+           
         }
     }
     
@@ -165,6 +197,12 @@ public class EnemyPlayer extends Entity
      */
     public void stopPlayer(float x, float y)
     {
+        //If triggered from outside it will be rendered/activated in the object till movePlayer gets called
+        this.executeStopPlayer = true;
+        this.executeMovePlayer = false;
+        this.stopX = x;
+        this.stopY = y;
+        
         //Sets the texture to no movement
         setDirection(0, 0);
             
@@ -190,37 +228,10 @@ public class EnemyPlayer extends Entity
             case "DOWN":
                 sb.draw(staticDown, pos.x, pos.y);
                 break;
-            
-            default:
-                System.err.println("ERROR: lastMovementKey has a wrong value: " + lastMovementKeyPressed );
+
         } 
     }
-    
-    /**
-     * Draws a still standing enemy texture the position is given through the constructor
-     * @param direction 
-     */
-    public void spawnEnemy(String direction)
-    {
-        switch(direction)
-        {
-            case "LEFT":
-                sb.draw(staticLeft, pos.x, pos.y);
-                break;
 
-            case "RIGHT":
-                sb.draw(staticRight, pos.x, pos.y);
-                break;
-
-            case "UP":
-                sb.draw(staticUp, pos.x, pos.y);
-                break;
-
-            case "DOWN":
-                sb.draw(staticDown, pos.x, pos.y);
-                break;
-        } 
-    }
     
     /**
     * Gets the frame out of the animation
@@ -242,19 +253,6 @@ public class EnemyPlayer extends Entity
         return currentFrame;
     }
     
-    
-    @Override
-    public void render(SpriteBatch sb)
-    {
-
-    }
-    
-    
-    @Override
-    public void update() 
-    {
-
-    }
     
     /**--------------------GETTER & SETTER--------------------**/
     public int getPlayerId()
