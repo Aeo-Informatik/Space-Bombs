@@ -29,7 +29,7 @@ public class Constants {
     
     
     //Server config
-    public static boolean LOCALSERVER = true;
+    public static boolean LOCALSERVER = true; // only for one player starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 4;

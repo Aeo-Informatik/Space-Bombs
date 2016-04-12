@@ -43,7 +43,7 @@ public class EntityManager {
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)
         {
-            System.out.println("Render main player");
+            System.out.println("Render MAIN player");
             mainPlayer.render(sb);
         }
         System.out.println("Finished rendering");
