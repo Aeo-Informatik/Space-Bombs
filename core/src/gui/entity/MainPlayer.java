@@ -29,6 +29,7 @@ public class MainPlayer extends Entity
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     private Client client;
+    private SpriteBatch sb;
     private boolean sendStopOnce = true;
     private OrthoCamera camera;
     
@@ -55,6 +56,7 @@ public class MainPlayer extends Entity
         {
             this.client = Main.client;
             this.camera = camera;
+            this.sb = Main.sb;
             
         }catch(Exception e)
         {
@@ -167,9 +169,9 @@ public class MainPlayer extends Entity
     @Override
     public void render(SpriteBatch sb)
     {
-        pos.add(direction);
-        inputMovePlayer(sb);   
-        inputDoPlayer(sb);
+        pos.add(this.direction);
+        inputMovePlayer();   
+        inputDoPlayer();
     }
     
     
@@ -199,7 +201,7 @@ public class MainPlayer extends Entity
      * Moves the player if keyboard input is received
      * @param sb 
      */
-    private void inputMovePlayer(SpriteBatch sb)
+    private void inputMovePlayer()
     {
         String moveCommand = "";
         float cameraSpeed = 2.51f; // DO NOT CHANGE
@@ -330,6 +332,9 @@ public class MainPlayer extends Entity
                 case "DOWN":
                     sb.draw(staticDown, pos.x, pos.y);
                     break;
+                
+                default:
+                    System.err.println("ERROR: In MainPlayer inputMovePlayer() wrong value in lastMovementKeyPressed: " + lastMovementKeyPressed);
             }
 
         }
@@ -340,7 +345,7 @@ public class MainPlayer extends Entity
      * Action the player can make like placing a bomb
      * @param sb 
      */
-    private void inputDoPlayer(SpriteBatch sb)
+    private void inputDoPlayer()
     {
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyPressed(Keys.SPACE))

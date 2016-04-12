@@ -17,7 +17,7 @@ public class Client {
     
     private GameScreen gameScreen;
     private Socket socket;
-    public static boolean DEBUG = false;
+
     
     public Client(String host, int port)
     {

@@ -22,13 +22,11 @@ public class GameScreen extends Screen{
     //The viewpoint of the player 
     private OrthoCamera camera;
     private EntityManager entityManager;
-    private Thread processDataThread;
     private MapManager mapManager;
-    private SpriteBatch sb;
+    private ProcessData processData;
     
-    public GameScreen(SpriteBatch sb)
+    public GameScreen()
     {
-        this.sb = sb;
     }
     
     @Override
@@ -36,11 +34,8 @@ public class GameScreen extends Screen{
     {
         this.camera = new OrthoCamera();
         this.entityManager = new EntityManager(camera);
-        
         this.mapManager = new MapManager(camera);
-        
-        ProcessData processData = new ProcessData(entityManager, sb);
-        processDataThread = new Thread(processData);
+        this.processData = new ProcessData(entityManager);
     }
 
     
@@ -54,20 +49,17 @@ public class GameScreen extends Screen{
         //Map loading into screen
         mapManager.render(sb);
         
-        //BEGIN DRAWING
+        /*---------------BEGIN DRAWING---------------*/
         sb.begin();
         
         //Render entities
         entityManager.render(sb);
         
-        //Render incoming server calls
-        if(processDataThread.isAlive() == false)
-        {
-            processDataThread.start();
-        }
+        //Render incoming server instructions
+        processData.start();
         
-        //END DRAWING
         sb.end();
+        /*---------------END DRAWING---------------*/
     }
 
     
@@ -75,6 +67,7 @@ public class GameScreen extends Screen{
     public void update() 
     {
         camera.update();
+        entityManager.update();
     }
     
     

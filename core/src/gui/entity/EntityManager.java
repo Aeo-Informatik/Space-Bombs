@@ -32,15 +32,21 @@ public class EntityManager {
 
     public void render(SpriteBatch sb)
     {
+        System.out.println("Before rendering");
         //For every Enemy Player Object that is stored in the arraylist execute the render function in it
         for(EnemyPlayer enemy: enemies)
         {
+            System.out.println("Render enemie");
             enemy.render(sb);
         }
         
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)
+        {
+            System.out.println("Render main player");
             mainPlayer.render(sb);
+        }
+        System.out.println("Finished rendering");
     }
     
     
@@ -64,14 +70,12 @@ public class EntityManager {
      * @param x
      * @param y
      * @param playerId
-     * @param sb 
      */
-    public void spawnEnemyPlayer(int x, int y, int playerId, SpriteBatch sb)
+    public void spawnEnemyPlayer(int x, int y, int playerId)
     {
         try
         {
             EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
-            enemyPlayer.spawnEnemy(sb, "UP");
             enemies.add(enemyPlayer);
             
         }catch(Exception e)

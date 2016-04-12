@@ -1,5 +1,6 @@
 package networkServer;
 
+import gui.Constants;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 
 public class Server {
     
-    public static boolean DEBUG = false;
     private ServerSocket serverSocket;
     private int minConnections;
     private int maxConnections;
@@ -42,8 +42,8 @@ public class Server {
             for(int i =0; i < socketList.size(); i++)
             {
                 //Debug
-                if(DEBUG)
-                    System.out.println("------Start Setup Game------");
+                if(Constants.SERVERDEBUG)
+                    System.out.println("SERVER: ------Start Setup Game------");
 
                 String playerId = Integer.toString(i +1);     
 
@@ -68,8 +68,8 @@ public class Server {
             }
 
             //Debug
-            if(DEBUG)
-                System.out.println("------End Setup Game------");
+            if(Constants.SERVERDEBUG)
+                System.out.println("SERVER: ------End Setup Game------");
             
         }catch(Exception e)
         {
@@ -92,7 +92,8 @@ public class Server {
             //Save connection
             ArrayList<Socket> pcConnections = new ArrayList<>();
             
-            System.out.println("Listening & accepting connections on port " + serverSocket.getLocalPort() + "\n");
+            System.out.println("SERVER: Listening & accepting connections on port " + serverSocket.getLocalPort() + "\n");
+            
             try
             {
                 //Start accepting connections
@@ -102,13 +103,13 @@ public class Server {
                     serverSocket.setSoTimeout(timeout);
                     Socket clientSocket = serverSocket.accept();
 
-                    //Debug
-                    if(Server.DEBUG)
-                        System.out.println("-----New Client-----");
-                        int y = i +1;
-                        System.out.println("Number: " + y);
-                        System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
-
+                    //Connection announcement
+                    System.out.println("-----New Client-----");
+                    int y = i +1;
+                    System.out.println("Number: " + y);
+                    System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
+                    System.out.println("--------------------");
+                    
                     //Add connection object to array list
                     pcConnections.add(clientSocket);
                 }

@@ -29,7 +29,8 @@ public class Main implements ApplicationListener {
     * texture can be described and sent to the GPU all at once. 
     * This is what the SpriteBatch class does.
     */
-    private SpriteBatch sb;
+    public static SpriteBatch sb;
+    public static Client client;
     
     /**
      * LibGdx makes use of bitmap files (pngs) to render fonts. 
@@ -38,17 +39,18 @@ public class Main implements ApplicationListener {
     private BitmapFont font;
     
     
-    public static Client client;
-    
     /**
      * Method called once when the application is created.
      */
     @Override
     public void create() 
     {   
+        //Create objects
+        this.sb = new SpriteBatch();    
+        this.font = new BitmapFont();
+        
+        //Load all textures
         TextureManager.load();
-        sb = new SpriteBatch();    
-        font = new BitmapFont();
         
         //Starts a local server for 1 Player
         if(Constants.LOCALSERVER)
@@ -58,12 +60,11 @@ public class Main implements ApplicationListener {
         
         //Sets the currentScreen to the GameScreen.java that means everything like
         //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
-        ScreenManager.setScreen(new GameScreen(sb));
+        ScreenManager.setScreen(new GameScreen());
         
         try {
             //Start Client
             client = new Client(Constants.CLIENTHOST, Constants.CLIENTPORT);
-            Client.DEBUG = true;
             
             //Listen for incomming data
             client.receiveData();

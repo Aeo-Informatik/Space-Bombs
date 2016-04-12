@@ -24,15 +24,12 @@ public class ServerStart implements Runnable
             //Initialise server object
             Server server = new Server(Constants.SERVERPORT, 1, 1);   
 
-            //Set debug output to true
-            Server.DEBUG = true;
-
-
             //Accept all client connections and get them as socket object
             ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERTIMEOUT);
 
             //Starts the game
             server.startGame(socketList);
+            
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error has been thrown in main" + e);
@@ -49,10 +46,6 @@ public class ServerStart implements Runnable
             //Initialise server object
             Server server = new Server(Constants.SERVERPORT, Constants.MINPLAYERS, Constants.MAXPLAYERS);   
                
-            //Set debug output to true
-            Server.DEBUG = true;
-                    
-            
             //Accept all client connections and get them as socket object
             ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERTIMEOUT);
             

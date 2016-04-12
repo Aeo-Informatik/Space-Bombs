@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import gui.Constants;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -46,10 +47,10 @@ public class ClientReceiveThread implements Runnable {
                     while((dataReceived = receive.readLine())!= null)
                     {   
                         //Debug
-                        if(networkClient.Client.DEBUG)
+                        if(Constants.CLIENTDEBUG)
                             System.out.println("Received from server: " + dataReceived);
-
-                        //Adds the data to the BlockingQueue
+                        
+                       //Adds the data to the BlockingQueue
                        queue.add(dataReceived);
                        Thread.sleep(100);
                     }

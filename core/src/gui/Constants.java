@@ -18,17 +18,23 @@ public class Constants {
     public static String WINDOWTITEL = "XBlast Reloaded";
     
     
+    //Main config
+    public static boolean PROCESSDATADEBUG = true;
+    
+    
     //Client config
     public static String CLIENTHOST = "127.0.0.1";
     public static int CLIENTPORT = 13199;
+    public static boolean CLIENTDEBUG = true;
+    
     
     //Server config
-    public static boolean LOCALSERVER = false;
+    public static boolean LOCALSERVER = true;
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 4;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
-    
+    public static boolean SERVERDEBUG = false;
     
         
     //Ingame variable DO NOT CHANGE!

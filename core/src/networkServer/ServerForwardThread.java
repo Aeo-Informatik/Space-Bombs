@@ -7,6 +7,7 @@ package networkServer;
 
 
 
+import gui.Constants;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -49,9 +50,11 @@ public class ServerForwardThread implements Runnable
                 while((dataReceived = receive.readLine())!= null)
                 {   
                     //Debug
-                    if(Server.DEBUG)
+                    if(Constants.SERVERDEBUG)
+                    {
                         System.out.println("Received from client: " + dataReceived);
                         System.out.println("From: " + socket.getInetAddress().getHostAddress());
+                    }
                            
                     //Send received message to every client
                     for(int i = 0; i < clientConnections.size(); i++)
@@ -65,11 +68,13 @@ public class ServerForwardThread implements Runnable
                         printWriter.flush();
 
                         //Debug
-                        if(Server.DEBUG)
+                        if(Constants.SERVERDEBUG)
+                        {
                             System.out.println("Send to client: " + dataReceived);
                             System.out.println("To: " + clientConnections.get(i).getInetAddress().getHostAddress()); 
                         }
                     }
+                }
 
             }catch(SocketException | SocketTimeoutException e)
             {
