@@ -7,7 +7,7 @@ package gui;
 
 /**
  *
- * @author hebendanz_l
+ * @author qubasa
  */
 public class Constants {
     
