@@ -23,7 +23,7 @@ public class Constants {
     
     
     //Client config
-    public static String CLIENTHOST = "10.5.0.34";
+    public static String CLIENTHOST = "localhost";
     public static int CLIENTPORT = 13199;
     public static boolean CLIENTDEBUG = true;
     
