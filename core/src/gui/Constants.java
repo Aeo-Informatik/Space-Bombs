@@ -15,7 +15,7 @@ public class Constants {
     public static int HEIGHT = 480;
     
     //Client config
-    public static String CLIENTHOST = "127.0.0.1";
+    public static String CLIENTHOST = "10.5.0.34";
     public static int CLIENTPORT = 13199;
     
     //Ingame variable

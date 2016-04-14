@@ -54,7 +54,7 @@ public class MainPlayer extends Entity{
         try
         {
             this.client = Main.client;
-            
+            this.camera = camera;
         }catch(Exception e)
         {
            throw e; 
@@ -139,7 +139,6 @@ public class MainPlayer extends Entity{
         {
             
             case "LEFT":
-                System.out.println("LEFT");
                 break;
             
             case "RIGHT":
@@ -349,7 +348,6 @@ public class MainPlayer extends Entity{
         {
             //Create Bomb Object
             Bomb bomb = new Bomb(super.getPosition(),direction,1); 
-            Bombs.add(bomb.getB1StaticBurns());
             
             //Draw bomb
             sb.draw(bomb.getB1StaticBurns(),pos.x,pos.y);
