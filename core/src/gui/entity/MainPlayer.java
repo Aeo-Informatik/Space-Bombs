@@ -8,7 +8,6 @@ package gui.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -408,6 +407,7 @@ public class MainPlayer extends Entity
             camera.setPosition(pos.x, pos.y);
         }
         
+        
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
         {
@@ -433,6 +433,7 @@ public class MainPlayer extends Entity
         Passing in true, will tell the animation to restart after it reaches the last frame.
         */
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
+        
         
         return currentFrame;
     }

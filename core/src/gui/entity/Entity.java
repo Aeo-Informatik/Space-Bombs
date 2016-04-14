@@ -15,13 +15,11 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author qubasa
  */
-public abstract class Entity extends Sprite
+public abstract class Entity
 {
     
     protected Vector2 pos, direction;
     protected TextureRegion textureRegion;
-    
-    protected Sprite sprite;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
@@ -31,8 +29,6 @@ public abstract class Entity extends Sprite
         this.direction = direction;
         this.textureRegion = textureRegion;
         
-        //this.sprite = new Sprite(textureRegion);
-        //sprite.setPosition(pos.x, pos.y);
     }
     
     //Update is the same as render only that it doesn't have the SpriteBatch Object
@@ -42,10 +38,6 @@ public abstract class Entity extends Sprite
     public void render(SpriteBatch sb)
     {
         sb.draw(textureRegion, pos.x, pos.y);
-        
-        //Sets the position where to draw and then draws the texture
-        //sprite.setPosition(pos.x, pos.y);
-        //sprite.draw(sb);
     }
     
     
