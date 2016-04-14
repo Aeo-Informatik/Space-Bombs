@@ -16,6 +16,7 @@ import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
+import gui.map.MapManager;
 import networkClient.Client;
 
 /**
@@ -32,6 +33,7 @@ public class MainPlayer extends Entity
     private SpriteBatch sb;
     private boolean sendStopOnce = true;
     private OrthoCamera camera;
+    private MapManager map;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -46,7 +48,7 @@ public class MainPlayer extends Entity
     private final TextureRegion staticLeft;
 
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map) throws Exception 
     {
         super(null, pos, direction);
         
@@ -57,6 +59,7 @@ public class MainPlayer extends Entity
             this.client = Main.client;
             this.camera = camera;
             this.sb = Main.sb;
+            this.map = map;
             
         }catch(Exception e)
         {
