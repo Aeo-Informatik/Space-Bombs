@@ -14,7 +14,8 @@ import com.badlogic.gdx.math.Vector2;
  *
  * @author qubasa
  */
-public abstract class Entity {
+public abstract class Entity
+{
     
     protected TextureRegion textureRegion;
     protected Vector2 pos, direction;

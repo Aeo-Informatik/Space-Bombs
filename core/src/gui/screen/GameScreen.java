@@ -6,6 +6,7 @@
 package gui.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
@@ -21,21 +22,20 @@ public class GameScreen extends Screen{
     //The viewpoint of the player 
     private OrthoCamera camera;
     private EntityManager entityManager;
-    private Thread processDataThread;
     private MapManager mapManager;
+    private ProcessData processData;
+    
+    public GameScreen()
+    {
+    }
     
     @Override
     public void create() 
     {
         this.camera = new OrthoCamera();
         this.entityManager = new EntityManager(camera);
-        
         this.mapManager = new MapManager(camera);
-        mapManager.setMap("maps/BasicMap.tmx");
-        mapManager.create();
-        
-        ProcessData processData = new ProcessData(entityManager);
-        processDataThread = new Thread(processData);
+        this.processData = new ProcessData(entityManager);
     }
 
     
@@ -46,21 +46,20 @@ public class GameScreen extends Screen{
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
         
-        //Render Map
+        //Map loading into screen
         mapManager.render(sb);
         
+        /*---------------BEGIN DRAWING---------------*/
         sb.begin();
         
-        //Render Entites 
+        //Render entities
         entityManager.render(sb);
         
-        //Starts one thread to render incoming server calls
-        if(processDataThread.isAlive() == false)
-        {
-            processDataThread.start();
-        }
+        //Render incoming server instructions
+        processData.start();
         
         sb.end();
+        /*---------------END DRAWING---------------*/
     }
 
     
@@ -69,7 +68,6 @@ public class GameScreen extends Screen{
     {
         camera.update();
         entityManager.update();
-        mapManager.update();
     }
     
     
@@ -77,20 +75,25 @@ public class GameScreen extends Screen{
     public void resize(int width, int height) 
     {
        camera.resize();
+       mapManager.resize(width, height);
+       
+       //If screen gets resized set camera to player position
+       if(Constants.PLAYERSPAWNED)
+       {
+            camera.setPosition(entityManager.getMainPlayer().getPosition().x, entityManager.getMainPlayer().getPosition().y);
+       }
     }
 
     
     @Override
     public void pause() 
     {
-        mapManager.pause();
     }
 
     
     @Override
     public void resume() 
     {
-        mapManager.resume();
     }
 
     

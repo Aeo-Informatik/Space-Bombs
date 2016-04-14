@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -15,19 +16,20 @@ import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
-import java.util.ArrayList;
 import networkClient.Client;
 
 /**
  *
  * @author qubasa
  */
-public class MainPlayer extends Entity{
+public class MainPlayer extends Entity
+{
     
-
+    //General Variables
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
     private Client client;
+    private SpriteBatch sb;
     private boolean sendStopOnce = true;
     private OrthoCamera camera;
     
@@ -50,11 +52,13 @@ public class MainPlayer extends Entity{
         
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
-        
         try
         {
             this.client = Main.client;
             this.camera = camera;
+
+            this.sb = Main.sb;
+
         }catch(Exception e)
         {
            throw e; 
@@ -166,8 +170,9 @@ public class MainPlayer extends Entity{
     @Override
     public void render(SpriteBatch sb)
     {
-        inputMovePlayer(sb);   
-        inputDoPlayer(sb);
+        pos.add(this.direction);
+        inputMovePlayer();   
+        inputDoPlayer();
     }
     
     
@@ -197,14 +202,11 @@ public class MainPlayer extends Entity{
      * Moves the player if keyboard input is received
      * @param sb 
      */
-    private void inputMovePlayer(SpriteBatch sb)
+    private void inputMovePlayer()
     {
-        //Changes the position of the texture 
-        pos.add(direction);
         String moveCommand = "";
         float cameraSpeed = 2.51f; // DO NOT CHANGE
         
-        //Input handling and moving the player
         /*------------------WALKING LEFT------------------*/
         if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT))
         {
@@ -331,6 +333,9 @@ public class MainPlayer extends Entity{
                 case "DOWN":
                     sb.draw(staticDown, pos.x, pos.y);
                     break;
+                
+                default:
+                    System.err.println("ERROR: In MainPlayer inputMovePlayer() wrong value in lastMovementKeyPressed: " + lastMovementKeyPressed);
             }
 
         }
@@ -341,7 +346,7 @@ public class MainPlayer extends Entity{
      * Action the player can make like placing a bomb
      * @param sb 
      */
-    private void inputDoPlayer(SpriteBatch sb)
+    private void inputDoPlayer()
     {
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyPressed(Keys.SPACE))
@@ -359,24 +364,41 @@ public class MainPlayer extends Entity{
             }
         }
         
-        /*------------------ZOOM INTO GAME------------------*/
-        if (Gdx.input.isKeyPressed(Keys.Z))
-        {
-            camera.zoom += 0.02;
-            camera.setPosition(pos.x, pos.y);
-        }
         
         /*------------------ZOOM OUT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Keys.Z))
+        {
+            if(camera.zoom < 2.5)
+            {
+                camera.zoom += 0.02;
+                camera.setPosition(pos.x, pos.y);
+            }
+            
+        }
+        
+        
+        /*------------------ZOOM INTO GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.U))
         {
-            camera.zoom -= 0.02;
-            camera.setPosition(pos.x, pos.y);
+            if(camera.zoom > 0.5)
+            {
+                camera.zoom -= 0.02;
+                camera.setPosition(pos.x, pos.y);
+            }
         }
+        
         
         /*------------------CAMERA CENTERS PLAYER------------------*/
         if (Gdx.input.isKeyPressed(Keys.P))
         {
             camera.setPosition(pos.x, pos.y);
+        }
+        
+        /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Keys.ESCAPE))
+        {
+            System.out.println("Quit game with Keyboard [ESC]");
+            Gdx.app.exit();
         }
     }
     
@@ -400,5 +422,23 @@ public class MainPlayer extends Entity{
         
         return currentFrame;
     }
+ 
     
+    /*------------------ GETTER & SETTER ------------------*/
+    @Override
+    public Vector2 getPosition()
+    {
+        return pos;
+    }
+    
+    public Vector2 getDirection()
+    {
+        return direction;
+    }
+    
+    public void setPosition(Vector2 pos)
+    {
+        this.pos = pos;
+    }
+
 }

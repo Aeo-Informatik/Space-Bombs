@@ -1,6 +1,7 @@
 
 package networkServer;
 
+import gui.Constants;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -44,7 +45,7 @@ class SendThread implements Runnable
                     for(String msgToClient : dataToSend)
                     {
                         //Debug
-                        if(Server.DEBUG)
+                        if(Constants.SERVERDEBUG)
                             System.out.println("Send: " + msgToClient);
 
                         //Iterate through connected client list
@@ -52,7 +53,7 @@ class SendThread implements Runnable
                         {
 
                             //Debug
-                            if(Server.DEBUG)
+                            if(Constants.SERVERDEBUG)
                                 System.out.println("To: " + sock.get(i).getInetAddress().getHostAddress());
 
                             //Create object to send data
@@ -70,10 +71,12 @@ class SendThread implements Runnable
                 {
 
                     //Debug
-                    if(Server.DEBUG)
+                    if(Constants.SERVERDEBUG)
+                    {
                         System.out.println("Send: " + message1);
                         System.out.println("To: " + socket1.getInetAddress().getHostAddress());
-                            
+                    }        
+                     
                     //Create object to send data
                     PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket1.getOutputStream()));
 

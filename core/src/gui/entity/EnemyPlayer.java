@@ -10,18 +10,27 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.gdx.bomberman.Main;
 import gui.TextureManager;
 
 /**
  *
  * @author qubasa
  */
-public class EnemyPlayer extends Entity{
+public class EnemyPlayer extends Entity
+{
 
     private float stateTime;
     private String lastMovementKeyPressed = "UP";
-    private SpriteBatch sb;
     private int playerId = 0;
+    private SpriteBatch sb;
+    
+    //Online render variables
+    private boolean executeMovePlayer = false;
+    private boolean executeStopPlayer = true;
+    private String moveDirection = "";
+    private float stopX = pos.x; 
+    private float stopY = pos.y;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -41,6 +50,7 @@ public class EnemyPlayer extends Entity{
         super(null, pos, direction);
         
         this.playerId = playerId;
+        this.sb = Main.sb;
         
         switch(playerId)
         {
@@ -108,29 +118,45 @@ public class EnemyPlayer extends Entity{
 
     
     @Override
-    public void render(SpriteBatch sb)
+    public void update() 
     {
-        //Changes the position of the texture 
-        pos.add(direction);
-        
-        if(this.sb == null)
-            this.sb = sb;
-        
-        //movePlayer(sb, "RIGHT");
             
     }
     
+    
     @Override
-    public void update() {
+    public void render(SpriteBatch sb)
+    {
+        if(this.executeStopPlayer)
+        {
+            stopPlayer(this.stopX, this.stopY);
+        }
+        
+        if(this.executeMovePlayer)
+        {
+            movePlayer(this.moveDirection);
+        }
         
     }
     
-    
-    public void movePlayer(String direction)
+    /**
+     * Moves the player accordingly to the direction specified.
+     * @param movement 
+     */
+    public void movePlayer(String movement)
     {
-         //Input handling and moving the player
-        if(direction.equalsIgnoreCase("LEFT"))
+        //If triggered from outside it will be rendered/activated in the object till stopPlayer gets called
+        this.moveDirection = movement;
+        this.executeMovePlayer = true;
+        this.executeStopPlayer = false;
+        
+        //Changes the position of the texture by adding the number of pixels 
+        //in which the player should go to the position
+        pos.add(this.direction);
+        
+        switch(this.moveDirection)
         {
+            case "LEFT":
             //Set the speed the texture moves in x and y axis
             //this is the method inherited from Entity.java class
             setDirection(-150, 0);
@@ -138,43 +164,51 @@ public class EnemyPlayer extends Entity{
             //Draw the walking animation
             sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
             
+            //Sets the direction in which the still standing image will be rendered
             lastMovementKeyPressed = "LEFT";
-            
-        }else if(direction.equalsIgnoreCase("RIGHT"))
-        {
+            break;
+
+            case "RIGHT":
             setDirection(150, 0);  
-            
             sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
-            
             lastMovementKeyPressed = "RIGHT";
-            
-        }else if(direction.equalsIgnoreCase("UP"))
-        {
+            break;
+
+            case "UP":
             setDirection(0, 150);
-            
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
-            
             lastMovementKeyPressed = "UP";
-            
-        }else if(direction.equalsIgnoreCase("DOWN"))
-        {
+            break;
+
+            case "DOWN":
             setDirection(0, -150);
-            
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
-            
             lastMovementKeyPressed = "DOWN";
-            
+            break;
+           
         }
     }
     
+    
+    /**
+     * Stops the player movements and render him on given positions
+     * @param x int
+     * @param y int
+     */
     public void stopPlayer(float x, float y)
     {
+        //If triggered from outside it will be rendered/activated in the object till movePlayer gets called
+        this.executeStopPlayer = true;
+        this.executeMovePlayer = false;
+        this.stopX = x;
+        this.stopY = y;
+        
         //Sets the texture to no movement
         setDirection(0, 0);
             
         //Sets the positon where to draw the player.
-        this.pos.set(x, y);
-        
+        pos.set(x, y);
+        pos.add(this.direction);
         
         //Draws the player if he stands still
         switch(lastMovementKeyPressed)
@@ -194,25 +228,16 @@ public class EnemyPlayer extends Entity{
             case "DOWN":
                 sb.draw(staticDown, pos.x, pos.y);
                 break;
+
         } 
     }
-    
-    
-    public int getPlayerId()
-    {
-        return this.playerId;
-    }
-    
-    public void setPlayerId(int playerId)
-    {
-        this.playerId = playerId;
-    }
+
     
     /**
-     * Gets the frame out of the animation
-     * @param animation
-     * @return 
-     */
+    * Gets the frame out of the animation
+    * @param animation
+    * @return 
+    */
     private TextureRegion getFrame(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
@@ -226,6 +251,18 @@ public class EnemyPlayer extends Entity{
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
         
         return currentFrame;
+    }
+    
+    
+    /**--------------------GETTER & SETTER--------------------**/
+    public int getPlayerId()
+    {
+        return this.playerId;
+    }
+    
+    public void setPlayerId(int playerId)
+    {
+        this.playerId = playerId;
     }
     
 }

@@ -22,7 +22,7 @@ public class OrthoCamera extends OrthographicCamera {
         //Constructor 1
 	public OrthoCamera() 
         {
-            this(new VirtualViewport(Constants.WIDTH, Constants.HEIGHT));
+            this(new VirtualViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
 	}
 	
         //Constructor2
@@ -88,7 +88,7 @@ public class OrthoCamera extends OrthographicCamera {
 
         public void resize() 
         {
-            VirtualViewport virtualViewport = new VirtualViewport(Constants.WIDTH, Constants.HEIGHT);  
+            VirtualViewport virtualViewport = new VirtualViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT);  
             setVirtualViewport(virtualViewport);  
             updateViewport();
         }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package networkServer;
+import com.badlogic.gdx.Gdx;
 import gui.Constants;
 import java.net.*;
 import java.util.ArrayList;
@@ -15,19 +16,29 @@ import java.util.ArrayList;
 public class ServerStart implements Runnable
 {
 
-    public static void main(String [] args)
-    {
-        startServer();
-    }
-    
     @Override
     public void run() 
     {
-        startServer();
-        Server.DEBUG = false;
+        try
+        {
+            //Initialise server object
+            Server server = new Server(Constants.SERVERPORT, 1, 1);   
+
+            //Accept all client connections and get them as socket object
+            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERTIMEOUT);
+
+            //Starts the game
+            server.startGame(socketList);
+            
+        }catch(Exception e)
+        {
+            System.err.println("ERROR: Unexpected error has been thrown in main" + e);
+            Gdx.app.exit();
+        }
     }
     
-    public static void startServer()
+    
+    public static void main(String [] args)
     {
         try
         {
@@ -35,10 +46,6 @@ public class ServerStart implements Runnable
             //Initialise server object
             Server server = new Server(Constants.SERVERPORT, Constants.MINPLAYERS, Constants.MAXPLAYERS);   
                
-            //Set debug output to true
-            Server.DEBUG = true;
-                    
-            
             //Accept all client connections and get them as socket object
             ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERTIMEOUT);
             
@@ -48,8 +55,7 @@ public class ServerStart implements Runnable
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error has been thrown in main" + e);
-            System.exit(0); 
+            Gdx.app.exit();
         }
     }
-    
 }

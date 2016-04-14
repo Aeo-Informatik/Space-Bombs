@@ -16,18 +16,36 @@ import gui.camera.OrthoCamera;
  */
 public class EntityManager {
     
+    //Vatiables
     private OrthoCamera camera;
     
+    //Array from libgdx is much faster in comparison to an arraylist
+    private Array<EnemyPlayer> enemies = new Array<>();
+    private MainPlayer mainPlayer;
+    
+    //Constructor
     public EntityManager(OrthoCamera camera)
     {
         this.camera = camera;
     }
     
-    //Array from libgdx is much faster in comparison to an arraylist
-    private Array<EnemyPlayer> enemies = new Array<>();
-    private MainPlayer mainPlayer;
 
-    //Update is the same as render only that it doesn't have the SpriteBatch Object
+    public void render(SpriteBatch sb)
+    {
+        //For every Enemy Player Object that is stored in the arraylist execute the render function in it
+        for(EnemyPlayer enemy: enemies)
+        {
+            enemy.render(sb);
+        }
+        
+        //Executes the render function in the mainPlayer object
+        if(mainPlayer != null)
+        {
+            mainPlayer.render(sb);
+        }
+    }
+    
+    
     public void update()
     {
         //For every Enemy Player Object that is stored in the arraylist execute the update function in it
@@ -41,28 +59,34 @@ public class EntityManager {
             mainPlayer.update();
     }
     
+    /**--------------------SPAWN FUNCTIONS--------------------**/
     
-    public void render(SpriteBatch sb)
-    {
-        //For every Enemy Player Object that is stored in the arraylist execute the render function in it
-        for(EnemyPlayer enemy: enemies)
-        {
-            enemy.render(sb);
-        }
-        
-        //Executes the render function in the mainPlayer object
-        if(mainPlayer != null)
-            mainPlayer.render(sb);
-    }
-    
-
+    /**
+     * Creates renders and adds a EnemyPlayer Object to the array
+     * @param x
+     * @param y
+     * @param playerId
+     */
     public void spawnEnemyPlayer(int x, int y, int playerId)
     {
-        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
-        enemies.add(enemyPlayer);
+        try
+        {
+            EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+            enemies.add(enemyPlayer);
+            
+        }catch(Exception e)
+        {
+            throw e;
+        }
     }
     
-    
+    /**
+     * Creates a MainPlayer Object and saves it in EntityManager
+     * @param x
+     * @param y
+     * @param playerId
+     * @throws Exception 
+     */
     public void spawnMainPlayer(int x, int y, int playerId) throws Exception
     {
         try 
@@ -75,12 +99,21 @@ public class EntityManager {
         }
     }
     
-    //Getter & Setter
+
+    /**--------------------GETTER & SETTER--------------------**/
+    /**
+     * 
+     * @return Array<EnemyPlayer>
+     */
     public Array<EnemyPlayer> getEnemieArray()
     {
         return enemies;
     }
     
+    /**
+     * 
+     * @return MainPlayer
+     */
     public MainPlayer getMainPlayer()
     {
         return mainPlayer;

@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import gui.Constants;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,7 +40,7 @@ public class ClientSendThread implements Runnable {
             PrintWriter print = new PrintWriter(socket.getOutputStream(), true);	
 
             //Debug
-            if(networkClient.Client.DEBUG)
+            if(Constants.CLIENTDEBUG)
                 System.out.println("Send to server: " + dataToSend);
 
             //Send string to server
