@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Main;
 import gui.Constants;
@@ -35,6 +36,7 @@ public class MainPlayer extends Entity
     private String sendMoveOnce = "";
     private OrthoCamera camera;
     private MapManager map;
+    private TiledMapTileLayer blockLayer;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -141,8 +143,10 @@ public class MainPlayer extends Entity
     @Override
     public void update() 
     {
-        float oldY = pos.y;
-        float oldX = pos.x;
+        blockLayer = map.getBlockLayer();
+        float oldY = pos.y, oldX = pos.x; 
+        float tileWidth = blockLayer.getTileWidth(), tileHeight = blockLayer.getTileHeight();
+        
         
         switch(getMovingDirection())
         {
