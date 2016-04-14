@@ -33,8 +33,8 @@ public class GameScreen extends Screen{
     public void create() 
     {
         this.camera = new OrthoCamera();
-        this.entityManager = new EntityManager(camera);
         this.mapManager = new MapManager(camera);
+        this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ProcessData(entityManager);
     }
 

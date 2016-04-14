@@ -16,6 +16,7 @@ import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
+import gui.map.MapManager;
 import networkClient.Client;
 
 /**
@@ -32,6 +33,7 @@ public class MainPlayer extends Entity
     private SpriteBatch sb;
     private boolean sendStopOnce = true;
     private OrthoCamera camera;
+    private MapManager map;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -46,7 +48,7 @@ public class MainPlayer extends Entity
     private final TextureRegion staticLeft;
 
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map) throws Exception 
     {
         super(null, pos, direction);
         
@@ -58,6 +60,8 @@ public class MainPlayer extends Entity
             this.camera = camera;
 
             this.sb = Main.sb;
+            this.map = map;
+            
 
         }catch(Exception e)
         {
@@ -91,27 +95,27 @@ public class MainPlayer extends Entity
                     break;
 
                 case 3:
-                    this.walkAnimUp = TextureManager.p2WalkingUpAnim;
-                    this.walkAnimDown = TextureManager.p2WalkingDownAnim;
-                    this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
-                    this.walkAnimRight = TextureManager.p2WalkingRightAnim;
+                    this.walkAnimUp = TextureManager.p3WalkingUpAnim;
+                    this.walkAnimDown = TextureManager.p3WalkingDownAnim;
+                    this.walkAnimLeft = TextureManager.p3WalkingLeftAnim;
+                    this.walkAnimRight = TextureManager.p3WalkingRightAnim;
                     
-                    this.staticUp = TextureManager.p2StaticUp;
-                    this.staticDown = TextureManager.p2StaticDown;
-                    this.staticLeft = TextureManager.p2StaticLeft;
-                    this.staticRight = TextureManager.p2StaticRight;
+                    this.staticUp = TextureManager.p3StaticUp;
+                    this.staticDown = TextureManager.p3StaticDown;
+                    this.staticLeft = TextureManager.p3StaticLeft;
+                    this.staticRight = TextureManager.p3StaticRight;
                     break;
 
                 case 4:
-                    this.walkAnimUp = TextureManager.p2WalkingUpAnim;
-                    this.walkAnimDown = TextureManager.p2WalkingDownAnim;
-                    this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
-                    this.walkAnimRight = TextureManager.p2WalkingRightAnim;
+                    this.walkAnimUp = TextureManager.p4WalkingUpAnim;
+                    this.walkAnimDown = TextureManager.p4WalkingDownAnim;
+                    this.walkAnimLeft = TextureManager.p4WalkingLeftAnim;
+                    this.walkAnimRight = TextureManager.p4WalkingRightAnim;
                     
-                    this.staticUp = TextureManager.p2StaticUp;
-                    this.staticDown = TextureManager.p2StaticDown;
-                    this.staticLeft = TextureManager.p2StaticLeft;
-                    this.staticRight = TextureManager.p2StaticRight;
+                    this.staticUp = TextureManager.p4StaticUp;
+                    this.staticDown = TextureManager.p4StaticDown;
+                    this.staticLeft = TextureManager.p4StaticLeft;
+                    this.staticRight = TextureManager.p4StaticRight;
                     break;
                 
                 default:

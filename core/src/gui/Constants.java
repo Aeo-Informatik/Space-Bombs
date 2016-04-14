@@ -19,7 +19,7 @@ public class Constants {
     
     
     //Main config
-    public static boolean PROCESSDATADEBUG = true;
+    public static boolean PROCESSDATADEBUG = false;
     
     
     //Client config
@@ -32,7 +32,7 @@ public class Constants {
     public static boolean LOCALSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 2;
+    public static int MAXPLAYERS = 4;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
     public static boolean SERVERDEBUG = false;
     
