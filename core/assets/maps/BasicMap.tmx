@@ -21,6 +21,9 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="5" name="brick" tilewidth="32" tileheight="32">
+  <image source="../texturepacks/Beau Texturepack/brick.png" width="32" height="32"/>
+ </tileset>
  <layer name="Floor" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztwwENAAAMw6DOv+kLOSSsmqqqqu8ezqADhQ==
@@ -29,7 +32,7 @@
  <objectgroup name="Entities" width="30" height="30"/>
  <layer name="Blocks" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztl9EKwCAIRYP6/28eexiM8KrXbO3BC76UdnRNx0ZrbRyyr1Xc4ha3uLu4nVyPcDswxLX2pP2M55zJZWvWYiU/jWvlwsrDjZzJvAs7+khizzkxfeSxtz+KjXI9QtxHMzfSE948IlzrTFZ/4rJ3GOlrNJ8ZrraG8tG+Cyheq807M5k5yfpoOa7MK+Y+vPVmciWd+h+77QJ5oQMq
+   eJztlsEKwCAMQ4X5/9+8kyAlbRIV3GEBL6P2WRt1vbXWLw2mR4hx9HO/z32McYq7W//XuHF/EHeHjbioL1l/M1W9dbmqZ5S1Da6bz5Hq59Nn1eHeqDeLXWUgfyrn1+l9xZ3nMu4KJ8sxx7J7g9UYa0Gx6Bs7v4zNuNlcZZ8rKVyUJ3Lj3BVfu1z1DJzmzrEoHu1l5iEWh+qtepTlc98NhetIfVcqX+14i0n9zxlS1qKsU72fY74Vn1dcNd8p7o3xAk2LA9s=
   </data>
  </layer>
 </map>
