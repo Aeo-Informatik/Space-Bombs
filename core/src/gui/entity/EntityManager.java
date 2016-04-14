@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import gui.camera.OrthoCamera;
+import gui.map.MapManager;
 
 /**
  *
@@ -22,11 +23,13 @@ public class EntityManager {
     //Array from libgdx is much faster in comparison to an arraylist
     private Array<EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
+    private MapManager map;
     
     //Constructor
-    public EntityManager(OrthoCamera camera)
+    public EntityManager(OrthoCamera camera, MapManager map)
     {
         this.camera = camera;
+        this.map = map;
     }
     
 
@@ -71,7 +74,7 @@ public class EntityManager {
     {
         try
         {
-            EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId);
+            EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId, map);
             enemies.add(enemyPlayer);
             
         }catch(Exception e)
@@ -91,7 +94,7 @@ public class EntityManager {
     {
         try 
         {
-            mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId, camera);
+            mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId, camera, map);
             
         } catch (Exception e) 
         {
