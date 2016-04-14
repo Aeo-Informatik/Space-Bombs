@@ -9,6 +9,7 @@ package gui.map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import gui.Constants;
@@ -24,12 +25,14 @@ public class MapManager
     private TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
     private OrthoCamera camera;
+    private TiledMapTileLayer blockLayer; 
     
     public MapManager(OrthoCamera camera)
     {
         this.camera = camera;
         this.tiledMap = new TmxMapLoader().load(Constants.MAPPATH);
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
     }
     
     public void render(SpriteBatch sb) 
@@ -49,8 +52,10 @@ public class MapManager
     }
     
     //Getter & Setter
-    public TiledMap getTiledMap()
+    public TiledMapTileLayer getBlockLayer()
     {
-        return tiledMap;
+        return this.blockLayer;
     }
+    
+    
 }
