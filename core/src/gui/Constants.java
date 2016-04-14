@@ -20,12 +20,13 @@ public class Constants {
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
+    public static String MAPPATH = "maps/BasicMap.tmx";
     
     
     //Client config
     public static String CLIENTHOST = "localhost";
     public static int CLIENTPORT = 13199;
-    public static boolean CLIENTDEBUG = true;
+    public static boolean CLIENTDEBUG = false;
     
     
     //Server config
@@ -40,6 +41,5 @@ public class Constants {
     //Ingame variable DO NOT CHANGE!
     public static int PLAYERID = 0;
     public static int AMOUNTENEMYPLAYERS = 0;
-    public static String MAPPATH = "maps/BasicMap.tmx";
     public static volatile boolean PLAYERSPAWNED = false;
 }

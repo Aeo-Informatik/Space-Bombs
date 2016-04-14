@@ -32,6 +32,7 @@ public class MainPlayer extends Entity
     private Client client;
     private SpriteBatch sb;
     private boolean sendStopOnce = true;
+    private String sendMoveOnce = "";
     private OrthoCamera camera;
     private MapManager map;
     
@@ -225,7 +226,7 @@ public class MainPlayer extends Entity
             sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
             
             //Block of code that gets executed just once upon button press
-            if(Gdx.input.isKeyJustPressed(Keys.A) || Gdx.input.isKeyJustPressed(Keys.LEFT))
+            if(sendMoveOnce.equals("LEFT") == false)
             {
                 lastMovementKeyPressed = "LEFT";
                 sendStopOnce = true;
@@ -236,7 +237,9 @@ public class MainPlayer extends Entity
                 //Send data to server
                 client.sendData(moveCommand);
             }
-           
+            
+            sendMoveOnce = "LEFT";
+            
         /*------------------WALKING RIGHT------------------*/
         }else if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT))
         {
@@ -248,7 +251,7 @@ public class MainPlayer extends Entity
             sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
             
             //Block of code that gets executed just once upon button press
-            if(Gdx.input.isKeyJustPressed(Keys.D) || Gdx.input.isKeyJustPressed(Keys.RIGHT))
+            if(sendMoveOnce.equals("RIGHT") == false)
             {
                 lastMovementKeyPressed = "RIGHT";
                 sendStopOnce = true;
@@ -258,6 +261,8 @@ public class MainPlayer extends Entity
                 //Send data to server
                 client.sendData(moveCommand);
             }
+            
+            sendMoveOnce = "RIGHT";
             
         /*------------------WALKING UP------------------*/
         }else if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP))
@@ -270,7 +275,7 @@ public class MainPlayer extends Entity
             sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
             
             //Block of code that gets executed just once upon button press
-            if(Gdx.input.isKeyJustPressed(Keys.W) || Gdx.input.isKeyJustPressed(Keys.UP))
+            if(sendMoveOnce.equals("UP") == false)
             {
                 lastMovementKeyPressed = "UP";
                 sendStopOnce = true;
@@ -281,6 +286,8 @@ public class MainPlayer extends Entity
                 client.sendData(moveCommand);
             }
         
+            sendMoveOnce = "UP";
+            
         /*------------------WALKING DOWN------------------*/
         }else if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN))
         {
@@ -292,7 +299,7 @@ public class MainPlayer extends Entity
             sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
             
             //Block of code that gets executed just once upon button press
-            if(Gdx.input.isKeyJustPressed(Keys.S) || Gdx.input.isKeyJustPressed(Keys.DOWN))
+            if(sendMoveOnce.equals("DOWN") == false)
             {
                 lastMovementKeyPressed = "DOWN";
                 sendStopOnce = true;
@@ -302,6 +309,8 @@ public class MainPlayer extends Entity
                 //Send data to server
                 client.sendData(moveCommand);
             }
+            
+            sendMoveOnce = "DOWN";
             
         /*------------------NO MOVEMENT------------------*/    
         }else
@@ -314,7 +323,9 @@ public class MainPlayer extends Entity
                 client.sendData(moveCommand);
                 
                 sendStopOnce = false;
+                sendMoveOnce = "";
             }
+
             
             //Sets the texture to no movement
             setDirection(0, 0);
@@ -361,11 +372,6 @@ public class MainPlayer extends Entity
             //Draw bomb
             sb.draw(bomb.getB1StaticBurns(),pos.x,pos.y);
             
-            //Block of code that gets executed just once upon button press
-            if(Gdx.input.isKeyJustPressed(Keys.SPACE))
-            {
-                
-            }
         }
         
         
