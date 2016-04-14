@@ -434,7 +434,6 @@ public class MainPlayer extends Entity
         */
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
         
-        
         return currentFrame;
     }
  
