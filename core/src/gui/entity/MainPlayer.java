@@ -162,7 +162,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesLeft()
     {
-        if(isCellBlocked(pos.x -0.5f, pos.y))
+        if(isCellBlocked(pos.x -1f, pos.y))
             return true;
 
         return false;
@@ -170,7 +170,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesRight()
     {
-        if(isCellBlocked(pos.x +0.5f, pos.y))
+        if(isCellBlocked(pos.x +1f, pos.y))
             return true;
 
         return false;
@@ -178,7 +178,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesTop()
     {
-        if(isCellBlocked(pos.x, pos.y +0.5f))
+        if(isCellBlocked(pos.x, pos.y +1f))
             return true;
 
         return false;
@@ -186,7 +186,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesBottom()
     {
-        if(isCellBlocked(pos.x, pos.y -0.5f))
+        if(isCellBlocked(pos.x, pos.y -1f))
             return true;
 
         return false;
