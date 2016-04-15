@@ -4,20 +4,18 @@
   <image source="../blocks/map_tiles.png" width="128" height="32"/>
   <tile id="0">
    <properties>
-    <property name="destructable" value="false"/>
-    <property name="walkable" value="true"/>
+    <property name="" value=""/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
-    <property name="destructable" value="true"/>
-    <property name="walkable" value="false"/>
+    <property name="blocked" value=""/>
+    <property name="destructable" value=""/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="destructable" value="false"/>
-    <property name="walkable" value="false"/>
+    <property name="blocked" value=""/>
    </properties>
   </tile>
  </tileset>
