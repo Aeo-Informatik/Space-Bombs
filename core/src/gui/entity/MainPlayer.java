@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Main;
 import gui.Constants;
@@ -34,13 +35,10 @@ public class MainPlayer extends Entity
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
     private OrthoCamera camera;
-    float cameraSpeed = 2.51f;
     
     //Collision detection
     private MapManager map;
     private TiledMapTileLayer blockLayer;
-    private boolean blockCollisionLeft = false, blockCollisionRight = false, blockCollisionDown = false, blockCollisionUp = false;
-    float oldX = pos.x, oldY = pos.y;
     
     
     //Player animation when he is moving around
@@ -49,11 +47,6 @@ public class MainPlayer extends Entity
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
-    //Player Static image when he stands still
-    private final TextureRegion staticUp;
-    private final TextureRegion staticDown;
-    private final TextureRegion staticRight;
-    private final TextureRegion staticLeft;
 
     
     public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map) throws Exception 
@@ -62,82 +55,51 @@ public class MainPlayer extends Entity
         
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
-        try
-        {
-            this.client = Main.client;
-            this.camera = camera;
 
-            this.sb = Main.sb;
-            this.map = map;
-            this.blockLayer = map.getBlockLayer();
+        this.client = Main.client;
+        this.camera = camera;
+        this.sb = Main.sb;
+        this.map = map;
+        this.blockLayer = map.getBlockLayer();
 
-        }catch(Exception e)
+        //Get apropriate player texture based on player id
+        switch(player)
         {
-           throw e; 
+            case 1:
+                this.walkAnimUp = TextureManager.p1WalkingUpAnim;
+                this.walkAnimDown = TextureManager.p1WalkingDownAnim;
+                this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
+                this.walkAnimRight = TextureManager.p1WalkingRightAnim;
+                break;
+
+            case 2:
+                this.walkAnimUp = TextureManager.p2WalkingUpAnim;
+                this.walkAnimDown = TextureManager.p2WalkingDownAnim;
+                this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
+                this.walkAnimRight = TextureManager.p2WalkingRightAnim;
+                break;
+
+            case 3:
+                this.walkAnimUp = TextureManager.p3WalkingUpAnim;
+                this.walkAnimDown = TextureManager.p3WalkingDownAnim;
+                this.walkAnimLeft = TextureManager.p3WalkingLeftAnim;
+                this.walkAnimRight = TextureManager.p3WalkingRightAnim;
+                break;
+
+            case 4:
+                this.walkAnimUp = TextureManager.p4WalkingUpAnim;
+                this.walkAnimDown = TextureManager.p4WalkingDownAnim;
+                this.walkAnimLeft = TextureManager.p4WalkingLeftAnim;
+                this.walkAnimRight = TextureManager.p4WalkingRightAnim;
+                break;
+
+            default:
+                System.err.println("ERROR: Wrong player number in MainPlayer. Using default p1");
+                this.walkAnimUp = TextureManager.p1WalkingUpAnim;
+                this.walkAnimDown = TextureManager.p1WalkingDownAnim;
+                this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
+                this.walkAnimRight = TextureManager.p1WalkingRightAnim;
         }
-        
-            switch(player)
-            {
-                case 1:
-                    this.walkAnimUp = TextureManager.p1WalkingUpAnim;
-                    this.walkAnimDown = TextureManager.p1WalkingDownAnim;
-                    this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
-                    this.walkAnimRight = TextureManager.p1WalkingRightAnim;
-                    
-                    this.staticUp = TextureManager.p1StaticUp;
-                    this.staticDown = TextureManager.p1StaticDown;
-                    this.staticLeft = TextureManager.p1StaticLeft;
-                    this.staticRight = TextureManager.p1StaticRight;
-                    break;
-
-                case 2:
-                    this.walkAnimUp = TextureManager.p2WalkingUpAnim;
-                    this.walkAnimDown = TextureManager.p2WalkingDownAnim;
-                    this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
-                    this.walkAnimRight = TextureManager.p2WalkingRightAnim;
-                    
-                    this.staticUp = TextureManager.p2StaticUp;
-                    this.staticDown = TextureManager.p2StaticDown;
-                    this.staticLeft = TextureManager.p2StaticLeft;
-                    this.staticRight = TextureManager.p2StaticRight;
-                    break;
-
-                case 3:
-                    this.walkAnimUp = TextureManager.p3WalkingUpAnim;
-                    this.walkAnimDown = TextureManager.p3WalkingDownAnim;
-                    this.walkAnimLeft = TextureManager.p3WalkingLeftAnim;
-                    this.walkAnimRight = TextureManager.p3WalkingRightAnim;
-                    
-                    this.staticUp = TextureManager.p3StaticUp;
-                    this.staticDown = TextureManager.p3StaticDown;
-                    this.staticLeft = TextureManager.p3StaticLeft;
-                    this.staticRight = TextureManager.p3StaticRight;
-                    break;
-
-                case 4:
-                    this.walkAnimUp = TextureManager.p4WalkingUpAnim;
-                    this.walkAnimDown = TextureManager.p4WalkingDownAnim;
-                    this.walkAnimLeft = TextureManager.p4WalkingLeftAnim;
-                    this.walkAnimRight = TextureManager.p4WalkingRightAnim;
-                    
-                    this.staticUp = TextureManager.p4StaticUp;
-                    this.staticDown = TextureManager.p4StaticDown;
-                    this.staticLeft = TextureManager.p4StaticLeft;
-                    this.staticRight = TextureManager.p4StaticRight;
-                    break;
-                
-                default:
-                    System.err.println("ERROR: Wrong player number in MainPlayer. Using default p1");
-                    this.walkAnimUp = TextureManager.p1WalkingUpAnim;
-                    this.walkAnimDown = TextureManager.p1WalkingDownAnim;
-                    this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
-                    this.walkAnimRight = TextureManager.p1WalkingRightAnim;
-                    
-                    this.staticUp = TextureManager.p1StaticUp;
-                    this.staticDown = TextureManager.p1StaticDown;
-                    this.staticLeft = TextureManager.p1StaticLeft;
-                    this.staticRight = TextureManager.p1StaticRight;
-            }
     }
 
     
@@ -148,60 +110,24 @@ public class MainPlayer extends Entity
     @Override
     public void update() 
     {  
-        try
+        //LEFT
+        if(direction.x < 0)
         {
-            //LEFT
-            if(direction.x < 0)
-            {
-                blockCollisionLeft = blockLayer.getCell((int) (pos.x / blockLayer.getTileWidth()), (int) (pos.y / blockLayer.getTileHeight())).getTile().getProperties().containsKey("blocked");
-            }else
-            {
-                blockCollisionLeft = false;
-            }
-            
-            //RIGHT
-            if(direction.x > 0)
-            {
-                blockCollisionRight = blockLayer.getCell((int) (pos.x / blockLayer.getTileWidth()), (int) (pos.y / blockLayer.getTileHeight())).getTile().getProperties().containsKey("blocked");
-            }else
-            {
-                blockCollisionRight = false;
-            }
-            
-            //DOWN
-            if(direction.y < 0)
-            {
-                
-                blockCollisionDown = blockLayer.getCell((int) (pos.x / blockLayer.getTileWidth()), (int) (pos.y / blockLayer.getTileHeight())).getTile().getProperties().containsKey("blocked");
-            }else
-            {
-                blockCollisionDown = false;
-            }
-            
-            //UP
-            if(direction.y > 0)
-            {
-                blockCollisionUp = blockLayer.getCell((int) (pos.x / blockLayer.getTileWidth()), (int) (pos.y / blockLayer.getTileHeight())).getTile().getProperties().containsKey("blocked");
-            }else
-            {
-                blockCollisionUp = false;
-            }
-            
-        }catch(NullPointerException e)
-        {
-            //Do nothing because if there is no block in reach blockCollision returns null
         }
-        
-        if(blockCollisionLeft || blockCollisionRight || blockCollisionUp || blockCollisionDown)
+            
+        //RIGHT
+        if(direction.x > 0)
         {
-            pos.x = oldX;
-            pos.y = oldY;
-            setDirection(0,0);
-            camera.setPosition(pos.x, pos.y);
-        }else
+        }
+
+        //DOWN
+        if(direction.y < 0)
         {
-            oldX = pos.x;
-            oldY = pos.y;
+        }
+
+        //UP
+        if(direction.y > 0)
+        {
         }
     }
     
@@ -221,124 +147,223 @@ public class MainPlayer extends Entity
         inputDoPlayer();
     }
     
+    
+    /**
+     * Checks if the block on given entity coordinates is blocked.
+     * @param x
+     * @param y
+     * @return boolean
+     */
+    private boolean isCellBlocked(float x, float y)
+    {
+        Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("blocked");
+    }
+    
+    private boolean collidesLeft()
+    {
+        if(isCellBlocked(pos.x -0.5f, pos.y))
+            return true;
 
+        return false;
+    }
+    
+    private boolean collidesRight()
+    {
+        if(isCellBlocked(pos.x +0.5f, pos.y))
+            return true;
+
+        return false;
+    }
+    
+    private boolean collidesTop()
+    {
+        if(isCellBlocked(pos.x, pos.y +0.5f))
+            return true;
+
+        return false;
+    }
+    
+    private boolean collidesBottom()
+    {
+        if(isCellBlocked(pos.x, pos.y -0.5f))
+            return true;
+
+        return false;
+    }
+    
     /**
      * Moves the player if keyboard input is received.
      */
     private void inputMovePlayer()
     {
         String moveCommand = "";
-        cameraSpeed = 2.51f; // DO NOT CHANGE
+        float cameraSpeed = 2.51f;
         
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
         {
-            //Set the speed the texture moves in x and y axis
-            //this is the method inherited from Entity.java class
-            setDirection(-150, 0);
-            
-            //Move camera x,y
-            camera.setPosition(pos.x, pos.y);
-            
-            //Draw the walking animation
-            sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
-            
-            //Block of code that gets executed just once upon button press
-            if(sendMoveOnce.equals("LEFT") == false)
+            if(!collidesLeft())
             {
-                lastMovementKeyPressed = "LEFT";
-                sendStopOnce = true;
-                
-                //General: moveEnemyPlayer|playerId|direction|target
-                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
+                //Set the speed the texture moves in x and y axis
+                //This will be added to the position every render cycle
+                setDirection(-150, 0);
 
-                //Send data to server
-                client.sendData(moveCommand);
+                //Move camera x,y
+                camera.translate( -1 * cameraSpeed,0);
+
+                //Draw the walking animation
+                sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+
+                //Block of code that gets executed just once upon button press
+                if(sendMoveOnce.equals("LEFT") == false)
+                {
+                    //Saves position so that the static image looks in the right direction if player doesnt move
+                    lastMovementKeyPressed = "LEFT";
+                    
+                    //Ensures that stop command gets send only once
+                    sendStopOnce = true;
+
+                    //General: moveEnemyPlayer|playerId|direction|target
+                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
+
+                    //Send data to server
+                    client.sendData(moveCommand);
+                }
+
+                //Ensures that walk command gets send only once
+                sendMoveOnce = "LEFT";
+            }else
+            {
+                //Stop player
+                sendStopOnce = true;
+                setDirection(0,0);
+                sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                camera.translate(0, 0);
             }
-            
-            sendMoveOnce = "LEFT";
-            
+             
         /*------------------WALKING RIGHT------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)))
         {
-            setDirection(150, 0);
-            
-            camera.setPosition(pos.x, pos.y);
-            
-            //Draw the walking animation
-            sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
-            
-            //Block of code that gets executed just once upon button press
-            if(sendMoveOnce.equals("RIGHT") == false)
+            if(!collidesRight())
             {
-                lastMovementKeyPressed = "RIGHT";
-                sendStopOnce = true;
+                setDirection(150, 0);
                 
-                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
-
-                //Send data to server
-                client.sendData(moveCommand);
+                camera.translate(cameraSpeed,0);
+                
+                sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                
+                if(sendMoveOnce.equals("RIGHT") == false)
+                {
+                    lastMovementKeyPressed = "RIGHT";
+                    sendStopOnce = true;
+                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
+                    client.sendData(moveCommand);
+                }
+                sendMoveOnce = "RIGHT";
+            }else
+            {
+                sendStopOnce = true;
+                setDirection(0,0);
+                sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                camera.translate(0, 0);
             }
-            
-            sendMoveOnce = "RIGHT";
             
         /*------------------WALKING UP------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)))
         {
-            setDirection(0, 150);
-            
-            camera.setPosition(pos.x, pos.y);
-            
-            //Draw the walking animation
-            sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
-            
-            //Block of code that gets executed just once upon button press
-            if(sendMoveOnce.equals("UP") == false)
+            if(!collidesTop())
             {
-                lastMovementKeyPressed = "UP";
-                sendStopOnce = true;
-                
-                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
+                setDirection(0, 150);
 
-                //Send data to server
-                client.sendData(moveCommand);
+                camera.translate(0, cameraSpeed);
+
+                sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+
+                if(sendMoveOnce.equals("UP") == false)
+                {
+                    lastMovementKeyPressed = "UP";
+                    sendStopOnce = true;
+                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
+                    client.sendData(moveCommand);
+                }
+                sendMoveOnce = "UP";
+            }else
+            {
+                sendStopOnce = true;
+                setDirection(0,0);
+                sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                camera.translate(0, 0);
             }
-        
-            sendMoveOnce = "UP";
             
         /*------------------WALKING DOWN------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)))
         {
-            setDirection(0, -150);
-            
-            camera.setPosition(pos.x, pos.y);
-            
-            //Draw the walking animation
-            sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
-            
-            //Block of code that gets executed just once upon button press
-            if(sendMoveOnce.equals("DOWN") == false)
+            if(!collidesBottom())
             {
-                lastMovementKeyPressed = "DOWN";
+                setDirection(0, -150);
+                camera.translate(0, -1 * cameraSpeed);
+                sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                if(sendMoveOnce.equals("DOWN") == false)
+                {
+                    lastMovementKeyPressed = "DOWN";
+                    sendStopOnce = true;
+                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
+                    client.sendData(moveCommand);
+                }
+                sendMoveOnce = "DOWN";
+            }else
+            {
                 sendStopOnce = true;
-                
-                moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
-
-                //Send data to server
-                client.sendData(moveCommand);
+                setDirection(0,0);
+                sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                camera.translate(0, 0);
             }
-            
-            sendMoveOnce = "DOWN";
             
         /*------------------NO MOVEMENT------------------*/    
         }else
         {
-            stopPlayer();
+            if(sendStopOnce)
+            {
+                moveCommand = "stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*";
+
+                //Send data to server
+                client.sendData(moveCommand);
+                
+                sendStopOnce = false;
+                sendMoveOnce = "";
+            }
+
+            //Sets the texture to no movement
+            setDirection(0, 0);
+            
+            //Draws the player if he stands still
+            switch(lastMovementKeyPressed)
+            {
+                case "LEFT":
+                    sb.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
+                    break;
+
+                case "RIGHT":
+                    sb.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
+                break;
+
+                case "UP":
+                    sb.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
+                    break;
+
+                case "DOWN":
+                    sb.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
+                    break;
+                
+                default:
+                    System.err.println("ERROR: In MainPlayer inputMovePlayer() wrong value in lastMovementKeyPressed: " + lastMovementKeyPressed);
+            }
         }
 
     }
     
-
+    
     /**
      * Action the player can make like placing a bomb
      * @param sb 
@@ -356,7 +381,6 @@ public class MainPlayer extends Entity
             
         }
         
-        
         /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.Z))
         {
@@ -367,8 +391,7 @@ public class MainPlayer extends Entity
             }
             
         }
-        
-        
+
         /*------------------ZOOM INTO GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.U))
         {
@@ -379,13 +402,11 @@ public class MainPlayer extends Entity
             }
         }
         
-        
         /*------------------CAMERA CENTERS PLAYER------------------*/
         if (Gdx.input.isKeyPressed(Keys.P))
         {
             camera.setPosition(pos.x, pos.y);
         }
-        
         
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
@@ -395,51 +416,7 @@ public class MainPlayer extends Entity
         }
     }
     
-    
-    /**
-     * Stops the main player at his current position. 
-     */
-    private void stopPlayer()
-    {
-        if(sendStopOnce)
-            {
-                String moveCommand = "stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*";
 
-                //Send data to server
-                client.sendData(moveCommand);
-                
-                sendStopOnce = false;
-                sendMoveOnce = "";
-            }
-
-            //Sets the texture to no movement
-            setDirection(0, 0);
-            
-            //Draws the player if he stands still
-            switch(lastMovementKeyPressed)
-            {
-                case "LEFT":
-                    sb.draw(staticLeft, pos.x, pos.y);
-                    break;
-
-                case "RIGHT":
-                    sb.draw(staticRight, pos.x, pos.y);
-                break;
-
-                case "UP":
-                    sb.draw(staticUp, pos.x, pos.y);
-                    break;
-
-                case "DOWN":
-                    sb.draw(staticDown, pos.x, pos.y);
-                    break;
-                
-                default:
-                    System.err.println("ERROR: In MainPlayer inputMovePlayer() wrong value in lastMovementKeyPressed: " + lastMovementKeyPressed);
-            }
-    }
-    
-    
     /**
      * Gets the frame out of the animation
      * @param animation

@@ -40,11 +40,6 @@ public class EnemyPlayer extends Entity
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
-    //Player Static image when he stands still
-    private final TextureRegion staticUp;
-    private final TextureRegion staticDown;
-    private final TextureRegion staticRight;
-    private final TextureRegion staticLeft;
     
     
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map) 
@@ -62,11 +57,6 @@ public class EnemyPlayer extends Entity
                 this.walkAnimDown = TextureManager.p1WalkingDownAnim;
                 this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
                 this.walkAnimRight = TextureManager.p1WalkingRightAnim;
-                    
-                this.staticUp = TextureManager.p1StaticUp;
-                this.staticDown = TextureManager.p1StaticDown;
-                this.staticLeft = TextureManager.p1StaticLeft;
-                this.staticRight = TextureManager.p1StaticRight;
                 break;
 
             case 2:
@@ -74,11 +64,6 @@ public class EnemyPlayer extends Entity
                 this.walkAnimDown = TextureManager.p2WalkingDownAnim;
                 this.walkAnimLeft = TextureManager.p2WalkingLeftAnim;
                 this.walkAnimRight = TextureManager.p2WalkingRightAnim;
-                    
-                this.staticUp = TextureManager.p2StaticUp;
-                this.staticDown = TextureManager.p2StaticDown;
-                this.staticLeft = TextureManager.p2StaticLeft;
-                this.staticRight = TextureManager.p2StaticRight;
                 break;
 
             case 3:
@@ -86,11 +71,6 @@ public class EnemyPlayer extends Entity
                 this.walkAnimDown = TextureManager.p3WalkingDownAnim;
                 this.walkAnimLeft = TextureManager.p3WalkingLeftAnim;
                 this.walkAnimRight = TextureManager.p3WalkingRightAnim;
-                    
-                this.staticUp = TextureManager.p3StaticUp;
-                this.staticDown = TextureManager.p3StaticDown;
-                this.staticLeft = TextureManager.p3StaticLeft;
-                this.staticRight = TextureManager.p3StaticRight;
                 break;
 
             case 4:
@@ -98,11 +78,6 @@ public class EnemyPlayer extends Entity
                 this.walkAnimDown = TextureManager.p4WalkingDownAnim;
                 this.walkAnimLeft = TextureManager.p4WalkingLeftAnim;
                 this.walkAnimRight = TextureManager.p4WalkingRightAnim;
-                    
-                this.staticUp = TextureManager.p4StaticUp;
-                this.staticDown = TextureManager.p4StaticDown;
-                this.staticLeft = TextureManager.p4StaticLeft;
-                this.staticRight = TextureManager.p4StaticRight;
                 break;
                 
             default:
@@ -111,11 +86,6 @@ public class EnemyPlayer extends Entity
                 this.walkAnimDown = TextureManager.p1WalkingDownAnim;
                 this.walkAnimLeft = TextureManager.p1WalkingLeftAnim;
                 this.walkAnimRight = TextureManager.p1WalkingRightAnim;
-                    
-                this.staticUp = TextureManager.p1StaticUp;
-                this.staticDown = TextureManager.p1StaticDown;
-                this.staticLeft = TextureManager.p1StaticLeft;
-                this.staticRight = TextureManager.p1StaticRight;
         }
     }
 
@@ -217,21 +187,20 @@ public class EnemyPlayer extends Entity
         switch(lastMovementKeyPressed)
         {
             case "LEFT":
-                sb.draw(staticLeft, pos.x, pos.y);
+                sb.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
                 break;
 
             case "RIGHT":
-                sb.draw(staticRight, pos.x, pos.y);
-                break;
+                sb.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
+            break;
 
             case "UP":
-                sb.draw(staticUp, pos.x, pos.y);
+                sb.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
                 break;
 
             case "DOWN":
-                sb.draw(staticDown, pos.x, pos.y);
+                sb.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
                 break;
-
         } 
     }
 
