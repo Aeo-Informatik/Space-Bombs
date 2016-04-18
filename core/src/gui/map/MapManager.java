@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import gui.Constants;
 import gui.camera.OrthoCamera;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 
 
 /**
@@ -27,7 +29,7 @@ public class MapManager
     private OrthoCamera camera;
     private TiledMapTileLayer blockLayer; 
     private TiledMapTileLayer floorLayer;
-    private TiledMapTileLayer entityLayer;
+    private MapObjects entityLayer;
     
     public MapManager(OrthoCamera camera)
     {
@@ -36,7 +38,7 @@ public class MapManager
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
-        this.entityLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Entities");
+        this.entityLayer =  tiledMap.getLayers().get("Entities").getObjects();
     }
     
     public void render(SpriteBatch sb) 
@@ -61,7 +63,7 @@ public class MapManager
         return this.blockLayer;
     }
     
-    public TiledMapTileLayer getEntityLayer()
+    public MapObjects getEntityLayer()
     {
         return this.entityLayer;
     }
