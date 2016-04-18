@@ -156,8 +156,9 @@ public class MainPlayer extends Entity
      */
     private boolean isCellBlocked(float x, float y)
     {
-        Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
-        return cell != null && cell.getTile().getProperties().containsKey("blocked");
+        return false;
+//        Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+//        return cell != null && cell.getTile().getProperties().containsKey("blocked");
     }
     
     private boolean collidesLeft()
