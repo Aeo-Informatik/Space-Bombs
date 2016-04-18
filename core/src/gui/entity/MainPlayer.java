@@ -6,6 +6,7 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -416,6 +417,18 @@ public class MainPlayer extends Entity
         {
             System.out.println("Quit game with Keyboard [ESC]");
             Gdx.app.exit();
+        }
+        
+        /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
+        if(Gdx.input.isKeyPressed(Keys.F12))
+        {
+            if(Gdx.graphics.isFullscreen())
+            {
+                Gdx.graphics.setWindowedMode(Constants.SCREENWIDTH, Constants.SCREENHEIGHT);
+            }else
+            {
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+            }
         }
     }
     
