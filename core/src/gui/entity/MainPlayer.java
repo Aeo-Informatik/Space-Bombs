@@ -156,15 +156,16 @@ public class MainPlayer extends Entity
      */
     private boolean isCellBlocked(float x, float y)
     {
-        //Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+        Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
         System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
-        //return cell != null && cell.getTile().getProperties().containsKey("blocked");
-        return false;
+        return cell != null && cell.getTile().getProperties().containsKey("blocked");
     }
+    
+    float margin = 3;
     
     private boolean collidesLeft()
     {
-        if(isCellBlocked(pos.x -1f, pos.y))
+        if(isCellBlocked(pos.x - margin, pos.y))
             return true;
 
         return false;
@@ -172,7 +173,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesRight()
     {
-        if(isCellBlocked(pos.x +1f, pos.y))
+        if(isCellBlocked(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() + margin, pos.y))
             return true;
 
         return false;
@@ -180,7 +181,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesTop()
     {
-        if(isCellBlocked(pos.x, pos.y +1f))
+        if(isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() / 2, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + margin))
             return true;
 
         return false;
@@ -188,7 +189,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesBottom()
     {
-        if(isCellBlocked(pos.x, pos.y -1f))
+        if(isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() / 2, pos.y - margin))
             return true;
 
         return false;
