@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Main;
 import gui.TextureManager;
@@ -26,6 +27,7 @@ public class EnemyPlayer extends Entity
     private int playerId = 0;
     private SpriteBatch sb;
     private MapManager map;
+    private TiledMapTileLayer blockLayer;
     
     //Online render variables
     private boolean executeMovePlayer = false;
@@ -49,6 +51,7 @@ public class EnemyPlayer extends Entity
         this.playerId = playerId;
         this.sb = Main.sb;
         this.map = map;
+        this.blockLayer = map.getBlockLayer();
         
         switch(playerId)
         {
@@ -130,33 +133,69 @@ public class EnemyPlayer extends Entity
         switch(this.moveDirection)
         {
             case "LEFT":
-            //Set the speed the texture moves in x and y axis
-            //this is the method inherited from Entity.java class
-            setDirection(-150, 0);
+                if(!collidesLeft())
+                {
+                    //Set the speed the texture moves in x and y axis
+                    //this is the method inherited from Entity.java class
+                    setDirection(-150, 0);
 
-            //Draw the walking animation
-            sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
-            
-            //Sets the direction in which the still standing image will be rendered
-            lastMovementKeyPressed = "LEFT";
+                    //Draw the walking animation
+                    sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+
+                    //Sets the direction in which the still standing image will be rendered
+                    lastMovementKeyPressed = "LEFT";
+                }else
+                {
+                    //Stop player
+                    setDirection(0,0);
+                    sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                    lastMovementKeyPressed = "LEFT";
+                }
             break;
 
             case "RIGHT":
-            setDirection(150, 0);  
-            sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
-            lastMovementKeyPressed = "RIGHT";
+                if(!collidesRight())
+                {
+                    setDirection(150, 0);  
+                    sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                    lastMovementKeyPressed = "RIGHT";
+                }else
+                {
+                    //Stop player
+                    setDirection(0,0);
+                    sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                    lastMovementKeyPressed = "RIGHT";
+                }
             break;
 
             case "UP":
-            setDirection(0, 150);
-            sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
-            lastMovementKeyPressed = "UP";
+                if(!collidesTop())
+                {
+                    setDirection(0, 150);
+                    sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                    lastMovementKeyPressed = "UP";
+                }else
+                {
+                    //Stop player
+                    setDirection(0,0);
+                    sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                    lastMovementKeyPressed = "UP";
+                }
             break;
 
             case "DOWN":
-            setDirection(0, -150);
-            sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
-            lastMovementKeyPressed = "DOWN";
+                if(!collidesTop())
+                {
+                    setDirection(0, -150);
+                    sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                    lastMovementKeyPressed = "DOWN";
+                }else
+                {
+                    //Stop player
+                    setDirection(0,0);
+                    sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                    lastMovementKeyPressed = "DOWN";
+                }
             break;
            
         }
@@ -223,6 +262,54 @@ public class EnemyPlayer extends Entity
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
         
         return currentFrame;
+    }
+    
+    
+        /**
+     * Checks if the block on given entity coordinates is blocked.
+     * @param x
+     * @param y
+     * @return boolean
+     */
+    private boolean isCellBlocked(float x, float y)
+    {
+        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("blocked");
+    }
+    
+    
+    private boolean collidesLeft()
+    {
+        if(isCellBlocked(pos.x - 2, pos.y))
+            return true;
+
+        return false;
+    }
+    
+    private boolean collidesRight()
+    {
+        if(isCellBlocked(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() + 2, pos.y))
+            return true;
+
+        return false;
+    }
+    
+    private boolean collidesTop()
+    {
+        if(isCellBlocked(pos.x + 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() - 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3))
+            return true;
+
+        return false;
+    }
+    
+    private boolean collidesBottom()
+    {
+        //Checks at the players feet on the left if there is a block and on the right
+        if(isCellBlocked(pos.x + 3, pos.y - 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() -3, pos.y - 3))
+            return true;
+
+        return false;
     }
     
     

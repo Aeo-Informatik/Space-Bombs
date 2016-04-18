@@ -157,15 +157,14 @@ public class MainPlayer extends Entity
     private boolean isCellBlocked(float x, float y)
     {
         Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
-        System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
         return cell != null && cell.getTile().getProperties().containsKey("blocked");
     }
     
-    float margin = 3;
     
     private boolean collidesLeft()
     {
-        if(isCellBlocked(pos.x - margin, pos.y))
+        if(isCellBlocked(pos.x - 2, pos.y))
             return true;
 
         return false;
@@ -173,7 +172,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesRight()
     {
-        if(isCellBlocked(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() + margin, pos.y))
+        if(isCellBlocked(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() + 2, pos.y))
             return true;
 
         return false;
@@ -181,7 +180,7 @@ public class MainPlayer extends Entity
     
     private boolean collidesTop()
     {
-        if(isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() / 2, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + margin))
+        if(isCellBlocked(pos.x + 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() - 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3))
             return true;
 
         return false;
@@ -189,7 +188,8 @@ public class MainPlayer extends Entity
     
     private boolean collidesBottom()
     {
-        if(isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() / 2, pos.y - margin))
+        //Checks at the players feet on the left if there is a block and on the right
+        if(isCellBlocked(pos.x + 3, pos.y - 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() -3, pos.y - 3))
             return true;
 
         return false;
