@@ -86,7 +86,7 @@ public class ProcessData
                         if(parameters.length == 2)
                         {
                             //Spawn main player
-                            entityManager.spawnMainPlayer(50, 50, Constants.PLAYERID);
+                            entityManager.spawnMainPlayer(Constants.PLAYERID);
 
                             //Spawn enemy players
                             for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)
@@ -99,7 +99,7 @@ public class ProcessData
                                 if(Constants.PROCESSDATADEBUG)
                                     System.out.println("Spawning enemie with player id: " + i);
                                 
-                                entityManager.spawnEnemyPlayer(200 + i*100, 0, i);
+                                entityManager.spawnEnemyPlayer(i);
                             }
 
                             Constants.PLAYERSPAWNED = true;

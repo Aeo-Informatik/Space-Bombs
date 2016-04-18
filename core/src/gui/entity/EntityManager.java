@@ -6,6 +6,7 @@
 package gui.entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import gui.camera.OrthoCamera;
@@ -66,35 +67,57 @@ public class EntityManager {
     
     /**
      * Creates renders and adds a EnemyPlayer Object to the array
-     * @param x
-     * @param y
      * @param playerId
      */
-    public void spawnEnemyPlayer(int x, int y, int playerId)
+    public void spawnEnemyPlayer(int playerId)
     {
-        try
+        for(int mapY=0; mapY < map.getFloor().getHeight(); mapY++)
         {
-            EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(x,y), new Vector2(0,0), playerId, map);
-            enemies.add(enemyPlayer);
-            
-        }catch(Exception e)
-        {
-            throw e;
+            for(int mapX=0; mapX < map.getFloor().getWidth(); mapX++)
+            {
+                try
+                {
+                    if(map.getFloor().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
+                    {
+                        System.out.println("On cell coordinates " + mapX + " " + mapY + " found spawn for P" + playerId);
+                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, map);
+                        enemies.add(enemyPlayer);
+                    }
+                }catch(NullPointerException e)
+                {
+
+                }
+            }
         }
     }
     
+    
     /**
      * Creates a MainPlayer Object and saves it in EntityManager
-     * @param x
-     * @param y
      * @param playerId
      * @throws Exception 
      */
-    public void spawnMainPlayer(int x, int y, int playerId) throws Exception
+    public void spawnMainPlayer(int playerId) throws Exception
     {
         try 
         {
-            mainPlayer = new MainPlayer(new Vector2(x,y), new Vector2(0,0), playerId, camera, map);
+            for(int mapY=0; mapY < map.getFloor().getHeight(); mapY++)
+            {
+                for(int mapX=0; mapX < map.getFloor().getWidth(); mapX++)
+                {
+                    try
+                    {
+                        if(map.getFloor().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
+                        {
+                            System.out.println("On cell coordinates " + mapX + " " + mapY + " found spawn for P" + playerId);
+                            mainPlayer = new MainPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, camera, map);
+                        }
+                    }catch(NullPointerException e)
+                    {
+                        
+                    }
+                }
+            }
             
         } catch (Exception e) 
         {

@@ -7,10 +7,15 @@
     <property name="" value=""/>
    </properties>
   </tile>
+  <tile id="1">
+   <properties>
+    <property name="Spawn-P1" value=""/>
+   </properties>
+  </tile>
   <tile id="2">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructable" value=""/>
    </properties>
   </tile>
   <tile id="3">
@@ -24,13 +29,13 @@
  </tileset>
  <layer name="Floor" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwwENAAAMw6DOv+kLOSSsmqqqqu8ezqADhQ==
+   eJztzrENAAAIA6DW/4/2DRMZ2GmSAgBwxhw4AD8s0xADhg==
   </data>
  </layer>
  <objectgroup name="Entities" width="30" height="30"/>
  <layer name="Blocks" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlsEKwCAMQ4X5/9+8kyAlbRIV3GEBL6P2WRt1vbXWLw2mR4hx9HO/z32McYq7W//XuHF/EHeHjbioL1l/M1W9dbmqZ5S1Da6bz5Hq59Nn1eHeqDeLXWUgfyrn1+l9xZ3nMu4KJ8sxx7J7g9UYa0Gx6Bs7v4zNuNlcZZ8rKVyUJ3Lj3BVfu1z1DJzmzrEoHu1l5iEWh+qtepTlc98NhetIfVcqX+14i0n9zxlS1qKsU72fY74Vn1dcNd8p7o3xAk2LA9s=
+   eJztlsEKwDAIQwvb/3/zTgORaJK20B0m9DKsr2psd48x7kOL2SX4OPZzv8+9jLWLu5r/17i5Poi7wkZc1Jeqv5V1vXW5qmaUs71cN55jqp53z6rDPZFv5TvLQPpU5tfpfceNexl3hlPFiL7s3mA55lyQL/rG5pexGbfaq9S5M4WL4mRu3juja5erzsBubvRF/qiWlYaYH8q361EVz303FK5j6rvS6WpFW+ws6n9OjMHOgnqe+er9nOPN6DwaqrMSbxf3xHoAcLMD8A==
   </data>
  </layer>
 </map>
