@@ -184,7 +184,7 @@ public class EnemyPlayer extends Entity
             break;
 
             case "DOWN":
-                if(!collidesTop())
+                if(!collidesBottom())
                 {
                     setDirection(0, -150);
                     sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
