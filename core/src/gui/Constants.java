@@ -24,13 +24,13 @@ public class Constants {
     
     
     //Client config
-    public static String CLIENTHOST = "10.5.0.34";
+    public static String CLIENTHOST = "localhost";
     public static int CLIENTPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     
     
     //Server config
-    public static boolean LOCALSERVER = false; // Only for one player. Starts the game instantly
+    public static boolean LOCALSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 4;
