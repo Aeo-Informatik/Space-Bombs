@@ -24,6 +24,7 @@ public class Client {
         try
         {
             this.socket = new Socket(host, port);
+            Sockets.isSocketConnected();
             
         }catch(Exception e)
         {
