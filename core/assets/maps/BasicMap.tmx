@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32">
-  <image source="../blocks/map_tiles.png" width="128" height="32"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="brick" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../texturepacks/Beau Texturepack/brick.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="Map Tiles" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../blocks/map_tiles.png" width="128" height="128"/>
   <tile id="0">
    <properties>
     <property name="" value=""/>
@@ -24,18 +27,15 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="5" name="brick" tilewidth="32" tileheight="32">
-  <image source="../texturepacks/Beau Texturepack/brick.png" width="32" height="32"/>
- </tileset>
- <layer name="Floor" width="30" height="30">
+ <layer name="Floor" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztzrENAAAIA6DW/4/2DRMZ2GmSAgBwxhw4AD8s0xADhg==
+   eJztz8EJAAAIxDBx/6Gdwc+JkEAHaBUAAADs9FFX/Pr169evX795fv369evXr988v379+vXr12+eX79+/X75BQAA4K8BEuoHCQ==
   </data>
  </layer>
- <objectgroup name="Entities" width="30" height="30"/>
- <layer name="Blocks" width="30" height="30">
+ <objectgroup name="Entities"/>
+ <layer name="Blocks" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztlsEKwDAIQwvb/3/zTgORaJK20B0m9DKsr2psd48x7kOL2SX4OPZzv8+9jLWLu5r/17i5Poi7wkZc1Jeqv5V1vXW5qmaUs71cN55jqp53z6rDPZFv5TvLQPpU5tfpfceNexl3hlPFiL7s3mA55lyQL/rG5pexGbfaq9S5M4WL4mRu3juja5erzsBubvRF/qiWlYaYH8q361EVz303FK5j6rvS6WpFW+ws6n9OjMHOgnqe+er9nOPN6DwaqrMSbxf3xHoAcLMD8A==
+   eJzt2TEKw0AQBMEFyYkk//+7xg9wOKcxqoHi4mbD22ZmAwAAAH563eDu3nPW7JiO3u/2RW9L76q19LpvZi297ptZS6/7ZtbS676ZtfS6b2Ytve6bWUuv+2bW0uu+mbX0um9mLb3um1lLr/tm1tL7pPu+Z82u6eh90v8RAAAA/+sD+yAlWA==
   </data>
  </layer>
 </map>
