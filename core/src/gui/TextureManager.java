@@ -75,7 +75,6 @@ public class TextureManager {
     //Bomb
     public static Texture b1Burns;
     public static Animation b1BurnsAnim;
-    public static TextureRegion b1StaticBurns;
     
     
     public static Texture loadTexture (String file) 
@@ -194,6 +193,5 @@ public class TextureManager {
         b1Burns = loadTexture("bombs/normal-bomb_anim.png");
         b1BurnsAnim = new Animation(WalkingAnimTime, new TextureRegion(b1Burns, 0, 0, 16, 16), new TextureRegion(b1Burns, 16, 0, 14, 16),
                                 new TextureRegion(b1Burns, 30, 0, 14, 16));
-        b1StaticBurns = new TextureRegion(b1Burns, 0, 0, 16,16);
     }
 }

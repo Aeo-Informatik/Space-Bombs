@@ -12,39 +12,40 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
+import gui.map.MapManager;
 
 /**
  *
  * @author phinix
  */
-public class Bomb extends Entity{
+public class Bomb extends Entity
+{
     
     private float stateTime;
-    //private String lastMovementKeyPressed = "UP";
     private SpriteBatch sb;
     private int bombId=0;
+    private MapManager map;
     
- 
+    //Bomb Animation
     private  Animation b1BurnsAnim;
-    private  TextureRegion b1StaticBurns;    
 
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction,int id)
+    public Bomb(Vector2 pos, Vector2 direction,int id, MapManager map)
     {
         super(null, pos, direction);
         
-        bombId=id;
+        bombId = id;
+        
+        
         switch(bombId)
         {
             case 1:
                 this.b1BurnsAnim = TextureManager.b1BurnsAnim;   
-                this.b1StaticBurns = TextureManager.b1StaticBurns;
                 break;
                 
             default:
                 System.err.println("ERROR: Wrong bomb number: " + bombId + " in Bomb. Using default b1");
                 this.b1BurnsAnim = TextureManager.b1BurnsAnim; 
-                this.b1StaticBurns = TextureManager.b1StaticBurns;
         }
     
     }
@@ -53,14 +54,7 @@ public class Bomb extends Entity{
     @Override
     public void render(SpriteBatch sb)
     {
-        //Changes the position of the texture 
-        pos.add(direction);
-        
-        if(this.sb == null)
-            this.sb = sb;
-        
-        //movePlayer(sb, "RIGHT");
-            
+
     }
     
     @Override
@@ -83,6 +77,8 @@ public class Bomb extends Entity{
         return currentFrame;
     }
 
+    
+    /**------------Getter & Setter-------------**/
     public int getBombId() {
         return bombId;
     }
@@ -99,12 +95,4 @@ public class Bomb extends Entity{
         this.b1BurnsAnim = b1BurnsAnim;
     }
 
-    public TextureRegion getB1StaticBurns() {
-        return b1StaticBurns;
-    }
-
-    public void setB1StaticBurns(TextureRegion b1StaticBurns) {
-        this.b1StaticBurns = b1StaticBurns;
-    }
-    
 }
