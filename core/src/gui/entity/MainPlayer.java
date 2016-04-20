@@ -385,7 +385,7 @@ public class MainPlayer extends Entity
         /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.Z))
         {
-            if(camera.zoom < 2.5)
+            if(camera.zoom < 2.0)
             {
                 camera.zoom += 0.02;
                 camera.setPosition(pos.x, pos.y);
