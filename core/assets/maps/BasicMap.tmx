@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="120" height="60" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="brick" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+<map version="1.0" orientation="orthogonal" width="120" height="60" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="brick" tilewidth="32" tileheight="32">
   <image source="../texturepacks/Beau Texturepack/brick.png" width="32" height="32"/>
  </tileset>
- <tileset firstgid="2" name="Map Tiles" tilewidth="32" tileheight="32" tilecount="24" columns="4">
+ <tileset firstgid="2" name="Map Tiles" tilewidth="32" tileheight="32">
   <image source="../blocks/map_tiles.png" width="128" height="192"/>
   <tile id="0">
    <properties>
@@ -140,11 +140,11 @@
  </tileset>
  <layer name="Floor" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt07EJwEAMBEHh/Ptv1zh2/oJlBq4BLZoBAAAAAAAAgB3PwrhH3zZ92/Rt07dN3zZ92/Rt07dN3zZ92/Rt07dN3zZ92/Rt07dN3zZ92/Rt07dN3zZ92/Rt07dN3zZ92757n9G3yv8CAAAAAAAA/L1igwae
+   eJzt0zEKw1AMBUGR0knuf13za/cyLDOgC2h5MwAAAAAAAADwjs8Lx57z79/sdP2Ovtvst03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt+38+z87Xa/Rd5v9AgAAAAAAADzdQ3wGuQ==
   </data>
  </layer>
- <objectgroup name="Entities"/>
- <layer name="Blocks" width="120" height="60" visible="0">
+ <objectgroup name="Entities" width="0" height="0"/>
+ <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
    eJztm39PwjAQQC9BDf4zp2wI3/+LuottUub6a5u9Rd8lL8e6OtHHcQXKSUROAAAAAAAAAAAAAAAAAADwg/cD3Ie/zrMB1n/zf0L/3z5egtuvsi0uwXXCa+HXxu/TxM3lzmWJ5K5y3jUYx297v1pfw8Q4cZbH6KUsYvM+5buWe/d78Nver7pN1aHP83q9Ff6cr99R8Gvh92Pi7nzk6rWP3NboEufU8UXwa+FXn5NL6jTWd3N9OMz4be/3t6JbGMOvjd/aOqzp02HGr41fH2HfXKo/SZyP9d8uOMavjd+19Vib8WvjN7ZurllPlwR+bfyuqdfS96/Ccfza+E3FUh+O9enc8wB+bfzW1OuWfoxfG78aqfVvLHJr7Hk949fG7959lv57DFL9N9d3U/Nj8/Br43dLXy39HEkEv1Z+t0TJa2DWz7Z+9+i3PqfqGb82fuc1WFKTqbUz/fcY1Lz+Lc18fnQc1vbfXH3fI+P4be9X98Dt2X/n83w/Zn+Ojd/BOfE5FbX7KfWxM7rjs+DXwq/G0j4ryeTc+1bXhXn4tfGrMTgnqX0Z4VwdH2fj/tjvo9brvQXn8dveL98/AgAAAAAAAAAAAAAAAAB45Avuhlcc
   </data>
