@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import gui.Constants;
 import gui.TextureManager;
 import gui.map.MapManager;
 
@@ -74,14 +75,17 @@ public class Bomb extends Entity
             //Do render in cell HERE!
             sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
             
-            //Get cell positon
-            int cellX = (int) (pos.x / map.getFloorLayer().getTileWidth());
-            int cellY = (int) (pos.y / map.getFloorLayer().getTileHeight());
-            
-            //Create new cell to set it in bomb layer
-            Cell cell = new Cell();
-            cell.setTile(new StaticTiledMapTile(getFrame(this.defaultBombAnim)));
-            map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
+//            //Get cell positon
+//            int cellX = (int) (pos.x / map.getBlockLayer().getTileWidth());
+//            int cellY = (int) (pos.y / map.getBlockLayer().getTileHeight());
+//            
+//            //Create new cell to set it in bomb layer
+//            Cell cell = map.getBombLayer().getCell(cellX, cellY);
+//            if(cell != null)
+//            {
+//                cell.setTile(new StaticTiledMapTile(getFrame(this.defaultBombAnim)));
+//                map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
+//            }
             
         }else
         {
@@ -99,7 +103,7 @@ public class Bomb extends Entity
             
         }else
         {
-            timer += Gdx.graphics.getDeltaTime();
+            timer += Constants.DELTATIME;
         }
     }
     
@@ -107,7 +111,7 @@ public class Bomb extends Entity
     private TextureRegion getFrame(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Gdx.graphics.getDeltaTime(); 
+        this.stateTime += Constants.DELTATIME; 
         
         /*
         Obtains the current frame. This is given by the animation for the current time. 

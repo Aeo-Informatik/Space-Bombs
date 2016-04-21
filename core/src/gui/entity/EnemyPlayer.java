@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
+import gui.Constants;
 import gui.TextureManager;
 import gui.map.MapManager;
 
@@ -254,7 +255,7 @@ public class EnemyPlayer extends Entity
     private TextureRegion getFrame(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Gdx.graphics.getDeltaTime(); 
+        this.stateTime += Constants.DELTATIME; 
         
         /*
         Obtains the current frame. This is given by the animation for the current time. 

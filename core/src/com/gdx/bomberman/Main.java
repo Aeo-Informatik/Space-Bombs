@@ -95,6 +95,9 @@ public class Main implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
+        //Sets the delta time to a constant
+        Constants.DELTATIME = Gdx.graphics.getDeltaTime();
+        
         if(currentScreen != null)
             ScreenManager.getCurrentScreen().update();
             ScreenManager.getCurrentScreen().render(sb);

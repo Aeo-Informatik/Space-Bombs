@@ -444,7 +444,7 @@ public class MainPlayer extends Entity
     private TextureRegion getFrame(Animation animation)
     {
         /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Gdx.graphics.getDeltaTime(); 
+        this.stateTime += Constants.DELTATIME; 
         
         /*
         Obtains the current frame. This is given by the animation for the current time. 
