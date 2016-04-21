@@ -52,6 +52,7 @@ public class Bomb extends Entity
         this.blockLayer = map.getBlockLayer();
         this.bombId = bombId;
         
+        //Please only use ONE switch for better practice (less code > more code)
         switch(bombId)
         {
             case 1:
@@ -73,6 +74,7 @@ public class Bomb extends Entity
     {
         if(bombId == 1)
         {
+            //Do render in cell HERE!
             sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
             
         }else
@@ -86,8 +88,8 @@ public class Bomb extends Entity
     {
         if(timer >= explosionTime)
         {
+            //Do explosion effect HERE!
             this.isExploded = true;
-            
         }else
         {
             timer += Gdx.graphics.getDeltaTime();
