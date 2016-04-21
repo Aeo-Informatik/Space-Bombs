@@ -28,7 +28,7 @@ public class MapManager
     private OrthoCamera camera;
     private TiledMapTileLayer blockLayer; 
     private TiledMapTileLayer floorLayer;
-    private MapObjects entityLayer;
+    private TiledMapTileLayer bombLayer;
     
     public MapManager(OrthoCamera camera)
     {
@@ -37,7 +37,7 @@ public class MapManager
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
-        this.entityLayer =  tiledMap.getLayers().get("Entities").getObjects();
+        this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
     }
     
     public void render(SpriteBatch sb, float deltaTime) 
@@ -62,9 +62,9 @@ public class MapManager
         return this.blockLayer;
     }
     
-    public MapObjects getEntityLayer()
+    public TiledMapTileLayer getBombLayer()
     {
-        return this.entityLayer;
+        return this.bombLayer;
     }
     
     public TiledMapTileLayer getFloor()

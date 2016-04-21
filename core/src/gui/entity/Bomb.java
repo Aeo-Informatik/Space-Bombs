@@ -10,10 +10,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
+import static gui.TextureManager.defaultBomb;
 import gui.map.MapManager;
 
 /**
@@ -35,10 +39,9 @@ public class Bomb extends Entity
     private float explosionTime;
     private int explosionRange;
     private boolean isExploded = false;
-    private int range;
     
     //Bomb 1 Animation
-    private  Animation b1BurnsAnim;
+    private  Animation defaultBombAnim;
 
     //Constructor
     public Bomb(float posX, float posY, Vector2 direction, int bombId, MapManager map,int playerId)
@@ -52,46 +55,35 @@ public class Bomb extends Entity
         switch(bombId)
         {
             case 1:
-
-               
-                timer=1;
-                range=1;
-                break;
-                
-            default:
-                System.err.println("ERROR: Wrong bomb id given. Using default bomb 1");
-                timer=1;
-                range=1;  
-        }
-        
-        this.playerId=playerId;
-        
-        
-        switch(bombId)
-        {
-            case 1:
-
-                this.explosionTime = 3; // In seconds
-                this.explosionRange = 1; // In blocks
-
-                this.b1BurnsAnim = TextureManager.b1BurnsAnim;   
+                this.defaultBombAnim = TextureManager.defaultBombAnim;
+                explosionRange = 1; // In blocks
+                explosionTime = 3; // in seconds
                 break;
                 
             default:
                 System.err.println("ERROR: Wrong bomb number: " + bombId + " in Bomb. Using default b1");
-                this.explosionTime = 3;
-                this.explosionRange = 1;  
-        }   
+                explosionRange = 1; // In blocks
+                explosionTime = 3; // in seconds  
+        } 
     }
     
 
     @Override
-    public void render(SpriteBatch sb, float deltaTime)
+    public void render(SpriteBatch sb)
     {
-        sb.draw(getFrame(b1BurnsAnim), pos.x, pos.y);
+        //int cellX = (int) (pos.x / map.getBlockLayer().getTileWidth()), cellY = (int) (pos.y / map.getBlockLayer().getTileHeight());
         
+        if(bombId == 1)
         {
-            timer-=(1*deltaTime);
+//            Cell cell = new Cell();
+//            //cell.setTile();
+//            
+//            
+//            map.getBombLayer().setCell(cellX, cellY, cell);
+//            
+        }else
+        {
+            System.err.println("Not implementet jet bomb " + bombId);
         }
     }
     
@@ -104,7 +96,6 @@ public class Bomb extends Entity
         }else
         {
             timer += Gdx.graphics.getDeltaTime();
-            System.out.println(timer);
         }
         
     }
@@ -152,19 +143,22 @@ public class Bomb extends Entity
         this.timer = timer;
     }
 
-    public int getRange() {
+    public int getRange() 
+    {
         return explosionRange;
     }
 
     
-    public void explode(){
+    public void explode()
+    {
         
         System.out.println("BombID:" + bombId + " X:" + pos.x + " Y:" + pos.y );
         cellStatus((int)pos.x, (int)pos.y);
         
     }
     
-    public int cellStatus(int x, int y){
+    public int cellStatus(int x, int y)
+    {
         Cell cell =  blockLayer.getCell((int)pos.x, (int)pos.y);
         System.out.println("Cell found");
         System.out.println("X:" + x + " Y:" + y);

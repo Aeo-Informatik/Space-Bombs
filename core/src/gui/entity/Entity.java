@@ -6,7 +6,6 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -35,7 +34,7 @@ public abstract class Entity
     public abstract void update();
     
     
-    public void render(SpriteBatch sb, float deltaTime)
+    public void render(SpriteBatch sb)
     {
         sb.draw(textureRegion, pos.x, pos.y);
     }

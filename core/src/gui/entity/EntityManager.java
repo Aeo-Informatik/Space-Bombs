@@ -40,49 +40,27 @@ public class EntityManager {
         //For every Enemy Player Object that is stored in the arraylist execute the render function in it
         for(EnemyPlayer enemy: enemies)
         {
-            enemy.render(sb, deltaTime);
+            enemy.render(sb);
         }
         
-
-        
-        int i=0;
-        for (Bomb bombs:bombArray)
-        {
-            bombs.render(sb,deltaTime);
-            
-            if(bombs.getTimer()<=0)
-            {
-                
-                bombs.explode();
-                bombArray.removeIndex(i);
-                
-            }    
-            i+=1;
-
         for (Bomb bomb: bombArray)
         {
-            bomb.render(sb,deltaTime);
+            bomb.render(sb);
         }
         
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)
         {
-            mainPlayer.render(sb,deltaTime);
+            mainPlayer.render(sb);
 
         }
         
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)
         {
-            mainPlayer.render(sb, deltaTime);
+            mainPlayer.render(sb);
         }
         
-        
-        
-            
-            
-        
-    }
     }
     
     
@@ -94,6 +72,7 @@ public class EntityManager {
             enemy.update();
         }
         
+        //Deletes bomb if exploded
         for (int i=0; i < bombArray.size; i++)
         {
             this.bombArray.get(i).update();
