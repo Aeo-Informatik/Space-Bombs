@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
 import gui.Constants;
 import gui.TextureManager;
@@ -36,6 +37,7 @@ public class MainPlayer extends Entity
     private String sendMoveOnce = "";
     private OrthoCamera camera;
     private int player;
+    private Array <Bomb> bombArray;
     
     //Collision detection
     private MapManager map;
@@ -50,10 +52,12 @@ public class MainPlayer extends Entity
     
 
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map, Array<Bomb> bombArray) throws Exception 
     {
         super(null, pos, direction);
-        this.player=player;
+        this.player = player;
+        this.bombArray = bombArray;
+        
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
 
