@@ -54,21 +54,6 @@ public class EntityManager {
             mainPlayer.render(sb);
         }
         
-        int i=0;
-        for (Bomb bombs:bombArray)
-        {
-            bombs.changeTimer(1*deltaTime);
-            
-            if(bombs.getTimer()<=0)
-            {
-                
-                bombs.explode();
-                bombArray.removeIndex(i);
-                
-            }
-            i+=1;
-        }
-        
     }
     
     

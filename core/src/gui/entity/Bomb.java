@@ -28,7 +28,8 @@ public class Bomb extends Entity
     private MapManager map;
     private int playerId ;
     private float timer;
-    private int range;
+    private float ExplosionTime;
+    private int ExplosionRange;
     private TiledMapTileLayer blockLayer;
     
     //Bomb Animation
@@ -39,37 +40,23 @@ public class Bomb extends Entity
     {
         super(null, new Vector2(posX, posY), direction);
         
+        this.playerId = playerId;
         this.blockLayer = map.getBlockLayer();
-        
-        bombId = id;
-        
-        switch(bombId)
-        {
-            case 1:
-                timer=10;
-                range=1;
-                break;
-                
-            default:
-                System.err.println("ERROR: Wrong bomb id given. Using default bomb 1");
-                timer=10;
-                range=1;  
-        }
-        
-        this.playerId=playerId;
-        
+        this.bombId = id;
         
         switch(bombId)
         {
             case 1:
+                ExplosionTime = 10; // In seconds
+                ExplosionRange = 1; // In blocks
                 this.b1BurnsAnim = TextureManager.b1BurnsAnim;   
                 break;
                 
             default:
                 System.err.println("ERROR: Wrong bomb number: " + bombId + " in Bomb. Using default b1");
-                this.b1BurnsAnim = TextureManager.b1BurnsAnim; 
-        }
-    
+                timer = 10;
+                ExplosionRange = 1;  
+        }   
     }
     
 
@@ -80,9 +67,12 @@ public class Bomb extends Entity
     }
     
     @Override
-    public void update() {
+    public void update() 
+    {
+        
         
     }
+    
     
     private TextureRegion getFrame(Animation animation)
     {
@@ -101,42 +91,27 @@ public class Bomb extends Entity
 
     
     /**------------Getter & Setter-------------**/
-    public int getBombId() {
+    public int getBombId() 
+    {
         return bombId;
     }
 
-    public void setBombId(int bombId) {
+    public void setBombId(int bombId) 
+    {
         this.bombId = bombId;
     }
 
-    public Animation getB1BurnsAnim() {
-        return b1BurnsAnim;
-    }
-
-    public void setB1BurnsAnim(Animation b1BurnsAnim) {
-        this.b1BurnsAnim = b1BurnsAnim;
-    }
-
-    public float getTimer() {
+    public float getTimer()
+    {
         return timer;
     }
 
-    public void changeTimer(float timer) {
-        this.timer -= timer;
+    public void setTimer(float timer) 
+    {
+        this.timer = timer;
     }
 
     public int getRange() {
-        return range;
+        return ExplosionRange;
     }
-    
-    public void explode(){
-        
-        System.out.println("BombID:" + bombId + "X:" + pos.x + "Y:" + pos.y );
-        
-        ///return cell != null && cell.getTile().getProperties().containsKey("blocked");
-
-    }
-  
-    
-
 }
