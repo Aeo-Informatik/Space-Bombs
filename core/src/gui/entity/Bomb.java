@@ -30,6 +30,7 @@ public class Bomb extends Entity
     private MapManager map;
     private int playerId ;
     private TiledMapTileLayer blockLayer;
+    int cellX, cellY;
     
     //Bomb settings
     private float timer;
@@ -49,6 +50,11 @@ public class Bomb extends Entity
         this.playerId = playerId;
         this.blockLayer = map.getBlockLayer();
         this.bombId = bombId;
+        this.map = map;
+        
+        //Get cell positon
+        this.cellX = (int) (pos.x / map.getBlockLayer().getTileWidth());
+        this.cellY = (int) (pos.y / map.getBlockLayer().getTileHeight());
         
         //Please only use one switch for better practice (less code > more code)
         switch(bombId)
@@ -73,19 +79,14 @@ public class Bomb extends Entity
         if(bombId == 1)
         {
             //Do render in cell HERE!
-            sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
+            //sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
+
+            //Create new cell and set its tile texture
+            Cell cell = new Cell();
+            cell.setTile(new StaticTiledMapTile(getFrame(this.defaultBombAnim)));
             
-//            //Get cell positon
-//            int cellX = (int) (pos.x / map.getBlockLayer().getTileWidth());
-//            int cellY = (int) (pos.y / map.getBlockLayer().getTileHeight());
-//            
-//            //Create new cell to set it in bomb layer
-//            Cell cell = map.getBombLayer().getCell(cellX, cellY);
-//            if(cell != null)
-//            {
-//                cell.setTile(new StaticTiledMapTile(getFrame(this.defaultBombAnim)));
-//                map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
-//            }
+            //Set bomb into bomb layer
+            map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
             
         }else
         {
@@ -100,6 +101,7 @@ public class Bomb extends Entity
         {
             //Do explosion effect HERE!
             this.isExploded = true;
+            map.getBombLayer().getCell((int) cellX, (int) cellY);
             
         }else
         {
