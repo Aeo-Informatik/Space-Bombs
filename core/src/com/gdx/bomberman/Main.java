@@ -94,11 +94,10 @@ public class Main implements ApplicationListener {
         //Clear screen
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        deltaTime = Gdx.graphics.getDeltaTime();
         
         if(currentScreen != null)
             ScreenManager.getCurrentScreen().update();
-            ScreenManager.getCurrentScreen().render(sb,deltaTime);
+            ScreenManager.getCurrentScreen().render(sb);
     }
     
     
