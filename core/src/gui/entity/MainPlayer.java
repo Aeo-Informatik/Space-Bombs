@@ -379,12 +379,13 @@ public class MainPlayer extends Entity
     private void inputDoPlayer()
     {
         /*------------------PLACE BOMB------------------*/
-        if (Gdx.input.isKeyPressed(Keys.SPACE))
+        if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
-            map.getEntityLayer().add(null);
+            
             //Create Bomb Object
-            Bomb bomb = new Bomb(super.getPosition(), direction, 1, map,player); 
-              
+            Bomb bomb = new Bomb(pos.x, pos.y, direction, 1, map,player); 
+            bombArray.add(bomb); 
+            
         }
         
         /*------------------ZOOM OUT GAME------------------*/

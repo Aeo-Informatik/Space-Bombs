@@ -25,7 +25,7 @@ public class EntityManager {
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
     private MapManager map;
-    private Array <Bomb> bomb = new Array<>();
+    private Array <Bomb> bombArray = new Array<>();
     
     //Constructor
     public EntityManager(OrthoCamera camera, MapManager map)
@@ -43,6 +43,11 @@ public class EntityManager {
             enemy.render(sb);
         }
         
+        for (Bomb bombs:bombArray)
+        {
+            bombs.render(sb);
+        }
+        
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)
         {
@@ -57,6 +62,11 @@ public class EntityManager {
         for(EnemyPlayer enemy: enemies)
         {
             enemy.update();
+        }
+        
+        for (Bomb bombs:bombArray)
+        {
+            bombs.update();
         }
         
         //Executes the update function in the mainPlayer object
@@ -111,7 +121,7 @@ public class EntityManager {
                         if(map.getFloor().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                         {
                             System.out.println("On cell coordinates " + mapX + " " + mapY + " found spawn for P" + playerId);
-                            mainPlayer = new MainPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, camera, map);
+                            mainPlayer = new MainPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, camera, map,bombArray);
                         }
                     }catch(NullPointerException e)
                     {

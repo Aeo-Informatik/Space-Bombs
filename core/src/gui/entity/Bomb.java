@@ -31,9 +31,9 @@ public class Bomb extends Entity
     private  Animation b1BurnsAnim;
 
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction,int id, MapManager map,int playerId)
+    public Bomb(float posX, float posY, Vector2 direction,int id, MapManager map,int playerId)
     {
-        super(null, pos, direction);
+        super(null, new Vector2(posX, posY), direction);
         
         bombId = id;
         this.playerId=playerId;
@@ -56,7 +56,7 @@ public class Bomb extends Entity
     @Override
     public void render(SpriteBatch sb)
     {
-
+        sb.draw(getFrame(b1BurnsAnim), pos.x, pos.y);
     }
     
     @Override
@@ -96,5 +96,6 @@ public class Bomb extends Entity
     public void setB1BurnsAnim(Animation b1BurnsAnim) {
         this.b1BurnsAnim = b1BurnsAnim;
     }
+    
 
 }
