@@ -43,9 +43,9 @@ public class EntityManager {
             enemy.render(sb);
         }
         
-        for (Bomb bombs:bombArray)
+        for (Bomb bomb: bombArray)
         {
-            bombs.render(sb);
+            bomb.render(sb);
         }
         
         //Executes the render function in the mainPlayer object
@@ -65,9 +65,14 @@ public class EntityManager {
             enemy.update();
         }
         
-        for (Bomb bombs:bombArray)
+        for (int i=0; i < bombArray.size; i++)
         {
-            bombs.update();
+            this.bombArray.get(i).update();
+            
+            if(this.bombArray.get(i).isExploded())
+            {
+                bombArray.removeIndex(i);
+            }
         }
         
         //Executes the update function in the mainPlayer object

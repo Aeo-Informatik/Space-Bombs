@@ -191,7 +191,7 @@ public class TextureManager {
         
         /*---------------------------------BOMB1---------------------------------------*/
         b1Burns = loadTexture("bombs/normal-bomb_anim.png");
-        b1BurnsAnim = new Animation(WalkingAnimTime, new TextureRegion(b1Burns, 0, 0, 16, 16), new TextureRegion(b1Burns, 16, 0, 14, 16),
-                                new TextureRegion(b1Burns, 30, 0, 14, 16));
+        b1BurnsAnim = new Animation(0.35f, new TextureRegion(b1Burns, 0, 0, 34, 32), new TextureRegion(b1Burns, 34, 0, 32, 32),
+                                new TextureRegion(b1Burns, 67, 0, 30, 32));
     }
 }

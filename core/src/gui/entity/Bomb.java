@@ -21,41 +21,44 @@ import gui.map.MapManager;
  */
 public class Bomb extends Entity
 {
-    
+    //General variables
     private float stateTime;
     private SpriteBatch sb;
-    private int bombId=0;
     private MapManager map;
     private int playerId ;
-    private float timer;
-    private float ExplosionTime;
-    private int ExplosionRange;
     private TiledMapTileLayer blockLayer;
     
-    //Bomb Animation
+    //Bomb settings
+    private float timer;
+    private int bombId;
+    private float explosionTime;
+    private int explosionRange;
+    private boolean isExploded = false;
+    
+    //Bomb 1 Animation
     private  Animation b1BurnsAnim;
 
     //Constructor
-    public Bomb(float posX, float posY, Vector2 direction,int id, MapManager map,int playerId)
+    public Bomb(float posX, float posY, Vector2 direction, int bombId, MapManager map,int playerId)
     {
         super(null, new Vector2(posX, posY), direction);
         
         this.playerId = playerId;
         this.blockLayer = map.getBlockLayer();
-        this.bombId = id;
+        this.bombId = bombId;
         
         switch(bombId)
         {
             case 1:
-                ExplosionTime = 10; // In seconds
-                ExplosionRange = 1; // In blocks
+                this.explosionTime = 3; // In seconds
+                this.explosionRange = 1; // In blocks
                 this.b1BurnsAnim = TextureManager.b1BurnsAnim;   
                 break;
                 
             default:
                 System.err.println("ERROR: Wrong bomb number: " + bombId + " in Bomb. Using default b1");
-                timer = 10;
-                ExplosionRange = 1;  
+                this.explosionTime = 3;
+                this.explosionRange = 1;  
         }   
     }
     
@@ -69,7 +72,14 @@ public class Bomb extends Entity
     @Override
     public void update() 
     {
-        
+        if(timer >= explosionTime)
+        {
+            this.isExploded = true;
+        }else
+        {
+            timer += Gdx.graphics.getDeltaTime();
+            System.out.println(timer);
+        }
         
     }
     
@@ -96,6 +106,11 @@ public class Bomb extends Entity
         return bombId;
     }
 
+    public boolean isExploded()
+    {
+        return this.isExploded;
+    }
+    
     public void setBombId(int bombId) 
     {
         this.bombId = bombId;
@@ -112,6 +127,6 @@ public class Bomb extends Entity
     }
 
     public int getRange() {
-        return ExplosionRange;
+        return explosionRange;
     }
 }
