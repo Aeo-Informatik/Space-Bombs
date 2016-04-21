@@ -26,6 +26,8 @@ public class Bomb extends Entity
     private int bombId=0;
     private MapManager map;
     private int playerId ;
+    private int timer;
+    private int range;
     
     //Bomb Animation
     private  Animation b1BurnsAnim;
@@ -36,6 +38,19 @@ public class Bomb extends Entity
         super(null, new Vector2(posX, posY), direction);
         
         bombId = id;
+        
+        switch(bombId)
+        {
+            case 1:
+                timer=1000;
+                range=1;
+            
+            default:
+                System.err.println("ERROR: Wrong bomb id given. Using default bomb 1");
+                timer=1000;
+                range=1;  
+        }
+        
         this.playerId=playerId;
         
         
@@ -96,6 +111,19 @@ public class Bomb extends Entity
     public void setB1BurnsAnim(Animation b1BurnsAnim) {
         this.b1BurnsAnim = b1BurnsAnim;
     }
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public void changeTimer(int timer) {
+        this.timer = timer;
+    }
+
+    public int getRange() {
+        return range;
+    }
+  
     
 
 }

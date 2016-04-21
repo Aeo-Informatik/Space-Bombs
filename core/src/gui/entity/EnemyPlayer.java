@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
 import gui.TextureManager;
 import gui.map.MapManager;
@@ -28,6 +29,7 @@ public class EnemyPlayer extends Entity
     private SpriteBatch sb;
     private MapManager map;
     private TiledMapTileLayer blockLayer;
+    private Array <Bomb> bombArray;
     
     //Online render variables
     private boolean executeMovePlayer = false;
@@ -44,7 +46,7 @@ public class EnemyPlayer extends Entity
     
     
     
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray) 
     {
         super(null, pos, direction);
         

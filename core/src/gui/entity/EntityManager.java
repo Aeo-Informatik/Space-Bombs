@@ -53,6 +53,10 @@ public class EntityManager {
         {
             mainPlayer.render(sb);
         }
+        for (Bomb bombs:bombArray)
+        {
+            
+        }
     }
     
     
@@ -91,7 +95,7 @@ public class EntityManager {
                     if(map.getFloor().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
                         System.out.println("On cell coordinates " + mapX + " " + mapY + " found spawn for P" + playerId);
-                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, map);
+                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, map, bombArray);
                         enemies.add(enemyPlayer);
                     }
                 }catch(NullPointerException e)
