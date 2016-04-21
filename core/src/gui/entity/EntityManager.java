@@ -22,9 +22,10 @@ public class EntityManager {
     private OrthoCamera camera;
     
     //Array from libgdx is much faster in comparison to an arraylist
-    private Array<EnemyPlayer> enemies = new Array<>();
+    private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
     private MapManager map;
+    private Array <Bomb> bomb = new Array<>();
     
     //Constructor
     public EntityManager(OrthoCamera camera, MapManager map)

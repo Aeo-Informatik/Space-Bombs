@@ -35,6 +35,7 @@ public class MainPlayer extends Entity
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
     private OrthoCamera camera;
+    private int player;
     
     //Collision detection
     private MapManager map;
@@ -52,7 +53,7 @@ public class MainPlayer extends Entity
     public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map) throws Exception 
     {
         super(null, pos, direction);
-        
+        this.player=player;
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
 
@@ -378,7 +379,7 @@ public class MainPlayer extends Entity
         {
             map.getEntityLayer().add(null);
             //Create Bomb Object
-            Bomb bomb = new Bomb(super.getPosition(), direction, 1, map); 
+            Bomb bomb = new Bomb(super.getPosition(), direction, 1, map,player); 
               
         }
         

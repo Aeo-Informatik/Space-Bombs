@@ -25,16 +25,18 @@ public class Bomb extends Entity
     private SpriteBatch sb;
     private int bombId=0;
     private MapManager map;
+    private int playerId ;
     
     //Bomb Animation
     private  Animation b1BurnsAnim;
 
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction,int id, MapManager map)
+    public Bomb(Vector2 pos, Vector2 direction,int id, MapManager map,int playerId)
     {
         super(null, pos, direction);
         
         bombId = id;
+        this.playerId=playerId;
         
         
         switch(bombId)
