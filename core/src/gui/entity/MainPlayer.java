@@ -142,7 +142,7 @@ public class MainPlayer extends Entity
      * @param sb 
      */
     @Override
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch sb, float deltaTime)
     {
         //Adding direction to position
         pos.add(this.direction);

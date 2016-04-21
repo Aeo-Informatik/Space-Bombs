@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.map.MapManager;
@@ -46,13 +47,13 @@ public class Bomb extends Entity
         switch(bombId)
         {
             case 1:
-                timer=10;
+                timer=1;
                 range=1;
                 break;
                 
             default:
                 System.err.println("ERROR: Wrong bomb id given. Using default bomb 1");
-                timer=10;
+                timer=1;
                 range=1;  
         }
         
@@ -74,9 +75,13 @@ public class Bomb extends Entity
     
 
     @Override
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch sb, float deltaTime)
     {
         sb.draw(getFrame(b1BurnsAnim), pos.x, pos.y);
+        
+        {
+            timer-=(1*deltaTime);
+        }
     }
     
     @Override
@@ -131,12 +136,20 @@ public class Bomb extends Entity
     
     public void explode(){
         
-        System.out.println("BombID:" + bombId + "X:" + pos.x + "Y:" + pos.y );
+        System.out.println("BombID:" + bombId + " X:" + pos.x + " Y:" + pos.y );
+        cellStatus((int)pos.x, (int)pos.y);
         
-        ///return cell != null && cell.getTile().getProperties().containsKey("blocked");
-
     }
-  
     
+    public int cellStatus(int x, int y){
+        Cell cell =  blockLayer.getCell((int)pos.x, (int)pos.y);
+        System.out.println("Cell found");
+        System.out.println("X:" + x + " Y:" + y);
+        int cellStatus=0;
+       
+            
+        
+        return cellStatus;
+    }
 
 }

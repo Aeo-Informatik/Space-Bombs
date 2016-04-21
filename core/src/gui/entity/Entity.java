@@ -35,7 +35,7 @@ public abstract class Entity
     public abstract void update();
     
     
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch sb, float deltaTime)
     {
         sb.draw(textureRegion, pos.x, pos.y);
     }

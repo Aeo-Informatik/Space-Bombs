@@ -103,7 +103,7 @@ public class EnemyPlayer extends Entity
     
     
     @Override
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch sb, float deltaTime)
     {
         if(this.executeStopPlayer)
         {
