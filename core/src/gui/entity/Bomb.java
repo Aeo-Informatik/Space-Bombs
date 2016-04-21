@@ -44,7 +44,8 @@ public class Bomb extends Entity
             case 1:
                 timer=1000;
                 range=1;
-            
+                break;
+                
             default:
                 System.err.println("ERROR: Wrong bomb id given. Using default bomb 1");
                 timer=1000;
