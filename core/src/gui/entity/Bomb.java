@@ -117,7 +117,7 @@ public class Bomb extends Entity
     }
 
     public void changeTimer(int timer) {
-        this.timer = timer;
+        this.timer -= timer;
     }
 
     public int getRange() {
