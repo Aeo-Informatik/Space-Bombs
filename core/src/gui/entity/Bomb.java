@@ -131,9 +131,7 @@ public class Bomb extends Entity
     
     public void explode(){
         
-        
-        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (pos.x / blockLayer.getTileWidth()), (int) (pos.y / blockLayer.getTileHeight()));
-        cell.getTile().getProperties().remove(null);
+        System.out.println("BombID:" + bombId + "X:" + pos.x + "Y:" + pos.y );
         
         ///return cell != null && cell.getTile().getProperties().containsKey("blocked");
 

@@ -62,6 +62,7 @@ public class EntityManager {
             if(bombs.getTimer()<=0)
             {
                 
+                bombs.explode();
                 bombArray.removeIndex(i);
                 
             }
