@@ -22,31 +22,38 @@ import gui.map.MapManager;
  */
 public class Bomb extends Entity
 {
-    
+    //General variables
     private float stateTime;
     private SpriteBatch sb;
-    private int bombId=0;
     private MapManager map;
     private int playerId ;
-    private float timer;
-    private int range;
     private TiledMapTileLayer blockLayer;
     
-    //Bomb Animation
+    //Bomb settings
+    private float timer;
+    private int bombId;
+    private float explosionTime;
+    private int explosionRange;
+    private boolean isExploded = false;
+    private int range;
+    
+    //Bomb 1 Animation
     private  Animation b1BurnsAnim;
 
     //Constructor
-    public Bomb(float posX, float posY, Vector2 direction,int id, MapManager map,int playerId)
+    public Bomb(float posX, float posY, Vector2 direction, int bombId, MapManager map,int playerId)
     {
         super(null, new Vector2(posX, posY), direction);
         
+        this.playerId = playerId;
         this.blockLayer = map.getBlockLayer();
-        
-        bombId = id;
+        this.bombId = bombId;
         
         switch(bombId)
         {
             case 1:
+
+               
                 timer=1;
                 range=1;
                 break;
@@ -63,14 +70,18 @@ public class Bomb extends Entity
         switch(bombId)
         {
             case 1:
+
+                this.explosionTime = 3; // In seconds
+                this.explosionRange = 1; // In blocks
+
                 this.b1BurnsAnim = TextureManager.b1BurnsAnim;   
                 break;
                 
             default:
                 System.err.println("ERROR: Wrong bomb number: " + bombId + " in Bomb. Using default b1");
-                this.b1BurnsAnim = TextureManager.b1BurnsAnim; 
-        }
-    
+                this.explosionTime = 3;
+                this.explosionRange = 1;  
+        }   
     }
     
 
@@ -85,9 +96,19 @@ public class Bomb extends Entity
     }
     
     @Override
-    public void update() {
+    public void update() 
+    {
+        if(timer >= explosionTime)
+        {
+            this.isExploded = true;
+        }else
+        {
+            timer += Gdx.graphics.getDeltaTime();
+            System.out.println(timer);
+        }
         
     }
+    
     
     private TextureRegion getFrame(Animation animation)
     {
@@ -106,33 +127,35 @@ public class Bomb extends Entity
 
     
     /**------------Getter & Setter-------------**/
-    public int getBombId() {
+    public int getBombId() 
+    {
         return bombId;
     }
 
-    public void setBombId(int bombId) {
+    public boolean isExploded()
+    {
+        return this.isExploded;
+    }
+    
+    public void setBombId(int bombId) 
+    {
         this.bombId = bombId;
     }
 
-    public Animation getB1BurnsAnim() {
-        return b1BurnsAnim;
-    }
-
-    public void setB1BurnsAnim(Animation b1BurnsAnim) {
-        this.b1BurnsAnim = b1BurnsAnim;
-    }
-
-    public float getTimer() {
+    public float getTimer()
+    {
         return timer;
     }
 
-    public void changeTimer(float timer) {
-        this.timer -= timer;
+    public void setTimer(float timer) 
+    {
+        this.timer = timer;
     }
 
     public int getRange() {
-        return range;
+        return explosionRange;
     }
+
     
     public void explode(){
         
@@ -151,5 +174,6 @@ public class Bomb extends Entity
         
         return cellStatus;
     }
+
 
 }
