@@ -38,6 +38,11 @@ public class Main implements ApplicationListener {
      */
     private BitmapFont font;
     
+    /**
+     * deltaTime is used so that the bombs explode at the same time
+     */
+    private float deltaTime=0;
+    
     
     /**
      * Method called once when the application is created.
@@ -89,10 +94,11 @@ public class Main implements ApplicationListener {
         //Clear screen
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        deltaTime = Gdx.graphics.getDeltaTime();
         
         if(currentScreen != null)
             ScreenManager.getCurrentScreen().update();
-            ScreenManager.getCurrentScreen().render(sb);
+            ScreenManager.getCurrentScreen().render(sb,deltaTime);
     }
     
     

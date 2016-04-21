@@ -40,7 +40,7 @@ public class MapManager
         this.entityLayer =  tiledMap.getLayers().get("Entities").getObjects();
     }
     
-    public void render(SpriteBatch sb) 
+    public void render(SpriteBatch sb, float deltaTime) 
     {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();

@@ -35,7 +35,7 @@ public class EntityManager {
     }
     
 
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch sb, float deltaTime)
     {
         //For every Enemy Player Object that is stored in the arraylist execute the render function in it
         for(EnemyPlayer enemy: enemies)
@@ -57,11 +57,13 @@ public class EntityManager {
         int i=0;
         for (Bomb bombs:bombArray)
         {
-            bombs.changeTimer(1);
+            bombs.changeTimer(1*deltaTime);
             
-            if(bombs.getTimer()==0)
+            if(bombs.getTimer()<=0)
             {
+                
                 bombArray.removeIndex(i);
+                
             }
             i+=1;
         }

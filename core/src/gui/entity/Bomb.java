@@ -10,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.map.MapManager;
@@ -26,8 +27,9 @@ public class Bomb extends Entity
     private int bombId=0;
     private MapManager map;
     private int playerId ;
-    private int timer;
+    private float timer;
     private int range;
+    private TiledMapTileLayer blockLayer;
     
     //Bomb Animation
     private  Animation b1BurnsAnim;
@@ -37,18 +39,20 @@ public class Bomb extends Entity
     {
         super(null, new Vector2(posX, posY), direction);
         
+        this.blockLayer = map.getBlockLayer();
+        
         bombId = id;
         
         switch(bombId)
         {
             case 1:
-                timer=1000;
+                timer=10;
                 range=1;
                 break;
                 
             default:
                 System.err.println("ERROR: Wrong bomb id given. Using default bomb 1");
-                timer=1000;
+                timer=10;
                 range=1;  
         }
         
@@ -113,16 +117,26 @@ public class Bomb extends Entity
         this.b1BurnsAnim = b1BurnsAnim;
     }
 
-    public int getTimer() {
+    public float getTimer() {
         return timer;
     }
 
-    public void changeTimer(int timer) {
+    public void changeTimer(float timer) {
         this.timer -= timer;
     }
 
     public int getRange() {
         return range;
+    }
+    
+    public void explode(){
+        
+        
+        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (pos.x / blockLayer.getTileWidth()), (int) (pos.y / blockLayer.getTileHeight()));
+        cell.getTile().getProperties().remove(null);
+        
+        ///return cell != null && cell.getTile().getProperties().containsKey("blocked");
+
     }
   
     
