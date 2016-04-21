@@ -74,14 +74,14 @@ public class Bomb extends Entity
             //Do render in cell HERE!
             sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
             
-//            //Get cell positon
-//            int cellX = (int) (pos.x / map.getFloor().getTileWidth());
-//            int cellY = (int) (pos.y / map.getFloor().getTileHeight());
-//            
-//            //Create new cell to set it in bomb layer
-//            Cell cell = new Cell();
-//            cell.setTile(new StaticTiledMapTile(getFrame(this.defaultBombAnim)));
-//            map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
+            //Get cell positon
+            int cellX = (int) (pos.x / map.getFloorLayer().getTileWidth());
+            int cellY = (int) (pos.y / map.getFloorLayer().getTileHeight());
+            
+            //Create new cell to set it in bomb layer
+            Cell cell = new Cell();
+            cell.setTile(new StaticTiledMapTile(getFrame(this.defaultBombAnim)));
+            map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
             
         }else
         {
@@ -99,9 +99,8 @@ public class Bomb extends Entity
             
         }else
         {
-            timer += stateTime;
+            timer += Gdx.graphics.getDeltaTime();
         }
-        
     }
     
     

@@ -66,7 +66,7 @@ public class MapManager
         return this.bombLayer;
     }
     
-    public TiledMapTileLayer getFloor()
+    public TiledMapTileLayer getFloorLayer()
     {
         return this.floorLayer;
     }

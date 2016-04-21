@@ -88,15 +88,15 @@ public class EntityManager {
      */
     public void spawnEnemyPlayer(int playerId)
     {
-        for(int mapY=0; mapY < map.getFloor().getHeight(); mapY++)
+        for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
         {
-            for(int mapX=0; mapX < map.getFloor().getWidth(); mapX++)
+            for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
             {
                 try
                 {
-                    if(map.getFloor().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
+                    if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
-                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, map, bombArray);
+                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * map.getFloorLayer().getTileWidth(), mapY * map.getFloorLayer().getTileHeight()), new Vector2(0,0), playerId, map, bombArray);
                         enemies.add(enemyPlayer);
                     }
                 }catch(NullPointerException e)
@@ -117,15 +117,15 @@ public class EntityManager {
     {
         try 
         {
-            for(int mapY=0; mapY < map.getFloor().getHeight(); mapY++)
+            for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
             {
-                for(int mapX=0; mapX < map.getFloor().getWidth(); mapX++)
+                for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
                 {
                     try
                     {
-                        if(map.getFloor().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
+                        if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                         {
-                            mainPlayer = new MainPlayer(new Vector2(mapX * map.getFloor().getTileWidth(), mapY * map.getFloor().getTileHeight()), new Vector2(0,0), playerId, camera, map,bombArray);
+                            mainPlayer = new MainPlayer(new Vector2(mapX * map.getFloorLayer().getTileWidth(), mapY * map.getFloorLayer().getTileHeight()), new Vector2(0,0), playerId, camera, map,bombArray);
                         }
                     }catch(NullPointerException e)
                     {
