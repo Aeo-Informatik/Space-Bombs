@@ -10,14 +10,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
-import static gui.TextureManager.defaultBomb;
 import gui.map.MapManager;
 
 /**
@@ -52,7 +49,7 @@ public class Bomb extends Entity
         this.blockLayer = map.getBlockLayer();
         this.bombId = bombId;
         
-        //Please only use ONE switch for better practice (less code > more code)
+        //Please only use one switch for better practice (less code > more code)
         switch(bombId)
         {
             case 1:
@@ -77,9 +74,18 @@ public class Bomb extends Entity
             //Do render in cell HERE!
             sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
             
+//            //Get cell positon
+//            int cellX = (int) (pos.x / map.getFloor().getTileWidth());
+//            int cellY = (int) (pos.y / map.getFloor().getTileHeight());
+//            
+//            //Create new cell to set it in bomb layer
+//            Cell cell = new Cell();
+//            cell.setTile(new StaticTiledMapTile(getFrame(this.defaultBombAnim)));
+//            map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
+            
         }else
         {
-            System.err.println("Not implementet jet bomb " + bombId);
+            System.err.println("Not implementet jet bombId " + bombId);
         }
     }
     
@@ -90,9 +96,10 @@ public class Bomb extends Entity
         {
             //Do explosion effect HERE!
             this.isExploded = true;
+            
         }else
         {
-            timer += Gdx.graphics.getDeltaTime();
+            timer += stateTime;
         }
         
     }
@@ -154,14 +161,13 @@ public class Bomb extends Entity
         
     }
     
+    //Tipp: If there is no cell at given position a NullPointerException will be thrown ;)
     public int cellStatus(int x, int y)
     {
         Cell cell =  blockLayer.getCell((int)pos.x, (int)pos.y);
         System.out.println("Cell found");
         System.out.println("X:" + x + " Y:" + y);
         int cellStatus=0;
-       
-            
         
         return cellStatus;
     }

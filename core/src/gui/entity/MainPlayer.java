@@ -383,7 +383,7 @@ public class MainPlayer extends Entity
         {
             
             //Create Bomb Object
-            Bomb bomb = new Bomb(pos.x, pos.y, direction, 1, map,player); 
+            Bomb bomb = new Bomb(pos.x, pos.y, direction, 1, map, player); 
             bombArray.add(bomb); 
             
         }

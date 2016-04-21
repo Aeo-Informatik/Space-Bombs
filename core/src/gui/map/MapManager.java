@@ -14,7 +14,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import gui.Constants;
 import gui.camera.OrthoCamera;
-import com.badlogic.gdx.maps.MapObjects;
 
 
 /**
