@@ -40,7 +40,7 @@ public class MapManager
         this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
     }
     
-    public void render(SpriteBatch sb, float deltaTime) 
+    public void render(SpriteBatch sb) 
     {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();

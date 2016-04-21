@@ -71,16 +71,10 @@ public class Bomb extends Entity
     @Override
     public void render(SpriteBatch sb)
     {
-        //int cellX = (int) (pos.x / map.getBlockLayer().getTileWidth()), cellY = (int) (pos.y / map.getBlockLayer().getTileHeight());
-        
         if(bombId == 1)
         {
-//            Cell cell = new Cell();
-//            //cell.setTile();
-//            
-//            
-//            map.getBombLayer().setCell(cellX, cellY, cell);
-//            
+            sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
+            
         }else
         {
             System.err.println("Not implementet jet bomb " + bombId);
@@ -93,6 +87,7 @@ public class Bomb extends Entity
         if(timer >= explosionTime)
         {
             this.isExploded = true;
+            
         }else
         {
             timer += Gdx.graphics.getDeltaTime();

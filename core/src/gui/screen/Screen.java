@@ -26,7 +26,7 @@ public abstract class Screen {
      //Update is the same as render only that it doesn't have the SpriteBatch Object
     public abstract void update();
     
-    public abstract void render(SpriteBatch sb, float deltaTime);
+    public abstract void render(SpriteBatch sb);
     
     public abstract void resize(int width, int height);
     

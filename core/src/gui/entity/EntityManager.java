@@ -35,7 +35,7 @@ public class EntityManager {
     }
     
 
-    public void render(SpriteBatch sb, float deltaTime)
+    public void render(SpriteBatch sb)
     {
         //For every Enemy Player Object that is stored in the arraylist execute the render function in it
         for(EnemyPlayer enemy: enemies)
@@ -52,15 +52,7 @@ public class EntityManager {
         if(mainPlayer != null)
         {
             mainPlayer.render(sb);
-
         }
-        
-        //Executes the render function in the mainPlayer object
-        if(mainPlayer != null)
-        {
-            mainPlayer.render(sb);
-        }
-        
     }
     
     

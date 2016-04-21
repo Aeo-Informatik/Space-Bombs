@@ -6,8 +6,6 @@
 package gui.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
@@ -42,20 +40,20 @@ public class GameScreen extends Screen{
 
     
     @Override
-    public void render(SpriteBatch sb, float deltaTime) 
+    public void render(SpriteBatch sb) 
     { 
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
         
         //Map loading into screen
-        mapManager.render(sb,deltaTime);
+        mapManager.render(sb);
         
         /*---------------BEGIN DRAWING---------------*/
         sb.begin();
         
         //Render entities
-        entityManager.render(sb, deltaTime);
+        entityManager.render(sb);
         
         //Render incoming server instructions
         processData.start();
