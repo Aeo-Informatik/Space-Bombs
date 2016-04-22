@@ -79,7 +79,6 @@ public class Bomb extends Entity
         if(bombId == 1)
         {
             //Do render in cell HERE!
-            //sb.draw(getFrame(defaultBombAnim), pos.x, pos.y);
 
             //Create new cell and set its tile texture
             Cell cell = new Cell();
@@ -101,7 +100,11 @@ public class Bomb extends Entity
         {
             //Do explosion effect HERE!
             this.isExploded = true;
-            map.getBombLayer().getCell((int) cellX, (int) cellY);
+            
+            //Override bomb cell with empty cell
+            map.getBombLayer().setCell((int) cellX, (int) cellY, new Cell());
+            
+            
             
         }else
         {
