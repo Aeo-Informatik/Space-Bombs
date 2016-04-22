@@ -77,6 +77,12 @@ public class TextureManager {
     public static Animation defaultBombAnim;
     
     
+    //Explosion
+    public static Texture defaultExplosion;
+    public static TextureRegion defaultExplosionUpMiddle;
+    
+    
+    
     public static Texture loadTexture (String file) 
     {
 	return new Texture(Gdx.files.internal(file));
@@ -189,9 +195,14 @@ public class TextureManager {
 
         
         
-        /*---------------------------------BOMB1---------------------------------------*/
+        /*---------------------------------DEFAULT BOMB---------------------------------------*/
         defaultBomb = loadTexture("bombs/normal-bomb_anim.png");
-        defaultBombAnim = new Animation(0.35f, new TextureRegion(defaultBomb, 0, 0, 34, 32), new TextureRegion(defaultBomb, 34, 0, 32, 32),
+        defaultBombAnim = new Animation(0.35f, new TextureRegion(defaultBomb, 0, 0, 34, 34), new TextureRegion(defaultBomb, 34, 0, 32, 32),
                                 new TextureRegion(defaultBomb, 67, 0, 30, 32));
+        
+        
+        /*---------------------------------DEFAULT EXPLOSION---------------------------------*/
+        defaultExplosion = loadTexture("bombs/explosion.png");
+        defaultExplosionUpMiddle = new TextureRegion(defaultExplosion, 3, 96, 29, 37);
     }
 }

@@ -96,15 +96,15 @@ public class Bomb extends Entity
     @Override
     public void update() 
     {
+        //Do explosion effect HERE!
         if(timer >= explosionTime)
         {
-            //Do explosion effect HERE!
             this.isExploded = true;
             
             //Override bomb cell with empty cell
             map.getBombLayer().setCell((int) cellX, (int) cellY, new Cell());
             
-            
+            explode();
             
         }else
         {
@@ -112,6 +112,30 @@ public class Bomb extends Entity
         }
     }
     
+    
+    public void explode()
+    {
+        //Explode on x 
+        for(int y=1; y <= explosionRange; y++)
+        {
+            Cell cell = new Cell();
+            cell.setTile(new StaticTiledMapTile(TextureManager.defaultExplosionUpMiddle));
+            map.getBombLayer().setCell((int) cellX, (int) cellY + y, cell);
+        }
+        
+    }
+    
+    
+    //Tipp: If there is no cell at given position a NullPointerException will be thrown ;)
+    public int cellStatus(int x, int y)
+    {
+        Cell cell =  blockLayer.getCell((int)pos.x, (int)pos.y);
+        System.out.println("Cell found");
+        System.out.println("X:" + x + " Y:" + y);
+        int cellStatus=0;
+        
+        return cellStatus;
+    }
     
     private TextureRegion getFrame(Animation animation)
     {
@@ -159,26 +183,4 @@ public class Bomb extends Entity
     {
         return explosionRange;
     }
-
-    
-    public void explode()
-    {
-        
-        System.out.println("BombID:" + bombId + " X:" + pos.x + " Y:" + pos.y );
-        cellStatus((int)pos.x, (int)pos.y);
-        
-    }
-    
-    //Tipp: If there is no cell at given position a NullPointerException will be thrown ;)
-    public int cellStatus(int x, int y)
-    {
-        Cell cell =  blockLayer.getCell((int)pos.x, (int)pos.y);
-        System.out.println("Cell found");
-        System.out.println("X:" + x + " Y:" + y);
-        int cellStatus=0;
-        
-        return cellStatus;
-    }
-
-
 }
