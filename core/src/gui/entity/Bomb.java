@@ -201,4 +201,21 @@ public class Bomb extends Entity
     {
         return explosionRange;
     }
+    
+    public String findCell (float X , float Y )
+    {
+        String cellStatus="null";
+        Cell cell = blockLayer.getCell((int) (X / blockLayer.getTileWidth()), (int) (Y / blockLayer.getTileHeight()));
+        
+        if(cell != null){
+            if(cell.getTile().getProperties().containsKey("undestructible")){
+                cellStatus="undestructible";
+            }else{
+                cellStatus="destructible";
+            }
+        }
+        
+        return cellStatus;
+        
+    }
 }
