@@ -143,14 +143,14 @@
    eJzt0zEKw1AMBUGR0knuf13za/cyLDOgC2h5MwAAAAAAAADwjs8Lx57z79/sdP2Ovtvst03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt+38+z87Xa/Rd5v9AgAAAAAAADzdQ3wGuQ==
   </data>
  </layer>
- <layer name="Bombs" width="120" height="60">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
-  </data>
- </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
    eJztm39PwjAQQC9BDf4zp2wI3/+LuottUub6a5u9Rd8lL8e6OtHHcQXKSUROAAAAAAAAAAAAAAAAAADwg/cD3Ie/zrMB1n/zf0L/3z5egtuvsi0uwXXCa+HXxu/TxM3lzmWJ5K5y3jUYx297v1pfw8Q4cZbH6KUsYvM+5buWe/d78Nver7pN1aHP83q9Ff6cr99R8Gvh92Pi7nzk6rWP3NboEufU8UXwa+FXn5NL6jTWd3N9OMz4be/3t6JbGMOvjd/aOqzp02HGr41fH2HfXKo/SZyP9d8uOMavjd+19Vib8WvjN7ZurllPlwR+bfyuqdfS96/Ccfza+E3FUh+O9enc8wB+bfzW1OuWfoxfG78aqfVvLHJr7Hk949fG7959lv57DFL9N9d3U/Nj8/Br43dLXy39HEkEv1Z+t0TJa2DWz7Z+9+i3PqfqGb82fuc1WFKTqbUz/fcY1Lz+Lc18fnQc1vbfXH3fI+P4be9X98Dt2X/n83w/Zn+Ojd/BOfE5FbX7KfWxM7rjs+DXwq/G0j4ryeTc+1bXhXn4tfGrMTgnqX0Z4VwdH2fj/tjvo9brvQXn8dveL98/AgAAAAAAAAAAAAAAAAB45Avuhlcc
+  </data>
+ </layer>
+ <layer name="Bombs" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
   </data>
  </layer>
 </map>

@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureManager {
     
+    
     //Player 1 Walking
     public static Texture p1WalkingDown;
     public static Animation p1WalkingDownAnim;
@@ -72,18 +73,26 @@ public class TextureManager {
     public static Animation p4WalkingLeftAnim;
     
     
-    //Bomb P1
-    public static Texture defaultBomb;
-    public static Animation defaultBombAnim;
+    //Map Textures
+    public static Texture nullBlock;
+    public static TextureRegion emptyBlock;
     
     
-    //Explosion P1
+    //Normal Bomb 
+    public static Texture normalBomb;
+    public static Animation normalBombAnim;
+    
+    
+    //Explosion effect Player 1
     public static Texture p1Explosion;
     public static TextureRegion p1ExplosionYMiddle;
-    public static TextureRegion p1ExplosionYEnd;
     public static TextureRegion p1ExplosionXMiddle;
-    public static TextureRegion p1ExplosionXEnd;
     public static TextureRegion p1ExplosionCenter;
+    
+    public static TextureRegion p1ExplosionDownEnd;
+    public static TextureRegion p1ExplosionUpEnd;
+    public static TextureRegion p1ExplosionRightEnd;
+    public static TextureRegion p1ExplosionLeftEnd;
     
     
     public static Texture loadTexture (String file) 
@@ -191,18 +200,26 @@ public class TextureManager {
 				new TextureRegion(p4WalkingLeft, 34, 0, 17, 22), new TextureRegion(p4WalkingLeft, 51, 0, 17, 22));
         
         
-        /*---------------------------------P1 BOMB---------------------------------------*/
-        defaultBomb = loadTexture("bombs/normal-bomb_anim.png");
-        defaultBombAnim = new Animation(0.35f, new TextureRegion(defaultBomb, 0, 0, 34, 34), new TextureRegion(defaultBomb, 34, 0, 32, 32),
-                                new TextureRegion(defaultBomb, 67, 0, 30, 32));
+        /*---------------------------------BLOCK TEXTURES---------------------------------------*/
+        nullBlock = loadTexture("blocks/empty.png");
+        emptyBlock = new TextureRegion(nullBlock, 0, 0, 32, 32);
+        
+        
+        /*---------------------------------NORMAL BOMB---------------------------------------*/
+        normalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        normalBombAnim = new Animation(0.35f, new TextureRegion(normalBomb, 0, 0, 34, 34), new TextureRegion(normalBomb, 34, 0, 32, 32),
+                                new TextureRegion(normalBomb, 67, 0, 30, 32));
         
         
         /*---------------------------------P1 EXPLOSION---------------------------------*/
         p1Explosion = loadTexture("bombs/explosion_p1.png");
         p1ExplosionYMiddle = new TextureRegion(p1Explosion, 0, 32, 32, 32);
-        p1ExplosionYEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
         p1ExplosionCenter = new TextureRegion(p1Explosion, 128, 0, 32, 32);
         p1ExplosionXMiddle = new TextureRegion(p1Explosion, 32, 32, 32, 32);
-        p1ExplosionXEnd = new TextureRegion(p1Explosion, 32, 0, 32, 32);
+        
+        p1ExplosionDownEnd = new TextureRegion(p1Explosion, 64, 0, 32, 32);
+        p1ExplosionUpEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
+        p1ExplosionLeftEnd = new TextureRegion(p1Explosion, 32, 0, 32, 32);
+        p1ExplosionRightEnd = new TextureRegion(p1Explosion, 96, 0, 32, 32);
     }
 }
