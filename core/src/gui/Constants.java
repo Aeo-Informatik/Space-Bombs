@@ -43,4 +43,5 @@ public class Constants {
     public static int AMOUNTENEMYPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;
     
+    public static float DELTATIME = 0;
 }
