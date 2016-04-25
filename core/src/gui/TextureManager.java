@@ -28,7 +28,8 @@ public class TextureManager {
     
     public static Texture p1WalkingLeft;
     public static Animation p1WalkingLeftAnim;
-
+    
+    public static Texture p1BombExplosion;
     
     //Player 2
     public static Texture p2WalkingDown;
@@ -43,6 +44,7 @@ public class TextureManager {
     public static Texture p2WalkingLeft;
     public static Animation p2WalkingLeftAnim;
 
+    public static Texture p2BombExplosion;
     
     //Player 3
     public static Texture p3WalkingDown;
@@ -57,6 +59,7 @@ public class TextureManager {
     public static Texture p3WalkingLeft;
     public static Animation p3WalkingLeftAnim;
 
+    public static Texture p3BombExplosion;
     
     //Player 4
     public static Texture p4WalkingDown;
@@ -70,6 +73,8 @@ public class TextureManager {
 
     public static Texture p4WalkingLeft;
     public static Animation p4WalkingLeftAnim;
+    
+    public static Texture p4BombExplosion;
     
     //Bomb
     public static Texture defaultBomb;
@@ -117,7 +122,8 @@ public class TextureManager {
         p1WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p1WalkingLeft, 0, 0, 17, 22), new TextureRegion(p1WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p1WalkingLeft, 34, 0, 17, 22), new TextureRegion(p1WalkingLeft, 51, 0, 17, 22));
 
-        
+        p4BombExplosion = loadTexture("bombs/explosion_p1");
+ 
         
         /*---------------------------------PLAYER 2---------------------------------------*/
         p2WalkingDown = loadTexture("players/player2/walking-down.png");
@@ -142,7 +148,8 @@ public class TextureManager {
         p2WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p2WalkingLeft, 0, 0, 17, 22), new TextureRegion(p2WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p2WalkingLeft, 34, 0, 17, 22), new TextureRegion(p2WalkingLeft, 51, 0, 17, 22));
 
-        
+                p4BombExplosion = loadTexture("bombs/explosion_p2");
+
         
          /*---------------------------------PLAYER 3---------------------------------------*/
         p3WalkingDown = loadTexture("players/player3/walking-down.png");
@@ -167,7 +174,8 @@ public class TextureManager {
         p3WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p3WalkingLeft, 0, 0, 17, 22), new TextureRegion(p3WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p3WalkingLeft, 34, 0, 17, 22), new TextureRegion(p3WalkingLeft, 51, 0, 17, 22));
 
-    
+            p4BombExplosion = loadTexture("bombs/explosion_p3");
+
     
      /*---------------------------------PLAYER 4---------------------------------------*/
         p4WalkingDown = loadTexture("players/player4/walking-down.png");
@@ -191,7 +199,7 @@ public class TextureManager {
         p4WalkingLeft = loadTexture("players/player4/walking-left.png");
         p4WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p4WalkingLeft, 0, 0, 17, 22), new TextureRegion(p4WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p4WalkingLeft, 34, 0, 17, 22), new TextureRegion(p4WalkingLeft, 51, 0, 17, 22));
-
+        p4BombExplosion = loadTexture("bombs/explosion_p4");
         
         
         /*---------------------------------DEFAULT BOMB---------------------------------------*/
@@ -201,7 +209,7 @@ public class TextureManager {
         
         
         /*---------------------------------DEFAULT EXPLOSION---------------------------------*/
-        defaultExplosion = loadTexture("bombs/explosion.png");
+        defaultExplosion = loadTexture("bombs/explosion_p1.png");
         defaultExplosionUpMiddle = new TextureRegion(defaultExplosion, 0, 90, 29, 37);
     }
 }

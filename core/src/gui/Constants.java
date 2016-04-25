@@ -15,7 +15,7 @@ public class Constants {
     public static int SCREENWIDTH = 800;
     public static int SCREENHEIGHT = 480;
     public static boolean FULLSCREEN = false;
-    public static String WINDOWTITEL = "XBlast Reloaded";
+    public static String WINDOWTITEL = "Aeo Bombs";
     
     
     //Main config
