@@ -76,14 +76,18 @@ public class TextureManager {
     
     public static Texture p4BombExplosion;
     
-    //Bomb
+    
+    //Bomb P1
     public static Texture defaultBomb;
     public static Animation defaultBombAnim;
     
     
-    //Explosion
-    public static Texture defaultExplosion;
-    public static TextureRegion defaultExplosionUpMiddle;
+    //Explosion P1
+    public static Texture p1Explosion;
+    public static TextureRegion p1ExplosionYMiddle;
+    public static TextureRegion p1ExplosionYEnd;
+    public static TextureRegion p1ExplosionXMiddle;
+    public static TextureRegion p1ExplosionXEnd;
     
     
     
@@ -209,7 +213,11 @@ public class TextureManager {
         
         
         /*---------------------------------DEFAULT EXPLOSION---------------------------------*/
-        defaultExplosion = loadTexture("bombs/explosion_p1.png");
-        defaultExplosionUpMiddle = new TextureRegion(defaultExplosion, 0, 90, 29, 37);
+        p1Explosion = loadTexture("bombs/explosion_p1.png");
+        p1ExplosionYMiddle = new TextureRegion(p1Explosion, 0, 0, 32, 32);
+        p1ExplosionYEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
+        
+        p1ExplosionXMiddle = new TextureRegion(p1Explosion, 0, 0, 32, 32);
+        p1ExplosionXEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
     }
 }

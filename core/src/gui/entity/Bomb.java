@@ -119,7 +119,7 @@ public class Bomb extends Entity
         for(int y=1; y <= explosionRange; y++)
         {
             Cell cell = new Cell();
-            cell.setTile(new StaticTiledMapTile(TextureManager.defaultExplosionUpMiddle));
+            cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionYMiddle));
             
             //Explosion above
             map.getBombLayer().setCell((int) cellX, (int) cellY + y, cell);
@@ -132,7 +132,7 @@ public class Bomb extends Entity
         for(int x=1; x <= explosionRange; x++)
         {
             Cell cell = new Cell();
-            cell.setTile(new StaticTiledMapTile(TextureManager.defaultExplosionUpMiddle));
+            cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionXMiddle));
             
             //Explosion right
             map.getBombLayer().setCell((int) cellX +x, (int) cellY, cell);
@@ -143,17 +143,6 @@ public class Bomb extends Entity
         
     }
     
-    
-    //Tipp: If there is no cell at given position a NullPointerException will be thrown ;)
-    public int cellStatus(int x, int y)
-    {
-        Cell cell =  blockLayer.getCell((int)pos.x, (int)pos.y);
-        System.out.println("Cell found");
-        System.out.println("X:" + x + " Y:" + y);
-        int cellStatus=0;
-        
-        return cellStatus;
-    }
     
     private TextureRegion getFrame(Animation animation)
     {
