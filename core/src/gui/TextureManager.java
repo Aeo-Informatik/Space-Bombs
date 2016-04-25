@@ -58,7 +58,6 @@ public class TextureManager {
     public static Animation p3WalkingLeftAnim;
 
     
-    
     //Player 4
     public static Texture p4WalkingDown;
     public static Animation p4WalkingDownAnim;
@@ -203,6 +202,6 @@ public class TextureManager {
         
         /*---------------------------------DEFAULT EXPLOSION---------------------------------*/
         defaultExplosion = loadTexture("bombs/explosion.png");
-        defaultExplosionUpMiddle = new TextureRegion(defaultExplosion, 3, 96, 29, 37);
+        defaultExplosionUpMiddle = new TextureRegion(defaultExplosion, 0, 90, 29, 37);
     }
 }
