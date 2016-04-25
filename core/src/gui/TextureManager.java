@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureManager {
     
-    //Player 1
+    //Player 1 Walking
     public static Texture p1WalkingDown;
     public static Animation p1WalkingDownAnim;
     
@@ -29,9 +29,8 @@ public class TextureManager {
     public static Texture p1WalkingLeft;
     public static Animation p1WalkingLeftAnim;
     
-    public static Texture p1BombExplosion;
     
-    //Player 2
+    //Player 2 Walking
     public static Texture p2WalkingDown;
     public static Animation p2WalkingDownAnim;
     
@@ -44,9 +43,8 @@ public class TextureManager {
     public static Texture p2WalkingLeft;
     public static Animation p2WalkingLeftAnim;
 
-    public static Texture p2BombExplosion;
     
-    //Player 3
+    //Player 3 Walking 
     public static Texture p3WalkingDown;
     public static Animation p3WalkingDownAnim;
 
@@ -59,9 +57,8 @@ public class TextureManager {
     public static Texture p3WalkingLeft;
     public static Animation p3WalkingLeftAnim;
 
-    public static Texture p3BombExplosion;
     
-    //Player 4
+    //Player 4 Walking
     public static Texture p4WalkingDown;
     public static Animation p4WalkingDownAnim;
 
@@ -73,8 +70,6 @@ public class TextureManager {
 
     public static Texture p4WalkingLeft;
     public static Animation p4WalkingLeftAnim;
-    
-    public static Texture p4BombExplosion;
     
     
     //Bomb P1
@@ -126,9 +121,6 @@ public class TextureManager {
         p1WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p1WalkingLeft, 0, 0, 17, 22), new TextureRegion(p1WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p1WalkingLeft, 34, 0, 17, 22), new TextureRegion(p1WalkingLeft, 51, 0, 17, 22));
 
-        p4BombExplosion = loadTexture("bombs/explosion_p1");
- 
-        
         /*---------------------------------PLAYER 2---------------------------------------*/
         p2WalkingDown = loadTexture("players/player2/walking-down.png");
         p2WalkingDownAnim = new Animation(WalkingAnimTime, new TextureRegion(p2WalkingDown, 0, 0, 18, 22), new TextureRegion(p2WalkingDown, 18, 0, 18, 22), 
@@ -152,9 +144,6 @@ public class TextureManager {
         p2WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p2WalkingLeft, 0, 0, 17, 22), new TextureRegion(p2WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p2WalkingLeft, 34, 0, 17, 22), new TextureRegion(p2WalkingLeft, 51, 0, 17, 22));
 
-                p4BombExplosion = loadTexture("bombs/explosion_p2");
-
-        
          /*---------------------------------PLAYER 3---------------------------------------*/
         p3WalkingDown = loadTexture("players/player3/walking-down.png");
         p3WalkingDownAnim = new Animation(WalkingAnimTime, new TextureRegion(p3WalkingDown, 0, 0, 18, 22), new TextureRegion(p3WalkingDown, 18, 0, 18, 22), 
@@ -178,9 +167,6 @@ public class TextureManager {
         p3WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p3WalkingLeft, 0, 0, 17, 22), new TextureRegion(p3WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p3WalkingLeft, 34, 0, 17, 22), new TextureRegion(p3WalkingLeft, 51, 0, 17, 22));
 
-            p4BombExplosion = loadTexture("bombs/explosion_p3");
-
-    
      /*---------------------------------PLAYER 4---------------------------------------*/
         p4WalkingDown = loadTexture("players/player4/walking-down.png");
         p4WalkingDownAnim = new Animation(WalkingAnimTime, new TextureRegion(p4WalkingDown, 0, 0, 18, 22), new TextureRegion(p4WalkingDown, 18, 0, 18, 22), 
@@ -203,7 +189,6 @@ public class TextureManager {
         p4WalkingLeft = loadTexture("players/player4/walking-left.png");
         p4WalkingLeftAnim = new Animation(WalkingAnimTime, new TextureRegion(p4WalkingLeft, 0, 0, 17, 22), new TextureRegion(p4WalkingLeft, 17, 0, 17, 22), 
 				new TextureRegion(p4WalkingLeft, 34, 0, 17, 22), new TextureRegion(p4WalkingLeft, 51, 0, 17, 22));
-        p4BombExplosion = loadTexture("bombs/explosion_p4");
         
         
         /*---------------------------------DEFAULT BOMB---------------------------------------*/

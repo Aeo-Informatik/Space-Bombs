@@ -138,7 +138,7 @@ public class Bomb extends Entity
             map.getBombLayer().setCell((int) cellX +x, (int) cellY, cell);
             
             //Explosion left
-            map.getBombLayer().setCell((int) cellX +x, (int) cellY, cell);
+            map.getBombLayer().setCell((int) cellX -x, (int) cellY, cell);
         }
         
     }
