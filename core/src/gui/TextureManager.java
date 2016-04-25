@@ -83,7 +83,7 @@ public class TextureManager {
     public static TextureRegion p1ExplosionYEnd;
     public static TextureRegion p1ExplosionXMiddle;
     public static TextureRegion p1ExplosionXEnd;
-    
+    public static TextureRegion p1ExplosionCenter;
     
     
     public static Texture loadTexture (String file) 
@@ -191,18 +191,18 @@ public class TextureManager {
 				new TextureRegion(p4WalkingLeft, 34, 0, 17, 22), new TextureRegion(p4WalkingLeft, 51, 0, 17, 22));
         
         
-        /*---------------------------------DEFAULT BOMB---------------------------------------*/
+        /*---------------------------------P1 BOMB---------------------------------------*/
         defaultBomb = loadTexture("bombs/normal-bomb_anim.png");
         defaultBombAnim = new Animation(0.35f, new TextureRegion(defaultBomb, 0, 0, 34, 34), new TextureRegion(defaultBomb, 34, 0, 32, 32),
                                 new TextureRegion(defaultBomb, 67, 0, 30, 32));
         
         
-        /*---------------------------------DEFAULT EXPLOSION---------------------------------*/
+        /*---------------------------------P1 EXPLOSION---------------------------------*/
         p1Explosion = loadTexture("bombs/explosion_p1.png");
-        p1ExplosionYMiddle = new TextureRegion(p1Explosion, 0, 0, 32, 32);
+        p1ExplosionYMiddle = new TextureRegion(p1Explosion, 0, 32, 32, 32);
         p1ExplosionYEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
-        
-        p1ExplosionXMiddle = new TextureRegion(p1Explosion, 0, 0, 32, 32);
-        p1ExplosionXEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
+        p1ExplosionCenter = new TextureRegion(p1Explosion, 128, 0, 32, 32);
+        p1ExplosionXMiddle = new TextureRegion(p1Explosion, 32, 32, 32, 32);
+        p1ExplosionXEnd = new TextureRegion(p1Explosion, 32, 0, 32, 32);
     }
 }

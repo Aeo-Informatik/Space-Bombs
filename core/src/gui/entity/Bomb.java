@@ -115,6 +115,12 @@ public class Bomb extends Entity
     
     public void explode()
     {
+        Cell cellCenter = new Cell();
+        cellCenter.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionYMiddle));
+            
+        //Explosion above
+        map.getBombLayer().setCell((int) cellX, (int) cellY, cellCenter);
+        
         //Explode on y 
         for(int y=1; y <= explosionRange; y++)
         {
@@ -135,10 +141,10 @@ public class Bomb extends Entity
             cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionXMiddle));
             
             //Explosion right
-            map.getBombLayer().setCell((int) cellX +x, (int) cellY, cell);
+            map.getBombLayer().setCell((int) cellX + x, (int) cellY, cell);
             
             //Explosion left
-            map.getBombLayer().setCell((int) cellX -x, (int) cellY, cell);
+            map.getBombLayer().setCell((int) cellX - x, (int) cellY, cell);
         }
         
     }
