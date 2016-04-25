@@ -23,6 +23,7 @@ public class EntityManager {
     //Array from libgdx is much faster in comparison to an arraylist
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
+    private Spectator spectator;
     private MapManager map;
     private Array <Bomb> bombArray = new Array<>();
     
@@ -51,7 +52,11 @@ public class EntityManager {
         if(mainPlayer != null)
         {
             mainPlayer.render(sb);
+        }else
+        {
+            spectator.render(sb);
         }
+                    
     }
     
     
@@ -76,7 +81,21 @@ public class EntityManager {
         
         //Executes the update function in the mainPlayer object
         if(mainPlayer != null)
+        {
             mainPlayer.update();
+            
+            if(mainPlayer.getLife() == 0)
+            {
+                //Create new spectator
+                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0));
+                
+                //Delete main player
+                mainPlayer = null; 
+            }
+        }else
+        {
+            spectator.update();
+        }
     }
     
     /**--------------------SPAWN FUNCTIONS--------------------**/

@@ -165,6 +165,7 @@ public class MainPlayer extends Entity
     private boolean touchesDeadlyBlock()
     {
         float margin = 4f;
+        
         //Checks from the walking right texture a collision on the top right, top left, down left, down right
         if(isCellDeadly(pos.x + margin, pos.y) || isCellDeadly(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() - margin, pos.y) || isCellDeadly(pos.x + margin, pos.y  + walkAnimRight.getKeyFrame(0).getRegionHeight()) || isCellDeadly(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() - margin, pos.y  + walkAnimRight.getKeyFrame(0).getRegionHeight()))
         {
@@ -500,6 +501,16 @@ public class MainPlayer extends Entity
     public void setPosition(Vector2 pos)
     {
         this.pos = pos;
+    }
+    
+    public int getLife()
+    {
+        return this.life;
+    }
+    
+    public void setLife(int life)
+    {
+        this.life = life;
     }
 
 }

@@ -1,0 +1,7 @@
+1) Placing bomb, exploding, killing players, deleting blocks, stopping explosion on undestroyable blocks
+2) Implementing bomb placing into server/client
+
+1) Spectator --> If player is dead watching the game in spectator mode
+2) Implementing player death (ghost movement isnt required to be send) into server/client
+
+
