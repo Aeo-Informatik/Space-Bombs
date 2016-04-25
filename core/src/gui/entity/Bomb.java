@@ -186,8 +186,9 @@ public class Bomb extends Entity
         //Create new cell and set texture
         Cell cellCenter = new Cell();
         cellCenter.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionCenter));
-            
-        //Explosion center replaces bomb texture
+        cellCenter.getTile().getProperties().put("death", null);
+        
+        //Explosion center, replaces bomb texture
         map.getBombLayer().setCell(cellX, cellY, cellCenter);
         
         //Explode on y 
@@ -197,6 +198,7 @@ public class Bomb extends Entity
             {
                 Cell cell = new Cell();
                 cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionYMiddle));
+                cell.getTile().getProperties().put("death", null);
                 
                 map.getBombLayer().setCell(cellX, cellY + y, cell);
                 map.getBombLayer().setCell(cellX, cellY - y, cell);
@@ -205,10 +207,14 @@ public class Bomb extends Entity
                 //Set end of explosion
                 Cell cellUp = new Cell();
                 cellUp.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionUpEnd));
+                cellUp.getTile().getProperties().put("death", null);
+                
                 map.getBombLayer().setCell(cellX, cellY + y, cellUp);
                 
                 Cell cellDown = new Cell();
                 cellDown.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionDownEnd));
+                cellDown.getTile().getProperties().put("death", null);
+                
                 map.getBombLayer().setCell(cellX, cellY - y, cellDown);
             }
         }
@@ -221,6 +227,8 @@ public class Bomb extends Entity
                 //Set cell with middle explosion texture
                 Cell cell = new Cell();
                 cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionXMiddle));
+                cell.getTile().getProperties().put("death", null);
+                
                 map.getBombLayer().setCell(cellX + x, cellY, cell);
                 map.getBombLayer().setCell(cellX - x, cellY, cell);
                 
@@ -229,10 +237,14 @@ public class Bomb extends Entity
                 //Set end of explosion
                 Cell cellRight = new Cell();
                 cellRight.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionRightEnd));
+                cellRight.getTile().getProperties().put("death", null);
+                
                 map.getBombLayer().setCell(cellX + x, cellY, cellRight);
                 
                 Cell cellLeft = new Cell();
                 cellLeft.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionLeftEnd));
+                cellLeft.getTile().getProperties().put("death", null);
+                
                 map.getBombLayer().setCell(cellX - x, cellY, cellLeft);
             }
         }
