@@ -38,11 +38,12 @@ public class MainPlayer extends Entity
     private OrthoCamera camera;
     private int player;
     private Array <Bomb> bombArray;
+    private int life = 1;
     
     //Collision detection
     private MapManager map;
     private TiledMapTileLayer blockLayer;
-    
+    private TiledMapTileLayer bombLayer;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -66,7 +67,8 @@ public class MainPlayer extends Entity
         this.sb = Main.sb;
         this.map = map;
         this.blockLayer = map.getBlockLayer();
-
+        this.bombLayer = map.getBombLayer();
+        
         //Get apropriate player texture based on player id
         switch(player)
         {
@@ -150,8 +152,34 @@ public class MainPlayer extends Entity
         //Keyboard interception
         inputMovePlayer();
         inputDoPlayer();
+        
+        if(touchesDeadlyBlock())
+        {
+            System.out.println("Touched deadly tile!");
+            life -= 1;
+        }
+        
     }
     
+    
+    private boolean touchesDeadlyBlock()
+    {
+        float margin = 4f;
+        //Checks from the walking right texture a collision on the top right, top left, down left, down right
+        if(isCellDeadly(pos.x + margin, pos.y) || isCellDeadly(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() - margin, pos.y) || isCellDeadly(pos.x + margin, pos.y  + walkAnimRight.getKeyFrame(0).getRegionHeight()) || isCellDeadly(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() - margin, pos.y  + walkAnimRight.getKeyFrame(0).getRegionHeight()))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
+    private boolean isCellDeadly(float x, float y)
+    {
+        Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("deadly");
+    }
     
     /**
      * Checks if the block on given entity coordinates is blocked.
