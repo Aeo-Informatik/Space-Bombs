@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="120" height="60" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="brick" tilewidth="32" tileheight="32">
-  <image source="../texturepacks/Beau Texturepack/brick.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="2" name="Map Tiles" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32">
   <image source="../blocks/map_tiles.png" width="128" height="192"/>
   <tile id="0">
    <properties>
     <property name="" value=""/>
    </properties>
   </tile>
+  <tile id="1">
+   <properties>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
   <tile id="2">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="undestructible " value=""/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
     <property name="blocked" value=""/>
-    <property name="undestructible" value=""/>
+    <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="6">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="7">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="8">
@@ -68,84 +70,84 @@
   </tile>
   <tile id="12">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="13">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="14">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="15">
    <properties>
-    <property name="destructible" value=""/>
+    <property name="" value=""/>
    </properties>
   </tile>
   <tile id="16">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="17">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="18">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="19">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="20">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="21">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="22">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
   <tile id="23">
    <properties>
+    <property name="" value=""/>
     <property name="blocked" value=""/>
-    <property name="destructible" value=""/>
    </properties>
   </tile>
  </tileset>
  <layer name="Floor" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt0zEKw1AMBUGR0knuf13za/cyLDOgC2h5MwAAAAAAAADwjs8Lx57z79/sdP2Ovtvst03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt+38+z87Xa/Rd5v9AgAAAAAAADzdQ3wGuQ==
+   eJzt0zEKw1AMBUGldJL7n9f82r0MywzoAlreDAAAAAAAAAC84/PCsef8+zc7Xb+j7zb7bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bTv//s9O12v03Wa/AAAAAAAAAE83dd4DcA==
   </data>
  </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJztm39PwjAQQC9BDf4zp2wI3/+LuottUub6a5u9Rd8lL8e6OtHHcQXKSUROAAAAAAAAAAAAAAAAAADwg/cD3Ie/zrMB1n/zf0L/3z5egtuvsi0uwXXCa+HXxu/TxM3lzmWJ5K5y3jUYx297v1pfw8Q4cZbH6KUsYvM+5buWe/d78Nver7pN1aHP83q9Ff6cr99R8Gvh92Pi7nzk6rWP3NboEufU8UXwa+FXn5NL6jTWd3N9OMz4be/3t6JbGMOvjd/aOqzp02HGr41fH2HfXKo/SZyP9d8uOMavjd+19Vib8WvjN7ZurllPlwR+bfyuqdfS96/Ccfza+E3FUh+O9enc8wB+bfzW1OuWfoxfG78aqfVvLHJr7Hk949fG7959lv57DFL9N9d3U/Nj8/Br43dLXy39HEkEv1Z+t0TJa2DWz7Z+9+i3PqfqGb82fuc1WFKTqbUz/fcY1Lz+Lc18fnQc1vbfXH3fI+P4be9X98Dt2X/n83w/Zn+Ojd/BOfE5FbX7KfWxM7rjs+DXwq/G0j4ryeTc+1bXhXn4tfGrMTgnqX0Z4VwdH2fj/tjvo9brvQXn8dveL98/AgAAAAAAAAAAAAAAAAB45Avuhlcc
+   eJztm39PwjAQQC+owX/mlA3h+39Sd7FNylx/bbO36Lvk5VhXJ/o4rkA5icgJAAAAAAAAAAAAAAAAAAB+8H6A+/DXeTbA+m/+T+j/28dLcPtVtsUluE54Lfza+H2auLncuSyR3FXOuwbj+G3vV+trmBgnzvIYvZRFbN6nfNdy734Pftv7VbepOvR5Xq+3wp/z9TsKfi38fkzcnY9cvfaR2xpd4pw6vgh+Lfzqc3JJncb6bq4Phxm/7f3+VnQLY/i18VtbhzV9Osz4tfHrI+ybS/UnifOx/tsFx/i18bu2Hmszfm38xtbNNevpksCvjd819Vr6/lU4jl8bv6lY6sOxPp17HsCvjd+aet3Sj/Fr41cjtf6NRW6NPa9n/Nr43bvP0n+PQar/5vpuan5sHn5t/G7pq6WfI4ng18rvlih5Dcz62dbvHv3W51Q949fG77wGS2oytXam/x6Dmte/pZnPj47D2v6bq+97ZBy/7f3qHrg9++98nu/H7M+x8Ts4Jz6nonY/pT52Rnd8Fvxa+NVY2mclmZx73+q6MA+/Nn41BucktS8jnKvj42zcH/t91Hq9t+A8ftv75ftHAAAAAAAAAAAAAAAAAACPfAHNTjyy
   </data>
  </layer>
  <layer name="Bombs" width="120" height="60">

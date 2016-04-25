@@ -1,5 +1,10 @@
 Blocks must have specified propeties for:
 
+//MAP LAYERS
+1) Bombs
+2) Blocks
+3) Floor
+
 //MUST BE INCLUDED
 Spawn player:
 1 = Spawn-P1

@@ -44,7 +44,7 @@ public class Bomb extends Entity
     private  Animation normalBombAnim;
 
     //Constructor
-    public Bomb(float posX, float posY, Vector2 direction, int bombId, MapManager map,int playerId)
+    public Bomb(float posX, float posY, Vector2 direction, int bombId, MapManager map, int playerId)
     {
         super(null, new Vector2(posX, posY), direction);
         
@@ -64,7 +64,7 @@ public class Bomb extends Entity
                 this.normalBombAnim = TextureManager.normalBombAnim;
                 explosionRange = 4; // In blocks
                 explosionTime = 3; // in seconds
-                explosionDuration = 0.7f; // in seconds
+                explosionDuration = 0.6f; // in seconds
                 break;
                 
             default:
@@ -116,6 +116,30 @@ public class Bomb extends Entity
 
     }
     
+    public boolean deleteBlock(int x, int y)
+    {
+        Cell currentCell = blockLayer.getCell(x , y);
+        
+        if(currentCell != null)
+        {
+            //If block is undestructable
+            if(currentCell.getTile().getProperties().containsKey("undestructable"))
+            {
+                return false;
+                
+            }else
+            {
+                Cell cell = new Cell();
+                cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
+                
+                map.getBlockLayer().setCell( x, y, cell);
+            }
+        }
+        
+        // If there is no block 
+        return true;
+    }
+    
     public void deleteExplosionEffect()
     {
         //Create new cell and set texture
@@ -132,10 +156,12 @@ public class Bomb extends Entity
             cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
 
             //Explosion above
-            map.getBombLayer().setCell( cellX, cellY + y, cell);
-
+            map.getBombLayer().setCell(cellX, cellY + y, cell);
+            deleteBlock(cellX, cellY + y);
+            
             //Explosion below
             map.getBombLayer().setCell(cellX, cellY - y, cell);
+            deleteBlock(cellX, cellY - y);
         }
         
         for(int x=1; x <= explosionRange; x++)
@@ -146,9 +172,11 @@ public class Bomb extends Entity
 
             //Explosion right
             map.getBombLayer().setCell(cellX + x, cellY, cell);
-
+            deleteBlock(cellX +x, cellY);
+            
             //Explosion left
             map.getBombLayer().setCell(cellX - x, cellY, cell);
+            deleteBlock(cellX -x, cellY);
         }
         
     }
@@ -214,7 +242,7 @@ public class Bomb extends Entity
     
     public String findCell (int X , int Y )
     {
-        String cellStatus="null";
+        String cellStatus = "null";
         Cell cell = blockLayer.getCell( X , Y );
         
         if(cell != null){
