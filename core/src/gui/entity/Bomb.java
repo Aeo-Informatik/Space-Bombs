@@ -64,7 +64,7 @@ public class Bomb extends Entity
                 this.normalBombAnim = TextureManager.normalBombAnim;
                 explosionRange = 4; // In blocks
                 explosionTime = 3; // in seconds
-                explosionDuration = 1; // in seconds
+                explosionDuration = 0.7f; // in seconds
                 break;
                 
             default:
@@ -169,27 +169,18 @@ public class Bomb extends Entity
             {
                 Cell cell = new Cell();
                 cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionYMiddle));
-
-                //Explosion above
-                map.getBombLayer().setCell(cellX, cellY + y, cell);
-
-                //Explosion below
-                map.getBombLayer().setCell(cellX, cellY - y, cell);
                 
+                map.getBombLayer().setCell(cellX, cellY + y, cell);
+                map.getBombLayer().setCell(cellX, cellY - y, cell);
             }else
             {
-                //Create new cell and set texture
+                //Set end of explosion
                 Cell cellUp = new Cell();
                 cellUp.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionUpEnd));
-                
-                //Explosion above
                 map.getBombLayer().setCell(cellX, cellY + y, cellUp);
                 
-                //Create new cell and set texture
                 Cell cellDown = new Cell();
                 cellDown.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionDownEnd));
-                
-                //Explosion below
                 map.getBombLayer().setCell(cellX, cellY - y, cellDown);
             }
         }
@@ -202,28 +193,18 @@ public class Bomb extends Entity
                 //Set cell with middle explosion texture
                 Cell cell = new Cell();
                 cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionXMiddle));
-
-                //Explosion right
                 map.getBombLayer().setCell(cellX + x, cellY, cell);
-
-                //Explosion left
                 map.getBombLayer().setCell(cellX - x, cellY, cell);
                 
             }else
             {
-                //Create new cell and set texture
+                //Set end of explosion
                 Cell cellRight = new Cell();
                 cellRight.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionRightEnd));
-                
-                //Explosion right
                 map.getBombLayer().setCell(cellX + x, cellY, cellRight);
                 
-                
-                //Create new cell and set texture
                 Cell cellLeft = new Cell();
                 cellLeft.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionLeftEnd));
-                
-                //Explosion left
                 map.getBombLayer().setCell(cellX - x, cellY, cellLeft);
             }
         }
