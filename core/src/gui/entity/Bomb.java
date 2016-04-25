@@ -143,6 +143,27 @@ public class Bomb extends Entity
         
     }
     
+        public String findCell (int X , int Y )
+    {
+        String cellStatus="null";
+        Cell cell = blockLayer.getCell( X , Y );
+        
+        if(cell != null){
+            if(cell.getTile().getProperties().containsKey("undestructible")){
+                System.out.println("Cell is undestructible");
+                cellStatus="undestructible";
+            }else{
+                System.out.println("Cell is destructible");
+                cellStatus="destructible";
+            }
+        }else{
+            System.out.println("Cell is empty");
+        }
+        
+        return cellStatus;
+        
+    }
+    
     
     private TextureRegion getFrame(Animation animation)
     {
@@ -191,20 +212,5 @@ public class Bomb extends Entity
         return explosionRange;
     }
     
-    public String findCell (int X , int Y )
-    {
-        String cellStatus="null";
-        Cell cell = blockLayer.getCell( X , Y );
-        
-        if(cell != null){
-            if(cell.getTile().getProperties().containsKey("undestructible")){
-                cellStatus="undestructible";
-            }else{
-                cellStatus="destructible";
-            }
-        }
-        
-        return cellStatus;
-        
-    }
+
 }
