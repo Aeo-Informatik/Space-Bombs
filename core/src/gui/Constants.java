@@ -42,4 +42,5 @@ public class Constants {
     public static int PLAYERID = 0;
     public static int AMOUNTENEMYPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;
+    
 }
