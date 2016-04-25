@@ -116,7 +116,7 @@ public class Bomb extends Entity
     public void explode()
     {
         Cell cellCenter = new Cell();
-        cellCenter.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionYMiddle));
+        cellCenter.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionCenter));
             
         //Explosion above
         map.getBombLayer().setCell((int) cellX, (int) cellY, cellCenter);
@@ -149,7 +149,8 @@ public class Bomb extends Entity
         
     }
     
-        public String findCell (int X , int Y )
+    
+    public String findCell (int X , int Y )
     {
         String cellStatus="null";
         Cell cell = blockLayer.getCell( X , Y );
