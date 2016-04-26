@@ -101,7 +101,8 @@ public class Bomb extends Entity
             //Create new cell and set its animation texture
             Cell cell = new Cell();
             cell.setTile(new StaticTiledMapTile(getFrame(this.normalBombAnim)));
-
+            //cell.getTile().getProperties().put("blocked", null);
+            
             //Set bomb into bomb layer
             map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
             

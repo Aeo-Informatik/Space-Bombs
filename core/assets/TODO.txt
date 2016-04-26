@@ -4,4 +4,6 @@
 1) Spectator --> If player is dead watching the game in spectator mode
 2) Implementing player death (ghost movement isnt required to be send) into server/client
 
-1) Adding another texture for unpassabel blocks for ghosts (spectators)
+1) Adding another texture for undestroyabel blocks for players (because spectators)
+2) Adding a texture for a tomb stone (on player death)
+3) Adding a texture in to the stars for everyone

@@ -164,7 +164,7 @@ public class MainPlayer extends Entity
     
     private boolean touchesDeadlyBlock()
     {
-        float margin = 4f;
+        float margin = 3f;
         
         //Checks from the walking right texture a collision on the top right, top left, down left, down right
         if(isCellDeadly(pos.x + margin, pos.y) || isCellDeadly(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() - margin, pos.y) || isCellDeadly(pos.x + margin, pos.y  + walkAnimRight.getKeyFrame(0).getRegionHeight()) || isCellDeadly(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() - margin, pos.y  + walkAnimRight.getKeyFrame(0).getRegionHeight()))
