@@ -14,7 +14,8 @@ Spawn player:
 
 
 //OPTIONAL PARAMETERS
-Unpassable = blocked
+Player Unpassable = blocked
+Ghost Unpassabel = ghost-blocked
 Undestroyable = undestructable
 Deadly = deadly
 

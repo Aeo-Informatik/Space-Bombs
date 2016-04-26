@@ -80,7 +80,14 @@ public class GameScreen extends Screen{
        //If screen gets resized set camera to player position
        if(Constants.PLAYERSPAWNED)
        {
-            camera.setPosition(entityManager.getMainPlayer().getPosition().x, entityManager.getMainPlayer().getPosition().y);
+           if(entityManager.getMainPlayer() != null)
+           {
+                camera.setPosition(entityManager.getMainPlayer().getPosition().x, entityManager.getMainPlayer().getPosition().y);
+           
+           }else if(entityManager.getSpectator() != null)
+           {
+               camera.setPosition(entityManager.getSpectator().getPosition().x, entityManager.getSpectator().getPosition().y);
+           }
        }
     }
 

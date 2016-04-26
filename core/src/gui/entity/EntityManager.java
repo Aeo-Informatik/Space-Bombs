@@ -52,7 +52,7 @@ public class EntityManager {
         if(mainPlayer != null)
         {
             mainPlayer.render(sb);
-        }else
+        }else if(spectator != null)
         {
             spectator.render(sb);
         }
@@ -87,12 +87,12 @@ public class EntityManager {
             if(mainPlayer.getLife() == 0)
             {
                 //Create new spectator
-                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0));
+                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map);
                 
                 //Delete main player
                 mainPlayer = null; 
             }
-        }else
+        }else if(spectator != null)
         {
             spectator.update();
         }
@@ -176,5 +176,10 @@ public class EntityManager {
     public MainPlayer getMainPlayer()
     {
         return mainPlayer;
+    }
+    
+    public Spectator getSpectator()
+    {
+        return this.spectator;
     }
 }

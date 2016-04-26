@@ -21,6 +21,7 @@
   <tile id="3">
    <properties>
     <property name="blocked" value=""/>
+    <property name="ghost-blocked" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
