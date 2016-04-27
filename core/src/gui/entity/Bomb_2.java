@@ -157,9 +157,9 @@ public class Bomb_2 extends Entity
             map.getBombLayer().setCell(cellX, cellY + y, cell);
             if(up==false)
                 {                    
-                    if(findCell(cellX , cellY + y)!="null")
+                    if(findCell(cellX , cellY + y) != "null")
                     {
-                        up=true;
+                        up = true;
                     }
                     deleteBlock(cellX, cellY + y);
                 }
@@ -167,13 +167,13 @@ public class Bomb_2 extends Entity
             
             //Explosion below
             map.getBombLayer().setCell(cellX, cellY - y, cell);
-                if(down==false)
+            if(down==false)
                 {                    
-                    if(findCell(cellX , cellY - y)!="null")
+                    if(findCell(cellX , cellY - y) != "null")
                     {
-                        down=true;
+                        down = true;
                     }
-                    down = deleteBlock(cellX, cellY - y);
+                    deleteBlock(cellX, cellY - y);
                 }
 
         }
@@ -188,22 +188,22 @@ public class Bomb_2 extends Entity
             map.getBombLayer().setCell(cellX + x, cellY, cell);
             if(right==false)
                 {                    
-                    if(findCell(cellX + x , cellY)!="null")
+                    if(findCell(cellX + x , cellY) != "null")
                     {
-                        right=true;
+                        right = true;
                     }
-                    right = deleteBlock(cellX + x, cellY);
+                    deleteBlock(cellX + x, cellY);
                 }
             
             //Explosion left
             map.getBombLayer().setCell(cellX - x, cellY, cell);
             if(left==false)
                 {                    
-                    if(findCell(cellX - x , cellY)!="null")
+                    if(findCell(cellX - x , cellY) != "null")
                     {
-                        left=true;
+                        left = true;
                     }
-                    left = deleteBlock(cellX - x, cellY);
+                    deleteBlock(cellX - x, cellY);
                 }
 
         }
@@ -340,14 +340,10 @@ public class Bomb_2 extends Entity
         
         if(cell != null){
             if(cell.getTile().getProperties().containsKey("undestructable")){
-                System.out.println("Cell is undestructable");
                 cellStatus="undestructable";
-            }else{
-                System.out.println("Cell is destructable");
+            }else if(cell.getTile().getProperties().containsKey("blocked")){
                 cellStatus="destructable";
             }
-        }else{
-            System.out.println("Cell is empty");
         }
         
         return cellStatus;
