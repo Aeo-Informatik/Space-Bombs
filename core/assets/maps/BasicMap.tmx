@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="120" height="60" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="120" height="60" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32" tilecount="24" columns="4">
   <image source="../blocks/map_tiles.png" width="128" height="192"/>
   <tile id="0">
    <properties>
@@ -16,6 +16,7 @@
    <properties>
     <property name="" value=""/>
     <property name="blocked" value=""/>
+    <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="3">
