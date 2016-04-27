@@ -38,7 +38,6 @@ public class MainPlayer extends Entity
     private OrthoCamera camera;
     private int player;
     private Array <Bomb> bombArray;
-    private int life = 1;
     
     //Collision detection
     private MapManager map;
@@ -51,7 +50,11 @@ public class MainPlayer extends Entity
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
-
+    //Player values
+    private int life = 1;
+    private boolean godmode = false;
+    private int coins = 0;
+    
     
     public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map, Array<Bomb> bombArray) throws Exception 
     {
@@ -412,7 +415,7 @@ public class MainPlayer extends Entity
         {
             
             //Create Bomb Object
-            Bomb bomb = new Bomb(pos.x, pos.y, direction, 1, map, player); 
+            Bomb bomb = new Bomb(pos.x, pos.y, direction, map, player); 
             bombArray.add(bomb); 
             
         }

@@ -34,7 +34,6 @@ public class Bomb extends Entity
     //Bomb settings
     private float timer;
     private float timer2;
-    private int bombId;
     private float explosionTime;
     private int explosionRange;
     private float explosionDuration;
@@ -44,35 +43,24 @@ public class Bomb extends Entity
     private  Animation normalBombAnim;
 
     //Constructor
-    public Bomb(float posX, float posY, Vector2 direction, int bombId, MapManager map, int playerId)
+    public Bomb(float posX, float posY, Vector2 direction, MapManager map, int playerId)
     {
         super(null, new Vector2(posX, posY), direction);
         
+        //Needed variables
         this.playerId = playerId;
         this.blockLayer = map.getBlockLayer();
-        this.bombId = bombId;
         this.map = map;
         
         //Get cell positon
         this.cellX = (int) (pos.x / map.getBlockLayer().getTileWidth());
         this.cellY = (int) (pos.y / map.getBlockLayer().getTileHeight());
         
-        //Please only use one switch for better practice (less code > more code)
-        switch(bombId)
-        {
-            case 1:
-                this.normalBombAnim = TextureManager.normalBombAnim;
-                explosionRange = 4; // In blocks
-                explosionTime = 3; // in seconds
-                explosionDuration = 0.6f; // in seconds
-                break;
-                
-            default:
-                System.err.println("ERROR: Wrong bomb number: " + bombId + " in Bomb. Using default b1");
-                explosionRange = 1; // In blocks
-                explosionTime = 3; // in seconds  
-                explosionDuration = 1; // in seconds
-        } 
+        //Bomb settings
+        this.normalBombAnim = TextureManager.normalBombAnim;
+        this.explosionRange = 4; // In blocks
+        this.explosionTime = 3; // in seconds
+        this.explosionDuration = 0.6f; // in seconds      
     }
     
 
@@ -292,19 +280,10 @@ public class Bomb extends Entity
 
     
     /**------------Getter & Setter-------------**/
-    public int getBombId() 
-    {
-        return bombId;
-    }
 
     public boolean isExploded()
     {
         return this.isExploded;
-    }
-    
-    public void setBombId(int bombId) 
-    {
-        this.bombId = bombId;
     }
 
     public float getTimer()
