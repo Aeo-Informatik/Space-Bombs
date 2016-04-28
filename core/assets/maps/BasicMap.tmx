@@ -105,7 +105,7 @@
     <property name="blocked" value=""/>
    </properties>
   </tile>
-  <tile id="18" probability="0">
+  <tile id="18">
    <properties>
     <property name="" value=""/>
     <property name="blocked" value=""/>
