@@ -47,7 +47,7 @@ public class Bomb_2 extends Entity
     //Constructor
     public Bomb_2(float posX, float posY, Vector2 direction, MapManager map, int playerId)
     {
-        super(null, new Vector2(posX, posY), direction);
+        super(new Vector2(posX, posY), direction, map);
         
         //Needed variables
         this.playerId = playerId;
@@ -322,7 +322,7 @@ public class Bomb_2 extends Entity
                 cellLeft.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionLeftEnd));
                 cellLeft.getTile().getProperties().put("deadly", null);
                 
-                if(up==false)
+                if(left==false)
                 {
                 map.getBombLayer().setCell(cellX - x, cellY, cellLeft);
                 }
@@ -349,23 +349,6 @@ public class Bomb_2 extends Entity
         return cellStatus;
         
     }
-    
-    
-    private TextureRegion getFrame(Animation animation)
-    {
-        /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Constants.DELTATIME; 
-        
-        /*
-        Obtains the current frame. This is given by the animation for the current time. 
-        The second variable is the looping. 
-        Passing in true, we tell the animation to restart after it reaches the last frame.
-        */
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        
-        return currentFrame;
-    }
-
     
     /**------------Getter & Setter-------------**/
 

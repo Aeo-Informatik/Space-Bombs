@@ -146,14 +146,14 @@
    eJzt0zEKw1AMBUGldJL7n9f82r0MywzoAlreDAAAAAAAAAC84/PCsef8+zc7Xb+j7zb7bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bdO3Td82fdv0bTv//s9O12v03Wa/AAAAAAAAAE83dd4DcA==
   </data>
  </layer>
+ <layer name="Blocks" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztm9tu2zAQRImkvrwYqRQ5zv9/aUVgB6YnoqWggDZoj4ADiiKZOBmMdnnxSynlBQAAAAAAAAAAAAAAAAAAvvD7B3yGf51fCWT/zf8T9f+t6zBzmznOnJv6JcpxZoj2wZ6NMWaI/mOM13Nd6Jujr/R6DX1em7rKq7VfO6X/nPp8RN80fau/3memmVNo/Rn3b9FW64coz/Hc6xpX7z9CU5Vv0Q9999e36rfkU/ev+9b7r5UT+qbo2/qu9eVHlO+h0dHa5dNL1FW6n4dyf0ej7/76Vo2exVf3r7d7vMa/Pwe9n9v4OlgpH5/j/mbtGneK9mN59PW5KdF3f32rPlvy4q35cs/P+DdHX/lQcXNpHqv2W7n7+BLlVB59q3y5jc/kz3n6evx9No/9Tn7t8fkTfVP0lc8UV9t42ubBHn99fqx2zXuPVuf9nKOv+7e3btXzZa+f+5n5UY6+ynuV76rextWl9SqfByvuel4tX/N+ztG36rHk279dvyJ/zqed/8qHupePr2V5vqv+njd7/G7jMvrur6/8uzV/XttP6o3Dvzn6Lvmw9a3HXfnd/ez7Tp53H9E3RV/tH231YW+faS0u837O0dfXm5fy4nbe6/71/Nnnw8q/T+iboq/8u/V8xtbzG17Hvzn6rp3HWFqX8v5t/J5sfDufRt/99e2d31jzZ8+nvXiNf3P0lc98H/iZP5f2jbRX7OvY7fwafffXV+vPvfOTPX+urVN7P9Ync/St/hrL17zY82DFVT+vIR97fPZx5M85+pbQcus8dq3f0vmsKX4P+uboWy+dk5Qep3im+iHaJ3ve63cp93OXutB3f335/hEAAAAAAAAAAAAAAAAAwCN/AGrPW6o=
+  </data>
+ </layer>
  <layer name="Bombs" width="120" height="60">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
-  </data>
- </layer>
- <layer name="Blocks" width="120" height="60">
-  <data encoding="base64" compression="zlib">
-   eJztm39PwjAQQC+owX/mlA3h+39Sd7FNylx/bbO36Lvk5VhXJ/o4rkA5icgJAAAAAAAAAAAAAAAAAAB+8H6A+/DXeTbA+m/+T+j/28dLcPtVtsUluE54Lfza+H2auLncuSyR3FXOuwbj+G3vV+trmBgnzvIYvZRFbN6nfNdy734Pftv7VbepOvR5Xq+3wp/z9TsKfi38fkzcnY9cvfaR2xpd4pw6vgh+Lfzqc3JJncb6bq4Phxm/7f3+VnQLY/i18VtbhzV9Osz4tfHrI+ybS/UnifOx/tsFx/i18bu2Hmszfm38xtbNNevpksCvjd819Vr6/lU4jl8bv6lY6sOxPp17HsCvjd+aet3Sj/Fr41cjtf6NRW6NPa9n/Nr43bvP0n+PQar/5vpuan5sHn5t/G7pq6WfI4ng18rvlih5Dcz62dbvHv3W51Q949fG77wGS2oytXam/x6Dmte/pZnPj47D2v6bq+97ZBy/7f3qHrg9++98nu/H7M+x8Ts4Jz6nonY/pT52Rnd8Fvxa+NVY2mclmZx73+q6MA+/Nn41BucktS8jnKvj42zcH/t91Hq9t+A8ftv75ftHAAAAAAAAAAAAAAAAAACPfAHNTjyy
   </data>
  </layer>
 </map>
