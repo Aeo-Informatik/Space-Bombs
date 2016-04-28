@@ -253,5 +253,4 @@ public class EnemyPlayer extends Entity
     {
         this.playerId = playerId;
     }
-    
 }

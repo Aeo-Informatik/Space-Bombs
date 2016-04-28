@@ -64,6 +64,13 @@ public class MapManager
         return cell != null && cell.getTile().getProperties().containsKey("blocked");
     }
     
+    public boolean isCellGhostBlocked(float x, float y)
+    {
+        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("ghost-blocked");
+    }
+    
     public boolean isBombPlaced(float x, float y)
     {
         TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));

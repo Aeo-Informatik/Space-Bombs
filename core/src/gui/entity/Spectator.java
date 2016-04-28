@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import gui.Constants;
+import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 
@@ -26,11 +27,8 @@ public class Spectator extends Entity
     private boolean freeCam = true;
     private int currentPlayerIndex = 0;
     private EnemyPlayer currentEnemyPlayer;
-    
-    //Collision detection
-    private MapManager map;
-    private TiledMapTileLayer blockLayer;
     private Array <EnemyPlayer> enemies;
+    
     
     public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies) 
     {
@@ -210,19 +208,44 @@ public class Spectator extends Entity
         }
     }
     
+     /*------------------GHOST MOVEMENT------------------*/
     @Override
-    public Vector2 getPosition()
+    protected boolean collidesLeft()
     {
-        return pos;
+        if(map.isCellGhostBlocked(pos.x - 2, pos.y))
+            return true;
+
+        return false;
     }
     
-    public Vector2 getDirection()
+    @Override
+    protected boolean collidesRight()
     {
-        return direction;
+        if(map.isCellGhostBlocked(pos.x + TextureManager.playerWidth + 2, pos.y))
+            return true;
+
+        return false;
     }
     
-    public void setPosition(Vector2 pos)
+    @Override
+    protected boolean collidesTop()
     {
-        this.pos = pos;
+        if(map.isCellGhostBlocked(pos.x + 3, pos.y + TextureManager.playerHeight / 2 + 3) || map.isCellGhostBlocked(pos.x  + TextureManager.playerWidth - 3, pos.y + TextureManager.playerHeight / 2 + 3))
+            return true;
+
+        return false;
     }
+    
+    @Override
+    protected boolean collidesBottom()
+    {
+        //Checks at the players feet on the left if there is a block and on the right
+        if(map.isCellGhostBlocked(pos.x + 3, pos.y - 3) || map.isCellGhostBlocked(pos.x  + TextureManager.playerWidth -3, pos.y - 3))
+            return true;
+
+        return false;
+    }
+    
+    /*------------------Getter & Setter------------------*/
+
 }

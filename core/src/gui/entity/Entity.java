@@ -125,5 +125,15 @@ public abstract class Entity
         //Makes the frames per second constant on every device (so it doesnt run faster on better devices)
         direction.scl(Gdx.graphics.getDeltaTime());
     }
+    
+    public Vector2 getDirection()
+    {
+        return direction;
+    }
+    
+    public void setPosition(Vector2 pos)
+    {
+        this.pos = pos;
+    }
 }
 

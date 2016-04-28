@@ -375,17 +375,7 @@ public class MainPlayer extends Entity
     }
     
 
-    /*------------------ GETTER & SETTER ------------------*/
-    public Vector2 getDirection()
-    {
-        return direction;
-    }
-    
-    public void setPosition(Vector2 pos)
-    {
-        this.pos = pos;
-    }
-    
+    /*------------------ GETTER & SETTER ------------------*/    
     public int getLife()
     {
         return this.life;

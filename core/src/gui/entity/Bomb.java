@@ -271,12 +271,12 @@ public class Bomb extends Entity
 
     public float getTimer()
     {
-        return timer;
+        return explosionTime;
     }
 
     public void setTimer(float timer) 
     {
-        this.timer = timer;
+        this.explosionTime = timer;
     }
 
     public int getRange() 
