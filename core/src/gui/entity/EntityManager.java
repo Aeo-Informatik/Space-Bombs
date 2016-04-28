@@ -26,6 +26,7 @@ public class EntityManager {
     private Spectator spectator;
     private MapManager map;
     private Array <Bomb> bombArray = new Array<>();
+    private Array <Bomb> bombArrayEnemy = new Array<>();
     
     //Constructor
     public EntityManager(OrthoCamera camera, MapManager map)
@@ -47,6 +48,11 @@ public class EntityManager {
         {
             bomb.render(sb);
         }
+        
+        for (Bomb bomb: bombArrayEnemy)
+        {
+            bomb.render(sb);
+        }        
         
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)

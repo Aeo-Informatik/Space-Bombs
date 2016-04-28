@@ -69,7 +69,7 @@ public class Bomb_2 extends Entity
 
     @Override
     public void render(SpriteBatch sb)
-    {
+    {       
         //If time to explode
         if(timer >= explosionTime)
         {

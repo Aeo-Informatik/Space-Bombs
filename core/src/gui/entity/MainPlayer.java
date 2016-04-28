@@ -414,10 +414,12 @@ public class MainPlayer extends Entity
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
-            
+           if(bombArray.size < maxBombPlacing)
+           {
             //Create Bomb Object
             Bomb bomb = new Bomb(pos.x, pos.y, direction, map, player); 
             bombArray.add(bomb); 
+           }
             
         }
         
