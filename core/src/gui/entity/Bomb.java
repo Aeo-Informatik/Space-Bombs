@@ -138,26 +138,33 @@ public class Bomb extends Entity
             Cell cell = new Cell();
             cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
 
+            //If explosion hits block
+            if(map.isCellBlocked(cellX * Constants.MAPTEXTUREWIDTH, (cellY - y) * Constants.MAPTEXTUREHEIGHT))
+            {
+                //Delete explosion effect
+                map.getBombLayer().setCell(cellX, cellY - y, cell);
+                
+                //Delete block
+                deleteBlock(cellX, cellY - y);
+                
+                break;
+            }
+            
             //Explosion down
             map.getBombLayer().setCell(cellX, cellY - y, cell);
             deleteBlock(cellX, cellY - y);
             
-            //If explosion hits block
-            if(map.isCellBlocked(cellX * Constants.MAPTEXTUREWIDTH, (cellY - y) * Constants.MAPTEXTUREHEIGHT))
-            {
-                break;
-            }
         }
         
         //Explode UP 
         for(int y=1; y <= explosionRange; y++)
         {
+            Cell cell = new Cell();
+            cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
+            
             //If explosion hits block
             if(map.isCellBlocked(cellX * Constants.MAPTEXTUREWIDTH, (cellY + y) * Constants.MAPTEXTUREHEIGHT))
             {
-                Cell cell = new Cell();
-                cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
-
                 //Delete explosion effect
                 map.getBombLayer().setCell(cellX, cellY + y, cell);
                 
@@ -166,9 +173,6 @@ public class Bomb extends Entity
                 
                 break;
             }
-            
-            Cell cell = new Cell();
-            cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
 
             //Delete explosion effect
             map.getBombLayer().setCell(cellX, cellY + y, cell);
@@ -178,22 +182,19 @@ public class Bomb extends Entity
         //Explode LEFT
         for(int x=1; x <= explosionRange; x++)
         {
-                        //If explosion hits block
+            //Set cell with middle explosion texture
+            Cell cell = new Cell();
+            cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
+            
+            //If explosion hits block
             if(map.isCellBlocked((cellX -x) * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
             {
-                //Set cell with middle explosion texture
-                Cell cell = new Cell();
-                cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
 
                 //Explosion left
                 map.getBombLayer().setCell(cellX - x, cellY, cell);
                 deleteBlock(cellX -x, cellY);
                 break;
             }
-            
-            //Set cell with middle explosion texture
-            Cell cell = new Cell();
-            cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
             
             //Explosion left
             map.getBombLayer().setCell(cellX - x, cellY, cell);
@@ -203,23 +204,19 @@ public class Bomb extends Entity
         //Explode RIGHT
         for(int x=1; x <= explosionRange; x++)
         {
+            //Set cell with middle explosion texture
+            Cell cell = new Cell();
+            cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
+            
             //If explosion hits block
             if(map.isCellBlocked((cellX + x) * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
             {
-                //Set cell with middle explosion texture
-                Cell cell = new Cell();
-                cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
-
                 //Explosion right
                 map.getBombLayer().setCell(cellX + x, cellY, cell);
                 deleteBlock(cellX +x, cellY);
                 break;
             }
             
-            //Set cell with middle explosion texture
-            Cell cell = new Cell();
-            cell.setTile(new StaticTiledMapTile(TextureManager.emptyBlock));
-
             //Explosion right
             map.getBombLayer().setCell(cellX + x, cellY, cell);
             deleteBlock(cellX +x, cellY);
