@@ -317,14 +317,14 @@ public class MainPlayer extends Entity
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
             //Checks if there is already a bomb
-            if(!map.isBombPlaced(pos.x, pos.y))
+            if(!map.isBombPlaced(pos.x, pos.y) && maxBombPlacing >= bombArray.size)
             {
                 //Create Bomb Object
                 Bomb bomb = new Bomb(pos, direction, map, playerId); 
                 bombArray.add(bomb);
                 System.out.println("Placed bomb");
             }else
-                System.out.println("Bomb is already there!");
+                System.out.println("Bomb is already there! Or maxBombs reached");
         }
         
         /*------------------ZOOM OUT GAME------------------*/

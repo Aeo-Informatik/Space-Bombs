@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 
@@ -119,7 +120,7 @@ public class EntityManager {
                 {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
-                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * map.getFloorLayer().getTileWidth(), mapY * map.getFloorLayer().getTileHeight()), new Vector2(0,0), playerId, map, bombArray);
+                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, map, bombArrayEnemy);
                         enemies.add(enemyPlayer);
                     }
                 }catch(NullPointerException e)
@@ -148,7 +149,7 @@ public class EntityManager {
                     {
                         if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                         {
-                            mainPlayer = new MainPlayer(new Vector2(mapX * map.getFloorLayer().getTileWidth(), mapY * map.getFloorLayer().getTileHeight()), new Vector2(0,0), playerId, camera, map,bombArray);
+                            mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray);
                         }
                     }catch(NullPointerException e)
                     {
