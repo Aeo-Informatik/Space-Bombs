@@ -37,6 +37,9 @@ public class MapManager
         this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
         this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
+        
+        Constants.MAPTEXTUREWIDTH = blockLayer.getTileWidth();
+        Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
     }
     
     public void render(SpriteBatch sb) 
@@ -59,28 +62,28 @@ public class MapManager
     /**-------------------MAP FUNCTIONS-------------------**/
     public boolean isCellBlocked(float x, float y)
     {
-        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH ), (int) (y / Constants.MAPTEXTUREHEIGHT));
         //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
         return cell != null && cell.getTile().getProperties().containsKey("blocked");
     }
     
     public boolean isCellGhostBlocked(float x, float y)
     {
-        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH), (int) (y / Constants.MAPTEXTUREHEIGHT));
         //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
         return cell != null && cell.getTile().getProperties().containsKey("ghost-blocked");
     }
     
     public boolean isBombPlaced(float x, float y)
     {
-        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
+        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH), (int) (y / Constants.MAPTEXTUREHEIGHT));
         //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
         return cell != null && cell.getTile().getProperties().containsKey("bomb");
     }
     
     public boolean isCellDeadly(float x, float y)
     {
-        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
+        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH), (int) (y / Constants.MAPTEXTUREHEIGHT));
         return cell != null && cell.getTile().getProperties().containsKey("deadly");
     }
     

@@ -16,10 +16,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureManager {
     
-    //General Variables
-    public static float playerWidth;
-    public static float playerHeight;
-    
     //Player 1 Walking
     public static Texture p1WalkingDown;
     public static Animation p1WalkingDownAnim;
@@ -220,8 +216,8 @@ public class TextureManager {
         p1ExplosionRightEnd = new TextureRegion(p1Explosion, 96, 0, 32, 32);
         
         
-        playerWidth = p1WalkingRightAnim.getKeyFrame(0).getRegionWidth();
-        playerHeight = p1WalkingRightAnim.getKeyFrame(0).getRegionHeight();
+        Constants.PLAYERWIDTH = p1WalkingRightAnim.getKeyFrame(0).getRegionWidth();
+        Constants.PLAYERHEIGHT = p1WalkingRightAnim.getKeyFrame(0).getRegionHeight();
     }
     
     

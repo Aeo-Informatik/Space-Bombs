@@ -56,7 +56,7 @@ public abstract class Entity
     
     protected boolean collidesRight()
     {
-        if(map.isCellBlocked(pos.x + TextureManager.playerWidth + 2, pos.y))
+        if(map.isCellBlocked(pos.x + Constants.PLAYERWIDTH + 2, pos.y))
             return true;
 
         return false;
@@ -64,7 +64,7 @@ public abstract class Entity
     
     protected boolean collidesTop()
     {
-        if(map.isCellBlocked(pos.x + 3, pos.y + TextureManager.playerHeight / 2 + 3) || map.isCellBlocked(pos.x  + TextureManager.playerWidth - 3, pos.y + TextureManager.playerHeight / 2 + 3))
+        if(map.isCellBlocked(pos.x + 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3) || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH - 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3))
             return true;
 
         return false;
@@ -73,7 +73,7 @@ public abstract class Entity
     protected boolean collidesBottom()
     {
         //Checks at the players feet on the left if there is a block and on the right
-        if(map.isCellBlocked(pos.x + 3, pos.y - 3) || map.isCellBlocked(pos.x  + TextureManager.playerWidth -3, pos.y - 3))
+        if(map.isCellBlocked(pos.x + 3, pos.y - 3) || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH -3, pos.y - 3))
             return true;
 
         return false;
@@ -84,7 +84,7 @@ public abstract class Entity
         float margin = 3f;
         
         //Checks from the walking right texture a collision on the down left, down right
-        if(map.isCellDeadly(pos.x + margin, pos.y) || map.isCellDeadly(pos.x + TextureManager.playerWidth - margin, pos.y))
+        if(map.isCellDeadly(pos.x + margin, pos.y) || map.isCellDeadly(pos.x + Constants.PLAYERWIDTH - margin, pos.y))
             return true;
         
         return false;

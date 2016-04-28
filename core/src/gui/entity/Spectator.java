@@ -221,7 +221,7 @@ public class Spectator extends Entity
     @Override
     protected boolean collidesRight()
     {
-        if(map.isCellGhostBlocked(pos.x + TextureManager.playerWidth + 2, pos.y))
+        if(map.isCellGhostBlocked(pos.x + Constants.PLAYERWIDTH + 2, pos.y))
             return true;
 
         return false;
@@ -230,7 +230,7 @@ public class Spectator extends Entity
     @Override
     protected boolean collidesTop()
     {
-        if(map.isCellGhostBlocked(pos.x + 3, pos.y + TextureManager.playerHeight / 2 + 3) || map.isCellGhostBlocked(pos.x  + TextureManager.playerWidth - 3, pos.y + TextureManager.playerHeight / 2 + 3))
+        if(map.isCellGhostBlocked(pos.x + 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3) || map.isCellGhostBlocked(pos.x  + Constants.PLAYERWIDTH - 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3))
             return true;
 
         return false;
@@ -240,7 +240,7 @@ public class Spectator extends Entity
     protected boolean collidesBottom()
     {
         //Checks at the players feet on the left if there is a block and on the right
-        if(map.isCellGhostBlocked(pos.x + 3, pos.y - 3) || map.isCellGhostBlocked(pos.x  + TextureManager.playerWidth -3, pos.y - 3))
+        if(map.isCellGhostBlocked(pos.x + 3, pos.y - 3) || map.isCellGhostBlocked(pos.x  + Constants.PLAYERWIDTH -3, pos.y - 3))
             return true;
 
         return false;
