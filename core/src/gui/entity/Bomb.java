@@ -8,8 +8,6 @@ package gui.entity;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
@@ -24,11 +22,8 @@ import gui.map.MapManager;
 public class Bomb extends Entity
 {
     //General variables
-    private float stateTime;
     private SpriteBatch sb;
-    private MapManager map;
     private int playerId ;
-    private TiledMapTileLayer blockLayer;
     int cellX, cellY;
     
     //Bomb settings
@@ -39,18 +34,17 @@ public class Bomb extends Entity
     private float explosionDuration;
     private boolean isExploded = false;
     
-    //Bomb 1 Player 1 Animation
+    //Bomb 1 Animation
     private  Animation normalBombAnim;
 
+    
     //Constructor
-    public Bomb(float posX, float posY, Vector2 direction, MapManager map, int playerId)
+    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId)
     {
-        super(null, new Vector2(posX, posY), direction);
+        super(pos, direction, map);
         
         //Needed variables
         this.playerId = playerId;
-        this.blockLayer = map.getBlockLayer();
-        this.map = map;
         
         //Get cell positon
         this.cellX = (int) (pos.x / map.getBlockLayer().getTileWidth());
@@ -84,7 +78,7 @@ public class Bomb extends Entity
                 timer2 += Constants.DELTATIME;
             }
             
-        }else
+        }else //Creates bomb animation
         {
             //Create new cell and set its animation texture
             Cell cell = new Cell();
@@ -180,7 +174,27 @@ public class Bomb extends Entity
         //Explosion center, replaces bomb texture
         map.getBombLayer().setCell(cellX, cellY, cellCenter);
         
-        //Explode on y 
+        //Explode DOWN
+        for(int y=1; y <= explosionRange; y++)
+        {
+            if(y != explosionRange) // If not end of explosion
+            {
+                Cell cell = new Cell();
+                cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionYMiddle));
+                cell.getTile().getProperties().put("deadly", null);
+                
+                map.getBombLayer().setCell(cellX, cellY - y, cell);
+            }else
+            {
+                Cell cellDown = new Cell();
+                cellDown.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionDownEnd));
+                cellDown.getTile().getProperties().put("deadly", null);
+                
+                map.getBombLayer().setCell(cellX, cellY - y, cellDown);
+            }
+        }
+        
+         //Explode UP
         for(int y=1; y <= explosionRange; y++)
         {
             if(y != explosionRange) // If not end of explosion
@@ -190,7 +204,6 @@ public class Bomb extends Entity
                 cell.getTile().getProperties().put("deadly", null);
                 
                 map.getBombLayer().setCell(cellX, cellY + y, cell);
-                map.getBombLayer().setCell(cellX, cellY - y, cell);
             }else
             {
                 //Set end of explosion
@@ -199,16 +212,10 @@ public class Bomb extends Entity
                 cellUp.getTile().getProperties().put("deadly", null);
                 
                 map.getBombLayer().setCell(cellX, cellY + y, cellUp);
-                
-                Cell cellDown = new Cell();
-                cellDown.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionDownEnd));
-                cellDown.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(cellX, cellY - y, cellDown);
             }
         }
         
-        //Explode on x 
+        //Explode RIGHT
         for(int x=1; x <= explosionRange; x++)
         {
             if(x != explosionRange)  // If not end of explosion
@@ -219,7 +226,6 @@ public class Bomb extends Entity
                 cell.getTile().getProperties().put("deadly", null);
                 
                 map.getBombLayer().setCell(cellX + x, cellY, cell);
-                map.getBombLayer().setCell(cellX - x, cellY, cell);
                 
             }else
             {
@@ -229,7 +235,23 @@ public class Bomb extends Entity
                 cellRight.getTile().getProperties().put("deadly", null);
                 
                 map.getBombLayer().setCell(cellX + x, cellY, cellRight);
+            }
+        }
+        
+        //Explode LEFT
+        for(int x=1; x <= explosionRange; x++)
+        {
+            if(x != explosionRange)  // If not end of explosion
+            {
+                //Set cell with middle explosion texture
+                Cell cell = new Cell();
+                cell.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionXMiddle));
+                cell.getTile().getProperties().put("deadly", null);
                 
+                map.getBombLayer().setCell(cellX - x, cellY, cell);
+                
+            }else
+            {
                 Cell cellLeft = new Cell();
                 cellLeft.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionLeftEnd));
                 cellLeft.getTile().getProperties().put("deadly", null);
@@ -237,26 +259,9 @@ public class Bomb extends Entity
                 map.getBombLayer().setCell(cellX - x, cellY, cellLeft);
             }
         }
-        
     }
     
-        
-    private TextureRegion getFrame(Animation animation)
-    {
-        /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Constants.DELTATIME; 
-        
-        /*
-        Obtains the current frame. This is given by the animation for the current time. 
-        The second variable is the looping. 
-        Passing in true, we tell the animation to restart after it reaches the last frame.
-        */
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        
-        return currentFrame;
-    }
 
-    
     /**------------Getter & Setter-------------**/
 
     public boolean isExploded()

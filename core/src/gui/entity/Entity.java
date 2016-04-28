@@ -6,9 +6,14 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import gui.Constants;
+import gui.TextureManager;
+import gui.map.MapManager;
 
 /**
  *
@@ -18,29 +23,95 @@ public abstract class Entity
 {
     
     protected Vector2 pos, direction;
-    protected TextureRegion textureRegion;
+    protected MapManager map;
+    protected TiledMapTileLayer blockLayer;
+    protected TiledMapTileLayer bombLayer;
+    protected float stateTime;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
-    public Entity(TextureRegion textureRegion, Vector2 pos, Vector2 direction){
+    public Entity(Vector2 pos, Vector2 direction, MapManager map){
         
         this.pos = pos;
+        this.map = map;
         this.direction = direction;
-        this.textureRegion = textureRegion;
-        
+        this.blockLayer = map.getBlockLayer();
+        this.bombLayer = map.getBombLayer();
     }
     
-    //Update is the same as render only that it doesn't have the SpriteBatch Object
     public abstract void update();
     
     
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch sb){}
+    
+
+    /**------------------COLLISION FUNCTIONS------------------**/
+    protected boolean collidesLeft()
     {
-        sb.draw(textureRegion, pos.x, pos.y);
+        if(map.isCellBlocked(pos.x - 2, pos.y))
+            return true;
+
+        return false;
     }
     
+    protected boolean collidesRight()
+    {
+        if(map.isCellBlocked(pos.x + TextureManager.playerWidth + 2, pos.y))
+            return true;
+
+        return false;
+    }
     
-    //Get current position on screen
+    protected boolean collidesTop()
+    {
+        if(map.isCellBlocked(pos.x + 3, pos.y + TextureManager.playerHeight / 2 + 3) || map.isCellBlocked(pos.x  + TextureManager.playerWidth - 3, pos.y + TextureManager.playerHeight / 2 + 3))
+            return true;
+
+        return false;
+    }
+    
+    protected boolean collidesBottom()
+    {
+        //Checks at the players feet on the left if there is a block and on the right
+        if(map.isCellBlocked(pos.x + 3, pos.y - 3) || map.isCellBlocked(pos.x  + TextureManager.playerWidth -3, pos.y - 3))
+            return true;
+
+        return false;
+    }
+
+    protected boolean touchesDeadlyBlock()
+    {
+        float margin = 3f;
+        
+        //Checks from the walking right texture a collision on the down left, down right
+        if(map.isCellDeadly(pos.x + margin, pos.y) || map.isCellDeadly(pos.x + TextureManager.playerWidth - margin, pos.y))
+            return true;
+        
+        return false;
+    }
+    
+    /**
+    * Gets the frame out of the animation
+    * @param animation
+    * @return TextureRegion
+    */
+    protected TextureRegion getFrame(Animation animation)
+    { 
+        /* Adds the time elapsed since the last render to the stateTime.*/
+        this.stateTime += Constants.DELTATIME; 
+
+        /*
+        Obtains the current frame. This is given by the animation for the current time. 
+        The second variable is the looping. 
+        Passing in true, will tell the animation to restart after it reaches the last frame.
+        */
+        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
+        
+        return currentFrame;
+    }
+
+    
+    /**------------------Getter & Setter------------------**/
     public Vector2 getPosition()
     {
         return pos;
@@ -54,5 +125,5 @@ public abstract class Entity
         //Makes the frames per second constant on every device (so it doesnt run faster on better devices)
         direction.scl(Gdx.graphics.getDeltaTime());
     }
-    
 }
+

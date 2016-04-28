@@ -8,12 +8,10 @@ package gui.entity;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
-import gui.Constants;
 import gui.TextureManager;
 import gui.map.MapManager;
 
@@ -23,13 +21,11 @@ import gui.map.MapManager;
  */
 public class EnemyPlayer extends Entity
 {
-
-    private float stateTime;
+    //General variables
     private String lastMovementKeyPressed = "UP";
-    private int playerId = 0;
+    
+    //General objects
     private SpriteBatch sb;
-    private MapManager map;
-    private TiledMapTileLayer blockLayer;
     private Array <Bomb> bombArray;
     
     //Online render variables
@@ -45,16 +41,16 @@ public class EnemyPlayer extends Entity
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
+    //Player values
+    private int playerId = 0;
     
     
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray) 
     {
-        super(null, pos, direction);
+        super(pos, direction, map);
         
         this.playerId = playerId;
         this.sb = Main.sb;
-        this.map = map;
-        this.blockLayer = map.getBlockLayer();
         
         switch(playerId)
         {
@@ -246,75 +242,6 @@ public class EnemyPlayer extends Entity
         } 
     }
 
-    
-    /**
-    * Gets the frame out of the animation
-    * @param animation
-    * @return 
-    */
-    private TextureRegion getFrame(Animation animation)
-    {
-        /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Constants.DELTATIME; 
-        
-        /*
-        Obtains the current frame. This is given by the animation for the current time. 
-        The second variable is the looping. 
-        Passing in true, we tell the animation to restart after it reaches the last frame.
-        */
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        
-        return currentFrame;
-    }
-    
-    
-        /**
-     * Checks if the block on given entity coordinates is blocked.
-     * @param x
-     * @param y
-     * @return boolean
-     */
-    private boolean isCellBlocked(float x, float y)
-    {
-        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
-        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
-        return cell != null && cell.getTile().getProperties().containsKey("blocked");
-    }
-    
-    
-    private boolean collidesLeft()
-    {
-        if(isCellBlocked(pos.x - 2, pos.y))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesRight()
-    {
-        if(isCellBlocked(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() + 2, pos.y))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesTop()
-    {
-        if(isCellBlocked(pos.x + 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() - 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesBottom()
-    {
-        //Checks at the players feet on the left if there is a block and on the right
-        if(isCellBlocked(pos.x + 3, pos.y - 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() -3, pos.y - 3))
-            return true;
-
-        return false;
-    }
-    
     
     /**--------------------GETTER & SETTER--------------------**/
     public int getPlayerId()

@@ -7,13 +7,11 @@ package gui.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import gui.Constants;
-import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 
@@ -32,16 +30,14 @@ public class Spectator extends Entity
     //Collision detection
     private MapManager map;
     private TiledMapTileLayer blockLayer;
-    private final Animation walkAnimRight;
     private Array <EnemyPlayer> enemies;
     
     public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies) 
     {
-        super(null, pos, direction);
+        super(pos, direction, map);
         
         this.blockLayer = map.getBlockLayer();
         this.camera = camera;
-        this.walkAnimRight = TextureManager.p1WalkingRightAnim; // only for player size purposes
         this.enemies = enemies;
     }
 
@@ -51,52 +47,6 @@ public class Spectator extends Entity
         
     }
     
-    /**
-     * Checks if the block on given entity coordinates is blocked.
-     * @param x
-     * @param y
-     * @return boolean
-     */
-    private boolean isCellBlocked(float x, float y)
-    {
-        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
-        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
-        return cell != null && cell.getTile().getProperties().containsKey("ghost-blocked");
-    }
-    
-    
-    private boolean collidesLeft()
-    {
-        if(isCellBlocked(pos.x - 2, pos.y))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesRight()
-    {
-        if(isCellBlocked(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() + 2, pos.y))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesTop()
-    {
-        if(isCellBlocked(pos.x + 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() - 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesBottom()
-    {
-        //Checks at the players feet on the left if there is a block and on the right
-        if(isCellBlocked(pos.x + 3, pos.y - 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() -3, pos.y - 3))
-            return true;
-
-        return false;
-    }
     
     public void render(SpriteBatch sb)
     {
@@ -110,19 +60,13 @@ public class Spectator extends Entity
         }else
         {
             //Follow living enemie player
-            followEnemyPlayer();
+            camera.setPosition(this.currentEnemyPlayer.getPosition().x, this.currentEnemyPlayer.getPosition().y);
         }
         
         inputDoSpectator();
     }
     
-    
-    private void followEnemyPlayer()
-    {
-        camera.setPosition(this.currentEnemyPlayer.getPosition().x, this.currentEnemyPlayer.getPosition().y);
-    }
-    
-    
+
     private void inputMoveSpectator()
     {
                 

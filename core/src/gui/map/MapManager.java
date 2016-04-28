@@ -55,7 +55,30 @@ public class MapManager
         
     }
     
-    //Getter & Setter
+    
+    /**-------------------MAP FUNCTIONS-------------------**/
+    public boolean isCellBlocked(float x, float y)
+    {
+        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
+        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("blocked");
+    }
+    
+    public boolean isBombPlaced(float x, float y)
+    {
+        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
+        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("bomb");
+    }
+    
+    public boolean isCellDeadly(float x, float y)
+    {
+        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("deadly");
+    }
+    
+    
+    /**-------------------Getter & Setter-------------------**/
     public TiledMapTileLayer getBlockLayer()
     {
         return this.blockLayer;

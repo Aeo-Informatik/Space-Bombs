@@ -99,7 +99,6 @@ public class EntityManager {
     }
     
     /**--------------------SPAWN FUNCTIONS--------------------**/
-    
     /**
      * Creates renders and adds a EnemyPlayer Object to the array
      * @param playerId

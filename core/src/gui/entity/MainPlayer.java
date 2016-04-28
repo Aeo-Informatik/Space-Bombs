@@ -9,9 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
@@ -29,20 +27,16 @@ public class MainPlayer extends Entity
 {
     
     //General Variables
-    private float stateTime;
     private String lastMovementKeyPressed = "UP";
-    private Client client;
-    private SpriteBatch sb;
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
+    
+    //General objects
     private OrthoCamera camera;
-    private int player;
+    private Client client;
+    private SpriteBatch sb;
     private Array <Bomb> bombArray;
     
-    //Collision detection
-    private MapManager map;
-    private TiledMapTileLayer blockLayer;
-    private TiledMapTileLayer bombLayer;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -51,30 +45,28 @@ public class MainPlayer extends Entity
     private final Animation walkAnimLeft;
     
     //Player values
+    private int playerId = 0;
     private int life = 1;
     private boolean godmode = false;
     private int coins = 0;
     private int maxBombPlacing = 2;
     
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map, Array<Bomb> bombArray) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray) throws Exception 
     {
-        super(null, pos, direction);
-        this.player = player;
-        this.bombArray = bombArray;
-        
+        super(pos, direction, map);
+
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
 
         this.client = Main.client;
         this.camera = camera;
         this.sb = Main.sb;
-        this.map = map;
-        this.blockLayer = map.getBlockLayer();
-        this.bombLayer = map.getBombLayer();
+        this.playerId = playerId;
+        this.bombArray = bombArray;
         
         //Get apropriate player texture based on player id
-        switch(player)
+        switch(playerId)
         {
             case 1:
                 this.walkAnimUp = TextureManager.p1WalkingUpAnim;
@@ -121,24 +113,10 @@ public class MainPlayer extends Entity
     @Override
     public void update() 
     {  
-        //LEFT
-        if(direction.x < 0)
+        if(touchesDeadlyBlock())
         {
-        }
-            
-        //RIGHT
-        if(direction.x > 0)
-        {
-        }
-
-        //DOWN
-        if(direction.y < 0)
-        {
-        }
-
-        //UP
-        if(direction.y > 0)
-        {
+            System.out.println("Touched deadly tile!");
+            life -= 1;
         }
     }
     
@@ -156,90 +134,9 @@ public class MainPlayer extends Entity
         //Keyboard interception
         inputMovePlayer();
         inputDoPlayer();
-        
-        if(touchesDeadlyBlock())
-        {
-            System.out.println("Touched deadly tile!");
-            life -= 1;
-        }
-        
     }
     
-    
-    private boolean touchesDeadlyBlock()
-    {
-        float margin = 3f;
-        
-        //Checks from the walking right texture a collision on the down left, down right
-        if(isCellDeadly(pos.x + margin, pos.y) || isCellDeadly(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() - margin, pos.y) )
-        {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    
-    private boolean isCellDeadly(float x, float y)
-    {
-        Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
-        return cell != null && cell.getTile().getProperties().containsKey("deadly");
-    }
-    
-    /**
-     * Checks if the block on given entity coordinates is blocked.
-     * @param x
-     * @param y
-     * @return boolean
-     */
-    private boolean isCellBlocked(float x, float y)
-    {
-        Cell cell = blockLayer.getCell((int) (x / blockLayer.getTileWidth()), (int) (y / blockLayer.getTileHeight()));
-        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
-        return cell != null && cell.getTile().getProperties().containsKey("blocked");
-    }
-    
-    private boolean isBombPlaced(float x, float y)
-    {
-        Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
-        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
-        return cell != null && cell.getTile().getProperties().containsKey("bomb");
-    }
-    
-    
-    private boolean collidesLeft()
-    {
-        if(isCellBlocked(pos.x - 2, pos.y))
-            return true;
 
-        return false;
-    }
-    
-    private boolean collidesRight()
-    {
-        if(isCellBlocked(pos.x + walkAnimRight.getKeyFrame(0).getRegionWidth() + 2, pos.y))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesTop()
-    {
-        if(isCellBlocked(pos.x + 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() - 3, pos.y + walkAnimRight.getKeyFrame(0).getRegionHeight() / 2 + 3))
-            return true;
-
-        return false;
-    }
-    
-    private boolean collidesBottom()
-    {
-        //Checks at the players feet on the left if there is a block and on the right
-        if(isCellBlocked(pos.x + 3, pos.y - 3) || isCellBlocked(pos.x  + walkAnimRight.getKeyFrame(0).getRegionWidth() -3, pos.y - 3))
-            return true;
-
-        return false;
-    }
-    
     /**
      * Moves the player if keyboard input is received.
      */
@@ -408,7 +305,6 @@ public class MainPlayer extends Entity
                     System.err.println("ERROR: In MainPlayer inputMovePlayer() wrong value in lastMovementKeyPressed: " + lastMovementKeyPressed);
             }
         }
-
     }
     
     
@@ -421,15 +317,15 @@ public class MainPlayer extends Entity
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
-            if(!isBombPlaced(pos.x, pos.y))
+            //Checks if there is already a bomb
+            if(!map.isBombPlaced(pos.x, pos.y))
             {
                 //Create Bomb Object
-                Bomb bomb = new Bomb(pos.x, pos.y, direction, map, player); 
+                Bomb bomb = new Bomb(pos, direction, map, playerId); 
                 bombArray.add(bomb);
                 System.out.println("Placed bomb");
             }else
                 System.out.println("Bomb is already there!");
-            
         }
         
         /*------------------ZOOM OUT GAME------------------*/
@@ -440,7 +336,6 @@ public class MainPlayer extends Entity
                 camera.zoom += 0.02;
                 camera.setPosition(pos.x, pos.y);
             }
-            
         }
 
         /*------------------ZOOM INTO GAME------------------*/
@@ -480,34 +375,7 @@ public class MainPlayer extends Entity
     }
     
 
-    /**
-     * Gets the frame out of the animation
-     * @param animation
-     * @return 
-     */
-    private TextureRegion getFrame(Animation animation)
-    {
-        /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Constants.DELTATIME; 
-        
-        /*
-        Obtains the current frame. This is given by the animation for the current time. 
-        The second variable is the looping. 
-        Passing in true, will tell the animation to restart after it reaches the last frame.
-        */
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        
-        return currentFrame;
-    }
- 
-    
     /*------------------ GETTER & SETTER ------------------*/
-    @Override
-    public Vector2 getPosition()
-    {
-        return pos;
-    }
-    
     public Vector2 getDirection()
     {
         return direction;

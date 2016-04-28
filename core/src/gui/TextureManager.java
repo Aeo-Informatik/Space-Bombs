@@ -16,6 +16,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureManager {
     
+    //General Variables
+    public static float playerWidth;
+    public static float playerHeight;
     
     //Player 1 Walking
     public static Texture p1WalkingDown;
@@ -94,13 +97,7 @@ public class TextureManager {
     public static TextureRegion p1ExplosionRightEnd;
     public static TextureRegion p1ExplosionLeftEnd;
     
-    
-    public static Texture loadTexture (String file) 
-    {
-	return new Texture(Gdx.files.internal(file));
-    }
-    
-    
+
     public static void load() 
     {
         //TextureRegion(texture, int cutX, int cutY, int width, int height)
@@ -221,5 +218,21 @@ public class TextureManager {
         p1ExplosionUpEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
         p1ExplosionLeftEnd = new TextureRegion(p1Explosion, 32, 0, 32, 32);
         p1ExplosionRightEnd = new TextureRegion(p1Explosion, 96, 0, 32, 32);
+        
+        
+        playerWidth = p1WalkingRightAnim.getKeyFrame(0).getRegionWidth();
+        playerHeight = p1WalkingRightAnim.getKeyFrame(0).getRegionHeight();
+    }
+    
+    
+    /**-------------------TEXTURE FUNCTIONS-------------------**/
+    /**
+     * loads texture out of assets folder
+     * @param file
+     * @return Texture
+     */
+    public static Texture loadTexture (String file) 
+    {
+	return new Texture(Gdx.files.internal(file));
     }
 }
