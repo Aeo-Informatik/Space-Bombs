@@ -3,7 +3,6 @@
 2) Implementing bomb placing into server/client
 
 //Player
-1) Spectator --> If player is dead watching the game in spectator mode, change from every players side of view through key press 
 2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 
 3) Implement a maximum of bombs being placed
 4) Player hit by bomb gets for 5 seconds godMode and -1 life if life 0 he is dead and spawns a tomb stone with his coins
@@ -16,6 +15,7 @@
 5) Adding animation for block breaking
 6) Adding an animation for player standig still
 7) Adding a static texture for our menuscreen
+8) Increasing the size of the player texture a tiny bit
 
 //Menu
 
@@ -23,4 +23,4 @@
 //Bugs
 1) Bomb destroys multiple blocks at once and goes through undestroyable ones
 2) Bomb can be placed into blocks if you stand at the right position
-3) Multiple bombs can be placed on one block
+4) Player faces always wall if run into it

@@ -199,6 +199,13 @@ public class MainPlayer extends Entity
         return cell != null && cell.getTile().getProperties().containsKey("blocked");
     }
     
+    private boolean isBombPlaced(float x, float y)
+    {
+        Cell cell = bombLayer.getCell((int) (x / bombLayer.getTileWidth()), (int) (y / bombLayer.getTileHeight()));
+        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        return cell != null && cell.getTile().getProperties().containsKey("bomb");
+    }
+    
     
     private boolean collidesLeft()
     {
@@ -414,10 +421,14 @@ public class MainPlayer extends Entity
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
-            
-            //Create Bomb Object
-            Bomb bomb = new Bomb(pos.x, pos.y, direction, map, player); 
-            bombArray.add(bomb); 
+            if(!isBombPlaced(pos.x, pos.y))
+            {
+                //Create Bomb Object
+                Bomb bomb = new Bomb(pos.x, pos.y, direction, map, player); 
+                bombArray.add(bomb);
+                System.out.println("Placed bomb");
+            }else
+                System.out.println("Bomb is already there!");
             
         }
         
