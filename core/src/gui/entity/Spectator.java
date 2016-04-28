@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import gui.Constants;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
@@ -25,20 +26,23 @@ public class Spectator extends Entity
     //Camera
     private OrthoCamera camera;
     private boolean freeCam = true;
-    
+    private int currentPlayerIndex = 0;
+    private EnemyPlayer currentEnemyPlayer;
     
     //Collision detection
     private MapManager map;
     private TiledMapTileLayer blockLayer;
     private final Animation walkAnimRight;
+    private Array <EnemyPlayer> enemies;
     
-    public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map) 
+    public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies) 
     {
         super(null, pos, direction);
         
         this.blockLayer = map.getBlockLayer();
         this.camera = camera;
         this.walkAnimRight = TextureManager.p1WalkingRightAnim; // only for player size purposes
+        this.enemies = enemies;
     }
 
     @Override
@@ -103,9 +107,19 @@ public class Spectator extends Entity
         if(freeCam)
         {
             inputMoveSpectator();
+        }else
+        {
+            //Follow living enemie player
+            followEnemyPlayer();
         }
         
         inputDoSpectator();
+    }
+    
+    
+    private void followEnemyPlayer()
+    {
+        camera.setPosition(this.currentEnemyPlayer.getPosition().x, this.currentEnemyPlayer.getPosition().y);
     }
     
     
@@ -206,17 +220,29 @@ public class Spectator extends Entity
         }
         
         /*------------------FREE MOVING CAMERA FOR SPECTATOR------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
         {
             camera.setPosition(pos.x, pos.y);
-            this.freeCam = true;
+            freeCam = true;
         }
         
         
         /*------------------CAMERA STICKS TO OTHER PLAYER------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
         {
-            this.freeCam = false;
+            //If enemies are present
+            if(currentPlayerIndex < enemies.size && enemies.size > 0)
+            {
+                freeCam = false;
+                currentEnemyPlayer = enemies.get(currentPlayerIndex);
+                currentPlayerIndex += 1;
+            }else
+            {
+                currentPlayerIndex = 0;
+                freeCam = true;
+            }
+                
+
         }
         
         
