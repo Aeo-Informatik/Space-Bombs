@@ -69,7 +69,7 @@ public class Bomb_2 extends Entity
 
     @Override
     public void render(SpriteBatch sb)
-    {       
+    {
         //If time to explode
         if(timer >= explosionTime)
         {
@@ -322,7 +322,7 @@ public class Bomb_2 extends Entity
                 cellLeft.setTile(new StaticTiledMapTile(TextureManager.p1ExplosionLeftEnd));
                 cellLeft.getTile().getProperties().put("deadly", null);
                 
-                if(up==false)
+                if(left==false)
                 {
                 map.getBombLayer().setCell(cellX - x, cellY, cellLeft);
                 }
