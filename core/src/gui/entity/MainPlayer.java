@@ -54,6 +54,7 @@ public class MainPlayer extends Entity
     private int life = 1;
     private boolean godmode = false;
     private int coins = 0;
+    private int maxBombPlacing = 2;
     
     
     public MainPlayer(Vector2 pos, Vector2 direction, int player, OrthoCamera camera, MapManager map, Array<Bomb> bombArray) throws Exception 
@@ -421,7 +422,7 @@ public class MainPlayer extends Entity
         }
         
         /*------------------ZOOM OUT GAME------------------*/
-        if (Gdx.input.isKeyPressed(Keys.Z))
+        if (Gdx.input.isKeyPressed(Keys.O))
         {
             if(camera.zoom < 2.0)
             {
@@ -432,7 +433,7 @@ public class MainPlayer extends Entity
         }
 
         /*------------------ZOOM INTO GAME------------------*/
-        if (Gdx.input.isKeyPressed(Keys.U))
+        if (Gdx.input.isKeyPressed(Keys.I))
         {
             if(camera.zoom > 0.5)
             {
@@ -442,7 +443,7 @@ public class MainPlayer extends Entity
         }
         
         /*------------------CAMERA CENTERS PLAYER------------------*/
-        if (Gdx.input.isKeyPressed(Keys.P))
+        if (Gdx.input.isKeyPressed(Keys.ENTER))
         {
             camera.setPosition(pos.x, pos.y);
         }

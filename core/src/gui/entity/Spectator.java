@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import gui.Constants;
@@ -23,8 +22,10 @@ import gui.map.MapManager;
  */
 public class Spectator extends Entity
 {
-
+    //Camera
     private OrthoCamera camera;
+    private boolean freeCam = true;
+    
     
     //Collision detection
     private MapManager map;
@@ -97,7 +98,13 @@ public class Spectator extends Entity
     {
         //Adding direction to position
         pos.add(this.direction);
-        inputMoveSpectator();
+        
+        //Move spectators cam at its own will if freeCam = true
+        if(freeCam)
+        {
+            inputMoveSpectator();
+        }
+        
         inputDoSpectator();
     }
     
@@ -178,7 +185,7 @@ public class Spectator extends Entity
     private void inputDoSpectator()
     {
         /*------------------ZOOM OUT GAME------------------*/
-        if (Gdx.input.isKeyPressed(Input.Keys.Z))
+        if(Gdx.input.isKeyPressed(Input.Keys.O))
         {
             if(camera.zoom < 2.0)
             {
@@ -189,7 +196,7 @@ public class Spectator extends Entity
         }
 
         /*------------------ZOOM INTO GAME------------------*/
-        if (Gdx.input.isKeyPressed(Input.Keys.U))
+        if(Gdx.input.isKeyPressed(Input.Keys.I))
         {
             if(camera.zoom > 0.5)
             {
@@ -198,11 +205,20 @@ public class Spectator extends Entity
             }
         }
         
-        /*------------------CAMERA CENTERS PLAYER------------------*/
-        if (Gdx.input.isKeyPressed(Input.Keys.P))
+        /*------------------FREE MOVING CAMERA FOR SPECTATOR------------------*/
+        if(Gdx.input.isKeyPressed(Input.Keys.ENTER))
         {
             camera.setPosition(pos.x, pos.y);
+            this.freeCam = true;
         }
+        
+        
+        /*------------------CAMERA STICKS TO OTHER PLAYER------------------*/
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+        {
+            this.freeCam = false;
+        }
+        
         
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
