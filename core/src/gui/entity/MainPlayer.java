@@ -317,7 +317,7 @@ public class MainPlayer extends Entity
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
             //Checks if there is already a bomb
-            if(!map.isBombPlaced(pos.x, pos.y) && maxBombPlacing >= bombArray.size)
+            if(!map.isBombPlaced(pos.x, pos.y) && maxBombPlacing > bombArray.size)
             {
                 //Create Bomb Object
                 Bomb bomb = new Bomb(pos, direction, map, playerId); 
