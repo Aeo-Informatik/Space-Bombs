@@ -1,10 +1,10 @@
 //Bomb
-1) Implement explode if hit by explosion
+1) Implement explode bomb if hit by explosion
 2) Implementing bomb placing into server/client
 
 //Player
 2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 
-4) Player hit by bomb gets for 5 seconds godMode and -1 life if life 0 he is dead and spawns a tomb stone with his coins
+4) Player hit by bomb gets for 5 seconds godMode and -1 life. If life reaches 0 he is dead and spawns a tomb stone with his coins
 5) Player shouldnt be able to walk on bombs
 
 //Textures
