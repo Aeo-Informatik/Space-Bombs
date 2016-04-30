@@ -53,7 +53,7 @@ public class Bomb extends Entity
         
         //Bomb settings
         this.normalBombAnim = TextureManager.normalBombAnim;
-        this.explosionRange = 1; // In blocks
+        this.explosionRange = 4; // In blocks
         this.explosionTime = 2; // in seconds
         this.explosionDuration = 0.4f; // in seconds      
     }
