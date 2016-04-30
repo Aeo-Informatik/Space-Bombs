@@ -319,12 +319,10 @@ public class MainPlayer extends Entity
             //Checks if there is already a bomb
             if(!map.isBombPlaced(pos.x, pos.y) && maxBombPlacing > bombArray.size)
             {
-                //Create Bomb Object
-                Bomb bomb = new Bomb(pos, direction, map, playerId); 
+                //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                Bomb bomb = new Bomb(new Vector2(pos.x, pos.y), new Vector2(pos.x, pos.y), map, playerId); 
                 bombArray.add(bomb);
-                System.out.println("Placed bomb");
-            }else
-                System.out.println("Bomb is already there! Or maxBombs reached");
+            }
         }
         
         /*------------------ZOOM OUT GAME------------------*/

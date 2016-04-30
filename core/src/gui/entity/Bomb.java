@@ -47,8 +47,8 @@ public class Bomb extends Entity
         this.playerId = playerId;
         
         //Get cell positon
-        this.cellX = (int) (pos.x / map.getBlockLayer().getTileWidth());
-        this.cellY = (int) (pos.y / map.getBlockLayer().getTileHeight());
+        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
+        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
         
         //Bomb settings
         this.normalBombAnim = TextureManager.normalBombAnim;
@@ -62,8 +62,11 @@ public class Bomb extends Entity
     public void render(SpriteBatch sb)
     {
         //If time to explode
-        if(timer >= explosionTime)
+        if(timer >= explosionTime || map.isCellDeadly(pos.x, pos.y))
         {
+            //To ensure the render method stays in the if branch after detecting a deadly tile
+            timer += explosionTime;
+            
             explode();
             
             //If explosion effect is done
@@ -86,7 +89,7 @@ public class Bomb extends Entity
             cell.getTile().getProperties().put("bomb", null);
             
             //Set bomb into bomb layer
-            map.getBombLayer().setCell((int) cellX, (int) cellY, cell);
+            map.getBombLayer().setCell(cellX, cellY, cell);
             
             //Add passed to counter
             timer += Constants.DELTATIME;
