@@ -22,4 +22,4 @@
 //Bugs
 2) Bomb can be placed into blocks if you stand at the correct position (top left corner or down right corner)
 4) Player faces always wall if run into it
-5) Bombs will be placed at times behind the player
+5) Bombs will be placed at times behind the player - has to be verified
