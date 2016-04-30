@@ -25,6 +25,7 @@ public class Bomb extends Entity
     private SpriteBatch sb;
     private int playerId ;
     int cellX, cellY;
+    boolean touchedDeadlyTile = false;
     
     //Bomb settings
     private float timer;
@@ -57,16 +58,23 @@ public class Bomb extends Entity
         this.explosionDuration = 0.4f; // in seconds      
     }
     
-
+    
     @Override
     public void render(SpriteBatch sb)
     {
-        //If time to explode
-        if(timer >= explosionTime || map.isCellDeadly(pos.x, pos.y))
+        if(map.isCellDeadly(pos.x, pos.y) && touchedDeadlyTile == false && timer < explosionTime)
         {
-            //To ensure the render method stays in the if branch after detecting a deadly tile
-            timer += explosionTime;
+            System.out.println("Touched deadly tile");
             
+            //To delay the explosion after hit from another bomb
+            timer = explosionTime - explosionDuration;
+            
+            touchedDeadlyTile = true;
+        }
+        
+        //If time to explode or deadly tile has been touched
+        if(timer >= explosionTime)
+        {
             explode();
             
             //If explosion effect is done
@@ -81,7 +89,7 @@ public class Bomb extends Entity
                 timer2 += Constants.DELTATIME;
             }
             
-        }else //Creates bomb animation
+        }else if(!touchedDeadlyTile)//Creates bomb animation
         {
             //Create new cell and set its animation texture
             Cell cell = new Cell();
@@ -90,10 +98,10 @@ public class Bomb extends Entity
             
             //Set bomb into bomb layer
             map.getBombLayer().setCell(cellX, cellY, cell);
-            
-            //Add passed to counter
-            timer += Constants.DELTATIME;
         }
+        
+        //Add passed to counter
+        timer += Constants.DELTATIME;
     }
     
     @Override

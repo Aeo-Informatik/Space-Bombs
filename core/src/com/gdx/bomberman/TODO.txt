@@ -1,5 +1,4 @@
 //Bomb
-1) Implement explode bomb if hit by explosion
 2) Implementing bomb placing into server/client
 
 //Player
