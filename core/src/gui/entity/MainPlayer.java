@@ -29,13 +29,14 @@ public class MainPlayer extends Entity
     private String lastMovementKeyPressed = "UP";
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
+    private float marginXInfrontPlayer = 0f;
+    private float marginYInfrontPlayer = 0f;
     
     //General objects
     private OrthoCamera camera;
     private Client client;
     private SpriteBatch sb;
     private Array <Bomb> bombArray;
-    
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -116,6 +117,35 @@ public class MainPlayer extends Entity
         {
             System.out.println("Touched deadly tile!");
             life -= 1;
+        }
+        
+        float margin = 10f;
+        
+        //Which direction the player is facing
+        switch(lastMovementKeyPressed)
+        {
+            case "LEFT":
+                marginXInfrontPlayer = -margin;
+                marginYInfrontPlayer = 0f;
+                break;
+
+            case "RIGHT":
+                marginXInfrontPlayer = margin;
+                marginYInfrontPlayer = 0f;
+                break;
+
+            case "UP":
+                marginYInfrontPlayer = margin;
+                marginXInfrontPlayer = 0f;
+                break;
+
+            case "DOWN":
+                marginYInfrontPlayer = -margin;
+                marginXInfrontPlayer = 0f;
+                break;
+
+            default:
+                System.err.println("ERROR: In MainPlayer update() wrong value in lastMovementKeyPressed: " + lastMovementKeyPressed);
         }
     }
     
@@ -317,10 +347,10 @@ public class MainPlayer extends Entity
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
             //Checks if there is already a bomb
-            if(!map.isBombPlaced(pos.x, pos.y) && maxBombPlacing > bombArray.size)
+            if(!map.isBombPlaced(pos.x, pos.y) && maxBombPlacing > bombArray.size && !map.isBombPlaced(pos.x + marginXInfrontPlayer, pos.y + marginYInfrontPlayer))
             {
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                Bomb bomb = new Bomb(new Vector2(pos.x, pos.y), new Vector2(pos.x, pos.y), map, playerId); 
+                Bomb bomb = new Bomb(new Vector2(pos.x + marginXInfrontPlayer, pos.y + marginYInfrontPlayer), new Vector2(pos.x, pos.y), map, playerId); 
                 bombArray.add(bomb);
             }
         }

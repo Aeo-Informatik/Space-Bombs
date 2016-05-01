@@ -34,6 +34,7 @@ public class Bomb extends Entity
     private int explosionRange;
     private float explosionDuration;
     private boolean isExploded = false;
+    private float delayAfterHitByBomb;
     
     //Bomb 1 Animation
     private  Animation normalBombAnim;
@@ -55,7 +56,8 @@ public class Bomb extends Entity
         this.normalBombAnim = TextureManager.normalBombAnim;
         this.explosionRange = 4; // In blocks
         this.explosionTime = 2; // in seconds
-        this.explosionDuration = 0.4f; // in seconds      
+        this.explosionDuration = 0.4f; // in seconds     
+        this.delayAfterHitByBomb = 0f;
     }
     
     
@@ -67,7 +69,7 @@ public class Bomb extends Entity
             System.out.println("Bomb has touched deadly tile");
             
             //To delay the explosion after hit from another bomb
-            timer = explosionTime - explosionDuration;
+            timer = explosionTime - delayAfterHitByBomb;
             
             touchedDeadlyTile = true;
         }
@@ -164,7 +166,6 @@ public class Bomb extends Entity
             //Explosion down
             map.getBombLayer().setCell(cellX, cellY - y, cell);
             deleteBlock(cellX, cellY - y);
-            
         }
         
         //Explode UP 
