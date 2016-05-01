@@ -47,7 +47,9 @@ public abstract class Entity
     /**------------------COLLISION FUNCTIONS------------------**/
     protected boolean collidesLeft()
     {
-        if(map.isCellBlocked(pos.x - 2, pos.y))
+        float marginX = 2;
+        //|| map.isBombPlaced(pos.x - marginX, pos.y)
+        if(map.isCellBlocked(pos.x - marginX, pos.y) )
             return true;
 
         return false;
@@ -55,7 +57,9 @@ public abstract class Entity
     
     protected boolean collidesRight()
     {
-        if(map.isCellBlocked(pos.x + Constants.PLAYERWIDTH + 2, pos.y))
+        float marginX = 2;
+        //|| map.isBombPlaced(pos.x + Constants.PLAYERWIDTH + marginX, pos.y)
+        if(map.isCellBlocked(pos.x + Constants.PLAYERWIDTH + marginX, pos.y) )
             return true;
 
         return false;
@@ -63,18 +67,31 @@ public abstract class Entity
     
     protected boolean collidesTop()
     {
-        if(map.isCellBlocked(pos.x + 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3) || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH - 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3))
+        float marginX = 3;
+        float marginY = 3;
+        
+        //Checks at players half on the left and right if there is a block or bomb located
+        if(map.isCellBlocked(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY) 
+                || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
+//                || map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY)
+//                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
             return true;
-
+        //else
         return false;
     }
     
     protected boolean collidesBottom()
     {
-        //Checks at the players feet on the left if there is a block and on the right
-        if(map.isCellBlocked(pos.x + 3, pos.y - 3) || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH -3, pos.y - 3))
+        float marginX = 3;
+        float marginY = 3;
+        
+        //Checks at players feet on the left if there is a block and on the right
+        if(map.isCellBlocked(pos.x + marginX, pos.y - marginY) 
+                || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
+//                || map.isBombPlaced(pos.x + marginX, pos.y - marginY)
+//                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
             return true;
-
+        //else
         return false;
     }
 
