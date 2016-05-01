@@ -64,7 +64,7 @@ public class Bomb extends Entity
     {
         if(map.isCellDeadly(pos.x, pos.y) && touchedDeadlyTile == false && timer < explosionTime)
         {
-            System.out.println("Touched deadly tile");
+            System.out.println("Bomb has touched deadly tile");
             
             //To delay the explosion after hit from another bomb
             timer = explosionTime - explosionDuration;
