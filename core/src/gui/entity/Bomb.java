@@ -64,52 +64,60 @@ public class Bomb extends Entity
     @Override
     public void render(SpriteBatch sb)
     {
-        if(map.isCellDeadly(pos.x, pos.y) && touchedDeadlyTile == false && timer < explosionTime)
+        //To make sure no bomb gets placed into wall
+        if(!map.isCellBlocked(pos.x, pos.y))
         {
-            System.out.println("Bomb has touched deadly tile");
-            
-            //To delay the explosion after hit from another bomb
-            timer = explosionTime - delayAfterHitByBomb;
-            
-            touchedDeadlyTile = true;
-        }
-        
-        //If time to explode or deadly tile has been touched
-        if(timer >= explosionTime)
-        {
-            explode();
-            
-            //If explosion effect is done
-            if(timer2 >= explosionDuration)
+            if(map.isCellDeadly(pos.x, pos.y) && touchedDeadlyTile == false && timer < explosionTime)
             {
-                deleteExplosionEffect();
-                
-                //Object gets delete only set if everything is done.
-                this.isExploded = true;
-            }else
-            {
-                timer2 += Constants.DELTATIME;
+                System.out.println("Bomb has touched deadly tile");
+
+                //To delay the explosion after hit from another bomb
+                timer = explosionTime - delayAfterHitByBomb;
+
+                touchedDeadlyTile = true;
             }
-            
-        }else if(!touchedDeadlyTile)//Creates bomb animation
+
+            //If time to explode or deadly tile has been touched
+            if(timer >= explosionTime)
+            {
+                explode();
+
+                //If explosion effect is done
+                if(timer2 >= explosionDuration)
+                {
+                    deleteExplosionEffect();
+
+                    //Object gets delete only set if everything is done.
+                    this.isExploded = true;
+                }else
+                {
+                    timer2 += Constants.DELTATIME;
+                }
+
+            }else if(!touchedDeadlyTile)//Creates bomb animation
+            {
+                //Create new cell and set its animation texture
+                Cell cell = new Cell();
+                cell.setTile(new StaticTiledMapTile(getFrame(this.normalBombAnim)));
+                cell.getTile().getProperties().put("bomb", null);
+
+                //Set bomb into bomb layer
+                map.getBombLayer().setCell(cellX, cellY, cell);
+            }
+
+            //Add passed to counter
+            timer += Constants.DELTATIME;
+        }else
         {
-            //Create new cell and set its animation texture
-            Cell cell = new Cell();
-            cell.setTile(new StaticTiledMapTile(getFrame(this.normalBombAnim)));
-            cell.getTile().getProperties().put("bomb", null);
-            
-            //Set bomb into bomb layer
-            map.getBombLayer().setCell(cellX, cellY, cell);
+            //Object gets delete only set if everything is done.
+            this.isExploded = true;
         }
-        
-        //Add passed to counter
-        timer += Constants.DELTATIME;
     }
     
     @Override
     public void update() 
     {
-
+        
     }
     
     public boolean deleteBlock(int x, int y)
