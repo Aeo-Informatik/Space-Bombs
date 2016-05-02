@@ -412,4 +412,14 @@ public class Bomb extends Entity
     {
         return explosionRange;
     }
+    
+    public int getCellX()
+    {
+        return cellX;
+    }
+    
+    public int getCellY()
+    {
+        return cellY;
+    }
 }
