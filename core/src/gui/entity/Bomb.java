@@ -65,7 +65,7 @@ public class Bomb extends Entity
     public void render(SpriteBatch sb)
     {
         //To make sure no bomb gets placed into wall
-        if(!map.isCellBlocked(pos.x, pos.y))
+        if(!map.isCellBlocked(pos.x, pos.y) && !isExploded)
         {
             if(map.isCellDeadly(pos.x, pos.y) && touchedDeadlyTile == false && timer < explosionTime)
             {
@@ -86,7 +86,8 @@ public class Bomb extends Entity
                 if(timer2 >= explosionDuration)
                 {
                     deleteExplosionEffect();
-
+                    System.out.println("Boom delete");
+                    
                     //Object gets delete only set if everything is done.
                     this.isExploded = true;
                 }else
@@ -410,5 +411,15 @@ public class Bomb extends Entity
     public int getRange() 
     {
         return explosionRange;
+    }
+    
+    public int getCellX()
+    {
+        return cellX;
+    }
+    
+    public int getCellY()
+    {
+        return cellY;
     }
 }

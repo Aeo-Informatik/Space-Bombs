@@ -119,7 +119,7 @@ public class MainPlayer extends Entity
             life -= 1;
         }
         
-        float margin = 10f;
+        float margin = 5f;
         
         //Which direction the player is facing
         switch(lastMovementKeyPressed)

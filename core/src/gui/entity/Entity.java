@@ -106,6 +106,11 @@ public abstract class Entity
         return false;
     }
     
+    protected boolean collidesBomb()
+    {
+        return true;
+    }
+    
     /**
     * Gets the frame out of the animation
     * @param animation
