@@ -57,7 +57,7 @@ public class Bomb extends Entity
         this.explosionRange = 4; // In blocks
         this.explosionTime = 2; // in seconds
         this.explosionDuration = 0.4f; // in seconds     
-        this.delayAfterHitByBomb = 0f;
+        this.delayAfterHitByBomb = 0.4f;
     }
     
     
@@ -69,8 +69,6 @@ public class Bomb extends Entity
         {
             if(map.isCellDeadly(pos.x, pos.y) && touchedDeadlyTile == false && timer < explosionTime)
             {
-                System.out.println("Bomb has touched deadly tile");
-
                 //To delay the explosion after hit from another bomb
                 timer = explosionTime - delayAfterHitByBomb;
 
@@ -86,7 +84,6 @@ public class Bomb extends Entity
                 if(timer2 >= explosionDuration)
                 {
                     deleteExplosionEffect();
-                    System.out.println("Boom delete");
                     
                     //Object gets delete only set if everything is done.
                     this.isExploded = true;

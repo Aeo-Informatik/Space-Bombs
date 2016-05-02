@@ -89,7 +89,8 @@
   </tile>
   <tile id="15">
    <properties>
-    <property name="" value=""/>
+    <property name="blocked" value=""/>
+    <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="16">
@@ -148,7 +149,7 @@
  </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJztmm2L2zAQhJc7J/GXcI2dt///S2tRDZpMrVwoxVuaWXjQWZZM3WG8K0UfEfFhjDHGGGOMMcYYY4wxxhhjjDHmN378A/+G/50hgex3fifK/zdit3Bb2C+MdH2s7bRwqvdP0jfVOac6fqrz0Y+wvnn6lvis+nxW/bi9yP1Lp73JOA7ru72+7K8SxYP3hcPC18Jcr3e1HWu/XmNe+fsav7zLMYb1zdC36Kc+W/Ov+lZ9ra0+7xzWN0Nf9h3HtfbPVbN9NN8O0Xx6rOPQrn0PyvwprG+GvkWjZ75T/3ItvJavdT6ea//m6Kv59SQawcfIn7dovh9o3kHmsZ95fvY7vxPQZy2/csC3uD/QuKEzXvOz/ZujL/Iv6mBex3KMVTP4sNy/Vt04pvoczs9fYf9m6av5V+tjDvbvd/lW18v3sL4Z+sJnt3jMw4do/uZA/tV8C39O9Xn7aOtg+Nz6bq+v+he+HKKfj9f2vTQfaz73+ihH3+JDXsfCt+doPsS6N+JxfRTxuF+FfSyuq8doNbj13V7foof69m/h+jlfX6x/4UP4DL6+xOO6WP3LeZb3t7B/PdJ967u9vvCv1r2aRzn+JP/avzn6wrda72IdhLyLmGO9rkbehW95XY3nW9/t9cXvR73fhzjQz/tXa/fXvgf+PufoC5+hRd2rvydhfTzLPB2HfM6+LWNQl2e/8zvB/tX9Jg7Nq6/sP+t3wP7N0XftPAaH1r/IozuaD59y8DkQ71/l6Qv/vrqf3FvfPsvX9m+evvDZLNro/hPqa/jwLP33aPvYHLy+tr7b64v9Zw6cf312LrJ3vrJXV3t/Mkdf9S37mf1b/Mp5mvMqr5tRL2sed/2coy/HK+cje77unY/msL55+uKcZNGnePJQ+3C9q/fP0t8bd4x27hJhfbfXd2uy39kYY4wxxhhjjDHGGGOMMcYYY77jJ+GMUEk=
+   eJztm9tu2zAQBYm4tvwSxLfY+f8vrYjywMfblWP0QVu0s8CAliwJSQZHpCjmrbX2BgAAAAAAAAAAAAAAAAAAv3H4C36Gf50fBVT/zv8T/e+t2s7cZnYze9t+H+1p5ji+P4Z9p3HOcRx/Gudrvwq/dX57bYafzfDn7Wf4/nOhvYXjvPC7vl/PV6+ewa+ZaeZj5jy2t6Pdj/1xW+f1z9f2K7te+4bfCr/dX8xZlt+Y25jr2MbrXRp+K/x67ryuY/95ONu1e26V7X7M+zhObXY/6OefGn4r/HZHz3IX8zsZWX8dz9d1yW+N39i/HoMj5bjnsju9jfY4Wp03hfM8z2rxu77f7ifrX72UW30/2XHKcjw+9s/kt8av+l+Ng/051ms/nCnH/fvr8OZ1Gtfx/lnXxe/6fmP/G8fHXlOCV3Yd3Re+Gn4r/Cpnt/bYD3d3mquKdUj2bdt9zuo6zr3aNvfnGr8xv9m81S64jH7ldtOW+3Oej2r89pz6c2zf7mPqS7vn0P0eDJX8fthnn9/SGBy/6/vt91/P626BwxO2T2D8XOtXz7/qh+Vzao9+Va/mV3Ncyi/35xq/yq+Pe7P8ev1J/0t+a/x6bn28655jPRs/K7f+XK3r43d9v3p/lL0fim73CV5aE5A9B3N/rvGrnKnVuDe+T8rcZo7Vn3tu+7Wmht8Kv8pvnG/yeuY2c5w9T5PfGr/ZegyvV9xmjn0dCPNXdX6V3+/e33oeby1flxX7a/Jb71c5Owc3cf5J4+tLaH3cnY23/fkav+v71fyzl9a/PlsXubS+MnPM+6M6vzG3nmfPb8+r99Per/pz89KcCOPnGr9er6yPXMp1HH9njvFb51frJLufnkm9R9K23hVcwv6l4zTecsf4Xd8v/38EAAAAAAAAAAAAAAAAAPDIT5wbT9w=
   </data>
  </layer>
  <layer name="Bombs" width="120" height="60">

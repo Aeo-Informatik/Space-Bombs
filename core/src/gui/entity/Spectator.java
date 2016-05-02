@@ -8,11 +8,9 @@ package gui.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import gui.Constants;
-import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 
