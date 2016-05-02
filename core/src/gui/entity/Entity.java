@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import gui.Constants;
 import gui.map.MapManager;
 
@@ -106,10 +107,6 @@ public abstract class Entity
         return false;
     }
     
-    protected boolean collidesBomb()
-    {
-        return true;
-    }
     
     /**
     * Gets the frame out of the animation
