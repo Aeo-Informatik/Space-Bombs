@@ -147,6 +147,11 @@ public class ProcessData
                             System.err.println("ERROR: stopEnemyPlayer wrong number of parameters");
                         break;
 
+                     /**------------------STOP ENEMY PLAYER------------------**/
+                    //General: setBomb|playerId|x|y|bomb|target
+                    case "setBomb":
+                        break;
+                        
                     default:
                         System.err.println("ERROR: Command received from server is not valid");
                         System.err.println(receivedData);
