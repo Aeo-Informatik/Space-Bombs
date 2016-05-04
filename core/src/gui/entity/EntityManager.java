@@ -198,4 +198,13 @@ public class EntityManager {
     {
         return this.bombArray;
     }
+
+    public MapManager getMap() {
+        return map;
+    }
+
+    public void setMap(MapManager map) {
+        this.map = map;
+    }
+    
 }
