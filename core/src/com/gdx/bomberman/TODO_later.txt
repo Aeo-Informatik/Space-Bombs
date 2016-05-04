@@ -1,5 +1,5 @@
 //Bomb
-2) Implementing bomb placing into server/client
+3) pull bombs above the floor
 
 //Player
 2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 

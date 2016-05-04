@@ -146,7 +146,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
         {
-            if(!collidesLeft())
+            if(!collidesLeft() && !collidesLeftBomb(bombArray))
             {
                 //Set the speed the texture moves in x and y axis
                 //This will be added to the position every render cycle
@@ -188,7 +188,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING RIGHT------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)))
         {
-            if(!collidesRight())
+            if(!collidesRight() && !collidesRightBomb(bombArray))
             {
                 setDirection(150, 0);
                 
@@ -215,7 +215,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING UP------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)))
         {
-            if(!collidesTop())
+            if(!collidesTop() && !collidesTopBomb(bombArray))
             {
                 setDirection(0, 150);
 
@@ -242,7 +242,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING DOWN------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)))
         {
-            if(!collidesBottom())
+            if(!collidesBottom() && !collidesBottomBomb(bombArray))
             {
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);

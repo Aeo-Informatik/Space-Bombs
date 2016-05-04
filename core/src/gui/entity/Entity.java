@@ -96,6 +96,110 @@ public abstract class Entity
         return false;
     }
 
+    protected boolean collidesLeftBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 2;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x - marginX, pos.y))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x - marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) (pos.y / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    protected boolean collidesRightBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 2;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x + marginX, pos.y))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x + marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) (pos.y / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    protected boolean collidesTopBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 3;
+        float marginY = 3;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x + marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) ((pos.y + Constants.PLAYERHEIGHT / 2 + marginY) / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    protected boolean collidesBottomBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 3;
+        float marginY = 3;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x - marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) ((pos.y - marginY) / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    
+    
     protected boolean touchesDeadlyBlock()
     {
         float margin = 3f;
