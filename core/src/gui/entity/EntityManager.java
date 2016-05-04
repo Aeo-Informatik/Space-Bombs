@@ -188,4 +188,14 @@ public class EntityManager {
     {
         return this.spectator;
     }
+    
+    public Array <Bomb> getBombArrayEnemy()
+    {
+        return this.bombArrayEnemy;
+    }
+    
+    public Array <Bomb> getBombArrayMain()
+    {
+        return this.bombArray;
+    }
 }

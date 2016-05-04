@@ -147,7 +147,7 @@ public class ProcessData
                             System.err.println("ERROR: stopEnemyPlayer wrong number of parameters");
                         break;
 
-                     /**------------------STOP ENEMY PLAYER------------------**/
+                     /**------------------ENEMY PLAYER PLACE BOMB------------------**/
                     //General: setBomb|playerId|x|y|bomb|target
                     case "setBomb":
                         break;
