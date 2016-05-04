@@ -315,9 +315,15 @@ public class MainPlayer extends Entity
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
+            float x = pos.x + Constants.PLAYERWIDTH / 2;
+            float y = pos.y + Constants.PLAYERHEIGHT / 3;
+            int bombId = 1;
+            
             //Checks if there is already a bomb
-            if(!map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y + Constants.PLAYERHEIGHT / 3) && maxBombPlacing > bombArray.size)
+            if(!map.isBombPlaced(x, y) && maxBombPlacing > bombArray.size)
             {
+                client.sendData("setBomb|" + Integer.toString(Constants.PLAYERID) + "|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(bombId) + "|*");
+                
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                 Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId); 
                 bombArray.add(bomb);
