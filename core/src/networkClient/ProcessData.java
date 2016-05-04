@@ -148,7 +148,7 @@ public class ProcessData
                         break;
 
                      /**------------------ENEMY PLAYER PLACE BOMB------------------**/
-                    //General: setBomb|playerId|x|y|bomb|target
+                    //General: setBomb|playerId|x|y|bombId|target
                     case "setBomb":
                         break;
                         
