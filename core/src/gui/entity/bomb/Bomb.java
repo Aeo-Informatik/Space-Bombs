@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gui.entity;
+package gui.entity.bomb;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import gui.Constants;
 import gui.TextureManager;
+import gui.entity.Entity;
 import gui.map.MapManager;
 
 /**

@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import gui.entity.bomb.Bomb;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -164,7 +165,23 @@ public class EntityManager {
         }
     }
     
+    public void placeBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
+    {
+        switch(bombType)
+        {
+            case "default":
+                Bomb defaultBomb = new Bomb(pos, direction, map, playerId);
+                bombArray.add(defaultBomb);
+                break;
+            
+            default:
+                Bomb defaultBomb1 = new Bomb(pos, direction, map, playerId);
+                bombArray.add(defaultBomb1);
+        }
+    }
 
+    
+    
     /**--------------------GETTER & SETTER--------------------**/
     /**
      * 

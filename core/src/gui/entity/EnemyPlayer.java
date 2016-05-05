@@ -6,6 +6,7 @@
 package gui.entity;
 
 
+import gui.entity.bomb.Bomb;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;

@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import gui.entity.bomb.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
