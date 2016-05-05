@@ -114,8 +114,9 @@ public class MainPlayer extends Entity
     {  
         if(touchesDeadlyBlock())
         {
-            System.out.println("Touched deadly tile!");
+            System.out.println("You touched a deadly tile!");
             life -= 1;
+            client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
         }
     }
     
@@ -379,7 +380,7 @@ public class MainPlayer extends Entity
     
     public void onDeath()
     {
-        client.sendData("playerDeath|" + Constants.PLAYERID + "|*");
+        System.out.println("YOU DIED!");
     }
 
     /*------------------ GETTER & SETTER ------------------*/    

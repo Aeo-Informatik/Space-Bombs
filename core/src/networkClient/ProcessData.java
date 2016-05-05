@@ -118,7 +118,7 @@ public class ProcessData
                     case "moveEnemyPlayer":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemieArray())
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -136,7 +136,7 @@ public class ProcessData
                     case "stopEnemyPlayer":
                         if(parameters.length == 5)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemieArray())
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -166,11 +166,11 @@ public class ProcessData
                         
                         
                     /**------------------ENEMY PLAYER DIES------------------**/   
-                    //General: playerDeath|playerId|target
-                    case "playerDeath":
-                        if(parameters.length == 3)
+                    //General: playerDeath|playerId|life|target
+                    case "enemyPlayerLife":
+                        if(parameters.length == 4)
                         {
-                            entityManager.killEnemyPlayer(Integer.parseInt(parameters[1]));
+                            entityManager.setLiveEnemyPlayer(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]));
                         }else
                             System.err.println("ERROR: playerDied wrong number of parameters");
                         break;

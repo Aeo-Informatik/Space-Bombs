@@ -71,9 +71,16 @@ public class EntityManager {
     public void update()
     {
         //For every Enemy Player Object that is stored in the arraylist execute the update function in it
-        for(EnemyPlayer enemy: enemies)
+        for(int i=0; i < bombArray.size; i++)
         {
-            enemy.update();
+            enemies.get(i).update();
+            
+            //If player is dead
+            if(enemies.get(i).getLife() == 0)
+            {
+                enemies.get(i).onDeath();
+                enemies.removeIndex(i);
+            }
         }
         
         //Deletes bomb if exploded
@@ -190,28 +197,26 @@ public class EntityManager {
         }
     }
 
-    /**
-     * Deletes (kills) player from enemie array and executes on death function from specified player
-     * @param playerId 
-     */
-    public void killEnemyPlayer(int playerId)
+
+    public void setLiveEnemyPlayer(int playerId, int life)
     {
         for(int i=0; i < enemies.size; i++)
         {
             if(enemies.get(i).getPlayerId() == playerId)
             {
-                enemies.get(i).onDeath();
-                enemies.removeIndex(i);
+                enemies.get(i).setLife(life);
+                System.out.println("Set life of enemy player " + playerId + " to " + life);
             }
         }
     }
+    
     
     /**--------------------GETTER & SETTER--------------------**/
     /**
      * 
      * @return Array<EnemyPlayer>
      */
-    public Array<EnemyPlayer> getEnemieArray()
+    public Array<EnemyPlayer> getEnemyArray()
     {
         return enemies;
     }

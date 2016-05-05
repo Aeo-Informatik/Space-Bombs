@@ -30,10 +30,10 @@ public class Constants {
     
     
     //Server config
-    public static boolean LOCALSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean LOCALSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 4;
+    public static int MAXPLAYERS = 2;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
     public static boolean SERVERDEBUG = false;
     
@@ -47,4 +47,5 @@ public class Constants {
     public static float MAPTEXTUREWIDTH;
     public static float MAPTEXTUREHEIGHT;
     public static float DELTATIME = 0;
+    public static int AMOUNTSPECTATORS = 0;
 }
