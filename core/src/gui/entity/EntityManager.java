@@ -97,6 +97,9 @@ public class EntityManager {
                 //Create new spectator
                 spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies);
                 
+                //On death
+                mainPlayer.onDeath();
+                
                 //Delete main player
                 mainPlayer = null; 
             }

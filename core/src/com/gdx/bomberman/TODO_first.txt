@@ -1,14 +1,11 @@
-//Bomb
-
 
 //Player
 2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 
 5) Player shouldnt be able to walk on bombs
 
 //Textures
-7) Adding a static texture for our menuscreen
-8) Adding a animation bomb texture for every player
+8) Adding an animation bomb texture for every player
 
-//Menu
+
 
 

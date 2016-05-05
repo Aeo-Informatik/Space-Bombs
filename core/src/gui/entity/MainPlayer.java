@@ -377,6 +377,10 @@ public class MainPlayer extends Entity
         }
     }
     
+    public void onDeath()
+    {
+        client.sendData("playerDeath|" + Constants.PLAYERID + "|*");
+    }
 
     /*------------------ GETTER & SETTER ------------------*/    
     public int getLife()

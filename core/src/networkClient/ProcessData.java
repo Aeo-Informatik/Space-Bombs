@@ -149,7 +149,7 @@ public class ProcessData
                         break;
 
                         
-                     /**------------------ENEMY PLAYER PLACE BOMB------------------**/
+                    /**------------------ENEMY PLAYER PLACES BOMB------------------**/
                     //General: placeBomb|x|y|playerId|bombType|target
                     case "placeEnemyBomb":
                         if(parameters.length == 6)
@@ -164,6 +164,11 @@ public class ProcessData
                             System.err.println("ERROR: placeBomb wrong number of parameters");
                         break;
                         
+                        
+                    /**------------------ENEMY PLAYER DIES------------------**/   
+                    //General: playerDeath|playerId|target
+                    case "playerDied":
+                        break;
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");
