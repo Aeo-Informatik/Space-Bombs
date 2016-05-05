@@ -1,10 +1,10 @@
 //Bomb
-3) pull bombs above the floor
+
 
 //Player
 2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 
 4) If life reaches 0 he is dead and spawns a tomb stone with his coins
-5) Player shouldnt be able to walk on bombs
+5) Player hit by bomb gets for 5 seconds godMode and -1 life. 
 
 //Textures
 2) Adding a texture for a tomb stone to display on player death
@@ -13,9 +13,4 @@
 6) Adding an animation for player standig still
 8) Increasing the size of the player texture a tiny bit
 
-//Menu
 
-
-//Bugs
-4) Player faces always wall if run into it
-5) bobs explode at the same time
