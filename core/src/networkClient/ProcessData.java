@@ -167,7 +167,12 @@ public class ProcessData
                         
                     /**------------------ENEMY PLAYER DIES------------------**/   
                     //General: playerDeath|playerId|target
-                    case "playerDied":
+                    case "playerDeath":
+                        if(parameters.length == 3)
+                        {
+                            entityManager.killEnemyPlayer(Integer.parseInt(parameters[1]));
+                        }else
+                            System.err.println("ERROR: playerDied wrong number of parameters");
                         break;
                         
                     default:

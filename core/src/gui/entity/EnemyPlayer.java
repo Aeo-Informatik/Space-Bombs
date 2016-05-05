@@ -9,7 +9,6 @@ package gui.entity;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
@@ -243,6 +242,10 @@ public class EnemyPlayer extends Entity
         } 
     }
 
+    public void onDeath()
+    {
+        System.out.println("Player " + playerId + " died!");
+    }
     
     /**--------------------GETTER & SETTER--------------------**/
     public int getPlayerId()

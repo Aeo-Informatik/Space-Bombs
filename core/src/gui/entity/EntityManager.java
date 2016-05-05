@@ -190,7 +190,21 @@ public class EntityManager {
         }
     }
 
-    
+    /**
+     * Deletes (kills) player from enemie array and executes on death function from specified player
+     * @param playerId 
+     */
+    public void killEnemyPlayer(int playerId)
+    {
+        for(int i=0; i < enemies.size; i++)
+        {
+            if(enemies.get(i).getPlayerId() == playerId)
+            {
+                enemies.get(i).onDeath();
+                enemies.removeIndex(i);
+            }
+        }
+    }
     
     /**--------------------GETTER & SETTER--------------------**/
     /**
