@@ -153,10 +153,13 @@ public class ProcessData
                     //General: placeBomb|x|y|playerId|bombType|target
                     case "placeEnemyBomb":
                         if(parameters.length == 6)
-                        {
-                            //placeBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
-                            entityManager.placeEnemyBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), new Vector2(0, 0), 
-                                    Integer.parseInt(parameters[3]), parameters[4]);
+                        {   //Check if bomb is placed by own player
+                            if(Integer.parseInt(parameters[3]) != Constants.PLAYERID)
+                            {
+                                //placeBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
+                                entityManager.placeEnemyBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), new Vector2(0, 0), 
+                                        Integer.parseInt(parameters[3]), parameters[4]);
+                            }
                         }else
                             System.err.println("ERROR: placeBomb wrong number of parameters");
                         break;
