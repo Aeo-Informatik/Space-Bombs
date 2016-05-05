@@ -132,7 +132,7 @@ public class ProcessData
 
 
                     /**------------------STOP ENEMY PLAYER------------------**/
-                    //General: moveEnemyPlayer|playerId|x|y|target
+                    //General: stopEnemyPlayer|playerId|x|y|target
                     case "stopEnemyPlayer":
                         if(parameters.length == 5)
                         {

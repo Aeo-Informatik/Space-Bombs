@@ -60,6 +60,7 @@ public class EntityManager {
         if(mainPlayer != null)
         {
             mainPlayer.render(sb);
+            
         }else if(spectator != null)
         {
             spectator.render(sb);
@@ -71,12 +72,12 @@ public class EntityManager {
     public void update()
     {
         //For every Enemy Player Object that is stored in the arraylist execute the update function in it
-        for(int i=0; i < bombArray.size; i++)
+        for(int i=0; i < enemies.size; i++)
         {
             enemies.get(i).update();
             
             //If player is dead
-            if(enemies.get(i).getLife() == 0)
+            if(enemies.get(i).getLife() <= 0)
             {
                 enemies.get(i).onDeath();
                 enemies.removeIndex(i);
@@ -99,7 +100,7 @@ public class EntityManager {
         {
             mainPlayer.update();
             
-            if(mainPlayer.getLife() == 0)
+            if(mainPlayer.getLife() <= 0)
             {
                 //Create new spectator
                 spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies);
