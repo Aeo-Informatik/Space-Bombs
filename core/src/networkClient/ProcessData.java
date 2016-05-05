@@ -98,7 +98,7 @@ public class ProcessData
                                 }
 
                                 if(Constants.PROCESSDATADEBUG)
-                                    System.out.println("Spawning enemie with player id: " + i);
+                                    System.out.println("Spawning enemy with player id: " + i);
                                 
                                 entityManager.spawnEnemyPlayer(i);
                             }
@@ -166,7 +166,7 @@ public class ProcessData
                         
                         
                     /**------------------ENEMY PLAYER DIES------------------**/   
-                    //General: playerDeath|playerId|life|target
+                    //General: enemyPlayerLife|playerId|life|target
                     case "enemyPlayerLife":
                         if(parameters.length == 4)
                         {
