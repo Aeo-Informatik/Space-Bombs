@@ -6,6 +6,8 @@
 //Textures
 8) Adding an animation bomb texture for every player
 
-
+//Bugs
+You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
+setEnemyLife from processData gets executed 2 times (nothing important just noting)
 
 

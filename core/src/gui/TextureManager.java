@@ -247,7 +247,7 @@ public class TextureManager {
         
         
         /*---------------------------------NORMAL BOMB P1---------------------------------------*/
-        p1NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p1NormalBomb = loadTexture("bombs/normal_bomb-anim_p1.png");
         p1NormalBombAnim = new Animation(0.35f, new TextureRegion(p1NormalBomb, 0, 0, 34, 34), new TextureRegion(p1NormalBomb, 34, 0, 32, 32),
                                 new TextureRegion(p1NormalBomb, 67, 0, 30, 32));
         
@@ -265,7 +265,7 @@ public class TextureManager {
         
         
         /*---------------------------------NORMAL BOMB P2---------------------------------------*/
-        p2NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p2NormalBomb = loadTexture("bombs/normal_bomb-anim_p2.png");
         p2NormalBombAnim = new Animation(0.35f, new TextureRegion(p2NormalBomb, 0, 0, 34, 34), new TextureRegion(p2NormalBomb, 34, 0, 32, 32),
                                 new TextureRegion(p2NormalBomb, 67, 0, 30, 32));
         
@@ -283,7 +283,7 @@ public class TextureManager {
         
         
         /*---------------------------------NORMAL BOMB P3---------------------------------------*/
-        p3NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p3NormalBomb = loadTexture("bombs/normal_bomb-anim_p3.png");
         p3NormalBombAnim = new Animation(0.35f, new TextureRegion(p3NormalBomb, 0, 0, 34, 34), new TextureRegion(p3NormalBomb, 34, 0, 32, 32),
                                 new TextureRegion(p3NormalBomb, 67, 0, 30, 32));
         
@@ -300,7 +300,7 @@ public class TextureManager {
         
         
         /*---------------------------------NORMAL BOMB P4---------------------------------------*/
-        p4NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p4NormalBomb = loadTexture("bombs/normal_bomb-anim_p4.png");
         p4NormalBombAnim = new Animation(0.35f, new TextureRegion(p4NormalBomb, 0, 0, 34, 34), new TextureRegion(p4NormalBomb, 34, 0, 32, 32),
                                 new TextureRegion(p4NormalBomb, 67, 0, 30, 32));
         
