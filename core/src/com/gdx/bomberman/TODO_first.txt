@@ -1,13 +1,10 @@
 
 //Player
-2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 
 5) Player shouldnt be able to walk on bombs
 
-//Textures
-8) Adding an animation bomb texture for every player
-
 //Bugs
-You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
+1) You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
 setEnemyLife from processData gets executed 2 times (nothing important just noting)
 
+2) The 4. player cant be seen by the 2. and 1. one 
 
