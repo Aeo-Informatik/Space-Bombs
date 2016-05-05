@@ -78,9 +78,21 @@ public class TextureManager {
     
     
     //Normal Bomb Animation Player 1
-    public static Texture normalBombP1;
-    public static Animation normalBombAnimP1;
+    public static Texture p1NormalBomb;
+    public static Animation p1NormalBombAnim;
     
+    
+    //Normal Bomb Animation Player 2
+    public static Texture p2NormalBomb;
+    public static Animation p2NormalBombAnim;
+    
+    //Normal Bomb Animation Player 3
+    public static Texture p3NormalBomb;
+    public static Animation p3NormalBombAnim;
+    
+    //Normal Bomb Animation Player 4
+    public static Texture p4NormalBomb;
+    public static Animation p4NormalBombAnim;
     
     //Explosion effect Player 1
     public static Texture p1Explosion;
@@ -235,9 +247,9 @@ public class TextureManager {
         
         
         /*---------------------------------NORMAL BOMB P1---------------------------------------*/
-        normalBombP1 = loadTexture("bombs/normal-bomb_anim.png");
-        normalBombAnimP1 = new Animation(0.35f, new TextureRegion(normalBombP1, 0, 0, 34, 34), new TextureRegion(normalBombP1, 34, 0, 32, 32),
-                                new TextureRegion(normalBombP1, 67, 0, 30, 32));
+        p1NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p1NormalBombAnim = new Animation(0.35f, new TextureRegion(p1NormalBomb, 0, 0, 34, 34), new TextureRegion(p1NormalBomb, 34, 0, 32, 32),
+                                new TextureRegion(p1NormalBomb, 67, 0, 30, 32));
         
         
         /*---------------------------------P1 EXPLOSION---------------------------------*/
@@ -250,6 +262,58 @@ public class TextureManager {
         p1ExplosionUpEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);
         p1ExplosionLeftEnd = new TextureRegion(p1Explosion, 32, 0, 32, 32);
         p1ExplosionRightEnd = new TextureRegion(p1Explosion, 96, 0, 32, 32);
+        
+        
+        /*---------------------------------NORMAL BOMB P2---------------------------------------*/
+        p2NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p2NormalBombAnim = new Animation(0.35f, new TextureRegion(p2NormalBomb, 0, 0, 34, 34), new TextureRegion(p2NormalBomb, 34, 0, 32, 32),
+                                new TextureRegion(p2NormalBomb, 67, 0, 30, 32));
+        
+        
+        /*---------------------------------P2 EXPLOSION---------------------------------*/
+        p2Explosion = loadTexture("bombs/explosion_p2.png");
+        p2ExplosionYMiddle = new TextureRegion(p2Explosion, 0, 32, 32, 32);
+        p2ExplosionCenter = new TextureRegion(p2Explosion, 128, 0, 32, 32);
+        p2ExplosionXMiddle = new TextureRegion(p2Explosion, 32, 32, 32, 32);
+        
+        p2ExplosionDownEnd = new TextureRegion(p2Explosion, 64, 0, 32, 32);
+        p2ExplosionUpEnd = new TextureRegion(p2Explosion, 0, 0, 32, 32);
+        p2ExplosionLeftEnd = new TextureRegion(p2Explosion, 32, 0, 32, 32);
+        p2ExplosionRightEnd = new TextureRegion(p2Explosion, 96, 0, 32, 32);
+        
+        
+        /*---------------------------------NORMAL BOMB P3---------------------------------------*/
+        p3NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p3NormalBombAnim = new Animation(0.35f, new TextureRegion(p3NormalBomb, 0, 0, 34, 34), new TextureRegion(p3NormalBomb, 34, 0, 32, 32),
+                                new TextureRegion(p3NormalBomb, 67, 0, 30, 32));
+        
+        /*---------------------------------P3 EXPLOSION---------------------------------*/
+        p3Explosion = loadTexture("bombs/explosion_p3.png");
+        p3ExplosionYMiddle = new TextureRegion(p3Explosion, 0, 32, 32, 32);
+        p3ExplosionCenter = new TextureRegion(p3Explosion, 128, 0, 32, 32);
+        p3ExplosionXMiddle = new TextureRegion(p3Explosion, 32, 32, 32, 32);
+        
+        p3ExplosionDownEnd = new TextureRegion(p3Explosion, 64, 0, 32, 32);
+        p3ExplosionUpEnd = new TextureRegion(p3Explosion, 0, 0, 32, 32);
+        p3ExplosionLeftEnd = new TextureRegion(p3Explosion, 32, 0, 32, 32);
+        p3ExplosionRightEnd = new TextureRegion(p3Explosion, 96, 0, 32, 32);
+        
+        
+        /*---------------------------------NORMAL BOMB P4---------------------------------------*/
+        p4NormalBomb = loadTexture("bombs/normal-bomb_anim.png");
+        p4NormalBombAnim = new Animation(0.35f, new TextureRegion(p4NormalBomb, 0, 0, 34, 34), new TextureRegion(p4NormalBomb, 34, 0, 32, 32),
+                                new TextureRegion(p4NormalBomb, 67, 0, 30, 32));
+        
+        /*---------------------------------P4 EXPLOSION---------------------------------*/
+        p4Explosion = loadTexture("bombs/explosion_p4.png");
+        p4ExplosionYMiddle = new TextureRegion(p4Explosion, 0, 32, 32, 32);
+        p4ExplosionCenter = new TextureRegion(p4Explosion, 128, 0, 32, 32);
+        p4ExplosionXMiddle = new TextureRegion(p4Explosion, 32, 32, 32, 32);
+        
+        p4ExplosionDownEnd = new TextureRegion(p4Explosion, 64, 0, 32, 32);
+        p4ExplosionUpEnd = new TextureRegion(p4Explosion, 0, 0, 32, 32);
+        p4ExplosionLeftEnd = new TextureRegion(p4Explosion, 32, 0, 32, 32);
+        p4ExplosionRightEnd = new TextureRegion(p4Explosion, 96, 0, 32, 32);
         
         
         Constants.PLAYERWIDTH = p1WalkingRightAnim.getKeyFrame(0).getRegionWidth();

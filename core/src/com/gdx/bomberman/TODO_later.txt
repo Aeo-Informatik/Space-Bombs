@@ -13,4 +13,10 @@
 6) Adding an animation for player standig still
 8) Increasing the size of the player texture a tiny bit
 
+//Server
+1) Implementing delay calculator with ping requests
+2) Handling the quitting from server
+
+//Client
+1) Scanning for open servers with port scan
 

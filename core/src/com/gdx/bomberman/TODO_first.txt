@@ -7,7 +7,7 @@
 
 //Textures
 7) Adding a static texture for our menuscreen
-
+8) Adding a animation bomb texture for every player
 
 //Menu
 

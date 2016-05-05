@@ -75,7 +75,7 @@ public class Bomb extends Entity
         switch(playerId)
         {
             case 1:
-                this.bombAnim = TextureManager.normalBombAnimP1;
+                this.bombAnim = TextureManager.p1NormalBombAnim;
                 this.explosionYMiddle = TextureManager.p1ExplosionYMiddle;
                 this.explosionXMiddle = TextureManager.p1ExplosionXMiddle;
                 this.explosionCenter = TextureManager.p1ExplosionCenter;
@@ -85,9 +85,42 @@ public class Bomb extends Entity
                 this.explosionLeftEnd = TextureManager.p1ExplosionLeftEnd;
                 break;
             
+            case 2:
+                this.bombAnim = TextureManager.p2NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p2ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p2ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p2ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p2ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p2ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p2ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p2ExplosionLeftEnd;
+                break;
+                
+            case 3:
+                this.bombAnim = TextureManager.p3NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p3ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p3ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p3ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p3ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p3ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p3ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p3ExplosionLeftEnd;
+                break;
+                
+            case 4:
+                this.bombAnim = TextureManager.p4NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p4ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p4ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p4ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p4ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p4ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p4ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p4ExplosionLeftEnd;
+                break;
+                
             default:
-                System.err.println("ERROR: Wrong playerId in Bomb defined " + playerId + " using default p1 textures.");
-                this.bombAnim = TextureManager.normalBombAnimP1;
+                System.err.println("ERROR: Wrong playerId in bomb defined " + playerId + " using default p1 textures.");
+                this.bombAnim = TextureManager.p1NormalBombAnim;
                 this.explosionYMiddle = TextureManager.p1ExplosionYMiddle;
                 this.explosionXMiddle = TextureManager.p1ExplosionXMiddle;
                 this.explosionCenter = TextureManager.p1ExplosionCenter;
