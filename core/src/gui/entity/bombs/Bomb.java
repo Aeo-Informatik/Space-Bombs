@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gui.entity.bomb;
+package gui.entity.bombs;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

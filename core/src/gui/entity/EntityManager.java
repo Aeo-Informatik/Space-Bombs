@@ -5,7 +5,7 @@
  */
 package gui.entity;
 
-import gui.entity.bomb.Bomb;
+import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -165,6 +165,13 @@ public class EntityManager {
         }
     }
     
+    /**
+     * Places the specified bomb type into the map
+     * @param pos
+     * @param direction
+     * @param playerId
+     * @param bombType 
+     */
     public void placeBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
     {
         switch(bombType)
