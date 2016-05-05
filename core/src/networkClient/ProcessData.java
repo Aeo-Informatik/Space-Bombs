@@ -151,11 +151,11 @@ public class ProcessData
                         
                      /**------------------ENEMY PLAYER PLACE BOMB------------------**/
                     //General: placeBomb|x|y|playerId|bombType|target
-                    case "placeBomb":
+                    case "placeEnemyBomb":
                         if(parameters.length == 6)
                         {
                             //placeBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
-                            entityManager.placeBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), new Vector2(0, 0), 
+                            entityManager.placeEnemyBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), new Vector2(0, 0), 
                                     Integer.parseInt(parameters[3]), parameters[4]);
                         }else
                             System.err.println("ERROR: placeBomb wrong number of parameters");

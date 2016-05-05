@@ -166,19 +166,19 @@ public class EntityManager {
     }
     
     /**
-     * Places the specified bomb type into the map
+     * Places the specified bomb type into the map for enemy player
      * @param pos
      * @param direction
      * @param playerId
      * @param bombType 
      */
-    public void placeBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
+    public void placeEnemyBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
     {
         switch(bombType)
         {
             case "default":
                 Bomb defaultBomb = new Bomb(pos, direction, map, playerId);
-                bombArray.add(defaultBomb);
+                bombArrayEnemy.add(defaultBomb);
                 break;
             
             default:

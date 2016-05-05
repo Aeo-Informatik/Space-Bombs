@@ -3,7 +3,7 @@
 
 //Player
 2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 
-4) If life reaches 0 he is dead and spawns a tomb stone with his coins
+4) If life reaches 0 the player is dead and spawns a tomb stone with his coins
 5) Player hit by bomb gets for 5 seconds godMode and -1 life. 
 
 //Textures
