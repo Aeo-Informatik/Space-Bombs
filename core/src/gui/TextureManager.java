@@ -77,9 +77,9 @@ public class TextureManager {
     public static TextureRegion emptyBlock;
     
     
-    //Normal Bomb 
-    public static Texture normalBomb;
-    public static Animation normalBombAnim;
+    //Normal Bomb Animation Player 1
+    public static Texture normalBombP1;
+    public static Animation normalBombAnimP1;
     
     
     //Explosion effect Player 1
@@ -93,7 +93,43 @@ public class TextureManager {
     public static TextureRegion p1ExplosionRightEnd;
     public static TextureRegion p1ExplosionLeftEnd;
     
-
+    
+    //Explosion effect Player 2
+    public static Texture p2Explosion;
+    public static TextureRegion p2ExplosionYMiddle;
+    public static TextureRegion p2ExplosionXMiddle;
+    public static TextureRegion p2ExplosionCenter;
+    
+    public static TextureRegion p2ExplosionDownEnd;
+    public static TextureRegion p2ExplosionUpEnd;
+    public static TextureRegion p2ExplosionRightEnd;
+    public static TextureRegion p2ExplosionLeftEnd;
+    
+    
+    //Explosion effect Player 3
+    public static Texture p3Explosion;
+    public static TextureRegion p3ExplosionYMiddle;
+    public static TextureRegion p3ExplosionXMiddle;
+    public static TextureRegion p3ExplosionCenter;
+    
+    public static TextureRegion p3ExplosionDownEnd;
+    public static TextureRegion p3ExplosionUpEnd;
+    public static TextureRegion p3ExplosionRightEnd;
+    public static TextureRegion p3ExplosionLeftEnd;
+    
+    
+    //Explosion effect Player 4
+    public static Texture p4Explosion;
+    public static TextureRegion p4ExplosionYMiddle;
+    public static TextureRegion p4ExplosionXMiddle;
+    public static TextureRegion p4ExplosionCenter;
+    
+    public static TextureRegion p4ExplosionDownEnd;
+    public static TextureRegion p4ExplosionUpEnd;
+    public static TextureRegion p4ExplosionRightEnd;
+    public static TextureRegion p4ExplosionLeftEnd;
+    
+    
     public static void load() 
     {
         //TextureRegion(texture, int cutX, int cutY, int width, int height)
@@ -198,10 +234,10 @@ public class TextureManager {
         emptyBlock = new TextureRegion(nullBlock, 0, 0, 32, 32);
         
         
-        /*---------------------------------NORMAL BOMB---------------------------------------*/
-        normalBomb = loadTexture("bombs/normal-bomb_anim.png");
-        normalBombAnim = new Animation(0.35f, new TextureRegion(normalBomb, 0, 0, 34, 34), new TextureRegion(normalBomb, 34, 0, 32, 32),
-                                new TextureRegion(normalBomb, 67, 0, 30, 32));
+        /*---------------------------------NORMAL BOMB P1---------------------------------------*/
+        normalBombP1 = loadTexture("bombs/normal-bomb_anim.png");
+        normalBombAnimP1 = new Animation(0.35f, new TextureRegion(normalBombP1, 0, 0, 34, 34), new TextureRegion(normalBombP1, 34, 0, 32, 32),
+                                new TextureRegion(normalBombP1, 67, 0, 30, 32));
         
         
         /*---------------------------------P1 EXPLOSION---------------------------------*/
