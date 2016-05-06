@@ -19,7 +19,7 @@ public class Constants {
     
     
     //Main config
-    public static boolean PROCESSDATADEBUG = false;
+    public static boolean PROCESSDATADEBUG = true;
     public static String MAPPATH = "maps/BasicMap.tmx";
     
     
@@ -33,14 +33,14 @@ public class Constants {
     public static boolean LOCALSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 2;
+    public static int MAXPLAYERS = 4;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
     public static boolean SERVERDEBUG = false;
     
         
     //Ingame variable DO NOT CHANGE!
     public static int PLAYERID = 0;
-    public static int AMOUNTENEMYPLAYERS = 0;
+    public static int AMOUNTPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;
     public static float PLAYERWIDTH;
     public static float PLAYERHEIGHT;
