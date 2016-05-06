@@ -71,11 +71,11 @@ public class ProcessData
                     case "registerEnemyPlayers":
                         if(parameters.length == 3)
                         {
-                            Constants.AMOUNTENEMYPLAYERS = Integer.parseInt(parameters[1]);
+                            Constants.AMOUNTPLAYERS = Integer.parseInt(parameters[1]) +1;
 
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Amount of Enemy players: " + Constants.AMOUNTENEMYPLAYERS);
+                                System.out.println("Total number of players: " + Constants.AMOUNTPLAYERS);
                         }else
                             System.err.println("ERROR: registerEnemyPlayers wrong number of parameters");
                         break;
@@ -90,11 +90,11 @@ public class ProcessData
                             entityManager.spawnMainPlayer(Constants.PLAYERID);
 
                             //Spawn enemy players
-                            for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)
+                            for(int i=1; i <= Constants.AMOUNTPLAYERS ; i++)
                             {
                                 if(i == Constants.PLAYERID)
                                 {
-                                    i++;
+                                    continue;
                                 }
 
                                 if(Constants.PROCESSDATADEBUG)
