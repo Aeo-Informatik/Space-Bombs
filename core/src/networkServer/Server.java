@@ -55,10 +55,9 @@ public class Server {
 
                 //Message to receive: registerEnemyPlayers|3|1
                 //General: registerAmountPlayers|amount|target //
-                String registerEnemiesCommand = "registerAmountPlayers|" + 
-                Integer.toString(socketList.size()) + "|*";
+                String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(socketList.size()) + "|*";
                 
-                sendToAll(socketList, new ArrayList<String>(){{add(registerEnemiesCommand);add("spawnPlayers|*");}});
+                sendToAll(socketList, new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
 
                 /*-------------------END SETUP GAME---------------------*/
                 //Open forward thread for every client
