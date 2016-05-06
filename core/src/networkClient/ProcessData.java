@@ -38,14 +38,11 @@ public class ProcessData
                 receivedData = ClientReceiveThread.queue.take().toString();
             }
 
-            
             //Split received data
             String[] parameters = receivedData.split("\\|");
-            String playerIdString = Integer.toString(Constants.PLAYERID);
-
 
             //Check if it targets this device with playerId or astrix
-            if (parameters[parameters.length - 1].equals(playerIdString) || parameters[parameters.length - 1].equals("*"))
+            if (parameters[parameters.length - 1].equals(Integer.toString(Constants.PLAYERID)) || parameters[parameters.length - 1].equals("*"))
             {
                 switch (parameters[0]) 
                 {
@@ -67,11 +64,11 @@ public class ProcessData
 
 
                     /**------------------REGISTER ENEMY PLAYERS------------------**/
-                    //General: registerEnemyPlayers|amount|target
-                    case "registerEnemyPlayers":
+                    //General: registerAmountPlayers|amount|target
+                    case "registerAmountPlayers":
                         if(parameters.length == 3)
                         {
-                            Constants.AMOUNTPLAYERS = Integer.parseInt(parameters[1]) +1;
+                            Constants.AMOUNTPLAYERS = Integer.parseInt(parameters[1]);
 
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
