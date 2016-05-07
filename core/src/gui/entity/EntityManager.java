@@ -206,7 +206,6 @@ public class EntityManager {
             if(enemies.get(i).getPlayerId() == playerId)
             {
                 enemies.get(i).setLife(life);
-                System.out.println("Set life of enemy player " + playerId + " to " + life);
             }
         }
     }

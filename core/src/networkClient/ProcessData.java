@@ -162,12 +162,17 @@ public class ProcessData
                         break;
                         
                         
-                    /**------------------ENEMY PLAYER DIES------------------**/   
+                    /**------------------ENEMY PLAYER GETS HIT------------------**/   
                     //General: enemyPlayerLife|playerId|life|target
                     case "enemyPlayerLife":
                         if(parameters.length == 4)
                         {
                             entityManager.setLiveEnemyPlayer(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]));
+                        
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player " + parameters[1] + " has been hit by bomb. Life counter: " + parameters[2]);
+                            
                         }else
                             System.err.println("ERROR: playerDied wrong number of parameters");
                         break;
