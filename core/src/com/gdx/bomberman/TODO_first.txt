@@ -3,7 +3,4 @@
 5) Player shouldnt be able to walk on bombs
 
 //Bugs
-1) You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
-setEnemyLife from processData gets executed 2 times (nothing important just noting)
 3) Functions in ProcessData get executed multiple times 
-4) If spectator tries to zoom in or out it uses his ghost as fixing point causing the camera to jump

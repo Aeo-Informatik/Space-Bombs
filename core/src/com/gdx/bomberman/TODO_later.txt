@@ -21,3 +21,5 @@
 //Client
 1) Scanning for open servers with port scan
 
+//Bugs
+1) You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
