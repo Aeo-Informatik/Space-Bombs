@@ -15,6 +15,7 @@ import com.gdx.bomberman.Main;
 
 public class MenuScreen extends Screen
 {
+    //Objects
     private Sprite splash;
     private SpriteBatch batch;
     private Stage stage;

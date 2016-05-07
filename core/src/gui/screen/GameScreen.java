@@ -46,7 +46,8 @@ public class GameScreen extends Screen{
             new Thread(new ServerStart()).start();
 
         //Connect to server
-        try {
+        try 
+        {
             client = new Client(Constants.CLIENTHOST, Constants.CLIENTPORT);
             client.receiveData();
             
