@@ -23,3 +23,4 @@
 
 //Bugs
 1) You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
+2) If zoomed out the player texture doesnt get rendered correctly and one of his eyes is bigger than the other (libgdx bug ?)
