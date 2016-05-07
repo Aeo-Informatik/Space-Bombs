@@ -19,7 +19,7 @@ public class Constants {
     
     
     //Main config
-    public static boolean PROCESSDATADEBUG = true;
+    public static boolean PROCESSDATADEBUG = false;
     public static String MAPPATH = "maps/BasicMap.tmx";
     
     
@@ -35,7 +35,7 @@ public class Constants {
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 2;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
-    public static boolean SERVERDEBUG = true;
+    public static boolean SERVERDEBUG = false;
     
         
     //Ingame variable DO NOT CHANGE!
