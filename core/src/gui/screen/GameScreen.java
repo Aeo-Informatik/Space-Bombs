@@ -53,7 +53,7 @@ public class GameScreen extends Screen{
             
         } catch (Exception e) 
         {
-            System.err.println("ERROR: Client could't connect to server " + e);
+            System.err.println("ERROR: Client couldn't connect to server " + e);
             Gdx.app.exit();
         }
     }
