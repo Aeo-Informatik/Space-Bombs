@@ -8,10 +8,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.gdx.bomberman.Main;
 
 public class MenuScreen extends Screen
@@ -50,6 +53,16 @@ public class MenuScreen extends Screen
         stage.addActor(button);
         
         
+        button.addListener(new ChangeListener() 
+        {
+            public void changed (ChangeEvent event, Actor actor) 
+            {
+                System.out.println("Clicked! Is checked: " + button.isChecked());
+                //button.setText("Starting new game");
+                //g.setScreen( new GameScreen());
+
+            }
+        });
         
     }
 
@@ -84,6 +97,8 @@ public class MenuScreen extends Screen
     @Override
     public void dispose() 
     {
+        buttonAtlas.dispose();
+        font.dispose();
         stage.dispose();
         skin.dispose();
     }
