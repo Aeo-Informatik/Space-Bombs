@@ -5,7 +5,9 @@
  */
 package networkClient;
 
+import com.badlogic.gdx.math.Vector2;
 import gui.Constants;
+import gui.entity.Bomb;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
 
@@ -150,6 +152,18 @@ public class ProcessData
                      /**------------------ENEMY PLAYER PLACE BOMB------------------**/
                     //General: setBomb|playerId|x|y|bombId|target
                     case "setBomb":
+                        if(parameters.length == 6)
+                        {
+                          
+                          /*  
+                            Bomb bomb; 
+                            bomb = new Bomb(new Vector2(Float.parseFloat(parameters[2]),Float.parseFloat(parameters[3])), 
+                            new Vector2(Float.parseFloat(parameters[2]),Float.parseFloat(parameters[3])),  map, parameters[1] );
+                           */           
+                        
+                        
+                        
+                        }
                         break;
                         
                     default:
