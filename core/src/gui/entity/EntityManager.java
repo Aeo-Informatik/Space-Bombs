@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -59,6 +60,7 @@ public class EntityManager {
         if(mainPlayer != null)
         {
             mainPlayer.render(sb);
+            
         }else if(spectator != null)
         {
             spectator.render(sb);
@@ -70,9 +72,16 @@ public class EntityManager {
     public void update()
     {
         //For every Enemy Player Object that is stored in the arraylist execute the update function in it
-        for(EnemyPlayer enemy: enemies)
+        for(int i=0; i < enemies.size; i++)
         {
-            enemy.update();
+            enemies.get(i).update();
+            
+            //If player is dead
+            if(enemies.get(i).getLife() <= 0)
+            {
+                enemies.get(i).onDeath();
+                enemies.removeIndex(i);
+            }
         }
         
         //Deletes bomb if exploded
@@ -91,10 +100,13 @@ public class EntityManager {
         {
             mainPlayer.update();
             
-            if(mainPlayer.getLife() == 0)
+            if(mainPlayer.getLife() <= 0)
             {
                 //Create new spectator
                 spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies);
+                
+                //On death
+                mainPlayer.onDeath();
                 
                 //Delete main player
                 mainPlayer = null; 
@@ -164,13 +176,47 @@ public class EntityManager {
         }
     }
     
+    /**
+     * Places the specified bomb type into the map for enemy player
+     * @param pos
+     * @param direction
+     * @param playerId
+     * @param bombType 
+     */
+    public void placeEnemyBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
+    {
+        switch(bombType)
+        {
+            case "default":
+                Bomb defaultBomb = new Bomb(pos, direction, map, playerId);
+                bombArrayEnemy.add(defaultBomb);
+                break;
+            
+            default:
+                Bomb defaultBomb1 = new Bomb(pos, direction, map, playerId);
+                bombArray.add(defaultBomb1);
+        }
+    }
 
+
+    public void setLiveEnemyPlayer(int playerId, int life)
+    {
+        for(int i=0; i < enemies.size; i++)
+        {
+            if(enemies.get(i).getPlayerId() == playerId)
+            {
+                enemies.get(i).setLife(life);
+            }
+        }
+    }
+    
+    
     /**--------------------GETTER & SETTER--------------------**/
     /**
      * 
      * @return Array<EnemyPlayer>
      */
-    public Array<EnemyPlayer> getEnemieArray()
+    public Array<EnemyPlayer> getEnemyArray()
     {
         return enemies;
     }

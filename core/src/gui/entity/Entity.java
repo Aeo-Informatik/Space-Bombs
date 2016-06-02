@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -49,7 +50,6 @@ public abstract class Entity
     protected boolean collidesLeft()
     {
         float marginX = 2;
-        //|| map.isBombPlaced(pos.x - marginX, pos.y)
         if(map.isCellBlocked(pos.x - marginX, pos.y) )
             return true;
 
@@ -59,7 +59,6 @@ public abstract class Entity
     protected boolean collidesRight()
     {
         float marginX = 2;
-        //|| map.isBombPlaced(pos.x + Constants.PLAYERWIDTH + marginX, pos.y)
         if(map.isCellBlocked(pos.x + Constants.PLAYERWIDTH + marginX, pos.y) )
             return true;
 
@@ -74,8 +73,6 @@ public abstract class Entity
         //Checks at players half on the left and right if there is a block or bomb located
         if(map.isCellBlocked(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY) 
                 || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
-//                || map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY)
-//                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
             return true;
         //else
         return false;
@@ -89,13 +86,115 @@ public abstract class Entity
         //Checks at players feet on the left if there is a block and on the right
         if(map.isCellBlocked(pos.x + marginX, pos.y - marginY) 
                 || map.isCellBlocked(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
-//                || map.isBombPlaced(pos.x + marginX, pos.y - marginY)
-//                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
             return true;
         //else
         return false;
     }
 
+    protected boolean collidesLeftBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 2;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x - marginX, pos.y))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x - marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) (pos.y / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    protected boolean collidesRightBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 2;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x + marginX, pos.y))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x + marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) (pos.y / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    protected boolean collidesTopBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 3;
+        float marginY = 3;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x + marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) ((pos.y + Constants.PLAYERHEIGHT / 2 + marginY) / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    protected boolean collidesBottomBomb(Array<Bomb> bombArray)
+    {
+        float marginX = 3;
+        float marginY = 3;
+        if(map.isBombPlaced(pos.x , pos.y) == true)
+        {
+           return false; 
+        }else
+        { 
+            if( !map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
+            {
+                return false;
+            }else
+            {
+               for (Bomb bomb: bombArray)
+                {
+                    if(bomb.getCellX() == (int)((pos.x - marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) ((pos.y - marginY) / Constants.MAPTEXTUREHEIGHT))
+                    {
+                     return true;   
+                    }
+                } 
+               return false;
+            }
+        }
+    }
+    
+    
+    
     protected boolean touchesDeadlyBlock()
     {
         float margin = 3f;

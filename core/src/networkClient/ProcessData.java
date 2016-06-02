@@ -39,14 +39,11 @@ public class ProcessData
                 receivedData = ClientReceiveThread.queue.take().toString();
             }
 
-            
             //Split received data
             String[] parameters = receivedData.split("\\|");
-            String playerIdString = Integer.toString(Constants.PLAYERID);
-
 
             //Check if it targets this device with playerId or astrix
-            if (parameters[parameters.length - 1].equals(playerIdString) || parameters[parameters.length - 1].equals("*"))
+            if (parameters[parameters.length - 1].equals(Integer.toString(Constants.PLAYERID)) || parameters[parameters.length - 1].equals("*"))
             {
                 switch (parameters[0]) 
                 {
@@ -68,15 +65,15 @@ public class ProcessData
 
 
                     /**------------------REGISTER ENEMY PLAYERS------------------**/
-                    //General: registerEnemyPlayers|amount|target
-                    case "registerEnemyPlayers":
+                    //General: registerAmountPlayers|amount|target
+                    case "registerAmountPlayers":
                         if(parameters.length == 3)
                         {
-                            Constants.AMOUNTENEMYPLAYERS = Integer.parseInt(parameters[1]);
+                            Constants.AMOUNTPLAYERS = Integer.parseInt(parameters[1]);
 
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Amount of Enemy players: " + Constants.AMOUNTENEMYPLAYERS);
+                                System.out.println("Total number of players: " + Constants.AMOUNTPLAYERS);
                         }else
                             System.err.println("ERROR: registerEnemyPlayers wrong number of parameters");
                         break;
@@ -91,15 +88,15 @@ public class ProcessData
                             entityManager.spawnMainPlayer(Constants.PLAYERID);
 
                             //Spawn enemy players
-                            for(int i=1; i <= Constants.AMOUNTENEMYPLAYERS; i++)
+                            for(int i=1; i <= Constants.AMOUNTPLAYERS ; i++)
                             {
                                 if(i == Constants.PLAYERID)
                                 {
-                                    i++;
+                                    continue;
                                 }
 
                                 if(Constants.PROCESSDATADEBUG)
-                                    System.out.println("Spawning enemie with player id: " + i);
+                                    System.out.println("Spawning enemy with player id: " + i);
                                 
                                 entityManager.spawnEnemyPlayer(i);
                             }
@@ -119,7 +116,7 @@ public class ProcessData
                     case "moveEnemyPlayer":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemieArray())
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -133,11 +130,11 @@ public class ProcessData
 
 
                     /**------------------STOP ENEMY PLAYER------------------**/
-                    //General: moveEnemyPlayer|playerId|x|y|target
+                    //General: stopEnemyPlayer|playerId|x|y|target
                     case "stopEnemyPlayer":
                         if(parameters.length == 5)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemieArray())
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -148,6 +145,7 @@ public class ProcessData
                         }else
                             System.err.println("ERROR: stopEnemyPlayer wrong number of parameters");
                         break;
+
 
                      /**------------------ENEMY PLAYER PLACE BOMB------------------**/
                     //General: setBomb|playerId|x|y|bombId|target
@@ -164,6 +162,38 @@ public class ProcessData
                         
                         
                         }
+
+                        
+                    /**------------------ENEMY PLAYER PLACES BOMB------------------**/
+                    //General: placeBomb|x|y|playerId|bombType|target
+                    case "placeEnemyBomb":
+                        if(parameters.length == 6)
+                        {   //Check if bomb is placed by own player
+                            if(Integer.parseInt(parameters[3]) != Constants.PLAYERID)
+                            {
+                                //placeBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
+                                entityManager.placeEnemyBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), new Vector2(0, 0), 
+                                        Integer.parseInt(parameters[3]), parameters[4]);
+                            }
+                        }else
+                            System.err.println("ERROR: placeBomb wrong number of parameters");
+                        break;
+                        
+                        
+                    /**------------------ENEMY PLAYER GETS HIT------------------**/   
+                    //General: enemyPlayerLife|playerId|life|target
+                    case "enemyPlayerLife":
+                        if(parameters.length == 4)
+                        {
+                            entityManager.setLiveEnemyPlayer(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]));
+                        
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player " + parameters[1] + " has been hit by bomb. Life counter: " + parameters[2]);
+                            
+                        }else
+                            System.err.println("ERROR: playerDied wrong number of parameters");
+
                         break;
                         
                     default:

@@ -33,18 +33,19 @@ public class Constants {
     public static boolean LOCALSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 4;
+    public static int MAXPLAYERS = 2;
     public static int SERVERTIMEOUT = 20000; // 20 seconds
     public static boolean SERVERDEBUG = false;
     
         
     //Ingame variable DO NOT CHANGE!
     public static int PLAYERID = 0;
-    public static int AMOUNTENEMYPLAYERS = 0;
+    public static int AMOUNTPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;
     public static float PLAYERWIDTH;
     public static float PLAYERHEIGHT;
     public static float MAPTEXTUREWIDTH;
     public static float MAPTEXTUREHEIGHT;
     public static float DELTATIME = 0;
+    public static int AMOUNTSPECTATORS = 0;
 }

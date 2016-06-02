@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.Constants;
 import gui.TextureManager;
 import gui.screen.GameScreen;
+import gui.screen.MenuScreen;
 import gui.screen.ScreenManager;
 import static gui.screen.ScreenManager.currentScreen;
 import networkClient.Client;
@@ -39,12 +40,6 @@ public class Main implements ApplicationListener {
     private BitmapFont font;
     
     /**
-     * deltaTime is used so that the bombs explode at the same time
-     */
-    private float deltaTime=0;
-    
-    
-    /**
      * Method called once when the application is created.
      */
     @Override
@@ -57,29 +52,10 @@ public class Main implements ApplicationListener {
         //Load all textures
         TextureManager.load();
         
-        //Starts a local server for 1 Player
-        if(Constants.LOCALSERVER)
-        {
-            new Thread(new ServerStart()).start();
-        }
-        
         //Sets the currentScreen to the GameScreen.java that means everything like
         //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
+        //ScreenManager.setScreen(new MenuScreen());
         ScreenManager.setScreen(new GameScreen());
-        
-        try {
-            //Start Client
-            client = new Client(Constants.CLIENTHOST, Constants.CLIENTPORT);
-            
-            //Listen for incomming data
-            client.receiveData();
-        
-        //If an error occurs shut application down
-        } catch (Exception e) 
-        {
-            System.err.println("ERROR: Client could't connect to server " + e);
-            Gdx.app.exit();
-        }
     }
     
         

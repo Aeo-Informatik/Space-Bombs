@@ -5,12 +5,16 @@
  */
 package gui.screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import static com.gdx.bomberman.Main.client;
 import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import networkClient.Client;
 import networkClient.ProcessData;
+import networkServer.ServerStart;
 
 
 /**
@@ -36,6 +40,22 @@ public class GameScreen extends Screen{
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ProcessData(entityManager);
+        
+        //Starts local server for 1 Player
+        if(Constants.LOCALSERVER)
+            new Thread(new ServerStart()).start();
+
+        //Connect to server
+        try 
+        {
+            client = new Client(Constants.CLIENTHOST, Constants.CLIENTPORT);
+            client.receiveData();
+            
+        } catch (Exception e) 
+        {
+            System.err.println("ERROR: Client couldn't connect to server " + e);
+            Gdx.app.exit();
+        }
     }
 
     

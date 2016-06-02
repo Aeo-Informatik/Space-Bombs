@@ -6,9 +6,9 @@
 package gui.entity;
 
 
+import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
@@ -43,6 +43,9 @@ public class EnemyPlayer extends Entity
     
     //Player values
     private int playerId = 0;
+    private int life = 1;
+    private boolean godmode = false;
+    private int coins = 0;
     
     
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray) 
@@ -102,6 +105,7 @@ public class EnemyPlayer extends Entity
     @Override
     public void render(SpriteBatch sb)
     {
+        //System.out.println("Enemy player is existing");
         if(this.executeStopPlayer)
         {
             stopPlayer(this.stopX, this.stopY);
@@ -243,6 +247,12 @@ public class EnemyPlayer extends Entity
     }
 
     
+    public void onDeath()
+    {
+        System.out.println("---------------------Player " + playerId + " died!-------------------");
+    }
+    
+    
     /**--------------------GETTER & SETTER--------------------**/
     public int getPlayerId()
     {
@@ -252,5 +262,15 @@ public class EnemyPlayer extends Entity
     public void setPlayerId(int playerId)
     {
         this.playerId = playerId;
+    }
+    
+    public int getLife()
+    {
+        return this.life;
+    }
+    
+    public void setLife(int life)
+    {
+        this.life = life;
     }
 }

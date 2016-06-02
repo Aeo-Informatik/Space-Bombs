@@ -1,10 +1,9 @@
 //Bomb
-2) Implementing bomb placing into server/client
+
 
 //Player
-2) Implementing player death into server/client (ghost movement isnt required to be send only player death) 
-4) If life reaches 0 he is dead and spawns a tomb stone with his coins
-5) Player shouldnt be able to walk on bombs
+4) If life reaches 0 the player is dead and spawns a tomb stone with his coins
+5) Player hit by bomb gets for 5 seconds godMode and -1 life. 
 
 //Textures
 2) Adding a texture for a tomb stone to display on player death
@@ -12,10 +11,15 @@
 5) Adding animation for block breaking
 6) Adding an animation for player standig still
 8) Increasing the size of the player texture a tiny bit
+9) Create a game icon
 
-//Menu
+//Server
+1) Implementing delay calculator with ping requests
+2) Handling the client quitting from server
 
+//Client
+1) Scanning for open servers with port scan
 
 //Bugs
-4) Player faces always wall if run into it
-5) bobs explode at the same time
+1) You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
+2) If zoomed out the player texture doesnt get rendered correctly and one of his eyes is bigger than the other (libgdx bug ?)

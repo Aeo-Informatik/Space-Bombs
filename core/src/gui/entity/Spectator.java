@@ -144,7 +144,14 @@ public class Spectator extends Entity
             if(camera.zoom < 2.0)
             {
                 camera.zoom += 0.02;
-                camera.setPosition(pos.x, pos.y);
+                
+                if(freeCam)
+                {
+                    camera.setPosition(pos.x, pos.y);
+                }else
+                {
+                    camera.setPosition(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y);
+                }
             }
             
         }
@@ -155,7 +162,14 @@ public class Spectator extends Entity
             if(camera.zoom > 0.5)
             {
                 camera.zoom -= 0.02;
-                camera.setPosition(pos.x, pos.y);
+                
+                if(freeCam)
+                {
+                    camera.setPosition(pos.x, pos.y);
+                }else
+                {
+                    camera.setPosition(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y);
+                }
             }
         }
         

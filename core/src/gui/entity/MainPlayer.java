@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -113,8 +114,9 @@ public class MainPlayer extends Entity
     {  
         if(touchesDeadlyBlock())
         {
-            System.out.println("Touched deadly tile!");
+            System.out.println("You touched a deadly tile!");
             life -= 1;
+            client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
         }
     }
     
@@ -146,7 +148,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
         {
-            if(!collidesLeft())
+            if(!collidesLeft() && !collidesLeftBomb(bombArray))
             {
                 //Set the speed the texture moves in x and y axis
                 //This will be added to the position every render cycle
@@ -188,7 +190,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING RIGHT------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)))
         {
-            if(!collidesRight())
+            if(!collidesRight() && !collidesRightBomb(bombArray))
             {
                 setDirection(150, 0);
                 
@@ -215,7 +217,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING UP------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)))
         {
-            if(!collidesTop())
+            if(!collidesTop() && !collidesTopBomb(bombArray))
             {
                 setDirection(0, 150);
 
@@ -242,7 +244,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING DOWN------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)))
         {
-            if(!collidesBottom())
+            if(!collidesBottom() && !collidesBottomBomb(bombArray))
             {
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);
@@ -317,12 +319,12 @@ public class MainPlayer extends Entity
         {
             float x = pos.x + Constants.PLAYERWIDTH / 2;
             float y = pos.y + Constants.PLAYERHEIGHT / 3;
-            int bombId = 1;
+            String bombType = "default";
             
             //Checks if there is already a bomb
             if(!map.isBombPlaced(x, y) && maxBombPlacing > bombArray.size)
             {
-                client.sendData("setBomb|" + Integer.toString(Constants.PLAYERID) + "|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(bombId) + "|*");
+                client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                 Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId); 
@@ -376,6 +378,10 @@ public class MainPlayer extends Entity
         }
     }
     
+    public void onDeath()
+    {
+        System.out.println("YOU DIED!");
+    }
 
     /*------------------ GETTER & SETTER ------------------*/    
     public int getLife()
