@@ -36,6 +36,7 @@ public class MenuScreen extends Screen
         font = new BitmapFont();
         skin = new Skin();
         
+        
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin.addRegions(buttonAtlas);
@@ -48,19 +49,17 @@ public class MenuScreen extends Screen
         //textButtonStyle.checked = skin.getDrawable("checked-button");
         
         //Add button to screen
-        button = new TextButton("", textButtonStyle);
+        button = new TextButton("Start Game", textButtonStyle);
         button.setPosition(Gdx.graphics.getWidth() / 2 - (button.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(button);
         
-        
+        //Add click listener --> Start Game
         button.addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
             {
-                System.out.println("Clicked! Is checked: " + button.isChecked());
-                //button.setText("Starting new game");
-                //g.setScreen( new GameScreen());
-
+                System.out.println("Starting game screen!");
+                ScreenManager.setScreen( new GameScreen());
             }
         });
         
