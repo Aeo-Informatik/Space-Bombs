@@ -2,6 +2,7 @@ package gui.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,39 +17,40 @@ import com.gdx.bomberman.Main;
 public class MenuScreen extends Screen
 {
     //Objects
-    private Sprite splash;
-    private SpriteBatch batch;
-    private Stage stage;
-    private TextButton button;
-    private TextButtonStyle textButtonStyle;
-    private BitmapFont font;
-    private Skin skin;
-    private TextureAtlas buttonAtlas;
-
+    Stage stage;
+    TextButton button;
+    TextButtonStyle textButtonStyle;
+    BitmapFont font;
+    Skin skin;
+    TextureAtlas buttonAtlas;
+    
     @Override
-    public void create() {
-        
-        //Define Objects
-        this.stage = new Stage();
-        this.font = new BitmapFont();
-        this.skin = new Skin();
-        this.textButtonStyle = new TextButtonStyle();
-        this.batch = Main.sb;
-        
-        //Loads the button image description
-        this.buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
-        
-        //Sets background wallpaper
-        Texture texture = new Texture (Gdx.files.internal("menu/menu.png"));  
-        this.splash = new Sprite(texture);
-        
-        //Creates a button
+    public void create() 
+    {
+        //Create objects
+        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+        font = new BitmapFont();
+        skin = new Skin();
+        
+        //Load button description into memory
+        buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin.addRegions(buttonAtlas);
+        
+        //Add button style
+        textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("startbutton_up");
-        button = new TextButton("Button1", textButtonStyle);
+        textButtonStyle.down = skin.getDrawable("startbutton_down");
+        //textButtonStyle.checked = skin.getDrawable("checked-button");
+        
+        //Add button to screen
+        button = new TextButton("", textButtonStyle);
+        button.setPosition(Gdx.graphics.getWidth() / 2 - (button.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(button);
+        
+        
+        
     }
 
     
@@ -60,16 +62,14 @@ public class MenuScreen extends Screen
  
 
     @Override
-    public void render(SpriteBatch sb) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);  
+    public void render(SpriteBatch sb) 
+    {
+        //Clear Screen
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
-        batch.begin();
         
-            splash.draw(batch);
-        
-        batch.end();
-        
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
 
@@ -77,15 +77,15 @@ public class MenuScreen extends Screen
     @Override
     public void resize(int width, int height) 
     {
-        splash.setSize(width, height);
+        
     }
 
     
     @Override
     public void dispose() 
     {
-        batch.dispose();
-        splash.getTexture().dispose();
+        stage.dispose();
+        skin.dispose();
     }
 
     @Override
