@@ -7,7 +7,7 @@ package networkClient;
 
 import com.badlogic.gdx.math.Vector2;
 import gui.Constants;
-import gui.entity.Bomb;
+import gui.entity.bombs.Bomb;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
 
