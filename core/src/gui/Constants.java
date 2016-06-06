@@ -30,11 +30,11 @@ public class Constants {
     
     
     //Server config
-    public static boolean LOCALSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean LOCALSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 3;
-    public static int SERVERTIMEOUT = 20000; // 20 seconds
+    public static int SERVERTIMEOUT = 30000; // 20 seconds
     public static boolean SERVERDEBUG = false;
     
         
