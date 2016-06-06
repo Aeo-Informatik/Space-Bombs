@@ -16,6 +16,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class TextureManager {
     
+    public static Texture menuBackground;
+    
     //Player 1 Walking
     public static Texture p1WalkingDown;
     public static Animation p1WalkingDownAnim;
@@ -147,6 +149,8 @@ public class TextureManager {
         //TextureRegion(texture, int cutX, int cutY, int width, int height)
         
         float WalkingAnimTime = 0.25f;
+        
+        menuBackground = loadTexture("menu/menu.png");
         
         /*---------------------------------PLAYER 1---------------------------------------*/
         p1WalkingDown = loadTexture("players/player1/walking-down.png");

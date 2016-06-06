@@ -1,6 +1,8 @@
 package gui.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,21 +18,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.gdx.bomberman.Main;
+import static com.gdx.bomberman.Main.sb;
+import gui.Constants;
+import static gui.Constants.SCREENHEIGHT;
+import static gui.Constants.SCREENWIDTH;
+import gui.TextureManager;
 
-public class MenuScreen extends Screen
+public class MenuScreen implements Screen
 {
     //Objects
-    Stage stage;
-    TextButton button;
-    TextButtonStyle textButtonStyle;
-    BitmapFont font;
-    Skin skin;
-    TextureAtlas buttonAtlas;
+    private Stage stage;
+    private TextButton button;
+    private TextButtonStyle textButtonStyle;
+    private BitmapFont font;
+    private Skin skin;
+    private TextureAtlas buttonAtlas;
+    private Game game;
     
-    @Override
-    public void create() 
+    /**------------------------CONSTRUCTOR------------------------**/
+    public MenuScreen(Game game)
     {
-        //Create objects
+        this.game = game;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
@@ -59,32 +67,28 @@ public class MenuScreen extends Screen
             public void changed (ChangeEvent event, Actor actor) 
             {
                 System.out.println("Starting game screen!");
-                ScreenManager.setScreen( new GameScreen());
+                game.setScreen(new GameScreen(game));
             }
         });
     }
-
     
+    
+    /**------------------------RENDER------------------------**/
     @Override
-    public void update() 
-    {
-
-    }
- 
-
-    @Override
-    public void render(SpriteBatch sb) 
+    public void render(float f) 
     {
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
+        //Render stage
+        stage.act(Gdx.graphics.getDeltaTime());
         
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
-
     
+    
+    /**------------------------RESIZE------------------------**/
     @Override
     public void resize(int width, int height) 
     {
@@ -92,6 +96,7 @@ public class MenuScreen extends Screen
     }
 
     
+    /**------------------------DISPOSE------------------------**/
     @Override
     public void dispose() 
     {
@@ -101,12 +106,23 @@ public class MenuScreen extends Screen
         skin.dispose();
     }
 
+    
+    
+    /**------------------------OTHER------------------------**/
     @Override
     public void pause() {
     }
 
     @Override
     public void resume() {
+    }
+
+    @Override
+    public void show() {
+    }
+
+    @Override
+    public void hide() {
     }
     
 }

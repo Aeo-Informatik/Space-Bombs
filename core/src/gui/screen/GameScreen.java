@@ -5,9 +5,12 @@
  */
 package gui.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.gdx.bomberman.Main.client;
+import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
@@ -21,21 +24,20 @@ import networkServer.ServerStart;
  *
  * @author qubasa
  */
-public class GameScreen extends Screen{
+public class GameScreen implements Screen{
     
-    //The viewpoint of the player 
+    //Objects 
     private OrthoCamera camera;
     private EntityManager entityManager;
     private MapManager mapManager;
     private ProcessData processData;
+    private Game game;
     
-    public GameScreen()
-    {
-    }
     
-    @Override
-    public void create() 
+    /**------------------------CONSTRUCTOR------------------------**/
+    public GameScreen(Game game)
     {
+        this.game = game;
         this.camera = new OrthoCamera();
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
@@ -57,11 +59,12 @@ public class GameScreen extends Screen{
             Gdx.app.exit();
         }
     }
-
     
+    
+    /**------------------------RENDER------------------------**/
     @Override
-    public void render(SpriteBatch sb) 
-    { 
+    public void render(float f)
+    {
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
@@ -69,7 +72,6 @@ public class GameScreen extends Screen{
         //Map loading into screen
         mapManager.render(sb);
         
-        /*---------------BEGIN DRAWING---------------*/
         sb.begin();
         
         //Render entities
@@ -79,18 +81,13 @@ public class GameScreen extends Screen{
         processData.start();
         
         sb.end();
-        /*---------------END DRAWING---------------*/
-    }
-
-    
-    @Override
-    public void update() 
-    {
+        
         camera.update();
         entityManager.update();
     }
     
     
+    /**------------------------RESIZE------------------------**/
     @Override
     public void resize(int width, int height) 
     {
@@ -111,7 +108,16 @@ public class GameScreen extends Screen{
        }
     }
 
+    /**------------------------DISPOSE------------------------**/
+    @Override
+    public void dispose() 
+    {
+        mapManager.dispose();
+    }
     
+    
+    
+    /**------------------------OTHER------------------------**/
     @Override
     public void pause() 
     {
@@ -123,11 +129,15 @@ public class GameScreen extends Screen{
     {
     }
 
-    
     @Override
-    public void dispose() 
+    public void show() {
+        
+    }
+
+    @Override
+    public void hide() 
     {
-        mapManager.dispose();
+        
     }
     
 }

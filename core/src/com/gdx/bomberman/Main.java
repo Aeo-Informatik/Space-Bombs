@@ -14,14 +14,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.Constants;
 import gui.TextureManager;
-import gui.screen.GameScreen;
 import gui.screen.MenuScreen;
-import gui.screen.Screen;
-import gui.screen.ScreenManager;
-import static gui.screen.ScreenManager.currentScreen;
 import networkClient.Client;
 
-public class Main implements ApplicationListener {
+public class Main extends Game implements ApplicationListener {
     
     /**
     * It is very common to draw a texture mapped to rectangular geometry. 
@@ -33,12 +29,15 @@ public class Main implements ApplicationListener {
     */
     public static SpriteBatch sb;
     public static Client client;
-    
-    /**
-     * LibGdx makes use of bitmap files (pngs) to render fonts. 
-     * Each glyph in the font has a corresponding TextureRegion.
-     */
+    private Game game;
     private BitmapFont font;
+    
+    //Constructor
+    public Main()
+    {
+        //Objects
+        game = this;
+    }
     
     /**
      * Method called once when the application is created.
@@ -46,16 +45,13 @@ public class Main implements ApplicationListener {
     @Override
     public void create() 
     {   
-        //Create objects
-        this.sb = new SpriteBatch();    
-        this.font = new BitmapFont();
+        sb = new SpriteBatch();    
+        font = new BitmapFont();
         
         //Load all textures
         TextureManager.load();
         
-        //Sets the currentScreen to the GameScreen.java that means everything like
-        //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
-        ScreenManager.setScreen(new MenuScreen());
+        game.setScreen(new MenuScreen(game));
     }
     
         
@@ -73,12 +69,8 @@ public class Main implements ApplicationListener {
         
         //Sets the delta time to a constant
         Constants.DELTATIME = Gdx.graphics.getDeltaTime();
-        
-        if(currentScreen != null)
-        {
-            ScreenManager.getCurrentScreen().update();
-            ScreenManager.getCurrentScreen().render(sb);
-        }
+
+        super.render();
     }
     
     
@@ -90,9 +82,19 @@ public class Main implements ApplicationListener {
     @Override
     public void resize(int width, int height) 
     {
-        if(currentScreen != null)
-            ScreenManager.getCurrentScreen().resize(width, height);
-        
+
+    }
+    
+    
+    /**
+    * Called when the application is closed
+    */
+    @Override
+    public void dispose() 
+    {
+
+        sb.dispose();
+        font.dispose();
     }
     
     
@@ -103,35 +105,16 @@ public class Main implements ApplicationListener {
     @Override
     public void pause() 
     {
-        
-        if(currentScreen != null)
-            ScreenManager.getCurrentScreen().pause();
-        
+
     }
     
-    
-    /**
-     * Called when the application is destroyed
-     */
-    @Override
-    public void dispose() 
-    {
-        
-        if(currentScreen != null)
-            ScreenManager.getCurrentScreen().dispose();
-        
-        sb.dispose();
-        font.dispose();
-    }
-    
-    
+
     /**
      * This method is only called on Android, when the application resumes from a paused state.
      */
     @Override
     public void resume() 
     {
-        if(currentScreen != null)
-            ScreenManager.getCurrentScreen().resume();
+
     }
 }
