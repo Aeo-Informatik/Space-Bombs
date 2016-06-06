@@ -7,6 +7,7 @@ package com.gdx.bomberman;
 
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,10 +16,10 @@ import gui.Constants;
 import gui.TextureManager;
 import gui.screen.GameScreen;
 import gui.screen.MenuScreen;
+import gui.screen.Screen;
 import gui.screen.ScreenManager;
 import static gui.screen.ScreenManager.currentScreen;
 import networkClient.Client;
-import networkServer.ServerStart;
 
 public class Main implements ApplicationListener {
     
@@ -54,8 +55,7 @@ public class Main implements ApplicationListener {
         
         //Sets the currentScreen to the GameScreen.java that means everything like
         //ScreenManager.getCurrentScreen() is equals to GameScreen().methodName
-        //ScreenManager.setScreen(new MenuScreen());
-        ScreenManager.setScreen(new GameScreen());
+        ScreenManager.setScreen(new MenuScreen());
     }
     
         
@@ -75,8 +75,10 @@ public class Main implements ApplicationListener {
         Constants.DELTATIME = Gdx.graphics.getDeltaTime();
         
         if(currentScreen != null)
+        {
             ScreenManager.getCurrentScreen().update();
             ScreenManager.getCurrentScreen().render(sb);
+        }
     }
     
     

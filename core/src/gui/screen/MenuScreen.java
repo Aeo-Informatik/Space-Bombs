@@ -49,7 +49,7 @@ public class MenuScreen extends Screen
         //textButtonStyle.checked = skin.getDrawable("checked-button");
         
         //Add button to screen
-        button = new TextButton("Start Game", textButtonStyle);
+        button = new TextButton("Start Game!", textButtonStyle);
         button.setPosition(Gdx.graphics.getWidth() / 2 - (button.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(button);
         
@@ -62,7 +62,6 @@ public class MenuScreen extends Screen
                 ScreenManager.setScreen( new GameScreen());
             }
         });
-        
     }
 
     
