@@ -4,7 +4,6 @@
 
 
 //Textures
-1) Adding another texture for undestroyabel blocks
 3) Adding the credits in to the stars for everyone
 7) Adding a static texture for our menuscreen
 
