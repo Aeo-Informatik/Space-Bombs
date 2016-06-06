@@ -45,7 +45,7 @@ public class MainPlayer extends Entity
     
     //Player values
     private int playerId = 0;
-    private int life = 1;
+    private int life = 1000000000;
     private boolean godmode = false;
     private int coins = 0;
     private int maxBombPlacing = 2;

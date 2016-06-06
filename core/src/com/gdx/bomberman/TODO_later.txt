@@ -1,5 +1,5 @@
 //Bomb
-
+(vielleicht) Schnellere Animation
 
 //Player
 4) If life reaches 0 the player is dead and spawns a tomb stone with his coins
