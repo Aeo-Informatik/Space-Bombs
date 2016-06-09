@@ -28,7 +28,7 @@ public class MenuScreen implements Screen
 {
     //Objects
     private Stage stage;
-    private TextButton button;
+    private TextButton startbutton;
     private TextButtonStyle textButtonStyle;
     private BitmapFont font;
     private Skin skin;
@@ -43,6 +43,7 @@ public class MenuScreen implements Screen
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
+        
         
         
         //Load button description into memory
@@ -62,12 +63,12 @@ public class MenuScreen implements Screen
 
         
         //Add button to screen
-        button = new TextButton("Start Game!", textButtonStyle);
-        button.setPosition(Gdx.graphics.getWidth() / 2 - (button.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
-        stage.addActor(button);
+        startbutton = new TextButton("Start Game!", textButtonStyle);
+        startbutton.setPosition(Gdx.graphics.getWidth() / 2 - (startbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
+        stage.addActor(startbutton);
         
         //Add click listener --> Start Game
-        button.addListener(new ChangeListener() 
+        startbutton.addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
             {
