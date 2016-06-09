@@ -3,7 +3,7 @@
 
 //Player
 4) If life reaches 0 the player is dead and spawns a tomb stone with his coins
-5) Player hit by bomb gets for 5 seconds godMode and -1 life. 
+ 
 
 //Textures
 2) Adding a texture for a tomb stone to display on player death

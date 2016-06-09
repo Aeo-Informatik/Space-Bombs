@@ -48,7 +48,7 @@ public class MainPlayer extends Entity
     private int life = 3;
     private boolean godmode = false;
     private float godModeTimer = 0;
-    private float godModeDuration = 2; // seconds if hit by bomb how long 
+    private float godModeDuration = 5; // seconds if hit by bomb how long 
     private int coins = 0;
     private int maxBombPlacing = 2;
     
@@ -132,6 +132,7 @@ public class MainPlayer extends Entity
         }else if(godmode == true)
         {
             godmode = false;
+            godModeTimer = 0;
         }
     }
     
