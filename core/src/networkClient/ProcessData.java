@@ -146,23 +146,6 @@ public class ProcessData
                             System.err.println("ERROR: stopEnemyPlayer wrong number of parameters");
                         break;
 
-
-                     /**------------------ENEMY PLAYER PLACE BOMB------------------**/
-                    //General: setBomb|playerId|x|y|bombId|target
-                    case "setBomb":
-                        if(parameters.length == 6)
-                        {
-                          
-                          /*  
-                            Bomb bomb; 
-                            bomb = new Bomb(new Vector2(Float.parseFloat(parameters[2]),Float.parseFloat(parameters[3])), 
-                            new Vector2(Float.parseFloat(parameters[2]),Float.parseFloat(parameters[3])),  map, parameters[1] );
-                           */           
-                        
-                        
-                        
-                        }
-
                         
                     /**------------------ENEMY PLAYER PLACES BOMB------------------**/
                     //General: placeBomb|x|y|playerId|bombType|target

@@ -54,6 +54,7 @@ public class MenuScreen implements Screen
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("startbutton_up");
         textButtonStyle.down = skin.getDrawable("startbutton_down");
+        textButtonStyle.pressedOffsetY = -3;
         //textButtonStyle.checked = skin.getDrawable("checked-button");
         
         //Add button to screen

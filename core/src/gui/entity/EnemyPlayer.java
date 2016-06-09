@@ -44,8 +44,6 @@ public class EnemyPlayer extends Entity
     //Player values
     private int playerId = 0;
     private int life = 1;
-    private boolean godmode = false;
-    private int coins = 0;
     
     
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray) 

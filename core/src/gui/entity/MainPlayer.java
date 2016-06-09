@@ -45,8 +45,10 @@ public class MainPlayer extends Entity
     
     //Player values
     private int playerId = 0;
-    private int life = 1;
+    private int life = 3;
     private boolean godmode = false;
+    private float godModeTimer = 0;
+    private float godModeDuration = 2; // seconds if hit by bomb how long 
     private int coins = 0;
     private int maxBombPlacing = 2;
     
@@ -112,11 +114,24 @@ public class MainPlayer extends Entity
     @Override
     public void update() 
     {  
-        if(touchesDeadlyBlock())
+        //If player touches explosion
+        if(touchesDeadlyBlock() && godmode == false)
         {
-            System.out.println("You touched a deadly tile!");
             life -= 1;
+            godmode = true;
+            System.out.println("Life has been reduced to: " + life);
+            System.out.println("Godmode activated");
             client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
+        }
+        
+        //Timer for godmode length after hit
+        if(godModeTimer < godModeDuration && godmode == true)
+        {
+            godModeTimer += Constants.DELTATIME;
+            //System.out.println("Increasing timer by: " + godModeTimer);
+        }else if(godmode == true)
+        {
+            godmode = false;
         }
     }
     
