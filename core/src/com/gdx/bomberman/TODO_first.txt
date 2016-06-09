@@ -1,6 +1,6 @@
 
 //Player
-5) Player shouldnt be able to walk on bombs
+5) Player shouldnt be able to walk on bombs (even if he stands on a Bomb)
 
 
 //Textures
