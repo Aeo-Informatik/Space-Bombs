@@ -4,14 +4,13 @@
 //Player
 4) If life reaches 0 the player is dead and spawns a tomb stone with his coins
  
-
 //Textures
-2) Adding a texture for a tomb stone to display on player death
-4) Adding animation texture for bomb explosion 
+4) Chaning explosion texture to fade away
 5) Adding animation for block breaking
 6) Adding an animation for player standig still
 8) Increasing the size of the player texture a tiny bit
 9) Create a game icon
+10) Create menu buttons and background
 
 //Server
 1) Implementing delay calculator with ping requests
@@ -21,5 +20,3 @@
 1) Scanning for open servers with port scan
 
 //Bugs
-1) You die even if you have more than one life --> Invulnerability after bomb hit has to be introduced
-2) If zoomed out the player texture doesnt get rendered correctly and one of his eyes is bigger than the other (libgdx bug ?)
