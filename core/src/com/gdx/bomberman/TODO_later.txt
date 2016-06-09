@@ -13,10 +13,11 @@
 10) Create menu buttons and background
 
 //Server
-1) Implementing delay calculator with ping requests
 2) Handling the client quitting from server
 
 //Client
 1) Scanning for open servers with port scan
+2) Implementing delay calculator with ping requests
 
 //Bugs
+Entity function onDeath() gets executet multiple times by processData
