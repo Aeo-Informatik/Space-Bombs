@@ -6,11 +6,24 @@
  
 //Textures
 4) Chaning explosion texture to fade away
-5) Adding animation for block breaking
+5) (Adding animation for block breaking)
 6) Adding an animation for player standig still
 8) Increasing the size of the player texture a tiny bit
 9) Create a game icon
-10) Create menu buttons and background
+10) !!Create buttons and background for menu
+
+//Screens
+MenuScreen:
+Join, Host, Options, Help, Exit
+
+Error Screen:
+If an error occurs display on screen like "connection to server lost".
+
+Option Screen:
+
+Join Screen:
+
+Host Screen:
 
 //Server
 2) Handling the client quitting from server

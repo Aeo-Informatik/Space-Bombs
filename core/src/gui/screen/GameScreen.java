@@ -60,6 +60,7 @@ public class GameScreen implements Screen{
         {
             //If wrong server ip or port are given
             System.err.println("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
+        
         }catch (IOException | InterruptedException e) 
         {
             System.err.println("ERROR: Unexpected client exception: " + e);
@@ -72,20 +73,19 @@ public class GameScreen implements Screen{
     @Override
     public void render(float f)
     {
-        
-        //If client has been disconnected from server
-        if(client != null)
-        {
-            if(!client.isConnectedToServer())
-            {
-                System.err.println("Server connection lost to: " + Constants.SERVERIP);
-                game.setScreen(new MenuScreen(game));
-            }
-        }else
+        //If error occured on creating connection to server
+        if(client == null)
         {
             game.setScreen(new MenuScreen(game));
         }
         
+        //If client has been disconnected from server
+        if(!client.isConnectedToServer())
+        {
+            System.err.println("Server connection lost to: " + Constants.SERVERIP);
+            game.setScreen(new MenuScreen(game));
+        }
+
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
