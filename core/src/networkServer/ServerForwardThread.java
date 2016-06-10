@@ -25,11 +25,13 @@ public class ServerForwardThread implements Runnable
 {
     private Socket socket;  
     private ArrayList<Socket> clientConnections;
+    private int playerId;
     
-    public ServerForwardThread(Socket socket, ArrayList<Socket> clientConnections)
+    public ServerForwardThread(Socket socket, ArrayList<Socket> clientConnections, int playerId)
     {
         this.socket = socket;
         this.clientConnections = clientConnections;
+        this.playerId = playerId;
     }
     
     @Override
@@ -92,6 +94,17 @@ public class ServerForwardThread implements Runnable
 
                 //If clients disconnects
                 System.out.println("Client " + socket.getInetAddress().getHostAddress() + " disconnected from server.");
+
+                ArrayList<String> dataToSend = new ArrayList<>();
+                
+                dataToSend.add("enemyPlayerLife|" + playerId + "|0|*");
+                
+                //Send death message of disconnecting player
+                SendThread send = new SendThread(clientConnections, dataToSend);
+                Thread thread = new Thread(send);
+                thread.start();
+                
+                //Stop current thread
                 Thread.currentThread().interrupt();
                 
             }catch(SocketException | SocketTimeoutException e)
