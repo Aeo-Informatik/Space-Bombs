@@ -3,12 +3,8 @@ package gui.screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,12 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
-import com.gdx.bomberman.Main;
-import static com.gdx.bomberman.Main.sb;
-import gui.Constants;
-import static gui.Constants.SCREENHEIGHT;
-import static gui.Constants.SCREENWIDTH;
-import gui.TextureManager;
+
 
 public class MenuScreen implements Screen
 {
@@ -71,7 +62,6 @@ public class MenuScreen implements Screen
         {
             public void changed (ChangeEvent event, Actor actor) 
             {
-                System.out.println("Starting game screen!");
                 game.setScreen(new GameScreen(game));
             }
         });

@@ -5,7 +5,8 @@
  */
 package networkClient;
 
-import gui.screen.GameScreen;
+
+import java.io.IOException;
 import java.net.Socket;
 
 
@@ -15,25 +16,23 @@ import java.net.Socket;
  */
 public class Client {
     
-    private GameScreen gameScreen;
+    //Objects
     private Socket socket;
-
+    private final Thread receiveThread;
+    private Thread pingThread;
     
-    public Client(String host, int port)
+    //Constructor
+    public Client(String host, int port) throws IOException
     {
-        try
-        {
-            this.socket = new Socket(host, port);
-            
-            
-        }catch(Exception e)
-        {
-            System.err.println("ERROR: Something went wrong on connectiong to server " + e);
-            System.exit(1);
-        }
+        this.socket = new Socket(host, port);
+        PingThread ping = new PingThread(socket);
+        ClientReceiveThread recieve = new ClientReceiveThread(socket);
+        
+        receiveThread = new Thread(recieve);
+        pingThread = new Thread(ping);
     }
         
-    
+    //Start temporary thread to send some data to server
     public void sendData(String dataToSend)
     {
         ClientSendThread sendThread = new ClientSendThread(socket, dataToSend);
@@ -41,11 +40,35 @@ public class Client {
         send.start();
     }
     
-    
-    public void receiveData()
+    //Start permanent connection thread to server and gets data
+    public void connectToServer() throws InterruptedException
     {
-        ClientReceiveThread recieveThread = new ClientReceiveThread(socket);
-        Thread receive = new Thread(recieveThread);
-        receive.start();
+        //Start tcp connection
+        receiveThread.start();
+        
+        //Wait till thread is running
+        while(!receiveThread.isAlive())
+        {
+            System.out.print(".");
+            Thread.sleep(500);
+        }
+    }
+    
+    //Start periodic pinging of server to determin latency
+    public void pingThread()
+    {
+        //Start latency calculator with ping
+        pingThread.start();
+    }
+    
+    public boolean isConnectedToServer()
+    {
+        //If recievethread or pingthread is down
+        if(!receiveThread.isAlive())
+        {
+            return false;
+        }
+        
+        return true;
     }
 }

@@ -25,6 +25,8 @@ class SendThread implements Runnable
         boolean oneClientOnly = false;
         Socket socket1;
         String message1;
+        
+        //Constructor 2
         public SendThread(Socket socket1, String message1)
         {
             this.oneClientOnly = true;

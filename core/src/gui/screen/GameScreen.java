@@ -8,13 +8,14 @@ package gui.screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import java.io.IOException;
+import java.net.ConnectException;
 import networkClient.Client;
 import networkClient.ProcessData;
 import networkServer.ServerStart;
@@ -44,18 +45,24 @@ public class GameScreen implements Screen{
         this.processData = new ProcessData(entityManager);
         
         //Starts local server for 1 Player
-        if(Constants.LOCALSERVER)
+        if(Constants.TESTSERVER)
             new Thread(new ServerStart()).start();
 
         //Connect to server
         try 
         {
-            client = new Client(Constants.CLIENTHOST, Constants.CLIENTPORT);
-            client.receiveData();
+            client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
             
-        } catch (Exception e) 
+            client.connectToServer();
+            //client.pingThread();
+            
+        }catch(ConnectException e)
         {
-            System.err.println("ERROR: Client couldn't connect to server " + e);
+            //If wrong server ip or port are given
+            System.err.println("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
+        }catch (IOException | InterruptedException e) 
+        {
+            System.err.println("ERROR: Unexpected client exception: " + e);
             Gdx.app.exit();
         }
     }
@@ -65,6 +72,20 @@ public class GameScreen implements Screen{
     @Override
     public void render(float f)
     {
+        
+        //If client has been disconnected from server
+        if(client != null)
+        {
+            if(!client.isConnectedToServer())
+            {
+                System.err.println("Server connection lost to: " + Constants.SERVERIP);
+                game.setScreen(new MenuScreen(game));
+            }
+        }else
+        {
+            game.setScreen(new MenuScreen(game));
+        }
+        
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);

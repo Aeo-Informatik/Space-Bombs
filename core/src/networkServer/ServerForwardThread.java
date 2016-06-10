@@ -46,9 +46,23 @@ public class ServerForwardThread implements Runnable
                 BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
                 String dataReceived;
 
-                //Read all lines received from client
+                //Opens tcp session to client if client disconnects readLine() returns null
                 while((dataReceived = receive.readLine())!= null)
                 {   
+                    //If ping request found pong back
+                    if(dataReceived.equals("PING"))
+                    {
+                        if(Constants.SERVERSHOWPING)
+                            System.out.println("Received PING from: " + socket.getInetAddress().getHostAddress());
+                        
+                        //Send pong back to client
+                        SendThread send = new SendThread(socket, "PONG");
+                        Thread thread = new Thread(send);
+                        thread.start();
+                        
+                        continue;
+                    }
+                    
                     //Debug
                     if(Constants.SERVERDEBUG)
                     {
@@ -76,6 +90,10 @@ public class ServerForwardThread implements Runnable
                     }
                 }
 
+                //If clients disconnects
+                System.out.println("Client " + socket.getInetAddress().getHostAddress() + " disconnected from server.");
+                Thread.currentThread().interrupt();
+                
             }catch(SocketException | SocketTimeoutException e)
             {
                 System.err.println("Server ReceiveThread() Client disconnected closing receive thread. " + e);

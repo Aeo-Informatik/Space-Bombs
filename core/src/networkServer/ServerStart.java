@@ -25,7 +25,7 @@ public class ServerStart implements Runnable
             Server server = new Server(Constants.SERVERPORT, 1, 1);   
 
             //Accept all client connections and get them as socket object
-            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERTIMEOUT);
+            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERLOBBYWAIT);
 
             //Starts the game
             server.startGame(socketList);
@@ -47,7 +47,7 @@ public class ServerStart implements Runnable
             Server server = new Server(Constants.SERVERPORT, Constants.MINPLAYERS, Constants.MAXPLAYERS);   
                
             //Accept all client connections and get them as socket object
-            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERTIMEOUT);
+            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERLOBBYWAIT);
             
             //Starts the game
             server.startGame(socketList);
