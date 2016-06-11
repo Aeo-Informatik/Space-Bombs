@@ -5,14 +5,12 @@
  */
 package gui.entity;
 
-import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import gui.Constants;
 import gui.map.MapManager;
 
@@ -91,6 +89,8 @@ public abstract class Entity
         return false;
     }
 
+    
+    /**--------------------------COLLIDES WITH BOMB--------------------------**/
     protected boolean collidesLeftBomb()
     {
         float marginX = 2;

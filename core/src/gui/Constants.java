@@ -28,12 +28,13 @@ public class Constants {
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     public static boolean CLIENTSHOWPONG = false; // Show received pong
+    public static int PINGDELAY = 2; // 1 ping each 2 seconds
     
     //Server config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 3;
+    public static int MAXPLAYERS = 2;
     public static int SERVERLOBBYWAIT = 30000; // 30 seconds
     public static boolean SERVERDEBUG = false;
     public static boolean SERVERSHOWPING = false; // Show received ping
@@ -48,5 +49,8 @@ public class Constants {
     public static float MAPTEXTUREHEIGHT;
     public static float DELTATIME = 0;
     public static int AMOUNTSPECTATORS = 0;
-    public static int PINGDELAY = 2; // 1 ping each 2 seconds
+    public static int BOMBIDCOUNTERP1 = 0;
+    public static int BOMBIDCOUNTERP2 = 1000;
+    public static int BOMBIDCOUNTERP3 = 2000;
+    public static int BOMBIDCOUNTERP4 = 3000;
 }

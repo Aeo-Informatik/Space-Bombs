@@ -19,12 +19,11 @@ import gui.map.MapManager;
 
 /**
  *
- * @author phinix
+ * @author qubasa
  */
 public class Bomb extends Entity
 {
     //General variables
-    private SpriteBatch sb;
     private int playerId ;
     int cellX, cellY;
     boolean touchedDeadlyTile = false;
@@ -37,6 +36,7 @@ public class Bomb extends Entity
     private float explosionDuration;
     private boolean isExploded = false;
     private float delayAfterHitByBomb;
+    private int bombId;
     
     //Blocks
     private TextureRegion emptyBlock;
@@ -70,6 +70,44 @@ public class Bomb extends Entity
         this.explosionTime = 2; // in seconds
         this.explosionDuration = 0.4f; // in seconds     
         this.delayAfterHitByBomb = 0.4f;
+                
+        //If player placed more bombs then defined in range reset Id to startvalue
+        switch(playerId)
+        {
+            case 1:
+                Constants.BOMBIDCOUNTERP1 += 1;
+                bombId = Constants.BOMBIDCOUNTERP1;
+                
+                if(bombId > 1000)
+                    Constants.BOMBIDCOUNTERP1 = 0;
+                break;
+            
+            case 2:
+                Constants.BOMBIDCOUNTERP2 += 1;
+                bombId = Constants.BOMBIDCOUNTERP2;
+                
+                if(bombId > 2000)
+                    Constants.BOMBIDCOUNTERP2 = 1000;
+                break;
+                
+            case 3:
+                Constants.BOMBIDCOUNTERP3 += 1;
+                bombId = Constants.BOMBIDCOUNTERP3;
+                
+                if(bombId > 3000)
+                    Constants.BOMBIDCOUNTERP3 = 2000;
+                break;
+                
+            case 4:
+                Constants.BOMBIDCOUNTERP4 += 1;
+                this.bombId = Constants.BOMBIDCOUNTERP4;
+                
+                if(bombId > 4000)
+                    Constants.BOMBIDCOUNTERP4 = 3000;
+                break;
+        }
+        
+        System.out.println("BomId for player " + playerId +" is: " + bombId);
         
         //Set Textures
         switch(playerId)
@@ -457,8 +495,7 @@ public class Bomb extends Entity
             }
         }
     }
-    
-    
+
     /**------------Getter & Setter-------------**/
 
     public boolean isExploded()
@@ -466,6 +503,11 @@ public class Bomb extends Entity
         return this.isExploded;
     }
 
+    public int getBombId()
+    {
+        return this.bombId;
+    }
+    
     public float getTimer()
     {
         return explosionTime;

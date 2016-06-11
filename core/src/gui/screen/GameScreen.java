@@ -74,18 +74,18 @@ public class GameScreen implements Screen{
     public void render(float f)
     {
         //If error occured on creating connection to server
-        if(client == null)
+        if(client != null)
         {
+            //If client has been disconnected from server
+            if(!client.isConnectedToServer())
+            {
+                System.err.println("Server connection lost to: " + Constants.SERVERIP);
+                game.setScreen(new MenuScreen(game));
+            }
+        }else
             game.setScreen(new MenuScreen(game));
-        }
         
-        //If client has been disconnected from server
-        if(!client.isConnectedToServer())
-        {
-            System.err.println("Server connection lost to: " + Constants.SERVERIP);
-            game.setScreen(new MenuScreen(game));
-        }
-
+        
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
         sb.setProjectionMatrix(camera.combined);
