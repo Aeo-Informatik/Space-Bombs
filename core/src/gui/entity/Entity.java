@@ -188,9 +188,9 @@ public abstract class Entity
      * @param duration: Of the blinking length
      * @param timesPerSecond: How often the texture changes from visibel to invisibel
      */
-    protected void blinkingAnimation(float duration, int timesPerSecond)
+    protected Thread blinkingAnimation(float duration, int timesPerSecond)
     {
-        new Thread()
+        Thread blink = new Thread()
         {
             @Override
             public void run() 
@@ -219,7 +219,11 @@ public abstract class Entity
                    }
                }
             }
-        }.start();
+        };
+          
+        blink.start();
+        
+        return blink;
     }
     
     /**

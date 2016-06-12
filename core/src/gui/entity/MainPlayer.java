@@ -11,16 +11,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
-import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import networkClient.Client;
 
 /**
@@ -52,7 +48,7 @@ public class MainPlayer extends Entity
     private int life = 3;
     private boolean godmode = false;
     private float godModeTimer = 0;
-    private float godModeDuration = 2.5f; // seconds if hit by bomb how long 
+    private float godModeDuration = 2f; // seconds if hit by bomb how long 
     private int coins = 0;
     private int maxBombPlacing = 2;
     
@@ -111,6 +107,7 @@ public class MainPlayer extends Entity
         }
     }
 
+    Thread blink;
     
     /**
      * Update is the same as render only that it doesn't have the SpriteBatch Object.
@@ -127,9 +124,14 @@ public class MainPlayer extends Entity
             client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
             
             System.out.println("Life has been reduced to: " + life);
-            System.out.println("Invulnerability activated");
             
-            blinkingAnimation(godModeDuration, 3);
+            if(Constants.CLIENTDEBUG)
+            {
+                System.out.println("Invulnerability activated");
+            }
+
+            //Lets the player blink and saves the thread object to be able to stop it manually
+            blink = blinkingAnimation(godModeDuration, 3);
         }
         
         //Timer for godmode length after hit
@@ -142,7 +144,13 @@ public class MainPlayer extends Entity
             godmode = false;
             godModeTimer = 0;
             
-            System.out.println("Invulnerability deactivated");
+            //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
+            blink.stop();
+            
+            if(Constants.CLIENTDEBUG)
+            {
+                System.out.println("Invulnerability deactivated");
+            }
         }
     }
     

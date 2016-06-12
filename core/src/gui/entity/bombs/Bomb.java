@@ -107,7 +107,8 @@ public class Bomb extends Entity
                 break;
         }
         
-        System.out.println("BomId for player " + playerId +" is: " + bombId);
+        if(Constants.CLIENTDEBUG)
+            System.out.println("BomId for player " + playerId +" is: " + bombId);
         
         //Set Textures
         switch(playerId)
@@ -498,6 +499,11 @@ public class Bomb extends Entity
 
     /**------------Getter & Setter-------------**/
 
+    public int getPlayerId()
+    {
+        return this.playerId;
+    }
+    
     public boolean isExploded()
     {
         return this.isExploded;
