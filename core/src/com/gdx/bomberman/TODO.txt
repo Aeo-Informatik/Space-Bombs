@@ -31,4 +31,3 @@ Host Screen:
 
 //Bugs
 Entity function onDeath() gets executet multiple times by processData
-Player blinkingAnimation isn't completly synchron with godmode deactivation
