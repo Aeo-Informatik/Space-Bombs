@@ -30,4 +30,4 @@ Host Screen:
 2) Implementing delay calculator with ping requests
 
 //Bugs
-Entity function onDeath() gets executet multiple times by processData
+Entity function onDeath() gets executed multiple times by processData
