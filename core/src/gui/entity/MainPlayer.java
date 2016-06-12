@@ -11,12 +11,16 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
+import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import networkClient.Client;
 
 /**
@@ -65,6 +69,7 @@ public class MainPlayer extends Entity
         this.sb = Main.sb;
         this.playerId = playerId;
         this.bombArray = bombArray;
+        
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -119,9 +124,12 @@ public class MainPlayer extends Entity
         {
             life -= 1;
             godmode = true;
-            System.out.println("Life has been reduced to: " + life);
-            System.out.println("Godmode activated");
             client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
+            
+            System.out.println("Life has been reduced to: " + life);
+            System.out.println("Invulnerability activated");
+            
+            blinkingAnimation(godModeDuration, 3);
         }
         
         //Timer for godmode length after hit
@@ -133,7 +141,8 @@ public class MainPlayer extends Entity
         {
             godmode = false;
             godModeTimer = 0;
-            System.out.println("Godmode deactivated");
+            
+            System.out.println("Invulnerability deactivated");
         }
     }
     

@@ -24,7 +24,7 @@ import gui.map.MapManager;
 public class Bomb extends Entity
 {
     //General variables
-    private int playerId ;
+    private int playerId;
     int cellX, cellY;
     boolean touchedDeadlyTile = false;
     

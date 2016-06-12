@@ -11,8 +11,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.map.MapManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -180,6 +183,44 @@ public abstract class Entity
         return false;
     }
     
+    /**
+     * The texture blinks periodically on the screen
+     * @param duration: Of the blinking length
+     * @param timesPerSecond: How often the texture changes from visibel to invisibel
+     */
+    protected void blinkingAnimation(float duration, int timesPerSecond)
+    {
+        new Thread()
+        {
+            @Override
+            public void run() 
+            {
+               for(float i = 0; i < duration; i++)
+               {
+                   for(int b = 0; b < timesPerSecond; b++)
+                   {
+                        sb.setColor(1.0f, 1.0f, 1.0f,0.0f); 
+                        try 
+                        {
+                             Thread.sleep((1000 / timesPerSecond) / 2);
+                        } catch (InterruptedException ex) 
+                        {
+                             System.err.println("ERROR: Interrupted blinkingAnimation()");
+                        }
+                        
+                        sb.setColor(1.0f, 1.0f, 1.0f,1.0f); 
+                        try 
+                        {
+                             Thread.sleep((1000 / timesPerSecond) / 2);
+                        } catch (InterruptedException ex) 
+                        {
+                             System.err.println("ERROR: Interrupted blinkingAnimation()");
+                        }
+                   }
+               }
+            }
+        }.start();
+    }
     
     /**
     * Gets the frame out of the animation
