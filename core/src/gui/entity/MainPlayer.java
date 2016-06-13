@@ -45,7 +45,7 @@ public class MainPlayer extends Entity
     
     //Player values
     private int playerId = 0;
-    private int life = 3;
+    private int life = 30;
     private boolean godmode = false;
     private float godModeTimer = 0;
     private float godModeDuration = 2f; // seconds if hit by bomb how long 
