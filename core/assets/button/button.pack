@@ -5,22 +5,22 @@ filter: Nearest,Nearest
 repeat: none
 button_up
   rotate: false
-  xy: 1, 90
-  size: 190, 45
-  orig: 190, 45
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 button_checked
   rotate: false
-  xy: 1, 46
-  size: 187, 42
-  orig: 187, 42
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 button_down
   rotate: false
-  xy: 1, 1
-  size: 186, 43
-  orig: 186, 43
+  xy: 133, 1
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
