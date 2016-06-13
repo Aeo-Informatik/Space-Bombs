@@ -134,7 +134,7 @@ public class EnemyPlayer extends Entity
         switch(this.moveDirection)
         {
             case "LEFT":
-                if(!collidesLeft())
+                if(!collidesLeft() && !collidesLeftBomb())
                 {
                     //Set the speed the texture moves in x and y axis
                     //this is the method inherited from Entity.java class
@@ -155,7 +155,7 @@ public class EnemyPlayer extends Entity
             break;
 
             case "RIGHT":
-                if(!collidesRight())
+                if(!collidesRight() && !collidesRightBomb())
                 {
                     setDirection(150, 0);  
                     sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
@@ -170,7 +170,7 @@ public class EnemyPlayer extends Entity
             break;
 
             case "UP":
-                if(!collidesTop())
+                if(!collidesTop() && !collidesTopBomb())
                 {
                     setDirection(0, 150);
                     sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
@@ -185,7 +185,7 @@ public class EnemyPlayer extends Entity
             break;
 
             case "DOWN":
-                if(!collidesBottom())
+                if(!collidesBottom() && !collidesBottomBomb())
                 {
                     setDirection(0, -150);
                     sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
