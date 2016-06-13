@@ -21,3 +21,9 @@ Font
 "Press Start Font" by codeman38
 Licensed under SIL Open Font License (OFL)
 found in http://www.zone38.net/font/#pressstart
+
+
+Buttons
+======
+
+Designed by Freepik

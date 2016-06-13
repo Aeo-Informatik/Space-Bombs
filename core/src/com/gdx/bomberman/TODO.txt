@@ -1,0 +1,30 @@
+//Bomb
+(vielleicht) Schnellere Animation
+
+//Player
+4) Spawns a tomb stone with his coins on death
+ 
+//Textures
+10) !!Create buttons and background for every screen
+6) Adding an animation for the player standig still
+9) Create a game icon
+
+//Screens
+MenuScreen:
+Join, Host, Options, Help, Exit
+
+Error Screen:
+If an error occurs display it on screen like "connection to server lost".
+
+Option Screen:
+
+Join Screen:
+
+Host Screen:
+
+//Client
+1) Scanning for open servers with port scan
+2) Implementing delay calculator with ping requests
+
+//Bugs
+Entity function onDeath() gets executed multiple times by processData

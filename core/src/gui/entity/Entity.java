@@ -5,16 +5,17 @@
  */
 package gui.entity;
 
-import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
+import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.map.MapManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -91,106 +92,82 @@ public abstract class Entity
         return false;
     }
 
-    protected boolean collidesLeftBomb(Array<Bomb> bombArray)
+    
+    /**--------------------------COLLIDES WITH BOMB--------------------------**/
+    protected boolean collidesLeftBomb()
     {
         float marginX = 2;
-        if(map.isBombPlaced(pos.x , pos.y) == true)
+        
+        //If player stands on bomb walk away
+        if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-           return false; 
-        }else
-        { 
-            if( !map.isBombPlaced(pos.x - marginX, pos.y))
-            {
-                return false;
-            }else
-            {
-               for (Bomb bomb: bombArray)
-                {
-                    if(bomb.getCellX() == (int)((pos.x - marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) (pos.y / Constants.MAPTEXTUREHEIGHT))
-                    {
-                     return true;   
-                    }
-                } 
-               return false;
-            }
+            return false;
         }
+        
+        //If player hits bomb from the left stop walking
+        if(map.isBombPlaced(pos.x - marginX, pos.y) )
+        {
+            return true;
+        }
+        
+        return false;
     }
     
-    protected boolean collidesRightBomb(Array<Bomb> bombArray)
+    protected boolean collidesRightBomb()
     {
         float marginX = 2;
-        if(map.isBombPlaced(pos.x , pos.y) == true)
+        
+        //If player stands on bomb walk away
+        if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-           return false; 
-        }else
-        { 
-            if( !map.isBombPlaced(pos.x + marginX, pos.y))
-            {
-                return false;
-            }else
-            {
-               for (Bomb bomb: bombArray)
-                {
-                    if(bomb.getCellX() == (int)((pos.x + marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) (pos.y / Constants.MAPTEXTUREHEIGHT))
-                    {
-                     return true;   
-                    }
-                } 
-               return false;
-            }
+            return false;
         }
+        
+        //If player hits bomb from the right stop walking
+        if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH + marginX, pos.y))
+        {
+            return true;
+        }
+        
+        return false;
     }
     
-    protected boolean collidesTopBomb(Array<Bomb> bombArray)
+    protected boolean collidesTopBomb()
     {
         float marginX = 3;
         float marginY = 3;
-        if(map.isBombPlaced(pos.x , pos.y) == true)
+        
+        //If player stands on bomb walk away
+        if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-           return false; 
-        }else
-        { 
-            if( !map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
-            {
-                return false;
-            }else
-            {
-               for (Bomb bomb: bombArray)
-                {
-                    if(bomb.getCellX() == (int)((pos.x + marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) ((pos.y + Constants.PLAYERHEIGHT / 2 + marginY) / Constants.MAPTEXTUREHEIGHT))
-                    {
-                     return true;   
-                    }
-                } 
-               return false;
-            }
+            return false;
         }
+        
+        //Checks at players half on the left and right if there is a block located
+        if(map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY) 
+                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
+            return true;
+        
+        return false;
     }
     
-    protected boolean collidesBottomBomb(Array<Bomb> bombArray)
+    protected boolean collidesBottomBomb()
     {
         float marginX = 3;
         float marginY = 3;
-        if(map.isBombPlaced(pos.x , pos.y) == true)
+        
+        //If player stands on bomb walk away
+        if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-           return false; 
-        }else
-        { 
-            if( !map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
-            {
-                return false;
-            }else
-            {
-               for (Bomb bomb: bombArray)
-                {
-                    if(bomb.getCellX() == (int)((pos.x - marginX)/Constants.MAPTEXTUREWIDTH) && bomb.getCellY() == (int) ((pos.y - marginY) / Constants.MAPTEXTUREHEIGHT))
-                    {
-                     return true;   
-                    }
-                } 
-               return false;
-            }
+            return false;
         }
+        
+        //Checks at players feet on the left if there is a block and on the right
+        if(map.isBombPlaced(pos.x + marginX, pos.y - marginY) 
+                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
+            return true;
+        //else
+        return false;
     }
     
     
@@ -206,6 +183,48 @@ public abstract class Entity
         return false;
     }
     
+    /**
+     * The texture blinks periodically on the screen
+     * @param duration: Of the blinking length
+     * @param timesPerSecond: How often the texture changes from visibel to invisibel
+     */
+    protected Thread blinkingAnimation(float duration, int timesPerSecond)
+    {
+        Thread blink = new Thread()
+        {
+            @Override
+            public void run() 
+            {
+               for(float i = 0; i < duration; i++)
+               {
+                   for(int b = 0; b < timesPerSecond; b++)
+                   {
+                        sb.setColor(1.0f, 1.0f, 1.0f,0.0f); 
+                        try 
+                        {
+                             Thread.sleep((1000 / timesPerSecond) / 2);
+                        } catch (InterruptedException ex) 
+                        {
+                             System.err.println("ERROR: Interrupted blinkingAnimation()");
+                        }
+                        
+                        sb.setColor(1.0f, 1.0f, 1.0f,1.0f); 
+                        try 
+                        {
+                             Thread.sleep((1000 / timesPerSecond) / 2);
+                        } catch (InterruptedException ex) 
+                        {
+                             System.err.println("ERROR: Interrupted blinkingAnimation()");
+                        }
+                   }
+               }
+            }
+        };
+          
+        blink.start();
+        
+        return blink;
+    }
     
     /**
     * Gets the frame out of the animation

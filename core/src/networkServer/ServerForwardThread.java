@@ -25,11 +25,13 @@ public class ServerForwardThread implements Runnable
 {
     private Socket socket;  
     private ArrayList<Socket> clientConnections;
+    private int playerId;
     
-    public ServerForwardThread(Socket socket, ArrayList<Socket> clientConnections)
+    public ServerForwardThread(Socket socket, ArrayList<Socket> clientConnections, int playerId)
     {
         this.socket = socket;
         this.clientConnections = clientConnections;
+        this.playerId = playerId;
     }
     
     @Override
@@ -46,9 +48,23 @@ public class ServerForwardThread implements Runnable
                 BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
                 String dataReceived;
 
-                //Read all lines received from client
+                //Opens tcp session to client if client disconnects readLine() returns null
                 while((dataReceived = receive.readLine())!= null)
                 {   
+                    //If ping request found pong back
+                    if(dataReceived.equals("PING"))
+                    {
+                        if(Constants.SERVERSHOWPING)
+                            System.out.println("Received PING from: " + socket.getInetAddress().getHostAddress());
+                        
+                        //Send pong back to client
+                        SendThread send = new SendThread(socket, "PONG");
+                        Thread thread = new Thread(send);
+                        thread.start();
+                        
+                        continue;
+                    }
+                    
                     //Debug
                     if(Constants.SERVERDEBUG)
                     {
@@ -76,6 +92,21 @@ public class ServerForwardThread implements Runnable
                     }
                 }
 
+                //If clients disconnects
+                System.out.println("Client " + socket.getInetAddress().getHostAddress() + " disconnected from server.");
+
+                ArrayList<String> dataToSend = new ArrayList<>();
+                
+                dataToSend.add("enemyPlayerLife|" + playerId + "|0|*");
+                
+                //Send death message of disconnecting player
+                SendThread send = new SendThread(clientConnections, dataToSend);
+                Thread thread = new Thread(send);
+                thread.start();
+                
+                //Stop current thread
+                Thread.currentThread().interrupt();
+                
             }catch(SocketException | SocketTimeoutException e)
             {
                 System.err.println("Server ReceiveThread() Client disconnected closing receive thread. " + e);

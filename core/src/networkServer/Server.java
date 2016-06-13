@@ -61,7 +61,7 @@ public class Server {
 
                 /*-------------------END SETUP GAME---------------------*/
                 //Open forward thread for every client
-                ServerForwardThread receive = new ServerForwardThread(socketList.get(i), socketList);
+                ServerForwardThread receive = new ServerForwardThread(socketList.get(i), socketList, i +1);
                 Thread thread = new Thread(receive);
                 thread.start();
             }
@@ -73,7 +73,6 @@ public class Server {
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error in startGame " +e);
-            e.printStackTrace();
         }
     }
     

@@ -48,7 +48,7 @@ public class MainPlayer extends Entity
     private int life = 3;
     private boolean godmode = false;
     private float godModeTimer = 0;
-    private float godModeDuration = 5; // seconds if hit by bomb how long 
+    private float godModeDuration = 2f; // seconds if hit by bomb how long 
     private int coins = 0;
     private int maxBombPlacing = 2;
     
@@ -65,6 +65,7 @@ public class MainPlayer extends Entity
         this.sb = Main.sb;
         this.playerId = playerId;
         this.bombArray = bombArray;
+        
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -106,6 +107,7 @@ public class MainPlayer extends Entity
         }
     }
 
+    Thread blink;
     
     /**
      * Update is the same as render only that it doesn't have the SpriteBatch Object.
@@ -119,9 +121,17 @@ public class MainPlayer extends Entity
         {
             life -= 1;
             godmode = true;
-            System.out.println("Life has been reduced to: " + life);
-            System.out.println("Godmode activated");
             client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
+            
+            System.out.println("Life has been reduced to: " + life);
+            
+            if(Constants.CLIENTDEBUG)
+            {
+                System.out.println("Invulnerability activated");
+            }
+
+            //Lets the player blink and saves the thread object to be able to stop it manually
+            blink = blinkingAnimation(godModeDuration, 3);
         }
         
         //Timer for godmode length after hit
@@ -133,6 +143,14 @@ public class MainPlayer extends Entity
         {
             godmode = false;
             godModeTimer = 0;
+            
+            //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
+            blink.stop();
+            
+            if(Constants.CLIENTDEBUG)
+            {
+                System.out.println("Invulnerability deactivated");
+            }
         }
     }
     
@@ -164,7 +182,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
         {
-            if(!collidesLeft() && !collidesLeftBomb(bombArray))
+            if(!collidesLeft() && !collidesLeftBomb())
             {
                 //Set the speed the texture moves in x and y axis
                 //This will be added to the position every render cycle
@@ -206,7 +224,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING RIGHT------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)))
         {
-            if(!collidesRight() && !collidesRightBomb(bombArray))
+            if(!collidesRight() && !collidesRightBomb())
             {
                 setDirection(150, 0);
                 
@@ -233,7 +251,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING UP------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)))
         {
-            if(!collidesTop() && !collidesTopBomb(bombArray))
+            if(!collidesTop() && !collidesTopBomb())
             {
                 setDirection(0, 150);
 
@@ -260,7 +278,7 @@ public class MainPlayer extends Entity
         /*------------------WALKING DOWN------------------*/
         }else if((Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)))
         {
-            if(!collidesBottom() && !collidesBottomBomb(bombArray))
+            if(!collidesBottom() && !collidesBottomBomb())
             {
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);

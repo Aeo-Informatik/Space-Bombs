@@ -37,7 +37,6 @@ public class ClientSendThread implements Runnable {
     {
         try
         {
-
             PrintWriter print = new PrintWriter(socket.getOutputStream(), true);	
 
             //Debug
@@ -50,13 +49,12 @@ public class ClientSendThread implements Runnable {
   
         }catch(SocketException e)
         {
-            System.err.println("ERROR: Sending data failed because I couldn't connect to server " + e);
+            System.err.println("ERROR: Connection to server closed in ClientSendThread(). " + e);
             System.exit(1);
             
         }catch(Exception e)
         {
-            System.err.println("ERROR: Something in sendThread() went wrong " + e);
-            e.printStackTrace();
+            System.err.println("ERROR: Something in ClientSendThread() went wrong. " + e);
             System.exit(1);
         }
     }
