@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package gui.screen;
 
 import com.badlogic.gdx.Game;
@@ -10,30 +16,54 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 
 
-public class MenuScreen implements Screen
-{
+
+/**
+ *
+ * @author pl0614
+ */
+public class JoinScreen implements Screen{
+    
+
+
+
+
+
+
+
     //Objects
     private Stage stage;
-    private TextButton startbutton;
-    private TextButtonStyle textButtonStyle;
+    private TextButton joinbutton;
+    private TextButton.TextButtonStyle textButtonStyle;
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
     private Game game;
+    private TextField hostip;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public MenuScreen(Game game)
+    public JoinScreen(Game game)
     {
         this.game = game;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
+       
         
         
         
@@ -42,7 +72,7 @@ public class MenuScreen implements Screen
         skin.addRegions(buttonAtlas);
         
         //Add button style
-        textButtonStyle = new TextButtonStyle();
+        textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
@@ -54,16 +84,17 @@ public class MenuScreen implements Screen
 
         
         //Add button to screen
-        startbutton = new TextButton("Start Game!", textButtonStyle);
-        startbutton.setPosition(Gdx.graphics.getWidth() / 2 - (startbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
-        stage.addActor(startbutton);
+        joinbutton = new TextButton("Join Game", textButtonStyle);
+        
+        joinbutton.setPosition(Gdx.graphics.getWidth() / 2 - (joinbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
+        stage.addActor(joinbutton);
         
         //Add click listener --> Start Game
-        startbutton.addListener(new ChangeListener() 
+        joinbutton.addListener(new ChangeListener() 
         {
-            public void changed (ChangeEvent event, Actor actor) 
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                game.setScreen(new JoinScreen(game));
+                game.setScreen(new GameScreen(game));
             }
         });
     }
@@ -120,5 +151,6 @@ public class MenuScreen implements Screen
     @Override
     public void hide() {
     }
-    
 }
+    
+
