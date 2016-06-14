@@ -14,8 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.map.MapManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,16 +27,18 @@ public abstract class Entity
     protected TiledMapTileLayer blockLayer;
     protected TiledMapTileLayer bombLayer;
     protected float stateTime;
+    protected EntityManager entityManager;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
-    public Entity(Vector2 pos, Vector2 direction, MapManager map){
+    public Entity(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager){
         
         this.pos = pos;
         this.map = map;
         this.direction = direction;
         this.blockLayer = map.getBlockLayer();
         this.bombLayer = map.getBombLayer();
+        this.entityManager = entityManager;
     }
     
     public abstract void update();

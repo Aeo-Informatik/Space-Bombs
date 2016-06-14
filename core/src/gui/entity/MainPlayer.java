@@ -53,9 +53,9 @@ public class MainPlayer extends Entity
     private int maxBombPlacing = 2;
     
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) throws Exception 
     {
-        super(pos, direction, map);
+        super(pos, direction, map, entityManager);
 
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
@@ -361,7 +361,7 @@ public class MainPlayer extends Entity
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId); 
+                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId, entityManager); 
                 bombArray.add(bomb);
             }
         }

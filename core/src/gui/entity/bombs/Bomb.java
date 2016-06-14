@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import gui.Constants;
 import gui.TextureManager;
 import gui.entity.Entity;
+import gui.entity.EntityManager;
 import gui.map.MapManager;
 
 /**
@@ -53,9 +54,9 @@ public class Bomb extends Entity
     
     
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId)
+    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, EntityManager entityManager)
     {
-        super(pos, direction, map);
+        super(pos, direction, map, entityManager);
         
         //Needed variables
         this.playerId = playerId;
