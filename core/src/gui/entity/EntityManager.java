@@ -162,22 +162,22 @@ public class EntityManager {
      * @param y Cell coordiante on y axis
      * @return Bomb Object or Null
      */
-    public Bomb getBombObjOnCellCoordinates(int x, int y)
+    public Bomb getBombObjOnPosCoordinates(float posX, float posY)
     {
-        System.out.println("Checking if a bomb obj is on Coordinates: X=" + x + " Y=" + y);
+       int cellX = (int) (posX / Constants.MAPTEXTUREWIDTH);
+       int cellY = (int) (posY / Constants.MAPTEXTUREHEIGHT);
+        
         for(Bomb mainP : this.bombArray)
         {
-            System.out.println("MainPlayer Bomb: X="+ mainP.getCellX() + " Y=" + mainP.getCellY());
-            if(mainP.getCellX() == x && mainP.getCellY() == y)
+            if(mainP.getCellX() == cellX && mainP.getCellY() == cellY)
             {
                 return mainP;
             }
         }
-        System.out.println("No matching main Player bomb found!");
         
         for(Bomb enemyP : this.bombArrayEnemy)
         {
-            if(enemyP.getCellX() == x && enemyP.getCellY() == y)
+            if(enemyP.getCellX() == cellX && enemyP.getCellY() == cellY)
             {
                 return enemyP;
             }

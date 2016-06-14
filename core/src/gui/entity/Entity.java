@@ -92,8 +92,9 @@ public abstract class Entity
         return false;
     }
 
-    private int previousBombId = -1;
+    
     /**--------------------------COLLIDES WITH BOMB--------------------------**/
+    private int leftRefBombId = -1;
     protected boolean collidesLeftBomb()
     {
         float marginX = 2;
@@ -101,51 +102,71 @@ public abstract class Entity
         //If player stands on bomb 
         if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-            //If player didn't stand on a bomb before
-            if(this.previousBombId == -1)
+            if(leftRefBombId == -1)
             {
-                //Get Bomb Object and Id
-                Bomb bomb = entityManager.getBombObjOnCellCoordinates((int) (pos.x / Constants.MAPTEXTUREWIDTH), (int) (pos.y / Constants.MAPTEXTUREHEIGHT));
+                //Get bomb Id and save this Id for later
+                Bomb bomb = entityManager.getBombObjOnPosCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
                 if(bomb != null)
                 {
-                    System.out.println("Standing on Bomb Id: " + bomb.getBombId());
-                }else
-                {
-                    System.out.println("GetBombObj returned null!");
+                    leftRefBombId =  bomb.getBombId();
+                    return false;
                 }
             }
-            
-            return false;
         }
         
-        //If player hits bomb from the left stop walking
-        if(map.isBombPlaced(pos.x - marginX, pos.y) )
+        //If player walks against bomb from the left
+        if(map.isBombPlaced(pos.x - marginX, pos.y))
         {
-            return true;
+            //Compare saved bomb id with current one if they dont match lock movement
+            Bomb bomb = entityManager.getBombObjOnPosCoordinates(pos.x - marginX, pos.y);
+            if(bomb != null && bomb.getBombId() != leftRefBombId)
+            {
+                return true;
+            }
         }
         
+        //If the ids do match or there is no bomb unlock movement and reset reference bomb Id  
+        leftRefBombId = -1;
         return false;
     }
     
+    private int rightRefBombId = -1;
     protected boolean collidesRightBomb()
     {
         float marginX = 2;
         
-        //If player stands on bomb walk away
+        //If player stands on bomb 
         if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-            return false;
+            if(rightRefBombId == -1)
+            {
+                //Get bomb Id and save this Id for later
+                Bomb bomb = entityManager.getBombObjOnPosCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
+                if(bomb != null)
+                {
+                    rightRefBombId =  bomb.getBombId();
+                    return false;
+                }
+            }
         }
         
-        //If player hits bomb from the right stop walking
+        //If player walks against bomb from the right 
         if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH + marginX, pos.y))
         {
-            return true;
+            //Compare saved bomb id with current one if they dont match lock movement
+            Bomb bomb = entityManager.getBombObjOnPosCoordinates(pos.x + Constants.PLAYERWIDTH + marginX, pos.y);
+            if(bomb != null && bomb.getBombId() != rightRefBombId)
+            {
+                return true;
+            }
         }
         
+        //If the ids do match or there is no bomb unlock movement and reset reference bomb Id  
+        rightRefBombId = -1;
         return false;
     }
     
+    private int topRefBombId = -1;
     protected boolean collidesTopBomb()
     {
         float marginX = 3;
@@ -154,33 +175,71 @@ public abstract class Entity
         //If player stands on bomb walk away
         if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-            return false;
+            if(topRefBombId == -1)
+            {
+                //Get bomb Id and save this Id for later
+                Bomb bomb = entityManager.getBombObjOnPosCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
+                if(bomb != null)
+                {
+                    topRefBombId =  bomb.getBombId();
+                    return false;
+                }
+            }
         }
         
         //Checks at players half on the left and right if there is a block located
-        if(map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY) 
-                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
-            return true;
+        if(map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY) || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
+        {
+            //Compare saved bomb id with current one if they dont match lock movement
+            Bomb bomb1 = entityManager.getBombObjOnPosCoordinates(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY);
+            Bomb bomb2 = entityManager.getBombObjOnPosCoordinates(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY);
+            if((bomb1 != null && bomb1.getBombId() != topRefBombId) || (bomb2 != null && bomb2.getBombId() != topRefBombId))
+            {
+                return true;
+            }
+        }
         
+        //If the ids do match or there is no bomb unlock movement and reset reference bomb Id  
+        topRefBombId = -1;
         return false;
+
     }
     
+    private int bottomRefBombId = -1;
     protected boolean collidesBottomBomb()
     {
         float marginX = 3;
         float marginY = 3;
         
-        //If player stands on bomb walk away
+        //If player stands on bomb
         if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
-            return false;
+            if(bottomRefBombId == -1)
+            {
+                //Get bomb Id and save this Id for later
+                Bomb bomb = entityManager.getBombObjOnPosCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
+                if(bomb != null)
+                {
+                    bottomRefBombId =  bomb.getBombId();
+                    return false;
+                }
+            }
         }
         
         //Checks at players feet on the left if there is a block and on the right
-        if(map.isBombPlaced(pos.x + marginX, pos.y - marginY) 
-                || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
-            return true;
-        //else
+        if(map.isBombPlaced(pos.x + marginX, pos.y - marginY) || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
+        {
+            //Compare saved bomb id with current one if they dont match lock movement
+            Bomb bomb1 = entityManager.getBombObjOnPosCoordinates(pos.x + marginX, pos.y - marginY);
+            Bomb bomb2 = entityManager.getBombObjOnPosCoordinates(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY);
+            if((bomb1 != null && bomb1.getBombId() != bottomRefBombId) || (bomb2 != null && bomb2.getBombId() != bottomRefBombId))
+            {
+                return true;
+            }
+        }
+        
+        //If the ids do match or there is no bomb unlock movement and reset reference bomb Id  
+        bottomRefBombId = -1;
         return false;
     }
     
