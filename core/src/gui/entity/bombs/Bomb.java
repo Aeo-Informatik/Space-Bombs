@@ -26,8 +26,7 @@ public class Bomb extends Entity
 {
     //General variables
     private int playerId;
-    int cellX, cellY;
-    boolean touchedDeadlyTile = false;
+    private boolean touchedDeadlyTile = false;
     
     //Bomb settings
     private float timer;
@@ -38,6 +37,7 @@ public class Bomb extends Entity
     private boolean isExploded = false;
     private float delayAfterHitByBomb;
     private int bombId;
+    private int cellX, cellY;
     
     //Blocks
     private TextureRegion emptyBlock;
@@ -61,10 +61,9 @@ public class Bomb extends Entity
         //Needed variables
         this.playerId = playerId;
         this.emptyBlock = TextureManager.emptyBlock;
-        
-        //Get cell positon
         this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
         this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
+        
         
         //Bomb settings
         this.explosionRange = 2; // In blocks
@@ -226,7 +225,8 @@ public class Bomb extends Entity
     @Override
     public void update() 
     {
-        
+        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
+        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
     }
     
     public boolean deleteBlock(int x, int y)

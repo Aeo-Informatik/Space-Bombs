@@ -151,13 +151,16 @@ public class EntityManager {
      */
     public Bomb getBombObjOnCellCoordinates(int x, int y)
     {
+        System.out.println("Checking if a bomb obj is on Coordinates: X=" + x + " Y=" + y);
         for(Bomb mainP : this.bombArray)
         {
+            System.out.println("MainPlayer Bomb: X="+ mainP.getCellX() + " Y=" + mainP.getCellY());
             if(mainP.getCellX() == x && mainP.getCellY() == y)
             {
                 return mainP;
             }
         }
+        System.out.println("No matching main Player bomb found!");
         
         for(Bomb enemyP : this.bombArrayEnemy)
         {
