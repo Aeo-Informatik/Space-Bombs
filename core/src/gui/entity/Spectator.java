@@ -28,9 +28,9 @@ public class Spectator extends Entity
     private Array <EnemyPlayer> enemies;
     
     
-    public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies) 
+    public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
-        super(pos, direction, map);
+        super(pos, direction, map, entityManager);
         
         this.blockLayer = map.getBlockLayer();
         this.camera = camera;

@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import gui.Constants;
 import gui.TextureManager;
 import gui.entity.Entity;
+import gui.entity.EntityManager;
 import gui.map.MapManager;
 
 /**
@@ -25,8 +26,7 @@ public class Bomb extends Entity
 {
     //General variables
     private int playerId;
-    int cellX, cellY;
-    boolean touchedDeadlyTile = false;
+    private boolean touchedDeadlyTile = false;
     
     //Bomb settings
     private float timer;
@@ -37,6 +37,7 @@ public class Bomb extends Entity
     private boolean isExploded = false;
     private float delayAfterHitByBomb;
     private int bombId;
+    private int cellX, cellY;
     
     //Blocks
     private TextureRegion emptyBlock;
@@ -53,17 +54,16 @@ public class Bomb extends Entity
     
     
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId)
+    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, EntityManager entityManager)
     {
-        super(pos, direction, map);
+        super(pos, direction, map, entityManager);
         
         //Needed variables
         this.playerId = playerId;
         this.emptyBlock = TextureManager.emptyBlock;
-        
-        //Get cell positon
         this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
         this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
+        
         
         //Bomb settings
         this.explosionRange = 2; // In blocks
@@ -225,7 +225,8 @@ public class Bomb extends Entity
     @Override
     public void update() 
     {
-        
+        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
+        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
     }
     
     public boolean deleteBlock(int x, int y)
