@@ -8,6 +8,10 @@ package gui.entity;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -282,7 +286,14 @@ public class MainPlayer extends Entity
             {
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);
-                sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                
+                TextureData textureData = getFrame(walkAnimDown).getTexture().getTextureData();
+                textureData.prepare();
+                Pixmap pixmap = textureData.consumePixmap();
+                pixmap.setColor(1.0f, 1.0f, 1.0f, 0.5f);
+                Texture texture = new Texture (pixmap);
+                sb.draw(texture, pos.x, pos.y);
+                
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
                     lastMovementKeyPressed = "DOWN";
