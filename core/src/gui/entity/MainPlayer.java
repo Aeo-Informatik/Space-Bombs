@@ -8,6 +8,10 @@ package gui.entity;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -53,9 +57,9 @@ public class MainPlayer extends Entity
     private int maxBombPlacing = 2;
     
     
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) throws Exception 
     {
-        super(pos, direction, map);
+        super(pos, direction, map, entityManager);
 
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
@@ -282,7 +286,14 @@ public class MainPlayer extends Entity
             {
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);
-                sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                
+                TextureData textureData = getFrame(walkAnimDown).getTexture().getTextureData();
+                textureData.prepare();
+                Pixmap pixmap = textureData.consumePixmap();
+                pixmap.setColor(1.0f, 1.0f, 1.0f, 0.5f);
+                Texture texture = new Texture (pixmap);
+                sb.draw(texture, pos.x, pos.y);
+                
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
                     lastMovementKeyPressed = "DOWN";
@@ -361,7 +372,7 @@ public class MainPlayer extends Entity
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId); 
+                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId, entityManager); 
                 bombArray.add(bomb);
             }
         }

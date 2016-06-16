@@ -46,9 +46,9 @@ public class EnemyPlayer extends Entity
     private int life = 1;
     
     
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
     {
-        super(pos, direction, map);
+        super(pos, direction, map, entityManager);
         
         this.playerId = playerId;
         this.sb = Main.sb;

@@ -6,6 +6,7 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,9 +14,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
+import gui.entity.bombs.Bomb;
 import gui.map.MapManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,16 +29,18 @@ public abstract class Entity
     protected TiledMapTileLayer blockLayer;
     protected TiledMapTileLayer bombLayer;
     protected float stateTime;
+    protected EntityManager entityManager;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
-    public Entity(Vector2 pos, Vector2 direction, MapManager map){
+    public Entity(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager){
         
         this.pos = pos;
         this.map = map;
         this.direction = direction;
         this.blockLayer = map.getBlockLayer();
         this.bombLayer = map.getBombLayer();
+        this.entityManager = entityManager;
     }
     
     public abstract void update();
@@ -92,15 +94,29 @@ public abstract class Entity
         return false;
     }
 
-    
+    private int previousBombId = -1;
     /**--------------------------COLLIDES WITH BOMB--------------------------**/
     protected boolean collidesLeftBomb()
     {
         float marginX = 2;
         
-        //If player stands on bomb walk away
+        //If player stands on bomb 
         if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH / 2, pos.y))
         {
+            //If player didn't stand on a bomb before
+            if(this.previousBombId == -1)
+            {
+                //Get Bomb Object and Id
+                Bomb bomb = entityManager.getBombObjOnCellCoordinates((int) (pos.x / Constants.MAPTEXTUREWIDTH), (int) (pos.y / Constants.MAPTEXTUREHEIGHT));
+                if(bomb != null)
+                {
+                    System.out.println("Standing on Bomb Id: " + bomb.getBombId());
+                }else
+                {
+                    System.out.println("GetBombObj returned null!");
+                }
+            }
+            
             return false;
         }
         
@@ -199,7 +215,7 @@ public abstract class Entity
                {
                    for(int b = 0; b < timesPerSecond; b++)
                    {
-                        //sb.setColor(1.0f, 1.0f, 1.0f,0.0f); 
+                        sb.setColor(1.0f, 1.0f, 1.0f,0.0f); 
                        try 
                         {
                              Thread.sleep((1000 / timesPerSecond) / 2);

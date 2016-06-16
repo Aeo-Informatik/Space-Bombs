@@ -103,7 +103,7 @@ public class EntityManager {
             if(mainPlayer.getLife() <= 0)
             {
                 //Create new spectator
-                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies);
+                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies, this);
                 
                 //On death
                 mainPlayer.onDeath();
@@ -132,7 +132,7 @@ public class EntityManager {
                 {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
-                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, map, bombArrayEnemy);
+                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, map, bombArrayEnemy, this);
                         enemies.add(enemyPlayer);
                     }
                 }catch(NullPointerException e)
@@ -143,6 +143,35 @@ public class EntityManager {
         }
     }
     
+    /**
+     * Returns the Bomb Object on the specified coordinates. If there is no bomb return null.
+     * @param x Cell coordiante on x axis
+     * @param y Cell coordiante on y axis
+     * @return Bomb Object or Null
+     */
+    public Bomb getBombObjOnCellCoordinates(int x, int y)
+    {
+        System.out.println("Checking if a bomb obj is on Coordinates: X=" + x + " Y=" + y);
+        for(Bomb mainP : this.bombArray)
+        {
+            System.out.println("MainPlayer Bomb: X="+ mainP.getCellX() + " Y=" + mainP.getCellY());
+            if(mainP.getCellX() == x && mainP.getCellY() == y)
+            {
+                return mainP;
+            }
+        }
+        System.out.println("No matching main Player bomb found!");
+        
+        for(Bomb enemyP : this.bombArrayEnemy)
+        {
+            if(enemyP.getCellX() == x && enemyP.getCellY() == y)
+            {
+                return enemyP;
+            }
+        }
+        
+        return null;
+    }
     
     /**
      * Creates a MainPlayer Object and saves it in EntityManager
@@ -161,7 +190,7 @@ public class EntityManager {
                     {
                         if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                         {
-                            mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray);
+                            mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray, this);
                         }
                     }catch(NullPointerException e)
                     {
@@ -188,12 +217,12 @@ public class EntityManager {
         switch(bombType)
         {
             case "default":
-                Bomb defaultBomb = new Bomb(pos, direction, map, playerId);
+                Bomb defaultBomb = new Bomb(pos, direction, map, playerId, this);
                 bombArrayEnemy.add(defaultBomb);
                 break;
             
             default:
-                Bomb defaultBomb1 = new Bomb(pos, direction, map, playerId);
+                Bomb defaultBomb1 = new Bomb(pos, direction, map, playerId, this);
                 bombArray.add(defaultBomb1);
         }
     }

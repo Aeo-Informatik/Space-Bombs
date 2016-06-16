@@ -28,3 +28,4 @@ Host Screen:
 
 //Bugs
 Entity function onDeath() gets executed multiple times by processData
+Menuscreen buttons doesn't scale correclty
