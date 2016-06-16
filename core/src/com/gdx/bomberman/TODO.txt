@@ -7,7 +7,6 @@
 //Textures
 10) !!Create buttons and background for every screen
 6) Adding an animation for the player standig still
-9) Create a game icon
 
 //Screens
 MenuScreen:
@@ -29,3 +28,4 @@ Host Screen:
 //Bugs
 Entity function onDeath() gets executed multiple times by processData
 Menuscreen buttons doesn't scale correclty
+Game Icon isn't shown on mac and linux probably because of different size preferences

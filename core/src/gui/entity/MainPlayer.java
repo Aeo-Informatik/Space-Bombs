@@ -30,11 +30,13 @@ public class MainPlayer extends Entity
     private String lastMovementKeyPressed = "UP";
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
+    private float godModeTimer = 0;
+    private boolean godmode = false; //DO NOT CHANGE
+    private int playerId = 0;
     
     //General objects
     private OrthoCamera camera;
     private Client client;
-    private SpriteBatch renderObject;
     private Array <Bomb> bombArray;
     
     //Player animation when he is moving around
@@ -43,16 +45,13 @@ public class MainPlayer extends Entity
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
-    //Player values
-    private int playerId = 0;
+    //Player settings
     private int life = 30;
-    private boolean godmode = false;
-    private float godModeTimer = 0;
-    private float godModeDuration = 2f; // seconds if hit by bomb how long 
+    private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
     private int coins = 0;
     private int maxBombPlacing = 2;
     
-    
+    //Constructor
     public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) throws Exception 
     {
         super(pos, direction, map, entityManager);
@@ -62,7 +61,6 @@ public class MainPlayer extends Entity
 
         this.client = Main.client;
         this.camera = camera;
-        this.renderObject = entityManager.getRenderObject();
         this.playerId = playerId;
         this.bombArray = bombArray;
         
@@ -107,14 +105,39 @@ public class MainPlayer extends Entity
         }
     }
 
-    Thread blink;
-    
+
     /**
-     * Update is the same as render only that it doesn't have the SpriteBatch Object.
-     * It is used for game logic updates.
+     * Draws the player to screen
+     * @param sb 
      */
     @Override
-    public void update() 
+    public void render(SpriteBatch renderObject)
+    {
+        //Adding direction to position
+        pos.add(this.direction);
+        
+        //Keyboard interception
+        inputMovePlayer(renderObject);
+        inputDoPlayer(renderObject);
+        
+        hitByBomb(renderObject);
+    }
+    
+    
+    /**
+     * Execute on player death
+     */
+    public void onDeath()
+    {
+        System.out.println("YOU DIED!");
+    }
+    
+    
+    /**
+     * Player gets hit by bomb
+     */
+    Thread flashThread;
+    public void hitByBomb(SpriteBatch renderObject) 
     {  
         //If player touches explosion
         if(touchesDeadlyBlock() && godmode == false)
@@ -131,7 +154,7 @@ public class MainPlayer extends Entity
             }
 
             //Lets the player blink and saves the thread object to be able to stop it manually
-            //blink = blinkingAnimation(godModeDuration, 3, renderObject);
+            flashThread = flashingAnimation(godModeDuration, 3, renderObject);
         }
         
         //Timer for godmode length after hit
@@ -145,7 +168,7 @@ public class MainPlayer extends Entity
             godModeTimer = 0;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
-            //blink.stop();
+            flashThread.stop();
             
             if(Constants.CLIENTDEBUG)
             {
@@ -153,28 +176,12 @@ public class MainPlayer extends Entity
             }
         }
     }
-    
-    
-    /**
-     * Draws the player to screen
-     * @param sb 
-     */
-    @Override
-    public void render(SpriteBatch sb)
-    {
-        //Adding direction to position
-        pos.add(this.direction);
-        
-        //Keyboard interception
-        inputMovePlayer();
-        inputDoPlayer();
-    }
-    
 
+    
     /**
      * Moves the player if keyboard input is received.
      */
-    private void inputMovePlayer()
+    private void inputMovePlayer(SpriteBatch renderObject)
     {
         String moveCommand = "";
         float cameraSpeed = 2.51f;
@@ -346,9 +353,8 @@ public class MainPlayer extends Entity
     
     /**
      * Action the player can make like placing a bomb
-     * @param sb 
      */
-    private void inputDoPlayer()
+    private void inputDoPlayer(SpriteBatch renderObject)
     {
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
@@ -412,11 +418,6 @@ public class MainPlayer extends Entity
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             }
         }
-    }
-    
-    public void onDeath()
-    {
-        System.out.println("YOU DIED!");
     }
 
     /*------------------ GETTER & SETTER ------------------*/    

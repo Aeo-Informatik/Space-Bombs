@@ -20,14 +20,14 @@ import gui.map.MapManager;
  */
 public class Spectator extends Entity
 {
-    //Camera
+    //General objects and variables
     private OrthoCamera camera;
     private boolean freeCam = true;
     private int currentPlayerIndex = 0;
     private EnemyPlayer currentEnemyPlayer;
     private Array <EnemyPlayer> enemies;
     
-    
+    //Constructor
     public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager);
@@ -37,14 +37,9 @@ public class Spectator extends Entity
         this.enemies = enemies;
     }
 
+    
     @Override
-    public void update() 
-    {
-        
-    }
-    
-    
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch renderObject)
     {
         //Adding direction to position
         pos.add(this.direction);
@@ -59,10 +54,14 @@ public class Spectator extends Entity
             camera.setPosition(this.currentEnemyPlayer.getPosition().x, this.currentEnemyPlayer.getPosition().y);
         }
         
+        //Keyboard interception
         inputDoSpectator();
     }
     
-
+    
+    /**
+     * Moves and renders the spectator on key press.
+     */
     private void inputMoveSpectator()
     {
                 
@@ -136,6 +135,9 @@ public class Spectator extends Entity
     }
     
     
+    /**
+     * Other actions the player can do with his keyboard.
+     */
     private void inputDoSpectator()
     {
         /*------------------ZOOM OUT GAME------------------*/
@@ -153,7 +155,6 @@ public class Spectator extends Entity
                     camera.setPosition(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y);
                 }
             }
-            
         }
 
         /*------------------ZOOM INTO GAME------------------*/
@@ -195,10 +196,7 @@ public class Spectator extends Entity
                 currentPlayerIndex = 0;
                 freeCam = true;
             }
-                
-
         }
-        
         
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
@@ -220,7 +218,8 @@ public class Spectator extends Entity
         }
     }
     
-     /*------------------GHOST MOVEMENT------------------*/
+    
+    /*------------------GHOST MOVEMENT------------------*/
     @Override
     protected boolean collidesLeft()
     {

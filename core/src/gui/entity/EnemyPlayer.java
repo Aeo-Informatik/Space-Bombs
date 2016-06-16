@@ -5,13 +5,11 @@
  */
 package gui.entity;
 
-
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.gdx.bomberman.Main;
 import gui.TextureManager;
 import gui.map.MapManager;
 
@@ -23,12 +21,9 @@ public class EnemyPlayer extends Entity
 {
     //General variables
     private String lastMovementKeyPressed = "UP";
+    private int playerId = 0;
     
-    //General objects
-    private SpriteBatch sb;
-    private Array <Bomb> bombArray;
-    
-    //Online render variables
+    //Server render variables
     private boolean executeMovePlayer = false;
     private boolean executeStopPlayer = true;
     private String moveDirection = "";
@@ -41,18 +36,18 @@ public class EnemyPlayer extends Entity
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
-    //Player values
-    private int playerId = 0;
+    //Player settings
     private int life = 1;
     
-    
+    //Constructor
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager);
         
+        //Save variables & objects as global
         this.playerId = playerId;
-        this.sb = Main.sb;
         
+        //Set player id textures
         switch(playerId)
         {
             case 1:
@@ -94,33 +89,33 @@ public class EnemyPlayer extends Entity
 
     
     @Override
-    public void update() 
-    {
-            
-    }
-    
-    
-    @Override
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch renderObject)
     {
         //System.out.println("Enemy player is existing");
         if(this.executeStopPlayer)
         {
-            stopPlayer(this.stopX, this.stopY);
+            stopPlayer(this.stopX, this.stopY, renderObject);
         }
         
         if(this.executeMovePlayer)
         {
-            movePlayer(this.moveDirection);
+            movePlayer(this.moveDirection, renderObject);
         }
-        
     }
+    
+    
+    //Execute on player death
+    public void onDeath()
+    {
+        System.out.println("---------------------Player " + playerId + " died!-------------------");
+    }
+    
     
     /**
      * Moves the player accordingly to the direction specified.
      * @param movement 
      */
-    public void movePlayer(String movement)
+    public void movePlayer(String movement, SpriteBatch renderObject)
     {
         //If triggered from outside it will be rendered/activated in the object till stopPlayer gets called
         this.moveDirection = movement;
@@ -141,7 +136,7 @@ public class EnemyPlayer extends Entity
                     setDirection(-150, 0);
 
                     //Draw the walking animation
-                    sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
 
                     //Sets the direction in which the still standing image will be rendered
                     lastMovementKeyPressed = "LEFT";
@@ -149,7 +144,7 @@ public class EnemyPlayer extends Entity
                 {
                     //Stop player
                     setDirection(0,0);
-                    sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
                     lastMovementKeyPressed = "LEFT";
                 }
             break;
@@ -158,13 +153,13 @@ public class EnemyPlayer extends Entity
                 if(!collidesRight() && !collidesRightBomb())
                 {
                     setDirection(150, 0);  
-                    sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
                     lastMovementKeyPressed = "RIGHT";
                 }else
                 {
                     //Stop player
                     setDirection(0,0);
-                    sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
                     lastMovementKeyPressed = "RIGHT";
                 }
             break;
@@ -173,13 +168,13 @@ public class EnemyPlayer extends Entity
                 if(!collidesTop() && !collidesTopBomb())
                 {
                     setDirection(0, 150);
-                    sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
                     lastMovementKeyPressed = "UP";
                 }else
                 {
                     //Stop player
                     setDirection(0,0);
-                    sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
                     lastMovementKeyPressed = "UP";
                 }
             break;
@@ -188,13 +183,13 @@ public class EnemyPlayer extends Entity
                 if(!collidesBottom() && !collidesBottomBomb())
                 {
                     setDirection(0, -150);
-                    sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
                     lastMovementKeyPressed = "DOWN";
                 }else
                 {
                     //Stop player
                     setDirection(0,0);
-                    sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                    renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
                     lastMovementKeyPressed = "DOWN";
                 }
             break;
@@ -208,7 +203,7 @@ public class EnemyPlayer extends Entity
      * @param x int
      * @param y int
      */
-    public void stopPlayer(float x, float y)
+    public void stopPlayer(float x, float y, SpriteBatch renderObject)
     {
         //If triggered from outside it will be rendered/activated in the object till movePlayer gets called
         this.executeStopPlayer = true;
@@ -227,29 +222,23 @@ public class EnemyPlayer extends Entity
         switch(lastMovementKeyPressed)
         {
             case "LEFT":
-                sb.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
                 break;
 
             case "RIGHT":
-                sb.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
             break;
 
             case "UP":
-                sb.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
                 break;
 
             case "DOWN":
-                sb.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
                 break;
         } 
     }
 
-    
-    public void onDeath()
-    {
-        System.out.println("---------------------Player " + playerId + " died!-------------------");
-    }
-    
     
     /**--------------------GETTER & SETTER--------------------**/
     public int getPlayerId()

@@ -21,13 +21,13 @@ import gui.map.MapManager;
  */
 public abstract class Entity
 {
-    
+    //General objects & variables
     protected Vector2 pos, direction;
     protected MapManager map;
     protected TiledMapTileLayer blockLayer;
     protected TiledMapTileLayer bombLayer;
-    protected float stateTime;
     protected EntityManager entityManager;
+    protected float stateTime;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
@@ -41,13 +41,14 @@ public abstract class Entity
         this.entityManager = entityManager;
     }
     
-    public abstract void update();
-    
-    
     public void render(SpriteBatch renderObject){}
     
 
     /**------------------COLLISION FUNCTIONS------------------**/
+    /**
+     * Checks if entity collides with a blocked field on his left if so it returns true
+     * @return boolean
+     */
     protected boolean collidesLeft()
     {
         float marginX = 2;
@@ -57,6 +58,10 @@ public abstract class Entity
         return false;
     }
     
+    /**
+     * Checks if entity collides with a blocked field on his right if so it returns true
+     * @return boolean
+     */
     protected boolean collidesRight()
     {
         float marginX = 2;
@@ -66,6 +71,10 @@ public abstract class Entity
         return false;
     }
     
+    /**
+     * Checks if entity collides with a blocked field on his top if so it returns true
+     * @return boolean
+     */
     protected boolean collidesTop()
     {
         float marginX = 3;
@@ -79,6 +88,10 @@ public abstract class Entity
         return false;
     }
     
+    /**
+     * Checks if entity collides with a blocked field on his bottom if so it returns true
+     * @return boolean
+     */
     protected boolean collidesBottom()
     {
         float marginX = 3;
@@ -94,6 +107,10 @@ public abstract class Entity
 
     
     /**--------------------------COLLIDES WITH BOMB--------------------------**/
+    /**
+     * Checks if entity collides with a bomb on his left if so it returns true
+     * @return boolean
+     */
     private int leftRefBombId = -1;
     protected boolean collidesLeftBomb()
     {
@@ -130,6 +147,11 @@ public abstract class Entity
         return false;
     }
     
+    
+    /**
+     * Checks if entity collides with a bomb on his right if so it returns true
+     * @return boolean
+     */
     private int rightRefBombId = -1;
     protected boolean collidesRightBomb()
     {
@@ -166,6 +188,11 @@ public abstract class Entity
         return false;
     }
     
+    
+    /**
+     * Checks if entity collides with a bomb on his top if so it returns true
+     * @return boolean
+     */
     private int topRefBombId = -1;
     protected boolean collidesTopBomb()
     {
@@ -205,6 +232,11 @@ public abstract class Entity
 
     }
     
+    
+    /**
+     * Checks if entity collides with a bomb on his bottom if so it returns true
+     * @return boolean
+     */
     private int bottomRefBombId = -1;
     protected boolean collidesBottomBomb()
     {
@@ -244,7 +276,10 @@ public abstract class Entity
     }
     
     
-    
+    /**
+     * Checks if entity is standing on a deadly field if so it returns true
+     * @return boolean
+     */
     protected boolean touchesDeadlyBlock()
     {
         float margin = 3f;
@@ -256,12 +291,14 @@ public abstract class Entity
         return false;
     }
     
+    
     /**
-     * The texture blinks periodically on the screen
-     * @param duration: Of the blinking length
-     * @param timesPerSecond: How often the texture changes from visibel to invisibel
+     * The texture flashs periodically on the screen
+     * @param duration: Of the flashing length
+     * @param timesPerSecond: How often the texture changes from visibel to invisibel in a second
+     * @return Thread: Thread object to stop the blinking animation manually
      */
-    protected Thread blinkingAnimation(float duration, int timesPerSecond, SpriteBatch renderObject)
+    protected Thread flashingAnimation(float duration, int timesPerSecond, SpriteBatch renderObject)
     {
         Thread blink = new Thread()
         {

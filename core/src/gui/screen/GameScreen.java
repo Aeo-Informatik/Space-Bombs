@@ -26,22 +26,21 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class GameScreen implements Screen{
     
-    //Objects 
+    //Genral Objects & variables
     private OrthoCamera camera;
     private EntityManager entityManager;
     private MapManager mapManager;
     private ProcessData processData;
     private Game game;
-    private SpriteBatch renderObject;
     
-    
-    /**------------------------CONSTRUCTOR-----------------------
-     * @param game-**/
+    /**
+     * Constructor
+     * @param game 
+     */
     public GameScreen(Game game)
     {
         this.game = game;
         this.camera = new OrthoCamera();
-        this.renderObject = new SpriteBatch();
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager, this);
         this.processData = new ProcessData(entityManager);
@@ -72,12 +71,14 @@ public class GameScreen implements Screen{
     }
     
     
-    /**------------------------RENDER-----------------------
-     * @param f-**/
+    /**
+     * Render the game
+     * @param f: Don't know what it means
+     */
     @Override
     public void render(float f)
     {
-        //If error occured on creating connection to server
+        //Check if client is connected to server
         if(client != null)
         {
             //If client has been disconnected from server
@@ -86,7 +87,8 @@ public class GameScreen implements Screen{
                 System.err.println("Server connection lost to: " + Constants.SERVERIP);
                 game.setScreen(new MenuScreen(game));
             }
-        }else
+            
+        }else //If error occured on creating connection to server
         {
             game.setScreen(new MenuScreen(game));
         }
@@ -94,7 +96,7 @@ public class GameScreen implements Screen{
 
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
-        renderObject.setProjectionMatrix(camera.combined);
+        //renderServer.setProjectionMatrix(camera.combined);
         
         //Map loading into screen shouldn't be in the sb.begin() tags
         mapManager.render();
@@ -103,9 +105,7 @@ public class GameScreen implements Screen{
         entityManager.render();
         
         //Render incoming server instructions
-        renderObject.begin();
         processData.start();
-        renderObject.end();
         
         //Update functions
         camera.update();
@@ -113,9 +113,11 @@ public class GameScreen implements Screen{
     }
     
     
-    /**------------------------RESIZE-----------------------
-     * @param width-*
-     * @param height*/
+    /**
+     * Execute on window resize
+     * @param width
+     * @param height 
+     */
     @Override
     public void resize(int width, int height) 
     {
@@ -136,14 +138,13 @@ public class GameScreen implements Screen{
        }
     }
 
+    
     /**------------------------DISPOSE------------------------**/
     @Override
     public void dispose() 
     {
         mapManager.dispose();
-        renderObject.dispose();
     }
-    
     
     
     /**------------------------OTHER------------------------**/
@@ -170,18 +171,5 @@ public class GameScreen implements Screen{
     }
  
     
-    /**------------------------GETTER & SETTER-----------------------**/
-    /**
-     * 
-     * @return SpriteBatch
-     */
-    public SpriteBatch getRenderObject()
-    {
-        return this.renderObject;
-    }
-    
-    public void setRenderObject(SpriteBatch renderObject)
-    {
-        this.renderObject = renderObject;
-    }
+    /**------------------------GETTER & SETTER-----------------------**/    
 }

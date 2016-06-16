@@ -64,7 +64,6 @@ public class Bomb extends Entity
         this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
         this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
         
-        
         //Bomb settings
         this.explosionRange = 2; // In blocks
         this.explosionTime = 2; // in seconds
@@ -172,8 +171,11 @@ public class Bomb extends Entity
     
     
     @Override
-    public void render(SpriteBatch sb)
+    public void render(SpriteBatch renderObject)
     {
+        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
+        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
+        
         //To make sure no bomb gets placed into wall
         if(!map.isCellBlocked(pos.x, pos.y) && !isExploded)
         {
@@ -222,13 +224,12 @@ public class Bomb extends Entity
         }
     }
     
-    @Override
-    public void update() 
-    {
-        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
-        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
-    }
-    
+    /**
+     * If bomb explosion hits block delete it
+     * @param x: position on x axis
+     * @param y: position on y axis
+     * @return boolean
+     */ 
     public boolean deleteBlock(int x, int y)
     {
         Cell currentCell = blockLayer.getCell(x , y);
@@ -253,6 +254,7 @@ public class Bomb extends Entity
         return true;
     }
     
+
     private void deleteExplosionEffect()
     {
         //Create new cell and set texture

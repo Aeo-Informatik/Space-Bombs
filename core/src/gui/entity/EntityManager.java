@@ -22,7 +22,11 @@ public class EntityManager {
     
     //Variables & Objects
     private OrthoCamera camera;
-    private SpriteBatch renderObject;
+    private SpriteBatch renderMainPlayer = new SpriteBatch();
+    private SpriteBatch renderEnemyPlayer = new SpriteBatch();
+    private SpriteBatch renderSpectator = new SpriteBatch();
+    private SpriteBatch renderOther = new SpriteBatch();
+
     
     //Array from libgdx is much faster in comparison to an arraylist
     private Array <EnemyPlayer> enemies = new Array<>();
@@ -37,59 +41,61 @@ public class EntityManager {
     {
         this.camera = camera;
         this.map = map;
-        this.renderObject = gameScreen.getRenderObject();
     }
     
 
     public void render()
     {
-        //For every Enemy Player Object that is stored in the arraylist execute the render function in it
+        /**--------------------PLAYER RENDERER--------------------**/
+        //Render every enemy object in list
         for(EnemyPlayer enemy: enemies)
         {
-            renderObject.begin();
-            enemy.render(renderObject);
-            renderObject.end();
+            renderEnemyPlayer.begin();
+            enemy.render(renderEnemyPlayer);
+            renderEnemyPlayer.end();
         }
         
-        for (Bomb bomb: bombArray)
-        {
-            renderObject.begin();
-            bomb.render(renderObject);
-            renderObject.end();
-        }
-        
-        for (Bomb bomb: bombArrayEnemy)
-        {
-            renderObject.begin();
-            bomb.render(renderObject);
-            renderObject.end();
-        }        
-        
-        //Executes the render function in the mainPlayer object
+        //Render main player
         if(mainPlayer != null)
         {
-            renderObject.begin();
-            mainPlayer.render(renderObject);
-            renderObject.end();
-            
+            renderMainPlayer.begin();
+            mainPlayer.render(renderMainPlayer);
+            renderMainPlayer.end();
+        
+        //If main player equals null render spectator
         }else if(spectator != null)
         {
-            renderObject.begin();
-            spectator.render(renderObject);
-            renderObject.end();
+            renderSpectator.begin();
+            spectator.render(renderSpectator);
+            renderSpectator.end();
+        }          
+        
+        /**--------------------MAP OBJECTS RENDERER--------------------**/
+        renderOther.begin();
+        
+        //Render bomb in main player list
+        for (Bomb bomb: bombArray)
+        {
+            //It doesnt need a renderObject because the textures are dynamically 
+            //set into the tile layer without beeing drawn
+            bomb.render(renderOther);
         }
-                    
+        
+        //Render bomb in enemy player list
+        for (Bomb bomb: bombArrayEnemy)
+        {
+            bomb.render(renderOther);
+        }      
+        
+        renderOther.end();
     }
     
     
     public void update()
     {
-        //For every Enemy Player Object that is stored in the arraylist execute the update function in it
+        //If enemy player died execute onDeath and delete Object
         for(int i=0; i < enemies.size; i++)
         {
-            enemies.get(i).update();
-            
-            //If player is dead
             if(enemies.get(i).getLife() <= 0)
             {
                 enemies.get(i).onDeath();
@@ -97,22 +103,18 @@ public class EntityManager {
             }
         }
         
-        //Deletes bomb if exploded
+        //Deletes bomb texture and object if exploded
         for (int i=0; i < bombArray.size; i++)
         {
-            this.bombArray.get(i).update();
-            
             if(this.bombArray.get(i).isExploded())
             {
                 bombArray.removeIndex(i);
             }
         }
         
-        //Executes the update function in the mainPlayer object
+        //If main player died spawn spectator and delete mainPlayer Object
         if(mainPlayer != null)
         {
-            mainPlayer.update();
-            
             if(mainPlayer.getLife() <= 0)
             {
                 //Create new spectator
@@ -124,11 +126,9 @@ public class EntityManager {
                 //Delete main player
                 mainPlayer = null; 
             }
-        }else if(spectator != null)
-        {
-            spectator.update();
         }
     }
+    
     
     /**--------------------SPAWN FUNCTIONS--------------------**/
     /**
@@ -240,7 +240,11 @@ public class EntityManager {
         }
     }
 
-
+    /**
+     * Set the live of an enemy player
+     * @param playerId
+     * @param life 
+     */
     public void setLiveEnemyPlayer(int playerId, int life)
     {
         for(int i=0; i < enemies.size; i++)
@@ -262,12 +266,7 @@ public class EntityManager {
     {
         return enemies;
     }
-    
-    public SpriteBatch getRenderObject()
-    {
-        return this.renderObject;
-    }
-    
+        
     /**
      * 
      * @return MainPlayer

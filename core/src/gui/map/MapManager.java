@@ -6,7 +6,6 @@
 package gui.map;
 
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -22,6 +21,7 @@ import gui.camera.OrthoCamera;
  */
 public class MapManager
 {
+    //General Objects and variables
     private TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
     private OrthoCamera camera;
@@ -29,6 +29,7 @@ public class MapManager
     private TiledMapTileLayer floorLayer;
     private TiledMapTileLayer bombLayer;
     
+    //Constuctor
     public MapManager(OrthoCamera camera)
     {
         this.camera = camera;

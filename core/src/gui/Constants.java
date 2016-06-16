@@ -22,7 +22,6 @@ public class Constants {
     public static boolean PROCESSDATADEBUG = false;
     public static String MAPPATH = "maps/BasicMap.tmx";
     
-    
     //Client config
     public static String SERVERIP = "localhost";
     public static int CONNECTIONPORT = 13199;
