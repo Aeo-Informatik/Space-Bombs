@@ -16,7 +16,7 @@ public class Constants {
     public static int SCREENHEIGHT = 480;
     public static boolean FULLSCREEN = false;
     public static String WINDOWTITEL = "Aeo Bombs";
-    
+    public static String WINDOWICONPATH = "/other/icon.png";
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
@@ -34,7 +34,7 @@ public class Constants {
     public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 3;
+    public static int MAXPLAYERS = 2;
     public static int SERVERLOBBYWAIT = 30000; // 30 seconds
     public static boolean SERVERDEBUG = false;
     public static boolean SERVERSHOWPING = false; // Show received ping

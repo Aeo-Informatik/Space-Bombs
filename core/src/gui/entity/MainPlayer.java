@@ -287,12 +287,7 @@ public class MainPlayer extends Entity
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);
                 
-                TextureData textureData = getFrame(walkAnimDown).getTexture().getTextureData();
-                textureData.prepare();
-                Pixmap pixmap = textureData.consumePixmap();
-                pixmap.setColor(1.0f, 1.0f, 1.0f, 0.5f);
-                Texture texture = new Texture (pixmap);
-                sb.draw(texture, pos.x, pos.y);
+                sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
                 
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
