@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 
 public class OrthoCamera extends OrthographicCamera {
 

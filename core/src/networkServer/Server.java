@@ -1,6 +1,6 @@
 package networkServer;
 
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;

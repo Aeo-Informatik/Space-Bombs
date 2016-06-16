@@ -6,12 +6,10 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import gui.entity.bombs.Bomb;
 import gui.map.MapManager;
 
@@ -27,7 +25,6 @@ public abstract class Entity
     protected TiledMapTileLayer blockLayer;
     protected TiledMapTileLayer bombLayer;
     protected EntityManager entityManager;
-    protected float stateTime;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
@@ -291,72 +288,7 @@ public abstract class Entity
         return false;
     }
     
-    
-    /**
-     * The texture flashs periodically on the screen
-     * @param duration: Of the flashing length
-     * @param timesPerSecond: How often the texture changes from visibel to invisibel in a second
-     * @return Thread: Thread object to stop the blinking animation manually
-     */
-    protected Thread flashingAnimation(float duration, int timesPerSecond, SpriteBatch renderObject)
-    {
-        Thread blink = new Thread()
-        {
-            @Override
-            public void run() 
-            {
-               for(float i = 0; i < duration; i++)
-               {
-                   for(int b = 0; b < timesPerSecond; b++)
-                   {
-                        renderObject.setColor(1.0f, 1.0f, 1.0f,0.0f); 
-                       try 
-                        {
-                             Thread.sleep((1000 / timesPerSecond) / 2);
-                        } catch (InterruptedException ex) 
-                        {
-                             System.err.println("ERROR: Interrupted blinkingAnimation()");
-                        }
-                        
-                        renderObject.setColor(1.0f, 1.0f, 1.0f,1.0f); 
-                        try 
-                        {
-                             Thread.sleep((1000 / timesPerSecond) / 2);
-                        } catch (InterruptedException ex) 
-                        {
-                             System.err.println("ERROR: Interrupted blinkingAnimation()");
-                        }
-                   }
-               }
-            }
-        };
-          
-        blink.start();
-        
-        return blink;
-    }
-    
-    /**
-    * Gets the frame out of the animation
-    * @param animation
-    * @return TextureRegion
-    */
-    protected TextureRegion getFrame(Animation animation)
-    { 
-        /* Adds the time elapsed since the last render to the stateTime.*/
-        this.stateTime += Constants.DELTATIME; 
 
-        /*
-        Obtains the current frame. This is given by the animation for the current time. 
-        The second variable is the looping. 
-        Passing in true, will tell the animation to restart after it reaches the last frame.
-        */
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        
-        return currentFrame;
-    }
-
-    
     /**------------------Getter & Setter------------------**/
     public Vector2 getPosition()
     {

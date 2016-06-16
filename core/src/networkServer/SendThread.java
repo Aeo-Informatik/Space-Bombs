@@ -1,7 +1,7 @@
 
 package networkServer;
 
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;

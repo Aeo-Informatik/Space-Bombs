@@ -9,7 +9,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import static com.gdx.bomberman.Main.client;
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.map.MapManager;

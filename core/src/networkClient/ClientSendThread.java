@@ -5,7 +5,7 @@
  */
 package networkClient;
 
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

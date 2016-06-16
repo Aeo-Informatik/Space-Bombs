@@ -12,7 +12,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
-import gui.Constants;
+import com.gdx.bomberman.Constants;
+import gui.AnimEffects;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
@@ -27,6 +28,7 @@ public class Bomb extends Entity
     //General variables
     private int playerId;
     private boolean touchedDeadlyTile = false;
+    private AnimEffects animEffects = new AnimEffects();
     
     //Bomb settings
     private float timer;
@@ -208,7 +210,7 @@ public class Bomb extends Entity
             {
                 //Create new cell and set its animation texture
                 Cell cell = new Cell();
-                cell.setTile(new StaticTiledMapTile(getFrame(bombAnim)));
+                cell.setTile(new StaticTiledMapTile(animEffects.getFrame(bombAnim)));
                 cell.getTile().getProperties().put("bomb", null);
 
                 //Set bomb into bomb layer

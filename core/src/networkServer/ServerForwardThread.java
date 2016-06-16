@@ -7,7 +7,7 @@ package networkServer;
 
 
 
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;

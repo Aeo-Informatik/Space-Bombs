@@ -7,7 +7,7 @@ package networkClient;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import gui.entity.EnemyPlayer;
 import gui.entity.EntityManager;
 

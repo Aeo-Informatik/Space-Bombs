@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import gui.AnimEffects;
 import gui.TextureManager;
 import gui.map.MapManager;
 
@@ -22,6 +23,7 @@ public class EnemyPlayer extends Entity
     //General variables
     private String lastMovementKeyPressed = "UP";
     private int playerId = 0;
+    private AnimEffects animEffects = new AnimEffects();
     
     //Server render variables
     private boolean executeMovePlayer = false;
@@ -136,7 +138,7 @@ public class EnemyPlayer extends Entity
                     setDirection(-150, 0);
 
                     //Draw the walking animation
-                    renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
 
                     //Sets the direction in which the still standing image will be rendered
                     lastMovementKeyPressed = "LEFT";
@@ -144,7 +146,7 @@ public class EnemyPlayer extends Entity
                 {
                     //Stop player
                     setDirection(0,0);
-                    renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
                     lastMovementKeyPressed = "LEFT";
                 }
             break;
@@ -153,13 +155,13 @@ public class EnemyPlayer extends Entity
                 if(!collidesRight() && !collidesRightBomb())
                 {
                     setDirection(150, 0);  
-                    renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
                     lastMovementKeyPressed = "RIGHT";
                 }else
                 {
                     //Stop player
                     setDirection(0,0);
-                    renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
                     lastMovementKeyPressed = "RIGHT";
                 }
             break;
@@ -168,13 +170,13 @@ public class EnemyPlayer extends Entity
                 if(!collidesTop() && !collidesTopBomb())
                 {
                     setDirection(0, 150);
-                    renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
                     lastMovementKeyPressed = "UP";
                 }else
                 {
                     //Stop player
                     setDirection(0,0);
-                    renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
                     lastMovementKeyPressed = "UP";
                 }
             break;
@@ -183,13 +185,13 @@ public class EnemyPlayer extends Entity
                 if(!collidesBottom() && !collidesBottomBomb())
                 {
                     setDirection(0, -150);
-                    renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
                     lastMovementKeyPressed = "DOWN";
                 }else
                 {
                     //Stop player
                     setDirection(0,0);
-                    renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
                     lastMovementKeyPressed = "DOWN";
                 }
             break;

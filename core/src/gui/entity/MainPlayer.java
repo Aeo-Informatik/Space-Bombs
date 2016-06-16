@@ -13,7 +13,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
-import gui.Constants;
+import com.gdx.bomberman.Constants;
+import gui.AnimEffects;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
@@ -38,6 +39,7 @@ public class MainPlayer extends Entity
     private OrthoCamera camera;
     private Client client;
     private Array <Bomb> bombArray;
+    private AnimEffects animEffects = new AnimEffects();
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -154,7 +156,7 @@ public class MainPlayer extends Entity
             }
 
             //Lets the player blink and saves the thread object to be able to stop it manually
-            flashThread = flashingAnimation(godModeDuration, 3, renderObject);
+            flashThread = animEffects.flashing(godModeDuration, 3, renderObject);
         }
         
         //Timer for godmode length after hit
@@ -199,7 +201,7 @@ public class MainPlayer extends Entity
                 camera.translate( -1 * cameraSpeed,0);
 
                 //Draw the walking animation
-                renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
 
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("LEFT") == false)
@@ -224,7 +226,7 @@ public class MainPlayer extends Entity
                 //Stop player
                 sendStopOnce = true;
                 setDirection(0,0);
-                renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
                 camera.translate(0, 0);
             }
              
@@ -237,7 +239,7 @@ public class MainPlayer extends Entity
                 
                 camera.translate(cameraSpeed,0);
                 
-                renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
                 
                 if(sendMoveOnce.equals("RIGHT") == false)
                 {
@@ -251,7 +253,7 @@ public class MainPlayer extends Entity
             {
                 sendStopOnce = true;
                 setDirection(0,0);
-                renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
                 camera.translate(0, 0);
             }
             
@@ -264,7 +266,7 @@ public class MainPlayer extends Entity
 
                 camera.translate(0, cameraSpeed);
 
-                renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
 
                 if(sendMoveOnce.equals("UP") == false)
                 {
@@ -278,7 +280,7 @@ public class MainPlayer extends Entity
             {
                 sendStopOnce = true;
                 setDirection(0,0);
-                renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
                 camera.translate(0, 0);
             }
             
@@ -290,7 +292,7 @@ public class MainPlayer extends Entity
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);
                 
-                renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
                 
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
@@ -304,7 +306,7 @@ public class MainPlayer extends Entity
             {
                 sendStopOnce = true;
                 setDirection(0,0);
-                renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
                 camera.translate(0, 0);
             }
             

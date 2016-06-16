@@ -5,7 +5,7 @@
  */
 package networkServer;
 import com.badlogic.gdx.Gdx;
-import gui.Constants;
+import com.gdx.bomberman.Constants;
 import java.net.*;
 import java.util.ArrayList;
 
