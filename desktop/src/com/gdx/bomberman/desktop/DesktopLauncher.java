@@ -1,5 +1,7 @@
 package com.gdx.bomberman.desktop;
 
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.gdx.bomberman.Main;
@@ -14,6 +16,8 @@ public class DesktopLauncher {
                 config.height = Constants.SCREENHEIGHT;
                 config.fullscreen = Constants.FULLSCREEN;
                 config.title = Constants.WINDOWTITEL;
+                config.addIcon(Constants.WINDOWICONPATH, Files.FileType.Internal);
+
                 
 		new LwjglApplication(new Main(), config);
 	}
