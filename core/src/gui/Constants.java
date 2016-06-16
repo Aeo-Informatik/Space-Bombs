@@ -16,7 +16,7 @@ public class Constants {
     public static int SCREENHEIGHT = 480;
     public static boolean FULLSCREEN = false;
     public static String WINDOWTITEL = "Aeo Bombs";
-    public static String WINDOWICONPATH = "/other/icon.png";
+    public static String WINDOWICONPATH = "other/icon.png";
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
