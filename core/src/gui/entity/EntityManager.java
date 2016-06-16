@@ -46,6 +46,13 @@ public class EntityManager {
 
     public void render()
     {
+        //Lets spriteBatch use the coordinate system specified by camera instead of the default one. This has to be done 
+        //because both of the coordinate systems are different and the camera.combined will do the maths for you.
+        renderMainPlayer.setProjectionMatrix(camera.combined);
+        renderEnemyPlayer.setProjectionMatrix(camera.combined);
+        renderSpectator.setProjectionMatrix(camera.combined);
+        renderOther.setProjectionMatrix(camera.combined);
+        
         /**--------------------PLAYER RENDERER--------------------**/
         //Render every enemy object in list
         for(EnemyPlayer enemy: enemies)

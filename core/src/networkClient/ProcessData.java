@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import gui.Constants;
 import gui.entity.EnemyPlayer;
@@ -28,7 +29,7 @@ public class ProcessData
     /**
      * Renders incoming server calls has to be between the SpriteBatch.begin() tag.
      */
-    public void start()
+    public void start(SpriteBatch renderObject)
     {
         try
         {
@@ -120,7 +121,7 @@ public class ProcessData
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
-                                    enemy.movePlayer(parameters[2]);
+                                    enemy.movePlayer(parameters[2], renderObject);
                                 }
                             }
                             
@@ -138,7 +139,7 @@ public class ProcessData
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
-                                    enemy.stopPlayer(Float.parseFloat(parameters[2]), Float.parseFloat(parameters[3]));
+                                    enemy.stopPlayer(Float.parseFloat(parameters[2]), Float.parseFloat(parameters[3]), renderObject);
                                 }
                             }
                             

@@ -32,6 +32,7 @@ public class GameScreen implements Screen{
     private MapManager mapManager;
     private ProcessData processData;
     private Game game;
+    private SpriteBatch renderServer = new SpriteBatch();
     
     /**
      * Constructor
@@ -94,9 +95,9 @@ public class GameScreen implements Screen{
         }
         
 
-        //Takes the matrix and everything containing in it will be rendered. 
-        //The exact functionality is really complex with lots of math.
-        //renderServer.setProjectionMatrix(camera.combined);
+        //Lets spriteBatch use the coordinate system specified by camera instead of the default one. This is because 
+        //both of the coordinate systems are different and the camera.combined will do the maths for you.
+        renderServer.setProjectionMatrix(camera.combined);
         
         //Map loading into screen shouldn't be in the sb.begin() tags
         mapManager.render();
@@ -105,7 +106,9 @@ public class GameScreen implements Screen{
         entityManager.render();
         
         //Render incoming server instructions
-        processData.start();
+        renderServer.begin();
+        processData.start(renderServer);
+        renderServer.end();
         
         //Update functions
         camera.update();
