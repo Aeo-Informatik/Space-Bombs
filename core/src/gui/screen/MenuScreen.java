@@ -4,7 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import gui.Constants;
+
 
 
 public class MenuScreen implements Screen
@@ -25,6 +30,9 @@ public class MenuScreen implements Screen
     private Skin skin;
     private TextureAtlas buttonAtlas;
     private Game game;
+    private SpriteBatch batch;
+    private Texture backgroundTexture;
+    private Sprite sprite;
     
     /**------------------------CONSTRUCTOR------------------------**/
     public MenuScreen(Game game)
@@ -34,8 +42,13 @@ public class MenuScreen implements Screen
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
+        batch = new SpriteBatch();
         
-        
+         //load the background texture
+        backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
+        sprite = new Sprite(backgroundTexture);
+
+       
         
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
@@ -57,8 +70,7 @@ public class MenuScreen implements Screen
         startbutton = new TextButton("Start Game!", textButtonStyle);
         startbutton.setPosition(Gdx.graphics.getWidth() / 2 - (startbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(startbutton);
-        
-        //Add click listener --> Start Game
+         //Add click listener --> Start Game
         startbutton.addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
@@ -66,7 +78,11 @@ public class MenuScreen implements Screen
                 game.setScreen(new JoinScreen(game));
             }
         });
+        
+       
     }
+    
+    
     
     
     /**------------------------RENDER------------------------**/
@@ -79,8 +95,12 @@ public class MenuScreen implements Screen
         
         //Render stage
         stage.act(Gdx.graphics.getDeltaTime());
-        
+        batch.begin();
+        sprite.draw(batch);
+        sprite.setSize(800,480);
+        batch.end();
         stage.draw();
+       
     }
     
     
