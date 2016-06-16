@@ -11,7 +11,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.Constants;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
@@ -27,7 +26,6 @@ public class Main extends Game implements ApplicationListener {
     * texture can be described and sent to the GPU all at once. 
     * This is what the SpriteBatch class does.
     */
-    public static SpriteBatch sb;
     public static Client client;
     private Game game;
     private BitmapFont font;
@@ -44,8 +42,7 @@ public class Main extends Game implements ApplicationListener {
      */
     @Override
     public void create() 
-    {   
-        sb = new SpriteBatch();    
+    {     
         font = new BitmapFont();
         
         //Load all textures
@@ -92,8 +89,6 @@ public class Main extends Game implements ApplicationListener {
     @Override
     public void dispose() 
     {
-
-        sb.dispose();
         font.dispose();
     }
     

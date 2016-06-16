@@ -6,12 +6,13 @@
 package gui.entity;
 
 import gui.entity.bombs.Bomb;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
+import gui.screen.GameScreen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  *
@@ -19,8 +20,9 @@ import gui.map.MapManager;
  */
 public class EntityManager {
     
-    //Vatiables
+    //Variables & Objects
     private OrthoCamera camera;
+    private SpriteBatch renderObject;
     
     //Array from libgdx is much faster in comparison to an arraylist
     private Array <EnemyPlayer> enemies = new Array<>();
@@ -31,39 +33,50 @@ public class EntityManager {
     private Array <Bomb> bombArrayEnemy = new Array<>();
     
     //Constructor
-    public EntityManager(OrthoCamera camera, MapManager map)
+    public EntityManager(OrthoCamera camera, MapManager map, GameScreen gameScreen)
     {
         this.camera = camera;
         this.map = map;
+        this.renderObject = gameScreen.getRenderObject();
     }
     
 
-    public void render(SpriteBatch sb)
+    public void render()
     {
         //For every Enemy Player Object that is stored in the arraylist execute the render function in it
         for(EnemyPlayer enemy: enemies)
         {
-            enemy.render(sb);
+            renderObject.begin();
+            enemy.render(renderObject);
+            renderObject.end();
         }
         
         for (Bomb bomb: bombArray)
         {
-            bomb.render(sb);
+            renderObject.begin();
+            bomb.render(renderObject);
+            renderObject.end();
         }
         
         for (Bomb bomb: bombArrayEnemy)
         {
-            bomb.render(sb);
+            renderObject.begin();
+            bomb.render(renderObject);
+            renderObject.end();
         }        
         
         //Executes the render function in the mainPlayer object
         if(mainPlayer != null)
         {
-            mainPlayer.render(sb);
+            renderObject.begin();
+            mainPlayer.render(renderObject);
+            renderObject.end();
             
         }else if(spectator != null)
         {
-            spectator.render(sb);
+            renderObject.begin();
+            spectator.render(renderObject);
+            renderObject.end();
         }
                     
     }
@@ -248,6 +261,11 @@ public class EntityManager {
     public Array<EnemyPlayer> getEnemyArray()
     {
         return enemies;
+    }
+    
+    public SpriteBatch getRenderObject()
+    {
+        return this.renderObject;
     }
     
     /**

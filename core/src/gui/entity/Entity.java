@@ -6,13 +6,11 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.entity.bombs.Bomb;
 import gui.map.MapManager;
@@ -46,7 +44,7 @@ public abstract class Entity
     public abstract void update();
     
     
-    public void render(SpriteBatch sb){}
+    public void render(SpriteBatch renderObject){}
     
 
     /**------------------COLLISION FUNCTIONS------------------**/
@@ -204,7 +202,7 @@ public abstract class Entity
      * @param duration: Of the blinking length
      * @param timesPerSecond: How often the texture changes from visibel to invisibel
      */
-    protected Thread blinkingAnimation(float duration, int timesPerSecond)
+    protected Thread blinkingAnimation(float duration, int timesPerSecond, SpriteBatch renderObject)
     {
         Thread blink = new Thread()
         {
@@ -215,7 +213,7 @@ public abstract class Entity
                {
                    for(int b = 0; b < timesPerSecond; b++)
                    {
-                        sb.setColor(1.0f, 1.0f, 1.0f,0.0f); 
+                        renderObject.setColor(1.0f, 1.0f, 1.0f,0.0f); 
                        try 
                         {
                              Thread.sleep((1000 / timesPerSecond) / 2);
@@ -224,7 +222,7 @@ public abstract class Entity
                              System.err.println("ERROR: Interrupted blinkingAnimation()");
                         }
                         
-                        sb.setColor(1.0f, 1.0f, 1.0f,1.0f); 
+                        renderObject.setColor(1.0f, 1.0f, 1.0f,1.0f); 
                         try 
                         {
                              Thread.sleep((1000 / timesPerSecond) / 2);

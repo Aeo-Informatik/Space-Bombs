@@ -8,10 +8,6 @@ package gui.entity;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -38,7 +34,7 @@ public class MainPlayer extends Entity
     //General objects
     private OrthoCamera camera;
     private Client client;
-    private SpriteBatch sb;
+    private SpriteBatch renderObject;
     private Array <Bomb> bombArray;
     
     //Player animation when he is moving around
@@ -66,7 +62,7 @@ public class MainPlayer extends Entity
 
         this.client = Main.client;
         this.camera = camera;
-        this.sb = Main.sb;
+        this.renderObject = entityManager.getRenderObject();
         this.playerId = playerId;
         this.bombArray = bombArray;
         
@@ -135,7 +131,7 @@ public class MainPlayer extends Entity
             }
 
             //Lets the player blink and saves the thread object to be able to stop it manually
-            blink = blinkingAnimation(godModeDuration, 3);
+            //blink = blinkingAnimation(godModeDuration, 3, renderObject);
         }
         
         //Timer for godmode length after hit
@@ -149,7 +145,7 @@ public class MainPlayer extends Entity
             godModeTimer = 0;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
-            blink.stop();
+            //blink.stop();
             
             if(Constants.CLIENTDEBUG)
             {
@@ -196,7 +192,7 @@ public class MainPlayer extends Entity
                 camera.translate( -1 * cameraSpeed,0);
 
                 //Draw the walking animation
-                sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
 
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("LEFT") == false)
@@ -221,7 +217,7 @@ public class MainPlayer extends Entity
                 //Stop player
                 sendStopOnce = true;
                 setDirection(0,0);
-                sb.draw(getFrame(walkAnimLeft), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimLeft), pos.x, pos.y);
                 camera.translate(0, 0);
             }
              
@@ -234,7 +230,7 @@ public class MainPlayer extends Entity
                 
                 camera.translate(cameraSpeed,0);
                 
-                sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
                 
                 if(sendMoveOnce.equals("RIGHT") == false)
                 {
@@ -248,7 +244,7 @@ public class MainPlayer extends Entity
             {
                 sendStopOnce = true;
                 setDirection(0,0);
-                sb.draw(getFrame(walkAnimRight), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimRight), pos.x, pos.y);
                 camera.translate(0, 0);
             }
             
@@ -261,7 +257,7 @@ public class MainPlayer extends Entity
 
                 camera.translate(0, cameraSpeed);
 
-                sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
 
                 if(sendMoveOnce.equals("UP") == false)
                 {
@@ -275,7 +271,7 @@ public class MainPlayer extends Entity
             {
                 sendStopOnce = true;
                 setDirection(0,0);
-                sb.draw(getFrame(walkAnimUp), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimUp), pos.x, pos.y);
                 camera.translate(0, 0);
             }
             
@@ -287,7 +283,7 @@ public class MainPlayer extends Entity
                 setDirection(0, -150);
                 camera.translate(0, -1 * cameraSpeed);
                 
-                sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
                 
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
@@ -301,7 +297,7 @@ public class MainPlayer extends Entity
             {
                 sendStopOnce = true;
                 setDirection(0,0);
-                sb.draw(getFrame(walkAnimDown), pos.x, pos.y);
+                renderObject.draw(getFrame(walkAnimDown), pos.x, pos.y);
                 camera.translate(0, 0);
             }
             
@@ -326,19 +322,19 @@ public class MainPlayer extends Entity
             switch(lastMovementKeyPressed)
             {
                 case "LEFT":
-                    sb.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
                     break;
 
                 case "RIGHT":
-                    sb.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
                 break;
 
                 case "UP":
-                    sb.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
                     break;
 
                 case "DOWN":
-                    sb.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
                     break;
                 
                 default:

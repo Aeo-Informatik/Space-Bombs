@@ -42,7 +42,7 @@ public class MapManager
         Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
     }
     
-    public void render(SpriteBatch sb) 
+    public void render() 
     {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();

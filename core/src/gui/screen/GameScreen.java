@@ -9,7 +9,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import static com.gdx.bomberman.Main.client;
-import static com.gdx.bomberman.Main.sb;
 import gui.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
@@ -19,7 +18,7 @@ import java.net.ConnectException;
 import networkClient.Client;
 import networkClient.ProcessData;
 import networkServer.ServerStart;
-
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  *
@@ -33,16 +32,20 @@ public class GameScreen implements Screen{
     private MapManager mapManager;
     private ProcessData processData;
     private Game game;
+    private SpriteBatch renderObject;
     
     
-    /**------------------------CONSTRUCTOR------------------------**/
+    /**------------------------CONSTRUCTOR-----------------------
+     * @param game-**/
     public GameScreen(Game game)
     {
         this.game = game;
         this.camera = new OrthoCamera();
+        this.renderObject = new SpriteBatch();
         this.mapManager = new MapManager(camera);
-        this.entityManager = new EntityManager(camera, mapManager);
+        this.entityManager = new EntityManager(camera, mapManager, this);
         this.processData = new ProcessData(entityManager);
+        
         
         //Starts local server for 1 Player
         if(Constants.TESTSERVER)
@@ -69,7 +72,8 @@ public class GameScreen implements Screen{
     }
     
     
-    /**------------------------RENDER------------------------**/
+    /**------------------------RENDER-----------------------
+     * @param f-**/
     @Override
     public void render(float f)
     {
@@ -83,32 +87,35 @@ public class GameScreen implements Screen{
                 game.setScreen(new MenuScreen(game));
             }
         }else
+        {
             game.setScreen(new MenuScreen(game));
+        }
         
-        
+
         //Takes the matrix and everything containing in it will be rendered. 
         //The exact functionality is really complex with lots of math.
-        sb.setProjectionMatrix(camera.combined);
+        renderObject.setProjectionMatrix(camera.combined);
         
-        //Map loading into screen
-        mapManager.render(sb);
-        
-        sb.begin();
-        
+        //Map loading into screen shouldn't be in the sb.begin() tags
+        mapManager.render();
+           
         //Render entities
-        entityManager.render(sb);
+        entityManager.render();
         
         //Render incoming server instructions
+        renderObject.begin();
         processData.start();
+        renderObject.end();
         
-        sb.end();
-        
+        //Update functions
         camera.update();
         entityManager.update();
     }
     
     
-    /**------------------------RESIZE------------------------**/
+    /**------------------------RESIZE-----------------------
+     * @param width-*
+     * @param height*/
     @Override
     public void resize(int width, int height) 
     {
@@ -134,6 +141,7 @@ public class GameScreen implements Screen{
     public void dispose() 
     {
         mapManager.dispose();
+        renderObject.dispose();
     }
     
     
@@ -160,5 +168,20 @@ public class GameScreen implements Screen{
     {
         
     }
+ 
     
+    /**------------------------GETTER & SETTER-----------------------**/
+    /**
+     * 
+     * @return SpriteBatch
+     */
+    public SpriteBatch getRenderObject()
+    {
+        return this.renderObject;
+    }
+    
+    public void setRenderObject(SpriteBatch renderObject)
+    {
+        this.renderObject = renderObject;
+    }
 }
