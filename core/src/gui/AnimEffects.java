@@ -33,7 +33,7 @@ public class AnimEffects
      */
     public Thread flashing(float duration, int timesPerSecond, SpriteBatch renderObject)
     {
-        Thread blink = new Thread()
+        Thread flash = new Thread()
         {
             @Override
             public void run() 
@@ -59,14 +59,24 @@ public class AnimEffects
                         {
                              System.err.println("ERROR: Interrupted blinkingAnimation()");
                         }
+                        
+                        if(Thread.currentThread().isInterrupted())
+                        {
+                            break;
+                        }
+                   }
+                   
+                   if(Thread.currentThread().isInterrupted())
+                   {
+                        break;
                    }
                }
             }
         };
           
-        blink.start();
+        flash.start();
         
-        return blink;
+        return flash;
     }
     
     

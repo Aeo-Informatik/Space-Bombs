@@ -48,7 +48,7 @@ public class MainPlayer extends Entity
     private final Animation walkAnimLeft;
     
     //Player settings
-    private int life = 30;
+    private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
     private int coins = 0;
     private int maxBombPlacing = 2;
@@ -155,7 +155,7 @@ public class MainPlayer extends Entity
                 System.out.println("Invulnerability activated");
             }
 
-            //Lets the player blink and saves the thread object to be able to stop it manually
+            //Lets the player flash and saves the thread object to be able to stop it manually
             flashThread = animEffects.flashing(godModeDuration, 3, renderObject);
         }
         
@@ -170,7 +170,7 @@ public class MainPlayer extends Entity
             godModeTimer = 0;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
-            flashThread.stop();
+            flashThread.interrupt();
             
             if(Constants.CLIENTDEBUG)
             {

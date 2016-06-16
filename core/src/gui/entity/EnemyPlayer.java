@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.TextureManager;
 import gui.map.MapManager;
@@ -24,6 +25,8 @@ public class EnemyPlayer extends Entity
     private String lastMovementKeyPressed = "UP";
     private int playerId = 0;
     private AnimEffects animEffects = new AnimEffects();
+    private boolean godmode = false; //DO NOT CHANGE
+    private float godModeTimer = 0;
     
     //Server render variables
     private boolean executeMovePlayer = false;
@@ -39,7 +42,8 @@ public class EnemyPlayer extends Entity
     private final Animation walkAnimLeft;
     
     //Player settings
-    private int life = 1;
+    private int life = 3;
+    private float godModeDuration = 2f;
     
     //Constructor
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
@@ -103,6 +107,8 @@ public class EnemyPlayer extends Entity
         {
             movePlayer(this.moveDirection, renderObject);
         }
+        
+        hitByBomb(renderObject);
     }
     
     
@@ -112,6 +118,49 @@ public class EnemyPlayer extends Entity
         System.out.println("---------------------Player " + playerId + " died!-------------------");
     }
     
+    
+        /**
+     * Player gets hit by bomb
+     */
+    Thread flashThread;
+    public void hitByBomb(SpriteBatch renderObject) 
+    {  
+        //If player touches explosion
+        if(touchesDeadlyBlock() && godmode == false)
+        {
+            life -= 1;
+            godmode = true;
+            
+            System.out.println("Enemy " + playerId + " life has been reduced to: " + life);
+            
+            if(Constants.CLIENTDEBUG)
+            {
+                System.out.println("Enemy " + playerId + ": Invulnerability activated");
+            }
+
+            //Lets the player flash and saves the thread object to be able to stop it manually
+            flashThread = animEffects.flashing(godModeDuration, 3, renderObject);
+        }
+        
+        //Timer for godmode length after hit
+        if(godModeTimer < godModeDuration && godmode == true)
+        {
+            godModeTimer += Constants.DELTATIME;
+            //System.out.println("Increasing timer by: " + godModeTimer);
+        }else if(godmode == true)
+        {
+            godmode = false;
+            godModeTimer = 0;
+            
+            //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
+            flashThread.interrupt();
+            
+            if(Constants.CLIENTDEBUG)
+            {
+                System.out.println("Enemy " + playerId + ": Invulnerability deactivated");
+            }
+        }
+    }
     
     /**
      * Moves the player accordingly to the direction specified.
