@@ -6,6 +6,7 @@
 package gui.entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -214,7 +215,7 @@ public abstract class Entity
                {
                    for(int b = 0; b < timesPerSecond; b++)
                    {
-                        //sb.setColor(1.0f, 1.0f, 1.0f,0.0f); 
+                        sb.setColor(1.0f, 1.0f, 1.0f,0.0f); 
                        try 
                         {
                              Thread.sleep((1000 / timesPerSecond) / 2);
