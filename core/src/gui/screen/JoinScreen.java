@@ -23,13 +23,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-
+import gui.Constants;
 
 
 /**
@@ -62,7 +63,8 @@ public class JoinScreen implements Screen{
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
-        skin = new Skin();
+        Skin skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
+     
        
         
         
@@ -80,11 +82,18 @@ public class JoinScreen implements Screen{
 
        
         textButtonStyle.pressedOffsetY = -3;
+        //set the Textfield
+        hostip = new TextField("", skin);
         
+        hostip.setPosition(Gdx.graphics.getWidth() / 2 - (hostip.getWidth() / 2) + hostip.getWidth()/15, Gdx.graphics.getHeight() / 2- Gdx.graphics.getHeight()/10 );
+        hostip.setSize(150,25);
+        stage.addActor(hostip);
+      
+       
 
         
         //Add button to screen
-        joinbutton = new TextButton("Join Game", textButtonStyle);
+        joinbutton = new TextButton("Join Game", skin);
         
         joinbutton.setPosition(Gdx.graphics.getWidth() / 2 - (joinbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(joinbutton);
@@ -94,10 +103,14 @@ public class JoinScreen implements Screen{
         {
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
+                Constants.SERVERIP = hostip.getText();
+                Constants.TESTSERVER = false;                
                 game.setScreen(new GameScreen(game));
             }
         });
     }
+    //Textfield Listener
+    
     
     
     /**------------------------RENDER------------------------**/
