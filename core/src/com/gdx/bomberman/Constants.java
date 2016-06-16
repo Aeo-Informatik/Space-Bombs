@@ -19,7 +19,7 @@ public class Constants {
     public static String WINDOWICONPATH = "other/icon.png";
     
     //Main config
-    public static boolean PROCESSDATADEBUG = false;
+    public static boolean PROCESSDATADEBUG = true;
     public static String MAPPATH = "maps/BasicMap.tmx";
     
     //Client config

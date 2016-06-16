@@ -105,6 +105,7 @@ public class EntityManager {
         {
             if(enemies.get(i).getLife() <= 0)
             {
+                System.out.println("Enemie player " + enemies.get(i).getPlayerId() + " died");
                 enemies.get(i).onDeath();
                 enemies.removeIndex(i);
             }
