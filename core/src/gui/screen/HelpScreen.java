@@ -30,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.gdx.bomberman.Constants;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 /**
  *
@@ -56,10 +57,12 @@ public class HelpScreen implements Screen{
     private Sprite sprite;
     private SpriteBatch batch;
     
+
     /**------------------------CONSTRUCTOR------------------------**/
     public HelpScreen(Game game)
     {
        
+        
         
         this.game = game;
         stage = new Stage();
@@ -67,21 +70,21 @@ public class HelpScreen implements Screen{
         font = new BitmapFont();
         skin = new Skin();
         batch = new SpriteBatch();
-        Skin skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
         
-     
-          //load the background texture
-        backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
+         //load the background texture
+        backgroundTexture = new Texture(Gdx.files.internal("menu/help.png"));
         sprite = new Sprite(backgroundTexture);
         
-        
+       
+       
         
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin.addRegions(buttonAtlas);
+
         
         //Add button style
-        textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
@@ -89,25 +92,26 @@ public class HelpScreen implements Screen{
 
        
         textButtonStyle.pressedOffsetY = -3;
-   
+        
+
         
         //Add button to screen
-        backbutton = new TextButton("Back", skin);
-        
+        backbutton = new TextButton("Back!", textButtonStyle);
         backbutton.setPosition(Gdx.graphics.getWidth() / 2 , Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(backbutton);
-        
-        //Add click listener --> Start Game
+         //Add click listener --> Start Game
         backbutton.addListener(new ChangeListener() 
         {
-            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            public void changed (ChangeEvent event, Actor actor) 
             {
-                   
                 game.setScreen(new MenuScreen(game));
             }
         });
+
+        
+       
     }
-    //Textfield Listener
+    
     
     
     
@@ -121,8 +125,12 @@ public class HelpScreen implements Screen{
         
         //Render stage
         stage.act(Gdx.graphics.getDeltaTime());
-        
+        batch.begin();
+        sprite.draw(batch);
+        sprite.setSize(800,480);
+        batch.end();
         stage.draw();
+       
     }
     
     
@@ -162,5 +170,5 @@ public class HelpScreen implements Screen{
     @Override
     public void hide() {
     }
-}
     
+}

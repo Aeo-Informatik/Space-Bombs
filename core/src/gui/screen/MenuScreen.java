@@ -40,7 +40,7 @@ public class MenuScreen implements Screen
     /**------------------------CONSTRUCTOR------------------------**/
     public MenuScreen(Game game)
     {
-        
+       //Start Playing music in Menu @author Jemain 
       Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
       music.setLooping(true);
       music.play();
