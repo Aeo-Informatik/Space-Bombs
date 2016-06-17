@@ -25,6 +25,8 @@ public class MenuScreen implements Screen
     //Objects
     private Stage stage;
     private TextButton startbutton;
+    private TextButton exitbutton;
+    private TextButton helpbutton;
     private TextButtonStyle textButtonStyle;
     private BitmapFont font;
     private Skin skin;
@@ -47,12 +49,17 @@ public class MenuScreen implements Screen
          //load the background texture
         backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
         sprite = new Sprite(backgroundTexture);
-
+        
+       
        
         
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin.addRegions(buttonAtlas);
+        
+        buttonAtlas = new TextureAtlas(Gdx.files.internal("button/exit.pack"));
+        skin.addRegions(buttonAtlas);
+        
         
         //Add button style
         textButtonStyle = new TextButtonStyle();
@@ -78,6 +85,39 @@ public class MenuScreen implements Screen
                 game.setScreen(new JoinScreen(game));
             }
         });
+        
+        
+        //Add button to screen
+        exitbutton = new TextButton("Exit!", textButtonStyle);
+        exitbutton .setPosition(Gdx.graphics.getWidth() / 6, Gdx.graphics.getHeight() / 2); // Add to the center even after resize
+        stage.addActor(exitbutton);
+        
+        
+         //Add click listener --> Exit Game
+        exitbutton .addListener(new ChangeListener() 
+        {
+            public void changed (ChangeEvent event, Actor actor) 
+            {
+                Gdx.app.exit();
+            }
+        });
+        
+        
+         //Add button to screen
+        helpbutton = new TextButton("Help", textButtonStyle);
+        helpbutton .setPosition(Gdx.graphics.getWidth() / 3 - 1, Gdx.graphics.getHeight() / 2); // Add to the center even after resize
+        stage.addActor(helpbutton);
+        
+        
+         //Add click listener --> Exit Game
+        helpbutton .addListener(new ChangeListener() 
+        {
+            public void changed (ChangeEvent event, Actor actor) 
+            {
+               game.setScreen(new HelpScreen(game)); 
+            }
+        });
+        
         
        
     }

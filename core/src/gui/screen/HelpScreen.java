@@ -29,13 +29,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.gdx.bomberman.Constants;
-
+import com.badlogic.gdx.Game;
 
 /**
  *
- * @author pl0614
+ * @author JeJe
  */
-public class JoinScreen implements Screen{
+public class HelpScreen implements Screen{
     
 
 
@@ -46,24 +46,33 @@ public class JoinScreen implements Screen{
 
     //Objects
     private Stage stage;
-    private TextButton joinbutton;
+    private TextButton backbutton;
     private TextButton.TextButtonStyle textButtonStyle;
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
     private Game game;
-    private TextField hostip;
+    private Texture backgroundTexture;
+    private Sprite sprite;
+    private SpriteBatch batch;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public JoinScreen(Game game)
+    public HelpScreen(Game game)
     {
+       
+        
         this.game = game;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
+        skin = new Skin();
+        batch = new SpriteBatch();
         Skin skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
+        
      
-       
+          //load the background texture
+        backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
+        sprite = new Sprite(backgroundTexture);
         
         
         
@@ -80,30 +89,21 @@ public class JoinScreen implements Screen{
 
        
         textButtonStyle.pressedOffsetY = -3;
-        //set the Textfield
-        hostip = new TextField("", skin);
-        
-        hostip.setPosition(Gdx.graphics.getWidth() / 2 - (hostip.getWidth() / 2) + hostip.getWidth()/15, Gdx.graphics.getHeight() / 2- Gdx.graphics.getHeight()/10 );
-        hostip.setSize(150,25);
-        stage.addActor(hostip);
-      
-       
-
+   
         
         //Add button to screen
-        joinbutton = new TextButton("Join Game", skin);
+        backbutton = new TextButton("Back", skin);
         
-        joinbutton.setPosition(Gdx.graphics.getWidth() / 2 - (joinbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
-        stage.addActor(joinbutton);
+        backbutton.setPosition(Gdx.graphics.getWidth() / 2 , Gdx.graphics.getHeight() / 2); // Add to the center even after resize
+        stage.addActor(backbutton);
         
         //Add click listener --> Start Game
-        joinbutton.addListener(new ChangeListener() 
+        backbutton.addListener(new ChangeListener() 
         {
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                Constants.SERVERIP = hostip.getText();
-                Constants.TESTSERVER = false;                
-                game.setScreen(new GameScreen(game));
+                   
+                game.setScreen(new MenuScreen(game));
             }
         });
     }
