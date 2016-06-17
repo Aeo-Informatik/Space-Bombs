@@ -26,6 +26,5 @@ Host Screen:
 2) Implementing delay calculator with ping requests
 
 //Bugs
-Entity function onDeath() gets executed multiple times by processData. It repeats onDeath equals the clients connected.
 Menuscreen button hitbox doesn't scale correclty
 Game Icon isn't shown on mac and linux probably because of different size preferences

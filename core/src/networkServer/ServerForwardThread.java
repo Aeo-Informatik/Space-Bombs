@@ -90,6 +90,7 @@ public class ServerForwardThread implements Runnable
                             System.out.println("To: " + clientConnections.get(i).getInetAddress().getHostAddress()); 
                         }
                     }
+                    
                 }
 
                 //If clients disconnects

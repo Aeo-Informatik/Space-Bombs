@@ -35,7 +35,7 @@ public class Constants {
     public static int MINPLAYERS = 1;
     public static int MAXPLAYERS = 2;
     public static int SERVERLOBBYWAIT = 30000; // 30 seconds
-    public static boolean SERVERDEBUG = false;
+    public static boolean SERVERDEBUG = true;
     public static boolean SERVERSHOWPING = false; // Show received ping
         
     //Ingame variable DO NOT CHANGE!

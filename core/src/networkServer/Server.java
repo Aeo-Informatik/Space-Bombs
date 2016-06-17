@@ -53,12 +53,6 @@ public class Server {
                 String registerCommand = "registerMainPlayerId|" + playerId + "|*";
                 sendToOne(socketList.get(i), registerCommand);
 
-                //Message to receive: registerEnemyPlayers|3|1
-                //General: registerAmountPlayers|amount|target //
-                String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(socketList.size()) + "|*";
-                
-                sendToAll(socketList, new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
-
                 /*-------------------END SETUP GAME---------------------*/
                 //Open forward thread for every client
                 ServerForwardThread receive = new ServerForwardThread(socketList.get(i), socketList, i +1);
@@ -66,10 +60,12 @@ public class Server {
                 thread.start();
             }
 
-            //Debug
-            if(Constants.SERVERDEBUG)
-                System.out.println("SERVER: ------End Setup Game------");
-            
+            //Message to receive: registerEnemyPlayers|3|1
+            //General: registerAmountPlayers|amount|target //
+            String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(socketList.size()) + "|*";
+
+            sendToAll(socketList, new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
+
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error in startGame " +e);
