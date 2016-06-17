@@ -1,12 +1,26 @@
+//General
+Add music to the game & menu!
+
 //Bomb
-(vielleicht) Schnellere Animation
+1) To be able to push the bomb
+2) If bomb destorys a block drop a coin at random
 
 //Player
 4) Spawns a tomb stone with his coins on death
- 
+5) A hub with player live and collected coins 
+6) A hub navigation bar a la minecraft for bomb selection
+
 //Textures
 10) !!Create buttons and background for every screen
 6) Adding an animation for the player standig still
+11) Better bomb animation with fuse going down
+
+//Items
+Add items to the game:
+speedupgrade
+bombupgrade
+coin bags
+
 
 //Screens
 MenuScreen:
@@ -16,14 +30,22 @@ Error Screen:
 If an error occurs display it on screen like "connection to server lost".
 
 Option Screen:
+window size, fullscreen, music volume, effect volume
 
 Join Screen:
+ip address bar, join button, (optional) list of available servers
 
-Host Screen:
+Host with options Screen:
+Map Selection, max player number, list of already logged in users, start button
+
+Help Screen:
+
+Winner Screen:
 
 //Client
 1) Scanning for open servers with port scan
-2) Implementing delay calculator with ping requests
+2) (optional) Implementing delay calculator with ping requests
+
 
 //Bugs
 Menuscreen button hitbox doesn't scale correclty
