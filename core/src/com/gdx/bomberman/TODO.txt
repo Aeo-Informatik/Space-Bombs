@@ -1,5 +1,6 @@
 //General
 Add music to the game & menu!
+Add effects to the game & menu.
 
 //Bomb
 1) To be able to push the bomb
@@ -41,11 +42,13 @@ Map Selection, max player number, list of already logged in users, start button
 Help Screen:
 
 Winner Screen:
+Winning player gets displayed with a medal on a podest
+A font diplaying "Winner" or something like that
+
 
 //Client
 1) Scanning for open servers with port scan
 2) (optional) Implementing delay calculator with ping requests
-
 
 //Bugs
 Menuscreen button hitbox doesn't scale correclty
