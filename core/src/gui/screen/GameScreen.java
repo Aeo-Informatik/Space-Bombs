@@ -19,6 +19,7 @@ import networkClient.Client;
 import networkClient.ProcessData;
 import networkServer.ServerStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import gui.Hud;
 
 /**
  *
@@ -45,7 +46,6 @@ public class GameScreen implements Screen{
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager, this);
         this.processData = new ProcessData(entityManager);
-        
         
         //Starts local server for 1 Player
         if(Constants.TESTSERVER)
@@ -98,7 +98,6 @@ public class GameScreen implements Screen{
         //Lets spriteBatch use the coordinate system specified by camera instead of the default one. This is because 
         //both of the coordinate systems are different and the camera.combined will do the maths for you.
         renderServer.setProjectionMatrix(camera.combined);
-        
         //Map loading into screen shouldn't be in the sb.begin() tags
         mapManager.render();
            

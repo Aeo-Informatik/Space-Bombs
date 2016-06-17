@@ -1,6 +1,6 @@
 //General
 Add music to the game & menu!
-Add effects to the game & menu.
+Add sound effects to the game & menu.
 
 //Bomb
 1) To be able to push the bomb
