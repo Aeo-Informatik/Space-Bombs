@@ -3,6 +3,7 @@ package gui.screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -39,6 +40,22 @@ public class MenuScreen implements Screen
     /**------------------------CONSTRUCTOR------------------------**/
     public MenuScreen(Game game)
     {
+        
+      Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
+      music.setLooping(true);
+      music.play();
+      music.setVolume(0.5f);   
+     
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
         this.game = game;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
