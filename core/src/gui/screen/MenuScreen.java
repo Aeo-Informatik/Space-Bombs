@@ -41,21 +41,12 @@ public class MenuScreen implements Screen
     public MenuScreen(Game game)
     {
        //Start Playing music in Menu @author Jemain 
-      Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
-      music.setLooping(true);
-      music.play();
-      music.setVolume(0.5f);   
+//      Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
+//      music.setLooping(true);
+//      music.play();
+//      music.setVolume(0.5f);   
      
       
-        
-        
-        
-        
-        
-        
-        
-        
-        
         this.game = game;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -67,9 +58,7 @@ public class MenuScreen implements Screen
         backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
         sprite = new Sprite(backgroundTexture);
         
-       
-       
-        
+ 
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin.addRegions(buttonAtlas);
@@ -80,21 +69,19 @@ public class MenuScreen implements Screen
         
         //Add button style
         textButtonStyle = new TextButtonStyle();
-        textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
-
-       
+        textButtonStyle.font = font;
         textButtonStyle.pressedOffsetY = -3;
-        
-
         
         //Add button to screen
         startbutton = new TextButton("Start Game!", textButtonStyle);
         startbutton.setPosition(Gdx.graphics.getWidth() / 2 - (startbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(startbutton);
-         //Add click listener --> Start Game
+        
+        
+        //Add click listener --> Start Game
         startbutton.addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
@@ -110,7 +97,7 @@ public class MenuScreen implements Screen
         stage.addActor(exitbutton);
         
         
-         //Add click listener --> Exit Game
+        //Add click listener --> Exit Game
         exitbutton .addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
@@ -120,13 +107,13 @@ public class MenuScreen implements Screen
         });
         
         
-         //Add button to screen
+        //Add button to screen
         helpbutton = new TextButton("Help", textButtonStyle);
         helpbutton .setPosition(Gdx.graphics.getWidth() / 3 - 1, Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(helpbutton);
         
         
-         //Add click listener --> Exit Game
+        //Add click listener --> Exit Game
         helpbutton .addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 

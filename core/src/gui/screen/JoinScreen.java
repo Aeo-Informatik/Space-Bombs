@@ -102,7 +102,7 @@ public class JoinScreen implements Screen{
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
                 Constants.SERVERIP = hostip.getText();
-                Constants.TESTSERVER = false;                
+                Constants.TESTSERVER = true;                
                 game.setScreen(new GameScreen(game));
             }
         });
