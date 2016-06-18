@@ -4,7 +4,7 @@ Add sound effects to the game & menu.
 
 //Bomb
 1) To be able to push the bomb
-2) If bomb destorys a block drop a coin at random
+2) If bomb destorys a block drops a coin at random
 
 //Player
 4) Spawns a tomb stone with his coins on death
@@ -15,6 +15,7 @@ Add sound effects to the game & menu.
 10) !!Create buttons and background for every screen
 6) Adding an animation for the player standig still
 11) Better bomb animation with fuse going down
+12) !!Hud texture with full heart, half full and empty heart
 
 //Items
 Add items to the game:
