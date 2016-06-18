@@ -14,7 +14,6 @@ Add sound effects to the game & menu.
 10) !!Create buttons and background for every screen
 6) Adding an animation for the player standig still
 11) Better bomb animation with fuse going down
-12) !!Hud texture with full heart, half full and empty heart
 13) Hud texture a la minecraft for bomb selection
 
 //Items

@@ -128,17 +128,19 @@ public class CounterHud
             }else if(live != mainPlayer.getLife())
             {
                 live = mainPlayer.getLife();
-                //Do something
-                if(live == 2)
-                {
-                    uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterTwoThirdLive)));
-                }else if(live == 1)
-                {
-                    uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterOneThirdLive)));
                 
-                }else if(live == 0)
+                //Change heard texture
+                switch (live) 
                 {
-                     uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterNoLive)));
+                    case 2:
+                        uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterTwoThirdLive)));
+                        break;
+                    case 1:
+                        uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterOneThirdLive)));
+                        break;
+                    case 0:
+                        uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterNoLive)));
+                        break;
                 }
             }
             
