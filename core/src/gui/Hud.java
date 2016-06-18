@@ -31,7 +31,9 @@ public class Hud
     /**
      * How to use tables: https://github.com/libgdx/libgdx/wiki/Table#quickstart
      * How to use elements in table: https://github.com/libgdx/libgdx/wiki/Scene2d.ui#stack
+     * How to use scaling save fonts: https://github.com/libgdx/libgdx/wiki/Gdx-freetype
      */
+    
     //Objects
     public Stage stage;
     private Viewport viewport;
@@ -71,8 +73,8 @@ public class Hud
         coinCounterLabel = new Label("000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         
         //Live & coins display image
-        Texture uiTexture = new Texture(Gdx.files.internal("other/hud.png"));
-        TextureRegion uiCounter = new TextureRegion(uiTexture, 0, 0, 63, 16);
+        Texture uiTexture = new Texture(Gdx.files.internal("other/hud2_full_live.png"));
+        TextureRegion uiCounter = new TextureRegion(uiTexture, 0, 0, 80, 18);
         Image uiCounterImage = new Image(uiCounter);
         
         //Calculate image width (scaleX) and image height (scaleY)
@@ -83,8 +85,8 @@ public class Hud
         backgroundTable.add(uiCounterImage).width(scaleX).height(scaleY);
         
         //Add label to foreground table
-        foregroundTable.row().expandX().padTop(24);
-        foregroundTable.add(bombCounterLabel).padLeft(93);
+        foregroundTable.row().expandX().padTop(27);
+        foregroundTable.add(bombCounterLabel).padLeft(114);
         foregroundTable.add(coinCounterLabel).padLeft(18);
         
         //Set container to the height of the image and position it on the top left

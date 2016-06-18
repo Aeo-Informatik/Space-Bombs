@@ -9,6 +9,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.GL30;
 import static com.gdx.bomberman.Main.client;
 import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
@@ -87,6 +88,10 @@ public class GameScreen implements Screen{
     @Override
     public void render(float f)
     {
+        //Set bacckground color
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        
         //Check if client is connected to server
         if(client != null)
         {
