@@ -1,14 +1,5 @@
 Music
-
-Open Theme
-
-DST-1990 by DST 
-found in http://www.nosoapradio.us/
-licensed under a Creative Commons Attribution 3.0 Unported License.
-Music
 =====
-
-Open Theme
 
 "DST-1990" by DST 
 found in http://www.nosoapradio.us/
@@ -17,13 +8,10 @@ licensed under a Creative Commons Attribution 3.0 Unported License.
 
 Font
 ====
+Commercial use.
+Made by: codeman38
+Font Name: Lunchtime Doubly So
+Link: http://www.1001fonts.com/lunchtime-doubly-so-font.html
+Link: http://www.1001fonts.com/press-start-font.html
 
-"Press Start Font" by codeman38
-Licensed under SIL Open Font License (OFL)
-found in http://www.zone38.net/font/#pressstart
 
-
-Buttons
-======
-
-Designed by Freepik

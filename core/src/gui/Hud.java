@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -31,9 +33,7 @@ public class Hud
     /**
      * How to use tables: https://github.com/libgdx/libgdx/wiki/Table#quickstart
      * How to use elements in table: https://github.com/libgdx/libgdx/wiki/Scene2d.ui#stack
-     * How to use scaling save fonts: https://github.com/libgdx/libgdx/wiki/Gdx-freetype
      */
-    
     //Objects
     public Stage stage;
     private Viewport viewport;
@@ -41,6 +41,9 @@ public class Hud
     private MainPlayer mainPlayer;
     private EntityManager entityManager;
     
+    //Font import
+    private FreeTypeFontGenerator generator;
+    private FreeTypeFontParameter parameter;
     
     //Labels
     Label bombCounterLabel;
@@ -50,11 +53,16 @@ public class Hud
     //Constructor
     public Hud(SpriteBatch renderObject, EntityManager entityManager)
     {
-        
+        //Initialise Objects
         this.viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
         this.stage = new Stage(viewport, renderObject);
         this.stack = new Stack(); //A container in wich you can place multiple widgets to "stack" them
         this.entityManager = entityManager;
+        
+        //Initialise Font
+        this.generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/lunchtime-doubly-so/lunchds.ttf"));
+        this.parameter = new FreeTypeFontParameter();
+        parameter.size = 15;
         
         //Table settings
         Table backgroundTable = new Table();
@@ -69,12 +77,14 @@ public class Hud
         //foregroundTable.debugAll();
         
         //Labels (textfields)
-        bombCounterLabel = new Label("000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        coinCounterLabel = new Label("000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        bombCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
+        coinCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
+        
+        generator.dispose();
         
         //Live & coins display image
         Texture uiTexture = new Texture(Gdx.files.internal("other/hud2_full_live.png"));
-        TextureRegion uiCounter = new TextureRegion(uiTexture, 0, 0, 80, 18);
+        TextureRegion uiCounter = new TextureRegion(uiTexture, 0, 0, 80, 17);
         Image uiCounterImage = new Image(uiCounter);
         
         //Calculate image width (scaleX) and image height (scaleY)
@@ -87,7 +97,7 @@ public class Hud
         //Add label to foreground table
         foregroundTable.row().expandX().padTop(27);
         foregroundTable.add(bombCounterLabel).padLeft(114);
-        foregroundTable.add(coinCounterLabel).padLeft(18);
+        foregroundTable.add(coinCounterLabel).padLeft(21);
         
         //Set container to the height of the image and position it on the top left
         stack.setWidth(scaleX);
