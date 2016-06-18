@@ -19,7 +19,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 public class TextureManager {
     
     //Hud
-    public static Texture hudCounter;
+    public static Texture hudCounterFullLive;
+    public static Texture hudCounterTwoThirdLive;
+    public static Texture hudCounterOneThirdLive;
     
     //Player 1 Walking
     public static Texture p1WalkingDown;
@@ -156,9 +158,9 @@ public class TextureManager {
         float WalkingAnimTime = 0.25f;
         
         /*---------------------------------HUD---------------------------------*/
-        hudCounter = loadTexture("other/hud2_full_live.png");
-        
-        
+        hudCounterFullLive = loadTexture("other/hud2_full_live.png");
+        hudCounterTwoThirdLive = loadTexture("other/hud2_two_third_live.png");
+        hudCounterOneThirdLive = loadTexture("other/hud2_one_third_live.png");
         
         /*---------------------------------PLAYER 1---------------------------------------*/
         p1WalkingDown = loadTexture("players/player1/walking-down.png");

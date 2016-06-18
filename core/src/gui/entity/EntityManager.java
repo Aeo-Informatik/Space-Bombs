@@ -29,7 +29,7 @@ public class EntityManager {
     private SpriteBatch renderOther = new SpriteBatch();
 
     //Main Player HUD
-    private CounterHud hud;
+    private CounterHud mainCounterHud;
     private SpriteBatch renderHud = new SpriteBatch();
     
     //Array from libgdx is much faster in comparison to an arraylist
@@ -45,7 +45,7 @@ public class EntityManager {
     {
         this.camera = camera;
         this.map = map;
-        this.hud = new CounterHud(renderHud, this);
+        this.mainCounterHud = new CounterHud(renderHud, this);
     }
     
 
@@ -75,9 +75,9 @@ public class EntityManager {
             renderMainPlayer.end();
         
             //Render CounterHud
-            renderHud.setProjectionMatrix(hud.stage.getCamera().combined);
-            hud.stage.draw();
-            hud.update();
+            renderHud.setProjectionMatrix(mainCounterHud.stage.getCamera().combined);
+            mainCounterHud.stage.draw();
+            mainCounterHud.update();
             
         //If main player equals null render spectator
         }else if(spectator != null)
@@ -153,6 +153,9 @@ public class EntityManager {
                 
                 //Delete main player
                 mainPlayer = null; 
+                
+                //Delete hud
+                mainCounterHud = null;
             }
         }
     }

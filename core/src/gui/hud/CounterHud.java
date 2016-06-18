@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import gui.TextureManager;
@@ -41,10 +42,14 @@ public class CounterHud
     private Stack stack;
     private MainPlayer mainPlayer;
     private EntityManager entityManager;
+    Image uiCounterImage;
     
     //Font import
     private FreeTypeFontGenerator generator;
     private FreeTypeFontParameter parameter;
+    
+    //Variables
+    private int live = -1;
     
     //Labels
     Label bombCounterLabel;
@@ -84,11 +89,11 @@ public class CounterHud
         generator.dispose();
         
         //Live & coins display image
-        Image uiCounterImage = new Image(TextureManager.hudCounter);
+        uiCounterImage = new Image(TextureManager.hudCounterFullLive);
         
         //Calculate image width (scaleX) and image height (scaleY)
-        float scaleX = TextureManager.hudCounter.getWidth() * 3;
-        float scaleY = TextureManager.hudCounter.getHeight() * 3;
+        float scaleX = TextureManager.hudCounterFullLive.getWidth() * 3;
+        float scaleY = TextureManager.hudCounterFullLive.getHeight() * 3;
         
         //Add image to background table
         backgroundTable.add(uiCounterImage).width(scaleX).height(scaleY);
@@ -115,6 +120,26 @@ public class CounterHud
         {
             bombCounterLabel.setText(String.format("%03d", mainPlayer.getMaxBombs()));
             coinCounterLabel.setText(String.format("%03d", mainPlayer.getCoins()));
+            
+            //If first time live is set
+            if(live == -1)
+            {
+                live = mainPlayer.getLife();
+                
+            //If mainPlayer life changed
+            }else if(live != mainPlayer.getLife())
+            {
+                live = mainPlayer.getLife();
+                //Do something
+                if(live == 2)
+                {
+                    uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterTwoThirdLive)));
+                }else if(live == 1)
+                {
+                    uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterOneThirdLive)));
+                }
+            }
+            
         }else
         {
             mainPlayer = entityManager.getMainPlayer();
