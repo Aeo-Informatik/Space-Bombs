@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -25,47 +26,68 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class Hud 
 {
+    /**
+     * How to use tables: https://github.com/libgdx/libgdx/wiki/Table#quickstart
+     * How to use elements in table: https://github.com/libgdx/libgdx/wiki/Scene2d.ui#stack
+     */
+    
     public Stage stage;
     private Viewport viewport;
-    
-    private Integer worldTimer;
-    private float timeCount;
-    private Integer coins;
-    private Integer life;
+    private Stack stack;
 
-    Label countdownLabel;
-    Label coinBalanceLabel;
+    Label bombCounterLabel;
+    Label coinCounterLabel;
     Label liveCounterLabel;
     
+    //Constructor
     public Hud(SpriteBatch renderObject)
     {
-        this.worldTimer = 0;
-        this.coins = 0;
-        this.timeCount = 0;
-        this.life = 3;
         
         this.viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
         this.stage = new Stage(viewport, renderObject);
+        this.stack = new Stack(); //A container in wich you can place multiple widgets to "stack" them
         
         //Table settings
-        Table table = new Table();
-        table.top();
-        table.setFillParent(true);
-        //table.debugAll();
+        Table backgroundTable = new Table();
+        backgroundTable.top();
+        backgroundTable.setFillParent(true);
+        //backgroundTable.debugAll();
+        
+        //Table settings 2
+        Table foregroundTable = new Table();
+        foregroundTable.top();
+        foregroundTable.setFillParent(true);
+        //foregroundTable.debugAll();
         
         //Labels (textfields)
-        liveCounterLabel = new Label("LIFE: ", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        bombCounterLabel = new Label("999", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        coinCounterLabel = new Label("999", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         
         //Live & coins display image
         Texture uiTexture = new Texture(Gdx.files.internal("other/hud.png"));
         TextureRegion uiCounter = new TextureRegion(uiTexture, 0, 0, 63, 16);
         Image uiCounterImage = new Image(uiCounter);
         
-        //Add things to table
-        table.add(uiCounterImage).expandX().padTop(10).width(uiCounter.getRegionWidth() * 3).height(uiCounter.getRegionHeight() * 3).left().padLeft(15);
-        table.add(liveCounterLabel).expandX().padTop(10);
+        //Calculate image width (scaleX) and image height (scaleY)
+        float scaleX = uiCounter.getRegionWidth() * 3;
+        float scaleY = uiCounter.getRegionHeight() * 3;
         
-        //End table 
-        stage.addActor(table);
+        //Add image to background table
+        backgroundTable.add(uiCounterImage).width(scaleX).height(scaleY);
+        
+        //Add label to foreground table
+        foregroundTable.row().expandX().padTop(24);
+        foregroundTable.add(bombCounterLabel).padLeft(93);
+        foregroundTable.add(coinCounterLabel).padLeft(18);
+        
+        //Set container to the height of the image and position it on the top left
+        stack.setWidth(scaleX);
+        stack.setHeight(scaleY);
+        stack.setPosition(0, Gdx.graphics.getHeight() - scaleY - 10);
+        
+        //End table and container (stack)
+        stack.add(backgroundTable);
+        stack.add(foregroundTable);
+        stage.addActor(stack);
     }
 }
