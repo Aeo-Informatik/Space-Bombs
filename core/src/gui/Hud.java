@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import gui.entity.EntityManager;
+import gui.entity.MainPlayer;
 
 /**
  *
@@ -30,22 +32,27 @@ public class Hud
      * How to use tables: https://github.com/libgdx/libgdx/wiki/Table#quickstart
      * How to use elements in table: https://github.com/libgdx/libgdx/wiki/Scene2d.ui#stack
      */
-    
+    //Objects
     public Stage stage;
     private Viewport viewport;
     private Stack stack;
-
+    private MainPlayer mainPlayer;
+    private EntityManager entityManager;
+    
+    
+    //Labels
     Label bombCounterLabel;
     Label coinCounterLabel;
     Label liveCounterLabel;
     
     //Constructor
-    public Hud(SpriteBatch renderObject)
+    public Hud(SpriteBatch renderObject, EntityManager entityManager)
     {
         
         this.viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
         this.stage = new Stage(viewport, renderObject);
         this.stack = new Stack(); //A container in wich you can place multiple widgets to "stack" them
+        this.entityManager = entityManager;
         
         //Table settings
         Table backgroundTable = new Table();
@@ -60,8 +67,8 @@ public class Hud
         //foregroundTable.debugAll();
         
         //Labels (textfields)
-        bombCounterLabel = new Label("999", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        coinCounterLabel = new Label("999", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        bombCounterLabel = new Label("000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        coinCounterLabel = new Label("000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         
         //Live & coins display image
         Texture uiTexture = new Texture(Gdx.files.internal("other/hud.png"));
@@ -89,5 +96,17 @@ public class Hud
         stack.add(backgroundTable);
         stack.add(foregroundTable);
         stage.addActor(stack);
+    }
+    
+    public void update()
+    {
+        if(mainPlayer != null)
+        {
+            bombCounterLabel.setText(String.format("%03d", mainPlayer.getMaxBombs()));
+            coinCounterLabel.setText(String.format("%03d", mainPlayer.getCoins()));
+        }else
+        {
+            mainPlayer = entityManager.getMainPlayer();
+        }
     }
 }

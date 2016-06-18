@@ -28,6 +28,9 @@ public class EntityManager {
     private SpriteBatch renderSpectator = new SpriteBatch();
     private SpriteBatch renderOther = new SpriteBatch();
 
+    //Main Player HUD
+    private Hud hud;
+    private SpriteBatch renderHud = new SpriteBatch();
     
     //Array from libgdx is much faster in comparison to an arraylist
     private Array <EnemyPlayer> enemies = new Array<>();
@@ -42,6 +45,7 @@ public class EntityManager {
     {
         this.camera = camera;
         this.map = map;
+        this.hud = new Hud(renderHud, this);
     }
     
 
@@ -65,11 +69,16 @@ public class EntityManager {
         
         //Render main player
         if(mainPlayer != null)
-        {
+        {            
             renderMainPlayer.begin();
             mainPlayer.render(renderMainPlayer);
             renderMainPlayer.end();
         
+            //Render Hud
+            renderHud.setProjectionMatrix(hud.stage.getCamera().combined);
+            hud.stage.draw();
+            hud.update();
+            
         //If main player equals null render spectator
         }else if(spectator != null)
         {

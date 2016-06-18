@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
+import gui.Hud;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
@@ -27,12 +28,12 @@ import networkClient.Client;
 public class MainPlayer extends Entity
 {
     
-    //General Variables
+    //General Variables DO NOT CHANGE
     private String lastMovementKeyPressed = "UP";
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
     private float godModeTimer = 0;
-    private boolean godmode = false; //DO NOT CHANGE
+    private boolean godmode = false;
     private int playerId = 0;
     
     //General objects
@@ -47,7 +48,7 @@ public class MainPlayer extends Entity
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
-    //Player settings
+    //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
     private int coins = 0;
@@ -65,7 +66,6 @@ public class MainPlayer extends Entity
         this.camera = camera;
         this.playerId = playerId;
         this.bombArray = bombArray;
-        
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -437,6 +437,14 @@ public class MainPlayer extends Entity
         this.life = life;
     }
     
-    
+    public int getMaxBombs()
+    {
+        return this.maxBombPlacing;
+    }
 
+    public int getCoins()
+    {
+        return this.coins;
+    }
+    
 }
