@@ -98,7 +98,7 @@ public class HelpScreen implements Screen{
         
         //Add button to screen
         backbutton = new TextButton("Back!", textButtonStyle);
-        backbutton.setPosition(Gdx.graphics.getWidth() / 2 , Gdx.graphics.getHeight() / 2); // Add to the center even after resize
+        backbutton.setPosition(Gdx.graphics.getWidth() / 2 , Gdx.graphics.getHeight() / 2 - 175); // Add to the center even after resize
         stage.addActor(backbutton);
          //Add click listener --> Start Game
         backbutton.addListener(new ChangeListener() 
