@@ -8,7 +8,6 @@ Add sound effects to the game & menu.
 
 //Player
 4) Spawns a tomb stone with his coins on death
-5) A hub with player live and collected coins 
 6) A hub navigation bar a la minecraft for bomb selection
 
 //Textures
