@@ -36,7 +36,8 @@ public class GameScreen implements Screen{
     private ProcessData processData;
     private Game game;
     private SpriteBatch renderServer = new SpriteBatch();
-    
+    private SpriteBatch renderHud = new SpriteBatch();
+    private Hud hud;
    
     
     
@@ -57,11 +58,8 @@ public class GameScreen implements Screen{
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager, this);
         this.processData = new ProcessData(entityManager);
-        
+        this.hud = new Hud(renderHud);
  
-     
-
-        
         
         //Starts local server for 1 Player
         if(Constants.TESTSERVER)
@@ -119,6 +117,10 @@ public class GameScreen implements Screen{
            
         //Render entities
         entityManager.render();
+        
+        //Render Hud
+        renderHud.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
         
         //Render incoming server instructions
         renderServer.begin();
