@@ -8,6 +8,7 @@ package gui.screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import static com.gdx.bomberman.Main.client;
 import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
@@ -20,6 +21,7 @@ import networkClient.ProcessData;
 import networkServer.ServerStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.Hud;
+
 
 /**
  *
@@ -35,22 +37,36 @@ public class GameScreen implements Screen{
     private Game game;
     private SpriteBatch renderServer = new SpriteBatch();
     
+   
+    
+    
     /**
      * Constructor
      * @param game 
      */
     public GameScreen(Game game)
     {
+          //hier we can add gameplay music    
+      //Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/Gamemusic.ogg"));  
+      //music.setLooping(true);
+      //music.play();
+      //music.setVolume(8.5f);   
+     
         this.game = game;
         this.camera = new OrthoCamera();
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager, this);
         this.processData = new ProcessData(entityManager);
         
+ 
+     
+
+        
+        
         //Starts local server for 1 Player
         if(Constants.TESTSERVER)
             new Thread(new ServerStart()).start();
-
+        
         //Connect to server
         try 
         {

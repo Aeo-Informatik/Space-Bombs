@@ -30,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.gdx.bomberman.Constants;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 /**
@@ -103,7 +104,10 @@ public class HelpScreen implements Screen{
         backbutton.addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
-            {
+            {  //add click sound
+                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
+                music.play();
+                
                 game.setScreen(new MenuScreen(game));
             }
         });

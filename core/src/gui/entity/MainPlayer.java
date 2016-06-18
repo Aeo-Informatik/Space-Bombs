@@ -149,6 +149,7 @@ public class MainPlayer extends Entity
             client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
             
             System.out.println("Life has been reduced to: " + life);
+          
             
             if(Constants.CLIENTDEBUG)
             {
@@ -424,13 +425,18 @@ public class MainPlayer extends Entity
 
     /*------------------ GETTER & SETTER ------------------*/    
     public int getLife()
-    {
+    { 
+    
         return this.life;
+        
+        
     }
     
     public void setLife(int life)
     {
         this.life = life;
     }
+    
+    
 
 }

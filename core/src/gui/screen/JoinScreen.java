@@ -7,6 +7,8 @@ package gui.screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -101,6 +103,11 @@ public class JoinScreen implements Screen{
         {
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
+                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
+                music.play();
+                music.dispose();
+                
+              
                 Constants.SERVERIP = hostip.getText();
                 Constants.TESTSERVER = true;                
                 game.setScreen(new GameScreen(game));

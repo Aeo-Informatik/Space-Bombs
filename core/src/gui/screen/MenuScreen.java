@@ -41,10 +41,10 @@ public class MenuScreen implements Screen
     public MenuScreen(Game game)
     {
        //Start Playing music in Menu @author Jemain 
-//      Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
-//      music.setLooping(true);
-//      music.play();
-//      music.setVolume(0.5f);   
+      Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
+      music.setLooping(true);
+      music.play();
+      music.setVolume(0.5f);   
      
       
         this.game = game;
@@ -85,8 +85,12 @@ public class MenuScreen implements Screen
         startbutton.addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
-            {
+            {   //add click musik
+                music.dispose();
+                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
+                music.play();
                 game.setScreen(new JoinScreen(game));
+                
             }
         });
         
@@ -101,7 +105,10 @@ public class MenuScreen implements Screen
         exitbutton .addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
-            {
+            {   //add click sound
+                music.dispose();
+                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
+                music.play();
                 Gdx.app.exit();
             }
         });
@@ -117,8 +124,13 @@ public class MenuScreen implements Screen
         helpbutton .addListener(new ChangeListener() 
         {
             public void changed (ChangeEvent event, Actor actor) 
-            {
-               game.setScreen(new HelpScreen(game)); 
+            {   //add click sound
+                music.dispose();
+                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
+                music.play();
+               
+                
+                game.setScreen(new HelpScreen(game)); 
             }
         });
         

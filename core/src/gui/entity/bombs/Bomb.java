@@ -6,6 +6,8 @@
 
 package gui.entity.bombs;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -25,6 +27,7 @@ import gui.map.MapManager;
  */
 public class Bomb extends Entity
 {
+
     //General variables
     private int playerId;
     private boolean touchedDeadlyTile = false;
@@ -57,7 +60,7 @@ public class Bomb extends Entity
     
     //Constructor
     public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, EntityManager entityManager)
-    {
+    { 
         super(pos, direction, map, entityManager);
         
         //Needed variables
@@ -358,6 +361,11 @@ public class Bomb extends Entity
     
     private void explode()
     {
+      
+      
+     
+        
+        
         //Create new cell and set texture
         Cell cellCenter = new Cell();
         cellCenter.setTile(new StaticTiledMapTile(explosionCenter));
