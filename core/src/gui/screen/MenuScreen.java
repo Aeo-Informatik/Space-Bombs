@@ -10,15 +10,16 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
-import com.gdx.bomberman.Constants;
-
 
 
 public class MenuScreen implements Screen
@@ -36,111 +37,140 @@ public class MenuScreen implements Screen
     private SpriteBatch batch;
     private Texture backgroundTexture;
     private Sprite sprite;
+    private Stack stack;
+    
+    //Font import
+    private FreeTypeFontGenerator generator;
+    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     
     /**------------------------CONSTRUCTOR------------------------**/
     public MenuScreen(Game game)
     {
-       //Start Playing music in Menu @author Jemain 
-      Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
-      music.setLooping(true);
-      music.play();
-      music.setVolume(0.5f);   
-     
-      
+        //General Object initalisation
         this.game = game;
+        this.stack = new Stack();
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
         batch = new SpriteBatch();
+        Gdx.input.setInputProcessor(stage);
         
-         //load the background texture
+        //Initialise Font
+        this.generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
+        this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        
+        //Start Playing music in Menu @author Jemain 
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
+        music.setLooping(true);
+        music.play();
+        music.setVolume(0.5f);   
+        
+        //Load the background texture
         backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
         sprite = new Sprite(backgroundTexture);
         
- 
+        
+        /**------------------------BUTTON STYLE------------------------**/
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin.addRegions(buttonAtlas);
-        
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("button/exit.pack"));
-        skin.addRegions(buttonAtlas);
-        
         
         //Add button style
         textButtonStyle = new TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
-        textButtonStyle.font = font;
+        parameter.size = 10;
+        textButtonStyle.font = generator.generateFont(parameter);
         textButtonStyle.pressedOffsetY = -3;
         
-        //Add button to screen
-        startbutton = new TextButton("Start Game!", textButtonStyle);
-        startbutton.setPosition(Gdx.graphics.getWidth() / 2 - (startbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
-        stage.addActor(startbutton);
+        
+        /**------------------------BUTTON POSITION------------------------**/
+        Table stackTable = new Table();
+        stackTable.setFillParent(true);
+        stackTable.debugAll();
+        
+        //Add start button to screen
+        startbutton = new TextButton("Start Game", textButtonStyle);
+        stackTable.add(startbutton);
+        stackTable.row();
+        
+        //Add exit button to screen
+        exitbutton = new TextButton("Exit", textButtonStyle);
+        stackTable.add(exitbutton);
+        stackTable.row();
+        
+        //Add help button to screen
+        helpbutton = new TextButton("Help", textButtonStyle);
+        stackTable.add(helpbutton);
+        stackTable.row();
+        
+        //Set stack position
+        stack.setPosition(Gdx.graphics.getWidth() / 2 - (stack.getWidth() / 2), Gdx.graphics.getHeight() / 2);
+        
+        //End 
+        stack.add(stackTable);
+        stage.addActor(stack);
         
         
+        /**------------------------BUTTON FUNCTIONS------------------------**/
         //Add click listener --> Start Game
         startbutton.addListener(new ChangeListener() 
         {
+            @Override
             public void changed (ChangeEvent event, Actor actor) 
-            {   //add click musik
+            {   
+                //Add click musik
                 music.dispose();
                 Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
                 music.play();
-                game.setScreen(new JoinScreen(game));
                 
+                game.setScreen(new JoinScreen(game));
             }
         });
-        
-        
-        //Add button to screen
-        exitbutton = new TextButton("Exit!", textButtonStyle);
-        exitbutton .setPosition(Gdx.graphics.getWidth() / 6, Gdx.graphics.getHeight() / 2); // Add to the center even after resize
-        stage.addActor(exitbutton);
-        
         
         //Add click listener --> Exit Game
         exitbutton .addListener(new ChangeListener() 
         {
+            @Override
             public void changed (ChangeEvent event, Actor actor) 
-            {   //add click sound
+            {   
+                //Add click sound
                 music.dispose();
                 Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
                 music.play();
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+                
                 Gdx.app.exit();
             }
         });
         
-        
-        //Add button to screen
-        helpbutton = new TextButton("Help", textButtonStyle);
-        helpbutton .setPosition(Gdx.graphics.getWidth() / 3 - 1, Gdx.graphics.getHeight() / 2); // Add to the center even after resize
-        stage.addActor(helpbutton);
-        
-        
         //Add click listener --> Exit Game
         helpbutton .addListener(new ChangeListener() 
         {
+            @Override
             public void changed (ChangeEvent event, Actor actor) 
-            {   //add click sound
+            {   
+                //Add click sound
                 music.dispose();
                 Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
                 music.play();
                
-                
                 game.setScreen(new HelpScreen(game)); 
             }
         });
-        
-        
-       
     }
     
-    
-    
-    
+
     /**------------------------RENDER------------------------**/
     @Override
     public void render(float f) 
@@ -149,14 +179,15 @@ public class MenuScreen implements Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
-        //Render stage
         stage.act(Gdx.graphics.getDeltaTime());
+        
+        //Render stage
         batch.begin();
-        sprite.draw(batch);
-        sprite.setSize(800,480);
+            sprite.draw(batch);
+            sprite.setSize(800,480);
         batch.end();
+        
         stage.draw();
-       
     }
     
     
