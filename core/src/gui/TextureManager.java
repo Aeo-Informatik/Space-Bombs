@@ -10,12 +10,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 /**
  *
  * @author qubasa
  */
 public class TextureManager {
+    
+    //Hud
+    public static Texture hudCounter;
     
     //Player 1 Walking
     public static Texture p1WalkingDown;
@@ -87,13 +91,16 @@ public class TextureManager {
     public static Texture p2NormalBomb;
     public static Animation p2NormalBombAnim;
     
+    
     //Normal Bomb Animation Player 3
     public static Texture p3NormalBomb;
     public static Animation p3NormalBombAnim;
     
+    
     //Normal Bomb Animation Player 4
     public static Texture p4NormalBomb;
     public static Animation p4NormalBombAnim;
+    
     
     //Explosion effect Player 1
     public static Texture p1Explosion;
@@ -142,12 +149,16 @@ public class TextureManager {
     public static TextureRegion p4ExplosionRightEnd;
     public static TextureRegion p4ExplosionLeftEnd;
     
+    //TextureRegion(texture, int cutX, int cutY, int width, int height)
     
     public static void load() 
     {
-        //TextureRegion(texture, int cutX, int cutY, int width, int height)
-        
         float WalkingAnimTime = 0.25f;
+        
+        /*---------------------------------HUD---------------------------------*/
+        hudCounter = loadTexture("other/hud2_full_live.png");
+        
+        
         
         /*---------------------------------PLAYER 1---------------------------------------*/
         p1WalkingDown = loadTexture("players/player1/walking-down.png");
@@ -316,7 +327,7 @@ public class TextureManager {
         p4ExplosionLeftEnd = new TextureRegion(p4Explosion, 32, 0, 32, 32);
         p4ExplosionRightEnd = new TextureRegion(p4Explosion, 96, 0, 32, 32);
         
-        
+
         Constants.PLAYERWIDTH = p1WalkingRightAnim.getKeyFrame(0).getRegionWidth();
         Constants.PLAYERHEIGHT = p1WalkingRightAnim.getKeyFrame(0).getRegionHeight();
     }

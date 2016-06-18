@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.MainPlayer;
 
@@ -83,13 +84,11 @@ public class CounterHud
         generator.dispose();
         
         //Live & coins display image
-        Texture uiTexture = new Texture(Gdx.files.internal("other/hud2_full_live.png"));
-        TextureRegion uiCounter = new TextureRegion(uiTexture, 0, 0, 80, 17);
-        Image uiCounterImage = new Image(uiCounter);
+        Image uiCounterImage = new Image(TextureManager.hudCounter);
         
         //Calculate image width (scaleX) and image height (scaleY)
-        float scaleX = uiCounter.getRegionWidth() * 3;
-        float scaleY = uiCounter.getRegionHeight() * 3;
+        float scaleX = TextureManager.hudCounter.getWidth() * 3;
+        float scaleY = TextureManager.hudCounter.getHeight() * 3;
         
         //Add image to background table
         backgroundTable.add(uiCounterImage).width(scaleX).height(scaleY);
