@@ -13,7 +13,7 @@ import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.GameScreen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import gui.Hud;
+import gui.hud.CounterHud;
 
 /**
  *
@@ -29,7 +29,7 @@ public class EntityManager {
     private SpriteBatch renderOther = new SpriteBatch();
 
     //Main Player HUD
-    private Hud hud;
+    private CounterHud hud;
     private SpriteBatch renderHud = new SpriteBatch();
     
     //Array from libgdx is much faster in comparison to an arraylist
@@ -45,7 +45,7 @@ public class EntityManager {
     {
         this.camera = camera;
         this.map = map;
-        this.hud = new Hud(renderHud, this);
+        this.hud = new CounterHud(renderHud, this);
     }
     
 
@@ -74,7 +74,7 @@ public class EntityManager {
             mainPlayer.render(renderMainPlayer);
             renderMainPlayer.end();
         
-            //Render Hud
+            //Render CounterHud
             renderHud.setProjectionMatrix(hud.stage.getCamera().combined);
             hud.stage.draw();
             hud.update();

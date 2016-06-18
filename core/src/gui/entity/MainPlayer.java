@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Main;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
-import gui.Hud;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;

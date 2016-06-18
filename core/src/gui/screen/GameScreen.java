@@ -21,7 +21,6 @@ import networkClient.Client;
 import networkClient.ProcessData;
 import networkServer.ServerStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import gui.Hud;
 
 
 /**

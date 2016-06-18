@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package gui.hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -28,7 +28,7 @@ import gui.entity.MainPlayer;
  *
  * @author qubasa
  */
-public class Hud 
+public class CounterHud 
 {
     /**
      * How to use tables: https://github.com/libgdx/libgdx/wiki/Table#quickstart
@@ -51,7 +51,7 @@ public class Hud
     Label liveCounterLabel;
     
     //Constructor
-    public Hud(SpriteBatch renderObject, EntityManager entityManager)
+    public CounterHud(SpriteBatch renderObject, EntityManager entityManager)
     {
         //Initialise Objects
         this.viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
