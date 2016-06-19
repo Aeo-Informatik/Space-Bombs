@@ -6,6 +6,7 @@
 package gui.hud;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,8 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
+import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.entity.MainPlayer;
 
@@ -40,7 +44,7 @@ public class CounterHud
     private Stack stack;
     private MainPlayer mainPlayer;
     private EntityManager entityManager;
-    Image uiCounterImage;
+    private Image uiCounterImage;
     
     //Font import
     private FreeTypeFontGenerator generator;
@@ -58,7 +62,7 @@ public class CounterHud
     public CounterHud(SpriteBatch renderObject, EntityManager entityManager)
     {
         //Initialise Objects
-        this.viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
+        this.viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
         this.stage = new Stage(viewport, renderObject);
         this.stack = new Stack(); //A container in wich you can place multiple widgets to "stack" them
         this.entityManager = entityManager;
@@ -114,6 +118,8 @@ public class CounterHud
     
     public void update()
     {
+        stage.getCamera().update();
+        
         if(mainPlayer != null)
         {
             bombCounterLabel.setText(String.format("%03d", mainPlayer.getMaxBombs()));
@@ -148,5 +154,10 @@ public class CounterHud
         {
             mainPlayer = entityManager.getMainPlayer();
         }
+    }
+    
+    public void resize(int width, int height)
+    {
+        stage.getViewport().update(width, height, false);
     }
 }

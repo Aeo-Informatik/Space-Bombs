@@ -5,11 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,24 +18,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class MenuScreen implements Screen
 {
     //Objects
     private Stage stage;
-    private Skin skin;
-    private Game game;
-    private SpriteBatch renderObject;
-    private Sprite sprite;
     private Stack stack;
+    Table rootTable;
     
     //Textures
     private Texture backgroundTexture;
-    private TextureAtlas buttonAtlas;
     
     //Music
     private Music clickSound;
@@ -60,11 +53,8 @@ public class MenuScreen implements Screen
         //Look for ben briggs music!http://benbriggs.net/
         
         //General Object initalisation
-        this.renderObject = new SpriteBatch();
         this.stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        this.game = game;
         this.stack = new Stack();
-        this.skin = new Skin();
         Gdx.input.setInputProcessor(stage);
         
         //Initialise Font
@@ -82,32 +72,32 @@ public class MenuScreen implements Screen
         
         //Load the background texture
         backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
-        sprite = new Sprite(backgroundTexture);
         
         
         /**------------------------BUTTON STYLE------------------------**/
         //Load button description into memory
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
-        skin.addRegions(buttonAtlas);
         
         //Add button style
         textButtonStyle = new TextButtonStyle();
-        textButtonStyle.up = skin.getDrawable("button_up");
-        textButtonStyle.down = skin.getDrawable("button_down");
-        textButtonStyle.over = skin.getDrawable("button_checked");
         parameter.size = 11;
         textButtonStyle.font = generator.generateFont(parameter);
         textButtonStyle.pressedOffsetY = -3;
+        textButtonStyle.up   = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 0, 0, 64, 64));
+        textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 64, 0, 64, 64));
+        textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 128, 0, 64, 64));
         
+ 
         
         /**------------------------BUTTON POSITION------------------------**/
+        rootTable = new Table();
+        rootTable.setFillParent(true);
+        
         Table stackTable = new Table();
         stackTable.setFillParent(true);
-        //stackTable.debugAll();
         
         //Add start button to screen
         startbutton = new TextButton("Join", textButtonStyle);
-        stackTable.add(startbutton).width(64).height(64);
+        stackTable.add(startbutton);
         stackTable.row();
         
         //Add help button to screen
@@ -132,6 +122,7 @@ public class MenuScreen implements Screen
         
         //End 
         stack.add(stackTable);
+        stage.addActor(rootTable);
         stage.addActor(stack);
         
         
@@ -213,17 +204,17 @@ public class MenuScreen implements Screen
     /**------------------------RENDER------------------------**/
     @Override
     public void render(float f) 
-    {
+    {        
+        stage.setDebugAll(true);
+        
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
-        //Render stage
-        renderObject.begin();
-            sprite.draw(renderObject);
-            sprite.setSize(800,480);
-        renderObject.end();
-        
+        //Set background image
+        rootTable.background(new TextureRegionDrawable(new TextureRegion(backgroundTexture)));
+
+        //Draw stage
         stage.draw();
     }
     
@@ -240,9 +231,7 @@ public class MenuScreen implements Screen
     @Override
     public void dispose() 
     {
-        buttonAtlas.dispose();
         stage.dispose();
-        skin.dispose();
     }
 
     

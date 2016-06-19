@@ -21,6 +21,7 @@ import networkClient.Client;
 import networkClient.ProcessData;
 import networkServer.ServerStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import gui.hud.CounterHud;
 
 
 /**
@@ -36,6 +37,10 @@ public class GameScreen implements Screen{
     private ProcessData processData;
     private Game game;
     private SpriteBatch renderServer = new SpriteBatch();
+    
+    //Main Player HUD
+    private CounterHud counterHud;
+    private SpriteBatch renderHud = new SpriteBatch();
     
     /**
      * Constructor
@@ -54,6 +59,7 @@ public class GameScreen implements Screen{
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager, this);
         this.processData = new ProcessData(entityManager);
+        this.counterHud = new CounterHud(renderHud, entityManager);
         
         //Starts local server for 1 Player
         if(Constants.TESTSERVER)
@@ -116,6 +122,11 @@ public class GameScreen implements Screen{
         //Render entities
         entityManager.render();
         
+        //Render CounterHud
+        renderHud.setProjectionMatrix(counterHud.stage.getCamera().combined);
+        counterHud.stage.draw();
+        counterHud.update();
+        
         //Render incoming server instructions
         renderServer.begin();
         processData.start(renderServer);
@@ -137,6 +148,7 @@ public class GameScreen implements Screen{
     {
        camera.resize();
        mapManager.resize(width, height);
+       counterHud.resize(width, height);
        
        //If screen gets resized set camera to player position
        if(Constants.PLAYERSPAWNED)
