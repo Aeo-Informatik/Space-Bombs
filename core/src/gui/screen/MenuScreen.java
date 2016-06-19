@@ -4,8 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,6 +20,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class MenuScreen implements Screen
@@ -28,7 +31,7 @@ public class MenuScreen implements Screen
     private Stage stage;
     private Skin skin;
     private Game game;
-    private SpriteBatch batch;
+    private SpriteBatch renderHud;
     private Sprite sprite;
     private Stack stack;
     
@@ -37,7 +40,8 @@ public class MenuScreen implements Screen
     private TextureAtlas buttonAtlas;
     
     //Music
-    Music clickSound;
+    private Music clickSound;
+    private Music titleMusic;
     
     //Buttons
     private TextButtonStyle textButtonStyle;
@@ -53,12 +57,15 @@ public class MenuScreen implements Screen
     /**------------------------CONSTRUCTOR------------------------**/
     public MenuScreen(Game game)
     {
+        //Look for ben briggs music!http://benbriggs.net/
+        
         //General Object initalisation
+        this.renderHud = new SpriteBatch();
+        this.renderHud = new SpriteBatch();
+        this.stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.game = game;
         this.stack = new Stack();
-        stage = new Stage();
-        skin = new Skin();
-        batch = new SpriteBatch();
+        this.skin = new Skin();
         Gdx.input.setInputProcessor(stage);
         
         //Initialise Font
@@ -66,10 +73,10 @@ public class MenuScreen implements Screen
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         
         //Start Playing titleMusic in Menu @author Jemain 
-        Music titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
-        titleMusic.setLooping(true);
-        titleMusic.play();
-        titleMusic.setVolume(0.5f);   
+        titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/music.mp3"));  
+//        titleMusic.setLooping(true);
+//        titleMusic.play();
+//        titleMusic.setVolume(0.5f);   
         
         //Add click sound
         clickSound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
@@ -212,13 +219,11 @@ public class MenuScreen implements Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
-        stage.act(Gdx.graphics.getDeltaTime());
-        
         //Render stage
-        batch.begin();
-            sprite.draw(batch);
+        renderHud.begin();
+            sprite.draw(renderHud);
             sprite.setSize(800,480);
-        batch.end();
+        renderHud.end();
         
         stage.draw();
     }
@@ -228,7 +233,7 @@ public class MenuScreen implements Screen
     @Override
     public void resize(int width, int height) 
     {
-        
+        stage.getViewport().update(width, height, false);
     }
 
     

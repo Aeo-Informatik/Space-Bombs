@@ -78,7 +78,7 @@ public class Main extends Game implements ApplicationListener {
     @Override
     public void resize(int width, int height) 
     {
-
+        super.resize(width, height);
     }
     
     
@@ -88,6 +88,7 @@ public class Main extends Game implements ApplicationListener {
     @Override
     public void dispose() 
     {
+        super.dispose();
         font.dispose();
     }
     
@@ -99,7 +100,7 @@ public class Main extends Game implements ApplicationListener {
     @Override
     public void pause() 
     {
-
+        super.pause();
     }
     
 
@@ -109,6 +110,6 @@ public class Main extends Game implements ApplicationListener {
     @Override
     public void resume() 
     {
-
+        super.resume();
     }
 }
