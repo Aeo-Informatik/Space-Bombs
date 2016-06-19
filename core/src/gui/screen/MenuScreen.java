@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -35,6 +36,9 @@ public class MenuScreen implements Screen
     private Texture backgroundTexture;
     private TextureAtlas buttonAtlas;
     
+    //Music
+    Music clickSound;
+    
     //Buttons
     private TextButtonStyle textButtonStyle;
     private TextButton startbutton;
@@ -61,11 +65,14 @@ public class MenuScreen implements Screen
         this.generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         
-        //Start Playing music in Menu @author Jemain 
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
-//        music.setLooping(true);
-//        music.play();
-//        music.setVolume(0.5f);   
+        //Start Playing titleMusic in Menu @author Jemain 
+        Music titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
+        titleMusic.setLooping(true);
+        titleMusic.play();
+        titleMusic.setVolume(0.5f);   
+        
+        //Add click sound
+        clickSound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
         
         //Load the background texture
         backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
@@ -130,9 +137,8 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                music.dispose();
-                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
-                music.play();
+                titleMusic.dispose();  
+                clickSound.play();
                 
                 //Wait till sound is done
                 try 
@@ -155,9 +161,8 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                music.dispose();
-                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
-                music.play();
+                titleMusic.dispose();
+                clickSound.play();
                 
                 //Wait till sound is done
                 try 
@@ -180,9 +185,8 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                music.dispose();
-                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
-                music.play();
+                titleMusic.dispose();
+                clickSound.play();
                
                 //Wait till sound is done
                 try 
