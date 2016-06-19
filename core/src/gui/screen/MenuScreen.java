@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -26,18 +25,22 @@ public class MenuScreen implements Screen
 {
     //Objects
     private Stage stage;
-    private TextButton startbutton;
-    private TextButton exitbutton;
-    private TextButton helpbutton;
-    private TextButtonStyle textButtonStyle;
-    private BitmapFont font;
     private Skin skin;
-    private TextureAtlas buttonAtlas;
     private Game game;
     private SpriteBatch batch;
-    private Texture backgroundTexture;
     private Sprite sprite;
     private Stack stack;
+    
+    //Textures
+    private Texture backgroundTexture;
+    private TextureAtlas buttonAtlas;
+    
+    //Buttons
+    private TextButtonStyle textButtonStyle;
+    private TextButton startbutton;
+    private TextButton hostButton;
+    private TextButton exitbutton;
+    private TextButton helpbutton;
     
     //Font import
     private FreeTypeFontGenerator generator;
@@ -50,7 +53,6 @@ public class MenuScreen implements Screen
         this.game = game;
         this.stack = new Stack();
         stage = new Stage();
-        font = new BitmapFont();
         skin = new Skin();
         batch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
@@ -61,9 +63,9 @@ public class MenuScreen implements Screen
         
         //Start Playing music in Menu @author Jemain 
         Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/NyanCatoriginal.ogg"));  
-        music.setLooping(true);
-        music.play();
-        music.setVolume(0.5f);   
+//        music.setLooping(true);
+//        music.play();
+//        music.setVolume(0.5f);   
         
         //Load the background texture
         backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
@@ -80,7 +82,7 @@ public class MenuScreen implements Screen
         textButtonStyle.up = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
-        parameter.size = 10;
+        parameter.size = 11;
         textButtonStyle.font = generator.generateFont(parameter);
         textButtonStyle.pressedOffsetY = -3;
         
@@ -88,25 +90,32 @@ public class MenuScreen implements Screen
         /**------------------------BUTTON POSITION------------------------**/
         Table stackTable = new Table();
         stackTable.setFillParent(true);
-        stackTable.debugAll();
+        //stackTable.debugAll();
         
         //Add start button to screen
-        startbutton = new TextButton("Start Game", textButtonStyle);
-        stackTable.add(startbutton);
+        startbutton = new TextButton("Join", textButtonStyle);
+        stackTable.add(startbutton).width(64).height(64);
         stackTable.row();
         
-        //Add exit button to screen
-        exitbutton = new TextButton("Exit", textButtonStyle);
-        stackTable.add(exitbutton);
+        //Add help button to screen
+        hostButton = new TextButton("Host", textButtonStyle);
+        stackTable.add(hostButton).padTop(15);
         stackTable.row();
         
         //Add help button to screen
         helpbutton = new TextButton("Help", textButtonStyle);
-        stackTable.add(helpbutton);
+        stackTable.add(helpbutton).padTop(15);
+        stackTable.row();
+        
+        //Add exit button to screen
+        exitbutton = new TextButton("Exit", textButtonStyle);
+        stackTable.add(exitbutton).padTop(15);
         stackTable.row();
         
         //Set stack position
-        stack.setPosition(Gdx.graphics.getWidth() / 2 - (stack.getWidth() / 2), Gdx.graphics.getHeight() / 2);
+        int padX = -37;
+        int padY = -46;
+        stack.setPosition(Gdx.graphics.getWidth() / 2 - (stack.getWidth() / 2) + padX, Gdx.graphics.getHeight() / 2 + padY);
         
         //End 
         stack.add(stackTable);
@@ -124,6 +133,16 @@ public class MenuScreen implements Screen
                 music.dispose();
                 Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
                 music.play();
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
                 
                 game.setScreen(new JoinScreen(game));
             }
@@ -165,6 +184,16 @@ public class MenuScreen implements Screen
                 Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
                 music.play();
                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+                
                 game.setScreen(new HelpScreen(game)); 
             }
         });
@@ -204,7 +233,6 @@ public class MenuScreen implements Screen
     public void dispose() 
     {
         buttonAtlas.dispose();
-        font.dispose();
         stage.dispose();
         skin.dispose();
     }
