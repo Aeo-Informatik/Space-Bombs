@@ -31,7 +31,7 @@ public class MenuScreen implements Screen
     private Stage stage;
     private Skin skin;
     private Game game;
-    private SpriteBatch renderHud;
+    private SpriteBatch renderObject;
     private Sprite sprite;
     private Stack stack;
     
@@ -60,8 +60,7 @@ public class MenuScreen implements Screen
         //Look for ben briggs music!http://benbriggs.net/
         
         //General Object initalisation
-        this.renderHud = new SpriteBatch();
-        this.renderHud = new SpriteBatch();
+        this.renderObject = new SpriteBatch();
         this.stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.game = game;
         this.stack = new Stack();
@@ -74,9 +73,9 @@ public class MenuScreen implements Screen
         
         //Start Playing titleMusic in Menu @author Jemain 
         titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/music.mp3"));  
-//        titleMusic.setLooping(true);
-//        titleMusic.play();
-//        titleMusic.setVolume(0.5f);   
+        titleMusic.setLooping(true);
+        titleMusic.play();
+        titleMusic.setVolume(0.5f);   
         
         //Add click sound
         clickSound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
@@ -220,10 +219,10 @@ public class MenuScreen implements Screen
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
         //Render stage
-        renderHud.begin();
-            sprite.draw(renderHud);
+        renderObject.begin();
+            sprite.draw(renderObject);
             sprite.setSize(800,480);
-        renderHud.end();
+        renderObject.end();
         
         stage.draw();
     }
