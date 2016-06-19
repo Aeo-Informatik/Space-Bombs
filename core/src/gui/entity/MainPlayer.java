@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import com.badlogic.gdx.Game;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -18,6 +19,7 @@ import gui.AnimEffects;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
+import gui.screen.MenuScreen;
 import networkClient.Client;
 
 /**
@@ -40,6 +42,7 @@ public class MainPlayer extends Entity
     private Client client;
     private Array <Bomb> bombArray;
     private AnimEffects animEffects = new AnimEffects();
+    private Game game;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -54,7 +57,7 @@ public class MainPlayer extends Entity
     private int maxBombPlacing = 2;
     
     //Constructor
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, Game game) throws Exception 
     {
         super(pos, direction, map, entityManager);
 
@@ -65,6 +68,7 @@ public class MainPlayer extends Entity
         this.camera = camera;
         this.playerId = playerId;
         this.bombArray = bombArray;
+        this.game = game;
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -406,7 +410,7 @@ public class MainPlayer extends Entity
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
         {
             System.out.println("Quit game with Keyboard [ESC]");
-            Gdx.app.exit();
+            game.setScreen(new MenuScreen(game));
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

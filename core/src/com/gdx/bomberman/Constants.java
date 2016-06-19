@@ -14,7 +14,7 @@ public class Constants {
     //Window config
     public static int SCREENWIDTH = 800;
     public static int SCREENHEIGHT = 480;
-    public static boolean FULLSCREEN = true;
+    public static boolean FULLSCREEN = false;
     public static String WINDOWTITEL = "Aeo Bombs";
     public static String WINDOWICONPATH = "other/icon.png";
     

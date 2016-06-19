@@ -57,7 +57,7 @@ public class GameScreen implements Screen{
         this.game = game;
         this.camera = new OrthoCamera();
         this.mapManager = new MapManager(camera);
-        this.entityManager = new EntityManager(camera, mapManager, this);
+        this.entityManager = new EntityManager(camera, mapManager, game);
         this.processData = new ProcessData(entityManager);
         this.counterHud = new CounterHud(renderHud, entityManager);
         
