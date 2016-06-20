@@ -109,7 +109,7 @@ public class JoinScreen implements Screen{
                 
               
                 Constants.SERVERIP = hostip.getText();
-                Constants.TESTSERVER = true;                
+                               
                 game.setScreen(new GameScreen(game));
             }
         });
