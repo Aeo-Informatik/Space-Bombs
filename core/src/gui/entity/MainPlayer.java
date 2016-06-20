@@ -20,6 +20,9 @@ import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import networkClient.Client;
 
 /**
@@ -53,7 +56,7 @@ public class MainPlayer extends Entity
     //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
-    private int coins = 0;
+    private int coins = 99999;
     private int maxBombPlacing = 2;
     
     //Constructor
@@ -191,6 +194,7 @@ public class MainPlayer extends Entity
     {
         String moveCommand = "";
         float cameraSpeed = 2.51f;
+        
         
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
@@ -410,6 +414,14 @@ public class MainPlayer extends Entity
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
         {
             System.out.println("Quit game with Keyboard [ESC]");
+            try 
+            {
+                client.closeConnection();
+                
+            } catch (IOException ex) 
+            {
+                System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
+            }
             game.setScreen(new MenuScreen(game));
         }
         

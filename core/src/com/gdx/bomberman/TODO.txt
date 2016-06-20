@@ -11,7 +11,6 @@ Add sound effects to the game & menu.
 6) A hub navigation bar a la minecraft for bomb selection
 
 //Textures
-
 10) !!Create buttons and background for every screen
 6) Adding an animation for the player standig still
 11) Better bomb animation with fuse going down
@@ -23,14 +22,9 @@ speedupgrade
 bombupgrade
 coin bags
 
-      //Adding an animation for the player standig still
-
-
 
 //Screens
-
 MenuScreen:
-
 Join, Host, Options, Help, Exit
 
 Error Screen:
@@ -52,17 +46,14 @@ Winning player gets displayed with a medal on a podest
 A font diplaying "Winner" or something like that
 
 
-    MenuScreen:✓
-    Error Screen:✓
-    Option Screen:✓
-    Join Screen:✓
-    Host Screen:✓
-
-
 //Client
 1) Scanning for open servers with port scan
 2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
-Menuscreen button hitbox doesn't scale correclty
+Enemy player blinks randomly in online mode
+Enemy teleports himself in online mode due to laggs
+Player can be stuck between bombs
+On some plattforms the camera is slower then the player ? (maybe framerate problems)
+Menu Screen buttons and Hud doesn't resize correctly when switching from 800x480 to fullsize windowed
 Game Icon isn't shown on mac and linux probably because of different size preferences

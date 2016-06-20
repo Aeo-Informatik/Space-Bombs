@@ -35,41 +35,44 @@ public class ClientReceiveThread implements Runnable {
     {
         try
         {
-            //Runs the whole time
-            while(!Thread.currentThread().isInterrupted())
-            {
-                //Set timeout exception after 15 seconds or 0 = never
-                socket.setSoTimeout(0);
-                
-                //Get data from server and parse it into an Object BufferedReader
-                BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-                String dataReceived;
-                
-                //Read all lines received from server
-                while((dataReceived = receive.readLine())!= null)
-                {   
-                    //Debug
-                    if(Constants.CLIENTDEBUG && !dataReceived.equals("PONG"))
-                        System.out.println("Received from server: " + dataReceived);
+            //Set timeout exception after 15 seconds or 0 = never
+            socket.setSoTimeout(0);
 
-                    //Latency test
-                    if(dataReceived.equals("PONG"))
-                    {
-                        if(Constants.CLIENTSHOWPONG)
-                            System.out.println("Received PONG");
-                    }else
-                    {
-                        //Adds the data to the BlockingQueue
-                        queue.add(dataReceived);
-                        Thread.sleep(100);
-                    }
+            //Get data from server and parse it into an Object BufferedReader
+            BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            String dataReceived;
+
+            //Read all lines received from server
+            while((dataReceived = receive.readLine())!= null)
+            {   
+                if(Thread.currentThread().isInterrupted())
+                {
+                    break;
                 }
 
-                //If server disconnects
-                Thread.currentThread().interrupt();
+                //Debug
+                if(Constants.CLIENTDEBUG && !dataReceived.equals("PONG"))
+                    System.out.println("Received from server: " + dataReceived);
+
+                //Latency test
+                if(dataReceived.equals("PONG"))
+                {
+                    if(Constants.CLIENTSHOWPONG)
+                        System.out.println("Received PONG");
+                }else
+                {
+                    //Adds the data to the BlockingQueue
+                    queue.add(dataReceived);
+                    Thread.sleep(100);
+                }
             }
+
             
-        //If server disconnects shutdown thread
+        }catch(SocketException e)
+        {
+            System.out.println("Disconnected from Server");
+        
+            //If server disconnects shutdown thread
         }catch(IOException | InterruptedException e)
         {
             System.err.println("ERROR: Something went wrong in ClientReceiveDataThread " + e);

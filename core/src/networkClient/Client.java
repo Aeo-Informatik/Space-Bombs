@@ -54,6 +54,21 @@ public class Client {
         }
     }
     
+    public void closeConnection() throws IOException
+    {
+        if(receiveThread != null)
+        {
+            receiveThread.interrupt();
+        }
+        
+        if(pingThread != null)
+        {
+            pingThread.interrupt();
+        }
+
+        socket.close();
+    }
+    
     //Start periodic pinging of server to determin latency
     public void pingThread()
     {

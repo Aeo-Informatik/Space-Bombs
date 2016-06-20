@@ -14,6 +14,8 @@ import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.GameScreen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import gui.entity.item.Item;
+import gui.entity.item.*;
 
 /**
  *
@@ -36,6 +38,7 @@ public class EntityManager {
     private MapManager map;
     private Array <Bomb> bombArray = new Array<>();
     private Array <Bomb> bombArrayEnemy = new Array<>();
+    private Array <Item> itemArray = new Array<>();
     
     //Constructor
     public EntityManager(OrthoCamera camera, MapManager map, Game game)
@@ -94,7 +97,13 @@ public class EntityManager {
         for (Bomb bomb: bombArrayEnemy)
         {
             bomb.render(renderOther);
-        }      
+        } 
+        
+        for(Item item: itemArray)
+        {
+            item.render(renderOther);
+        }
+                    
         
         renderOther.end();
     }
@@ -176,6 +185,12 @@ public class EntityManager {
         }
     }
     
+    public void spawnItem()
+    {
+        Speed speed = new Speed(new Vector2(1 * Constants.MAPTEXTUREWIDTH, 1 * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0),map, this);
+        Item item = speed;
+        itemArray.add(item);
+    }
     /**
      * Returns the Bomb Object on the specified coordinates. If there is no bomb return null.
      * @param x Cell coordiante on x axis
