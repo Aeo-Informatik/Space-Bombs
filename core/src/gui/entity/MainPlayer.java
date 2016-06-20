@@ -53,7 +53,7 @@ public class MainPlayer extends Entity
     //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
-    private int coins = 0;
+    private int coins = 99999;
     private int maxBombPlacing = 2;
     
     //Constructor
@@ -191,6 +191,11 @@ public class MainPlayer extends Entity
     {
         String moveCommand = "";
         float cameraSpeed = 2.51f;
+        
+        if((Gdx.input.isKeyPressed(Keys.B)))
+        {
+            entityManager.spawnItem();
+        }
         
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))

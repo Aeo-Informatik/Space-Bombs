@@ -22,7 +22,10 @@ public class TextureManager {
     public static Texture hudCounterTwoThirdLive;
     public static Texture hudCounterOneThirdLive;
     public static Texture hudCounterNoLive;
-            
+    
+    //Items
+    public static Texture speed;
+    
     //Player 1 Walking
     public static Texture p1WalkingDown;
     public static Animation p1WalkingDownAnim;
@@ -162,6 +165,10 @@ public class TextureManager {
         hudCounterTwoThirdLive = loadTexture("other/hud2_two_third_live.png");
         hudCounterOneThirdLive = loadTexture("other/hud2_one_third_live.png");
         hudCounterNoLive = loadTexture("other/hud2_no_live.png");
+        
+        /*------------------------------ITEMS--------------------------------*/
+        speed = loadTexture("other/medal.png");
+        
         
         /*---------------------------------PLAYER 1---------------------------------------*/
         p1WalkingDown = loadTexture("players/player1/walking-down.png");
