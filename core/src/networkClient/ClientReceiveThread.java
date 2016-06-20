@@ -67,11 +67,6 @@ public class ClientReceiveThread implements Runnable {
                 }
             }
 
-            if(!Thread.currentThread().isInterrupted())
-            {
-                //If server disconnects
-                Thread.currentThread().interrupt();
-            }
             
         }catch(SocketException e)
         {
