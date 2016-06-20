@@ -28,6 +28,7 @@ public class MapManager
     private TiledMapTileLayer blockLayer; 
     private TiledMapTileLayer floorLayer;
     private TiledMapTileLayer bombLayer;
+    private TiledMapTileLayer itemLayer;
     
     //Constuctor
     public MapManager(OrthoCamera camera)
@@ -38,6 +39,7 @@ public class MapManager
         this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
         this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
+        this.itemLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Items");
         
         Constants.MAPTEXTUREWIDTH = blockLayer.getTileWidth();
         Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
@@ -104,4 +106,10 @@ public class MapManager
     {
         return this.floorLayer;
     }
+    
+    public TiledMapTileLayer getItemLayer()
+    {
+        return this.itemLayer;
+    }
+    
 }
