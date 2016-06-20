@@ -190,7 +190,6 @@ public class EntityManager {
         Speed speed = new Speed(new Vector2(1 * Constants.MAPTEXTUREWIDTH, 1 * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0),map, this);
         Item item = speed;
         itemArray.add(item);
-        System.out.println("YEAH!");
     }
     /**
      * Returns the Bomb Object on the specified coordinates. If there is no bomb return null.
