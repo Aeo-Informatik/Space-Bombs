@@ -20,6 +20,9 @@ import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import networkClient.Client;
 
 /**
@@ -415,6 +418,14 @@ public class MainPlayer extends Entity
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
         {
             System.out.println("Quit game with Keyboard [ESC]");
+            try 
+            {
+                client.closeConnection();
+                
+            } catch (IOException ex) 
+            {
+                System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
+            }
             game.setScreen(new MenuScreen(game));
         }
         

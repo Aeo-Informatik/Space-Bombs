@@ -30,10 +30,10 @@ public class Constants {
     public static int PINGDELAY = 2; // 1 ping each 2 seconds
     
     //Server config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MINPLAYERS = 1;
-    public static int MAXPLAYERS = 2;
+    public static int MAXPLAYERS = 1;
     public static int SERVERLOBBYWAIT = 30000; // 30 seconds
     public static boolean SERVERDEBUG = false;
     public static boolean SERVERSHOWPING = false; // Show received ping

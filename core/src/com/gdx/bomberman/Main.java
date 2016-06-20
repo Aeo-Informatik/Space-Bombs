@@ -33,7 +33,7 @@ public class Main extends Game implements ApplicationListener {
     public Main()
     {
         //Objects
-        game = this;
+        this.game = this;
     }
     
     /**
