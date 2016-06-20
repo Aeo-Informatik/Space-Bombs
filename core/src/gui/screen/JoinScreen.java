@@ -38,12 +38,6 @@ import com.gdx.bomberman.Constants;
  * @author pl0614
  */
 public class JoinScreen implements Screen{
-    
-
-
-
-
-
 
 
     //Objects
@@ -55,19 +49,19 @@ public class JoinScreen implements Screen{
     private TextureAtlas buttonAtlas;
     private Game game;
     private TextField hostip;
+    private  Music titleMusic;
     
-    /**------------------------CONSTRUCTOR------------------------**/
+    /**------------------------CONSTRUCTOR-----------------------
+     * @param game-**/
     public JoinScreen(Game game)
     {
+        //Initialise Objects
         this.game = game;
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
-        Skin skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
-     
-       
-        
-        
+        skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
+        titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
+        Gdx.input.setInputProcessor(stage);
         
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
@@ -75,47 +69,53 @@ public class JoinScreen implements Screen{
         
         //Add button style
         textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
-
-       
+        textButtonStyle.font = font;
         textButtonStyle.pressedOffsetY = -3;
-        //set the Textfield
-        hostip = new TextField("", skin);
         
+        //Set the Textfield
+        hostip = new TextField("", skin);
         hostip.setPosition(Gdx.graphics.getWidth() / 2 - (hostip.getWidth() / 2) + hostip.getWidth()/15, Gdx.graphics.getHeight() / 2- Gdx.graphics.getHeight()/10 );
         hostip.setSize(150,25);
         stage.addActor(hostip);
       
-       
-
-        
         //Add button to screen
         joinbutton = new TextButton("Join Game", skin);
-        
         joinbutton.setPosition(Gdx.graphics.getWidth() / 2 - (joinbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
         stage.addActor(joinbutton);
+        
         
         //Add click listener --> Start Game
         joinbutton.addListener(new ChangeListener() 
         {
+            @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
-                music.play();
-                music.dispose();
+                titleMusic.play();
+                titleMusic.dispose();
                 
-              
-                Constants.SERVERIP = hostip.getText();
-                               
-                game.setScreen(new GameScreen(game));
+                try
+                {
+                    if(!hostip.getText().equals("localhost") || !hostip.getText().equals(""))
+                    {
+                        int ip = Integer.parseInt(hostip.getText());
+                        Constants.SERVERIP = Integer.toString(ip);
+                    }else if(hostip.getText().equals("") || hostip.getText().equals("localhost"))
+                    {
+                        Constants.SERVERIP = "localhost";
+                    }
+    
+                    game.setScreen(new GameScreen(game));
+                
+                }catch(NumberFormatException e)
+                {
+                    System.err.println("ERROR: Please use only numbers for the ip");
+                }
             }
         });
     }
-    //Textfield Listener
-    
     
     
     /**------------------------RENDER------------------------**/
