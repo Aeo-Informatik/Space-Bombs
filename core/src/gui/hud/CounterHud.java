@@ -17,10 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.MainPlayer;
@@ -37,7 +37,6 @@ public class CounterHud
      */
     //Objects
     public Stage stage;
-    private Viewport viewport;
     private Stack stack;
     private MainPlayer mainPlayer;
     private EntityManager entityManager;
@@ -59,8 +58,7 @@ public class CounterHud
     public CounterHud(SpriteBatch renderObject, EntityManager entityManager)
     {
         //Initialise Objects
-        this.viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
-        this.stage = new Stage(viewport, renderObject);
+        this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack(); //A container in wich you can place multiple widgets to "stack" them
         this.entityManager = entityManager;
         
@@ -105,7 +103,7 @@ public class CounterHud
         //Set container to the height of the image and position it on the top left
         stack.setWidth(scaleX);
         stack.setHeight(scaleY);
-        stack.setPosition(0, Gdx.graphics.getHeight() - scaleY - 10);
+        stack.setPosition(0, 470 - scaleY);
         
         //End table and container (stack)
         stack.add(backgroundTable);
