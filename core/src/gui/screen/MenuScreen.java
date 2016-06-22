@@ -63,9 +63,9 @@ public class MenuScreen implements Screen
         
         //Start Playing titleMusic in Menu @author Jemain 
         titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/music.mp3"));  
-        titleMusic.setLooping(true);
-        titleMusic.play();
-        titleMusic.setVolume(0.5f);   
+//        titleMusic.setLooping(true);
+//        titleMusic.play();
+//        titleMusic.setVolume(0.5f);   
         
         //Add click sound
         clickSound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
