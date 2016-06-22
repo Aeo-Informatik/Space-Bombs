@@ -55,5 +55,4 @@ Enemy player blinks randomly in online mode
 Enemy teleports himself in online mode due to laggs
 Player can be stuck between bombs
 On some plattforms the camera is slower then the player ? (maybe framerate problems)
-Menu Screen buttons and Hud doesn't resize correctly when switching from 800x480 to fullsize windowed
 Game Icon isn't shown on mac and linux probably because of different size preferences
