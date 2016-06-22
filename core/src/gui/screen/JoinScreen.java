@@ -83,23 +83,15 @@ public class JoinScreen implements Screen{
                 titleMusic.play();
                 titleMusic.dispose();
                 
-                try
+                if(!hostip.getText().equals(""))
                 {
-                    if(!hostip.getText().equals(""))
-                    {
-                        int ip = Integer.parseInt(hostip.getText());
-                        Constants.SERVERIP = Integer.toString(ip);
-                    }else
-                    {
-                        Constants.SERVERIP = "localhost";
-                    }
-    
-                    game.setScreen(new GameScreen(game));
-                
-                }catch(NumberFormatException e)
+                    Constants.SERVERIP = hostip.getText();
+                }else
                 {
-                    System.err.println("ERROR: Please use only numbers int the ip address field. " + e.toString());
+                    Constants.SERVERIP = "localhost";
                 }
+
+                game.setScreen(new GameScreen(game));
             }
         });
     }

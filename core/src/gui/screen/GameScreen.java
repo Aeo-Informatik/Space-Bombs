@@ -8,7 +8,6 @@ package gui.screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import static com.gdx.bomberman.Main.client;
 import com.gdx.bomberman.Constants;
@@ -22,6 +21,8 @@ import networkClient.ProcessData;
 import networkServer.ServerStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.hud.CounterHud;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 
 /**
@@ -78,9 +79,13 @@ public class GameScreen implements Screen{
             //If wrong server ip or port are given
             System.err.println("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
         
+        }catch(SocketException | UnknownHostException e)
+        {
+            System.err.println("Invalid ip address given: " + e.toString());
+            
         }catch (IOException | InterruptedException e) 
         {
-            System.err.println("ERROR: Unexpected client exception: " + e);
+            System.err.println("ERROR: Unexpected client exception: " + e.toString());
             Gdx.app.exit();
         }
     }
@@ -104,12 +109,12 @@ public class GameScreen implements Screen{
             if(!client.isConnectedToServer())
             {
                 System.err.println("Server connection lost to: " + Constants.SERVERIP);
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new JoinScreen(game));
             }
             
         }else //If error occured on creating connection to server
         {
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new JoinScreen(game));
         }
         
 
