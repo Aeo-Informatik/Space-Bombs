@@ -5,17 +5,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -28,7 +30,7 @@ public class MenuScreen implements Screen
     //Objects
     private Stage stage;
     private Stack stack;
-    Table rootTable;
+    private Table rootTable;
     
     //Textures
     private Texture backgroundTexture;
@@ -39,6 +41,9 @@ public class MenuScreen implements Screen
     
     //Buttons
     private TextButtonStyle textButtonStyle;
+    private TextureRegionDrawable up;
+    private TextureRegionDrawable down;
+    private TextureRegionDrawable over;
     private TextButton startbutton;
     private TextButton hostButton;
     private TextButton exitbutton;
@@ -78,15 +83,18 @@ public class MenuScreen implements Screen
         /**------------------------BUTTON STYLE------------------------**/
         //Load button description into memory
         
+        up = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 0, 0, 64, 64));
+        over = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 64, 0, 64, 64));
+        down = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 128, 0, 64, 64));
+        parameter.size = 11;
+        BitmapFont font = generator.generateFont(parameter);
+        
         //Add button style
         textButtonStyle = new TextButtonStyle();
-        parameter.size = 11;
-        textButtonStyle.font = generator.generateFont(parameter);
-        textButtonStyle.pressedOffsetY = -3;
-        textButtonStyle.up   = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 0, 0, 64, 64));
-        textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 64, 0, 64, 64));
-        textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 128, 0, 64, 64));
-        
+        textButtonStyle.font = font;
+        textButtonStyle.up   = up;
+        textButtonStyle.over = over;
+        textButtonStyle.down = down;
  
         
         /**------------------------BUTTON POSITION------------------------**/
