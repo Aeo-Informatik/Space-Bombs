@@ -21,8 +21,6 @@ import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import networkClient.Client;
 
 /**
@@ -56,7 +54,7 @@ public class MainPlayer extends Entity
     //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
-    private int coins = 99999;
+    private int coins = 0;
     private int maxBombPlacing = 2;
     
     //Constructor
