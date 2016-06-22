@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -40,10 +38,6 @@ public class MenuScreen implements Screen
     private Music titleMusic;
     
     //Buttons
-    private TextButtonStyle textButtonStyle;
-    private TextureRegionDrawable up;
-    private TextureRegionDrawable down;
-    private TextureRegionDrawable over;
     private TextButton startbutton;
     private TextButton hostButton;
     private TextButton exitbutton;
@@ -57,6 +51,9 @@ public class MenuScreen implements Screen
     public MenuScreen(Game game)
     {
         //Look for ben briggs music!http://benbriggs.net/
+        //His music is available under this license: https://creativecommons.org/licenses/by/3.0/
+        //Best choices: https://www.youtube.com/watch?v=0O-UDakr5wQ&index=2&list=PLAcMRsccpTwmbfdc4JQjyFn-nCtyAHZFw
+        //Link to his playlist: https://www.youtube.com/watch?v=wUcieFm8oTY&list=PLeSVUX-B8IsQ5zYRPXzJoOsqPFqttYlX5&index=1
         
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -81,21 +78,21 @@ public class MenuScreen implements Screen
         
         
         /**------------------------BUTTON STYLE------------------------**/
-        //Load button description into memory
         
-        up = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 0, 0, 64, 64));
-        over = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 64, 0, 64, 64));
-        down = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 128, 0, 64, 64));
+        //Add button style
+        TextureRegionDrawable up = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 0, 0, 64, 64));
+        TextureRegionDrawable over = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 64, 0, 64, 64));
+        TextureRegionDrawable down = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 128, 0, 64, 64));
+        
         parameter.size = 11;
         BitmapFont font = generator.generateFont(parameter);
         
-        //Add button style
-        textButtonStyle = new TextButtonStyle();
+        TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.up   = up;
         textButtonStyle.over = over;
         textButtonStyle.down = down;
- 
+        
         
         /**------------------------BUTTON POSITION------------------------**/
         rootTable = new Table();
@@ -109,21 +106,20 @@ public class MenuScreen implements Screen
         stackTable.add(startbutton);
         stackTable.row();
         
-        int padTop = 15;
         
         //Add help button to screen
         hostButton = new TextButton("Host", textButtonStyle);
-        stackTable.add(hostButton).padTop(padTop);
+        stackTable.add(hostButton).padTop(15);
         stackTable.row();
         
         //Add help button to screen
         helpbutton = new TextButton("Help", textButtonStyle);
-        stackTable.add(helpbutton).padTop(padTop);
+        stackTable.add(helpbutton).padTop(15);
         stackTable.row();
         
         //Add exit button to screen
         exitbutton = new TextButton("Exit", textButtonStyle);
-        stackTable.add(exitbutton).padTop(padTop);
+        stackTable.add(exitbutton).padTop(15);
         stackTable.row();
         
         //Set stack position
@@ -214,7 +210,8 @@ public class MenuScreen implements Screen
     @Override
     public void render(float f) 
     {        
-        stage.setDebugAll(true);
+        //Debug
+        //stage.setDebugAll(true);
         
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
