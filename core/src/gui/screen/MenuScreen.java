@@ -118,6 +118,9 @@ public class MenuScreen implements Screen
         stackTable.add(exitbutton).padTop(padTop);
         stackTable.row();
         
+        //Set stack position
+        stack.setPosition(287, 195);
+        
         //End 
         stack.add(stackTable);
         stage.addActor(rootTable);
@@ -234,14 +237,6 @@ public class MenuScreen implements Screen
     public void resize(int width, int height) 
     {
         stage.getViewport().update(width, height, false);
-        
-        //Set stack position
-//        int padX = -37;
-//        int padY = 28;
-        int padX = 0;
-        int padY = 0;
-        stack.setPosition(Gdx.graphics.getWidth() / 2 - (stack.getWidth() / 2) + padX, Gdx.graphics.getHeight() / 2 - (stack.getHeight() / 2) + padY);
-        
     }
 
     
