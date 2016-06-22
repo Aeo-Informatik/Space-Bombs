@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -53,7 +54,7 @@ public class MenuScreen implements Screen
         //Look for ben briggs music!http://benbriggs.net/
         
         //General Object initalisation
-        this.stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
         
@@ -100,25 +101,22 @@ public class MenuScreen implements Screen
         stackTable.add(startbutton);
         stackTable.row();
         
+        int padTop = 15;
+        
         //Add help button to screen
         hostButton = new TextButton("Host", textButtonStyle);
-        stackTable.add(hostButton).padTop(15);
+        stackTable.add(hostButton).padTop(padTop);
         stackTable.row();
         
         //Add help button to screen
         helpbutton = new TextButton("Help", textButtonStyle);
-        stackTable.add(helpbutton).padTop(15);
+        stackTable.add(helpbutton).padTop(padTop);
         stackTable.row();
         
         //Add exit button to screen
         exitbutton = new TextButton("Exit", textButtonStyle);
-        stackTable.add(exitbutton).padTop(15);
+        stackTable.add(exitbutton).padTop(padTop);
         stackTable.row();
-        
-        //Set stack position
-        int padX = -37;
-        int padY = -46;
-        stack.setPosition(Gdx.graphics.getWidth() / 2 - (stack.getWidth() / 2) + padX, Gdx.graphics.getHeight() / 2 + padY);
         
         //End 
         stack.add(stackTable);
@@ -236,6 +234,14 @@ public class MenuScreen implements Screen
     public void resize(int width, int height) 
     {
         stage.getViewport().update(width, height, false);
+        
+        //Set stack position
+//        int padX = -37;
+//        int padY = 28;
+        int padX = 0;
+        int padY = 0;
+        stack.setPosition(Gdx.graphics.getWidth() / 2 - (stack.getWidth() / 2) + padX, Gdx.graphics.getHeight() / 2 - (stack.getHeight() / 2) + padY);
+        
     }
 
     
