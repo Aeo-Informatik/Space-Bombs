@@ -65,10 +65,10 @@ public class MenuScreen implements Screen
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         
         //Start Playing titleMusic in Menu @author Jemain 
-        titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/music.mp3"));  
-//        titleMusic.setLooping(true);
-//        titleMusic.play();
-//        titleMusic.setVolume(0.5f);   
+        titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/Ben Briggs - The Briggs Effect/Ben Briggs - The Briggs Effect - 09 Mystery Gift 1.mp3"));  
+        titleMusic.setLooping(true);
+        titleMusic.play();
+        titleMusic.setVolume(0.5f);   
         
         //Add click sound
         clickSound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
