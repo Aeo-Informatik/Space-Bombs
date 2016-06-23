@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -21,6 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
+import gui.AudioManager;
+import gui.TextureManager;
 
 
 public class MenuScreen implements Screen
@@ -30,12 +31,9 @@ public class MenuScreen implements Screen
     private Stack stack;
     private Table rootTable;
     
-    //Textures
-    private Texture backgroundTexture;
-    
     //Music
     private Music clickSound;
-    private Music titleMusic;
+    private Music menuMusic;
     
     //Buttons
     private TextButton startbutton;
@@ -43,55 +41,34 @@ public class MenuScreen implements Screen
     private TextButton exitbutton;
     private TextButton helpbutton;
     
-    //Font import
-    private FreeTypeFontGenerator generator;
-    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
-    
     /**------------------------CONSTRUCTOR------------------------**/
     public MenuScreen(Game game)
     {
-        //Look for ben briggs music!http://benbriggs.net/
-        //His music is available under this license: https://creativecommons.org/licenses/by/3.0/
-        //Best choices: https://www.youtube.com/watch?v=0O-UDakr5wQ&index=2&list=PLAcMRsccpTwmbfdc4JQjyFn-nCtyAHZFw
-        //Link to his playlist: https://www.youtube.com/watch?v=wUcieFm8oTY&list=PLeSVUX-B8IsQ5zYRPXzJoOsqPFqttYlX5&index=1
-        
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
         
         //Initialise Font
-        this.generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
-        this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontOptions.size = 11;
+        BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
         
-        //Start Playing titleMusic in Menu @author Jemain 
-        titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/music/Ben Briggs - The Briggs Effect/Ben Briggs - The Briggs Effect - 09 Mystery Gift 1.mp3"));  
-        titleMusic.setLooping(true);
-        titleMusic.play();
-        titleMusic.setVolume(0.5f);   
         
-        //Add click sound
-        clickSound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
-        
-        //Load the background texture
-        backgroundTexture = new Texture(Gdx.files.internal("menu/menu.png"));
-        
+        /**------------------------AUDIO------------------------**/
+        clickSound = AudioManager.clickSound;
+        menuMusic = AudioManager.menuMusic;
+        AudioManager.menuMusic.setLooping(true);
+        AudioManager.menuMusic.play();
+        AudioManager.menuMusic.setVolume(0.5f);  
+
         
         /**------------------------BUTTON STYLE------------------------**/
-        
-        //Add button style
-        TextureRegionDrawable up = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 0, 0, 64, 64));
-        TextureRegionDrawable over = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 64, 0, 64, 64));
-        TextureRegionDrawable down = new TextureRegionDrawable(new TextureRegion(new Texture("button/button.png"), 128, 0, 64, 64));
-        
-        parameter.size = 11;
-        BitmapFont font = generator.generateFont(parameter);
-        
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.font = font;
-        textButtonStyle.up   = up;
-        textButtonStyle.over = over;
-        textButtonStyle.down = down;
+        textButtonStyle.up   = new TextureRegionDrawable(TextureManager.bombUp);
+        textButtonStyle.over = new TextureRegionDrawable(TextureManager.bombOver);
+        textButtonStyle.down = new TextureRegionDrawable(TextureManager.bombDown);
         
         
         /**------------------------BUTTON POSITION------------------------**/
@@ -139,7 +116,7 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                titleMusic.dispose();  
+                menuMusic.dispose();  
                 clickSound.play();
                 
                 //Wait till sound is done
@@ -163,7 +140,7 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                titleMusic.dispose();
+                menuMusic.dispose();
                 clickSound.play();
                 
                 //Wait till sound is done
@@ -187,7 +164,7 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                titleMusic.dispose();
+                menuMusic.dispose();
                 clickSound.play();
                
                 //Wait till sound is done
@@ -218,7 +195,7 @@ public class MenuScreen implements Screen
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
         //Set background image
-        rootTable.background(new TextureRegionDrawable(new TextureRegion(backgroundTexture)));
+        rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.menuBackground)));
 
         //Draw stage
         stage.draw();

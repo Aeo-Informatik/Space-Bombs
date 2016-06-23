@@ -11,6 +11,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import gui.AudioManager;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
 import networkClient.Client;
@@ -27,7 +28,6 @@ public class Main extends Game implements ApplicationListener {
     */
     public static Client client;
     private Game game;
-    private BitmapFont font;
     
     //Constructor
     public Main()
@@ -42,10 +42,9 @@ public class Main extends Game implements ApplicationListener {
     @Override
     public void create() 
     {     
-        font = new BitmapFont();
-        
         //Load all textures
         TextureManager.load();
+        AudioManager.load();
         
         game.setScreen(new MenuScreen(game));
     }
@@ -89,7 +88,6 @@ public class Main extends Game implements ApplicationListener {
     public void dispose() 
     {
         super.dispose();
-        font.dispose();
     }
     
     

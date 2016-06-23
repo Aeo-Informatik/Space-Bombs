@@ -10,12 +10,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 /**
  *
  * @author qubasa
  */
-public class TextureManager {
+public class TextureManager 
+{
+    
+    //Menu
+    public static FreeTypeFontGenerator menuFont;
+    public static Texture menuBackground;
+    public static Texture bombButton;
+    public static TextureRegion bombUp;
+    public static TextureRegion bombDown;
+    public static TextureRegion bombOver;
     
     //Hud
     public static Texture hudCounterFullLive;
@@ -158,7 +168,16 @@ public class TextureManager {
     
     public static void load() 
     {
-        float WalkingAnimTime = 0.25f;
+
+        /*---------------------------------MENU---------------------------------*/
+        menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
+        menuBackground = loadTexture("menu/menu.png");
+        bombButton = loadTexture("button/button.png");
+        bombUp = new TextureRegion(bombButton, 0, 0, 64, 64);
+        bombOver = new TextureRegion(bombButton, 64, 0, 64, 64);
+        bombDown = new TextureRegion(bombButton, 128, 0, 64, 64);
+        
+        
         
         /*---------------------------------HUD---------------------------------*/
         hudCounterFullLive = loadTexture("other/hud2_full_live.png");
@@ -166,11 +185,17 @@ public class TextureManager {
         hudCounterOneThirdLive = loadTexture("other/hud2_one_third_live.png");
         hudCounterNoLive = loadTexture("other/hud2_no_live.png");
         
+        
+        
         /*------------------------------ITEMS--------------------------------*/
         speed = loadTexture("other/medal.png");
         
         
+        
+        
         /*---------------------------------PLAYER 1---------------------------------------*/
+        float WalkingAnimTime = 0.25f;
+        
         p1WalkingDown = loadTexture("players/player1/walking-down.png");
         p1WalkingDownAnim = new Animation(WalkingAnimTime, new TextureRegion(p1WalkingDown, 0, 0, 18, 22), new TextureRegion(p1WalkingDown, 18, 0, 18, 22), 
 				new TextureRegion(p1WalkingDown, 36, 0, 18, 22), new TextureRegion(p1WalkingDown, 54, 0, 18, 22));
