@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.game;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
@@ -28,17 +29,15 @@ public class Spectator extends Entity
     private int currentPlayerIndex = 0;
     private EnemyPlayer currentEnemyPlayer;
     private Array <EnemyPlayer> enemies;
-    private Game game;
     
     //Constructor
-    public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager, Game game) 
+    public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager);
         
         this.blockLayer = map.getBlockLayer();
         this.camera = camera;
         this.enemies = enemies;
-        this.game = game;
     }
 
     
@@ -206,7 +205,7 @@ public class Spectator extends Entity
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             System.out.println("Quit game with Keyboard [ESC]");
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen());
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

@@ -5,11 +5,9 @@
  */
 package gui.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
-import static com.gdx.bomberman.Main.client;
 import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
@@ -20,6 +18,7 @@ import networkClient.Client;
 import networkClient.ProcessData;
 import networkServer.ServerStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import static com.gdx.bomberman.Main.game;
 import gui.hud.CounterHud;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -36,8 +35,9 @@ public class GameScreen implements Screen{
     private EntityManager entityManager;
     private MapManager mapManager;
     private ProcessData processData;
-    private Game game;
     private SpriteBatch renderServer = new SpriteBatch();
+    public static Client client;
+    
     
     //Main Player HUD
     private CounterHud counterHud;
@@ -47,7 +47,7 @@ public class GameScreen implements Screen{
      * Constructor
      * @param game 
      */
-    public GameScreen(Game game)
+    public GameScreen()
     {
           //hier we can add gameplay music    
       //Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/Gamemusic.ogg"));  
@@ -55,10 +55,9 @@ public class GameScreen implements Screen{
       //music.play();
       //music.setVolume(8.5f);   
      
-        this.game = game;
         this.camera = new OrthoCamera();
         this.mapManager = new MapManager(camera);
-        this.entityManager = new EntityManager(camera, mapManager, game);
+        this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ProcessData(entityManager);
         this.counterHud = new CounterHud(renderHud, entityManager);
         
@@ -109,12 +108,12 @@ public class GameScreen implements Screen{
             if(!client.isConnectedToServer())
             {
                 System.err.println("Server connection lost to: " + Constants.SERVERIP);
-                game.setScreen(new JoinScreen(game));
+                game.setScreen(new JoinScreen());
             }
             
         }else //If error occured on creating connection to server
         {
-            game.setScreen(new JoinScreen(game));
+            game.setScreen(new JoinScreen());
         }
         
 

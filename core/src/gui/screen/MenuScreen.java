@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 
@@ -42,7 +43,7 @@ public class MenuScreen implements Screen
     private TextButton helpbutton;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public MenuScreen(Game game)
+    public MenuScreen()
     {
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -129,7 +130,7 @@ public class MenuScreen implements Screen
                     
                 }
                 
-                game.setScreen(new JoinScreen(game));
+                game.setScreen(new JoinScreen());
             }
         });
         

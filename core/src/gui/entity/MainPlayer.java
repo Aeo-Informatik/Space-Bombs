@@ -13,15 +13,15 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.gdx.bomberman.Main;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
+import static gui.screen.GameScreen.client;
 import gui.screen.MenuScreen;
 import java.io.IOException;
-import networkClient.Client;
 
 /**
  *
@@ -40,10 +40,8 @@ public class MainPlayer extends Entity
     
     //General objects
     private OrthoCamera camera;
-    private Client client;
     private Array <Bomb> bombArray;
     private AnimEffects animEffects = new AnimEffects();
-    private Game game;
     
     //Player animation when he is moving around
     private final Animation walkAnimUp;
@@ -58,18 +56,16 @@ public class MainPlayer extends Entity
     private int maxBombPlacing = 2;
     
     //Constructor
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, Game game) throws Exception 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) throws Exception 
     {
         super(pos, direction, map, entityManager);
 
         //Set camera position to players position
         camera.setPosition(pos.x, pos.y);
 
-        this.client = Main.client;
         this.camera = camera;
         this.playerId = playerId;
         this.bombArray = bombArray;
-        this.game = game;
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -420,7 +416,7 @@ public class MainPlayer extends Entity
             {
                 System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
             }
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen());
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

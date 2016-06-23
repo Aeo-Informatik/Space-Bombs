@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
-import gui.screen.GameScreen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.entity.item.Item;
 import gui.entity.item.*;
@@ -29,7 +28,6 @@ public class EntityManager {
     private SpriteBatch renderEnemyPlayer = new SpriteBatch();
     private SpriteBatch renderSpectator = new SpriteBatch();
     private SpriteBatch renderOther = new SpriteBatch();
-    private Game game;
     
     //Array from libgdx is much faster in comparison to an arraylist
     private Array <EnemyPlayer> enemies = new Array<>();
@@ -41,11 +39,10 @@ public class EntityManager {
     private Array <Item> itemArray = new Array<>();
     
     //Constructor
-    public EntityManager(OrthoCamera camera, MapManager map, Game game)
+    public EntityManager(OrthoCamera camera, MapManager map)
     {
         this.camera = camera;
         this.map = map;
-        this.game = game;
     }
     
 
@@ -147,7 +144,7 @@ public class EntityManager {
             if(mainPlayer.getLife() <= 0)
             {
                 //Create new spectator
-                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies, this, game);
+                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies, this);
                 
                 //On death
                 mainPlayer.onDeath();
@@ -238,7 +235,7 @@ public class EntityManager {
                     {
                         if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                         {
-                            mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray, this, game);
+                            mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray, this);
                         }
                     }catch(NullPointerException e)
                     {

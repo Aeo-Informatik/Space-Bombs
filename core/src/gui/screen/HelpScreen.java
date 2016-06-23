@@ -108,7 +108,7 @@ public class HelpScreen implements Screen{
                 Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
                 music.play();
                 
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new MenuScreen());
             }
         });
 

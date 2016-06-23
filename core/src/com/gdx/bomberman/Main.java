@@ -10,11 +10,9 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
-import networkClient.Client;
 
 public class Main extends Game implements ApplicationListener {
     
@@ -26,14 +24,13 @@ public class Main extends Game implements ApplicationListener {
     * texture can be described and sent to the GPU all at once. 
     * This is what the SpriteBatch class does.
     */
-    public static Client client;
-    private Game game;
+    public static Game game;
     
     //Constructor
     public Main()
     {
         //Objects
-        this.game = this;
+        Main.game = this;
     }
     
     /**
@@ -46,7 +43,7 @@ public class Main extends Game implements ApplicationListener {
         TextureManager.load();
         AudioManager.load();
         
-        game.setScreen(new MenuScreen(game));
+        game.setScreen(new MenuScreen());
     }
     
         
