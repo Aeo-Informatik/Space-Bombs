@@ -59,9 +59,9 @@ public class MenuScreen implements Screen
         /**------------------------AUDIO------------------------**/
         clickSound = AudioManager.clickSound;
         menuMusic = AudioManager.menuMusic;
-        AudioManager.menuMusic.setLooping(true);
-        AudioManager.menuMusic.play();
-        AudioManager.menuMusic.setVolume(0.5f);  
+        menuMusic.setLooping(true);
+        menuMusic.play();
+        menuMusic.setVolume(0.3f);  
 
         
         /**------------------------BUTTON STYLE------------------------**/
@@ -117,7 +117,6 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                menuMusic.dispose();  
                 clickSound.play();
                 
                 //Wait till sound is done
@@ -130,7 +129,7 @@ public class MenuScreen implements Screen
                     
                 }
                 
-                game.setScreen(new JoinScreen());
+                game.setScreen(new JoinScreen(menuMusic));
             }
         });
         
@@ -141,7 +140,6 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                menuMusic.dispose();
                 clickSound.play();
                 
                 //Wait till sound is done
@@ -165,7 +163,6 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                menuMusic.dispose();
                 clickSound.play();
                
                 //Wait till sound is done

@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.GL20;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
+import networkClient.Client;
 
 public class Main extends Game implements ApplicationListener {
     
@@ -25,6 +26,8 @@ public class Main extends Game implements ApplicationListener {
     * This is what the SpriteBatch class does.
     */
     public static Game game;
+    public static Client client;
+    
     
     //Constructor
     public Main()

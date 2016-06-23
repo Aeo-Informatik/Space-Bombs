@@ -18,6 +18,7 @@ import networkClient.Client;
 import networkClient.ProcessData;
 import networkServer.ServerStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.hud.CounterHud;
 import java.net.SocketException;
@@ -36,8 +37,6 @@ public class GameScreen implements Screen{
     private MapManager mapManager;
     private ProcessData processData;
     private SpriteBatch renderServer = new SpriteBatch();
-    public static Client client;
-    
     
     //Main Player HUD
     private CounterHud counterHud;
@@ -108,12 +107,12 @@ public class GameScreen implements Screen{
             if(!client.isConnectedToServer())
             {
                 System.err.println("Server connection lost to: " + Constants.SERVERIP);
-                game.setScreen(new JoinScreen());
+                game.setScreen(new MenuScreen());
             }
             
         }else //If error occured on creating connection to server
         {
-            game.setScreen(new JoinScreen());
+            game.setScreen(new MenuScreen());
         }
         
 

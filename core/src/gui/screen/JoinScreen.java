@@ -4,87 +4,98 @@
  * and open the template in the editor.
  */
 package gui.screen;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.game;
+import gui.AudioManager;
+import gui.TextureManager;
 
 
 /**
  *
  * @author pl0614
  */
-public class JoinScreen implements Screen{
-
-
+public class JoinScreen implements Screen
+{
     //Objects
     private Stage stage;
-    private TextButton joinbutton;
-    private TextButton.TextButtonStyle textButtonStyle;
-    private BitmapFont font;
+    private Stack stack;
+    private Table rootTable;
+    
+    //Music
+    private Music clickSound;
+    private Music menuMusic;
+    
+    //Local TextureManager
     private Skin skin;
     private TextureAtlas buttonAtlas;
-    private TextField hostip;
-    private  Music titleMusic;
+    
+    //Buttons
+    private TextField ipTextField;
+    private TextButton joinButton;
+    
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
-    public JoinScreen()
+    public JoinScreen(Music menuMusic)
     {
-        //Initialise Objects
-        stage = new Stage();
-        font = new BitmapFont();
-        skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
-        titleMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));
+        //General Object initalisation
+        this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
+        this.stack = new Stack();
+        this.menuMusic = menuMusic;
         Gdx.input.setInputProcessor(stage);
         
+        //Initialise Font
+        FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontOptions.size = 11;
+        BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
+        
+        //Audio
+        clickSound = AudioManager.clickSound;
+
         //Load button description into memory
         buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin.addRegions(buttonAtlas);
         
-        //Add button style
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.getDrawable("button_up");
-        textButtonStyle.down = skin.getDrawable("button_down");
-        textButtonStyle.over = skin.getDrawable("button_checked");
-        textButtonStyle.font = font;
-        textButtonStyle.pressedOffsetY = -3;
-        
         //Set the Textfield
-        hostip = new TextField("", skin);
-        hostip.setPosition(Gdx.graphics.getWidth() / 2 - (hostip.getWidth() / 2) + hostip.getWidth()/15, Gdx.graphics.getHeight() / 2- Gdx.graphics.getHeight()/10 );
-        hostip.setSize(150,25);
-        stage.addActor(hostip);
+        ipTextField = new TextField("", skin);
+        ipTextField.setPosition(50, 50);
+        ipTextField.setSize(150,25);
+        stage.addActor(ipTextField);
       
         //Add button to screen
-        joinbutton = new TextButton("Join Game", skin);
-        joinbutton.setPosition(Gdx.graphics.getWidth() / 2 - (joinbutton.getWidth() / 2), Gdx.graphics.getHeight() / 2); // Add to the center even after resize
-        stage.addActor(joinbutton);
+        joinButton = new TextButton("Join Game", skin);
+        joinButton.setPosition(100, 100);
+        stage.addActor(joinButton);
         
         
         //Add click listener --> Start Game
-        joinbutton.addListener(new ChangeListener() 
+        joinButton.addListener(new ChangeListener() 
         {
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                titleMusic.play();
-                titleMusic.dispose();
+                menuMusic.dispose();
+                clickSound.play();
                 
-                if(!hostip.getText().equals(""))
+                if(!ipTextField.getText().equals(""))
                 {
-                    Constants.SERVERIP = hostip.getText();
+                    Constants.SERVERIP = ipTextField.getText();
                 }else
                 {
                     Constants.SERVERIP = "localhost";
@@ -124,7 +135,6 @@ public class JoinScreen implements Screen{
     public void dispose() 
     {
         buttonAtlas.dispose();
-        font.dispose();
         stage.dispose();
         skin.dispose();
     }
