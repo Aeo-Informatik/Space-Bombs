@@ -32,10 +32,6 @@ public class MenuScreen implements Screen
     private Stack stack;
     private Table rootTable;
     
-    //Music
-    private Music clickSound;
-    private Music menuMusic;
-    
     //Buttons
     private TextButton startbutton;
     private TextButton hostButton;
@@ -57,11 +53,9 @@ public class MenuScreen implements Screen
         
         
         /**------------------------AUDIO------------------------**/
-        clickSound = AudioManager.clickSound;
-        menuMusic = AudioManager.menuMusic;
-        menuMusic.setLooping(true);
-        menuMusic.play();
-        menuMusic.setVolume(0.3f);  
+        AudioManager.menuMusic.setLooping(true);
+        AudioManager.menuMusic.play();
+        AudioManager.menuMusic.setVolume(0.3f);  
 
         
         /**------------------------BUTTON STYLE------------------------**/
@@ -117,7 +111,7 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                clickSound.play();
+                AudioManager.clickSound.play();
                 
                 //Wait till sound is done
                 try 
@@ -129,7 +123,7 @@ public class MenuScreen implements Screen
                     
                 }
                 
-                game.setScreen(new JoinScreen(menuMusic));
+                game.setScreen(new JoinScreen());
             }
         });
         
@@ -140,7 +134,7 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                clickSound.play();
+                AudioManager.clickSound.play();
                 
                 //Wait till sound is done
                 try 
@@ -163,7 +157,7 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                clickSound.play();
+                AudioManager.clickSound.play();
                
                 //Wait till sound is done
                 try 
@@ -196,6 +190,7 @@ public class MenuScreen implements Screen
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.menuBackground)));
 
         //Draw stage
+        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

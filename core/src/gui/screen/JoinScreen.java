@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.game;
@@ -34,16 +35,8 @@ public class JoinScreen implements Screen
 {
     //Objects
     private Stage stage;
-    private Stack stack;
     private Table rootTable;
-    
-    //Music
-    private Music clickSound;
-    private Music menuMusic;
-    
-    //Local TextureManager
-    private Skin skin;
-    private TextureAtlas buttonAtlas;
+    private Stack stack;
     
     //Buttons
     private TextField ipTextField;
@@ -52,37 +45,53 @@ public class JoinScreen implements Screen
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
-    public JoinScreen(Music menuMusic)
+    public JoinScreen()
     {
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
-        this.menuMusic = menuMusic;
         Gdx.input.setInputProcessor(stage);
         
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontOptions.size = 11;
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
-        
-        //Audio
-        clickSound = AudioManager.clickSound;
 
-        //Load button description into memory
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
-        skin.addRegions(buttonAtlas);
+        /**------------------------BUTTON STYLE------------------------**/
+        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
+        textFieldStyle.font = font;
         
-        //Set the Textfield
-        ipTextField = new TextField("", skin);
-        ipTextField.setPosition(50, 50);
-        ipTextField.setSize(150,25);
-        stage.addActor(ipTextField);
-      
-        //Add button to screen
-        joinButton = new TextButton("Join Game", skin);
-        joinButton.setPosition(100, 100);
-        stage.addActor(joinButton);
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        textButtonStyle.up   = new TextureRegionDrawable(TextureManager.bombUp);
+        textButtonStyle.over = new TextureRegionDrawable(TextureManager.bombOver);
+        textButtonStyle.down = new TextureRegionDrawable(TextureManager.bombDown);
         
+        
+        /**------------------------BUTTON POSITION------------------------**/
+        rootTable = new Table();
+        rootTable.setFillParent(true);
+
+        Table stackTable = new Table();
+        stackTable.setFillParent(true);
+        
+        //Add Textfield to screen
+        ipTextField = new TextField("", textFieldStyle);
+        stackTable.add(ipTextField).padTop(15);
+        stackTable.row();
+        
+        //Add join button to screen
+        joinButton = new TextButton("Start", textButtonStyle);
+        stackTable.add(joinButton).padTop(15);
+        stackTable.row();
+        
+        //Set stack position
+        stack.setPosition(287, 195);
+        
+        //End
+        stack.add(stackTable);
+        stage.addActor(rootTable);
+        stage.addActor(stack);
         
         //Add click listener --> Start Game
         joinButton.addListener(new ChangeListener() 
@@ -90,8 +99,9 @@ public class JoinScreen implements Screen
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                menuMusic.dispose();
-                clickSound.play();
+                AudioManager.menuMusic.stop();
+                AudioManager.clickSound.play();
+                
                 
                 if(!ipTextField.getText().equals(""))
                 {
@@ -117,7 +127,6 @@ public class JoinScreen implements Screen
         
         //Render stage
         stage.act(Gdx.graphics.getDeltaTime());
-        
         stage.draw();
     }
     
@@ -134,9 +143,7 @@ public class JoinScreen implements Screen
     @Override
     public void dispose() 
     {
-        buttonAtlas.dispose();
         stage.dispose();
-        skin.dispose();
     }
 
     
