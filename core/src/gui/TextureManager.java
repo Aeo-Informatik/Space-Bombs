@@ -9,8 +9,10 @@ import com.gdx.bomberman.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
  *
@@ -22,10 +24,9 @@ public class TextureManager
     //Menu
     public static FreeTypeFontGenerator menuFont;
     public static Texture menuBackground;
-    public static Texture bombButton;
-    public static TextureRegion bombUp;
-    public static TextureRegion bombDown;
-    public static TextureRegion bombOver;
+    public static Skin skin;
+    public static TextureAtlas textureAtlas;
+    
     
     //Hud
     public static Texture hudCounterFullLive;
@@ -172,12 +173,9 @@ public class TextureManager
         /*---------------------------------MENU---------------------------------*/
         menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         menuBackground = loadTexture("menu/menu.png");
-        bombButton = loadTexture("button/button.png");
-        bombUp = new TextureRegion(bombButton, 0, 0, 64, 64);
-        bombOver = new TextureRegion(bombButton, 64, 0, 64, 64);
-        bombDown = new TextureRegion(bombButton, 128, 0, 64, 64);
-        
-        
+        textureAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
+        skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
+        skin.addRegions(textureAtlas);
         
         /*---------------------------------HUD---------------------------------*/
         hudCounterFullLive = loadTexture("other/hud2_full_live.png");

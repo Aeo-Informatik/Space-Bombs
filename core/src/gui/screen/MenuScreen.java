@@ -7,14 +7,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -23,6 +26,7 @@ import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
+import static gui.TextureManager.skin;
 
 
 public class MenuScreen implements Screen
@@ -57,13 +61,12 @@ public class MenuScreen implements Screen
         AudioManager.menuMusic.play();
         AudioManager.menuMusic.setVolume(0.3f);  
 
-        
         /**------------------------BUTTON STYLE------------------------**/
-        TextButtonStyle textButtonStyle = new TextButtonStyle();
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
-        textButtonStyle.up   = new TextureRegionDrawable(TextureManager.bombUp);
-        textButtonStyle.over = new TextureRegionDrawable(TextureManager.bombOver);
-        textButtonStyle.down = new TextureRegionDrawable(TextureManager.bombDown);
+        textButtonStyle.up   = skin.getDrawable("button_up");
+        textButtonStyle.down = skin.getDrawable("button_down");
+        textButtonStyle.over = skin.getDrawable("button_checked");
         
         
         /**------------------------BUTTON POSITION------------------------**/

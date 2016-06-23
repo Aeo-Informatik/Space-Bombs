@@ -10,6 +10,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,6 +26,7 @@ import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
+import static gui.TextureManager.skin;
 
 
 /**
@@ -42,7 +44,6 @@ public class JoinScreen implements Screen
     private TextField ipTextField;
     private TextButton joinButton;
     
-    
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
     public JoinScreen()
@@ -51,22 +52,21 @@ public class JoinScreen implements Screen
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
-        
+
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontOptions.size = 11;
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
-
+        
         /**------------------------BUTTON STYLE------------------------**/
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.font = font;
         
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
-        textButtonStyle.up   = new TextureRegionDrawable(TextureManager.bombUp);
-        textButtonStyle.over = new TextureRegionDrawable(TextureManager.bombOver);
-        textButtonStyle.down = new TextureRegionDrawable(TextureManager.bombDown);
-        
+        textButtonStyle.up   = skin.getDrawable("button_up");
+        textButtonStyle.down = skin.getDrawable("button_down");
+        textButtonStyle.over = skin.getDrawable("button_checked");
         
         /**------------------------BUTTON POSITION------------------------**/
         rootTable = new Table();
@@ -76,7 +76,7 @@ public class JoinScreen implements Screen
         stackTable.setFillParent(true);
         
         //Add Textfield to screen
-        ipTextField = new TextField("", textFieldStyle);
+        ipTextField = new TextField("", skin);
         stackTable.add(ipTextField).padTop(15);
         stackTable.row();
         
@@ -124,6 +124,9 @@ public class JoinScreen implements Screen
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        
+        //Set background image
+        rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.menuBackground)));
         
         //Render stage
         stage.act(Gdx.graphics.getDeltaTime());
