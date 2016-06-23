@@ -59,33 +59,6 @@ public class GameScreen implements Screen{
         this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ProcessData(entityManager);
         this.counterHud = new CounterHud(renderHud, entityManager);
-        
-        //Starts local server for 1 Player
-        if(Constants.TESTSERVER)
-            new Thread(new ServerStart()).start();
-        
-        //Connect to server
-        try 
-        {
-            client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
-            
-            client.connectToServer();
-            //client.pingThread();
-            
-        }catch(ConnectException e)
-        {
-            //If wrong server ip or port are given
-            System.err.println("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
-        
-        }catch(SocketException | UnknownHostException e)
-        {
-            System.err.println("Invalid ip address given: " + e.toString());
-            
-        }catch (IOException | InterruptedException e) 
-        {
-            System.err.println("ERROR: Unexpected client exception: " + e.toString());
-            Gdx.app.exit();
-        }
     }
     
     

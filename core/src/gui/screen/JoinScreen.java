@@ -7,24 +7,35 @@ package gui.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import networkClient.Client;
+import networkServer.ServerStart;
 
 
 /**
@@ -42,6 +53,7 @@ public class JoinScreen implements Screen
     private TextField ipTextField;
     private TextButton joinButton;
     private TextButton backButton;
+    private Label errorLabel;
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
@@ -54,13 +66,18 @@ public class JoinScreen implements Screen
 
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        fontOptions.size = 11;
-        BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
-        
+
         /**------------------------BUTTON STYLE------------------------**/
         
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        fontOptions.size = 14;
+        labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
+        labelStyle.fontColor = Color.RED;
+        labelStyle.background = new TextureRegionDrawable(new TextureRegion(new Texture("menu/textBackground.png")));
+        
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
+        fontOptions.size = 11;
+        textButtonStyle.font = TextureManager.menuFont.generateFont(fontOptions);
         textButtonStyle.up   = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
@@ -72,18 +89,25 @@ public class JoinScreen implements Screen
         Table stackTable = new Table();
         stackTable.setFillParent(true);
         
-        //Add Textfield to screen
-        ipTextField = new TextField("", skin);
-        stackTable.add(ipTextField).width(230);
+        fontOptions.size = 14;
+        errorLabel = new Label("", labelStyle);
+        errorLabel.setVisible(false);
+        errorLabel.setAlignment(Align.center);
+        stackTable.add(errorLabel).height(40).width(300);
         stackTable.row();
         
+        //Add Textfield to screen
+        ipTextField = new TextField("", skin);
+        stackTable.add(ipTextField).width(230).padTop(40);
+        stackTable.row();
+
         //Add join button to screen
         joinButton = new TextButton("Join", textButtonStyle);
         stackTable.add(joinButton).padTop(30);
         stackTable.row();
         
         //Set stack position
-        stack.setPosition(287, 185);
+        stack.setPosition(287, 220);
         
         //End
         stage.addActor(rootTable);
@@ -96,9 +120,7 @@ public class JoinScreen implements Screen
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                AudioManager.menuMusic.stop();
                 AudioManager.clickSound.play();
-                
                 
                 if(!ipTextField.getText().equals(""))
                 {
@@ -108,7 +130,40 @@ public class JoinScreen implements Screen
                     Constants.SERVERIP = "localhost";
                 }
 
-                game.setScreen(new GameScreen());
+                //Starts local server for 1 Player
+                if(Constants.TESTSERVER)
+                    new Thread(new ServerStart()).start();
+                
+                //Connect to server
+                try 
+                {
+                    client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+
+                    client.connectToServer();
+                    //client.pingThread();
+
+                    AudioManager.menuMusic.stop();
+                    
+                    game.setScreen(new GameScreen());
+                    
+                }catch(ConnectException e)
+                {
+                    //If wrong server ip or port are given
+                    errorLabel.setText("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
+                    errorLabel.setVisible(true);
+                    
+                }catch(SocketException | UnknownHostException e)
+                {
+                    errorLabel.setText("Invalid ip address given");
+                    errorLabel.setVisible(true);
+                     
+                }catch (IOException | InterruptedException e) 
+                {
+                    System.err.println("ERROR: Unexpected client exception: " + e.toString());
+                    Gdx.app.exit();
+                }
+                
+                
             }
         });
     }
