@@ -58,11 +58,13 @@ public class Client {
     {
         if(receiveThread != null)
         {
+
             receiveThread.interrupt();
         }
         
         if(pingThread != null)
         {
+
             pingThread.interrupt();
         }
 

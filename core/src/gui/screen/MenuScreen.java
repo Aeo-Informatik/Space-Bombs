@@ -101,9 +101,9 @@ public class MenuScreen implements Screen
         stack.setPosition(287, 195);
         
         //End 
-        stack.add(stackTable);
         stage.addActor(rootTable);
         stage.addActor(stack);
+        stack.add(stackTable);
         
         
         /**------------------------BUTTON FUNCTIONS------------------------**/

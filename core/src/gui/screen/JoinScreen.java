@@ -5,16 +5,14 @@
  */
 package gui.screen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -43,6 +41,7 @@ public class JoinScreen implements Screen
     //Buttons
     private TextField ipTextField;
     private TextButton joinButton;
+    private TextButton backButton;
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
@@ -59,8 +58,6 @@ public class JoinScreen implements Screen
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
         
         /**------------------------BUTTON STYLE------------------------**/
-        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
-        textFieldStyle.font = font;
         
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
@@ -77,21 +74,21 @@ public class JoinScreen implements Screen
         
         //Add Textfield to screen
         ipTextField = new TextField("", skin);
-        stackTable.add(ipTextField).padTop(15);
+        stackTable.add(ipTextField).width(230);
         stackTable.row();
         
         //Add join button to screen
-        joinButton = new TextButton("Start", textButtonStyle);
-        stackTable.add(joinButton).padTop(15);
+        joinButton = new TextButton("Join", textButtonStyle);
+        stackTable.add(joinButton).padTop(30);
         stackTable.row();
         
         //Set stack position
-        stack.setPosition(287, 195);
+        stack.setPosition(287, 185);
         
         //End
-        stack.add(stackTable);
         stage.addActor(rootTable);
         stage.addActor(stack);
+        stack.add(stackTable);
         
         //Add click listener --> Start Game
         joinButton.addListener(new ChangeListener() 
@@ -121,6 +118,9 @@ public class JoinScreen implements Screen
     @Override
     public void render(float f) 
     {
+        //Debug
+        //stage.setDebugAll(true);
+        
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
@@ -131,6 +131,24 @@ public class JoinScreen implements Screen
         //Render stage
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+        
+        /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
+        if(Gdx.input.isKeyPressed(Input.Keys.F12))
+        {
+            if(Gdx.graphics.isFullscreen())
+            {
+                Gdx.graphics.setWindowedMode(Constants.SCREENWIDTH, Constants.SCREENHEIGHT);
+            }else
+            {
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+            }
+        }
+        
+        /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        {
+            game.setScreen(new MenuScreen());
+        }
     }
     
     

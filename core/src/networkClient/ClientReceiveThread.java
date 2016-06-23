@@ -66,7 +66,6 @@ public class ClientReceiveThread implements Runnable {
                     Thread.sleep(100);
                 }
             }
-
             
         }catch(SocketException e)
         {
