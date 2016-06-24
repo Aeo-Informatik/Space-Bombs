@@ -176,8 +176,6 @@ public class JoinScreen implements Screen
                     System.err.println("ERROR: Unexpected client exception: " + e.toString());
                     Gdx.app.exit();
                 }
-                
-                
             }
         });
     }
