@@ -34,8 +34,10 @@ public class GameScreen implements Screen{
     private MapManager mapManager;
     private ProcessData processData;
     private SpriteBatch renderServer = new SpriteBatch();
-    private int previousMusicIndex;
+    private int previousMusicIndex = -1;
     private Random random = new Random();
+    private float musicTimer = 0;
+    private float musicStart = 5;
     
     //Main Player HUD
     private CounterHud counterHud;
@@ -47,11 +49,6 @@ public class GameScreen implements Screen{
      */
     public GameScreen()
     {
-        previousMusicIndex = random.nextInt(5);
-        AudioManager.currentIngameMusic = AudioManager.nextIngameMusic(previousMusicIndex);
-        AudioManager.currentIngameMusic.play();
-        AudioManager.currentIngameMusic.setVolume(0.3f);
-        
         this.camera = new OrthoCamera();
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
@@ -74,7 +71,7 @@ public class GameScreen implements Screen{
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
         //Play next music title after last one finished and make sure the next one is unequal the last one
-        if(!AudioManager.currentIngameMusic.isPlaying())
+        if((AudioManager.currentIngameMusic == null || !AudioManager.currentIngameMusic.isPlaying()) && musicStart < musicTimer)
         {
             int nextMusic = random.nextInt(5);
             while(nextMusic == previousMusicIndex)
@@ -86,6 +83,11 @@ public class GameScreen implements Screen{
             
             AudioManager.currentIngameMusic = AudioManager.nextIngameMusic(nextMusic);
             AudioManager.currentIngameMusic.play();
+            
+            musicTimer = 0;
+        }else if ((AudioManager.currentIngameMusic == null || !AudioManager.currentIngameMusic.isPlaying()))
+        {
+            musicTimer += Gdx.graphics.getDeltaTime();
         }
         
         //Check if client is connected to server
