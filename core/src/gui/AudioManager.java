@@ -22,6 +22,7 @@ public class AudioManager
     public static Music menuMusic;
     
     //Ingame Music
+    public static Music currentIngameMusic;
     public static Music Amys_Toxic_Cave;
     public static Music Flight_of_the_Battery;
     public static Music Disregard_Farm;      
@@ -54,6 +55,33 @@ public class AudioManager
         return Gdx.audio.newMusic(Gdx.files.internal(file));
     } 
     
+    public static Music nextIngameMusic(int index)
+    {
+        System.out.println("Music Number: " + index);
+        
+        switch(index)
+        {
+            case 0:
+                return Amys_Toxic_Cave;
+                
+            case 1:
+                return Flight_of_the_Battery;
+                
+            case 2:
+                return Disregard_Farm;
+                
+            case 3:
+                return Moshua_Jorse;
+                
+            case 4:
+                return Bit_Shifted;
+                
+            case 5:
+                return Mr_Smilez_Theme;
+        }
+        
+        return null;
+    }
     
 }
 

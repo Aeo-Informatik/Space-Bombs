@@ -29,13 +29,10 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.regex.Pattern;
 import networkClient.Client;
 import networkServer.Server;
-import networkServer.RunServer;
 
 
 /**
@@ -153,6 +150,8 @@ public class JoinScreen implements Screen
                 {
                     if(validateIPAddress(Constants.SERVERIP))
                     {
+                        System.out.println("Connecting to server " + Constants.SERVERIP + ":" + Constants.CONNECTIONPORT);
+                        
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                         client.connectToServer();
 
@@ -173,7 +172,7 @@ public class JoinScreen implements Screen
 
                 }catch (Exception e) 
                 {
-                    System.err.println("ERROR: Unexpected client exception: " + e.toString());
+                    System.err.println("ERROR: Unexpected exception in joinScreen: " + e);
                     Gdx.app.exit();
                 }
             }

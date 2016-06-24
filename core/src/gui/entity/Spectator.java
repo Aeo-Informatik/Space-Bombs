@@ -12,10 +12,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
+import java.io.IOException;
 
 /**
  *
@@ -204,7 +206,15 @@ public class Spectator extends Entity
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            System.out.println("Quit game with Keyboard [ESC]");
+            try 
+            {
+                client.closeConnection();
+                
+            } catch (IOException ex) 
+            {
+                System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
+            }
+            
             game.setScreen(new MenuScreen());
         }
         

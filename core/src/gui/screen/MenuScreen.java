@@ -51,6 +51,11 @@ public class MenuScreen implements Screen
         
         
         /**------------------------AUDIO------------------------**/
+        if(AudioManager.currentIngameMusic != null)
+        {
+            AudioManager.currentIngameMusic.dispose();
+        }
+        
         AudioManager.menuMusic.setLooping(true);
         AudioManager.menuMusic.play();
         AudioManager.menuMusic.setVolume(0.3f);  

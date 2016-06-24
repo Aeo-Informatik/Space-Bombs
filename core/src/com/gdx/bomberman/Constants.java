@@ -23,7 +23,7 @@ public class Constants {
     public static String MAPPATH = "maps/BasicMap.tmx";
     
     //Client config
-    public static String SERVERIP = "localhost";
+    public static String SERVERIP = "127.0.0.1";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     public static boolean CLIENTSHOWPONG = false; // Show received pong

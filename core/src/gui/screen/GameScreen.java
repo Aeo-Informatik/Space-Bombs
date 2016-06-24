@@ -7,22 +7,19 @@ package gui.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
-import java.io.IOException;
-import java.net.ConnectException;
-import networkClient.Client;
 import networkClient.ProcessData;
-import networkServer.RunServer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
+import gui.AudioManager;
 import gui.hud.CounterHud;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.util.Random;
 
 
 /**
@@ -37,6 +34,8 @@ public class GameScreen implements Screen{
     private MapManager mapManager;
     private ProcessData processData;
     private SpriteBatch renderServer = new SpriteBatch();
+    private int previousMusicIndex;
+    private Random random = new Random();
     
     //Main Player HUD
     private CounterHud counterHud;
@@ -48,12 +47,11 @@ public class GameScreen implements Screen{
      */
     public GameScreen()
     {
-          //hier we can add gameplay music    
-      //Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/music/Gamemusic.ogg"));  
-      //music.setLooping(true);
-      //music.play();
-      //music.setVolume(8.5f);   
-     
+        previousMusicIndex = random.nextInt(5);
+        AudioManager.currentIngameMusic = AudioManager.nextIngameMusic(previousMusicIndex);
+        AudioManager.currentIngameMusic.play();
+        AudioManager.currentIngameMusic.setVolume(0.3f);
+        
         this.camera = new OrthoCamera();
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
@@ -69,9 +67,26 @@ public class GameScreen implements Screen{
     @Override
     public void render(float f)
     {
+        
+        
         //Set bacckground color
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        
+        //Play next music title after last one finished and make sure the next one is unequal the last one
+        if(!AudioManager.currentIngameMusic.isPlaying())
+        {
+            int nextMusic = random.nextInt(5);
+            while(nextMusic == previousMusicIndex)
+            {
+                nextMusic = random.nextInt(5);
+            }
+            
+            previousMusicIndex = nextMusic;
+            
+            AudioManager.currentIngameMusic = AudioManager.nextIngameMusic(nextMusic);
+            AudioManager.currentIngameMusic.play();
+        }
         
         //Check if client is connected to server
         if(client != null)
