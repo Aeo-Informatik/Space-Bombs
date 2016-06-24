@@ -10,7 +10,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -31,7 +30,6 @@ import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import networkClient.Client;
@@ -132,7 +130,8 @@ public class JoinScreen implements Screen
 
                 //Starts local server for 1 Player
                 if(Constants.TESTSERVER)
-                    new Thread(new ServerStart()).start();
+                {
+                }
                 
                 //Connect to server
                 try 
@@ -146,17 +145,12 @@ public class JoinScreen implements Screen
                     
                     game.setScreen(new GameScreen());
                     
-                }catch(ConnectException e)
-                {
-                    //If wrong server ip or port are given
-                    errorLabel.setText("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
-                    errorLabel.setVisible(true);
-                    
                 }catch(SocketException | UnknownHostException e)
                 {
                     errorLabel.setText("Invalid ip address given");
                     errorLabel.setVisible(true);
-                     
+                    System.err.println("ERROR: " + e.toString()); 
+                    
                 }catch (IOException | InterruptedException e) 
                 {
                     System.err.println("ERROR: Unexpected client exception: " + e.toString());

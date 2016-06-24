@@ -6,8 +6,6 @@
 package networkServer;
 import com.badlogic.gdx.Gdx;
 import com.gdx.bomberman.Constants;
-import java.net.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -22,13 +20,10 @@ public class ServerStart implements Runnable
         try
         {
             //Initialise server object
-            Server server = new Server(Constants.SERVERPORT, 1, 1);   
+            Server server = new Server(Constants.SERVERPORT, 1);   
 
-            //Accept all client connections and get them as socket object
-            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERLOBBYWAIT);
-
-            //Starts the game
-            server.startGame(socketList);
+            server.AcceptConnections();
+            server.startGame();
             
         }catch(Exception e)
         {
@@ -44,13 +39,10 @@ public class ServerStart implements Runnable
         {
             
             //Initialise server object
-            Server server = new Server(Constants.SERVERPORT, Constants.MINPLAYERS, Constants.MAXPLAYERS);   
-               
-            //Accept all client connections and get them as socket object
-            ArrayList<Socket> socketList = server.AcceptConnections(Constants.SERVERLOBBYWAIT);
-            
-            //Starts the game
-            server.startGame(socketList);
+            Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);   
+
+            server.AcceptConnections();
+            server.startGame();
                
         }catch(Exception e)
         {
