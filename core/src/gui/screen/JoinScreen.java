@@ -131,6 +131,7 @@ public class JoinScreen implements Screen
                 //Starts local server for 1 Player
                 if(Constants.TESTSERVER)
                 {
+                    new Thread(new ServerStart()).start();
                 }
                 
                 //Connect to server

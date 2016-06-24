@@ -34,8 +34,7 @@ public class Constants {
     //Server config
     public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
-    public static int MAXPLAYERS = 1;
-    public static int SERVERLOBBYWAIT = 30000; // 30 seconds
+    public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
     public static boolean SERVERSHOWPING = false; // Show received ping
         
