@@ -49,6 +49,6 @@ A font diplaying "Winner" or something like that
 2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
-Enemy teleports himself in online mode due to laggs
+Enemy teleports himself in online mode due to laggs --> Vector2.interpolation could be a solution
 On some plattforms the camera is slower then the player ? (maybe framerate problems)
 Game Icon isn't shown on mac because of different size preferences 128x128
