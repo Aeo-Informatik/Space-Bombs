@@ -161,13 +161,13 @@ public class JoinScreen implements Screen
                         game.setScreen(new GameScreen());
                     }else
                     {
-                        errorLabel.setText("Invalid IP Address!");
+                        errorLabel.setText("Invalid IP address");
                         errorLabel.setVisible(true);
                     }
                     
                 }catch(SocketException | UnknownHostException e)
                 {
-                    errorLabel.setText(e.getMessage());
+                    errorLabel.setText("Rejected connection");
                     errorLabel.setVisible(true);
                     System.err.println("ERROR: " + e.toString()); 
 
