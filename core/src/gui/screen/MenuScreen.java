@@ -101,6 +101,29 @@ public class MenuScreen implements Screen
         
         
         /**------------------------BUTTON FUNCTIONS------------------------**/
+        //Add click listener --> Help Button
+        hostButton.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) 
+            {   
+                //Add click sound
+                AudioManager.clickSound.play();
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+                
+                game.setScreen(new HostScreen()); 
+            }
+        });
+        
         //Add click listener --> Start Game
         startbutton.addListener(new ChangeListener() 
         {
@@ -147,8 +170,8 @@ public class MenuScreen implements Screen
             }
         });
         
-        //Add click listener --> Exit Game
-        helpbutton .addListener(new ChangeListener() 
+        //Add click listener --> Help Button
+        helpbutton.addListener(new ChangeListener() 
         {
             @Override
             public void changed (ChangeEvent event, Actor actor) 
