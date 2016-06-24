@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import networkClient.Client;
+import networkServer.Server;
 import networkServer.ServerStart;
 
 
@@ -131,7 +132,17 @@ public class JoinScreen implements Screen
                 //Starts local server for 1 Player
                 if(Constants.TESTSERVER)
                 {
-                    new Thread(new ServerStart()).start();
+                    new Thread()
+                    {
+                        @Override
+                        public void run() 
+                        {
+                    
+                            Server server = new Server(Constants.SERVERPORT, 1);
+                            server.AcceptConnections();
+                            server.startGame();
+                        }
+                    }.start();
                 }
                 
                 //Connect to server

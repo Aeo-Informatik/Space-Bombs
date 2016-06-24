@@ -1,5 +1,6 @@
 package networkServer;
 
+import com.badlogic.gdx.Gdx;
 import com.gdx.bomberman.Constants;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -16,7 +17,7 @@ public class Server
     private boolean stopListening = false;
     private ArrayList<Socket> clientConnections = new ArrayList<>();
     
-    public Server(int port, int maxConnections) throws Exception
+    public Server(int port, int maxConnections)
     {
         try 
         {
@@ -26,7 +27,7 @@ public class Server
         }catch(Exception e) 
         {
             System.err.println("ERROR: Something went wrong on creating the server: " +e);
-            throw e;
+            Gdx.app.exit();
         }
     }
     
@@ -100,23 +101,23 @@ public class Server
                         {
                             break;
                         }
-                        
+
                         //Accept connection and set timeout
                         serverSocket.setSoTimeout(1);
                         clientSocket = serverSocket.accept();
 
                     }catch(SocketTimeoutException e)
                     {
-                        
+
                     }
                 }
-                
+
                 //Stops clients from connecting
                 if(stopListening == true)
                 {
                     break;
                 }
-                
+
                 //Connection announcement
                 System.out.println("-----New Client-----");
                 int y = i +1;
@@ -127,7 +128,7 @@ public class Server
                 //Add connection object to array list
                 clientConnections.add(clientSocket);
             }
-            
+
         }catch(Exception e)
         {
             System.err.println("ERROR: Something went wrong in accepting connections " + e);
