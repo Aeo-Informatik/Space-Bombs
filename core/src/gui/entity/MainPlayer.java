@@ -5,7 +5,6 @@
  */
 package gui.entity;
 
-import com.badlogic.gdx.Game;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -411,7 +410,6 @@ public class MainPlayer extends Entity
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
         {
-            System.out.println("Quit game with Keyboard [ESC]");
             try 
             {
                 client.closeConnection();

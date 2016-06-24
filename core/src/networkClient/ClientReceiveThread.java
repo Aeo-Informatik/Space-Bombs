@@ -69,7 +69,7 @@ public class ClientReceiveThread implements Runnable {
             
         }catch(SocketException e)
         {
-            System.out.println("Disconnected from Server");
+            System.out.println("Client disconnecting from server...");
         
             //If server disconnects shutdown thread
         }catch(IOException | InterruptedException e)
