@@ -36,6 +36,7 @@ public class TextureManager
     
     //Items
     public static Texture speed;
+    public static Animation speed_Anim;
     
     //Player 1 Walking
     public static Texture p1WalkingDown;
@@ -186,7 +187,10 @@ public class TextureManager
         
         
         /*------------------------------ITEMS--------------------------------*/
-        speed = loadTexture("other/medal.png");
+        float SpeedAnimTime = 0.25f;
+        
+        speed = loadTexture("other/speed_upgrade.png");
+        speed_Anim = new Animation(SpeedAnimTime,new TextureRegion(speed,0,0,32,32));
         
         
         

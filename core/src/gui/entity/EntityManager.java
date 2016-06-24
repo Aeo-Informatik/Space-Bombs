@@ -28,6 +28,7 @@ public class EntityManager {
     private SpriteBatch renderEnemyPlayer = new SpriteBatch();
     private SpriteBatch renderSpectator = new SpriteBatch();
     private SpriteBatch renderOther = new SpriteBatch();
+    private SpriteBatch renderItem = new SpriteBatch();
     
     //Array from libgdx is much faster in comparison to an arraylist
     private Array <EnemyPlayer> enemies = new Array<>();
@@ -54,6 +55,7 @@ public class EntityManager {
         renderEnemyPlayer.setProjectionMatrix(camera.combined);
         renderSpectator.setProjectionMatrix(camera.combined);
         renderOther.setProjectionMatrix(camera.combined);
+        renderItem.setProjectionMatrix(camera.combined);
         
         /**--------------------PLAYER RENDERER--------------------**/
         //Render every enemy object in list
@@ -94,15 +96,18 @@ public class EntityManager {
         for (Bomb bomb: bombArrayEnemy)
         {
             bomb.render(renderOther);
-        } 
+        }                       
+        
+        renderOther.end();
+        
+        renderItem.begin();
         
         for(Item item: itemArray)
         {
-            item.render(renderOther);
+            item.render(renderItem);
         }
-                    
         
-        renderOther.end();
+        renderItem.end();
     }
     
     
@@ -184,9 +189,25 @@ public class EntityManager {
     
     public void spawnItem()
     {
-        Speed speed = new Speed(new Vector2(1 * Constants.MAPTEXTUREWIDTH, 1 * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0),map, this);
-        Item item = speed;
-        itemArray.add(item);
+        for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
+        {
+            for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
+            {
+                try
+                {
+                    if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
+                    {
+                        Speed speed = new Speed(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                        itemArray.add(speed);
+                        System.out.println(itemArray.size);
+                        System.out.println("X:" + mapX + " Y:" + mapY);
+                    }
+                }catch(NullPointerException e)
+                {
+
+                }
+            }
+        }
     }
     /**
      * Returns the Bomb Object on the specified coordinates. If there is no bomb return null.

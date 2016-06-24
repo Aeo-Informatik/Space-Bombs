@@ -228,7 +228,7 @@ public class Bomb extends Entity
             this.isExploded = true;
         }
     }
-    
+            
     /**
      * If bomb explosion hits block delete it
      * @param x: position on x axis

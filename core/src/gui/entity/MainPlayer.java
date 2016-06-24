@@ -188,7 +188,11 @@ public class MainPlayer extends Entity
     {
         String moveCommand = "";
         float cameraSpeed = 2.51f;
-        
+        if((Gdx.input.isKeyJustPressed(Keys.B)))
+                {
+                   entityManager.spawnItem();
+                    System.out.println("YEAH!");
+                }
         
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))

@@ -6,6 +6,7 @@
 
 package gui.entity.item;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
@@ -19,6 +20,17 @@ public class Item extends Entity{
     public Item(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
     }
+    
+    public void render(SpriteBatch renderObject)
+    {
+        
+    }
+    
+    public void check()
+    {
+        System.out.println("a");
+    }
+    
     
     
 }
