@@ -37,7 +37,7 @@ public class GameScreen implements Screen{
     private int previousMusicIndex = -1;
     private Random random = new Random();
     private float musicTimer = 0;
-    private float musicStart = 5;
+    private float musicStart = 15; //Seconds after game start or after music is finished
     
     //Main Player HUD
     private CounterHud counterHud;
@@ -64,8 +64,6 @@ public class GameScreen implements Screen{
     @Override
     public void render(float f)
     {
-        
-        
         //Set bacckground color
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);

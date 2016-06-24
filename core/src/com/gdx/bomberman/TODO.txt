@@ -51,8 +51,6 @@ A font diplaying "Winner" or something like that
 2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
-Enemy player blinks randomly in online mode
 Enemy teleports himself in online mode due to laggs
-Player can be stuck between bombs
 On some plattforms the camera is slower then the player ? (maybe framerate problems)
 Game Icon isn't shown on mac and linux probably because of different size preferences
