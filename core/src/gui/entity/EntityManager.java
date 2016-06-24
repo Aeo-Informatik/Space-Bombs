@@ -104,6 +104,7 @@ public class EntityManager {
         
         for(Item item: itemArray)
         {
+            if(item.)
             item.render(renderItem);
         }
         
@@ -268,6 +269,41 @@ public class EntityManager {
         } catch (Exception e) 
         {
             throw e;
+        }
+    }
+    
+    public int getPlayerIDOnPosCoordinates(int X, int Y)
+    {
+        
+            for(EnemyPlayer enemy:enemies)
+            {                
+                try
+                {
+                    if(enemy.getPosition().x / Constants.MAPTEXTUREWIDTH == X 
+                            && enemy.getPosition().y / Constants.MAPTEXTUREHEIGHT == Y)
+                    {
+                        return enemy.getPlayerId();
+                    }
+                }catch(NullPointerException e)
+                {
+                    
+                }
+            }
+            try
+            {
+                if((int)(mainPlayer.getPosition().x / Constants.MAPTEXTUREWIDTH) == X 
+                    && (int)(mainPlayer.getPosition().y / Constants.MAPTEXTUREHEIGHT) == Y)
+                {
+                    return mainPlayer.getPlayerId();
+                }
+            }catch(NullPointerException e)
+            {
+                
+            }
+            
+       
+        {
+           return -1; 
         }
     }
     

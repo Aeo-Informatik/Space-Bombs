@@ -17,6 +17,8 @@ import gui.map.MapManager;
  */
 public class Item extends Entity{
 
+    private boolean collected = false;
+    
     public Item(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
     }
@@ -26,9 +28,15 @@ public class Item extends Entity{
         
     }
     
-    public void check()
+    public int check(int X, int Y)
     {
-        System.out.println("a");
+        if(entityManager.getPlayerIDOnPosCoordinates(X, Y) != -1)
+        {
+            System.out.println("yeah!"); 
+            collected = true;
+            return entityManager.getPlayerIDOnPosCoordinates(X, Y);
+        }
+        return -1;
     }
     
     

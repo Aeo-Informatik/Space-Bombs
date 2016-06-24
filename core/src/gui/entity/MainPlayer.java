@@ -459,5 +459,23 @@ public class MainPlayer extends Entity
     {
         return this.coins;
     }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
+
+    public int getMaxBombPlacing() {
+        return maxBombPlacing;
+    }
+
+    public void setMaxBombPlacing(int maxBombPlacing) {
+        this.maxBombPlacing = maxBombPlacing;
+    }
+    
+    
     
 }

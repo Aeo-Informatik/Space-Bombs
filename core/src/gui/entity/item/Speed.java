@@ -28,6 +28,7 @@ public class Speed extends Item{
     private int cellX, cellY;
     private AnimEffects animEffects = new AnimEffects();
     
+    
     public Speed(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
         this.speedAnim = TextureManager.speed_Anim;
@@ -47,7 +48,7 @@ public class Speed extends Item{
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         
-        super.check();
+        super.check(cellX, cellY);
     }
     
 
