@@ -11,28 +11,8 @@ import com.gdx.bomberman.Constants;
  *
  * @author qubasa
  */
-public class ServerStart implements Runnable
+public class RunServer 
 {
-
-    @Override
-    public void run() 
-    {
-        try
-        {
-            //Initialise server object
-            Server server = new Server(Constants.SERVERPORT, 1);   
-
-            server.AcceptConnections();
-            server.startGame();
-            
-        }catch(Exception e)
-        {
-            System.err.println("ERROR: Unexpected error has been thrown in main" + e);
-            Gdx.app.exit();
-        }
-    }
-    
-    
     public static void main(String [] args)
     {
         try

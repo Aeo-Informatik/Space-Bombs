@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import networkClient.Client;
 import networkClient.ProcessData;
-import networkServer.ServerStart;
+import networkServer.RunServer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;

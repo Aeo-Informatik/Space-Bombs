@@ -5,7 +5,7 @@
  */
 package com.gdx.bomberman;
 
-import networkServer.ServerStart;
+import networkServer.RunServer;
 
 /**
  *
