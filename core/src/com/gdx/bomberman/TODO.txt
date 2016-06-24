@@ -1,5 +1,4 @@
 //General
-Add music to the game & menu!
 Add sound effects to the game & menu.
 
 //Bomb
@@ -11,7 +10,6 @@ Add sound effects to the game & menu.
 6) A hub navigation bar a la minecraft for bomb selection
 
 //Textures
-10) !!Create buttons and background for every screen
 6) Adding an animation for the player standig still
 11) Better bomb animation with fuse going down
 13) Hud texture a la minecraft for bomb selection
@@ -53,4 +51,4 @@ A font diplaying "Winner" or something like that
 //Bugs
 Enemy teleports himself in online mode due to laggs
 On some plattforms the camera is slower then the player ? (maybe framerate problems)
-Game Icon isn't shown on mac and linux probably because of different size preferences
+Game Icon isn't shown on mac because of different size preferences 128x128
