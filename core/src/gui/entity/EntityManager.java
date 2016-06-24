@@ -104,7 +104,7 @@ public class EntityManager {
         
         for(Item item: itemArray)
         {
-            if(item.)
+            //if(item.)
             item.render(renderItem);
         }
         
