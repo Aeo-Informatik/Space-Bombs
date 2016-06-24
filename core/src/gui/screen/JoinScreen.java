@@ -93,7 +93,7 @@ public class JoinScreen implements Screen
         errorLabel = new Label("", labelStyle);
         errorLabel.setVisible(false);
         errorLabel.setAlignment(Align.center);
-        stackTable.add(errorLabel).height(40).width(300);
+        stackTable.add(errorLabel).height(40).width(300).padBottom(15);
         stackTable.row();
         
         //Add Textfield to screen
@@ -107,7 +107,7 @@ public class JoinScreen implements Screen
         stackTable.row();
         
         //Set stack position
-        stack.setPosition(287, 220);
+        stack.setPosition(287, 227);
         
         //End
         stage.addActor(rootTable);
@@ -225,7 +225,7 @@ public class JoinScreen implements Screen
     @Override
     public void resize(int width, int height) 
     {
-        
+        stage.getViewport().update(width, height, false);
     }
 
     
