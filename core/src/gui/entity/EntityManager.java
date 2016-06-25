@@ -208,7 +208,7 @@ public class EntityManager {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
                     {
                         int item;
-                        item = (int)(Math.random()*2);
+                        item = (int)(Math.random()*3);
                         System.out.println(item);
                         switch(item)
                         {
@@ -216,13 +216,15 @@ public class EntityManager {
                             case(1):
                             {
                                 Speed speed = new Speed(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
-                                itemArray.add(speed);   
+                                itemArray.add(speed);
+                                break;
                             }
                             
                             case(2):
                             {
                                 BombUp bombUp = new BombUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
                                 itemArray.add(bombUp);
+                                break;
                             }
                             
                             default:
