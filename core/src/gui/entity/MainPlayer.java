@@ -364,7 +364,6 @@ public class MainPlayer extends Entity
         if((Gdx.input.isKeyJustPressed(Keys.B)))
         {
            entityManager.spawnItem();
-           System.out.println("YEAH! L(・o・)」");
         }
         
         /*------------------PLACE BOMB------------------*/
