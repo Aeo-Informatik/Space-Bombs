@@ -81,6 +81,7 @@ public class GameScreen implements Screen{
             
             AudioManager.currentIngameMusic = AudioManager.nextIngameMusic(nextMusic);
             AudioManager.currentIngameMusic.play();
+            AudioManager.currentIngameMusic.setVolume(Constants.MUSICVOLUME);
             
             musicTimer = 0;
         }else if ((AudioManager.currentIngameMusic == null || !AudioManager.currentIngameMusic.isPlaying()))

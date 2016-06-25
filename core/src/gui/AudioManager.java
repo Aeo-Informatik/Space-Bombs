@@ -17,6 +17,9 @@ public class AudioManager
     
     //Menu Sounds
     public static Music clickSound;
+    public static Music normalExplosion;
+    public static Music normalExplosion1;
+    public static Music normalExplosion2;
     
     //Menu Music
     public static Music menuMusic;
@@ -36,11 +39,11 @@ public class AudioManager
     {      
         //Menu Sounds
         clickSound = loadAudio("audio/sounds/click.wav");
+        normalExplosion = loadAudio("audio/sounds/8-bit-explosion-stakkato.wav");
         
         //Menu Music
         menuMusic = loadAudio("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
 
-        
         //Ingame Music
         Amys_Toxic_Cave = loadAudio("audio/music/The_Briggs_Effect/Amys_Toxic_Cave.mp3");
         Flight_of_the_Battery = loadAudio("audio/music/The_Briggs_Effect/Flight_of_the Battery.mp3");

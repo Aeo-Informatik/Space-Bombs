@@ -58,7 +58,7 @@ public class MenuScreen implements Screen
         
         AudioManager.menuMusic.setLooping(true);
         AudioManager.menuMusic.play();
-        AudioManager.menuMusic.setVolume(0.3f);  
+        AudioManager.menuMusic.setVolume(Constants.MUSICVOLUME);  
 
         /**------------------------BUTTON STYLE------------------------**/
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -114,6 +114,7 @@ public class MenuScreen implements Screen
             {   
                 //Add click sound
                 AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -137,6 +138,7 @@ public class MenuScreen implements Screen
             {   
                 //Add click musik
                 AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -160,6 +162,7 @@ public class MenuScreen implements Screen
             {   
                 //Add click sound
                 AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -183,6 +186,7 @@ public class MenuScreen implements Screen
             {   
                 //Add click sound
                 AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
                
                 //Wait till sound is done
                 try 

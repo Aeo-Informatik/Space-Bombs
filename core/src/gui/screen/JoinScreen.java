@@ -118,6 +118,7 @@ public class JoinScreen implements Screen
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
                 AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
                 
                 if(!ipTextField.getText().equals(""))
                 {

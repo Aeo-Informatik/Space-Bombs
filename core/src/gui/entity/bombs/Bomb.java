@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
+import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
@@ -362,8 +363,8 @@ public class Bomb extends Entity
     private void explode()
     {
       
-      
-     
+        AudioManager.normalExplosion.play();
+        AudioManager.normalExplosion.setVolume(Constants.SOUNDVOLUME);
         
         
         //Create new cell and set texture
