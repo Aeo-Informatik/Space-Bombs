@@ -13,6 +13,7 @@ import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import gui.entity.item.Item;
 import gui.entity.item.*;
 
@@ -104,15 +105,7 @@ public class EntityManager {
         
         for(Item item: itemArray)
         {
-            if(item.isCollected() == false )
-            {
             item.render(renderItem);
-            }else 
-            {
-                itemArray.removeValue(item, true);
-                
-                System.out.println("collected");
-            }
         }
         
         renderItem.end();
@@ -148,6 +141,15 @@ public class EntityManager {
             if(this.bombArray.get(i).isExploded())
             {
                 bombArray.removeIndex(i);
+            }
+        }
+        
+        for (int i=0; i < itemArray.size; i++)
+        {
+            if(this.itemArray.get(i).isCollected())
+            {
+                itemArray.get(i).clear();
+                itemArray.removeIndex(i);
             }
         }
         
@@ -197,7 +199,7 @@ public class EntityManager {
     
     public void spawnItem()
     {
-        
+        int i=0;
         
         for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
         {
@@ -209,7 +211,6 @@ public class EntityManager {
                     {
                         int item;
                         item = (int)(Math.random()*3);
-                        System.out.println(item);
                         switch(item)
                         {
                         
@@ -241,6 +242,7 @@ public class EntityManager {
                 }
             }
         }
+        System.out.println(itemArray.size);
     }
     /**
      * Returns the Bomb Object on the specified coordinates. If there is no bomb return null.
@@ -334,10 +336,11 @@ public class EntityManager {
             }
             
        
-        {
+        
            return -1; 
-        }
+        
     }
+           
     
     /**
      * Places the specified bomb type into the map for enemy player
@@ -420,4 +423,8 @@ public class EntityManager {
         this.map = map;
     }
     
+    public MainPlayer getMainplayer()
+    {
+        return mainPlayer;
+    }
 }
