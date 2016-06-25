@@ -35,8 +35,8 @@ public class TextureManager
     public static Texture hudCounterNoLive;
     
     //Items
-    public static Texture speed;
-    public static Animation speed_Anim;
+    public static Texture speedup;
+    public static TextureRegion speedUp;
     
     public static Texture bombup;
     public static TextureRegion bombUp;
@@ -192,8 +192,8 @@ public class TextureManager
         /*------------------------------ITEMS--------------------------------*/
         float SpeedAnimTime = 0.25f;
         
-        speed = loadTexture("other/speed_upgrade.png");
-        speed_Anim = new Animation(SpeedAnimTime,new TextureRegion(speed,0,0,32,32));
+        speedup = loadTexture("other/speed_upgrade.png");
+        speedUp = new TextureRegion(speedup,0,0,32,32);
         
         bombup = loadTexture("other/bomb_upgrade.png");
         bombUp = new TextureRegion(bombup,0,0,32,32);
