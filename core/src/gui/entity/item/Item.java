@@ -38,6 +38,14 @@ public class Item extends Entity{
         }
         return -1;
     }
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
     
     
     

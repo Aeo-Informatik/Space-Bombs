@@ -38,6 +38,9 @@ public class TextureManager
     public static Texture speed;
     public static Animation speed_Anim;
     
+    public static Texture bombup;
+    public static TextureRegion bombUp;
+    
     //Player 1 Walking
     public static Texture p1WalkingDown;
     public static Animation p1WalkingDownAnim;
@@ -191,6 +194,9 @@ public class TextureManager
         
         speed = loadTexture("other/speed_upgrade.png");
         speed_Anim = new Animation(SpeedAnimTime,new TextureRegion(speed,0,0,32,32));
+        
+        bombup = loadTexture("other/bomb_upgrade.png");
+        bombUp = new TextureRegion(bombup,0,0,32,32);
         
         
         

@@ -104,8 +104,15 @@ public class EntityManager {
         
         for(Item item: itemArray)
         {
-            //if(item.)
+            if(item.isCollected() == false )
+            {
             item.render(renderItem);
+            }else 
+            {
+                itemArray.removeValue(item, true);
+                
+                System.out.println("collected");
+            }
         }
         
         renderItem.end();
@@ -190,6 +197,8 @@ public class EntityManager {
     
     public void spawnItem()
     {
+        
+        
         for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
         {
             for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
@@ -198,10 +207,31 @@ public class EntityManager {
                 {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
                     {
-                        Speed speed = new Speed(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
-                        itemArray.add(speed);
-                        System.out.println(itemArray.size);
-                        System.out.println("X:" + mapX + " Y:" + mapY);
+                        int item;
+                        item = (int)(Math.random()*2);
+                        System.out.println(item);
+                        switch(item)
+                        {
+                        
+                            case(1):
+                            {
+                                Speed speed = new Speed(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                itemArray.add(speed);   
+                            }
+                            
+                            case(2):
+                            {
+                                BombUp bombUp = new BombUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                itemArray.add(bombUp);
+                            }
+                            
+                            default:
+                            {
+
+                            }
+                        
+                        }
+                        
                     }
                 }catch(NullPointerException e)
                 {
