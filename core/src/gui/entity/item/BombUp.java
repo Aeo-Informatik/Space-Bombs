@@ -5,16 +5,15 @@
  */
 package gui.entity.item;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
-import gui.AnimEffects;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+
 
 /**
  *
@@ -25,16 +24,12 @@ public class BombUp extends Item{
     
     private final TextureRegion bombUp;
     private int cellX, cellY;
-    private AnimEffects animEffects = new AnimEffects();
-    private TextureRegion emptyBlock;
+
     
     
     public BombUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
         this.bombUp = TextureManager.bombUp;
-        this.emptyBlock = TextureManager.emptyBlock;
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
     }
    
     public void render(SpriteBatch renderObject)
@@ -51,12 +46,7 @@ public class BombUp extends Item{
         
         
         super.check(cellX, cellY);
-        if(super.isCollected() == true )
-        {
-            TiledMapTileLayer.Cell cellCenter = new TiledMapTileLayer.Cell();
-            cellCenter.setTile(new StaticTiledMapTile(emptyBlock));
-             map.getItemLayer().setCell(cellX, cellY, cellCenter);
-        }
+
     }
     
 

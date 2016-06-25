@@ -6,18 +6,16 @@
 
 package gui.entity.item;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import gui.AnimEffects;
+
 
 /**
  *
@@ -25,18 +23,14 @@ import gui.AnimEffects;
  */
 public class Speed extends Item{
 
-    private final Animation speedAnim;
+    private final TextureRegion speedUp;
     private int cellX, cellY;
-    private AnimEffects animEffects = new AnimEffects();
-    private TextureRegion emptyBlock;
     
     
     public Speed(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
-        this.speedAnim = TextureManager.speed_Anim;
-        this.emptyBlock = TextureManager.emptyBlock;
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
+        this.speedUp = TextureManager.speedUp;
+
     }
    
     public void render(SpriteBatch renderObject)
@@ -46,19 +40,13 @@ public class Speed extends Item{
         
         
         Cell cell = new Cell();
-        cell.setTile(new StaticTiledMapTile(animEffects.getFrame(speedAnim)));
+        cell.setTile(new StaticTiledMapTile(speedUp));
         cell.getTile().getProperties().put("bomb", null);
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         
         super.check(cellX, cellY);
-        if(super.isCollected() == true )
-        {
-            Cell cellCenter = new Cell();
-            cellCenter.setTile(new StaticTiledMapTile(emptyBlock));
-             map.getItemLayer().setCell(cellX, cellY, cellCenter);
-        }
     }
     
 
