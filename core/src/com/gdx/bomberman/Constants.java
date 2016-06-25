@@ -5,8 +5,6 @@
  */
 package com.gdx.bomberman;
 
-import networkServer.ServerStart;
-
 /**
  *
  * @author qubasa
@@ -16,7 +14,7 @@ public class Constants {
     //Window config
     public static int SCREENWIDTH = 800;
     public static int SCREENHEIGHT = 480;
-    public static boolean FULLSCREEN = true;
+    public static boolean FULLSCREEN = false;
     public static String WINDOWTITEL = "Aeo Bombs";
     public static String WINDOWICONPATH = "other/icon.png";
     
@@ -25,16 +23,16 @@ public class Constants {
     public static String MAPPATH = "maps/BasicMap.tmx";
     
     //Client config
-    public static String SERVERIP = "localhost";
+    public static String SERVERIP = "127.0.0.1";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     public static boolean CLIENTSHOWPONG = false; // Show received pong
     public static int PINGDELAY = 2; // 1 ping each 2 seconds
     
     //Server config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
-    public static int MAXPLAYERS = 4;
+    public static int MAXPLAYERS = 2;
     public static boolean SERVERDEBUG = false;
     public static boolean SERVERSHOWPING = false; // Show received ping
         

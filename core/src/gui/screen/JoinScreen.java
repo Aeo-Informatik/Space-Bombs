@@ -29,11 +29,10 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import networkClient.Client;
-import networkServer.ServerStart;
+import networkServer.Server;
 
 
 /**
@@ -91,12 +90,12 @@ public class JoinScreen implements Screen
         errorLabel = new Label("", labelStyle);
         errorLabel.setVisible(false);
         errorLabel.setAlignment(Align.center);
-        stackTable.add(errorLabel).height(40).width(300);
+        stackTable.add(errorLabel).height(40).width(300).padBottom(15);
         stackTable.row();
         
         //Add Textfield to screen
         ipTextField = new TextField("", skin);
-        stackTable.add(ipTextField).width(230).padTop(40);
+        stackTable.add(ipTextField).width(230).padTop(25);
         stackTable.row();
 
         //Add join button to screen
@@ -105,7 +104,7 @@ public class JoinScreen implements Screen
         stackTable.row();
         
         //Set stack position
-        stack.setPosition(287, 220);
+        stack.setPosition(287, 227);
         
         //End
         stage.addActor(rootTable);
@@ -125,40 +124,57 @@ public class JoinScreen implements Screen
                     Constants.SERVERIP = ipTextField.getText();
                 }else
                 {
-                    Constants.SERVERIP = "localhost";
+                    Constants.SERVERIP = "127.0.0.1";
                 }
 
                 //Starts local server for 1 Player
+                Thread testServer = null;
                 if(Constants.TESTSERVER)
                 {
-                    new Thread(new ServerStart()).start();
+                    testServer = new Thread()
+                    {
+                        @Override
+                        public void run() 
+                        {
+                            Server server = new Server(Constants.SERVERPORT, 1);
+                            server.AcceptConnections();
+                            server.startGame();
+                        }
+                    };
+                            
+                    testServer.start();
                 }
                 
                 //Connect to server
                 try 
                 {
-                    client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+                    if(validateIPAddress(Constants.SERVERIP))
+                    {
+                        System.out.println("Connecting to server " + Constants.SERVERIP + ":" + Constants.CONNECTIONPORT);
+                        
+                        client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+                        client.connectToServer();
 
-                    client.connectToServer();
-                    //client.pingThread();
+                        AudioManager.menuMusic.stop();
 
-                    AudioManager.menuMusic.stop();
-                    
-                    game.setScreen(new GameScreen());
+                        game.setScreen(new GameScreen());
+                    }else
+                    {
+                        errorLabel.setText("Invalid IP address");
+                        errorLabel.setVisible(true);
+                    }
                     
                 }catch(SocketException | UnknownHostException e)
                 {
-                    errorLabel.setText("Invalid ip address given");
+                    errorLabel.setText("Rejected connection");
                     errorLabel.setVisible(true);
                     System.err.println("ERROR: " + e.toString()); 
-                    
-                }catch (IOException | InterruptedException e) 
+
+                }catch (Exception e) 
                 {
-                    System.err.println("ERROR: Unexpected client exception: " + e.toString());
+                    System.err.println("ERROR: Unexpected exception in joinScreen: " + e);
                     Gdx.app.exit();
                 }
-                
-                
             }
         });
     }
@@ -206,7 +222,7 @@ public class JoinScreen implements Screen
     @Override
     public void resize(int width, int height) 
     {
-        
+        stage.getViewport().update(width, height, false);
     }
 
     
@@ -235,5 +251,34 @@ public class JoinScreen implements Screen
     @Override
     public void hide() {
     }
+    
+    public boolean validateIPAddress( String ipAddress ) 
+    { 
+        try
+        {
+            String[] tokens = ipAddress.split("\\."); 
+
+            if (tokens.length != 4) 
+            { 
+                return false; 
+            } 
+
+            for (String str : tokens) 
+            { 
+                int i = Integer.parseInt(str); 
+
+                if ((i < 0) || (i > 255)) 
+                { 
+                    return false; 
+                } 
+            } 
+            
+        }catch(NumberFormatException e)
+        {
+            return false;
+        }
+        
+        return true; 
+    } 
 }
     

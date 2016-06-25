@@ -5,7 +5,6 @@
  */
 package gui.entity;
 
-import com.badlogic.gdx.Game;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -184,15 +183,12 @@ public class MainPlayer extends Entity
     /**
      * Moves the player if keyboard input is received.
      */
+    
+    
     private void inputMovePlayer(SpriteBatch renderObject)
     {
-        String moveCommand = "";
+        String moveCommand;
         float cameraSpeed = 2.51f;
-        if((Gdx.input.isKeyJustPressed(Keys.B)))
-                {
-                   entityManager.spawnItem();
-                    System.out.println("YEAH!");
-                }
         
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
@@ -364,6 +360,13 @@ public class MainPlayer extends Entity
      */
     private void inputDoPlayer(SpriteBatch renderObject)
     {
+        /*------------------SPAWN ITEM------------------*/
+        if((Gdx.input.isKeyJustPressed(Keys.B)))
+        {
+           entityManager.spawnItem();
+           System.out.println("YEAH! L(・o・)」");
+        }
+        
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
@@ -411,7 +414,6 @@ public class MainPlayer extends Entity
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.ESCAPE))
         {
-            System.out.println("Quit game with Keyboard [ESC]");
             try 
             {
                 client.closeConnection();

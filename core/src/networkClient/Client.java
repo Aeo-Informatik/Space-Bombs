@@ -41,16 +41,18 @@ public class Client {
     }
     
     //Start permanent connection thread to server and gets data
-    public void connectToServer() throws InterruptedException
+    public void connectToServer() throws Exception
     {
         //Start tcp connection
         receiveThread.start();
+        
+        System.out.println("Connecting to server...");
         
         //Wait till thread is running
         while(!receiveThread.isAlive())
         {
             System.out.print(".");
-            Thread.sleep(500);
+            Thread.sleep(100);
         }
     }
     
