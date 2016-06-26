@@ -131,18 +131,20 @@ public class JoinScreen implements Screen
                 //Starts local server for 1 Player
                 if(Constants.TESTSERVER)
                 {
+                    Constants.SERVERIP = "127.0.0.1";
+                    
                     Thread testServer = new Thread()
                     {
                         @Override
                         public void run() 
                         {
-                            System.out.println("CLIENT: Launching test server...");
+                            System.out.println("CLIENT: Launching test server force IP to localhost");
                             Server server = new Server(Constants.SERVERPORT, 1);
                             server.AcceptConnections();
                             server.startGame();
                         }
                     };
-                            
+
                     testServer.start();
                 }
                 
@@ -150,7 +152,7 @@ public class JoinScreen implements Screen
                 try 
                 {
                     if(validateIPAddress(Constants.SERVERIP))
-                    {                        
+                    {          
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                         client.connectToServer();
 

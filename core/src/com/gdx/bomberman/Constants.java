@@ -12,8 +12,8 @@ package com.gdx.bomberman;
 public class Constants {
     
     //Audio config
-    public static float MUSICVOLUME = 0.1f;
-    public static float SOUNDVOLUME = 0.2f;
+    public static float MUSICVOLUME = 0.0f;
+    public static float SOUNDVOLUME = 0.0f;
     
     //Window config
     public static int SCREENWIDTH = 800;
@@ -34,7 +34,7 @@ public class Constants {
     public static int PINGDELAY = 2; // 1 ping each 2 seconds
     
     //Server config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 2;
     public static boolean SERVERDEBUG = false;

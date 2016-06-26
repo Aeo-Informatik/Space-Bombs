@@ -59,7 +59,6 @@ public class Client {
     {
         if(receiveThread != null)
         {
-
             receiveThread.interrupt();
         }
         
