@@ -152,7 +152,7 @@ public class JoinScreen implements Screen
                 try 
                 {
                     if(validateIPAddress(Constants.SERVERIP))
-                    {          
+                    {        
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                         client.connectToServer();
 

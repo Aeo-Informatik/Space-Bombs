@@ -8,6 +8,7 @@ package networkClient;
 
 import com.gdx.bomberman.Constants;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 
@@ -23,12 +24,16 @@ public class Client {
     private Thread pingThread;
     
     //Constructor
-    public Client(String host, int port) throws IOException
+    public Client(String host, int port) throws Exception
     {
+        System.out.println("Start socket generation");
+        //InetSocketAddress address = new InetSocketAddress(host, port);
         this.socket = new Socket(host, port);
+        System.out.println("Finished socket generation");
+
         PingThread ping = new PingThread(socket);
         ClientReceiveThread recieve = new ClientReceiveThread(socket);
-        
+
         receiveThread = new Thread(recieve);
         pingThread = new Thread(ping);
     }
@@ -50,7 +55,7 @@ public class Client {
         //Wait till thread is running
         while(!receiveThread.isAlive())
         {
-            System.out.print(".");
+            System.out.print("Waiting.");
             Thread.sleep(100);
         }
     }

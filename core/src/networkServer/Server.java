@@ -1,6 +1,5 @@
 package networkServer;
 
-import com.badlogic.gdx.Gdx;
 import com.gdx.bomberman.Constants;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -28,7 +27,7 @@ public class Server
         {
             System.err.println("ERROR: Something went wrong on creating the server: " +e);
             e.printStackTrace();
-            Gdx.app.exit();
+            System.exit(1);
         }
     }
     
@@ -140,6 +139,11 @@ public class Server
         }
     }
     
+    //TODO
+    public void closeServer()
+    {
+        
+    }
     
     /**
      * Send one message to one client.

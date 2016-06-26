@@ -13,6 +13,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,7 +39,7 @@ public class ClientReceiveThread implements Runnable {
         {
             //Set timeout exception after 15 seconds or 0 = never
             socket.setSoTimeout(0);
-
+            
             //Get data from server and parse it into an Object BufferedReader
             BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             String dataReceived;
