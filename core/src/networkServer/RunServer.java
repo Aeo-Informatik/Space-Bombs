@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package networkServer;
-import com.badlogic.gdx.Gdx;
 import com.gdx.bomberman.Constants;
 
 /**
@@ -27,7 +26,8 @@ public class RunServer
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error has been thrown in main" + e);
-            Gdx.app.exit();
+            e.printStackTrace();
+            System.exit(1);
         }
     }
 }

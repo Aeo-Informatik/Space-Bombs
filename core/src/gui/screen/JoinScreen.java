@@ -129,14 +129,14 @@ public class JoinScreen implements Screen
                 }
 
                 //Starts local server for 1 Player
-                Thread testServer = null;
                 if(Constants.TESTSERVER)
                 {
-                    testServer = new Thread()
+                    Thread testServer = new Thread()
                     {
                         @Override
                         public void run() 
                         {
+                            System.out.println("CLIENT: Launching test server...");
                             Server server = new Server(Constants.SERVERPORT, 1);
                             server.AcceptConnections();
                             server.startGame();
@@ -150,12 +150,12 @@ public class JoinScreen implements Screen
                 try 
                 {
                     if(validateIPAddress(Constants.SERVERIP))
-                    {
-                        System.out.println("Connecting to server " + Constants.SERVERIP + ":" + Constants.CONNECTIONPORT);
-                        
+                    {                        
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                         client.connectToServer();
 
+                        System.out.println("CLIENT: Connecting to server " + Constants.SERVERIP + ":" + Constants.CONNECTIONPORT);
+                        
                         AudioManager.menuMusic.stop();
 
                         game.setScreen(new GameScreen());

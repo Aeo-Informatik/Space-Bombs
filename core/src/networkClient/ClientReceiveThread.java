@@ -52,7 +52,7 @@ public class ClientReceiveThread implements Runnable {
 
                 //Debug
                 if(Constants.CLIENTDEBUG && !dataReceived.equals("PONG"))
-                    System.out.println("Received from server: " + dataReceived);
+                    System.out.println("CLIENT: Received from server: " + dataReceived);
 
                 //Latency test
                 if(dataReceived.equals("PONG"))
@@ -69,12 +69,13 @@ public class ClientReceiveThread implements Runnable {
             
         }catch(SocketException e)
         {
-            System.out.println("Client disconnecting from server...");
+            System.out.println("CLIENT: Disconnecting from server...");
         
-            //If server disconnects shutdown thread
+        //If server disconnects shutdown thread
         }catch(IOException | InterruptedException e)
         {
             System.err.println("ERROR: Something went wrong in ClientReceiveDataThread " + e);
+            e.printStackTrace();
             System.exit(1);
         }
     }

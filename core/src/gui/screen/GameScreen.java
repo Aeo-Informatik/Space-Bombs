@@ -7,7 +7,6 @@ package gui.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;

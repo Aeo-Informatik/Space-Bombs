@@ -41,7 +41,7 @@ public class ClientSendThread implements Runnable {
 
             //Debug
             if(Constants.CLIENTDEBUG)
-                System.out.println("Send to server: " + dataToSend);
+                System.out.println("CLIENT: Send to server: " + dataToSend);
 
             //Send string to server
             print.println(dataToSend);
@@ -50,11 +50,13 @@ public class ClientSendThread implements Runnable {
         }catch(SocketException e)
         {
             System.err.println("ERROR: Connection to server closed in ClientSendThread(). " + e);
+            e.printStackTrace();
             System.exit(1);
             
         }catch(Exception e)
         {
             System.err.println("ERROR: Something in ClientSendThread() went wrong. " + e);
+            e.printStackTrace();
             System.exit(1);
         }
     }

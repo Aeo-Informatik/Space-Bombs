@@ -1,17 +1,23 @@
 Music
 =====
+Creativ Common License. Commercial use.
+Made by: Ben Briggs
+Link: http://benbriggs.net/
 
-"DST-1990" by DST 
-found in http://www.nosoapradio.us/
-licensed under a Creative Commons Attribution 3.0 Unported License.
-
+Sounds
+======
+Creativ Common License. Commercial use.
+Made by: thehorriblejoke
+Name: 8-bit-explosion-stakkato.wav
+Link: https://www.freesound.org/people/thehorriblejoke/sounds/259962/
 
 Font
 ====
-Commercial use.
+Creativ Common License. Commercial use.
 Made by: codeman38
-Font Name: Lunchtime Doubly So
+Name: Lunchtime Doubly So
 Link: http://www.1001fonts.com/lunchtime-doubly-so-font.html
+Name: Press-Start
 Link: http://www.1001fonts.com/press-start-font.html
 
 

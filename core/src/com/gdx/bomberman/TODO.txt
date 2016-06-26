@@ -25,19 +25,17 @@ coin bags
 MenuScreen:
 Join, Host, Options, Help, Exit
 
-Error Screen:
-If an error occurs display it on screen like "connection to server lost".
-
 Option Screen:
-window size, fullscreen, music volume, effect volume
+fullscreen, music volume, sound volume
 
 Join Screen:
 ip address bar, join button, (optional) list of available servers
 
 Host with options Screen:
-Map Selection, max player number, list of already logged in users, start button
+Map Selection, max player number, list of already connected users, start button
 
 Help Screen:
+button to use the instructions as slider. Button: Back, Button: Forward
 
 Winner Screen:
 Winning player gets displayed with a medal on a podest

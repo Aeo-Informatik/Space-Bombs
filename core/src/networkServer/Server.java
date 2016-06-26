@@ -27,6 +27,7 @@ public class Server
         }catch(Exception e) 
         {
             System.err.println("ERROR: Something went wrong on creating the server: " +e);
+            e.printStackTrace();
             Gdx.app.exit();
         }
     }
@@ -71,6 +72,8 @@ public class Server
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error in startGame " +e);
+            e.printStackTrace();
+            System.exit(1);
         }
     }
     
@@ -132,6 +135,8 @@ public class Server
         }catch(Exception e)
         {
             System.err.println("ERROR: Something went wrong in accepting connections " + e);
+            e.printStackTrace();
+            System.exit(1);
         }
     }
     
@@ -153,7 +158,8 @@ public class Server
         }catch(Exception e)
         {
             System.err.println("ERROR: Send to one had an unexcpected error " +e);
-            throw e;
+            e.printStackTrace();
+            System.exit(1);
         }
     }
     
@@ -174,7 +180,8 @@ public class Server
         }catch(Exception e)
         {
             System.err.println("ERROR: Send to all had an unexpected error " +e);
-            throw e;
+            e.printStackTrace();
+            System.exit(1);
         }
     }
     

@@ -37,90 +37,86 @@ public class ServerForwardThread implements Runnable
     @Override
     public void run() 
     {
-        while(!Thread.currentThread().isInterrupted())
+        try
         {
-            try
-            {
-                //Set timeout exception after 15 seconds or 0 = never
-                socket.setSoTimeout(0);
-                    
-                //Get data from server and parse it into an Object BufferedReader
-                BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-                String dataReceived;
+            //Set timeout exception after 15 seconds or 0 = never
+            socket.setSoTimeout(0);
 
-                //Opens tcp session to client if client disconnects readLine() returns null
-                while((dataReceived = receive.readLine())!= null)
-                {   
-                    //If ping request found pong back
-                    if(dataReceived.equals("PING"))
-                    {
-                        if(Constants.SERVERSHOWPING)
-                            System.out.println("Received PING from: " + socket.getInetAddress().getHostAddress());
-                        
-                        //Send pong back to client
-                        SendThread send = new SendThread(socket, "PONG");
-                        Thread thread = new Thread(send);
-                        thread.start();
-                        
-                        continue;
-                    }
-                    
+            //Get data from server and parse it into an Object BufferedReader
+            BufferedReader receive = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            String dataReceived;
+
+            //Opens tcp session to client if client disconnects readLine() returns null
+            while((dataReceived = receive.readLine())!= null)
+            {   
+                //If ping request found pong back
+                if(dataReceived.equals("PING"))
+                {
+                    if(Constants.SERVERSHOWPING)
+                        System.out.println("SERVER: Received PING from: " + socket.getInetAddress().getHostAddress());
+
+                    //Send pong back to client
+                    SendThread send = new SendThread(socket, "PONG");
+                    Thread thread = new Thread(send);
+                    thread.start();
+
+                    continue;
+                }
+
+                //Kill thread
+                if(Thread.currentThread().isInterrupted())
+                {
+                    break;
+                }
+
+                //Debug
+                if(Constants.SERVERDEBUG)
+                {
+                    System.out.println("SERVER: Received: " + dataReceived);
+                    System.out.println("SERVER: From: " + socket.getInetAddress().getHostAddress());
+                }
+
+                //Send received message to every client
+                for(int i = 0; i < clientConnections.size(); i++)
+                {
+
+                    //Create object to send data
+                    PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(clientConnections.get(i).getOutputStream()));
+
+                    //Send message to client
+                    printWriter.println(dataReceived);
+                    printWriter.flush();
+
                     //Debug
                     if(Constants.SERVERDEBUG)
                     {
-                        System.out.println("Received from client: " + dataReceived);
-                        System.out.println("From: " + socket.getInetAddress().getHostAddress());
+                        System.out.println("SERVER: Send: " + dataReceived);
+                        System.out.println("SERVER: To: " + clientConnections.get(i).getInetAddress().getHostAddress()); 
                     }
-                           
-                    //Send received message to every client
-                    for(int i = 0; i < clientConnections.size(); i++)
-                    {
-
-                        //Create object to send data
-                        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(clientConnections.get(i).getOutputStream()));
-
-                        //Send message to client
-                        printWriter.println(dataReceived);
-                        printWriter.flush();
-
-                        //Debug
-                        if(Constants.SERVERDEBUG)
-                        {
-                            System.out.println("Send to client: " + dataReceived);
-                            System.out.println("To: " + clientConnections.get(i).getInetAddress().getHostAddress()); 
-                        }
-                    }
-                    
                 }
 
-                //If clients disconnects
-                System.out.println("Client " + socket.getInetAddress().getHostAddress() + " disconnected from server.");
-
-                ArrayList<String> dataToSend = new ArrayList<>();
-                
-                dataToSend.add("enemyPlayerLife|" + playerId + "|0|*");
-                
-                //Send death message of disconnecting player
-                SendThread send = new SendThread(clientConnections, dataToSend);
-                Thread thread = new Thread(send);
-                thread.start();
-                
-                //Stop current thread
-                Thread.currentThread().interrupt();
-                
-            }catch(SocketException | SocketTimeoutException e)
-            {
-                System.err.println("Server ReceiveThread() Client disconnected closing receive thread. " + e);
-                Thread.currentThread().interrupt();
-                
-            }catch(Exception e)
-            {
-                System.err.println("ERROR: Server Unexpected error occurred in forward thread " +e);
-                e.printStackTrace();
-                System.exit(0);
             }
+
+            //If clients disconnects
+            System.out.println("SERVER: Client " + socket.getInetAddress().getHostAddress() + " disconnected from server.");
+
+            //Send death message of disconnecting player to everyone
+            ArrayList<String> dataToSend = new ArrayList<>();
+            dataToSend.add("enemyPlayerLife|" + playerId + "|0|*");
+            SendThread send = new SendThread(clientConnections, dataToSend);
+            Thread thread = new Thread(send);
+            thread.start();
+
+        }catch(SocketException | SocketTimeoutException e)
+        {
+            System.err.println("Server ReceiveThread() Client disconnected closing receive thread. " + e);
+
+        }catch(Exception e)
+        {
+            System.err.println("ERROR: Server Unexpected error occurred in forward thread " +e);
+            e.printStackTrace();
+            System.exit(1);
         }
-            
     }
-    
 }
+

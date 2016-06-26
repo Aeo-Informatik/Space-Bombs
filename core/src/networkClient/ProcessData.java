@@ -5,6 +5,7 @@
  */
 package networkClient;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
@@ -190,6 +191,7 @@ public class ProcessData
         {
             System.err.println("ERROR: ProcessDataThread() Something went wrong " + e);
             e.printStackTrace();
+            Gdx.app.exit();
         }
     }
 }

@@ -48,7 +48,7 @@ class SendThread implements Runnable
                     {
                         //Debug
                         if(Constants.SERVERDEBUG)
-                            System.out.println("Send: " + msgToClient);
+                            System.out.println("SERVER: Send: " + msgToClient);
 
                         //Iterate through connected client list
                         for(int i=0; i < sock.size(); i++)
@@ -56,7 +56,7 @@ class SendThread implements Runnable
 
                             //Debug
                             if(Constants.SERVERDEBUG)
-                                System.out.println("To: " + sock.get(i).getInetAddress().getHostAddress());
+                                System.out.println("SERVER: To: " + sock.get(i).getInetAddress().getHostAddress());
 
                             //Create object to send data
                             PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(sock.get(i).getOutputStream()));
@@ -75,8 +75,8 @@ class SendThread implements Runnable
                     //Debug
                     if(Constants.SERVERDEBUG)
                     {
-                        System.out.println("Send: " + message1);
-                        System.out.println("To: " + socket1.getInetAddress().getHostAddress());
+                        System.out.println("SERVER: Send: " + message1);
+                        System.out.println("SERVER: To: " + socket1.getInetAddress().getHostAddress());
                     }        
                      
                     //Create object to send data
@@ -90,7 +90,8 @@ class SendThread implements Runnable
             }catch(Exception e)
             {
                 System.err.println("ERROR: Unexpected error in sendThread " +e);
-                System.exit(0);
+                e.printStackTrace();
+                System.exit(1);
             }	
 	}
 }

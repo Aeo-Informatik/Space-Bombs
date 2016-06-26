@@ -6,6 +6,7 @@
 package networkClient;
 
 
+import com.gdx.bomberman.Constants;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -45,8 +46,6 @@ public class Client {
     {
         //Start tcp connection
         receiveThread.start();
-        
-        System.out.println("Connecting to server...");
         
         //Wait till thread is running
         while(!receiveThread.isAlive())
