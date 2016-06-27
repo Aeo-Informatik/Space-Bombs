@@ -100,7 +100,7 @@ public class Server
                 {
                     try
                     {
-                        //Check if client disconnects in lobby
+                        //Check if client disconnects from lobby
                         for(int b=0; b < clientConnections.size(); b++)
                         {
                             BufferedReader receive = new BufferedReader(new InputStreamReader(clientConnections.get(b).getInputStream()));

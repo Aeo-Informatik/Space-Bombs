@@ -8,7 +8,6 @@ package networkClient;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -22,7 +21,6 @@ public class Client {
     //Objects
     private Socket socket;
     private final Thread receiveThread;
-    private Thread pingThread;
     
     //Constructor
     public Client(String host, int port) throws Exception
@@ -39,10 +37,8 @@ public class Client {
         }
 
         //Create thread objects
-        PingThread ping = new PingThread(socket);
         ClientReceiveThread recieve = new ClientReceiveThread(socket);
         receiveThread = new Thread(recieve);
-        pingThread = new Thread(ping);
     }
         
     //Start temporary thread to send some data to server
@@ -73,21 +69,8 @@ public class Client {
         {
             receiveThread.interrupt();
         }
-        
-        if(pingThread != null)
-        {
-
-            pingThread.interrupt();
-        }
 
         socket.close();
-    }
-    
-    //Start periodic pinging of server to determin latency
-    public void pingThread()
-    {
-        //Start latency calculator with ping
-        pingThread.start();
     }
     
     public boolean isConnectedToServer()

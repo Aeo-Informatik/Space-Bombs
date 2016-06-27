@@ -13,8 +13,6 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -56,17 +54,9 @@ public class ClientReceiveThread implements Runnable {
                 if(Constants.CLIENTDEBUG && !dataReceived.equals("PONG"))
                     System.out.println("CLIENT: Received from server: " + dataReceived);
 
-                //Latency test
-                if(dataReceived.equals("PONG"))
-                {
-                    if(Constants.CLIENTSHOWPONG)
-                        System.out.println("Received PONG");
-                }else
-                {
-                    //Adds the data to the BlockingQueue
-                    queue.add(dataReceived);
-                    Thread.sleep(100);
-                }
+                //Adds the data to the BlockingQueue
+                queue.add(dataReceived);
+                Thread.sleep(100);
             }
             
         }catch(SocketException e)

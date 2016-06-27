@@ -3,7 +3,7 @@ Add sound effects to the game & menu.
 
 //Bomb
 1) To be able to push the bomb
-2) If bomb destorys a block drops a coin at random
+2) If bomb destorys a block drop a coin at random
 
 //Player
 4) Spawns a tomb stone with his coins on death

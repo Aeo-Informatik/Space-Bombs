@@ -30,17 +30,14 @@ public class Constants {
     public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
-    public static boolean CLIENTSHOWPONG = false; // Show received pong
-    public static int PINGDELAY = 2; // 1 ping each 2 seconds
     
     //Server config
-    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 2;
     public static boolean SERVERDEBUG = false;
-    public static boolean SERVERSHOWPING = false; // Show received ping
         
-    //Ingame variable DO NOT CHANGE!
+    //Ingame variables DO NOT CHANGE!
     public static int PLAYERID = 0;
     public static int AMOUNTPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;

@@ -49,20 +49,6 @@ public class ServerForwardThread implements Runnable
             //Opens tcp session to client if client disconnects readLine() returns null
             while((dataReceived = receive.readLine())!= null)
             {   
-                //If ping request found pong back
-                if(dataReceived.equals("PING"))
-                {
-                    if(Constants.SERVERSHOWPING)
-                        System.out.println("SERVER: Received PING from: " + socket.getInetAddress().getHostAddress());
-
-                    //Send pong back to client
-                    SendThread send = new SendThread(socket, "PONG");
-                    Thread thread = new Thread(send);
-                    thread.start();
-
-                    continue;
-                }
-
                 //Kill thread
                 if(Thread.currentThread().isInterrupted())
                 {
