@@ -15,6 +15,7 @@ import com.badlogic.gdx.audio.Sound;
  */
 public class AudioManager 
 {
+    //Generate Sounds with: http://www.bfxr.net/
     
     //Menu Sounds
     public static Sound clickSound;
