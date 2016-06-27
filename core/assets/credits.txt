@@ -11,6 +11,11 @@ Made by: thehorriblejoke
 Name: 8-bit-explosion-stakkato.wav
 Link: https://www.freesound.org/people/thehorriblejoke/sounds/259962/
 
+Made by: ProjectsU012
+Name: coin.wav
+Link: https://www.freesound.org/people/ProjectsU012/sounds/341695/
+
+
 Font
 ====
 Creativ Common License. Commercial use.

@@ -37,7 +37,7 @@ Host with options Screen:
 Map Selection, max player number, list of already connected users, start button
 
 Help Screen:
-button to use the instructions as slider. Button: Back, Button: Forward
+Button: Back, Button: Forward
 
 Winner Screen:
 Winning player gets displayed with a medal on a podest

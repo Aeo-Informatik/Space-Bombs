@@ -117,8 +117,8 @@ public class JoinScreen implements Screen
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
 
                 //Get the ip out of the textfield
                 Constants.SERVERIP = ipTextField.getText();

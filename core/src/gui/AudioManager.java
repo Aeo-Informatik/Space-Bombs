@@ -7,6 +7,7 @@ package gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 /**
  *
@@ -16,10 +17,9 @@ public class AudioManager
 {
     
     //Menu Sounds
-    public static Music clickSound;
-    public static Music normalExplosion;
-    public static Music normalExplosion1;
-    public static Music normalExplosion2;
+    public static Sound clickSound;
+    public static Sound normalExplosion;
+    public static Sound asd;
     
     //Menu Music
     public static Music menuMusic;
@@ -38,25 +38,30 @@ public class AudioManager
     public static void load() 
     {      
         //Menu Sounds
-        clickSound = loadAudio("audio/sounds/click.wav");
-        normalExplosion = loadAudio("audio/sounds/8-bit-explosion-stakkato.wav");
+        clickSound = loadSound("audio/sounds/click.wav");
+        normalExplosion = loadSound("audio/sounds/8-bit-explosion-stakkato.wav");
         
         //Menu Music
-        menuMusic = loadAudio("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
+        menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
 
         //Ingame Music
-        Amys_Toxic_Cave = loadAudio("audio/music/The_Briggs_Effect/Amys_Toxic_Cave.mp3");
-        Flight_of_the_Battery = loadAudio("audio/music/The_Briggs_Effect/Flight_of_the Battery.mp3");
-        Disregard_Farm = loadAudio("audio/music/The_Briggs_Effect/Disregard_Farm.mp3");
-        Moshua_Jorse = loadAudio("audio/music/The_Briggs_Effect/Moshua_Jorse.mp3");
-        Bit_Shifted = loadAudio("audio/music/The_Briggs_Effect/Bit_Shifted.mp3");
-        Mr_Smilez_Theme = loadAudio("audio/music/The_Briggs_Effect/Mr_Smilez_Theme.mp3");
+        Amys_Toxic_Cave = loadMusic("audio/music/The_Briggs_Effect/Amys_Toxic_Cave.mp3");
+        Flight_of_the_Battery = loadMusic("audio/music/The_Briggs_Effect/Flight_of_the Battery.mp3");
+        Disregard_Farm = loadMusic("audio/music/The_Briggs_Effect/Disregard_Farm.mp3");
+        Moshua_Jorse = loadMusic("audio/music/The_Briggs_Effect/Moshua_Jorse.mp3");
+        Bit_Shifted = loadMusic("audio/music/The_Briggs_Effect/Bit_Shifted.mp3");
+        Mr_Smilez_Theme = loadMusic("audio/music/The_Briggs_Effect/Mr_Smilez_Theme.mp3");
     }
     
-    public static Music loadAudio (String file) 
+    public static Music loadMusic (String file) 
     {
         return Gdx.audio.newMusic(Gdx.files.internal(file));
     } 
+    
+    public static Sound loadSound(String file)
+    {
+        return Gdx.audio.newSound(Gdx.files.internal(file));
+    }
     
     public static Music nextIngameMusic(int index)
     {

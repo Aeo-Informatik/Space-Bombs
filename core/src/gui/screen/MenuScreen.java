@@ -113,8 +113,8 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -137,8 +137,8 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -161,8 +161,8 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -185,8 +185,8 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
                
                 //Wait till sound is done
                 try 

@@ -6,8 +6,6 @@
 
 package gui.entity.bombs;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -360,12 +358,15 @@ public class Bomb extends Entity
         }
     }
     
+    long id = -1;
     private void explode()
     {
-      
-        AudioManager.normalExplosion.play();
-        AudioManager.normalExplosion.setVolume(Constants.SOUNDVOLUME);
-        
+        //To Execute the sound only once
+        if(id == -1)
+        {
+            id = AudioManager.normalExplosion.play();
+            AudioManager.normalExplosion.setVolume(id, Constants.SOUNDVOLUME);
+        }
         
         //Create new cell and set texture
         Cell cellCenter = new Cell();
