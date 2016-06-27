@@ -210,7 +210,7 @@ public class EntityManager {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
                     {
                         int item;
-                        item = (int)(Math.random()*3);
+                        item = (int)(Math.random()*5);
                         switch(item)
                         {
                         
@@ -218,15 +218,34 @@ public class EntityManager {
                             {
                                 Speed speed = new Speed(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
                                 itemArray.add(speed);
+                                System.out.println("Speed");
                                 break;
                             }
                             
                             case(2):
                             {
-                                BombUp bombUp = new BombUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
-                                itemArray.add(bombUp);
+                                Coin coin = new Coin(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                itemArray.add(coin);
+                                System.out.println("Coin");
                                 break;
                             }
+                            
+                            case(3):
+                            {
+                                RangeUp rangeUp = new RangeUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                itemArray.add(rangeUp);
+                                System.out.println("RangeUp");
+                                break;
+                            }
+                            
+                            case(4):
+                            {
+                                BombUp bombUp = new BombUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                itemArray.add(bombUp);
+                                System.out.println("BombUp");
+                                break;
+                            }
+                            
                             
                             default:
                             {

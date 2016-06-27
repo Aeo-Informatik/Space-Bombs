@@ -41,6 +41,12 @@ public class TextureManager
     public static Texture bombup;
     public static TextureRegion bombUp;
     
+    public static Texture rangeup;
+    public static TextureRegion rangeUp;
+    
+    public static Texture coin;
+    public static Animation coinAnim;
+    
     //Player 1 Walking
     public static Texture p1WalkingDown;
     public static Animation p1WalkingDownAnim;
@@ -190,7 +196,7 @@ public class TextureManager
         
         
         /*------------------------------ITEMS--------------------------------*/
-        float SpeedAnimTime = 0.25f;
+        float coinAnimTime = 0.25f;
         
         speedup = loadTexture("other/speed_upgrade.png");
         speedUp = new TextureRegion(speedup,0,0,32,32);
@@ -198,6 +204,11 @@ public class TextureManager
         bombup = loadTexture("other/bomb_upgrade.png");
         bombUp = new TextureRegion(bombup,0,0,32,32);
         
+        rangeup = loadTexture("other/range_upgrade.png");
+        rangeUp = new TextureRegion(rangeup,0,0,32,32);
+        
+        coin = loadTexture("other/coin.png");
+        coinAnim = new Animation(coinAnimTime, new TextureRegion(coin,0,0,20,32), new TextureRegion(coin,20,0,8,32), new TextureRegion(coin,28,0,10,32));
         
         
         
