@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
+import gui.AudioManager;
 import gui.TextureManager;
 import gui.map.MapManager;
 
@@ -129,6 +130,9 @@ public class EnemyPlayer extends Entity
         if(touchesDeadlyBlock() && godmode == false)
         {
             godmode = true;
+            
+            long id = AudioManager.hit.play();
+            AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
             
             if(Constants.CLIENTDEBUG)
             {

@@ -20,7 +20,9 @@ public class AudioManager
     //Menu Sounds
     public static Sound clickSound;
     public static Sound normalExplosion;
-    public static Sound asd;
+    public static Sound hit;
+    public static Sound singleCoin;
+    
     
     //Menu Music
     public static Music menuMusic;
@@ -41,6 +43,8 @@ public class AudioManager
         //Menu Sounds
         clickSound = loadSound("audio/sounds/click.wav");
         normalExplosion = loadSound("audio/sounds/8-bit-explosion-stakkato.wav");
+        hit = loadSound("audio/sounds/hit.wav");
+        singleCoin = loadSound("audio/sounds/coin.wav");
         
         //Menu Music
         menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");

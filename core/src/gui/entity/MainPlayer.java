@@ -16,6 +16,7 @@ import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
+import gui.AudioManager;
 import gui.TextureManager;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
@@ -149,6 +150,8 @@ public class MainPlayer extends Entity
             
             System.out.println("Life has been reduced to: " + life);
           
+            long id = AudioManager.hit.play();
+            AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
             
             if(Constants.CLIENTDEBUG)
             {
