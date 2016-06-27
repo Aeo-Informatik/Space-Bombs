@@ -169,7 +169,7 @@ public class JoinScreen implements Screen
                     
                 }catch(SocketException | UnknownHostException e)
                 {
-                    errorLabel.setText("Rejected connection");
+                    errorLabel.setText("Connection refused");
                     errorLabel.setVisible(true);
                     System.err.println("ERROR: " + e.toString()); 
 

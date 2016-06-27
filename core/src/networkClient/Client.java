@@ -6,10 +6,11 @@
 package networkClient;
 
 
-import com.gdx.bomberman.Constants;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 
 /**
@@ -26,14 +27,20 @@ public class Client {
     //Constructor
     public Client(String host, int port) throws Exception
     {
-        System.out.println("Start socket generation");
-        //InetSocketAddress address = new InetSocketAddress(host, port);
-        this.socket = new Socket(host, port);
-        System.out.println("Finished socket generation");
+        InetAddress address = InetAddress.getByName(host);
+        
+        //Check if host ip is up and running else it creates a loop on creating the socket object
+        if(address.isReachable(2))
+        {
+            this.socket = new Socket(host, 13199);
+        }else
+        {
+            throw new UnknownHostException("Connection refused");
+        }
 
+        //Create thread objects
         PingThread ping = new PingThread(socket);
         ClientReceiveThread recieve = new ClientReceiveThread(socket);
-
         receiveThread = new Thread(recieve);
         pingThread = new Thread(ping);
     }
