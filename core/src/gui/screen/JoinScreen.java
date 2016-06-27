@@ -119,14 +119,9 @@ public class JoinScreen implements Screen
             {
                 AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(Constants.SOUNDVOLUME);
-                
-                if(!ipTextField.getText().equals(""))
-                {
-                    Constants.SERVERIP = ipTextField.getText();
-                }else
-                {
-                    Constants.SERVERIP = "127.0.0.1";
-                }
+
+                //Get the ip out of the textfield
+                Constants.SERVERIP = ipTextField.getText();
 
                 //Starts local server for 1 Player
                 if(Constants.TESTSERVER)
@@ -151,6 +146,7 @@ public class JoinScreen implements Screen
                 //Connect to server
                 try 
                 {
+                    //Check if ip is valid
                     if(validateIPAddress(Constants.SERVERIP))
                     {        
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
@@ -163,15 +159,16 @@ public class JoinScreen implements Screen
                         game.setScreen(new GameScreen());
                     }else
                     {
+                        //Create error message on screen
                         errorLabel.setText("Invalid IP address");
                         errorLabel.setVisible(true);
                     }
                     
                 }catch(SocketException | UnknownHostException e)
                 {
+                    //Create error message on screen
                     errorLabel.setText("Connection refused");
-                    errorLabel.setVisible(true);
-                    System.err.println("ERROR: " + e.toString()); 
+                    errorLabel.setVisible(true); 
 
                 }catch (Exception e) 
                 {
