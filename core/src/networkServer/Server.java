@@ -1,6 +1,8 @@
 package networkServer;
 
 import com.gdx.bomberman.Constants;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -98,6 +100,20 @@ public class Server
                 {
                     try
                     {
+                        //Check if client disconnects in lobby
+                        for(int b=0; b < clientConnections.size(); b++)
+                        {
+                            BufferedReader receive = new BufferedReader(new InputStreamReader(clientConnections.get(b).getInputStream()));
+                            String dataReceived;
+                            
+                            if((dataReceived = receive.readLine()) == null)
+                            {
+                                System.out.println("SERVER: Client " + clientConnections.get(b).getInetAddress().getHostAddress() + " disconnected from Lobby");
+                                clientConnections.remove(b);
+                                i -= 1;
+                            }
+                        }
+                        
                         //Stops clients from connecting
                         if(stopListening == true)
                         {
@@ -105,7 +121,7 @@ public class Server
                         }
 
                         //Accept connection and set timeout
-                        serverSocket.setSoTimeout(1);
+                        serverSocket.setSoTimeout(100); //milliseconds
                         clientSocket = serverSocket.accept();
 
                     }catch(SocketTimeoutException e)

@@ -30,7 +30,7 @@ public class Client {
         InetAddress address = InetAddress.getByName(host);
         
         //Check if host ip is up and running else it creates a loop on creating the socket object
-        if(address.isReachable(2))
+        if(address.isReachable(2000))
         {
             this.socket = new Socket(host, 13199);
         }else
