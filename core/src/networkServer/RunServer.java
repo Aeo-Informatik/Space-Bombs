@@ -5,6 +5,7 @@
  */
 package networkServer;
 import com.gdx.bomberman.Constants;
+import java.util.Scanner;
 
 /**
  *
@@ -21,7 +22,16 @@ public class RunServer
             Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);   
 
             server.OpenLobby();
-            server.startGame();
+            
+            Scanner reader = new Scanner(System.in);  // Reading from System.in
+            System.out.println("Enter number 1 to start game: ");
+            int n = reader.nextInt();
+            
+            if(n == 1)
+            {
+                System.out.println("Start Game");
+                server.startGame();
+            }
                
         }catch(Exception e)
         {

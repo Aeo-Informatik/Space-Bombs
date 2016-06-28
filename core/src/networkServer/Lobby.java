@@ -18,7 +18,6 @@ import java.net.SocketTimeoutException;
 public class Lobby implements Runnable
 {
     //Variables
-    private int i = 0;
     private int maxConnections = -1;
     private ServerSocket serverSocket;
     
@@ -38,7 +37,7 @@ public class Lobby implements Runnable
         try
         {
             //Start accepting connections till maxConnections are reached
-            for(; maxConnections > getIvalue(); incrementI())
+            for(int i = 0; maxConnections > i; i++)
             {   
                 Socket clientSocket = null;
 
@@ -47,6 +46,7 @@ public class Lobby implements Runnable
                 {
                     try
                     {
+                        
                         //Stops thread
                         if(Thread.currentThread().isInterrupted())
                         {
@@ -59,7 +59,7 @@ public class Lobby implements Runnable
 
                     }catch(SocketTimeoutException e)
                     {
-                        System.out.println("Timeout");
+                        
                     }
                 }
 
@@ -71,66 +71,21 @@ public class Lobby implements Runnable
 
                 //Connection announcement
                 System.out.println("-----New Client-----");
-                int y = getIvalue() +1;
-                System.out.println("Number: " + y);
+                System.out.println("Player Id: " + i +1);
                 System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
                 System.out.println("--------------------");
 
                 //Add connection object to array list
                 Server.addClient(clientSocket);
-                
-                //Check if client disconnects
-                new Thread()
-                {
-                    @Override
-                    public void run() 
-                    {
-                        try
-                        {
-                            BufferedReader receive = new BufferedReader(new InputStreamReader(Server.getClient(getIvalue()).getInputStream()));
-                            String dataReceived;
 
-                            if((dataReceived = receive.readLine()) == null)
-                            {
-                                System.out.println("SERVER: Client " + Server.getClient(getIvalue()).getInetAddress().getHostAddress() + " disconnected from Lobby");
-                                Server.removeClient(getIvalue());
-                                decrementI();
-                            }else
-                            {
-                                System.out.println("Nobody disconnected");
-                            }
-                            
-                        }catch(Exception e)
-                        {
-                            System.err.println("ERROR: " + e);
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
             }
-
+            
         }catch(Exception e)
         {
             System.err.println("ERROR: Something went wrong in accepting connections " + e);
             e.printStackTrace();
             System.exit(1);
         }
-    }
-        
-    /**----------------------THREAD SAFE FUNCTIONS----------------------**/
-    private synchronized void incrementI() 
-    {
-        i++;
-    }
-
-    private synchronized void decrementI() 
-    {
-        i--;
-    }
-
-    private synchronized int getIvalue() 
-    {
-        return i;
     }
 }
 
