@@ -84,6 +84,7 @@ public class Server
         }
     }
     
+    
     /**
      * Stops server completly.
      */
@@ -100,6 +101,7 @@ public class Server
         }
     }
     
+    
     /**
      * Closes lobby thread. Nobody can connect anymore afterwards.
      */
@@ -110,6 +112,7 @@ public class Server
             lobbyThread.interrupt();
         }
     }
+    
     
     /**
      * Lets everyone connect to the server till maxConnections has been 

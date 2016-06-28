@@ -42,7 +42,8 @@ public class RunServer
                     
                 }else if(n.equalsIgnoreCase("/closeLobby"))
                 {
-                    System.out.println("----------SERVER STOPPED---------");
+                    System.out.println("----------LOBBY CLOSED---------");
+                    server.closeLobby();
                 }
             }
                
