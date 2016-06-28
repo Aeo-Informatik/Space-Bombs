@@ -134,30 +134,32 @@ public class JoinScreen implements Screen
                 {
                     Constants.SERVERIP = "127.0.0.1";
                     
-                    Thread testServer = new Thread()
+                    System.out.println("CLIENT: Launching test server force IP to localhost");
+                    
+                    //Create new Server object
+                    if(Constants.TESTSERVEROBJ == null)
                     {
-                        @Override
-                        public void run() 
-                        {
-                            System.out.println("CLIENT: Launching test server force IP to localhost");
-                            Server server = new Server(Constants.SERVERPORT, 1);
-                            server.OpenLobby();
-                            server.startGame();
-                        }
-                    };
-
-                    testServer.start();
+                        Constants.TESTSERVEROBJ = new Server(Constants.SERVERPORT, 1);
+                    }
+                    
+                    Constants.TESTSERVEROBJ.OpenLobby();
                 }
                 
-                //Connect to server
                 try 
                 {
                     //Check if ip is valid
                     if(validateIPAddress(Constants.SERVERIP))
-                    {        
+                    {     
+                        //Connect to server
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                         client.connectToServer();
-
+                        
+                        //Start game in test server
+                        if(Constants.TESTSERVER)
+                        {
+                            Constants.TESTSERVEROBJ.startGame();
+                        }
+                        
                         System.out.println("CLIENT: Connecting to server " + Constants.SERVERIP + ":" + Constants.CONNECTIONPORT);
                         
                         AudioManager.menuMusic.stop();

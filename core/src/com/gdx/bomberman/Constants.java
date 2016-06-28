@@ -5,6 +5,8 @@
  */
 package com.gdx.bomberman;
 
+import networkServer.Server;
+
 /**
  *
  * @author qubasa
@@ -32,12 +34,13 @@ public class Constants {
     public static boolean CLIENTDEBUG = false;
     
     //Server config
-    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
         
     //Ingame variables DO NOT CHANGE!
+    public static Server TESTSERVEROBJ = null;
     public static int PLAYERID = 0;
     public static int AMOUNTPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;
