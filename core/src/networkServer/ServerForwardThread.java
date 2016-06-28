@@ -81,7 +81,7 @@ public class ServerForwardThread implements Runnable
 
             }
 
-            //If clients disconnects
+             //If clients disconnects
             System.out.println("SERVER: Client " + socket.getInetAddress().getHostAddress() + " disconnected from server.");
 
             //Send death message of disconnecting player to everyone
@@ -90,10 +90,10 @@ public class ServerForwardThread implements Runnable
             SendThread send = new SendThread(Server.getClientList(), dataToSend);
             Thread thread = new Thread(send);
             thread.start();
-
+            
         }catch(SocketException | SocketTimeoutException e)
         {
-            System.err.println("Server ReceiveThread() Client disconnected closing receive thread. " + e);
+            System.err.println("ServerForwardThread(): Closed connection with exception: " + e);
 
         }catch(Exception e)
         {

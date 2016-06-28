@@ -113,6 +113,8 @@ public class Server
                 client.close();
             }
 
+            forwardThreadList.clear();
+            
             //Empty connected client list
             Server.getClientList().clear();
             
