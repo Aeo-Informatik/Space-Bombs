@@ -50,10 +50,6 @@ public class RunServer
                     System.out.println("----------NEW LOBBY OPENED----------");
                     server.OpenLobby();
                     
-                }else if(n.equalsIgnoreCase("/kickPlayer"))
-                {
-                    System.out.println("----------KICKED PLAYER----------");
-                    server.kickPlayer(2);
                 }
             }
                

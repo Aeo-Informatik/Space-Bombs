@@ -6,8 +6,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 
-
-
 public class Server 
 {
     //Objects
@@ -133,25 +131,6 @@ public class Server
         if(lobbyThread != null && lobbyThread.isAlive())
         {
             lobbyThread.interrupt();
-        }
-    }
-    
-    /**
-     * Kicks player from server
-     * @param playerId 
-     */
-    public void kickPlayer(int playerId)
-    {
-        try
-        {
-            forwardThreadList.get(playerId -1).interrupt();
-            Server.getClient(playerId -1).close();
-            
-        }catch(Exception e)
-        {
-            System.out.println("ERROR: Something went wrong in kickPlayer() " +e);
-            e.printStackTrace();
-            System.exit(1);
         }
     }
     
