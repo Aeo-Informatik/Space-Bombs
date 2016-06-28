@@ -1,9 +1,12 @@
 package networkServer;
 
 import com.gdx.bomberman.Constants;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -46,36 +49,41 @@ public class Server
     {
         try
         {
-            //Stop accepting client connections
-            closeLobby();
-            
-            //Gets connected client list as input and iterates over them
-            for(int i = 0; i < Server.getClientList().size(); i++)
+            if(forwardThreadList.size() == 0)
             {
-                //Debug
-                if(Constants.SERVERDEBUG)
-                    System.out.println("SERVER: ------Start Setup Game------");
+                //Stop accepting client connections
+                closeLobby();
 
-                //Player id as string
-                String playerId = Integer.toString(i +1);     
+                //Gets connected client list as input and iterates over them
+                for(int i = 0; i < Server.getClientList().size(); i++)
+                {
+                    //Debug
+                    if(Constants.SERVERDEBUG)
+                        System.out.println("SERVER: ------Start Setup Game------");
 
-                //Bind every client to their playerId (1, 2, 3, 4)
-                String registerCommand = "registerMainPlayerId|" + playerId + "|*";
-                sendToOne(Server.getClient(i), registerCommand);
+                    //Player id as string
+                    String playerId = Integer.toString(i +1);     
 
-                //Open forward thread for every client
-                ServerForwardThread receive = new ServerForwardThread(Server.getClient(i), i +1);
-                Thread forwardThread = new Thread(receive);
-                forwardThread.start();
-                
-                //Add forward thread to arraylist
-                forwardThreadList.add(forwardThread);
+                    //Bind every client to their playerId (1, 2, 3, 4)
+                    String registerCommand = "registerMainPlayerId|" + playerId + "|*";
+                    sendToOne(Server.getClient(i), registerCommand);
+
+                    //Open forward thread for every client
+                    ServerForwardThread receive = new ServerForwardThread(Server.getClient(i), i +1);
+                    Thread forwardThread = new Thread(receive);
+                    forwardThread.start();
+
+                    //Add forward thread to arraylist
+                    forwardThreadList.add(forwardThread);
+                }
+
+                //Send to client the amount of players and the signal to spawn them
+                String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(Server.getClientList().size()) + "|*";
+                sendToAll(Server.getClientList(), new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
+            }else
+            {
+                System.err.println("Game already in progress!");
             }
-
-            //Send to client the amount of players and the signal to spawn them
-            String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(Server.getClientList().size()) + "|*";
-            sendToAll(Server.getClientList(), new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
-
         }catch(Exception e)
         {
             System.err.println("ERROR: Unexpected error in startGame " +e);
@@ -86,18 +94,33 @@ public class Server
     
     
     /**
-     * Stops server completly.
+     * Resets server completly.
      */
-    public void stopServer()
+    public void resetServer()
     {
-        if(lobbyThread != null && lobbyThread.isAlive())
+        try
         {
-            lobbyThread.interrupt();
-        }
-        
-        for(Thread thread: forwardThreadList)
+            closeLobby();
+
+            //Close all forward threads
+            for(Thread thread: forwardThreadList)
+            {
+                thread.interrupt();
+            }
+
+            for(Socket client: Server.getClientList())
+            {
+                client.close();
+            }
+
+            //Empty connected client list
+            Server.getClientList().clear();
+            
+        }catch(Exception e)
         {
-            thread.interrupt();
+            System.out.println("ERROR: Something went wrong in resetServer() " +e);
+            e.printStackTrace();
+            System.exit(1);
         }
     }
     
@@ -113,6 +136,24 @@ public class Server
         }
     }
     
+    /**
+     * Kicks player from server
+     * @param playerId 
+     */
+    public void kickPlayer(int playerId)
+    {
+        try
+        {
+            forwardThreadList.get(playerId -1).interrupt();
+            Server.getClient(playerId -1).close();
+            
+        }catch(Exception e)
+        {
+            System.out.println("ERROR: Something went wrong in kickPlayer() " +e);
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
     
     /**
      * Lets everyone connect to the server till maxConnections has been 
@@ -121,6 +162,8 @@ public class Server
      */
     public void OpenLobby()
     {
+        resetServer();
+        
         //Create thread
         Lobby lobby = new Lobby(maxConnections, serverSocket);
         lobbyThread = new Thread(lobby);

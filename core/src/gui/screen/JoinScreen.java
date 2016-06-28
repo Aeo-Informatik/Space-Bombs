@@ -121,8 +121,14 @@ public class JoinScreen implements Screen
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
 
                 //Get the ip out of the textfield
-                Constants.SERVERIP = ipTextField.getText();
-
+                if(!ipTextField.getText().equals(""))
+                {
+                    Constants.SERVERIP = ipTextField.getText();
+                }else
+                {
+                    Constants.SERVERIP = "127.0.0.1";
+                }
+                
                 //Starts local server for 1 Player
                 if(Constants.TESTSERVER)
                 {

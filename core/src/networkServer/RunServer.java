@@ -24,7 +24,7 @@ public class RunServer
             server.OpenLobby();
             
             Scanner reader = new Scanner(System.in);  // Reading from System.in
-            System.out.println("Commands: /startGame, /stopServer, /closeLobby");
+            System.out.println("Commands: /startGame, /stopServer, /closeLobby, /openLobby");
             
             while(true)
             {
@@ -37,13 +37,23 @@ public class RunServer
                 }else if(n.equalsIgnoreCase("/stopServer"))
                 {
                     System.out.println("----------SERVER STOPPED---------");
-                    server.stopServer();
+                    server.resetServer();
                     break;
                     
                 }else if(n.equalsIgnoreCase("/closeLobby"))
                 {
                     System.out.println("----------LOBBY CLOSED---------");
                     server.closeLobby();
+                    
+                }else if(n.equalsIgnoreCase("/openLobby"))
+                {
+                    System.out.println("----------NEW LOBBY OPENED----------");
+                    server.OpenLobby();
+                    
+                }else if(n.equalsIgnoreCase("/kickPlayer"))
+                {
+                    System.out.println("----------KICKED PLAYER----------");
+                    server.kickPlayer(2);
                 }
             }
                
