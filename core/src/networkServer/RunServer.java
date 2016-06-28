@@ -24,13 +24,17 @@ public class RunServer
             server.OpenLobby();
             
             Scanner reader = new Scanner(System.in);  // Reading from System.in
-            System.out.println("Enter number 1 to start game: ");
-            int n = reader.nextInt();
+            System.out.println("Type: ./startGame");
             
-            if(n == 1)
+            while(true)
             {
-                System.out.println("Start Game");
-                server.startGame();
+                String n = reader.nextLine();
+                if(n.equalsIgnoreCase("./startGame"))
+                {
+                    System.out.println("----------GAME STARTED---------");
+                    server.startGame();
+                    break;
+                }
             }
                
         }catch(Exception e)
