@@ -1,12 +1,10 @@
 package networkServer;
 
 import com.gdx.bomberman.Constants;
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 
@@ -156,6 +154,7 @@ public class Server
             System.exit(1);
         }
     }
+    
     
     /**
      * Lets everyone connect to the server till maxConnections has been 
