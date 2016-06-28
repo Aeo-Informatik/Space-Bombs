@@ -70,10 +70,10 @@ public class GameScreen implements Screen{
         //Play next music title after last one finished and make sure the next one is unequal the last one
         if((AudioManager.currentIngameMusic == null || !AudioManager.currentIngameMusic.isPlaying()) && musicStart < musicTimer)
         {
-            int nextMusic = random.nextInt(5);
+            int nextMusic = random.nextInt(6);
             while(nextMusic == previousMusicIndex)
             {
-                nextMusic = random.nextInt(5);
+                nextMusic = random.nextInt(6);
             }
             
             previousMusicIndex = nextMusic;

@@ -14,7 +14,8 @@ public class Server
     private static ArrayList<Socket> clientConnections = new ArrayList<>();
     
     //Persistent Threads
-    private Thread lobbyThread; //Persistent Thread till closed or maxConnection reached
+    private Thread lobbyThread; //Till maxConnection has been reached or thread closed
+    private ArrayList<Thread> forwardThreadList = new ArrayList<>(); // Till client disconnected or thread closed
     
     //Variables
     private int maxConnections;
@@ -45,8 +46,8 @@ public class Server
     {
         try
         {
-            //Stop lobby Thread
-            lobbyThread.interrupt();
+            //Stop accepting client connections
+            closeLobby();
             
             //Gets connected client list as input and iterates over them
             for(int i = 0; i < Server.getClientList().size(); i++)
@@ -64,8 +65,11 @@ public class Server
 
                 //Open forward thread for every client
                 ServerForwardThread receive = new ServerForwardThread(Server.getClient(i), i +1);
-                Thread thread = new Thread(receive);
-                thread.start();
+                Thread forwardThread = new Thread(receive);
+                forwardThread.start();
+                
+                //Add forward thread to arraylist
+                forwardThreadList.add(forwardThread);
             }
 
             //Send to client the amount of players and the signal to spawn them
@@ -80,6 +84,32 @@ public class Server
         }
     }
     
+    /**
+     * Stops server completly.
+     */
+    public void stopServer()
+    {
+        if(lobbyThread != null && lobbyThread.isAlive())
+        {
+            lobbyThread.interrupt();
+        }
+        
+        for(Thread thread: forwardThreadList)
+        {
+            thread.interrupt();
+        }
+    }
+    
+    /**
+     * Closes lobby thread. Nobody can connect anymore afterwards.
+     */
+    public void closeLobby()
+    {
+        if(lobbyThread != null && lobbyThread.isAlive())
+        {
+            lobbyThread.interrupt();
+        }
+    }
     
     /**
      * Lets everyone connect to the server till maxConnections has been 

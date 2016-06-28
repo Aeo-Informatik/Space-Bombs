@@ -24,16 +24,25 @@ public class RunServer
             server.OpenLobby();
             
             Scanner reader = new Scanner(System.in);  // Reading from System.in
-            System.out.println("Type: ./startGame");
+            System.out.println("Commands: /startGame, /stopServer, /closeLobby");
             
             while(true)
             {
                 String n = reader.nextLine();
-                if(n.equalsIgnoreCase("./startGame"))
+                if(n.equalsIgnoreCase("/startGame"))
                 {
                     System.out.println("----------GAME STARTED---------");
                     server.startGame();
+                    
+                }else if(n.equalsIgnoreCase("/stopServer"))
+                {
+                    System.out.println("----------SERVER STOPPED---------");
+                    server.stopServer();
                     break;
+                    
+                }else if(n.equalsIgnoreCase("/closeLobby"))
+                {
+                    System.out.println("----------SERVER STOPPED---------");
                 }
             }
                

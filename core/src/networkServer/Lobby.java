@@ -5,8 +5,6 @@
  */
 package networkServer;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -46,7 +44,6 @@ public class Lobby implements Runnable
                 {
                     try
                     {
-                        
                         //Stops thread
                         if(Thread.currentThread().isInterrupted())
                         {
@@ -71,13 +68,12 @@ public class Lobby implements Runnable
 
                 //Connection announcement
                 System.out.println("-----New Client-----");
-                System.out.println("Player Id: " + i +1);
+                System.out.println("Player Id: " + (i+1));
                 System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
                 System.out.println("--------------------");
 
                 //Add connection object to array list
                 Server.addClient(clientSocket);
-
             }
             
         }catch(Exception e)
