@@ -135,7 +135,7 @@ public class JoinScreen implements Screen
                         {
                             System.out.println("CLIENT: Launching test server force IP to localhost");
                             Server server = new Server(Constants.SERVERPORT, 1);
-                            server.AcceptConnections();
+                            server.OpenLobby();
                             server.startGame();
                         }
                     };

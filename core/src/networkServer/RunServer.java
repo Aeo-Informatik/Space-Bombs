@@ -20,7 +20,7 @@ public class RunServer
             //Initialise server object
             Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);   
 
-            server.AcceptConnections();
+            server.OpenLobby();
             server.startGame();
                
         }catch(Exception e)

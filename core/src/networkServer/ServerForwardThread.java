@@ -24,13 +24,11 @@ import java.util.ArrayList;
 public class ServerForwardThread implements Runnable 
 {
     private Socket socket;  
-    private ArrayList<Socket> clientConnections;
     private int playerId;
     
-    public ServerForwardThread(Socket socket, ArrayList<Socket> clientConnections, int playerId)
+    public ServerForwardThread(Socket socket, int playerId)
     {
         this.socket = socket;
-        this.clientConnections = clientConnections;
         this.playerId = playerId;
     }
     
@@ -63,11 +61,11 @@ public class ServerForwardThread implements Runnable
                 }
 
                 //Send received message to every client
-                for(int i = 0; i < clientConnections.size(); i++)
+                for(int i = 0; i < Server.getClientList().size(); i++)
                 {
 
                     //Create object to send data
-                    PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(clientConnections.get(i).getOutputStream()));
+                    PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(Server.getClient(i).getOutputStream()));
 
                     //Send message to client
                     printWriter.println(dataReceived);
@@ -77,7 +75,7 @@ public class ServerForwardThread implements Runnable
                     if(Constants.SERVERDEBUG)
                     {
                         System.out.println("SERVER: Send: " + dataReceived);
-                        System.out.println("SERVER: To: " + clientConnections.get(i).getInetAddress().getHostAddress()); 
+                        System.out.println("SERVER: To: " + Server.getClient(i).getInetAddress().getHostAddress()); 
                     }
                 }
 
@@ -89,7 +87,7 @@ public class ServerForwardThread implements Runnable
             //Send death message of disconnecting player to everyone
             ArrayList<String> dataToSend = new ArrayList<>();
             dataToSend.add("enemyPlayerLife|" + playerId + "|0|*");
-            SendThread send = new SendThread(clientConnections, dataToSend);
+            SendThread send = new SendThread(Server.getClientList(), dataToSend);
             Thread thread = new Thread(send);
             thread.start();
 

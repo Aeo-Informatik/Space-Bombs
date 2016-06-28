@@ -1,23 +1,25 @@
 package networkServer;
 
 import com.gdx.bomberman.Constants;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 
 
 public class Server 
 {
-    
+    //Objects
     private ServerSocket serverSocket;
-    private int maxConnections;
-    private boolean stopListening = false;
-    private ArrayList<Socket> clientConnections = new ArrayList<>();
+    private static ArrayList<Socket> clientConnections = new ArrayList<>();
     
+    //Persistent Threads
+    private Thread lobbyThread; //Persistent Thread till closed or maxConnection reached
+    
+    //Variables
+    private int maxConnections;
+    
+    //Constructor
     public Server(int port, int maxConnections)
     {
         try 
@@ -33,42 +35,42 @@ public class Server
         }
     }
     
+    
     /**
      * Starts the forward thread which will receive & send back the data. 
-     * Before that happens every client gets a unique player id like player1 or player2.
+     * Before that happens every client gets a unique player id.
      * @param socketList 
      */
     public void startGame()
     {
         try
         {
+            //Stop lobby Thread
+            lobbyThread.interrupt();
+            
             //Gets connected client list as input and iterates over them
-            for(int i = 0; i < clientConnections.size(); i++)
+            for(int i = 0; i < Server.getClientList().size(); i++)
             {
                 //Debug
                 if(Constants.SERVERDEBUG)
                     System.out.println("SERVER: ------Start Setup Game------");
 
+                //Player id as string
                 String playerId = Integer.toString(i +1);     
 
-                /*-------------------SETUP GAME---------------------*/
                 //Bind every client to their playerId (1, 2, 3, 4)
-                //Message to send: registerPlayerId|playerId|*
                 String registerCommand = "registerMainPlayerId|" + playerId + "|*";
-                sendToOne(clientConnections.get(i), registerCommand);
+                sendToOne(Server.getClient(i), registerCommand);
 
-                /*-------------------END SETUP GAME---------------------*/
                 //Open forward thread for every client
-                ServerForwardThread receive = new ServerForwardThread(clientConnections.get(i), clientConnections, i +1);
+                ServerForwardThread receive = new ServerForwardThread(Server.getClient(i), i +1);
                 Thread thread = new Thread(receive);
                 thread.start();
             }
 
-            //Message to receive: registerEnemyPlayers|3|1
-            //General: registerAmountPlayers|amount|target //
-            String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(clientConnections.size()) + "|*";
-
-            sendToAll(clientConnections, new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
+            //Send to client the amount of players and the signal to spawn them
+            String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(Server.getClientList().size()) + "|*";
+            sendToAll(Server.getClientList(), new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
 
         }catch(Exception e)
         {
@@ -80,89 +82,21 @@ public class Server
     
     
     /**
-     * Lets everyone connect to the server till maxConnections has been reached or stopListening is
-     * set to true.
+     * Lets everyone connect to the server till maxConnections has been 
+     * reached or startGame has been executed.
+     * Persistent thread.
      */
-    public void AcceptConnections()
+    public void OpenLobby()
     {
-        try
-        {
-            //Debug
-            System.out.println("SERVER: Listening & accepting connections on port " + serverSocket.getLocalPort() + "\n");
-
-            //Start accepting connections till maxConnections are reached
-            for(int i=0; maxConnections > i; i++)
-            {   
-                Socket clientSocket = null;
-
-                //Try connecting till clientSocket has been bound to a client
-                while(clientSocket == null)
-                {
-                    try
-                    {
-                        //Check if client disconnects from lobby
-                        for(int b=0; b < clientConnections.size(); b++)
-                        {
-                            BufferedReader receive = new BufferedReader(new InputStreamReader(clientConnections.get(b).getInputStream()));
-                            String dataReceived;
-                            
-                            if((dataReceived = receive.readLine()) == null)
-                            {
-                                System.out.println("SERVER: Client " + clientConnections.get(b).getInetAddress().getHostAddress() + " disconnected from Lobby");
-                                clientConnections.remove(b);
-                                i -= 1;
-                            }
-                        }
-                        
-                        //Stops clients from connecting
-                        if(stopListening == true)
-                        {
-                            break;
-                        }
-
-                        //Accept connection and set timeout
-                        serverSocket.setSoTimeout(100); //milliseconds
-                        clientSocket = serverSocket.accept();
-
-                    }catch(SocketTimeoutException e)
-                    {
-
-                    }
-                }
-
-                //Stops clients from connecting
-                if(stopListening == true)
-                {
-                    break;
-                }
-
-                //Connection announcement
-                System.out.println("-----New Client-----");
-                int y = i +1;
-                System.out.println("Number: " + y);
-                System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
-                System.out.println("--------------------");
-
-                //Add connection object to array list
-                clientConnections.add(clientSocket);
-            }
-
-        }catch(Exception e)
-        {
-            System.err.println("ERROR: Something went wrong in accepting connections " + e);
-            e.printStackTrace();
-            System.exit(1);
-        }
+        //Create thread
+        Lobby lobby = new Lobby(maxConnections, serverSocket);
+        lobbyThread = new Thread(lobby);
+        lobbyThread.start();
     }
     
-    //TODO
-    public void closeServer()
-    {
-        
-    }
     
     /**
-     * Send one message to one client.
+     * Send one message to one client. Temporary thread.
      * @param socket
      * @param message 
      */
@@ -185,7 +119,7 @@ public class Server
     
     
     /**
-     * Send multiple messages in arraylist to everyone.
+     * Send multiple messages in an arraylist to everyone. Temporary thread.
      * @param socketList
      * @param dataToSend 
      */
@@ -206,24 +140,24 @@ public class Server
     }
     
     
-    /**-----------------------GETTER & SETTER-----------------------**/
-    public boolean getStopListening()
+    /**-----------------------THREAD SAFE FUNCTIONS-----------------------**/
+    public static synchronized void addClient(Socket client)
     {
-        return this.stopListening;
+        clientConnections.add(client);
     }
     
-    public void setStopListening(boolean stopListening)
+    public static synchronized Socket getClient(int i)
     {
-        this.stopListening = stopListening;
+        return clientConnections.get(i);
+    }
+     
+    public static synchronized void removeClient(int i)
+    {
+        clientConnections.remove(i);
     }
     
-    public ArrayList<Socket> getClientConnections()
+    public static synchronized ArrayList<Socket> getClientList()
     {
-        return this.clientConnections;
-    }
-    
-    public void setClientConnections(ArrayList<Socket> clientConnections)
-    {
-        this.clientConnections = clientConnections;
+        return clientConnections;
     }
 }
