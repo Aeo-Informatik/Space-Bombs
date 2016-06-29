@@ -9,6 +9,7 @@
   </tile>
   <tile id="1">
    <properties>
+    <property name="deadly" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
@@ -148,26 +149,31 @@
   </tile>
   <tile id="25">
    <properties>
+    <property name="deadly" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="26">
    <properties>
+    <property name="deadly" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="27">
    <properties>
+    <property name="deadly" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="28">
    <properties>
+    <property name="deadly" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="29">
    <properties>
+    <property name="deadly" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
@@ -187,7 +193,7 @@
    eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
   </data>
  </layer>
- <layer name="Items" width="120" height="60">
+ <layer name="Items" width="120" height="60" visible="0">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
   </data>
