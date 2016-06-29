@@ -46,13 +46,16 @@ public class BombUp extends Item{
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        int id = super.check(cellX, cellY) ;
-        
-        if(id != -1)
+        if(entityManager.getMainPlayer().getMaxBombPlacing()< Constants.maxBombs)
         {
-            if(super.collectedbyMainPlayer(id) == true)
+            int id = super.check(cellX, cellY) ;
+        
+            if(id != -1)
             {
-                doItem();
+                if(super.collectedbyMainPlayer(id) == true)
+                {
+                    doItem();
+                }
             }
         }
 
@@ -60,10 +63,8 @@ public class BombUp extends Item{
     
     public void doItem()
     {
-        if(entityManager.getMainPlayer().getMaxBombPlacing()< Constants.maxBombs)
-        {
-            entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
-        }
+
+        entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
     }
     
 }

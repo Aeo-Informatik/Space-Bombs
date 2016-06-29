@@ -35,16 +35,20 @@ public class EntityManager {
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
     private Spectator spectator;
+    private float itemTimer;
+    private float timer;
     private MapManager map;
     private Array <Bomb> bombArray = new Array<>();
     private Array <Bomb> bombArrayEnemy = new Array<>();
     private Array <Item> itemArray = new Array<>();
+    private Array <Item> tombs = new Array<>();
     
     //Constructor
     public EntityManager(OrthoCamera camera, MapManager map)
     {
         this.camera = camera;
         this.map = map;
+        this.itemTimer = Constants.itemTimer;
     }
     
 
@@ -108,6 +112,10 @@ public class EntityManager {
             item.render(renderItem);
         }
         
+        for(Item item: tombs)
+        {
+            item.render(renderItem);
+        }
         renderItem.end();
     }
     
@@ -144,6 +152,7 @@ public class EntityManager {
             }
         }
         
+        //
         for (int i=0; i < itemArray.size; i++)
         {
             if(this.itemArray.get(i).isCollected())
@@ -151,6 +160,21 @@ public class EntityManager {
                 itemArray.get(i).clear();
                 itemArray.removeIndex(i);
             }
+        }
+        
+        //
+        if(timer >= itemTimer)
+        {
+            for (int i=0; i < itemArray.size; i++)
+            {
+                itemArray.get(i).clear();
+                itemArray.removeIndex(i);
+            }   
+            spawnItem();
+            timer = 0;
+        }else
+        {
+            timer += Constants.DELTATIME;
         }
         
         //If main player died spawn spectator and delete mainPlayer Object
@@ -219,15 +243,13 @@ public class EntityManager {
                                 
                                 LifeUp lifeup = new LifeUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
                                 itemArray.add(lifeup);
-                                System.out.println("LifeUp");
                                 break;
                             }
                             
                             case(2):
                             {
-                                Coin coin = new Coin(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                Coin coin = new Coin(new Vector2(mapX, mapY), new Vector2(0,0),map, this, 1);
                                 itemArray.add(coin);
-                                System.out.println("Coin");
                                 break;
                             }
                             
@@ -235,7 +257,6 @@ public class EntityManager {
                             {
                                 RangeUp rangeUp = new RangeUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
                                 itemArray.add(rangeUp);
-                                System.out.println("RangeUp");
                                 break;
                             }
                             
@@ -243,7 +264,6 @@ public class EntityManager {
                             {
                                 BombUp bombUp = new BombUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
                                 itemArray.add(bombUp);
-                                System.out.println("BombUp");
                                 break;
                             }
                             
@@ -268,7 +288,7 @@ public class EntityManager {
     public void spawnCoin(int x, int y)
     {
         
-        Coin coin = new Coin(new Vector2(x, y), new Vector2(0,0),map, this);
+        Coin coin = new Coin(new Vector2(x, y), new Vector2(0,0),map, this, 2);
         itemArray.add(coin);
         System.out.println("Coin");
                                 
@@ -277,9 +297,7 @@ public class EntityManager {
     public void spawnTombstone(int x, int y)
     {
         Tombstone tombstone = new Tombstone(new Vector2(x, y), new Vector2(0,0), map, this, mainPlayer.getCoins());
-        itemArray.add(tombstone);
-        System.out.println(mainPlayer.getCoins());
-        System.out.println("Tombstone");
+        tombs.add(tombstone);
     }
     
     /**

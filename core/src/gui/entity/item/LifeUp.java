@@ -47,23 +47,23 @@ public class LifeUp extends Item{
         
         
         int id = super.check(cellX, cellY) ;
-        
-        if(id != -1)
+        if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
         {
-            if(super.collectedbyMainPlayer(id) == true)
+           
+            if(id != -1)
             {
-                doItem();
+                if(super.collectedbyMainPlayer(id) == true)
+                {
+                    doItem();
+                }
             }
         }
-
     }
     
     public void doItem()
     {
-        if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
-        {
-            entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
-        }
+
+        entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
         
     }
 

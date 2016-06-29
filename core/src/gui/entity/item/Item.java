@@ -52,7 +52,6 @@ public class Item extends Entity{
     {
         if(entityManager.getMainPlayer().getPlayerId() == ID)
         {
-            System.out.println("collectedbyMain");
             return true;
         }
         return false;
