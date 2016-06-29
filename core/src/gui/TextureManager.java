@@ -208,7 +208,7 @@ public class TextureManager
         rangeUp = new TextureRegion(rangeup,0,0,32,32);
         
         coin = loadTexture("other/coin.png");
-        coinAnim = new Animation(coinAnimTime, new TextureRegion(coin,0,0,20,32), new TextureRegion(coin,20,0,8,32), new TextureRegion(coin,28,0,10,32));
+        coinAnim = new Animation(coinAnimTime, new TextureRegion(coin,5,0,28,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32));
         
         
         
