@@ -21,13 +21,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
  *
  * @author cb0703
  */
-public class Speed extends Item{
+public class SpeedUp extends Item{
 
     private final TextureRegion speedUp;
     private int cellX, cellY;
     
     
-    public Speed(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
+    public SpeedUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
         this.speedUp = TextureManager.speedUp;
 
@@ -41,7 +41,7 @@ public class Speed extends Item{
         
         Cell cell = new Cell();
         cell.setTile(new StaticTiledMapTile(speedUp));
-        cell.getTile().getProperties().put("bomb", null);
+        cell.getTile().getProperties().put("speed", null);
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         

@@ -40,7 +40,7 @@ public class RangeUp extends Item{
         
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(rangeUp));
-        cell.getTile().getProperties().put("bomb", null);
+        cell.getTile().getProperties().put("rangeUp", null);
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         

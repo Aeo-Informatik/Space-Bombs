@@ -40,7 +40,7 @@ public class BombUp extends Item{
         
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(bombUp));
-        cell.getTile().getProperties().put("bomb", null);
+        cell.getTile().getProperties().put("bombUp", null);
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
