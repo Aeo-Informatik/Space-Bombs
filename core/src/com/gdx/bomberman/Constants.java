@@ -12,8 +12,8 @@ import networkServer.Server;
  * @author qubasa
  */
 public class Constants {
-    public static float MUSICVOLUME = 0.0f;
-    public static float SOUNDVOLUME = 0.0f;
+    public static float MUSICVOLUME = 0.2f;
+    public static float SOUNDVOLUME = 0.2f;
     
     //Window config
     public static int SCREENWIDTH = 800;
@@ -24,7 +24,7 @@ public class Constants {
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
-    public static String MAPPATH = "maps/TestMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
+    public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     
     //Item config
     public static float itemTimer = 5;
