@@ -12,6 +12,7 @@ import networkServer.Server;
  * @author qubasa
  */
 public class Constants {
+    public static float MUSICVOLUME = 0.2f;
     public static float SOUNDVOLUME = 0.2f;
     
     //Window config
