@@ -375,7 +375,7 @@ public class MainPlayer extends Entity
         /*------------------SPAWN ITEM------------------*/
         if((Gdx.input.isKeyJustPressed(Keys.B)))
         {
-           entityManager.spawnItem();
+           //entityManager.spawnItem();
         }
         
         /*------------------PLACE BOMB------------------*/
