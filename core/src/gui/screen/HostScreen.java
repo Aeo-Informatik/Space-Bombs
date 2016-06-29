@@ -29,6 +29,8 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
+import java.io.IOException;
+import java.net.ConnectException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -164,7 +166,27 @@ public class HostScreen implements Screen
                 //Add click musik
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
-                Constants.SERVERIP = "localhost";
+                new Thread(new ServerStart()).start();
+        
+       
+        try 
+        {
+            client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+            
+            client.connectToServer();
+            //client.pingThread();
+             game.setScreen(new GameScreen);
+        }catch(ConnectException e)
+        {
+            //If wrong server ip or port are given
+            System.err.println("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
+        
+        }catch (IOException | InterruptedException e) 
+        {
+            System.err.println("ERROR: Unexpected client exception: " + e);
+            Gdx.app.exit();
+        }
+                
                 
                 //Wait till sound is done
                 try 
@@ -180,12 +202,10 @@ public class HostScreen implements Screen
         {
             
             //Initialise server object
-            Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);   
-
-            server.OpenLobby();
+           
             
            
-            game.setScreen(new GameScreen());
+           
             
            
                
