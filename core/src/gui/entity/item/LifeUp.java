@@ -46,10 +46,10 @@ public class LifeUp extends Item{
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         
-        int id = super.check(cellX, cellY) ;
+        
         if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
         {
-           
+           int id = super.check(cellX, cellY) ;
             if(id != -1)
             {
                 if(super.collectedbyMainPlayer(id) == true)
