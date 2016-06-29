@@ -5,23 +5,21 @@ Add sound effects to the game & menu.
 
 //Bomb
 1) To be able to push the bomb
-2) If bomb destorys a block drop a coin at random
+
 
 //Player
 4) Spawns a tomb stone with his coins on death
 6) A hub navigation bar a la minecraft for bomb selection
 
 //Textures
-6) Adding an animation for the player standig still
+(6) Adding an animation for the player standig still)
 11) Better bomb animation with fuse going down
-13) Hud texture a la minecraft for bomb selection
+13) Hud texture à la minecraft for bomb selection
 14) Adding animation for items going up and down or rotating
 15) Changing the error background texture in joinscreen
 
 //Items
 Add items to the game:
-speedupgrade
-bombupgrade
 coin bags
 
 
