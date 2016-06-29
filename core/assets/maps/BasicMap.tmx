@@ -190,7 +190,7 @@
  </layer>
  <layer name="Bombs" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
+   eJztzjEKACAMA8AOvsDF///USRBBRytyB4EGOiQCAAAAAAAAAADuaNkDAAAAAAAAAAAAAAD4VptSN/fop/81NXhJyR4AAAAAAAAAkKwDD9IB/Q==
   </data>
  </layer>
  <layer name="Items" width="120" height="60" visible="0">
