@@ -42,6 +42,7 @@ public class EntityManager {
     private Array <Bomb> bombArrayEnemy = new Array<>();
     private Array <Item> itemArray = new Array<>();
     private Array <Item> tombs = new Array<>();
+    private Array <Item> coins = new Array<>();
     
     //Constructor
     public EntityManager(OrthoCamera camera, MapManager map)
@@ -116,6 +117,11 @@ public class EntityManager {
         {
             item.render(renderItem);
         }
+        
+        for (Item item: coins)
+        {
+            item.render(renderItem);
+        }
         renderItem.end();
     }
     
@@ -159,6 +165,24 @@ public class EntityManager {
             {
                 itemArray.get(i).clear();
                 itemArray.removeIndex(i);
+            }
+        }
+        
+        for (int i=0; i < tombs.size; i++)
+        {
+            if(this.tombs.get(i).isCollected())
+            {
+                tombs.get(i).clear();
+                tombs.removeIndex(i);
+            }
+        }
+        
+        for (int i=0; i < coins.size; i++)
+        {
+            if(this.coins.get(i).isCollected())
+            {
+                coins.get(i).clear();
+                coins.removeIndex(i);
             }
         }
         
@@ -288,9 +312,7 @@ public class EntityManager {
     {
         
         Coin coin = new Coin(new Vector2(x, y), new Vector2(0,0),map, this, 2);
-        itemArray.add(coin);
-        System.out.println("Coin");
-                                
+        coins.add(coin);                                
     }
     
     public void spawnTombstone(int x, int y)
