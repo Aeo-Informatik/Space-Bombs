@@ -477,5 +477,5 @@ public class EntityManager {
     public void setMap(MapManager map) {
         this.map = map;
     }
-    
+
 }

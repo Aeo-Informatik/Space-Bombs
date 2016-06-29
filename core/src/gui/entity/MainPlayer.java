@@ -495,8 +495,8 @@ public class MainPlayer extends Entity
     public void setCoins(int coins) {
         this.coins = coins;
     }
-    
-    
+
+
     
     
 }

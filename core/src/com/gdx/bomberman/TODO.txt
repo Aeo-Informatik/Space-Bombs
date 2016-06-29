@@ -19,6 +19,7 @@ different colored coins
 
 //Items
 coin bags ( just the texture )
+Speed Upgrade
 
 
 //Screens
