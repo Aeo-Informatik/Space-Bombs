@@ -184,36 +184,10 @@ public class HostScreen implements Screen
 
             server.OpenLobby();
             
-            Scanner reader = new Scanner(System.in);  // Reading from System.in
-            System.out.println("Commands: /startGame, /stopServer, /closeLobby, /openLobby");
+           
             game.setScreen(new GameScreen());
             
-            while(true)
-            {
-                String n = reader.nextLine();
-                if(n.equalsIgnoreCase("/startGame"))
-                {
-                    System.out.println("----------GAME STARTED---------");
-                    server.startGame();
-                    
-                }else if(n.equalsIgnoreCase("/stopServer"))
-                {
-                    System.out.println("----------SERVER STOPPED---------");
-                    server.resetServer();
-                    break;
-                    
-                }else if(n.equalsIgnoreCase("/closeLobby"))
-                {
-                    System.out.println("----------LOBBY CLOSED---------");
-                    server.closeLobby();
-                    
-                }else if(n.equalsIgnoreCase("/openLobby"))
-                {
-                    System.out.println("----------NEW LOBBY OPENED----------");
-                    server.OpenLobby();
-                    
-                }
-            }
+           
                
         }catch(Exception e)
         {
