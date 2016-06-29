@@ -58,6 +58,121 @@ public class Bomb extends Entity
     
     
     //Constructor
+    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
+    { 
+        super(pos, direction, map, entityManager);
+        
+        //Needed variables
+        this.playerId = playerId;
+        this.emptyBlock = TextureManager.emptyBlock;
+        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
+        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
+        
+        //Bomb settings
+        this.explosionRange = range; // In blocks
+        this.explosionTime = 2; // in seconds
+        this.explosionDuration = 0.4f; // in seconds     
+        this.delayAfterHitByBomb = 0.4f;
+                
+        //If player placed more bombs then defined in range reset Id to startvalue
+        switch(playerId)
+        {
+            case 1:
+                Constants.BOMBIDCOUNTERP1 += 1;
+                bombId = Constants.BOMBIDCOUNTERP1;
+                
+                if(bombId > 1000)
+                    Constants.BOMBIDCOUNTERP1 = 0;
+                break;
+            
+            case 2:
+                Constants.BOMBIDCOUNTERP2 += 1;
+                bombId = Constants.BOMBIDCOUNTERP2;
+                
+                if(bombId > 2000)
+                    Constants.BOMBIDCOUNTERP2 = 1000;
+                break;
+                
+            case 3:
+                Constants.BOMBIDCOUNTERP3 += 1;
+                bombId = Constants.BOMBIDCOUNTERP3;
+                
+                if(bombId > 3000)
+                    Constants.BOMBIDCOUNTERP3 = 2000;
+                break;
+                
+            case 4:
+                Constants.BOMBIDCOUNTERP4 += 1;
+                this.bombId = Constants.BOMBIDCOUNTERP4;
+                
+                if(bombId > 4000)
+                    Constants.BOMBIDCOUNTERP4 = 3000;
+                break;
+        }
+        
+        if(Constants.CLIENTDEBUG)
+            System.out.println("BomId for player " + playerId +" is: " + bombId);
+        
+        //Set Textures
+        switch(playerId)
+        {
+            case 1:
+                this.bombAnim = TextureManager.p1NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p1ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p1ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p1ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p1ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p1ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p1ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p1ExplosionLeftEnd;
+                break;
+            
+            case 2:
+                this.bombAnim = TextureManager.p2NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p2ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p2ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p2ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p2ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p2ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p2ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p2ExplosionLeftEnd;
+                break;
+                
+            case 3:
+                this.bombAnim = TextureManager.p3NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p3ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p3ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p3ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p3ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p3ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p3ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p3ExplosionLeftEnd;
+                break;
+                
+            case 4:
+                this.bombAnim = TextureManager.p4NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p4ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p4ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p4ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p4ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p4ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p4ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p4ExplosionLeftEnd;
+                break;
+                
+            default:
+                System.err.println("ERROR: Wrong playerId in bomb defined " + playerId + " using default p1 textures.");
+                this.bombAnim = TextureManager.p1NormalBombAnim;
+                this.explosionYMiddle = TextureManager.p1ExplosionYMiddle;
+                this.explosionXMiddle = TextureManager.p1ExplosionXMiddle;
+                this.explosionCenter = TextureManager.p1ExplosionCenter;
+                this.explosionDownEnd = TextureManager.p1ExplosionDownEnd;
+                this.explosionUpEnd = TextureManager.p1ExplosionUpEnd;
+                this.explosionRightEnd = TextureManager.p1ExplosionRightEnd;
+                this.explosionLeftEnd = TextureManager.p1ExplosionLeftEnd;
+        }
+    }
+    
     public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, EntityManager entityManager)
     { 
         super(pos, direction, map, entityManager);
@@ -172,7 +287,6 @@ public class Bomb extends Entity
                 this.explosionLeftEnd = TextureManager.p1ExplosionLeftEnd;
         }
     }
-    
     
     @Override
     public void render(SpriteBatch renderObject)

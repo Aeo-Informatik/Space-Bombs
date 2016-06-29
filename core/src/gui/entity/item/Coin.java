@@ -48,8 +48,21 @@ public class Coin extends Item{
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         
-        super.check(cellX, cellY);
+        int id = super.check(cellX, cellY) ;
+        
+        if(id != -1)
+        {
+            if(super.collectedbyMainPlayer(id) == true)
+            {
+                doItem();
+            }
+        }
 
+    }
+    
+    public void doItem()
+    {
+        entityManager.getMainPlayer().setCoins((entityManager.getMainPlayer().getCoins()+ 1));
     }
     
 

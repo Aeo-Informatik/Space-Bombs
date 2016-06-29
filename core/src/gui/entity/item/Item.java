@@ -47,6 +47,16 @@ public class Item extends Entity{
         }
         return -1;
     }
+    
+    public boolean collectedbyMainPlayer(int ID)
+    {
+        if(entityManager.getMainPlayer().getPlayerId() == ID)
+        {
+            System.out.println("collectedbyMain");
+            return true;
+        }
+        return false;
+    }
 
     public boolean isCollected() {
         return collected;
