@@ -24,15 +24,15 @@ public class Constants {
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
-    public static String MAPPATH = "maps/BasicMap.tmx";
+    public static String MAPPATH = "maps/TestMap.tmx";
     
     //Client config
-    public static String SERVERIP = "";
+    public static String SERVERIP = "localhost";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     
     //Server config
-    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
