@@ -216,11 +216,10 @@ public class EntityManager {
                         
                             case(1):
                             {
-                                /*
-                                SpeedUp speed = new SpeedUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
-                                itemArray.add(speed);
-                                System.out.println("Speed");
-                                */
+                                
+                                LifeUp lifeup = new LifeUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                itemArray.add(lifeup);
+                                System.out.println("LifeUp");
                                 break;
                             }
                             
@@ -265,6 +264,24 @@ public class EntityManager {
         }
         System.out.println(itemArray.size);
     }
+    
+    public void spawnCoin(int x, int y)
+    {
+        
+        Coin coin = new Coin(new Vector2(x, y), new Vector2(0,0),map, this);
+        itemArray.add(coin);
+        System.out.println("Coin");
+                                
+    }
+    
+    public void spawnTombstone(int x, int y)
+    {
+        Tombstone tombstone = new Tombstone(new Vector2(x, y), new Vector2(0,0), map, this, mainPlayer.getCoins());
+        itemArray.add(tombstone);
+        System.out.println(mainPlayer.getCoins());
+        System.out.println("Tombstone");
+    }
+    
     /**
      * Returns the Bomb Object on the specified coordinates. If there is no bomb return null.
      * @param x Cell coordiante on x axis
