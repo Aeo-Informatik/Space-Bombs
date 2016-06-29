@@ -211,6 +211,8 @@ public class MainPlayer extends Entity
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("LEFT") == false)
                 {
+                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    
                     //Saves position so that the static image looks in the right direction if player doesnt move
                     lastMovementKeyPressed = "LEFT";
                     
@@ -248,6 +250,8 @@ public class MainPlayer extends Entity
                 
                 if(sendMoveOnce.equals("RIGHT") == false)
                 {
+                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    
                     lastMovementKeyPressed = "RIGHT";
                     sendStopOnce = true;
                     moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
@@ -275,6 +279,8 @@ public class MainPlayer extends Entity
 
                 if(sendMoveOnce.equals("UP") == false)
                 {
+                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    
                     lastMovementKeyPressed = "UP";
                     sendStopOnce = true;
                     moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
@@ -301,6 +307,8 @@ public class MainPlayer extends Entity
                 
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
+                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    
                     lastMovementKeyPressed = "DOWN";
                     sendStopOnce = true;
                     moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
