@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import gui.entity.MainPlayer;
 
 
 /**
@@ -44,11 +45,21 @@ public class BombUp extends Item{
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
+        int id = super.check(cellX, cellY) ;
         
-        super.check(cellX, cellY);
+        if(id != -1)
+        {
+            if(super.collectedbyMainPlayer(id) == true)
+            {
+                doItem();
+            }
+        }
 
     }
     
-
+    public void doItem()
+    {
+        entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
+    }
     
 }

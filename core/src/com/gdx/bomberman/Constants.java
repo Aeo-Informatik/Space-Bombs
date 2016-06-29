@@ -14,7 +14,7 @@ import networkServer.Server;
 public class Constants {
     
     //Audio config
-    public static float MUSICVOLUME = 0.0f;
+    public static float MUSICVOLUME = 0.1f;
     public static float SOUNDVOLUME = 0.2f;
     
     //Window config
@@ -29,7 +29,7 @@ public class Constants {
     public static String MAPPATH = "maps/BasicMap.tmx";
     
     //Client config
-    public static String SERVERIP = "";
+    public static String SERVERIP = "localhost";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     
