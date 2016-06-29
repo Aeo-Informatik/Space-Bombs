@@ -24,7 +24,7 @@ public class Constants {
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
-    public static String MAPPATH = "maps/BasicMap.tmx";
+    public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     
     //Client config
     public static String SERVERIP = "localhost";

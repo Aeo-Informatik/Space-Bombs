@@ -1,6 +1,8 @@
 //General
 Add sound effects to the game & menu.
 
+
+
 //Bomb
 1) To be able to push the bomb
 2) If bomb destorys a block drop a coin at random
