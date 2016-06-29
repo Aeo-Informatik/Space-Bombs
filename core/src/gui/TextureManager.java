@@ -188,26 +188,26 @@ public class TextureManager
         skin.addRegions(textureAtlas);
         
         /*---------------------------------HUD---------------------------------*/
-        hudCounterFullLive = loadTexture("other/hud2_full_live.png");
-        hudCounterTwoThirdLive = loadTexture("other/hud2_two_third_live.png");
-        hudCounterOneThirdLive = loadTexture("other/hud2_one_third_live.png");
-        hudCounterNoLive = loadTexture("other/hud2_no_live.png");
+        hudCounterFullLive = loadTexture("hud/hud2_full_live.png");
+        hudCounterTwoThirdLive = loadTexture("hud/hud2_two_third_live.png");
+        hudCounterOneThirdLive = loadTexture("hud/hud2_one_third_live.png");
+        hudCounterNoLive = loadTexture("hud/hud2_no_live.png");
         
         
         
         /*------------------------------ITEMS--------------------------------*/
         float coinAnimTime = 0.25f;
         
-        speedup = loadTexture("other/speed_upgrade.png");
+        speedup = loadTexture("items/speed_upgrade.png");
         speedUp = new TextureRegion(speedup,0,0,32,32);
         
-        bombup = loadTexture("other/bomb_upgrade.png");
+        bombup = loadTexture("items/bomb_upgrade.png");
         bombUp = new TextureRegion(bombup,0,0,32,32);
         
-        rangeup = loadTexture("other/range_upgrade.png");
+        rangeup = loadTexture("items/range_upgrade.png");
         rangeUp = new TextureRegion(rangeup,0,0,32,32);
         
-        coin = loadTexture("other/coin.png");
+        coin = loadTexture("items/coin.png");
         coinAnim = new Animation(coinAnimTime, new TextureRegion(coin,5,0,28,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32));
         
         

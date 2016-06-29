@@ -27,12 +27,12 @@ public class Constants {
     public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     
     //Client config
-    public static String SERVERIP = "localhost";
+    public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     
     //Server config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
