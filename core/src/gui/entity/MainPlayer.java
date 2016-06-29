@@ -133,6 +133,7 @@ public class MainPlayer extends Entity
     public void onDeath()
     {
         System.out.println("YOU DIED!");
+        entityManager.spawnTombstone((int)(pos.x / Constants.MAPTEXTUREWIDTH),(int)(pos.y / Constants.MAPTEXTUREHEIGHT));
     }
     
     

@@ -365,6 +365,17 @@ public class Bomb extends Entity
                 cell.setTile(new StaticTiledMapTile(emptyBlock));
                 
                 map.getBlockLayer().setCell( x, y, cell);
+                if(currentCell.getTile().getId() != cell.getTile().getId())
+                {
+                    switch((int)(Math.random()*3))
+                    {
+                        case(0):
+                            break;
+                            
+                        default:
+                            entityManager.spawnCoin(x, y);
+                    }
+                }
             }
         }
         

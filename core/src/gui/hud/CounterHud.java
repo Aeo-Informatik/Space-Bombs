@@ -131,6 +131,18 @@ public class CounterHud
                 //Change heard texture
                 switch (live) 
                 {
+                    case 6:
+                        uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterSixLive)));
+                        break;
+                    case 5:
+                        uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterFiveLive)));
+                        break;
+                    case 4:
+                        uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterFourLive)));
+                        break;
+                    case 3:
+                        uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterFullLive)));
+                        break;
                     case 2:
                         uiCounterImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudCounterTwoThirdLive)));
                         break;

@@ -33,6 +33,9 @@ public class TextureManager
     public static Texture hudCounterTwoThirdLive;
     public static Texture hudCounterOneThirdLive;
     public static Texture hudCounterNoLive;
+    public static Texture hudCounterFourLive;
+    public static Texture hudCounterFiveLive;
+    public static Texture hudCounterSixLive;
     
     //Items
     public static Texture speedup;
@@ -46,6 +49,12 @@ public class TextureManager
     
     public static Texture coin;
     public static Animation coinAnim;
+    
+    public static Texture lifeup;
+    public static TextureRegion lifeUp;
+    
+    public static Texture tomb;
+    public static TextureRegion tombstone;
     
     //Player 1 Walking
     public static Texture p1WalkingDown;
@@ -192,6 +201,9 @@ public class TextureManager
         hudCounterTwoThirdLive = loadTexture("hud/hud2_two_third_live.png");
         hudCounterOneThirdLive = loadTexture("hud/hud2_one_third_live.png");
         hudCounterNoLive = loadTexture("hud/hud2_no_live.png");
+        hudCounterFourLive = loadTexture("hud/hud2_4_live.png");
+        hudCounterFiveLive = loadTexture("hud/hud2_5_live.png");
+        hudCounterSixLive = loadTexture("hud/hud2_6_live.png");
         
         
         
@@ -210,6 +222,11 @@ public class TextureManager
         coin = loadTexture("items/coin.png");
         coinAnim = new Animation(coinAnimTime, new TextureRegion(coin,5,0,28,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32));
         
+        lifeup = loadTexture("items/liveUp.png");
+        lifeUp = new TextureRegion(lifeup,0,0,32,32);
+        
+        tomb = loadTexture("items/tomb_stone.png");
+        tombstone = new TextureRegion(tomb,0,0,32,32);
         
         
         /*---------------------------------PLAYER 1---------------------------------------*/

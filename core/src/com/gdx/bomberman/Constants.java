@@ -26,6 +26,11 @@ public class Constants {
     public static boolean PROCESSDATADEBUG = false;
     public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     
+    //Item config
+    public static int maxBombs = 5;
+    public static int maxBombRange = 5;
+    public static int maxLife = 6;
+    
     //Client config
     public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
