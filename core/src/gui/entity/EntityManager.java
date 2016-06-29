@@ -282,7 +282,6 @@ public class EntityManager {
                 }
             }
         }
-        System.out.println(itemArray.size);
     }
     
     public void spawnCoin(int x, int y)
