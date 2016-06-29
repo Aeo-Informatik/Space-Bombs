@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
@@ -59,7 +60,11 @@ public class RangeUp extends Item{
     
     public void doItem()
     {
-        entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));
+        if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
+        {
+            entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));
+        }
+        
     }
 
     

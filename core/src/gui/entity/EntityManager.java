@@ -216,9 +216,11 @@ public class EntityManager {
                         
                             case(1):
                             {
+                                /*
                                 SpeedUp speed = new SpeedUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
                                 itemArray.add(speed);
                                 System.out.println("Speed");
+                                */
                                 break;
                             }
                             
