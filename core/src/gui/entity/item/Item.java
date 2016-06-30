@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
-import gui.entity.MainPlayer;
 import gui.map.MapManager;
 /**
  *

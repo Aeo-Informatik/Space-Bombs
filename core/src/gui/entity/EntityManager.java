@@ -381,8 +381,8 @@ public class EntityManager {
                 try
                 {
                     //Calculate enemy position in cell coordinates
-                    int enemyCellX = (int) (enemy.getPosition().x / Constants.MAPTEXTUREWIDTH);
-                    int enemyCellY = (int) (enemy.getPosition().y / Constants.MAPTEXTUREWIDTH);
+                    int enemyCellX = (int) ((enemy.getPosition().x + Constants.PLAYERWIDTH / 2) / Constants.MAPTEXTUREWIDTH);
+                    int enemyCellY = (int) ((enemy.getPosition().y + Constants.PLAYERHEIGHT / 2) / Constants.MAPTEXTUREWIDTH);
                     
                     //If enemy player found on given position
                     if(enemyCellX == x && enemyCellY == y)

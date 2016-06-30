@@ -55,4 +55,3 @@ Enemy teleports himself in online mode due to laggs --> Vector2.interpolation co
 On some plattforms the camera is slower then the player ? (maybe framerate problems)
 Game Icon isn't shown on mac because of different size preferences 128x128
 White bars when walking with player
-Items hitbox /item dont get collected correctly
