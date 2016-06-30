@@ -18,11 +18,10 @@ Add sound effects to the game & menu.
 different colored coins 
 
 //Items
-
 Add items to the game:
 coin bags
-
 Speed Upgrade
+
 
 
 //Screens

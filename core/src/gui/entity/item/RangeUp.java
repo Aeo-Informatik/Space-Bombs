@@ -6,9 +6,6 @@
 package gui.entity.item;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -33,7 +30,7 @@ public class RangeUp extends Item{
     {       
         if(entityManager.getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
+            if(entityManager.getMainPlayer().getBombRange() < Constants.MAXBOMBRANGE)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {

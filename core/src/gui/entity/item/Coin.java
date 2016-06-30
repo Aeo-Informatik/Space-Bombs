@@ -10,10 +10,12 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import gui.AnimEffects;
+import gui.AudioManager;
 
 
 /**
@@ -41,6 +43,12 @@ public class Coin extends Item{
         if(isMainPlayerCollectingItem() == true)
         {
             itemEffect();
+        }
+        
+        if(getPlayerIdCollectingItem() != -1)
+        {
+            long id = AudioManager.singleCoin.play();
+            AudioManager.singleCoin.setVolume(id, Constants.SOUNDVOLUME);
         }
     }
     

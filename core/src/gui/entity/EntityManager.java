@@ -33,7 +33,6 @@ public class EntityManager {
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
     private Spectator spectator;
-    private float itemTimer;
     private float timer;
     private MapManager map;
     private Array <Bomb> bombArray = new Array<>();
@@ -47,7 +46,6 @@ public class EntityManager {
     {
         this.camera = camera;
         this.map = map;
-        this.itemTimer = Constants.itemTimer;
     }
     
 
@@ -184,7 +182,7 @@ public class EntityManager {
         }
         
         //Spawn Items Randomly
-        if(timer >= itemTimer)
+        if(timer >= Constants.ITEMTIMER)
         {
             for (int i=0; i < itemArray.size; i++)
             {
@@ -319,7 +317,7 @@ public class EntityManager {
      */
     public void spawnCoin(int x, int y)
     {
-        Coin coin = new Coin(x, y, new Vector2(0,0),map, this, 2);
+        Coin coin = new Coin(x, y, new Vector2(0,0),map, this, Constants.COINVALUE);
         coins.add(coin);                                
     }
     

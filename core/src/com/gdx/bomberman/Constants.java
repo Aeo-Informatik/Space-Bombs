@@ -27,10 +27,11 @@ public class Constants {
     public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     
     //Item config
-    public static float itemTimer = 5;
-    public static int maxBombs = 5;
-    public static int maxBombRange = 5;
-    public static int maxLife = 6;
+    public static float ITEMTIMER = 5;
+    public static int MAXBOMBS = 5;
+    public static int MAXBOMBRANGE = 5;
+    public static int MAXLIFE = 6;
+    public static int COINVALUE = 1;
     
     //Client config
     public static String SERVERIP = "";

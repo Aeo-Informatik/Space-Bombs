@@ -19,6 +19,7 @@ import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import java.util.Random;
 
 /**
  *
@@ -361,19 +362,21 @@ public class Bomb extends Entity
                 
             }else
             {
+                //Delete block with empty texture
                 Cell cell = new Cell();
                 cell.setTile(new StaticTiledMapTile(emptyBlock));
-                
                 map.getBlockLayer().setCell( x, y, cell);
+                
+                
+                /**---------------------RANDOM COIN---------------------**/
+                //Check for a bug
                 if(currentCell.getTile().getId() != cell.getTile().getId())
                 {
-                    switch((int)(Math.random()*3))
+                    int randomNum = new Random().nextInt(3);//Possible output: 0, 1, 2
+                    
+                    if(randomNum == 0)
                     {
-                        case(0):
-                            break;
-                            
-                        default:
-                            entityManager.spawnCoin(x, y);
+                        entityManager.spawnCoin(x, y);
                     }
                 }
             }

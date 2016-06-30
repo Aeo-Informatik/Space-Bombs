@@ -6,9 +6,6 @@
 package gui.entity.item;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -39,7 +36,7 @@ public class YellowHeart extends Item{
     {
         if(entityManager.getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
+            if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {
@@ -55,7 +52,7 @@ public class YellowHeart extends Item{
     {
         if(entityManager.getMainPlayer() != null)
         {
-            entityManager.getMainPlayer().setLife(Constants.maxLife);
+            entityManager.getMainPlayer().setLife(Constants.MAXLIFE);
         }
     }
 }
