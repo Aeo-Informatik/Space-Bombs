@@ -38,7 +38,6 @@ public class Coin extends Item{
         cell.setTile(new StaticTiledMapTile(animEffects.getFrame(TextureManager.coinAnim)));
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        
         if(isMainPlayerCollectingItem() == true)
         {
             itemEffect();

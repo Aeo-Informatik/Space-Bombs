@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
+import gui.entity.MainPlayer;
 import gui.map.MapManager;
 /**
  *
@@ -33,7 +34,7 @@ public class Item extends Entity{
         this.cellX = cellX;
         this.cellY = cellY;
         
-        //Render Item
+        //Render Item once
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(itemTexture));
         map.getItemLayer().setCell(cellX, cellY, cell);

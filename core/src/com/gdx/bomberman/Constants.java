@@ -28,7 +28,6 @@ public class Constants {
     
     //Item config
     public static float itemTimer = 5;
-    
     public static int maxBombs = 5;
     public static int maxBombRange = 5;
     public static int maxLife = 6;
