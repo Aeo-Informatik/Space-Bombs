@@ -50,11 +50,14 @@ public class HostScreen implements Screen
     private Table rootTable;
     private Stack stack;
     
+    private int maximumplayer;
+    
     //Buttons
     private TextField maxplayer;
     private TextButton hostbutton;
     private TextButton addMaxPlayer;
     private TextButton reduceMaxPlayer;
+    
 
     private TextButton backButton;
     private Label errorLabel;
@@ -67,7 +70,7 @@ public class HostScreen implements Screen
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
-        Constants.MAXPLAYERS = 1;
+        Constants.MAXPLAYERS = maximumplayer;
         
 
         //Initialise Font
@@ -127,16 +130,21 @@ public class HostScreen implements Screen
         stage.addActor(stack);
         stack.add(stackTable);
         
-      hostbutton.addListener(new ChangeListener() 
+        
+        
+      addMaxPlayer.addListener(new ChangeListener() 
         {
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
-            {   
+            {    
+                if(maximumplayer < 4)
+              {
+                 
                 //Add click musik
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
-                Constants.MAXPLAYERS = Constants.MAXPLAYERS +1;
-                maxplayer.setText("Maxplayer = "+"/n"+ Constants.MAXPLAYERS);
+                maximumplayer = maximumplayer +1;
+                maxplayer.setText("Maxplayer = "+" "+ maximumplayer);
                 
                 //Wait till sound is done
                 try 
@@ -154,9 +162,53 @@ public class HostScreen implements Screen
             System.exit(1);
         }
                 
-                
+              }else
+              {
+                  
+               maxplayer.setText("reached maximum player");   
+              }
+                    
             }
         });
+      reduceMaxPlayer.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            {   
+                if( maximumplayer <= 4)
+              {if(maximumplayer >1)
+              {
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                maximumplayer = maximumplayer -1;
+                maxplayer.setText("Maxplayer = "+" "+ maximumplayer);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }    
+         catch(Exception e)
+        {
+            System.err.println("ERROR: Unexpected error has been thrown in main" + e);
+            e.printStackTrace();
+            System.exit(1);
+        }
+              } 
+              }else
+              {
+                  
+               maxplayer.setText("reached minimum player");   
+              }
+                    
+            }
+        });
+      
                 
                  
        hostbutton.addListener(new ChangeListener() 
@@ -165,6 +217,7 @@ public class HostScreen implements Screen
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
+                Constants.MAXPLAYERS = maximumplayer;
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);      
                 
