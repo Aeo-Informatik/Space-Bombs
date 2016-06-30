@@ -54,7 +54,7 @@ public class Coin extends Item{
         
         if(id != -1)
         {
-            if(super.collectedbyMainPlayer(id) == true)
+            if(entityManager.getMainPlayer() != null && super.collectedbyMainPlayer(id) == true)
             {
                 doItem();
             }
