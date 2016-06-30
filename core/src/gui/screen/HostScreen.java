@@ -4,115 +4,246 @@
  * and open the template in the editor.
  */
 package gui.screen;
-
-/**
- *
- * @author qubasa
- */
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.ServerSocket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+import networkClient.Client;
+import networkServer.Server;
 
 
+/**
+ *
+ * @author pl0614
+ */
 public class HostScreen implements Screen
 {
     //Objects
     private Stage stage;
-    private Stack stack;
     private Table rootTable;
+    private Stack stack;
+    
+    private int maximumplayer;
     
     //Buttons
-    private TextButton startbutton;
-    private TextButton hostButton;
-    private TextButton exitbutton;
-    private TextButton helpbutton;
+    private TextField maxplayer;
+    private TextButton hostbutton;
+    private TextButton addMaxPlayer;
+    private TextButton reduceMaxPlayer;
     
-    /**------------------------CONSTRUCTOR------------------------**/
+
+    private TextButton backButton;
+    private Label errorLabel;
+    
+    /**------------------------CONSTRUCTOR-----------------------
+     * @param game-**/
     public HostScreen()
     {
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
+        Constants.MAXPLAYERS = maximumplayer;
         
+
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        fontOptions.size = 11;
-        BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
-        
+
         /**------------------------BUTTON STYLE------------------------**/
+        
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        fontOptions.size = 14;
+        labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
+        labelStyle.fontColor = Color.RED;
+        labelStyle.background = new TextureRegionDrawable(new TextureRegion(new Texture("menu/textBackground.png")));
+        
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
+        fontOptions.size = 11;
+        textButtonStyle.font = TextureManager.menuFont.generateFont(fontOptions);
         textButtonStyle.up   = skin.getDrawable("button_up");
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
         
-        
         /**------------------------BUTTON POSITION------------------------**/
         rootTable = new Table();
         rootTable.setFillParent(true);
-        
+
         Table stackTable = new Table();
         stackTable.setFillParent(true);
         
-        //Add start button to screen
-        startbutton = new TextButton("Join", textButtonStyle);
-        stackTable.add(startbutton);
+        fontOptions.size = 14;
+        errorLabel = new Label("", labelStyle);
+        errorLabel.setVisible(false);
+        errorLabel.setAlignment(Align.center);
+        stackTable.add(errorLabel).height(40).width(300).padBottom(15);
         stackTable.row();
         
-        
-        //Add help button to screen
-        hostButton = new TextButton("Host", textButtonStyle);
-        stackTable.add(hostButton).padTop(15);
+        //Add Textfield to screen
+        maxplayer = new TextField("", skin);
+        stackTable.add(maxplayer).width(210).padTop(25);
         stackTable.row();
         
-        //Add help button to screen
-        helpbutton = new TextButton("Help", textButtonStyle);
-        stackTable.add(helpbutton).padTop(15);
+        addMaxPlayer = new TextButton("+", skin);
+        stackTable.add(addMaxPlayer).width(40).padTop(5);
+        
+        reduceMaxPlayer = new TextButton("-",skin);
+        stackTable.add(reduceMaxPlayer).width(40).padLeft(10);
         stackTable.row();
         
-        //Add exit button to screen
-        exitbutton = new TextButton("Exit", textButtonStyle);
-        stackTable.add(exitbutton).padTop(15);
+        //Add join button to screen
+        hostbutton = new TextButton("Host", textButtonStyle);
+        stackTable.add(hostbutton).padTop(50);
         stackTable.row();
         
         //Set stack position
-        stack.setPosition(287, 195);
+        stack.setPosition(287, 227);
         
-        //End 
+        //End
         stage.addActor(rootTable);
         stage.addActor(stack);
         stack.add(stackTable);
         
         
-        /**------------------------BUTTON FUNCTIONS------------------------**/
-        //Add click listener --> Start Game
-        startbutton.addListener(new ChangeListener() 
+        
+      addMaxPlayer.addListener(new ChangeListener() 
         {
             @Override
-            public void changed (ChangeEvent event, Actor actor) 
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            {    
+                if(maximumplayer < 4)
+              {
+                 
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                maximumplayer = maximumplayer +1;
+                maxplayer.setText("Maxplayer = "+" "+ maximumplayer);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }    
+         catch(Exception e)
+        {
+            System.err.println("ERROR: Unexpected error has been thrown in main" + e);
+            e.printStackTrace();
+            System.exit(1);
+        }
+                
+              }else
+              {
+                  
+               maxplayer.setText("reached maximum player");   
+              }
+                    
+            }
+        });
+      reduceMaxPlayer.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            {   
+                if( maximumplayer <= 4)
+              {if(maximumplayer >1)
+              {
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                maximumplayer = maximumplayer -1;
+                maxplayer.setText("Maxplayer = "+" "+ maximumplayer);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }    
+         catch(Exception e)
+        {
+            System.err.println("ERROR: Unexpected error has been thrown in main" + e);
+            e.printStackTrace();
+            System.exit(1);
+        }
+              } 
+              }else
+              {
+                  
+               maxplayer.setText("reached minimum player");   
+              }
+                    
+            }
+        });
+      
+                
+                 
+       hostbutton.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                AudioManager.clickSound.play();
+                Constants.MAXPLAYERS = maximumplayer;
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);      
+                
+                try 
+            {
+                // try to start the server and connect with it
+                Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);
+                client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+                client.connectToServer();
+                game.setScreen(new GameScreen());
+                
+             
+            
+            }catch(Exception e) 
+            {
+            System.err.println("ERROR: Something went wrong on creating the server: " +e);
+            e.printStackTrace();
+            
+            
+            System.exit(1);
+            }
+           
+       
+        
+        
+                
                 
                 //Wait till sound is done
                 try 
@@ -124,62 +255,41 @@ public class HostScreen implements Screen
                     
                 }
                 
-                game.setScreen(new JoinScreen());
-            }
-        });
-        
-        //Add click listener --> Exit Game
-        exitbutton .addListener(new ChangeListener() 
+                 try
         {
-            @Override
-            public void changed (ChangeEvent event, Actor actor) 
-            {   
-                //Add click sound
-                AudioManager.clickSound.play();
-                
-                //Wait till sound is done
-                try 
-                {
-                    Thread.sleep(100);
-                    
-                } catch (InterruptedException ex) 
-                {
-                    
-                }
-                
-                Gdx.app.exit();
-            }
-        });
-        
-        //Add click listener --> Exit Game
-        helpbutton .addListener(new ChangeListener() 
-        {
-            @Override
-            public void changed (ChangeEvent event, Actor actor) 
-            {   
-                //Add click sound
-                AudioManager.clickSound.play();
+            
+            //Initialise server object
+           
+            
+           
+           
+            
+           
                
-                //Wait till sound is done
-                try 
-                {
-                    Thread.sleep(100);
-                    
-                } catch (InterruptedException ex) 
-                {
-                    
-                }
+        }catch(Exception e)
+        {
+            System.err.println("ERROR: Unexpected error has been thrown in main" + e);
+            e.printStackTrace();
+            System.exit(1);
+        }
                 
-                game.setScreen(new HelpScreen(game)); 
+                
             }
         });
-    }
-    
+        
+                
+               
 
+                       
+                    
+               
+        
+     }
+    
     /**------------------------RENDER------------------------**/
     @Override
     public void render(float f) 
-    {        
+    {
         //Debug
         //stage.setDebugAll(true);
         
@@ -189,8 +299,8 @@ public class HostScreen implements Screen
         
         //Set background image
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.menuBackground)));
-
-        //Draw stage
+        
+        //Render stage
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         
@@ -205,7 +315,14 @@ public class HostScreen implements Screen
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             }
         }
+        
+        /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        {
+            game.setScreen(new MenuScreen());
+        }
     }
+   
     
     
     /**------------------------RESIZE------------------------**/
@@ -242,5 +359,35 @@ public class HostScreen implements Screen
     public void hide() {
     }
     
+    public boolean validateIPAddress( String ipAddress ) 
+    { 
+        try
+        {
+            String[] tokens = ipAddress.split("\\."); 
+
+            if (tokens.length != 4) 
+            { 
+                return false; 
+            } 
+
+            for (String str : tokens) 
+            { 
+                int i = Integer.parseInt(str); 
+
+                if ((i < 0) || (i > 255)) 
+                { 
+                    return false; 
+                } 
+            } 
+            
+        }catch(NumberFormatException e)
+        {
+            return false;
+        }
+        
+        return true; 
+    }
+
 }
 
+ 
