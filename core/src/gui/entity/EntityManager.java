@@ -5,7 +5,6 @@
  */
 package gui.entity;
 
-import com.badlogic.gdx.Game;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -13,7 +12,6 @@ import com.gdx.bomberman.Constants;
 import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import gui.entity.item.Item;
 import gui.entity.item.*;
 
