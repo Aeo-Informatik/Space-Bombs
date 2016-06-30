@@ -31,6 +31,7 @@ import gui.TextureManager;
 import static gui.TextureManager.skin;
 import java.io.IOException;
 import java.net.ConnectException;
+import java.net.ServerSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -165,27 +166,29 @@ public class HostScreen implements Screen
             {   
                 //Add click musik
                 long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
-                new Thread(new ServerStart()).start();
-        
-       
-        try 
-        {
-            client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);      
+                
+                try 
+            {
+                // try to start the server and connect with it
+                Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);
+                client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+                client.connectToServer();
+                game.setScreen(new GameScreen());
+                
+             
             
-            client.connectToServer();
-            //client.pingThread();
-             game.setScreen(new GameScreen);
-        }catch(ConnectException e)
-        {
-            //If wrong server ip or port are given
-            System.err.println("Couldn't find server " + Constants.SERVERIP + " on port " + Constants.CONNECTIONPORT);
+            }catch(Exception e) 
+            {
+            System.err.println("ERROR: Something went wrong on creating the server: " +e);
+            e.printStackTrace();
+            
+            System.exit(1);
+            }
+           
+       
         
-        }catch (IOException | InterruptedException e) 
-        {
-            System.err.println("ERROR: Unexpected client exception: " + e);
-            Gdx.app.exit();
-        }
+        
                 
                 
                 //Wait till sound is done
