@@ -236,6 +236,7 @@ public class HostScreen implements Screen
             System.err.println("ERROR: Something went wrong on creating the server: " +e);
             e.printStackTrace();
             
+            
             System.exit(1);
             }
            
