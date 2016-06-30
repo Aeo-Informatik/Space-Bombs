@@ -48,8 +48,10 @@ public class BombUp extends Item{
     @Override
     public void itemEffect()
     {
-
-        entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
+        if(entityManager.getMainPlayer() != null)
+        {
+            entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
+        }
     }
     
 }
