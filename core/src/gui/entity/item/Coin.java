@@ -22,14 +22,11 @@ import gui.AnimEffects;
  */
 public class Coin extends Item{
     
-    
-    private Animation coinAnim;
     private AnimEffects animEffects = new AnimEffects();
     private int value;
 
     public Coin(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager, int value) {
-        super(cellX, cellY, direction, map, entityManager);
-        this.coinAnim = TextureManager.coinAnim;
+        super(cellX, cellY, direction,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
         this.value = value;
     }
    
@@ -38,8 +35,7 @@ public class Coin extends Item{
     {
         //Render item
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(animEffects.getFrame(coinAnim)));
-        cell.getTile().getProperties().put("coin", null);
+        cell.setTile(new StaticTiledMapTile(animEffects.getFrame(TextureManager.coinAnim)));
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         

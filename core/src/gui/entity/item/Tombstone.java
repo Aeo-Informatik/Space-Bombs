@@ -21,26 +21,17 @@ import gui.map.MapManager;
  */
 public class Tombstone extends Item{
     
-    
-    private final TextureRegion tombstone;
     private int coins;
 
     //Constructor
     public Tombstone(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager, int coins) {
-        super(CellX, CellY, direction, map, entityManager);
-        this.tombstone = TextureManager.tombstone;
+        super(CellX, CellY, direction,TextureManager.tombstone, map, entityManager);
         this.coins = coins;
     }
    
     @Override
     public void render(SpriteBatch renderObject)
     {
-        //Render item
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(tombstone));
-        cell.getTile().getProperties().put("Tombstone", null);
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
         if(entityManager.getMainPlayer() != null)
         {
             if(isMainPlayerCollectingItem() == true)

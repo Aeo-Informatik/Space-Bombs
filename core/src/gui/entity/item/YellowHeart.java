@@ -22,10 +22,7 @@ import gui.map.MapManager;
  */
 public class YellowHeart extends Item{
     
-    
-    private final TextureRegion yellowHeart;
 
-    
     /**
      * 
      * @param pos the position of the Itemonly in int
@@ -34,19 +31,12 @@ public class YellowHeart extends Item{
      * @param entityManager 
      */
     public YellowHeart(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager) {
-        super(CellX, CellY, direction, map, entityManager);
-        this.yellowHeart = TextureManager.yellowHeart;
+        super(CellX, CellY, direction,TextureManager.yellowHeart, map, entityManager);
     }
    
     @Override
     public void render(SpriteBatch renderObject)
     {
-        //Render Item
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(yellowHeart));
-        cell.getTile().getProperties().put("yellowHeart", null);
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
         if(entityManager.getMainPlayer() != null)
         {
             if(entityManager.getMainPlayer().getLife()< Constants.maxLife)

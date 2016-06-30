@@ -23,27 +23,15 @@ import gui.map.MapManager;
  */
 public class BombUp extends Item{
     
-    //Objects
-    private final TextureRegion bombUp;
-    
     //Constructor
     public BombUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) 
     {
-        super(cellX, cellY, direction, map, entityManager);
-        this.bombUp = TextureManager.bombUp;
+        super(cellX, cellY, direction,TextureManager.bombUp, map, entityManager);
     }
    
     @Override
     public void render(SpriteBatch renderObject)
-    {
-        //Create cell Object
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(bombUp));
-        cell.getTile().getProperties().put("bombUp", null);
-        
-        //Set cell Object to coordinate positions
-        map.getItemLayer().setCell(cellX, cellY, cell);
-       
+    {   
         if(entityManager.getMainPlayer() != null)
         {
             //Check if mainPlayer has reached item max 

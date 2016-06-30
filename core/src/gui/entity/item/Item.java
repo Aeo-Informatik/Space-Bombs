@@ -26,12 +26,17 @@ public class Item extends Entity{
     protected int cellX, cellY;
     
     //Constructor
-    public Item(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) 
+    public Item(int cellX, int cellY, Vector2 direction, TextureRegion itemTexture, MapManager map, EntityManager entityManager) 
     {
         super(new Vector2(cellX, cellY), direction, map, entityManager);
         this.emptyBlock = TextureManager.emptyBlock;
         this.cellX = cellX;
         this.cellY = cellY;
+        
+        //Render Item
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+        cell.setTile(new StaticTiledMapTile(itemTexture));
+        map.getItemLayer().setCell(cellX, cellY, cell);
     }
     
     

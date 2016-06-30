@@ -22,23 +22,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
  */
 public class SpeedUp extends Item{
 
-    private final TextureRegion speedUp;
-    
     public SpeedUp(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager) {
-        super(CellX, CellY, direction, map, entityManager);
-        this.speedUp = TextureManager.speedUp;
-
+        super(CellX, CellY, direction,TextureManager.speedUp, map, entityManager);
     }
    
     @Override
     public void render(SpriteBatch renderObject)
-    {
-        //Render Item
-        Cell cell = new Cell();
-        cell.setTile(new StaticTiledMapTile(speedUp));
-        cell.getTile().getProperties().put("speed", null);
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
+    {            
         if(entityManager.getMainPlayer() != null)
         {
             if(isMainPlayerCollectingItem() == true)

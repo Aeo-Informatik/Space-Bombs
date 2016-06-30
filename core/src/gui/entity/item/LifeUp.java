@@ -22,25 +22,16 @@ import gui.map.MapManager;
  */
 public class LifeUp extends Item{
     
-    //Objects
-    private final TextureRegion lifeUp;
-
+    
     //Constructor
     public LifeUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) 
     {
-        super(cellX, cellY, direction, map, entityManager);
-        this.lifeUp = TextureManager.lifeUp;
+        super(cellX, cellY, direction,TextureManager.lifeUp, map, entityManager);
     }
    
     @Override
     public void render(SpriteBatch renderObject)
     {     
-        //Render item
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(lifeUp));
-        cell.getTile().getProperties().put("lifeUp", null);
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
         //Check if main player is alive
         if(entityManager.getMainPlayer() != null)
         {

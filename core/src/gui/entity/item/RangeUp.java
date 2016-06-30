@@ -22,24 +22,15 @@ import gui.map.MapManager;
  */
 public class RangeUp extends Item{
     
-    //Objects
-    private final TextureRegion rangeUp;
 
     //Constructor
     public RangeUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) {
-        super(cellX, cellY, direction, map, entityManager);
-        this.rangeUp = TextureManager.rangeUp;
+        super(cellX, cellY, direction,TextureManager.rangeUp, map, entityManager);
     }
    
     @Override
     public void render(SpriteBatch renderObject)
-    {
-    
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(rangeUp));
-        cell.getTile().getProperties().put("rangeUp", null);
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
+    {       
         if(entityManager.getMainPlayer() != null)
         {
             if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)

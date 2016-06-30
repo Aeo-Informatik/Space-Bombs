@@ -66,7 +66,7 @@ public class EntityManager {
         for(EnemyPlayer enemy: enemies)
         {
             renderEnemyPlayer.begin();
-            enemy.render(renderEnemyPlayer);
+                enemy.render(renderEnemyPlayer);
             renderEnemyPlayer.end();
         }
         
@@ -74,52 +74,49 @@ public class EntityManager {
         if(mainPlayer != null)
         {            
             renderMainPlayer.begin();
-            mainPlayer.render(renderMainPlayer);
+                mainPlayer.render(renderMainPlayer);
             renderMainPlayer.end();
         
         //If main player equals null render spectator
         }else if(spectator != null)
         {
             renderSpectator.begin();
-            spectator.render(renderSpectator);
+                spectator.render(renderSpectator);
             renderSpectator.end();
         }          
         
         /**--------------------MAP OBJECTS RENDERER--------------------**/
         renderOther.begin();
-        
-        //Render bomb in main player list
-        for (Bomb bomb: bombArray)
-        {
-            //It doesnt need a renderObject because the textures are dynamically 
-            //set into the tile layer without beeing drawn
-            bomb.render(renderOther);
-        }
-        
-        //Render bomb in enemy player list
-        for (Bomb bomb: bombArrayEnemy)
-        {
-            bomb.render(renderOther);
-        }                       
-        
+            //Render bomb in main player list
+            for (Bomb bomb: bombArray)
+            {
+                //It doesnt need a renderObject because the textures are dynamically 
+                //set into the tile layer without beeing drawn
+                bomb.render(renderOther);
+            }
+
+            //Render bomb in enemy player list
+            for (Bomb bomb: bombArrayEnemy)
+            {
+                bomb.render(renderOther);
+            }                       
         renderOther.end();
         
         renderItem.begin();
-        
-        for(Item item: itemArray)
-        {
-            item.render(renderItem);
-        }
-        
-        for(Item item: tombs)
-        {
-            item.render(renderItem);
-        }
-        
-        for (Item item: coins)
-        {
-            item.render(renderItem);
-        }
+            for(Item item: itemArray)
+            {
+                item.render(renderItem);
+            }
+
+            for(Item item: tombs)
+            {
+                item.render(renderItem);
+            }
+
+            for (Item item: coins)
+            {
+                item.render(renderItem);
+            }
         renderItem.end();
     }
     
@@ -156,7 +153,7 @@ public class EntityManager {
             }
         }
         
-        //
+        //Delete item if collected
         for (int i=0; i < itemArray.size; i++)
         {
             if(this.itemArray.get(i).isCollected())
@@ -166,6 +163,7 @@ public class EntityManager {
             }
         }
         
+        //Delete tomb stone if collected
         for (int i=0; i < tombs.size; i++)
         {
             if(this.tombs.get(i).isCollected())
@@ -175,6 +173,7 @@ public class EntityManager {
             }
         }
         
+        //Delete coins if collected
         for (int i=0; i < coins.size; i++)
         {
             if(this.coins.get(i).isCollected())
@@ -184,7 +183,7 @@ public class EntityManager {
             }
         }
         
-        //
+        //Spawn Items Randomly
         if(timer >= itemTimer)
         {
             for (int i=0; i < itemArray.size; i++)
