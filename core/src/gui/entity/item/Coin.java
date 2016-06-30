@@ -6,7 +6,6 @@
 package gui.entity.item;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -26,45 +25,47 @@ public class Coin extends Item{
     
     private Animation coinAnim;
     private AnimEffects animEffects = new AnimEffects();
-    private int cellX, cellY;
     private int value;
 
     
     
-    public Coin(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, int value) {
-        super(pos, direction, map, entityManager);
+    public Coin(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager, int value) {
+        super(cellX, cellY, direction, map, entityManager);
         this.coinAnim = TextureManager.coinAnim;
         this.value = value;
     }
    
+    @Override
     public void render(SpriteBatch renderObject)
     {
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
-        
-        
+        //Render item
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(animEffects.getFrame(coinAnim)));
         cell.getTile().getProperties().put("coin", null);
-        
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         
-        int id = super.check(cellX, cellY) ;
+        int id = getPlayerCollectingItem();
         
-        if(id != -1)
+        if(entityManager.getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer() != null && super.collectedbyMainPlayer(id) == true)
+            if(id != -1)
             {
-                doItem();
+                if(isMainPlayer(id) == true)
+                {
+                    itemEffect();
+                }
             }
         }
-
     }
     
-    public void doItem()
+    @Override
+    public void itemEffect()
     {
-        entityManager.getMainPlayer().setCoins((entityManager.getMainPlayer().getCoins()+ value));
+        if(entityManager.getMainPlayer() != null)
+        {
+            entityManager.getMainPlayer().setCoins((entityManager.getMainPlayer().getCoins()+ value));
+        }
     }
     
 

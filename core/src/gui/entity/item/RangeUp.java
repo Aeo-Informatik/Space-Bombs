@@ -22,50 +22,47 @@ import gui.map.MapManager;
  */
 public class RangeUp extends Item{
     
-    
+    //Objects
     private final TextureRegion rangeUp;
-    private int cellX, cellY;
 
-    
-    
-    public RangeUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
-        super(pos, direction, map, entityManager);
+    //Constructor
+    public RangeUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) {
+        super(cellX, cellY, direction, map, entityManager);
         this.rangeUp = TextureManager.rangeUp;
     }
    
     public void render(SpriteBatch renderObject)
     {
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
-        
-        
+    
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(rangeUp));
         cell.getTile().getProperties().put("rangeUp", null);
-        
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         if(entityManager.getMainPlayer() != null)
         {
-        if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
-        {
-            
-            int id = super.check(cellX, cellY) ;
-        
-            if(id != -1)
+            if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
             {
-                if(super.collectedbyMainPlayer(id) == true)
+
+                int id = getPlayerCollectingItem();
+
+                if(id != -1)
                 {
-                    doItem();
+                    if(isMainPlayer(id) == true)
+                    {
+                        itemEffect();
+                    }
                 }
             }
-        }
         } 
     }
     
     public void doItem()
     {
-        entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));        
+        if(entityManager.getMainPlayer() != null)
+        {
+            entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));   
+        }
     }
 
     

@@ -22,50 +22,49 @@ import gui.map.MapManager;
  */
 public class LifeUp extends Item{
     
-    
+    //Objects
     private final TextureRegion lifeUp;
-    private int cellX, cellY;
 
-    
-    
-    public LifeUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
-        super(pos, direction, map, entityManager);
+    //Constructor
+    public LifeUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) 
+    {
+        super(cellX, cellY, direction, map, entityManager);
         this.lifeUp = TextureManager.lifeUp;
     }
    
     public void render(SpriteBatch renderObject)
-    {
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
-        
-        
+    {     
+        //Render item
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(lifeUp));
         cell.getTile().getProperties().put("lifeUp", null);
-        
         map.getItemLayer().setCell(cellX, cellY, cell);
         
+        //Check if main player is alive
         if(entityManager.getMainPlayer() != null)
         {
-        if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
-        {
-           int id = super.check(cellX, cellY) ;
-            if(id != -1)
+            if(entityManager.getMainPlayer().getLife() < Constants.maxLife)
             {
-                if(super.collectedbyMainPlayer(id) == true)
+               int id = getPlayerCollectingItem();
+                if(id != -1)
                 {
-                    doItem();
+                    if(isMainPlayer(id) == true)
+                    {
+                        itemEffect();
+                    }
                 }
             }
         }
-        }
     }
     
-    public void doItem()
+    @Override
+    public void itemEffect()
     {
-
-        entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
-        
+        //Check if main player is alive
+        if(entityManager.getMainPlayer() != null)
+        {
+            entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
+        }
     }
 
     

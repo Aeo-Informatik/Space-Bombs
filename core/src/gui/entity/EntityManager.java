@@ -161,7 +161,7 @@ public class EntityManager {
         {
             if(this.itemArray.get(i).isCollected())
             {
-                itemArray.get(i).clear();
+                itemArray.get(i).deleteItem();
                 itemArray.removeIndex(i);
             }
         }
@@ -170,7 +170,7 @@ public class EntityManager {
         {
             if(this.tombs.get(i).isCollected())
             {
-                tombs.get(i).clear();
+                tombs.get(i).deleteItem();
                 tombs.removeIndex(i);
             }
         }
@@ -179,7 +179,7 @@ public class EntityManager {
         {
             if(this.coins.get(i).isCollected())
             {
-                coins.get(i).clear();
+                coins.get(i).deleteItem();
                 coins.removeIndex(i);
             }
         }
@@ -189,7 +189,7 @@ public class EntityManager {
         {
             for (int i=0; i < itemArray.size; i++)
             {
-                itemArray.get(i).clear();
+                itemArray.get(i).deleteItem();
                 itemArray.removeIndex(i);
             }   
             spawnItem();
@@ -220,16 +220,19 @@ public class EntityManager {
     /**--------------------SPAWN FUNCTIONS--------------------**/
     /**
      * Creates renders and adds a EnemyPlayer Object to the array
-     * @param playerId
+     * @param playerId: Id of player that goes from 1-4
      */
     public void spawnEnemyPlayer(int playerId)
     {
+        //Iterate through all cells in the map on the y axis
         for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
         {
+            //Iterate through all cells in the map on the x axis
             for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
             {
                 try
                 {
+                    //If cell has attribute Spawn-P + playerId spawn enemy player there
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
                         EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, map, bombArrayEnemy, this);
@@ -243,6 +246,9 @@ public class EntityManager {
         }
     }
     
+    /**
+     * Spawns a random item in every block with the attribute "Item-Spawner"
+     */
     public void spawnItem()
     {
         int i=0;
@@ -263,28 +269,28 @@ public class EntityManager {
                             case(1):
                             {
                                 
-                                LifeUp lifeup = new LifeUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                LifeUp lifeup = new LifeUp(mapX, mapY, new Vector2(0,0),map, this);
                                 itemArray.add(lifeup);
                                 break;
                             }
                             
                             case(2):
                             {
-                                Coin coin = new Coin(new Vector2(mapX, mapY), new Vector2(0,0),map, this, 1);
+                                Coin coin = new Coin(mapX, mapY, new Vector2(0,0),map, this, 1);
                                 itemArray.add(coin);
                                 break;
                             }
                             
                             case(3):
                             {
-                                RangeUp rangeUp = new RangeUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                RangeUp rangeUp = new RangeUp(mapX, mapY, new Vector2(0,0),map, this);
                                 itemArray.add(rangeUp);
                                 break;
                             }
                             
                             case(4):
                             {
-                                BombUp bombUp = new BombUp(new Vector2(mapX, mapY), new Vector2(0,0),map, this);
+                                BombUp bombUp = new BombUp(mapX, mapY, new Vector2(0,0),map, this);
                                 itemArray.add(bombUp);
                                 break;
                             }
@@ -306,30 +312,44 @@ public class EntityManager {
         }
     }
     
+    
+    /**
+     * Spawns a coin with a given value.
+     * @param x: Cell coordinates on x axis
+     * @param y: Cell coordinates on y axis
+     */
     public void spawnCoin(int x, int y)
     {
-        
-        Coin coin = new Coin(new Vector2(x, y), new Vector2(0,0),map, this, 2);
+        Coin coin = new Coin(x, y, new Vector2(0,0),map, this, 2);
         coins.add(coin);                                
     }
     
+    
+    /**
+     * Spawns a tombstone with the remaining coins of the dead player.
+     * @param x: Cell coordinates on x axis
+     * @param y: Cell coordinates on y axis
+     */
     public void spawnTombstone(int x, int y)
     {
-        Tombstone tombstone = new Tombstone(new Vector2(x, y), new Vector2(0,0), map, this, mainPlayer.getCoins());
+        Tombstone tombstone = new Tombstone(x, y, new Vector2(0,0), map, this, mainPlayer.getCoins());
         tombs.add(tombstone);
     }
     
+    
     /**
-     * Returns the Bomb Object on the specified coordinates. If there is no bomb return null.
-     * @param x Cell coordiante on x axis
-     * @param y Cell coordiante on y axis
+     * Returns the Bomb Object from a bomb on the specified coordinates. If there is no bomb return null.
+     * @param x: Entity coordinates on x axis
+     * @param y: Entity coordinates on y axis
      * @return Bomb Object or Null
      */
-    public Bomb getBombObjOnPosCoordinates(float posX, float posY)
+    public Bomb getBombObjectOnCoordinates(float posX, float posY)
     {
+       //Calculate cell coordiantes
        int cellX = (int) (posX / Constants.MAPTEXTUREWIDTH);
        int cellY = (int) (posY / Constants.MAPTEXTUREHEIGHT);
         
+        //Check if mainPlayer has a bomb on given position
         for(Bomb mainP : this.bombArray)
         {
             if(mainP.getCellX() == cellX && mainP.getCellY() == cellY)
@@ -338,6 +358,7 @@ public class EntityManager {
             }
         }
         
+        //Check if enemyPlayer has a bomb on given position
         for(Bomb enemyP : this.bombArrayEnemy)
         {
             if(enemyP.getCellX() == cellX && enemyP.getCellY() == cellY)
@@ -350,73 +371,81 @@ public class EntityManager {
     }
     
     /**
-     * Creates a MainPlayer Object and saves it in EntityManager
-     * @param playerId
-     * @throws Exception 
+     * Returns the playerId from a player on specified coordinates.
+     * @param x: Cell coordinates on x axis
+     * @param y: Cell coordinates on y axis
+     * @return playerId or -1
      */
-    public void spawnMainPlayer(int playerId) throws Exception
+    public int getPlayerIdOnCoordinates(int x, int y)
     {
-        try 
-        {
-            for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
-            {
-                for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
-                {
-                    try
-                    {
-                        if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
-                        {
-                            mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray, this);
-                        }
-                    }catch(NullPointerException e)
-                    {
-                        
-                    }
-                }
-            }
-            
-        } catch (Exception e) 
-        {
-            throw e;
-        }
-    }
-    
-    public int getPlayerIDOnPosCoordinates(int X, int Y)
-    {
-        
-            for(EnemyPlayer enemy:enemies)
+            //Iterate through the enemy list
+            for(EnemyPlayer enemy : enemies)
             {                
                 try
                 {
-                    if(enemy.getPosition().x / Constants.MAPTEXTUREWIDTH == X 
-                            && enemy.getPosition().y / Constants.MAPTEXTUREHEIGHT == Y)
+                    //Calculate enemy position in cell coordinates
+                    int enemyCellX = (int) (enemy.getPosition().x / Constants.MAPTEXTUREWIDTH);
+                    int enemyCellY = (int) (enemy.getPosition().y / Constants.MAPTEXTUREWIDTH);
+                    
+                    //If enemy player found on given position
+                    if(enemyCellX == x && enemyCellY == y)
                     {
                         return enemy.getPlayerId();
                     }
+                    
                 }catch(NullPointerException e)
                 {
                     
                 }
             }
+            
             try
             {
-                if((int)(mainPlayer.getPosition().x / Constants.MAPTEXTUREWIDTH) == X 
-                    && (int)(mainPlayer.getPosition().y / Constants.MAPTEXTUREHEIGHT) == Y)
+                //Calculate main position in cell coordinates
+                int mainCellX = (int)(mainPlayer.getPosition().x / Constants.MAPTEXTUREWIDTH);
+                int mainCellY = (int)(mainPlayer.getPosition().y / Constants.MAPTEXTUREHEIGHT);
+                
+                //If main player found on given position
+                if(mainCellX == x && mainCellY == y)
                 {
                     return mainPlayer.getPlayerId();
                 }
+                
             }catch(NullPointerException e)
             {
                 
             }
             
-       
-        
            return -1; 
-        
     }
            
     
+    /**
+     * Spawns mainPlayer with given playerId on the apropriate spawn field.
+     * @param playerId
+     * @throws Exception 
+     */
+    public void spawnMainPlayer(int playerId)
+    {
+        for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
+        {
+            for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
+            {
+                try
+                {
+                    if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
+                    {
+                        mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray, this);
+                    }
+                }catch(NullPointerException e)
+                {
+
+                }
+            }
+        }
+    }
+    
+
     /**
      * Places the specified bomb type into the map for enemy player
      * @param pos
@@ -439,6 +468,7 @@ public class EntityManager {
         }
     }
 
+    
     /**
      * Set the live of an enemy player
      * @param playerId

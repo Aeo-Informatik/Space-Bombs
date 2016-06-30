@@ -6,7 +6,6 @@
 
 package gui.entity.item;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
@@ -22,36 +21,41 @@ import gui.map.MapManager;
 public class Item extends Entity{
     
     //Variables
-    private boolean collected = false;
-    private TextureRegion emptyBlock;
-    private int cellX, cellY;
+    protected boolean collected = false;
+    protected TextureRegion emptyBlock;
+    protected int cellX, cellY;
     
     //Constructor
-    public Item(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) 
+    public Item(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) 
     {
-        super(pos, direction, map, entityManager);
+        super(new Vector2(cellX, cellY), direction, map, entityManager);
         this.emptyBlock = TextureManager.emptyBlock;
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
-        
+        this.cellX = cellX;
+        this.cellY = cellY;
     }
     
-    public void render(SpriteBatch renderObject)
-    {
-        
-    }
     
-    public int check(int X, int Y)
+    /**
+     * Check if a player is on this item field.
+     * @return playerId or -1
+     */
+    public int getPlayerCollectingItem()
     {
-        if(entityManager.getPlayerIDOnPosCoordinates(X, Y) != -1)
+        if(entityManager.getPlayerIdOnCoordinates(cellX, cellY) != -1)
         {
             collected = true;
-            return entityManager.getPlayerIDOnPosCoordinates(X, Y);
+            return entityManager.getPlayerIdOnCoordinates(cellX, cellY);
         }
         return -1;
     }
     
-    public boolean collectedbyMainPlayer(int ID)
+    
+    /**
+     * Check if id is from main player.
+     * @param ID player id
+     * @return true or false
+     */
+    public boolean isMainPlayer(int ID)
     {
         if(entityManager.getMainPlayer() != null && entityManager.getMainPlayer().getPlayerId() == ID)
         {
@@ -60,6 +64,23 @@ public class Item extends Entity{
         return false;
     }
 
+    
+    /**
+     * Deletes item texture in cell.
+     */
+    public void deleteItem()
+    {
+        TiledMapTileLayer.Cell cellCenter = new TiledMapTileLayer.Cell();
+        cellCenter.setTile(new StaticTiledMapTile(emptyBlock));
+        map.getItemLayer().setCell(cellX, cellY, cellCenter);
+    }
+    
+    public void itemEffect()
+    {
+        
+    }
+
+    /**--------------------GETTER & SETTER--------------------**/
     public boolean isCollected() 
     {
         return collected;
@@ -70,13 +91,6 @@ public class Item extends Entity{
         this.collected = collected;
     }
     
-    public void clear()
-    {
-        TiledMapTileLayer.Cell cellCenter = new TiledMapTileLayer.Cell();
-            cellCenter.setTile(new StaticTiledMapTile(emptyBlock));
-             map.getItemLayer().setCell(cellX, cellY, cellCenter);
-    }
-
     public int getCellX() {
         return cellX;
     }

@@ -24,7 +24,6 @@ public class YellowHeart extends Item{
     
     
     private final TextureRegion yellowHeart;
-    private int cellX, cellY;
 
     
     /**
@@ -34,44 +33,43 @@ public class YellowHeart extends Item{
      * @param map
      * @param entityManager 
      */
-    public YellowHeart(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
-        super(pos, direction, map, entityManager);
+    public YellowHeart(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager) {
+        super(CellX, CellY, direction, map, entityManager);
         this.yellowHeart = TextureManager.yellowHeart;
     }
    
     public void render(SpriteBatch renderObject)
     {
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
-        
-        
+        //Render Item
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(yellowHeart));
         cell.getTile().getProperties().put("yellowHeart", null);
-        
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         if(entityManager.getMainPlayer() != null)
         {
-        if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
-        {
-           int id = super.check(cellX, cellY) ;
-            if(id != -1)
+            if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
             {
-                if(super.collectedbyMainPlayer(id) == true)
+                int id = getPlayerCollectingItem();
+                if(id != -1)
                 {
-                    doItem();
+                    if(isMainPlayer(id) == true)
+                    {
+                        itemEffect();
+                    }
                 }
             }
         }
-        }
     }
     
-    public void doItem()
+    
+    @Override
+    public void itemEffect()
     {
-
-        entityManager.getMainPlayer().setLife(Constants.maxLife);
-        
+        if(entityManager.getMainPlayer() != null)
+        {
+            entityManager.getMainPlayer().setLife(Constants.maxLife);
+        }
     }
 
     

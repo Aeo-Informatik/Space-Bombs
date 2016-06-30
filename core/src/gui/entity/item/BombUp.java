@@ -14,7 +14,7 @@ import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
-import gui.entity.MainPlayer;
+
 
 
 /**
@@ -30,18 +30,14 @@ public class BombUp extends Item{
     private int cellX, cellY;
 
     //Constructor
-    public BombUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) 
+    public BombUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) 
     {
-        super(pos, direction, map, entityManager);
+        super(cellX, cellY, direction, map, entityManager);
         this.bombUp = TextureManager.bombUp;
     }
    
     public void render(SpriteBatch renderObject)
     {
-        //Constructor gets cell position and not a float
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
-        
         //Create cell Object
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(bombUp));
@@ -53,21 +49,21 @@ public class BombUp extends Item{
         //Check if mainPlayer has reached max of bomb
         if(entityManager.getMainPlayer() != null && entityManager.getMainPlayer().getMaxBombPlacing()< Constants.maxBombs)
         {
-            
-            int id = super.check(cellX, cellY) ;
+            int id = getPlayerCollectingItem();
         
             if(id != -1)
             {
-                if(super.collectedbyMainPlayer(id) == true)
+                if(isMainPlayer(id) == true)
                 {
-                    doItem();
+                    itemEffect();
                 }
             }
         }
 
     }
     
-    public void doItem()
+    @Override
+    public void itemEffect()
     {
 
         entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));

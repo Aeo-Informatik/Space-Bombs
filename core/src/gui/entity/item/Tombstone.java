@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
-import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
@@ -24,46 +23,41 @@ public class Tombstone extends Item{
     
     
     private final TextureRegion tombstone;
-    private int cellX, cellY;
     private int coins;
 
-    
-    
-    public Tombstone(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, int coins) {
-        super(pos, direction, map, entityManager);
+    //Constructor
+    public Tombstone(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager, int coins) {
+        super(CellX, CellY, direction, map, entityManager);
         this.tombstone = TextureManager.tombstone;
-        this.coins=coins;
+        this.coins = coins;
     }
    
     public void render(SpriteBatch renderObject)
     {
-        cellX = (int) pos.x;
-        cellY = (int) pos.y;
-        
-        
+        //Render item
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(tombstone));
         cell.getTile().getProperties().put("Tombstone", null);
-        
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         if(entityManager.getMainPlayer() != null)
         {
-        int id = super.check(cellX, cellY) ;
-        
-        if(id != -1)
-        {
-            if(super.collectedbyMainPlayer(id) == true)
+            int id = getPlayerCollectingItem();
+
+            if(id != -1)
             {
-                doItem();
+                if(isMainPlayer(id) == true)
+                {
+                    itemEffect();
+                }
             }
-        }
         }
     }
     
-    public void doItem()
+    @Override
+    public void itemEffect()
     {
-            entityManager.spawnCoin(cellX, cellX);        
+        entityManager.spawnCoin(cellX, cellX);        
     }
 
     
