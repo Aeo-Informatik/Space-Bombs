@@ -155,9 +155,11 @@ public class JoinScreen implements Screen
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                         client.connectToServer();
                         
+
                         //Start game on server
                         if(Constants.TESTSERVER)
                         {
+                            Thread.currentThread().sleep(100);
                             Constants.TESTSERVEROBJ.startGame();
                         }
                         
