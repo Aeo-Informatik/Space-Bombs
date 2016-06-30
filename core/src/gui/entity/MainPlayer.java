@@ -141,6 +141,7 @@ public class MainPlayer extends Entity
      * Player gets hit by bomb
      */
     Thread flashThread;
+    long id = -1;
     public void hitByBomb(SpriteBatch renderObject) 
     {  
         //If player touches explosion
@@ -152,9 +153,12 @@ public class MainPlayer extends Entity
             
             System.out.println("Life has been reduced to: " + life);
           
-            long id = AudioManager.hit.play();
-            AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
-            
+            if(id == -1)
+            {
+                id = AudioManager.hit.play();
+                AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
+            }
+                
             if(Constants.CLIENTDEBUG)
             {
                 System.out.println("Invulnerability activated");

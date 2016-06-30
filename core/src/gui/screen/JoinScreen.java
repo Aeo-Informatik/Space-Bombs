@@ -142,6 +142,7 @@ public class JoinScreen implements Screen
                         Constants.TESTSERVEROBJ = new Server(Constants.SERVERPORT, 1);
                     }
                     
+                    //Accept client connections
                     Constants.TESTSERVEROBJ.OpenLobby();
                 }
                 
@@ -154,7 +155,7 @@ public class JoinScreen implements Screen
                         client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                         client.connectToServer();
                         
-                        //Start game in test server
+                        //Start game on server
                         if(Constants.TESTSERVER)
                         {
                             Constants.TESTSERVEROBJ.startGame();

@@ -110,6 +110,11 @@ public class GameScreen implements Screen{
         //Map loading into screen shouldn't be in the sb.begin() tags
         mapManager.render();
            
+        //Render incoming server instructions
+        renderServer.begin();
+        processData.start(renderServer);
+        renderServer.end();
+        
         //Render entities
         entityManager.render();
         
@@ -117,12 +122,7 @@ public class GameScreen implements Screen{
         renderHud.setProjectionMatrix(counterHud.stage.getCamera().combined);
         counterHud.stage.draw();
         counterHud.update();
-        
-        //Render incoming server instructions
-        renderServer.begin();
-        processData.start(renderServer);
-        renderServer.end();
-        
+
         //Update functions
         camera.update();
         entityManager.update();
