@@ -20,12 +20,15 @@ import gui.map.MapManager;
  * @author cb0703
  */
 public class Item extends Entity{
-
+    
+    //Variables
     private boolean collected = false;
     private TextureRegion emptyBlock;
     private int cellX, cellY;
     
-    public Item(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
+    //Constructor
+    public Item(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) 
+    {
         super(pos, direction, map, entityManager);
         this.emptyBlock = TextureManager.emptyBlock;
         cellX = (int) pos.x;
@@ -50,18 +53,20 @@ public class Item extends Entity{
     
     public boolean collectedbyMainPlayer(int ID)
     {
-        if(entityManager.getMainPlayer().getPlayerId() == ID)
+        if(entityManager.getMainPlayer() != null && entityManager.getMainPlayer().getPlayerId() == ID)
         {
             return true;
         }
         return false;
     }
 
-    public boolean isCollected() {
+    public boolean isCollected() 
+    {
         return collected;
     }
 
-    public void setCollected(boolean collected) {
+    public void setCollected(boolean collected)
+    {
         this.collected = collected;
     }
     
