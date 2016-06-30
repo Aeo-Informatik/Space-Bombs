@@ -372,13 +372,7 @@ public class MainPlayer extends Entity
      * Action the player can make like placing a bomb
      */
     private void inputDoPlayer(SpriteBatch renderObject)
-    {
-        /*------------------SPAWN ITEM------------------*/
-        if((Gdx.input.isKeyJustPressed(Keys.B)))
-        {
-           entityManager.spawnItem();
-        }
-        
+    {        
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
@@ -501,8 +495,8 @@ public class MainPlayer extends Entity
     public void setCoins(int coins) {
         this.coins = coins;
     }
-    
-    
+
+
     
     
 }

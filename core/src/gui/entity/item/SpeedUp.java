@@ -15,6 +15,7 @@ import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.gdx.bomberman.Constants;
 
 
 /**
@@ -48,7 +49,7 @@ public class SpeedUp extends Item{
         
         super.check(cellX, cellY);
     }
-    
+        
+        
 
-    
 }

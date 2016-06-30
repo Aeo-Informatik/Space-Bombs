@@ -27,12 +27,14 @@ public class Coin extends Item{
     private Animation coinAnim;
     private AnimEffects animEffects = new AnimEffects();
     private int cellX, cellY;
+    private int value;
 
     
     
-    public Coin(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
+    public Coin(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, int value) {
         super(pos, direction, map, entityManager);
         this.coinAnim = TextureManager.coinAnim;
+        this.value = value;
     }
    
     public void render(SpriteBatch renderObject)
@@ -62,7 +64,7 @@ public class Coin extends Item{
     
     public void doItem()
     {
-        entityManager.getMainPlayer().setCoins((entityManager.getMainPlayer().getCoins()+ 1));
+        entityManager.getMainPlayer().setCoins((entityManager.getMainPlayer().getCoins()+ value));
     }
     
 

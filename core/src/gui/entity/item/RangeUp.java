@@ -45,26 +45,25 @@ public class RangeUp extends Item{
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        
-        int id = super.check(cellX, cellY) ;
-        
-        if(id != -1)
+        if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
         {
-            if(super.collectedbyMainPlayer(id) == true)
+            
+            int id = super.check(cellX, cellY) ;
+        
+            if(id != -1)
             {
-                doItem();
+                if(super.collectedbyMainPlayer(id) == true)
+                {
+                    doItem();
+                }
             }
         }
-
+            
     }
     
     public void doItem()
     {
-        if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
-        {
-            entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));
-        }
-        
+        entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));        
     }
 
     
