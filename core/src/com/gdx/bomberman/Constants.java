@@ -12,9 +12,7 @@ import networkServer.Server;
  * @author qubasa
  */
 public class Constants {
-    
-    //Audio config
-    public static float MUSICVOLUME = 0.1f;
+    public static float MUSICVOLUME = 0.2f;
     public static float SOUNDVOLUME = 0.2f;
     
     //Window config
@@ -26,10 +24,17 @@ public class Constants {
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
-    public static String MAPPATH = "maps/BasicMap.tmx";
+    public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
+    
+    //Item config
+    public static float itemTimer = 5;
+    
+    public static int maxBombs = 5;
+    public static int maxBombRange = 5;
+    public static int maxLife = 6;
     
     //Client config
-    public static String SERVERIP = "localhost";
+    public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
@@ -45,13 +46,16 @@ public class BombUp extends Item{
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        int id = super.check(cellX, cellY) ;
-        
-        if(id != -1)
+        if(entityManager.getMainPlayer().getMaxBombPlacing()< Constants.maxBombs)
         {
-            if(super.collectedbyMainPlayer(id) == true)
+            int id = super.check(cellX, cellY) ;
+        
+            if(id != -1)
             {
-                doItem();
+                if(super.collectedbyMainPlayer(id) == true)
+                {
+                    doItem();
+                }
             }
         }
 
@@ -59,6 +63,7 @@ public class BombUp extends Item{
     
     public void doItem()
     {
+
         entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
     }
     

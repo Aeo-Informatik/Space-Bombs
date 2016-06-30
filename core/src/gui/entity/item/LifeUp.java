@@ -20,17 +20,17 @@ import gui.map.MapManager;
  *
  * @author Christian
  */
-public class RangeUp extends Item{
+public class LifeUp extends Item{
     
     
-    private final TextureRegion rangeUp;
+    private final TextureRegion lifeUp;
     private int cellX, cellY;
 
     
     
-    public RangeUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
+    public LifeUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
-        this.rangeUp = TextureManager.rangeUp;
+        this.lifeUp = TextureManager.lifeUp;
     }
    
     public void render(SpriteBatch renderObject)
@@ -40,16 +40,16 @@ public class RangeUp extends Item{
         
         
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(rangeUp));
-        cell.getTile().getProperties().put("rangeUp", null);
+        cell.setTile(new StaticTiledMapTile(lifeUp));
+        cell.getTile().getProperties().put("lifeUp", null);
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
-        {
-            
-            int id = super.check(cellX, cellY) ;
         
+        
+        if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
+        {
+           int id = super.check(cellX, cellY) ;
             if(id != -1)
             {
                 if(super.collectedbyMainPlayer(id) == true)
@@ -58,12 +58,13 @@ public class RangeUp extends Item{
                 }
             }
         }
-            
     }
     
     public void doItem()
     {
-        entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));        
+
+        entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
+        
     }
 
     

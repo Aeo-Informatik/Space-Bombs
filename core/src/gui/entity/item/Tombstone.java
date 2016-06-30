@@ -20,17 +20,19 @@ import gui.map.MapManager;
  *
  * @author Christian
  */
-public class RangeUp extends Item{
+public class Tombstone extends Item{
     
     
-    private final TextureRegion rangeUp;
+    private final TextureRegion tombstone;
     private int cellX, cellY;
+    private int coins;
 
     
     
-    public RangeUp(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
+    public Tombstone(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, int coins) {
         super(pos, direction, map, entityManager);
-        this.rangeUp = TextureManager.rangeUp;
+        this.tombstone = TextureManager.tombstone;
+        this.coins=coins;
     }
    
     public void render(SpriteBatch renderObject)
@@ -40,30 +42,27 @@ public class RangeUp extends Item{
         
         
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(rangeUp));
-        cell.getTile().getProperties().put("rangeUp", null);
+        cell.setTile(new StaticTiledMapTile(tombstone));
+        cell.getTile().getProperties().put("Tombstone", null);
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
-        {
-            
-            int id = super.check(cellX, cellY) ;
         
-            if(id != -1)
+        int id = super.check(cellX, cellY) ;
+        
+        if(id != -1)
+        {
+            if(super.collectedbyMainPlayer(id) == true)
             {
-                if(super.collectedbyMainPlayer(id) == true)
-                {
-                    doItem();
-                }
+                doItem();
             }
         }
-            
+
     }
     
     public void doItem()
     {
-        entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));        
+            entityManager.spawnCoin(cellX, cellX);        
     }
 
     
