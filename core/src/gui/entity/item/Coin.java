@@ -27,8 +27,6 @@ public class Coin extends Item{
     private AnimEffects animEffects = new AnimEffects();
     private int value;
 
-    
-    
     public Coin(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager, int value) {
         super(cellX, cellY, direction, map, entityManager);
         this.coinAnim = TextureManager.coinAnim;
@@ -45,17 +43,9 @@ public class Coin extends Item{
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         
-        int id = getPlayerCollectingItem();
-        
-        if(entityManager.getMainPlayer() != null)
+        if(isMainPlayerCollectingItem() == true)
         {
-            if(id != -1)
-            {
-                if(isMainPlayer(id) == true)
-                {
-                    itemEffect();
-                }
-            }
+            itemEffect();
         }
     }
     

@@ -31,6 +31,7 @@ public class RangeUp extends Item{
         this.rangeUp = TextureManager.rangeUp;
     }
    
+    @Override
     public void render(SpriteBatch renderObject)
     {
     
@@ -43,21 +44,16 @@ public class RangeUp extends Item{
         {
             if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
             {
-
-                int id = getPlayerCollectingItem();
-
-                if(id != -1)
+                if(isMainPlayerCollectingItem() == true)
                 {
-                    if(isMainPlayer(id) == true)
-                    {
-                        itemEffect();
-                    }
+                    itemEffect();
                 }
             }
         } 
     }
     
-    public void doItem()
+    @Override
+    public void itemEffect()
     {
         if(entityManager.getMainPlayer() != null)
         {

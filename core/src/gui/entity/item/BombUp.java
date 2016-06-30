@@ -26,9 +26,6 @@ public class BombUp extends Item{
     //Objects
     private final TextureRegion bombUp;
     
-    //Variables
-    private int cellX, cellY;
-
     //Constructor
     public BombUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) 
     {
@@ -36,6 +33,7 @@ public class BombUp extends Item{
         this.bombUp = TextureManager.bombUp;
     }
    
+    @Override
     public void render(SpriteBatch renderObject)
     {
         //Create cell Object
@@ -46,20 +44,17 @@ public class BombUp extends Item{
         //Set cell Object to coordinate positions
         map.getItemLayer().setCell(cellX, cellY, cell);
        
-        //Check if mainPlayer has reached max of bomb
-        if(entityManager.getMainPlayer() != null && entityManager.getMainPlayer().getMaxBombPlacing()< Constants.maxBombs)
+        if(entityManager.getMainPlayer() != null)
         {
-            int id = getPlayerCollectingItem();
-        
-            if(id != -1)
+            //Check if mainPlayer has reached item max 
+            if(entityManager.getMainPlayer().getMaxBombPlacing() < Constants.maxBombs)
             {
-                if(isMainPlayer(id) == true)
+                if(isMainPlayerCollectingItem() == true)
                 {
                     itemEffect();
                 }
             }
         }
-
     }
     
     @Override

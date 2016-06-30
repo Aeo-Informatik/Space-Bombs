@@ -38,6 +38,7 @@ public class YellowHeart extends Item{
         this.yellowHeart = TextureManager.yellowHeart;
     }
    
+    @Override
     public void render(SpriteBatch renderObject)
     {
         //Render Item
@@ -50,13 +51,9 @@ public class YellowHeart extends Item{
         {
             if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
             {
-                int id = getPlayerCollectingItem();
-                if(id != -1)
+                if(isMainPlayerCollectingItem() == true)
                 {
-                    if(isMainPlayer(id) == true)
-                    {
-                        itemEffect();
-                    }
+                    itemEffect();
                 }
             }
         }
@@ -71,6 +68,4 @@ public class YellowHeart extends Item{
             entityManager.getMainPlayer().setLife(Constants.maxLife);
         }
     }
-
-    
 }

@@ -32,6 +32,7 @@ public class LifeUp extends Item{
         this.lifeUp = TextureManager.lifeUp;
     }
    
+    @Override
     public void render(SpriteBatch renderObject)
     {     
         //Render item
@@ -45,13 +46,9 @@ public class LifeUp extends Item{
         {
             if(entityManager.getMainPlayer().getLife() < Constants.maxLife)
             {
-               int id = getPlayerCollectingItem();
-                if(id != -1)
+                if(isMainPlayerCollectingItem() == true)
                 {
-                    if(isMainPlayer(id) == true)
-                    {
-                        itemEffect();
-                    }
+                    itemEffect();
                 }
             }
         }

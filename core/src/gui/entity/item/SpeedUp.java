@@ -30,6 +30,7 @@ public class SpeedUp extends Item{
 
     }
    
+    @Override
     public void render(SpriteBatch renderObject)
     {
         //Render Item
@@ -38,10 +39,19 @@ public class SpeedUp extends Item{
         cell.getTile().getProperties().put("speed", null);
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        
-       int id = getPlayerCollectingItem();
+        if(entityManager.getMainPlayer() != null)
+        {
+            if(isMainPlayerCollectingItem() == true)
+            {
+                itemEffect();
+            }
+        }
     }
+    
+    
+    @Override
+    public void itemEffect()
+    {
         
-        
-
+    }
 }

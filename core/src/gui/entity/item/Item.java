@@ -39,7 +39,7 @@ public class Item extends Entity{
      * Check if a player is on this item field.
      * @return playerId or -1
      */
-    public int getPlayerCollectingItem()
+    public int getPlayerIdCollectingItem()
     {
         if(entityManager.getPlayerIdOnCoordinates(cellX, cellY) != -1)
         {
@@ -55,11 +55,14 @@ public class Item extends Entity{
      * @param ID player id
      * @return true or false
      */
-    public boolean isMainPlayer(int ID)
+    public boolean isMainPlayerCollectingItem()
     {
-        if(entityManager.getMainPlayer() != null && entityManager.getMainPlayer().getPlayerId() == ID)
+        if(entityManager.getMainPlayer() != null)
         {
-            return true;
+            if(entityManager.getMainPlayer().getPlayerId() == getPlayerIdCollectingItem())
+            {
+                return true;
+            }
         }
         return false;
     }

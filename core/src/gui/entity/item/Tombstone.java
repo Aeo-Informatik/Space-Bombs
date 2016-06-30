@@ -32,6 +32,7 @@ public class Tombstone extends Item{
         this.coins = coins;
     }
    
+    @Override
     public void render(SpriteBatch renderObject)
     {
         //Render item
@@ -42,14 +43,9 @@ public class Tombstone extends Item{
         
         if(entityManager.getMainPlayer() != null)
         {
-            int id = getPlayerCollectingItem();
-
-            if(id != -1)
+            if(isMainPlayerCollectingItem() == true)
             {
-                if(isMainPlayer(id) == true)
-                {
-                    itemEffect();
-                }
+                itemEffect();
             }
         }
     }
@@ -59,6 +55,4 @@ public class Tombstone extends Item{
     {
         entityManager.spawnCoin(cellX, cellX);        
     }
-
-    
 }
