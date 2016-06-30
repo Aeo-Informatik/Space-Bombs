@@ -50,6 +50,9 @@ public class TextureManager
     public static Texture coin;
     public static Animation coinAnim;
     
+    public static Texture heart;
+    public static TextureRegion yellowHeart;
+    
     public static Texture lifeup;
     public static TextureRegion lifeUp;
     
@@ -224,6 +227,9 @@ public class TextureManager
         
         lifeup = loadTexture("items/liveUp.png");
         lifeUp = new TextureRegion(lifeup,0,0,32,32);
+        
+        heart = loadTexture("items/yellowheart.png");
+        yellowHeart = new TextureRegion(heart,0,0,32,32);
         
         tomb = loadTexture("items/tomb_stone.png");
         tombstone = new TextureRegion(tomb,0,0,32,32);

@@ -20,19 +20,23 @@ import gui.map.MapManager;
  *
  * @author Christian
  */
-public class Tombstone extends Item{
+public class YellowHeart extends Item{
     
     
-    private final TextureRegion tombstone;
+    private final TextureRegion yellowHeart;
     private int cellX, cellY;
-    private int coins;
 
     
-    
-    public Tombstone(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, int coins) {
+    /**
+     * 
+     * @param pos the position of the Itemonly in int
+     * @param direction alwalys 0, 0
+     * @param map
+     * @param entityManager 
+     */
+    public YellowHeart(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
-        this.tombstone = TextureManager.tombstone;
-        this.coins=coins;
+        this.yellowHeart = TextureManager.yellowHeart;
     }
    
     public void render(SpriteBatch renderObject)
@@ -42,20 +46,22 @@ public class Tombstone extends Item{
         
         
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(tombstone));
-        cell.getTile().getProperties().put("Tombstone", null);
+        cell.setTile(new StaticTiledMapTile(yellowHeart));
+        cell.getTile().getProperties().put("yellowHeart", null);
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
         if(entityManager.getMainPlayer() != null)
         {
-        int id = super.check(cellX, cellY) ;
-        
-        if(id != -1)
+        if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
         {
-            if(super.collectedbyMainPlayer(id) == true)
+           int id = super.check(cellX, cellY) ;
+            if(id != -1)
             {
-                doItem();
+                if(super.collectedbyMainPlayer(id) == true)
+                {
+                    doItem();
+                }
             }
         }
         }
@@ -63,7 +69,9 @@ public class Tombstone extends Item{
     
     public void doItem()
     {
-            entityManager.spawnCoin(cellX, cellX);        
+
+        entityManager.getMainPlayer().setLife(Constants.maxLife);
+        
     }
 
     

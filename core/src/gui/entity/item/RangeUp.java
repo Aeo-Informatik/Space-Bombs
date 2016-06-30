@@ -45,6 +45,8 @@ public class RangeUp extends Item{
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
+        if(entityManager.getMainPlayer() != null)
+        {
         if(entityManager.getMainPlayer().getBombRange() < Constants.maxBombRange)
         {
             
@@ -58,7 +60,7 @@ public class RangeUp extends Item{
                 }
             }
         }
-            
+        } 
     }
     
     public void doItem()

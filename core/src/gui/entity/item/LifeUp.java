@@ -45,8 +45,8 @@ public class LifeUp extends Item{
         
         map.getItemLayer().setCell(cellX, cellY, cell);
         
-        
-        
+        if(entityManager.getMainPlayer() != null)
+        {
         if(entityManager.getMainPlayer().getLife()< Constants.maxLife)
         {
            int id = super.check(cellX, cellY) ;
@@ -57,6 +57,7 @@ public class LifeUp extends Item{
                     doItem();
                 }
             }
+        }
         }
     }
     
