@@ -94,41 +94,37 @@ public class HostScreen implements Screen
         /**------------------------BUTTON POSITION------------------------**/
         rootTable = new Table();
         rootTable.setFillParent(true);
-
+        
         Table stackTable = new Table();
         stackTable.setFillParent(true);
         
-        fontOptions.size = 14;
-        errorLabel = new Label("", labelStyle);
-        errorLabel.setVisible(false);
-        errorLabel.setAlignment(Align.center);
-        stackTable.add(errorLabel).height(40).width(300).padBottom(15);
-        stackTable.row();
+        //Add plus button
+        addMaxPlayer = new TextButton("+", skin);
+        stackTable.add(addMaxPlayer).width(40).padTop(5).expandX();
         
         //Add Textfield to screen
         maxplayer = new TextField("", skin);
-        stackTable.add(maxplayer).width(210).padTop(25);
-        stackTable.row();
+        stackTable.add(maxplayer).width(70).expandX();
         
-        addMaxPlayer = new TextButton("+", skin);
-        stackTable.add(addMaxPlayer).width(40).padTop(5);
-        
+        //Add minus button
         reduceMaxPlayer = new TextButton("-",skin);
-        stackTable.add(reduceMaxPlayer).width(40).padLeft(10);
+        stackTable.add(reduceMaxPlayer).width(40).padTop(5).expandX();
         stackTable.row();
         
-        //Add join button to screen
+        //Add host button to screen
         hostbutton = new TextButton("Host", textButtonStyle);
         stackTable.add(hostbutton).padTop(50);
         stackTable.row();
         
-        //Set stack position
+        //Stack settings
         stack.setPosition(287, 227);
+        stack.setWidth(200);
         
         //End
+        stack.add(stackTable);
         stage.addActor(rootTable);
         stage.addActor(stack);
-        stack.add(stackTable);
+  
         
         
         
@@ -291,7 +287,7 @@ public class HostScreen implements Screen
     public void render(float f) 
     {
         //Debug
-        //stage.setDebugAll(true);
+        stage.setDebugAll(true);
         
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
