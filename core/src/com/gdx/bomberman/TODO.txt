@@ -14,7 +14,6 @@ Add sound effects to the game & menu.
 (6) Adding an animation for the player standig still)
 11) Better bomb animation with fuse going down
 13) Hud texture à la minecraft for bomb selection
-14) Adding animation for items going up and down or rotating
 15) Changing the error background texture in joinscreen
 different colored coins 
 
