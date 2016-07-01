@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="120" height="60" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32">
+  <image source="../blocks/map_tiles.png" width="128" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="deadly" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="ghost-blocked" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="Spawn-P2" value=""/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="Spawn-P3" value=""/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="Spawn-P4" value=""/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="Spawn-P1" value=""/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="" value=""/>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="Item-Spawner" value=""/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="deadly" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="deadly" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="deadly" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="deadly" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="deadly" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Floor" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt0zsKQkEQRcE29LMB979RmdhIhH5wqIIJJ7mHngEAAAAAAACAa9wueOw5ez9np+tj9N3mftv0bdO3Td82fdv0bdO3Td82fdv0bdO3Td+2s/d7fm/0zx/2uN82fdv0bdO3Td82fdv0bdO3Td82fdv0bdO37ez9mp2u99F3m/sFAAAAAAAA+PYBBm4DuA==
+  </data>
+ </layer>
+ <layer name="Blocks" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztm9tuo0AQRFtxMH5BYGNwlN3N/3/mMlKXKDqQ7EvcLKqRjgY6eHBUrp4Lw4uZvQghhBBCCCGEEEIIIYQQQhyQd69/ef3xpPt+hPu+P+m+QhyJ3zv4Dnv6HkfmNYHs//no/An6opwmeuLktBO3ic7r1v9+o3jr8PXgRPdgffl7iJ+B9TXXovP64cePEG8mLhNDiA8b13ORf/P07V2T68TbRO3nvZ93Xl/8uKJ465/D8Wizt3u6h/TN0Rd+49z8CHVj6z4dNmq0xT6Wvjn6wnfQA9rAnx1dw+djOIe/0U7JAfC19M3TN/quozr6tw414uivOa9zu9I3T9/iO/SnV9dmpJp9DB2vtvRtbcvxd2Ozn9+kb6q+0In7V/Yx+xV/Hyhe2zInx3G08nOuvvAZ+tfizcbWc/XF5rw82uffwo3aGf26Vvqm6suF57/oj5Gr4U1QUzz2t11s2KRvhr6vtsyh6E9LfbbP/hxtzsvR35Utx9Vmy9+D9H2+vrHE9afixzNp2NmyXy3xyonrXLFI3xx90U/Ct0Wzu8ejh6O+yNlF39ZmrXk+PErfVH1ZL87LfAwP3/0zmAfh7xV9pgrtaf6bq2/xGdaNoWXt9Xf+5b43+recy7/5+nJBfwudwd2287P6332yNX5mH8fxM+ZBvW2Pn9vQnsbPefrGwvNf9LnwL54NAjxLwFypsuX4Oxbpm6Mv1p35OS8/T0Juvti8foXjNX+jHYy/tX6Vqy/3q03QrCYtWdMYi7ma17G0/pyrL8a9/PwWuZk17WypL8fwubvXvA9E4+dcfeN685oPh3Bd3L8RfR/3gUjfPH2hB4+XeX8ViPs14nmcS8HLys+5+vL+q6JPya3Rn7yPg5/vxuugsfZf5fPV/kl4GetPmNdijltTnPdL8poIfjMo0jdP31LW9j/Hfc4l3qzEsa+jofg5tC99f56t9xfifOdf5kRfxRkUvb/wXPT+0fHYy3t7e/keQvxP6P19IYQQQgghhBBCCCGEEGI//AVpNFel
+  </data>
+ </layer>
+ <layer name="Bombs" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
+  </data>
+ </layer>
+ <layer name="Items" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
+  </data>
+ </layer>
+</map>

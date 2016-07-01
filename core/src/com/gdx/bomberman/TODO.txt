@@ -1,0 +1,57 @@
+//General
+Add sound effects to the game & menu.
+
+
+
+//Bomb
+1) To be able to push the bomb
+
+
+//Player
+6) A hub navigation bar a la minecraft for bomb/item selection
+
+//Textures
+(6) Adding an animation for the player standig still)
+11) Better bomb animation with fuse going down
+13) Hud texture à la minecraft for bomb selection
+15) Changing the error background texture in joinscreen
+different colored coins 
+
+//Items
+Add items to the game:
+coin bags
+Speed Upgrade
+
+
+
+//Screens
+MenuScreen:
+Join, Host, Options, Help, Exit
+
+Option Screen:
+fullscreen, music volume, sound volume
+
+Join Screen:
+ip address bar, join button, (optional) list of available servers
+
+Host with options Screen:
+Map Selection, max player number, list of already connected users, start button
+
+Help Screen:
+Button: Back, Button: Forward
+
+Winner Screen:
+Winning player gets displayed with a medal on a podest
+A font diplaying "Winner" or something like that
+
+
+//Client
+1) Scanning for open servers with port scan
+2) Items have to be synchronized on every client. Player 1 will be the "host". Coins too
+2) (optional) Implementing delay calculator with ping requests
+
+//Bugs
+Enemy teleports himself in online mode due to laggs --> Vector2.interpolation could be a solution
+On some plattforms the camera is slower then the player ? (maybe framerate problems)
+Game Icon isn't shown on mac because of different size preferences 128x128
+White bars when walking with player
