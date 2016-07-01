@@ -33,11 +33,6 @@ public class CoinBag extends Item{
     @Override
     public void render(SpriteBatch renderObject)
     {
-        //Render item
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(TextureManager.coinBag));
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
         if(isMainPlayerCollectingItem() == true)
         {
             itemEffect();

@@ -54,4 +54,5 @@ A font diplaying "Winner" or something like that
 Enemy teleports himself in online mode due to laggs --> Vector2.interpolation could be a solution
 On some plattforms the camera is slower then the player ? (maybe framerate problems)
 Game Icon isn't shown on mac because of different size preferences 128x128
-White bars when walking with player
+White bars when walking with player. The problem is called "bleeding".
+Solution: https://thekemiren.blogspot.de/2014/07/tile-bleeding-in-libgdx-using-tiled.html

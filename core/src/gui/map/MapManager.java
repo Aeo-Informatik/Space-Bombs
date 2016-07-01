@@ -41,6 +41,7 @@ public class MapManager
         this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
         this.itemLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Items");
         
+        
         Constants.MAPTEXTUREWIDTH = blockLayer.getTileWidth();
         Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
     }
