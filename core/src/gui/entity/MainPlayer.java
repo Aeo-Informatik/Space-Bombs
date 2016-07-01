@@ -55,6 +55,7 @@ public class MainPlayer extends Entity
     private int coins = 0;
     private int maxBombPlacing = 2;
     private int BombRange = 2;
+    private float speed = 1.0f;
     
     //Constructor
     public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
@@ -197,7 +198,7 @@ public class MainPlayer extends Entity
     private void inputMovePlayer(SpriteBatch renderObject)
     {
         String moveCommand;
-        float cameraSpeed = 2.51f;
+        float cameraSpeed = 2.51f * speed;
         
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
@@ -206,7 +207,7 @@ public class MainPlayer extends Entity
             {
                 //Set the speed the texture moves in x and y axis
                 //This will be added to the position every render cycle
-                setDirection(-150, 0);
+                setDirection(-150 * speed, 0);
 
                 //Move camera x,y
                 camera.translate( -1 * cameraSpeed,0);
@@ -248,7 +249,7 @@ public class MainPlayer extends Entity
         {
             if(!collidesRight() && !collidesRightBomb())
             {
-                setDirection(150, 0);
+                setDirection(150* speed, 0);
                 
                 camera.translate(cameraSpeed,0);
                 
@@ -277,7 +278,7 @@ public class MainPlayer extends Entity
         {
             if(!collidesTop() && !collidesTopBomb())
             {
-                setDirection(0, 150);
+                setDirection(0, 150* speed);
 
                 camera.translate(0, cameraSpeed);
 
@@ -306,7 +307,7 @@ public class MainPlayer extends Entity
         {
             if(!collidesBottom() && !collidesBottomBomb())
             {
-                setDirection(0, -150);
+                setDirection(0, -150* speed);
                 camera.translate(0, -1 * cameraSpeed);
                 
                 renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
@@ -498,6 +499,14 @@ public class MainPlayer extends Entity
 
     public void setCoins(int coins) {
         this.coins = coins;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
 

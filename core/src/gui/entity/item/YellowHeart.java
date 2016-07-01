@@ -53,6 +53,15 @@ public class YellowHeart extends Item{
         if(entityManager.getMainPlayer() != null)
         {
             entityManager.getMainPlayer().setLife(Constants.MAXLIFE);
+
+            
+            for(int i=0; i < 3; i++)
+                    {
+                        if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
+                        {
+                            entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
+                        }
+                    }
         }
     }
 }
