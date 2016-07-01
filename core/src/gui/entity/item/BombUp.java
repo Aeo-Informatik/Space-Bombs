@@ -25,23 +25,7 @@ public class BombUp extends Item{
     {
         super(cellX, cellY, direction,TextureManager.bombUp, map, entityManager);
     }
-   
-    @Override
-    public void render(SpriteBatch renderObject)
-    {   
-        if(entityManager.getMainPlayer() != null)
-        {
-            //Check if mainPlayer has reached item max 
-            if(entityManager.getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
-            {
-                if(isMainPlayerCollectingItem() == true)
-                {
-                    itemEffect();
-                }
-            }
-        }
-    }
-    
+       
     @Override
     public void itemEffect()
     {
@@ -51,4 +35,13 @@ public class BombUp extends Item{
         }
     }
     
+    @Override
+    public boolean canGetCollectedByMainPLayer()
+    {
+        if(entityManager.getMainPlayer().getMaxBombPlacing()< Constants.MAXBOMBS)
+        {
+            return true;
+        }
+        return false;
+    }
 }

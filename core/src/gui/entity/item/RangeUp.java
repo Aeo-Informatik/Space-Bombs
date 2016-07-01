@@ -24,21 +24,6 @@ public class RangeUp extends Item{
     public RangeUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(cellX, cellY, direction,TextureManager.rangeUp, map, entityManager);
     }
-   
-    @Override
-    public void render(SpriteBatch renderObject)
-    {       
-        if(entityManager.getMainPlayer() != null)
-        {
-            if(entityManager.getMainPlayer().getBombRange() < Constants.MAXBOMBRANGE)
-            {
-                if(isMainPlayerCollectingItem() == true)
-                {
-                    itemEffect();
-                }
-            }
-        } 
-    }
     
     @Override
     public void itemEffect()
@@ -49,5 +34,13 @@ public class RangeUp extends Item{
         }
     }
 
-    
+    @Override
+    public boolean canGetCollectedByMainPLayer()
+    {
+        if(entityManager.getMainPlayer().getBombRange()< Constants.MAXBOMBRANGE)
+        {
+            return true;
+        }
+        return false;
+    }
 }

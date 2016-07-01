@@ -14,7 +14,7 @@ import networkServer.Server;
 public class Constants {
     public static float MUSICVOLUME = 0.1f;
     public static float SOUNDVOLUME = 0.2f;
-    
+        
     //Window config
     public static int SCREENWIDTH = 800;
     public static int SCREENHEIGHT = 480;

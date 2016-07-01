@@ -29,27 +29,7 @@ public class CoinBag extends Item{
         super(cellX, cellY, direction,TextureManager.coinBag, map, entityManager);
         this.value = value * 10;
     }
-   
-    @Override
-    public void render(SpriteBatch renderObject)
-    {
-        //Render item
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(TextureManager.coinBag));
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
-        if(isMainPlayerCollectingItem() == true)
-        {
-            itemEffect();
-        }
-        
-        if(getPlayerIdCollectingItem() != -1)
-        {
-            long id = AudioManager.singleCoin.play();
-            AudioManager.singleCoin.setVolume(id, Constants.SOUNDVOLUME);
-        }
-    }
-    
+       
     @Override
     public void itemEffect()
     {
@@ -59,6 +39,12 @@ public class CoinBag extends Item{
         }
     }
     
-
+    
+    @Override
+    public boolean canGetCollectedByMainPLayer()
+    {
+        return true;
+    }
+    
     
 }

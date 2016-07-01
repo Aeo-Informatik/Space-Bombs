@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
@@ -29,21 +30,15 @@ public class Tombstone extends Item{
         this.coins = coins;
     }
    
-    @Override
-    public void render(SpriteBatch renderObject)
-    {
-        if(entityManager.getMainPlayer() != null)
-        {
-            if(isMainPlayerCollectingItem() == true)
-            {
-                itemEffect();
-            }
-        }
-    }
     
     @Override
     public void itemEffect()
     {
         entityManager.spawnCoin(cellX, cellX);        
+    }
+    @Override
+    public boolean canGetCollectedByMainPLayer()
+    {
+        return true;
     }
 }

@@ -26,21 +26,6 @@ public class SpeedUp extends Item{
     public SpeedUp(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(CellX, CellY, direction,TextureManager.speedUp, map, entityManager);
     }
-   
-    @Override
-    public void render(SpriteBatch renderObject)
-    {            
-        if(entityManager.getMainPlayer() != null)//check if MAinplayer stil exsitst
-        {
-            if(entityManager.getMainPlayer().getSpeed() < Constants.MAXSPEED)//check if item is usable for the mainplayer
-            {
-                if(isMainPlayerCollectingItem() == true)//check if item is collected by the mainplayer
-                {
-                    itemEffect();
-                }
-            }
-        }
-    }
     
     /**
      * do wahat the item does
@@ -49,5 +34,15 @@ public class SpeedUp extends Item{
     public void itemEffect()
     {
         entityManager.getMainPlayer().setSpeed((entityManager.getMainPlayer().getSpeed()+ 0.1f));
+    }
+    
+    @Override
+    public boolean canGetCollectedByMainPLayer()
+    {
+        if(entityManager.getMainPlayer().getSpeed()< Constants.MAXSPEED)
+        {
+            return true;
+        }
+        return false;
     }
 }

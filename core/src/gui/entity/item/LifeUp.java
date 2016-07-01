@@ -25,22 +25,6 @@ public class LifeUp extends Item{
     {
         super(cellX, cellY, direction,TextureManager.lifeUp, map, entityManager);
     }
-   
-    @Override
-    public void render(SpriteBatch renderObject)
-    {     
-        //Check if main player is alive
-        if(entityManager.getMainPlayer() != null)
-        {
-            if(entityManager.getMainPlayer().getLife() < Constants.MAXLIFE)
-            {
-                if(isMainPlayerCollectingItem() == true)
-                {
-                    itemEffect();
-                }
-            }
-        }
-    }
     
     @Override
     public void itemEffect()
@@ -52,5 +36,13 @@ public class LifeUp extends Item{
         }
     }
 
-    
+    @Override
+    public boolean canGetCollectedByMainPLayer()
+    {
+        if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
+        {
+            return true;
+        }
+        return false;
+    }
 }

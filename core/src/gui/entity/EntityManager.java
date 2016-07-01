@@ -189,9 +189,15 @@ public class EntityManager {
             {
                 itemArray.get(i).deleteItem();
                 itemArray.removeIndex(i);
-            }   
-            spawnItem();
-            timer = 0;
+            }
+            if(timer >= (Constants.ITEMTIMER + 1))
+            {
+                spawnItem();
+                timer = 0;
+            }else
+            {
+                timer += Constants.DELTATIME;
+            }
         }else
         {
             timer += Constants.DELTATIME;

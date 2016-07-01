@@ -6,10 +6,12 @@
 
 package gui.entity.item;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
@@ -18,7 +20,7 @@ import gui.map.MapManager;
  *
  * @author cb0703
  */
-public class Item extends Entity{
+public abstract class Item extends Entity{
     
     //Variables
     protected boolean collected = false;
@@ -39,6 +41,20 @@ public class Item extends Entity{
         map.getItemLayer().setCell(cellX, cellY, cell);
     }
     
+    public void render(SpriteBatch renderObject)
+    {     
+        //Check if main player is alive
+        if(entityManager.getMainPlayer() != null)
+        {
+            if(canGetCollectedByMainPLayer() == true)
+            {
+                if(isMainPlayerCollectingItem() == true)
+                {
+                    itemEffect();
+                }
+            }
+        }
+    }
     
     /**
      * Check if a player is on this item field.
@@ -83,10 +99,9 @@ public class Item extends Entity{
         map.getItemLayer().setCell(cellX, cellY, cellCenter);
     }
     
-    public void itemEffect()
-    {
-        
-    }
+    abstract void itemEffect();
+    
+    abstract boolean canGetCollectedByMainPLayer();
 
     /**--------------------GETTER & SETTER--------------------**/
     public boolean isCollected() 

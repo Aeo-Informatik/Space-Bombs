@@ -61,6 +61,12 @@ public class Coin extends Item{
         }
     }
     
+    @Override
+    public boolean canGetCollectedByMainPLayer()
+    {
+        return true;
+    }
+    
 
     
 }
