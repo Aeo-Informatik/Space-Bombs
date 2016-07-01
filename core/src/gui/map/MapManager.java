@@ -7,10 +7,12 @@ package gui.map;
 
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader.Parameters;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.gdx.bomberman.Constants;
 
@@ -33,6 +35,10 @@ public class MapManager
     //Constuctor
     public MapManager(OrthographicCamera camera)
     {
+//        Parameters params = new Parameters();
+//        params.textureMinFilter = TextureFilter.Nearest;
+//        params.textureMagFilter = TextureFilter.Nearest;
+        
         this.camera = camera;
         this.tiledMap = new TmxMapLoader().load(Constants.MAPPATH);
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
