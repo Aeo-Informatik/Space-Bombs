@@ -55,6 +55,8 @@ public class MainPlayer extends Entity
     private int coins = 0;
     private int maxBombPlacing = 2;
     private int BombRange = 2;
+    private float maxZoomOut = 1.5f;
+    private float maxZoomIn = 0.5f;
     
     //Constructor
     public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
@@ -67,6 +69,8 @@ public class MainPlayer extends Entity
         this.camera = camera;
         this.playerId = playerId;
         this.bombArray = bombArray;
+        
+        camera.zoom = 0.8f;
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -398,7 +402,7 @@ public class MainPlayer extends Entity
         /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.O))
         {
-            if(camera.zoom < 2.0)
+            if(camera.zoom < maxZoomOut)
             {
                 camera.zoom += 0.02;
                 camera.position.set(pos.x, pos.y, 0);
@@ -408,7 +412,7 @@ public class MainPlayer extends Entity
         /*------------------ZOOM INTO GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.I))
         {
-            if(camera.zoom > 0.5)
+            if(camera.zoom > maxZoomIn)
             {
                 camera.zoom -= 0.02;
                 camera.position.set(pos.x, pos.y, 0);
@@ -448,13 +452,30 @@ public class MainPlayer extends Entity
         }
     }
 
-    /*------------------ GETTER & SETTER ------------------*/    
+    /*------------------ GETTER & SETTER ------------------*/  
+    public float getMaxZoomIn()
+    {
+        return maxZoomIn;
+    }
+    
+    public void setMaxZoomIn(float maxZoomIn)
+    {
+        this.maxZoomIn = maxZoomIn;
+    }
+    
+    public float getMaxZoomOut()
+    {
+        return maxZoomIn;
+    }
+    
+    public void setMaxZoomOut(float maxZoomOut)
+    {
+        this.maxZoomOut = maxZoomOut;
+    }
+    
     public int getLife()
     { 
-    
         return this.life;
-        
-        
     }
     
     public void setLife(int life)
