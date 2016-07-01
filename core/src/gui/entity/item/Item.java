@@ -49,6 +49,7 @@ public class Item extends Entity{
         if(entityManager.getPlayerIdOnCoordinates(cellX, cellY) != -1)
         {
             collected = true;
+            System.out.println("Collected");
             return entityManager.getPlayerIdOnCoordinates(cellX, cellY);
         }
         return -1;

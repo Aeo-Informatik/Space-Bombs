@@ -180,12 +180,12 @@
  </tileset>
  <layer name="Floor" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt2MsKwkAMQNFx4duN2o3//6NSaKGUUCpUDPEcCIVhdpehkNYAAAAAAAAAAAD4V7svDHn0Pa5tm66Xpm823m9t8zbH4GxpovvkMe1yGL7Ptq5tN3z3Td+s5s0ewdnS3IMz8vD/rU3f2vStTd/a1jZ7fXCXPLzf2vStTd/a9K1t3qYLzpYm2mWSx7TLuH+Odo7RjLtM++e85s1OwdnSRPfJw/+3tr7HrW3T9dz0zcb7BQAAAAAAAAAAfuEN4agCsA==
+   eJzt08sJgEAQRMHx6CcB809UNgOFFYe2CuY2t0dXAQAAAAAAAAAA8FfLC0cfo8dec7pupW839ptN32z6ZtM3m77Z9M2mbzZ9s91tdj74pQ/7zaZvNn2z6ZtN32z6ZtM3m77ZRo+j5nRdS99u7BcAAAAAAAAAAPjCBS1/Afg=
   </data>
  </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJztm+FuglAMRm8Up3+MCojGbb7/Y44m/UJhuiWLxk4PyckdV7jGHFtLYbNSygwAAAAAAAAAAAAAAAAAAADgDpx8fPfxfKN1z5N1TzdaFwAGPp7sfeA61R149Gd6dT4nfrXtetY9h563nm3Poqf2v3eT+YMfX4c1ot/4PvAY5NfctT4e3eHKx81k1HznbpsyOCZ+c1EFt1t3ZN4sLue/jEc/3s6TY/zmwnxs3LFc2Wa5d++j3DeT+Xh87evgNxfmo5s4i/GsnLyd7MecLOdH/KbDfCyDuy64Xbgz/d6u/HXVWI2/LudL/KajCi7nZVxbWRzvff7go+3XZVxjzYNz/OaiKuM6WbWV8q3i1BwqrpXPVWPFuhq/uajcn+rimJttX9e+yuG7Mo5XuV/7ufjNhfLzpVoq5t5SvufwS+fhNxe6/lX8Kl7lUvGsHK54VfwqntXHwm8uLtXP6lEqTuVQ7rsy9Capn3NzrX42V+pnqG5WHd2W4TtB/ZybS/VzzNHH4HJZxte/6lVTP+dF/Sv1oGxTb+qn/pV6XKUMvS/6V/lQ/7lxV+ony5n6GXIa5+PxbaH/nBFd/8qhbX+5f6R4xm8udP9XjtVTjj2N6f3fWFvpnrFyNX4fz7XnN9THstwbn9OI9wfjvHqUbViD5zdywfNXzwfPTwL8X/j/BQAAAAAAAAAAAAAAAAAAeCW+AADbS9U=
+   eJzt291u4lAMReEjCIUbFALhR7Tl/R+zseQtnDRAL0C4sEb6lCFDU4322DVOZlJKmQAAAAAAAAAAAAAAADzA0Y+ffjzd6bqnwXWPd7ougLOvF/s+uKx6gGf/nd7d9yBf/Wo6y86+89FZdWadtf++GZzf+/vX4Rox3/h98BzK17Jr/XjwDBd+rAdHnd95tptyzpj6zaUK2Vpmc8/N6nJ643jw969CxuSbi+VRl37vtays92792N44rx5ek286lscuZLYu/XpWT14NXm/Ce5X5gXzTsTzUY2vPOtalZaaftwv/81jnh5D5nHzTqUKW09Kfraw2t35+70d7vS79GWsaMiffXKrSn5M1W6nfqk4tQ9W1+rlmrDhXk28uleenuTj2Znutz77q4U3p16uyX/rXkm8u6s9js1TsvaX87uFjX0e+uejzr+pX9aosVc/q4apX1a/qWXss8s1lbH7WjlJ1qgyV/a6cd5PMz7ldmp8tK+0zNDdrjm7L+d8E83NuY/Nz7NFxB6ndZezNzM+5aX+lHZTVpnZT1/ZXTXivdl/sr/LR/tlyinWpzLTPuHZ+5lmzf85Hn3+VlXaQf71/pN6ueibfXHT/Vxlrpxx3GsP7v3G20j3j1q9Dvs936fkN7bGs98bnNOL9wXheO8o2XIPnN3Lh+avXw/OTwP/F/18AAAAAAAAAAAAAALyTHyqATJ0=
   </data>
  </layer>
  <layer name="Items" width="120" height="60">

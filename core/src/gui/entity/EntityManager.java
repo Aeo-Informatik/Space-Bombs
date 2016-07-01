@@ -273,8 +273,8 @@ public class EntityManager {
                             
                             case(2):
                             {
-                                Coin coin = new Coin(mapX, mapY, new Vector2(0,0),map, this, 1);
-                                itemArray.add(coin);
+                                CoinBag coinBag = new CoinBag(mapX, mapY, new Vector2(0,0),map, this, Constants.COINVALUE);
+                                itemArray.add(coinBag);
                                 break;
                             }
                             

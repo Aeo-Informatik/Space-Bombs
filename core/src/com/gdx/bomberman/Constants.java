@@ -24,7 +24,7 @@ public class Constants {
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
-    public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
+    public static String MAPPATH = "maps/TsetMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     
     //Item config
     public static float ITEMTIMER = 5;
@@ -33,7 +33,7 @@ public class Constants {
     public static int MAXLIFE = 6;
     public static int COINVALUE = 1;
     public static float MAXSPEED = 1.5f;
-   
+    
     //Client config
     public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
