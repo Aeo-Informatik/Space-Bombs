@@ -15,6 +15,8 @@ import gui.map.MapManager;
 import networkClient.ProcessData;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
@@ -54,7 +56,7 @@ public class GameScreen implements Screen{
     public GameScreen()
     {
         this.camera = new OrthographicCamera();
-        this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT, camera));
+        this.stage = new Stage(new FillViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT, camera));
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ProcessData(entityManager);

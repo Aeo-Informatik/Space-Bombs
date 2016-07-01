@@ -10,7 +10,6 @@ import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
-import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.entity.item.Item;

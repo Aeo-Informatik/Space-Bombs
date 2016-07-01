@@ -5,7 +5,6 @@
  */
 package gui.entity;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
-import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
 import java.io.IOException;

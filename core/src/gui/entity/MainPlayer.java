@@ -19,7 +19,6 @@ import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
-import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
 import java.io.IOException;
