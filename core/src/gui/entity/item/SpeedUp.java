@@ -15,6 +15,7 @@ import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.gdx.bomberman.Constants;
 
 /**
  *
@@ -29,19 +30,24 @@ public class SpeedUp extends Item{
     @Override
     public void render(SpriteBatch renderObject)
     {            
-        if(entityManager.getMainPlayer() != null)
+        if(entityManager.getMainPlayer() != null)//check if MAinplayer stil exsitst
         {
-            if(isMainPlayerCollectingItem() == true)
+            if(entityManager.getMainPlayer().getSpeed() < Constants.MAXSPEED)//check if item is usable for the mainplayer
             {
-                itemEffect();
+                if(isMainPlayerCollectingItem() == true)//check if item is collected by the mainplayer
+                {
+                    itemEffect();
+                }
             }
         }
     }
     
-    
+    /**
+     * do wahat the item does
+     */
     @Override
     public void itemEffect()
     {
-        
+        entityManager.getMainPlayer().setSpeed((entityManager.getMainPlayer().getSpeed()+ 0.1f));
     }
 }

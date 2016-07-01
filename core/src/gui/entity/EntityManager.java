@@ -259,7 +259,7 @@ public class EntityManager {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
                     {
                         int item;
-                        item = (int)(Math.random()*5);
+                        item = (int)(Math.random()*7);
                         switch(item)
                         {
                         
@@ -273,8 +273,8 @@ public class EntityManager {
                             
                             case(2):
                             {
-                                Coin coin = new Coin(mapX, mapY, new Vector2(0,0),map, this, 1);
-                                itemArray.add(coin);
+                                CoinBag coinBag = new CoinBag(mapX, mapY, new Vector2(0,0),map, this, Constants.COINVALUE);
+                                itemArray.add(coinBag);
                                 break;
                             }
                             
@@ -292,6 +292,19 @@ public class EntityManager {
                                 break;
                             }
                             
+                            case(5):
+                            {
+                                YellowHeart yellowHeart = new YellowHeart(mapX, mapY, new Vector2(0,0),map, this);
+                                itemArray.add(yellowHeart);
+                                break;
+                            }
+                            
+                            case(6):
+                            {
+                                SpeedUp speedUp = new SpeedUp(mapX, mapY, new Vector2(0,0),map, this);
+                                itemArray.add(speedUp);
+                                break;
+                            }
                             
                             default:
                             {
