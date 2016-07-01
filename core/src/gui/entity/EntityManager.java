@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -22,7 +23,7 @@ import gui.entity.item.*;
 public class EntityManager {
     
     //Variables & Objects
-    private OrthoCamera camera;
+    private OrthographicCamera camera;
     private SpriteBatch renderMainPlayer = new SpriteBatch();
     private SpriteBatch renderEnemyPlayer = new SpriteBatch();
     private SpriteBatch renderSpectator = new SpriteBatch();
@@ -42,7 +43,7 @@ public class EntityManager {
     private Array <Item> coins = new Array<>();
     
     //Constructor
-    public EntityManager(OrthoCamera camera, MapManager map)
+    public EntityManager(OrthographicCamera camera, MapManager map)
     {
         this.camera = camera;
         this.map = map;

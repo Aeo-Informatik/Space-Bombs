@@ -8,12 +8,14 @@ package gui.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.gdx.bomberman.Constants;
-import gui.camera.OrthoCamera;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import networkClient.ProcessData;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
@@ -27,14 +29,17 @@ import java.util.Random;
  */
 public class GameScreen implements Screen{
     
-    //Genral Objects & variables
-    private OrthoCamera camera;
+    //Objects 
+    private OrthographicCamera camera;
     private EntityManager entityManager;
     private MapManager mapManager;
     private ProcessData processData;
     private SpriteBatch renderServer = new SpriteBatch();
-    private int previousMusicIndex = -1;
     private Random random = new Random();
+    private Stage stage;
+    
+    //Variables
+    private int previousMusicIndex = -1;
     private float musicTimer = 0;
     private float musicStart = 15; //Seconds after game start or after music is finished
     
@@ -48,7 +53,8 @@ public class GameScreen implements Screen{
      */
     public GameScreen()
     {
-        this.camera = new OrthoCamera();
+        this.camera = new OrthographicCamera();
+        this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT, camera));
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ProcessData(entityManager);
@@ -107,12 +113,16 @@ public class GameScreen implements Screen{
         //Lets spriteBatch use the coordinate system specified by camera instead of the default one. This is because 
         //both of the coordinate systems are different and the camera.combined will do the maths for you.
         renderServer.setProjectionMatrix(camera.combined);
-        //Map loading into screen shouldn't be in the sb.begin() tags
+        
+        //Draw stage
+        //stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+        
         mapManager.render();
            
         //Render incoming server instructions
         renderServer.begin();
-        processData.start(renderServer);
+            processData.start(renderServer);
         renderServer.end();
         
         //Render entities
@@ -137,7 +147,7 @@ public class GameScreen implements Screen{
     @Override
     public void resize(int width, int height) 
     {
-       camera.resize();
+       stage.getViewport().update(width, height, false);
        mapManager.resize(width, height);
        counterHud.resize(width, height);
        
@@ -146,11 +156,11 @@ public class GameScreen implements Screen{
        {
            if(entityManager.getMainPlayer() != null)
            {
-                camera.setPosition(entityManager.getMainPlayer().getPosition().x, entityManager.getMainPlayer().getPosition().y);
+                camera.position.set(entityManager.getMainPlayer().getPosition().x, entityManager.getMainPlayer().getPosition().y, 0);
            
            }else if(entityManager.getSpectator() != null)
            {
-               camera.setPosition(entityManager.getSpectator().getPosition().x, entityManager.getSpectator().getPosition().y);
+               camera.position.set(entityManager.getSpectator().getPosition().x, entityManager.getSpectator().getPosition().y, 0);
            }
        }
     }
@@ -161,6 +171,7 @@ public class GameScreen implements Screen{
     public void dispose() 
     {
         mapManager.dispose();
+        stage.dispose();
     }
     
     

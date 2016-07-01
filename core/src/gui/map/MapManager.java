@@ -6,6 +6,7 @@
 package gui.map;
 
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -24,14 +25,14 @@ public class MapManager
     //General Objects and variables
     private TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
-    private OrthoCamera camera;
+    private OrthographicCamera camera;
     private TiledMapTileLayer blockLayer; 
     private TiledMapTileLayer floorLayer;
     private TiledMapTileLayer bombLayer;
     private TiledMapTileLayer itemLayer;
     
     //Constuctor
-    public MapManager(OrthoCamera camera)
+    public MapManager(OrthographicCamera camera)
     {
         this.camera = camera;
         this.tiledMap = new TmxMapLoader().load(Constants.MAPPATH);

@@ -8,6 +8,7 @@ package gui.entity;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -26,14 +27,14 @@ import java.io.IOException;
 public class Spectator extends Entity
 {
     //General objects and variables
-    private OrthoCamera camera;
+    private OrthographicCamera camera;
     private boolean freeCam = true;
     private int currentPlayerIndex = 0;
     private EnemyPlayer currentEnemyPlayer;
     private Array <EnemyPlayer> enemies;
     
     //Constructor
-    public Spectator(Vector2 pos, Vector2 direction, OrthoCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
+    public Spectator(Vector2 pos, Vector2 direction, OrthographicCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager);
         
@@ -56,7 +57,7 @@ public class Spectator extends Entity
         }else
         {
             //Follow living enemie player
-            camera.setPosition(this.currentEnemyPlayer.getPosition().x, this.currentEnemyPlayer.getPosition().y);
+            camera.position.set(this.currentEnemyPlayer.getPosition().x, this.currentEnemyPlayer.getPosition().y, 0);
         }
         
         //Keyboard interception
@@ -154,10 +155,10 @@ public class Spectator extends Entity
                 
                 if(freeCam)
                 {
-                    camera.setPosition(pos.x, pos.y);
+                    camera.position.set(pos.x, pos.y, 0);
                 }else
                 {
-                    camera.setPosition(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y);
+                    camera.position.set(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y, 0);
                 }
             }
         }
@@ -171,10 +172,10 @@ public class Spectator extends Entity
                 
                 if(freeCam)
                 {
-                    camera.setPosition(pos.x, pos.y);
+                    camera.position.set(pos.x, pos.y, 0);
                 }else
                 {
-                    camera.setPosition(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y);
+                    camera.position.set(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y, 0);
                 }
             }
         }
@@ -182,7 +183,7 @@ public class Spectator extends Entity
         /*------------------FREE MOVING CAMERA FOR SPECTATOR------------------*/
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
         {
-            camera.setPosition(pos.x, pos.y);
+            camera.position.set(pos.x, pos.y, 0);
             freeCam = true;
         }
         

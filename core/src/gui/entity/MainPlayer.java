@@ -8,6 +8,7 @@ package gui.entity;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -39,7 +40,7 @@ public class MainPlayer extends Entity
     private int playerId = 0;
     
     //General objects
-    private OrthoCamera camera;
+    private OrthographicCamera camera;
     private Array <Bomb> bombArray;
     private AnimEffects animEffects = new AnimEffects();
     
@@ -58,12 +59,12 @@ public class MainPlayer extends Entity
     private float speed = 1.0f;
     
     //Constructor
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthoCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager);
 
         //Set camera position to players position
-        camera.setPosition(pos.x, pos.y);
+        camera.position.set(pos.x, pos.y, 0);
 
         this.camera = camera;
         this.playerId = playerId;
@@ -402,7 +403,7 @@ public class MainPlayer extends Entity
             if(camera.zoom < 2.0)
             {
                 camera.zoom += 0.02;
-                camera.setPosition(pos.x, pos.y);
+                camera.position.set(pos.x, pos.y, 0);
             }
         }
 
@@ -412,14 +413,14 @@ public class MainPlayer extends Entity
             if(camera.zoom > 0.5)
             {
                 camera.zoom -= 0.02;
-                camera.setPosition(pos.x, pos.y);
+                camera.position.set(pos.x, pos.y, 0);
             }
         }
         
         /*------------------CAMERA CENTERS PLAYER------------------*/
         if (Gdx.input.isKeyPressed(Keys.ENTER))
         {
-            camera.setPosition(pos.x, pos.y);
+            camera.position.set(pos.x, pos.y, 0);
         }
         
         /*------------------QUIT GAME------------------*/
