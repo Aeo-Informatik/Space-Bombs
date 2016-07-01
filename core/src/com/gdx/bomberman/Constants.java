@@ -24,7 +24,7 @@ public class Constants {
     
     //Main config
     public static boolean PROCESSDATADEBUG = false;
-    public static String MAPPATH = "maps/TsetMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
+    public static String MAPPATH = "maps/TestMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     
     //Item config
     public static float ITEMTIMER = 5;

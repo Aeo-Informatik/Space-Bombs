@@ -190,7 +190,7 @@
  </layer>
  <layer name="Items" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
+   eJzt18EKwjAQRdGCQrsp9f+/VtyZblSYTvBxDsw2s7iEkGUBAAAAAAAAAAAYHU17bk17GOmbTd9s+mbTN5u+2fTNdpym0vY2+s53Rd9H8Zn8puv+bsVn852u91dfqLc37Vmb9jDaT1NpPQ1zXdGXubru7+v/ey8+n8+63l995+jsSz99s+mbTd9s+mbTFwAAAAAAAACAf/AEyM8CrA==
   </data>
  </layer>
  <layer name="Bombs" width="120" height="60">

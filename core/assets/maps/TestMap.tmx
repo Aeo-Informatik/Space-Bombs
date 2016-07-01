@@ -188,14 +188,14 @@
    eJzt2zEOwjAQRUETcQDqALn/MWmMFKVJ5Y35jKWR03mjV+/SWlsAAAAAAAACrf1+9nsrenc7vLsWvQtJXhPMMNMcye7dY/c92tX/nO596Ft59n33czDGlX3RF33R91/pm03fbPpm0zebvtn0zaZvNn2z6ZtN32z6ZtM3m77Z9M2mbzZ9s+mbTd9s+mbTN5u+eUbsL9xOfI/9hVpVO0f2j+rMsrc3yxzwS+zvAwAAAADAPD4dUDWL
   </data>
  </layer>
- <layer name="Bombs" width="120" height="60">
-  <data encoding="base64" compression="zlib">
-   eJzt0rEJADAMA0EFsv/M7l2ktSF38L0KJQAAAAAAAAAAAAAAAAAAAAAAAADwj/MIOr/Y5U4PAAAAAAAAABhW6qsADQ==
-  </data>
- </layer>
  <layer name="Items" width="120" height="60">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
+  </data>
+ </layer>
+ <layer name="Bombs" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt0rEJADAMA0EFsv/M7l2ktSF38L0KJQAAAAAAAAAAAAAAAAAAAAAAAADwj/MIOr/Y5U4PAAAAAAAAABhW6qsADQ==
   </data>
  </layer>
 </map>
