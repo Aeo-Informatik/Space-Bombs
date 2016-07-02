@@ -22,15 +22,20 @@ public class EntityManager {
     
     //Variables & Objects
     private OrthographicCamera camera;
-
+    private float timer;
+    private MapManager map;
+    
     //Array from libgdx is much faster in comparison to an arraylist
+    //Players
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
     private Spectator spectator;
-    private float timer;
-    private MapManager map;
+    
+    //Bombs
     private Array <Bomb> bombArray = new Array<>();
     private Array <Bomb> bombArrayEnemy = new Array<>();
+    
+    //Items
     private Array <Item> itemArray = new Array<>();
     private Array <Item> tombs = new Array<>();
     private Array <Item> coins = new Array<>();

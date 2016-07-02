@@ -127,10 +127,10 @@ public class MainPlayer extends Entity
             pos.add(this.direction);
 
             //Keyboard interception
-            inputMovePlayer(renderObject);
-            inputDoPlayer(renderObject);
+            inputMovePlayer();
+            inputDoPlayer();
 
-            hitByBomb(renderObject);
+            hitByBomb();
         renderObject.end();
     }
     
@@ -150,7 +150,7 @@ public class MainPlayer extends Entity
      */
     Thread flashThread;
     long id = -1;
-    public void hitByBomb(SpriteBatch renderObject) 
+    public void hitByBomb() 
     {  
         //If player touches explosion
         if(touchesDeadlyBlock() && godmode == false)
@@ -202,7 +202,7 @@ public class MainPlayer extends Entity
      */
     
     
-    private void inputMovePlayer(SpriteBatch renderObject)
+    private void inputMovePlayer()
     {
         String moveCommand;
         float cameraSpeed = 2.51f * speed;
@@ -383,7 +383,7 @@ public class MainPlayer extends Entity
     /**
      * Action the player can make like placing a bomb
      */
-    private void inputDoPlayer(SpriteBatch renderObject)
+    private void inputDoPlayer()
     {        
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
