@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package gui.screen;
+import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -21,7 +22,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
@@ -29,13 +29,10 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import java.io.IOException;
-import java.net.ConnectException;
 import java.net.ServerSocket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.Scanner;
+import java.net.Socket;
 import networkClient.Client;
+import networkServer.Lobby;
 import networkServer.Server;
 
 
@@ -44,13 +41,16 @@ import networkServer.Server;
  * @author pl0614
  */
 public class HostScreen implements Screen
-{
+ {
     //Objects
     private Stage stage;
     private Table rootTable;
     private Stack stack;
     
     private int maximumplayer;
+   private int clientsConnectionSize;
+   private int hostButtonClickCounter;// because there was and error while having gamescreen , it was possible to click the button
+
     
     //Buttons
     private TextField maxplayer;
@@ -70,8 +70,10 @@ public class HostScreen implements Screen
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
+        maximumplayer = 1;
+        hostButtonClickCounter = 0;
         Constants.MAXPLAYERS = maximumplayer;
-        
+     
 
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -91,6 +93,7 @@ public class HostScreen implements Screen
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
         
+        
         /**------------------------BUTTON POSITION------------------------**/
         rootTable = new Table();
         rootTable.setFillParent(true);
@@ -100,36 +103,40 @@ public class HostScreen implements Screen
         
         //Add plus button
         addMaxPlayer = new TextButton("+", skin);
-        stackTable.add(addMaxPlayer).width(40).padTop(5).expandX();
+        stackTable.add(addMaxPlayer).width(40).expandX();
         
         //Add Textfield to screen
         maxplayer = new TextField("", skin);
-        stackTable.add(maxplayer).width(70).expandX();
+        stackTable.add(maxplayer).width(200).expandX();
         
         //Add minus button
         reduceMaxPlayer = new TextButton("-",skin);
-        stackTable.add(reduceMaxPlayer).width(40).padTop(5).expandX();
+        stackTable.add(reduceMaxPlayer).width(40).padLeft(10).expandX();
         stackTable.row();
         
         //Add host button to screen
         hostbutton = new TextButton("Host", textButtonStyle);
-        stackTable.add(hostbutton).padTop(50);
+        stackTable.add(hostbutton).padTop(50).center();
         stackTable.row();
         
         //Stack settings
         stack.setPosition(287, 227);
-        stack.setWidth(200);
+        stack.setWidth(300);
         
         //End
         stack.add(stackTable);
         stage.addActor(rootTable);
         stage.addActor(stack);
+        
+        maxplayer.setText("Maxplayer = "+" "+maximumplayer);
+        
   
         
         
         
       addMaxPlayer.addListener(new ChangeListener() 
         {
+         
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {    
@@ -171,9 +178,10 @@ public class HostScreen implements Screen
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
-                if( maximumplayer <= 4)
-              {if(maximumplayer >1)
-              {
+                if( maximumplayer <= 4 & maximumplayer> 1)
+                {
+                
+              
                 //Add click musik
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
@@ -195,7 +203,7 @@ public class HostScreen implements Screen
             e.printStackTrace();
             System.exit(1);
         }
-              } 
+              
               }else
               {
                   
@@ -212,25 +220,44 @@ public class HostScreen implements Screen
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
+                
+                if(hostButtonClickCounter <1){
+                    hostButtonClickCounter++;
+                Constants.SERVERIP = "localhost";
                 //Add click musik
                 Constants.MAXPLAYERS = maximumplayer;
+                System.out.println( Constants.MAXPLAYERS);
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);      
                 
                 try 
             {
                 // try to start the server and connect with it
+                
                 Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);
                 client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                 client.connectToServer();
+                server.OpenLobby();
                 game.setScreen(new GameScreen());
+
+                
+                clientsConnectionSize = Server.getClientList().size();
+
+               if(  (clientsConnectionSize==maximumplayer))
+               {
+                   
+                   server.startGame();
+               } 
+                
                 
              
             
             }catch(Exception e) 
             {
+          
             System.err.println("ERROR: Something went wrong on creating the server: " +e);
             e.printStackTrace();
+            
             
             
             System.exit(1);
@@ -257,7 +284,7 @@ public class HostScreen implements Screen
             //Initialise server object
            
             
-           
+        
            
             
            
@@ -270,6 +297,7 @@ public class HostScreen implements Screen
         }
                 
                 
+            }
             }
         });
         
@@ -287,7 +315,7 @@ public class HostScreen implements Screen
     public void render(float f) 
     {
         //Debug
-        stage.setDebugAll(true);
+      //  stage.setDebugAll(true);
         
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
