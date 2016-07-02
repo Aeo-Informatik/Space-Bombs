@@ -35,10 +35,6 @@ public class MapManager
     //Constuctor
     public MapManager(OrthographicCamera camera)
     {
-//        Parameters params = new Parameters();
-//        params.textureMinFilter = TextureFilter.Nearest;
-//        params.textureMagFilter = TextureFilter.Nearest;
-        
         this.camera = camera;
         this.tiledMap = new TmxMapLoader().load(Constants.MAPPATH);
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);

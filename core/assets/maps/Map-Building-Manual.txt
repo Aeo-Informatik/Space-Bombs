@@ -2,8 +2,10 @@ Blocks must have specified propeties for:
 
 //MAP LAYERS
 1) Bombs
-2) Blocks
-3) Floor
+2) Items
+3) Blocks
+4) Floor
+5) Background
 
 //MUST BE INCLUDED
 Spawn player:
@@ -19,3 +21,4 @@ Ghost Unpassabel = ghost-blocked
 Undestroyable = undestructable
 Deadly = deadly
 Tells player that there is a bomb = bomb
+Item spawn = Item-Spawner

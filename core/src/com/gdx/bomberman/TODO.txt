@@ -55,5 +55,4 @@ Enemy teleports himself in online mode due to laggs --> Vector2.interpolation co
 On some plattforms the camera is slower then the player ? (maybe framerate problems)
 Game Icon isn't shown on mac because of different size preferences 128x128
 White bars when walking with player. The problem is called "bleeding".
-Solution: https://thekemiren.blogspot.de/2014/07/tile-bleeding-in-libgdx-using-tiled.html
-http://www.java-gaming.org/index.php?topic=29543.0
+Solution: Dont make 32x32 textures but 34x34 ones

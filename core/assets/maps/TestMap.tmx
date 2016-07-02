@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="120" height="60" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32" tilecount="32" columns="4">
+<map version="1.0" orientation="orthogonal" width="120" height="60" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32">
   <image source="../blocks/map_tiles.png" width="128" height="256"/>
   <tile id="0">
    <properties>
@@ -178,14 +178,54 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="33" name="background" tilewidth="34" tileheight="34">
+  <image source="../blocks/background.png" width="136" height="256"/>
+  <tile id="2">
+   <properties>
+    <property name="Item-Spawner" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Spawn-P2" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="Spawn-P3" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Spawn-P4" value=""/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="Spawn-P1" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="ghost-blocked" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Background" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6GzUv8mZ2MPSFg1VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV9fUDrN6gTg==
+  </data>
+ </layer>
  <layer name="Floor" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt2TsKw0AMQEGlzOcCuf9Fzdap7MAaHjOwpRo9VO0MAAAAAAAAANzjccNjn7Xv95xv9L0w8xp9d3O/bfq26dumb5u+bfq26dumb5u+bfq26dumb9va95W/gn9m2Mf9tunbpm+bvm36tunbpm+bvm36tunbpm+bvm1r35853+jK/8Jz9N3N/QIAAAAAAAD8OgBmxAPo
+   eJzt1jkKwzAUQEGdJSHL/U/oIqUbW4XsPGZAjeBXDy1jAAAAAAAAAMA1Hhcs1tG3Td82fdv0bdO3Td82fdv0bdO37WiT58l9fe/B+W2b6fOenNN3vbNtPuN3J78mZvVdb6bPd3JO3/W8v21Hm/g//yfnt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9AUAAAAAAADY2wDfrm/K
   </data>
  </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt2zEOwjAQRUETcQDqALn/MWmMFKVJ5Y35jKWR03mjV+/SWlsAAAAAAAACrf1+9nsrenc7vLsWvQtJXhPMMNMcye7dY/c92tX/nO596Ft59n33czDGlX3RF33R91/pm03fbPpm0zebvtn0zaZvNn2z6ZtN32z6ZtM3m77Z9M2mbzZ9s+mbTd9s+mbTN5u+eUbsL9xOfI/9hVpVO0f2j+rMsrc3yxzwS+zvAwAAAADAPD4dUDWL
+   eJzt20EJADAMBMHaqX+DFdB/AssMnIHsO+cAAAAAAAAAwI67MOZM31vfWfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dvm/wgAAAAAAADg9wAdbxHx
   </data>
  </layer>
  <layer name="Items" width="120" height="60">
@@ -195,7 +235,7 @@
  </layer>
  <layer name="Bombs" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt0rEJADAMA0EFsv/M7l2ktSF38L0KJQAAAAAAAAAAAAAAAAAAAAAAAADwj/MIOr/Y5U4PAAAAAAAAABhW6qsADQ==
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
   </data>
  </layer>
 </map>
