@@ -43,6 +43,7 @@ A font diplaying "Winner" or something like that
 2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
-
+(Items and enemyPlayer dont get deleted instantly from arraylist)
+All enemy players blink if one of them has been hit
 //White bars when walking with player. The problem is called "bleeding".
 //Solution: Dont make 32x32 textures but 34x34 ones

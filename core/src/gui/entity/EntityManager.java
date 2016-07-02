@@ -127,18 +127,7 @@ public class EntityManager {
             if(enemies.get(i).getLife() <= 0)
             {
                 enemies.get(i).onDeath();
-                
-                //Try to remove object till it succeed
-                try
-                {
-                    while(enemies.get(i).getPlayerId() != -100)
-                    {
-                        enemies.removeIndex(i);
-                    }
-                }catch(IndexOutOfBoundsException e)
-                {
-                    
-                }
+                enemies.removeIndex(i);
             }
         }
         
