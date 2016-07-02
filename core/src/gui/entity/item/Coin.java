@@ -33,7 +33,7 @@ public class Coin extends Item{
     }
    
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {
         //Render item
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();

@@ -25,6 +25,7 @@ public abstract class Entity
     protected TiledMapTileLayer blockLayer;
     protected TiledMapTileLayer bombLayer;
     protected EntityManager entityManager;
+    protected SpriteBatch renderObject;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
@@ -36,9 +37,10 @@ public abstract class Entity
         this.blockLayer = map.getBlockLayer();
         this.bombLayer = map.getBombLayer();
         this.entityManager = entityManager;
+        this.renderObject = new SpriteBatch();
     }
     
-    public void render(SpriteBatch renderObject){}
+    public void render(){}
     
 
     /**------------------COLLISION FUNCTIONS------------------**/

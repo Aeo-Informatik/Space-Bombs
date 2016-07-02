@@ -27,7 +27,7 @@ public class BombUp extends Item{
     }
    
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {   
         if(entityManager.getMainPlayer() != null)
         {

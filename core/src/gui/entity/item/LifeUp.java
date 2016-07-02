@@ -27,7 +27,7 @@ public class LifeUp extends Item{
     }
    
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {     
         //Check if main player is alive
         if(entityManager.getMainPlayer() != null)

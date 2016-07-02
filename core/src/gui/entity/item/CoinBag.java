@@ -31,7 +31,7 @@ public class CoinBag extends Item{
     }
    
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {
         if(isMainPlayerCollectingItem() == true)
         {

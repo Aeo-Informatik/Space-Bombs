@@ -119,16 +119,19 @@ public class MainPlayer extends Entity
      * @param sb 
      */
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {
-        //Adding direction to position
-        pos.add(this.direction);
-        
-        //Keyboard interception
-        inputMovePlayer(renderObject);
-        inputDoPlayer(renderObject);
-        
-        hitByBomb(renderObject);
+        renderObject.setProjectionMatrix(camera.combined);
+        renderObject.begin();
+            //Adding direction to position
+            pos.add(this.direction);
+
+            //Keyboard interception
+            inputMovePlayer(renderObject);
+            inputDoPlayer(renderObject);
+
+            hitByBomb(renderObject);
+        renderObject.end();
     }
     
     

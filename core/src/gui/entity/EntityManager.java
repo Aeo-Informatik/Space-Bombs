@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.map.MapManager;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gui.entity.item.Item;
 import gui.entity.item.*;
 
@@ -23,12 +22,7 @@ public class EntityManager {
     
     //Variables & Objects
     private OrthographicCamera camera;
-    private SpriteBatch renderMainPlayer = new SpriteBatch();
-    private SpriteBatch renderEnemyPlayer = new SpriteBatch();
-    private SpriteBatch renderSpectator = new SpriteBatch();
-    private SpriteBatch renderOther = new SpriteBatch();
-    private SpriteBatch renderItem = new SpriteBatch();
-    
+
     //Array from libgdx is much faster in comparison to an arraylist
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
@@ -51,71 +45,54 @@ public class EntityManager {
 
     public void render()
     {
-        //Lets spriteBatch use the coordinate system specified by camera instead of the default one. This has to be done 
-        //because both of the coordinate systems are different and the camera.combined will do the maths for you.
-        renderMainPlayer.setProjectionMatrix(camera.combined);
-        renderEnemyPlayer.setProjectionMatrix(camera.combined);
-        renderSpectator.setProjectionMatrix(camera.combined);
-        renderOther.setProjectionMatrix(camera.combined);
-        renderItem.setProjectionMatrix(camera.combined);
-        
+
         /**--------------------PLAYER RENDERER--------------------**/
         //Render every enemy object in list
         for(EnemyPlayer enemy: enemies)
         {
-            renderEnemyPlayer.begin();
-                enemy.render(renderEnemyPlayer);
-            renderEnemyPlayer.end();
+            enemy.render();
         }
         
         //Render main player
         if(mainPlayer != null)
         {            
-            renderMainPlayer.begin();
-                mainPlayer.render(renderMainPlayer);
-            renderMainPlayer.end();
-        
+            mainPlayer.render();
+
         //If main player equals null render spectator
         }else if(spectator != null)
         {
-            renderSpectator.begin();
-                spectator.render(renderSpectator);
-            renderSpectator.end();
+            spectator.render();
         }          
         
         /**--------------------MAP OBJECTS RENDERER--------------------**/
-        renderOther.begin();
-            //Render bomb in main player list
-            for (Bomb bomb: bombArray)
-            {
-                //It doesnt need a renderObject because the textures are dynamically 
-                //set into the tile layer without beeing drawn
-                bomb.render(renderOther);
-            }
+        //Render bomb in main player list
+        for (Bomb bomb: bombArray)
+        {
+            //It doesnt need a renderObject because the textures are dynamically 
+            //set into the tile layer without beeing drawn
+            bomb.render();
+        }
 
-            //Render bomb in enemy player list
-            for (Bomb bomb: bombArrayEnemy)
-            {
-                bomb.render(renderOther);
-            }                       
-        renderOther.end();
-        
-        renderItem.begin();
-            for(Item item: itemArray)
-            {
-                item.render(renderItem);
-            }
+        //Render bomb in enemy player list
+        for (Bomb bomb: bombArrayEnemy)
+        {
+            bomb.render();
+        }                       
 
-            for(Item item: tombs)
-            {
-                item.render(renderItem);
-            }
+        for(Item item: itemArray)
+        {
+            item.render();
+        }
 
-            for (Item item: coins)
-            {
-                item.render(renderItem);
-            }
-        renderItem.end();
+        for(Item item: tombs)
+        {
+            item.render();
+        }
+
+        for (Item item: coins)
+        {
+            item.render();
+        }
     }
     
     
@@ -221,7 +198,7 @@ public class EntityManager {
                     //If cell has attribute Spawn-P + playerId spawn enemy player there
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
-                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, map, bombArrayEnemy, this);
+                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, map, bombArrayEnemy, this, camera);
                         enemies.add(enemyPlayer);
                     }
                 }catch(NullPointerException e)
