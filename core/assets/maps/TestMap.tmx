@@ -1,231 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="120" height="60" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="Map Tiles" tilewidth="32" tileheight="32">
-  <image source="../blocks/map_tiles.png" width="128" height="256"/>
-  <tile id="0">
-   <properties>
-    <property name="" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="deadly" value=""/>
-    <property name="undestructable" value=""/>
-   </properties>
-  </tile>
+ <tileset firstgid="1" name="Map-Blocks" tilewidth="34" tileheight="34">
+  <image source="../blocks/map_tiles.png" width="136" height="256"/>
   <tile id="2">
    <properties>
-    <property name="" value=""/>
-    <property name="blocked" value=""/>
+    <property name="Item-Spawner" value=""/>
    </properties>
   </tile>
-  <tile id="3">
+  <tile id="4">
+   <properties>
+    <property name="Spawn-P2" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="Spawn-P3" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Spawn-P4" value=""/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="Spawn-P1" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
    <properties>
     <property name="blocked" value=""/>
     <property name="ghost-blocked" value=""/>
     <property name="undestructable" value=""/>
    </properties>
   </tile>
-  <tile id="4">
-   <properties>
-    <property name="" value=""/>
-    <property name="blocked" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="" value=""/>
-    <property name="blocked" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="" value=""/>
-    <property name="blocked" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="" value=""/>
-    <property name="blocked" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="Spawn-P2" value=""/>
-   </properties>
-  </tile>
   <tile id="9">
    <properties>
-    <property name="Spawn-P3" value=""/>
+    <property name="blocked" value=""/>
+    <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="10">
    <properties>
-    <property name="Spawn-P4" value=""/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="Spawn-P1" value=""/>
+    <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="12">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="13">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="14">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="15">
    <properties>
     <property name="blocked" value=""/>
-    <property name="undestructable" value=""/>
    </properties>
   </tile>
   <tile id="16">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="17">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="18">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="19">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="20">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="21">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="22">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="23">
    <properties>
-    <property name="" value=""/>
     <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="24">
    <properties>
-    <property name="Item-Spawner" value=""/>
-   </properties>
-  </tile>
-  <tile id="25">
-   <properties>
-    <property name="deadly" value=""/>
-    <property name="undestructable" value=""/>
+    <property name="blocked" value=""/>
    </properties>
   </tile>
   <tile id="26">
    <properties>
-    <property name="deadly" value=""/>
-    <property name="undestructable" value=""/>
-   </properties>
-  </tile>
-  <tile id="27">
-   <properties>
-    <property name="deadly" value=""/>
-    <property name="undestructable" value=""/>
-   </properties>
-  </tile>
-  <tile id="28">
-   <properties>
-    <property name="deadly" value=""/>
-    <property name="undestructable" value=""/>
-   </properties>
-  </tile>
-  <tile id="29">
-   <properties>
-    <property name="deadly" value=""/>
-    <property name="undestructable" value=""/>
+    <property name="blocked" value=""/>
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="33" name="background" tilewidth="34" tileheight="34">
-  <image source="../blocks/background.png" width="136" height="256"/>
-  <tile id="2">
-   <properties>
-    <property name="Item-Spawner" value=""/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="Spawn-P2" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="Spawn-P3" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="Spawn-P4" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="Spawn-P1" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="blocked" value=""/>
-    <property name="ghost-blocked" value=""/>
-    <property name="undestructable" value=""/>
-   </properties>
-  </tile>
+ <tileset firstgid="29" name="background-credits" tilewidth="34" tileheight="34">
+  <image source="../blocks/background-credits.png" width="136" height="256"/>
  </tileset>
  <layer name="Background" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJztw0ENAAAMA6GzUv8mZ2MPSFg1VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV9fUDrN6gTg==
+   eJzt2rENwDAIBEB7EDth/yXjIhtAJCJdceW/hChhjjEmAAAAAAAA/Mg69nEn8pHI862rWQ+1oqhnN5gFAAAAAACAvCjqcR/sqWov7oM9Zf834s2uBrMAAAAAAAAAAAAAAADAnzzdBR55
   </data>
  </layer>
  <layer name="Floor" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt1jkKwzAUQEGdJSHL/U/oIqUbW4XsPGZAjeBXDy1jAAAAAAAAAMA1Hhcs1tG3Td82fdv0bdO3Td82fdv0bdO37WiT58l9fe/B+W2b6fOenNN3vbNtPuN3J78mZvVdb6bPd3JO3/W8v21Hm/g//yfnt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9AUAAAAAAADY2wDfrm/K
+   eJzt1jsKgDAURcGg+Nn/ii3sxERBkMdlBmwSu8NL0hoAAAAAAAAA/Gv68FGfvtn0zaZvtmuz+Watt0595jfbqN/+sE99vXZrO8/kbfAP9Y3mc3nYpz73bzbv52zmN5u+2fTNpi8AAAAAAAAAAAAAAAAAvHMAOmUB2g==
   </data>
  </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt20EJADAMBMHaqX+DFdB/AssMnIHsO+cAAAAAAAAAwI67MOZM31vfWfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dumb5u+bfq26dvm/wgAAAAAAADg9wAdbxHx
+   eJzt2TEKgEAMAMFrxSf4/3+KYGGnKIguM5Dq0m0TuDEAAAAAAAAA4F3Tg+H77nbS9x/0bdO3Td+2Y6f5ZHd7X/bR9x/0bdO3Td82fdvcz236tunbpm+b/yMAAAAAAAAAAAAAAAAAuGYFRA8DdQ==
   </data>
  </layer>
  <layer name="Items" width="120" height="60">
