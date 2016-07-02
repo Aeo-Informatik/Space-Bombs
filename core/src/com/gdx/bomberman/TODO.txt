@@ -1,11 +1,8 @@
 //General
 Add sound effects to the game & menu.
 
-
-
 //Bomb
 1) To be able to push the bomb
-
 
 //Player
 6) A hub navigation bar a la minecraft for bomb/item selection
@@ -15,26 +12,21 @@ Add sound effects to the game & menu.
 11) Better bomb animation with fuse going down
 13) Hud texture à la minecraft for bomb selection
 15) Changing the error background texture in joinscreen
-different colored coins 
+16) different colored coins 
+17) Game Icon in 128x128 for mac
 
 //Items
 Add items to the game:
-coin bags
 Speed Upgrade
 
-
-
 //Screens
-MenuScreen:
-Join, Host, Options, Help, Exit
-
 Option Screen:
 fullscreen, music volume, sound volume
 
 Join Screen:
 ip address bar, join button, (optional) list of available servers
 
-Host with options Screen:
+Host Screen:
 Map Selection, max player number, list of already connected users, start button
 
 Help Screen:
@@ -51,8 +43,6 @@ A font diplaying "Winner" or something like that
 2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
-Enemy teleports himself in online mode due to laggs --> Vector2.interpolation could be a solution
-On some plattforms the camera is slower then the player ? (maybe framerate problems)
-Game Icon isn't shown on mac because of different size preferences 128x128
-White bars when walking with player. The problem is called "bleeding".
-Solution: Dont make 32x32 textures but 34x34 ones
+
+//White bars when walking with player. The problem is called "bleeding".
+//Solution: Dont make 32x32 textures but 34x34 ones
