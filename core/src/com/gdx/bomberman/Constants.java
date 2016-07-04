@@ -33,6 +33,10 @@ public class Constants
     public static float DEFAULTCAMERASPEED = 10f;
     public static float DEFAULTENTITYSPEED = 1.5f;
     
+    //Entity config
+    public static float DEFAULTCAMERASPEED = 10.0f;
+    public static float DEFAULTENTITYSPEED = 1.5f;
+    
     //Item config
     public static float ITEMTIMER = 9999999;
     public static int MAXBOMBS = 5;

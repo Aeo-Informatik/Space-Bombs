@@ -373,12 +373,12 @@ public abstract class Entity
         return this.entitySpeed;
     }
     
-    public void setCameraSpeed(float cameraSpeed)
+    public void setCameraFollowSpeed(float cameraSpeed)
     {
         this.cameraSpeed = cameraSpeed;
     }
     
-    public float getCameraSpeed()
+    public float getCameraFollowSpeed()
     {
         return this.cameraSpeed;
     }
