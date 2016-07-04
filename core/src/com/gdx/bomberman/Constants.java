@@ -30,10 +30,6 @@ public class Constants
     public static float DEFAULTZOOM = 0.8f;
 
     //Entity config
-    public static float DEFAULTCAMERASPEED = 10f;
-    public static float DEFAULTENTITYSPEED = 1.5f;
-    
-    //Entity config
     public static float DEFAULTCAMERASPEED = 10.0f;
     public static float DEFAULTENTITYSPEED = 1.5f;
     
