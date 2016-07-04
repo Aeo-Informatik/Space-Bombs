@@ -42,7 +42,9 @@ public class LifeUp extends Item{
         if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
         {
             return true;
+        }else
+        {
+            return false;
         }
-        return false;
     }
 }

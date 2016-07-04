@@ -40,7 +40,9 @@ public class RangeUp extends Item{
         if(entityManager.getMainPlayer().getBombRange()< Constants.MAXBOMBRANGE)
         {
             return true;
+        }else
+        {
+            return false;
         }
-        return false;
     }
 }

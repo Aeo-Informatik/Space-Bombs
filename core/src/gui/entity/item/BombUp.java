@@ -38,10 +38,12 @@ public class BombUp extends Item{
     @Override
     public boolean canGetCollectedByMainPLayer()
     {
-        if(entityManager.getMainPlayer().getMaxBombPlacing()< Constants.MAXBOMBS)
+        if(entityManager.getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
         {
             return true;
+        }else
+        {
+            return false;
         }
-        return false;
     }
 }

@@ -42,7 +42,9 @@ public class SpeedUp extends Item{
         if(entityManager.getMainPlayer().getSpeed()< Constants.MAXSPEED)
         {
             return true;
+        }else
+        {
+            return false;
         }
-        return false;
     }
 }
