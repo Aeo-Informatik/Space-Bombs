@@ -53,14 +53,14 @@ public class HostScreen implements Screen
 
     
     //Buttons
-    private TextField maxplayer;
+    private Label maxplayer;
     private TextButton hostbutton;
     private TextButton addMaxPlayer;
     private TextButton reduceMaxPlayer;
     
 
     private TextButton backButton;
-    private Label errorLabel;
+    private Label playerLabel;
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
@@ -83,9 +83,10 @@ public class HostScreen implements Screen
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         fontOptions.size = 14;
         labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
-        labelStyle.fontColor = Color.RED;
-        labelStyle.background = new TextureRegionDrawable(new TextureRegion(new Texture("menu/textBackground.png")));
+        labelStyle.fontColor = Color.BLUE;
         
+   
+ 
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         fontOptions.size = 11;
         textButtonStyle.font = TextureManager.menuFont.generateFont(fontOptions);
@@ -94,41 +95,50 @@ public class HostScreen implements Screen
         textButtonStyle.over = skin.getDrawable("button_checked");
         
         
-        /**------------------------BUTTON POSITION------------------------**/
+        /**------------------------POSITION------------------------**/
         rootTable = new Table();
         rootTable.setFillParent(true);
         
         Table stackTable = new Table();
         stackTable.setFillParent(true);
         
+                stackTable.row();
+
+        //Add playerlabel
+        playerLabel =  new Label("MaxPlayer:",labelStyle);
+        playerLabel.setVisible(true);
+        stackTable.add(playerLabel).expandX();
+        stackTable.row();
+        
+        //Add Label to screen
+        maxplayer = new Label("1", labelStyle);
+        stackTable.add(maxplayer).width(15).padTop(15).expandX().padRight(20);
+        stackTable.row();
+        
         //Add plus button
         addMaxPlayer = new TextButton("+", skin);
-        stackTable.add(addMaxPlayer).width(40).expandX();
-        
-        //Add Textfield to screen
-        maxplayer = new TextField("", skin);
-        stackTable.add(maxplayer).width(200).expandX();
+        stackTable.add(addMaxPlayer).width(40).expandX().padRight(180).padTop(35);         
         
         //Add minus button
         reduceMaxPlayer = new TextButton("-",skin);
-        stackTable.add(reduceMaxPlayer).width(40).padLeft(10).expandX();
+        stackTable.add(reduceMaxPlayer).width(40).padLeft(10).expandX().padRight(110).padTop(35);
         stackTable.row();
         
         //Add host button to screen
         hostbutton = new TextButton("Host", textButtonStyle);
-        stackTable.add(hostbutton).padTop(50).center();
-        stackTable.row();
+        stackTable.add(hostbutton).padTop(109).expandX().padLeft(-26);
+      
         
         //Stack settings
-        stack.setPosition(287, 227);
-        stack.setWidth(300);
+        stack.setPosition(300, 185);
+        stack.setWidth(240);
         
         //End
         stack.add(stackTable);
         stage.addActor(rootTable);
         stage.addActor(stack);
         
-        maxplayer.setText("Maxplayer = "+" "+maximumplayer);
+       
         
   
         
@@ -147,7 +157,7 @@ public class HostScreen implements Screen
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
                 maximumplayer = maximumplayer +1;
-                maxplayer.setText("Maxplayer = "+" "+ maximumplayer);
+                maxplayer.setText(""+maximumplayer);
                 
                 //Wait till sound is done
                 try 
@@ -168,7 +178,7 @@ public class HostScreen implements Screen
               }else
               {
                   
-               maxplayer.setText("reached maximum player");   
+               
               }
                     
             }
@@ -186,8 +196,7 @@ public class HostScreen implements Screen
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
                 maximumplayer = maximumplayer -1;
-                maxplayer.setText("Maxplayer = "+" "+ maximumplayer);
-                
+                maxplayer.setText(""+maximumplayer);                
                 //Wait till sound is done
                 try 
                 {
@@ -207,7 +216,7 @@ public class HostScreen implements Screen
               }else
               {
                   
-               maxplayer.setText("reached minimum player");   
+           
               }
                     
             }
@@ -315,7 +324,7 @@ public class HostScreen implements Screen
     public void render(float f) 
     {
         //Debug
-      //  stage.setDebugAll(true);
+       //stage.setDebugAll(true);
         
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
