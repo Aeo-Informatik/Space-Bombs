@@ -23,13 +23,14 @@ import gui.map.MapManager;
  */
 public class EnemyPlayer extends Entity
 {
-    //General variables
-    private String lastMovementKeyPressed = "UP";
-    private int playerId = 0;
+    //Objects
     private AnimEffects animEffects = new AnimEffects();
-    private boolean godmode = false; //DO NOT CHANGE
+    
+    //Variables
+    private String lastMovementKeyPressed = "UP";
+    private boolean godmode = false;
     private float godModeTimer = 0;
-    private OrthographicCamera camera;
+    private int playerId = 0;
     
     //Server render variables
     private boolean executeMovePlayer = false;
@@ -51,11 +52,10 @@ public class EnemyPlayer extends Entity
     //Constructor
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, OrthographicCamera camera) 
     {
-        super(pos, direction, map, entityManager);
+        super(pos, direction, map, entityManager, camera);
         
         //Save variables & objects as global
         this.playerId = playerId;
-        this.camera = camera;
         
         //Set player id textures
         switch(playerId)
@@ -193,7 +193,7 @@ public class EnemyPlayer extends Entity
                 {
                     //Set the speed the texture moves in x and y axis
                     //this is the method inherited from Entity.java class
-                    setDirection(-150, 0);
+                    goLeft();
 
                     //Draw the walking animation
                     renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
@@ -203,7 +203,7 @@ public class EnemyPlayer extends Entity
                 }else
                 {
                     //Stop player
-                    setDirection(0,0);
+                    stopMoving();
                     renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
                     lastMovementKeyPressed = "LEFT";
                 }
@@ -212,13 +212,13 @@ public class EnemyPlayer extends Entity
             case "RIGHT":
                 if(!collidesRight() && !collidesRightBomb())
                 {
-                    setDirection(150, 0);  
+                    goRight();
                     renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
                     lastMovementKeyPressed = "RIGHT";
                 }else
                 {
                     //Stop player
-                    setDirection(0,0);
+                    stopMoving();
                     renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
                     lastMovementKeyPressed = "RIGHT";
                 }
@@ -227,13 +227,13 @@ public class EnemyPlayer extends Entity
             case "UP":
                 if(!collidesTop() && !collidesTopBomb())
                 {
-                    setDirection(0, 150);
+                    goUp();
                     renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
                     lastMovementKeyPressed = "UP";
                 }else
                 {
                     //Stop player
-                    setDirection(0,0);
+                    stopMoving();
                     renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
                     lastMovementKeyPressed = "UP";
                 }
@@ -242,13 +242,13 @@ public class EnemyPlayer extends Entity
             case "DOWN":
                 if(!collidesBottom() && !collidesBottomBomb())
                 {
-                    setDirection(0, -150);
+                    goDown();
                     renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
                     lastMovementKeyPressed = "DOWN";
                 }else
                 {
                     //Stop player
-                    setDirection(0,0);
+                    stopMoving();
                     renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
                     lastMovementKeyPressed = "DOWN";
                 }
@@ -272,11 +272,10 @@ public class EnemyPlayer extends Entity
         this.stopY = y;
         
         //Sets the texture to no movement
-        setDirection(0, 0);
+        stopMoving();
             
         //Sets the positon where to draw the player.
         pos.set(x, y);
-        pos.add(this.direction);
         
         //Draws the player if he stands still
         switch(lastMovementKeyPressed)

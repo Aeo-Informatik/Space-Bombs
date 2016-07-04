@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.item;
+package gui.item;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -27,8 +25,8 @@ public class Coin extends Item{
     private AnimEffects animEffects = new AnimEffects();
     private int value;
 
-    public Coin(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager, int value) {
-        super(cellX, cellY, direction,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
+    public Coin(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
+        super(cellX, cellY,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
         this.value = value;
     }
    
@@ -50,8 +48,6 @@ public class Coin extends Item{
             long id = AudioManager.singleCoin.play();
             AudioManager.singleCoin.setVolume(id, Constants.SOUNDVOLUME);
         }
-        
-        super.itemDeleteThroughBomb();
     }
     
     @Override
@@ -61,12 +57,6 @@ public class Coin extends Item{
         {
             entityManager.getMainPlayer().setCoins((entityManager.getMainPlayer().getCoins()+ value));
         }
-    }
-    
-    @Override
-    public boolean canGetCollectedByMainPLayer()
-    {
-        return true;
     }
     
 

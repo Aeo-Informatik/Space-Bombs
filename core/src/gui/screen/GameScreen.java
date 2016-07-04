@@ -59,6 +59,8 @@ public class GameScreen implements Screen{
         this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ProcessData(entityManager);
         this.counterHud = new CounterHud(renderHud, entityManager);
+        
+        this.camera.zoom = Constants.DEFAULTZOOM;
     }
     
     

@@ -24,7 +24,6 @@ import java.io.IOException;
 public class Spectator extends Entity
 {
     //General objects and variables
-    private OrthographicCamera camera;
     private boolean freeCam = true;
     private int currentPlayerIndex = 0;
     private EnemyPlayer currentEnemyPlayer;
@@ -33,10 +32,9 @@ public class Spectator extends Entity
     //Constructor
     public Spectator(Vector2 pos, Vector2 direction, OrthographicCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
-        super(pos, direction, map, entityManager);
+        super(pos, direction, map, entityManager, camera);
         
         this.blockLayer = map.getBlockLayer();
-        this.camera = camera;
         this.enemies = enemies;
         this.renderObject.setProjectionMatrix(camera.combined);
     }
@@ -77,7 +75,7 @@ public class Spectator extends Entity
             {
                 //Set the speed the texture moves in x and y axis
                 //This will be added to the position every render cycle
-                setDirection(-150, 0);
+                goLeft();
 
                 //Move camera x,y
                 camera.translate( -1 * cameraSpeed,0);
@@ -85,7 +83,7 @@ public class Spectator extends Entity
             }else
             {
                 camera.translate(0, 0);
-                setDirection(0,0);
+                stopMoving();
             }
              
         /*------------------WALKING RIGHT------------------*/
@@ -93,13 +91,13 @@ public class Spectator extends Entity
         {
             if(!collidesRight())
             {
-                setDirection(150, 0);
+                goRight();
                 camera.translate(cameraSpeed,0);
                 
             }else
             {
                 camera.translate(0, 0);
-                setDirection(0,0);
+                stopMoving();
             }
             
         /*------------------WALKING UP------------------*/
@@ -107,13 +105,13 @@ public class Spectator extends Entity
         {
             if(!collidesTop())
             {
-                setDirection(0, 150);
+                goUp();
                 camera.translate(0, cameraSpeed);
                 
             }else
             {
                 camera.translate(0, 0);
-                setDirection(0,0);
+                stopMoving();
             }
             
         /*------------------WALKING DOWN------------------*/
@@ -122,19 +120,19 @@ public class Spectator extends Entity
             if(!collidesBottom())
             {
                 camera.translate(0, -1 * cameraSpeed);
-                setDirection(0, -150);
+                goDown();
                 
             }else
             {
                 camera.translate(0, 0);
-                setDirection(0,0);
+                stopMoving();
             }
             
         /*------------------NO MOVEMENT------------------*/    
         }else
         {
             camera.translate(0, 0);
-            setDirection(0,0);
+            stopMoving();
         }
     }
     

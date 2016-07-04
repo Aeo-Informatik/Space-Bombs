@@ -4,36 +4,38 @@
  * and open the template in the editor.
  */
 
-package gui.entity.item;
+package gui.item;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
-import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 /**
  *
  * @author cb0703
  */
-public abstract class Item extends Entity{
+public class Item 
+{
     
     //Variables
     protected boolean collected = false;
     protected TextureRegion emptyBlock;
     protected int cellX, cellY;
+    protected EntityManager entityManager;
+    protected MapManager map;
     
     //Constructor
-    public Item(int cellX, int cellY, Vector2 direction, TextureRegion itemTexture, MapManager map, EntityManager entityManager) 
+    public Item(int cellX, int cellY, TextureRegion itemTexture, MapManager map, EntityManager entityManager) 
     {
-        super(new Vector2(cellX, cellY), direction, map, entityManager);
         this.emptyBlock = TextureManager.emptyBlock;
         this.cellX = cellX;
         this.cellY = cellY;
+        this.entityManager = entityManager;
+        this.map = map;
         
         //Render Item once
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
@@ -41,21 +43,6 @@ public abstract class Item extends Entity{
         map.getItemLayer().setCell(cellX, cellY, cell);
     }
     
-    public void render()
-    {     
-        //Check if main player is alive
-        if(entityManager.getMainPlayer() != null)
-        {
-            if(canGetCollectedByMainPLayer() == true)
-            {
-                if(isMainPlayerCollectingItem() == true)
-                {
-                    itemEffect();
-                }
-            }
-        }
-        itemDeleteThroughBomb();
-    }
     
     /**
      * Check if a player is on this item field.
@@ -71,16 +58,6 @@ public abstract class Item extends Entity{
         return -1;
     }
     
-    
-    public void itemDeleteThroughBomb()
-    {
-        if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT) == true)
-        {
-            
-            collected = true;
-            System.out.println("BUM!");
-        }
-    }
     
     /**
      * Check if id is from main player.
@@ -110,10 +87,16 @@ public abstract class Item extends Entity{
         map.getItemLayer().setCell(cellX, cellY, cellCenter);
     }
     
-    abstract void itemEffect();
-    
-    abstract boolean canGetCollectedByMainPLayer();
+    public void itemEffect()
+    {
+        
+    }
 
+    public void render()
+    {
+        
+    }
+    
     /**--------------------GETTER & SETTER--------------------**/
     public boolean isCollected() 
     {

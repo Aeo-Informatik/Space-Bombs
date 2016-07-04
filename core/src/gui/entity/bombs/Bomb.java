@@ -6,8 +6,8 @@
 
 package gui.entity.bombs;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
@@ -59,9 +59,9 @@ public class Bomb extends Entity
     
     
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
+    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager, OrthographicCamera camera)
     { 
-        super(pos, direction, map, entityManager);
+        super(pos, direction, map, entityManager, camera);
         
         //Needed variables
         this.playerId = playerId;
@@ -174,9 +174,9 @@ public class Bomb extends Entity
         }
     }
     
-    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, EntityManager entityManager)
+    public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, EntityManager entityManager, OrthographicCamera camera)
     { 
-        super(pos, direction, map, entityManager);
+        super(pos, direction, map, entityManager, camera);
         
         //Needed variables
         this.playerId = playerId;

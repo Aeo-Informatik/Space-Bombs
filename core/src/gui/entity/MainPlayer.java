@@ -10,7 +10,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
@@ -35,11 +34,10 @@ public class MainPlayer extends Entity
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
     private float godModeTimer = 0;
-    private boolean godmode = false;
+    private boolean godMode = false;
     private int playerId = 0;
     
     //General objects
-    private OrthographicCamera camera;
     private Array <Bomb> bombArray;
     private AnimEffects animEffects = new AnimEffects();
     
@@ -57,21 +55,18 @@ public class MainPlayer extends Entity
     private int BombRange = 2;
     private float maxZoomOut = 1.5f;
     private float maxZoomIn = 0.5f;
-    private float speed = 1.0f;
     
     //Constructor
     public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
     {
-        super(pos, direction, map, entityManager);
+        super(pos, direction, map, entityManager, camera);
 
-        //Set camera position to players position
+        //Set camera position to player
         camera.position.set(pos.x, pos.y, 0);
-
-        this.camera = camera;
+        
+        //Object setter
         this.playerId = playerId;
         this.bombArray = bombArray;
-        
-        camera.zoom = 0.8f;
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -123,13 +118,20 @@ public class MainPlayer extends Entity
     {
         renderObject.setProjectionMatrix(camera.combined);
         renderObject.begin();
+            
             //Adding direction to position
             pos.add(this.direction);
-
-            //Keyboard interception
+            
+            //Set the camera to follow the player
+            cameraFollowEntity();
+            
+            //Move player actions
             inputMovePlayer();
+            
+            //Special actions
             inputDoPlayer();
 
+            //Hit detection
             hitByBomb();
         renderObject.end();
     }
@@ -144,7 +146,7 @@ public class MainPlayer extends Entity
         entityManager.spawnTombstone((int)(pos.x / Constants.MAPTEXTUREWIDTH),(int)(pos.y / Constants.MAPTEXTUREHEIGHT));
     }
     
-    
+
     /**
      * Player gets hit by bomb
      */
@@ -153,20 +155,28 @@ public class MainPlayer extends Entity
     public void hitByBomb() 
     {  
         //If player touches explosion
-        if(touchesDeadlyBlock() && godmode == false)
+        if(touchesDeadlyBlock() && godMode == false)
         {
+            
+            //Reduce player life
             life -= 1;
-            godmode = true;
+            
+            //Set invulnerability to true
+            godMode = true;
+            
+            //Send playerLife command to server
             client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
             
             System.out.println("Life has been reduced to: " + life);
           
+            //Execute hit sound
             if(id == -1)
             {
                 id = AudioManager.hit.play();
                 AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
             }
-                
+               
+            //Debug
             if(Constants.CLIENTDEBUG)
             {
                 System.out.println("Invulnerability activated");
@@ -177,17 +187,23 @@ public class MainPlayer extends Entity
         }
         
         //Timer for godmode length after hit
-        if(godModeTimer < godModeDuration && godmode == true)
+        if(godModeTimer < godModeDuration && godMode == true)
         {
             godModeTimer += Constants.DELTATIME;
-            //System.out.println("Increasing timer by: " + godModeTimer);
-        }else if(godmode == true)
+            
+        }else if(godMode == true)
         {
-            godmode = false;
+            godMode = false;
             godModeTimer = 0;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
-            flashThread.interrupt();
+            if(flashThread != null)
+            {
+                flashThread.interrupt();
+            }else
+            {
+                System.err.println("ERROR: Someone gave himself godMode!");
+            }
             
             if(Constants.CLIENTDEBUG)
             {
@@ -200,55 +216,47 @@ public class MainPlayer extends Entity
     /**
      * Moves the player if keyboard input is received.
      */
-    
-    
     private void inputMovePlayer()
     {
-        String moveCommand;
-        float cameraSpeed = 2.51f * speed;
-        
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
         {
             if(!collidesLeft() && !collidesLeftBomb())
             {
-                //Set the speed the texture moves in x and y axis
-                //This will be added to the position every render cycle
-                setDirection(-150 * speed, 0);
+                //Smoothly changes the direction
+                goLeft();
 
-                //Move camera x,y
-                camera.translate( -1 * cameraSpeed,0);
-
-                //Draw the walking animation
+                //Draw the player with animation
                 renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
 
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("LEFT") == false)
                 {
+                    //Send current player position to reduce lag
                     client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
                     
-                    //Saves position so that the static image looks in the right direction if player doesnt move
+                    //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "LEFT";
                     
                     //Ensures that stop command gets send only once
                     sendStopOnce = true;
 
-                    //General: moveEnemyPlayer|playerId|direction|target
-                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*";
-
                     //Send data to server
-                    client.sendData(moveCommand);
+                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*");
                 }
 
                 //Ensures that walk command gets send only once
                 sendMoveOnce = "LEFT";
             }else
             {
-                //Stop player
+                //Ensures that stop command gets send only once
                 sendStopOnce = true;
-                setDirection(0,0);
+                
+                //Sets moving direction to 0
+                stopMoving();
+                
+                //Draw the player with animation
                 renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
-                camera.translate(0, 0);
             }
              
         /*------------------WALKING RIGHT------------------*/
@@ -256,28 +264,40 @@ public class MainPlayer extends Entity
         {
             if(!collidesRight() && !collidesRightBomb())
             {
-                setDirection(150* speed, 0);
+                //Smoothly changes the direction
+                goRight();
                 
-                camera.translate(cameraSpeed,0);
-                
+                //Draw the player with animation
                 renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
                 
+                //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("RIGHT") == false)
                 {
+                    //Send current player position to reduce lag
                     client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
                     
+                    //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "RIGHT";
+                    
+                    //Ensures that stop command gets send only once
                     sendStopOnce = true;
-                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*";
-                    client.sendData(moveCommand);
+                    
+                    //Send walk command to server
+                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*");
                 }
+                
+                //Ensures that walk command gets send only once
                 sendMoveOnce = "RIGHT";
             }else
             {
+                //Ensures that stop command gets send only once
                 sendStopOnce = true;
-                setDirection(0,0);
+                
+                //Sets moving direction to 0
+                stopMoving();
+                
+                //Draw the player with animation
                 renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
-                camera.translate(0, 0);
             }
             
         /*------------------WALKING UP------------------*/
@@ -285,28 +305,40 @@ public class MainPlayer extends Entity
         {
             if(!collidesTop() && !collidesTopBomb())
             {
-                setDirection(0, 150* speed);
+                //Smoothly changes the direction
+                goUp();
 
-                camera.translate(0, cameraSpeed);
-
+                //Draw the player with animation
                 renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
 
+                //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("UP") == false)
                 {
+                    //Send current player position to reduce lag
                     client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
                     
+                    //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "UP";
+                    
+                    //Ensures that stop command gets send only once
                     sendStopOnce = true;
-                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*";
-                    client.sendData(moveCommand);
+
+                    //Send walk command to server
+                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*");
                 }
+                
+                //Ensures that walk command gets send only once
                 sendMoveOnce = "UP";
             }else
             {
+                //Ensures that stop command gets send only once
                 sendStopOnce = true;
-                setDirection(0,0);
+                
+                //Sets moving direction to 0
+                stopMoving();
+                
+                //Draw the player with animation
                 renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
-                camera.translate(0, 0);
             }
             
         /*------------------WALKING DOWN------------------*/
@@ -314,45 +346,57 @@ public class MainPlayer extends Entity
         {
             if(!collidesBottom() && !collidesBottomBomb())
             {
-                setDirection(0, -150* speed);
-                camera.translate(0, -1 * cameraSpeed);
+                goDown();
                 
                 renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
                 
+                //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
+                    //Send current player position to reduce lag
                     client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
                     
+                    //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "DOWN";
+                    
+                    //Ensures that stop command gets send only once
                     sendStopOnce = true;
-                    moveCommand = "moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*";
-                    client.sendData(moveCommand);
+                    
+                    //Send walk command to server
+                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*");
                 }
+                
+                //Ensures that walk command gets send only once
                 sendMoveOnce = "DOWN";
             }else
             {
+                //Ensures that stop command gets send only once
                 sendStopOnce = true;
-                setDirection(0,0);
+                
+                //Sets moving direction to 0
+                stopMoving();
+                
+                //Draw the player with animation
                 renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
-                camera.translate(0, 0);
             }
             
         /*------------------NO MOVEMENT------------------*/    
         }else
         {
-            if(sendStopOnce)
+            if(sendStopOnce == true)
             {
-                moveCommand = "stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*";
-
-                //Send data to server
-                client.sendData(moveCommand);
+                //Send stop command to server
+                client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
                 
+                //Ensures that stop command gets send only once
                 sendStopOnce = false;
+                
+                //Reset walk command to be able to walk in every direction after stopping player
                 sendMoveOnce = "";
             }
 
-            //Sets the texture to no movement
-            setDirection(0, 0);
+            //Sets moving direction to 0
+            stopMoving();
             
             //Draws the player if he stands still
             switch(lastMovementKeyPressed)
@@ -395,15 +439,16 @@ public class MainPlayer extends Entity
             //Checks if there is already a bomb
             if(!map.isBombPlaced(x, y) && maxBombPlacing > bombArray.size)
             {
+                //Send bomb command to server
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId, BombRange, entityManager); 
+                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId, BombRange, entityManager, camera); 
                 bombArray.add(bomb);
             }
         }
         
-        /*------------------ZOOM OUT GAME------------------*/
+        /*------------------ZOOM OUT OF GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.O))
         {
             if(camera.zoom < maxZoomOut)
@@ -434,12 +479,15 @@ public class MainPlayer extends Entity
         {
             try 
             {
+                //Close connection to server
                 client.closeConnection();
                 
             } catch (IOException ex) 
             {
                 System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
             }
+            
+            //Go to menuscreen
             game.setScreen(new MenuScreen());
         }
         
@@ -497,43 +545,38 @@ public class MainPlayer extends Entity
         return this.coins;
     }
 
-    public int getPlayerId() {
+    public int getPlayerId() 
+    {
         return playerId;
     }
 
-    public void setPlayerId(int playerId) {
+    public void setPlayerId(int playerId) 
+    {
         this.playerId = playerId;
     }
 
-    public int getMaxBombPlacing() {
+    public int getMaxBombPlacing() 
+    {
         return maxBombPlacing;
     }
 
-    public void setMaxBombPlacing(int maxBombPlacing) {
+    public void setMaxBombPlacing(int maxBombPlacing) 
+    {
         this.maxBombPlacing = maxBombPlacing;
     }
 
-    public int getBombRange() {
+    public int getBombRange() 
+    {
         return BombRange;
     }
 
-    public void setBombRange(int BombRange) {
+    public void setBombRange(int BombRange) 
+    {
         this.BombRange = BombRange;
     }
 
-    public void setCoins(int coins) {
+    public void setCoins(int coins) 
+    {
         this.coins = coins;
     }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
-
-
-    
-    
 }

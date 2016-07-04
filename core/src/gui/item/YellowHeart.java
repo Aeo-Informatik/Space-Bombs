@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.item;
+package gui.item;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -27,10 +27,26 @@ public class YellowHeart extends Item{
      * @param map
      * @param entityManager 
      */
-    public YellowHeart(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager) {
-        super(CellX, CellY, direction,TextureManager.yellowHeart, map, entityManager);
-    }  
+    public YellowHeart(int CellX, int CellY, MapManager map, EntityManager entityManager) {
+        super(CellX, CellY,TextureManager.yellowHeart, map, entityManager);
+    }
    
+    @Override
+    public void render()
+    {
+        if(entityManager.getMainPlayer() != null)
+        {
+            if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
+            {
+                if(isMainPlayerCollectingItem() == true)
+                {
+                    itemEffect();
+                }
+            }
+        }
+    }
+    
+    
     @Override
     public void itemEffect()
     {
@@ -43,18 +59,6 @@ public class YellowHeart extends Item{
                     entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
                 }
             }
-        }
-    }
-    
-    @Override
-    public boolean canGetCollectedByMainPLayer()
-    {
-        if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
-        {
-            return true;
-        }else
-        {
-            return false;
         }
     }
 }

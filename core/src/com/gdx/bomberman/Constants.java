@@ -11,8 +11,11 @@ import networkServer.Server;
  *
  * @author qubasa
  */
-public class Constants {
-    public static float MUSICVOLUME = 0.1f;
+public class Constants 
+{
+    
+    //Audio config
+    public static float MUSICVOLUME = 0.0f;
     public static float SOUNDVOLUME = 0.2f;
         
     //Window config
@@ -22,25 +25,30 @@ public class Constants {
     public static String WINDOWTITEL = "Aeo Bombs";
     public static String WINDOWICONPATH = "other/icon.png";
     
-    //Main config
-    public static boolean PROCESSDATADEBUG = false;
+    //Game config
     public static String MAPPATH = "maps/TestMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
+    public static float DEFAULTZOOM = 0.8f;
+
+    //Entity config
+    public static float DEFAULTCAMERASPEED = 10f;
+    public static float DEFAULTENTITYSPEED = 1.5f;
     
     //Item config
-    public static float ITEMTIMER = 5;
+    public static float ITEMTIMER = 9999999;
     public static int MAXBOMBS = 5;
     public static int MAXBOMBRANGE = 5;
     public static int MAXLIFE = 6;
     public static int COINVALUE = 1;
-    public static float MAXSPEED = 1.5f;
+    public static float MAXSPEED = 2f;
     
     //Client config
     public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
+    public static boolean PROCESSDATADEBUG = false;
     
     //Server config
-    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;

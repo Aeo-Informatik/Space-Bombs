@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package gui.screen;
-import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -29,10 +28,7 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import java.net.ServerSocket;
-import java.net.Socket;
 import networkClient.Client;
-import networkServer.Lobby;
 import networkServer.Server;
 
 

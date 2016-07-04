@@ -5,10 +5,11 @@
  */
 package gui.entity;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.gdx.bomberman.Constants;
 import gui.entity.bombs.Bomb;
 import gui.map.MapManager;
@@ -26,13 +27,18 @@ public abstract class Entity
     protected TiledMapTileLayer bombLayer;
     protected EntityManager entityManager;
     protected SpriteBatch renderObject;
+    protected OrthographicCamera camera;
+    
+    protected float entitySpeed = Constants.DEFAULTENTITYSPEED;
+    protected float cameraSpeed = Constants.DEFAULTCAMERASPEED;
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
-    public Entity(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager){
+    public Entity(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, OrthographicCamera camera){
         
         this.pos = pos;
         this.map = map;
+        this.camera = camera;
         this.direction = direction;
         this.blockLayer = map.getBlockLayer();
         this.bombLayer = map.getBombLayer();
@@ -290,30 +296,91 @@ public abstract class Entity
         return false;
     }
     
-
+    
+    /**
+     * Follows the entity with smooth camera movements.
+     */
+    protected void cameraFollowEntity()
+    {
+        Vector3 cameraPos = camera.position;
+        cameraPos.x += (pos.x - cameraPos.x) * cameraSpeed * Constants.DELTATIME;
+        cameraPos.y += (pos.y - cameraPos.y) * cameraSpeed * Constants.DELTATIME;
+    }
+    
+    
+    /**
+     * Sets the entity movement direction to left controlled from entitySpeed.
+     */
+    protected void goLeft()
+    {
+        direction.set(-100 * entitySpeed * Constants.DELTATIME, 0);
+    }
+    
+    
+    /**
+    * Sets the entity movement direction to right controlled from entitySpeed.
+    */
+    protected void goRight()
+    {
+        direction.set(100 * entitySpeed * Constants.DELTATIME, 0);
+    }
+    
+    
+    /**
+    * Sets the entity movement direction to up controlled from entitySpeed.
+    */
+    protected void goUp()
+    {
+        direction.set(0, 100 * entitySpeed * Constants.DELTATIME);
+    }
+    
+    
+    /**
+    * Sets the entity movement direction to down controlled from entitySpeed.
+    */
+    protected void goDown()
+    {
+        direction.set(0, -100 * entitySpeed * Constants.DELTATIME);
+    }
+    
+    
+    /**
+    * Sets the entity movement direction to 0.
+    */
+    protected void stopMoving()
+    {
+        direction.set(0, 0);
+    }
+    
     /**------------------Getter & Setter------------------**/
     public Vector2 getPosition()
     {
         return pos;
     }
     
-    //Sets the direction in which the entity should move
-    public void setDirection(float x, float y)
-    {
-        direction.set(x, y);
-        
-        //Makes the frames per second constant on every device (so it doesnt run faster on better devices)
-        direction.scl(Gdx.graphics.getDeltaTime());
-    }
-    
-    public Vector2 getDirection()
-    {
-        return direction;
-    }
-    
     public void setPosition(Vector2 pos)
     {
         this.pos = pos;
+    }
+    
+    public void setEntitySpeed(float entitySpeed)
+    {
+        this.entitySpeed = entitySpeed;
+    }
+    
+    public float getEntitySpeed()
+    {
+        return this.entitySpeed;
+    }
+    
+    public void setCameraSpeed(float cameraSpeed)
+    {
+        this.cameraSpeed = cameraSpeed;
+    }
+    
+    public float getCameraSpeed()
+    {
+        return this.cameraSpeed;
     }
 }
 

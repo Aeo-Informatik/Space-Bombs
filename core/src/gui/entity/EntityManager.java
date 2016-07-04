@@ -5,14 +5,21 @@
  */
 package gui.entity;
 
+import gui.item.SpeedUp;
+import gui.item.CoinBag;
+import gui.item.YellowHeart;
+import gui.item.LifeUp;
+import gui.item.BombUp;
+import gui.item.Tombstone;
+import gui.item.RangeUp;
+import gui.item.Coin;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.map.MapManager;
-import gui.entity.item.Item;
-import gui.entity.item.*;
+import gui.item.Item;
 
 /**
  *
@@ -243,42 +250,42 @@ public class EntityManager {
                             case(1):
                             {
                                 
-                                LifeUp lifeup = new LifeUp(mapX, mapY, new Vector2(0,0),map, this);
+                                LifeUp lifeup = new LifeUp(mapX, mapY, map, this);
                                 itemArray.add(lifeup);
                                 break;
                             }
                             
                             case(2):
                             {
-                                CoinBag coinBag = new CoinBag(mapX, mapY, new Vector2(0,0),map, this, Constants.COINVALUE);
+                                CoinBag coinBag = new CoinBag(mapX, mapY, map, this, Constants.COINVALUE);
                                 itemArray.add(coinBag);
                                 break;
                             }
                             
                             case(3):
                             {
-                                RangeUp rangeUp = new RangeUp(mapX, mapY, new Vector2(0,0),map, this);
+                                RangeUp rangeUp = new RangeUp(mapX, mapY, map, this);
                                 itemArray.add(rangeUp);
                                 break;
                             }
                             
                             case(4):
                             {
-                                BombUp bombUp = new BombUp(mapX, mapY, new Vector2(0,0),map, this);
+                                BombUp bombUp = new BombUp(mapX, mapY, map, this);
                                 itemArray.add(bombUp);
                                 break;
                             }
                             
                             case(5):
                             {
-                                YellowHeart yellowHeart = new YellowHeart(mapX, mapY, new Vector2(0,0),map, this);
+                                YellowHeart yellowHeart = new YellowHeart(mapX, mapY, map, this);
                                 itemArray.add(yellowHeart);
                                 break;
                             }
                             
                             case(6):
                             {
-                                SpeedUp speedUp = new SpeedUp(mapX, mapY, new Vector2(0,0),map, this);
+                                SpeedUp speedUp = new SpeedUp(mapX, mapY, map, this);
                                 itemArray.add(speedUp);
                                 break;
                             }
@@ -307,7 +314,7 @@ public class EntityManager {
      */
     public void spawnCoin(int x, int y)
     {
-        Coin coin = new Coin(x, y, new Vector2(0,0),map, this, Constants.COINVALUE);
+        Coin coin = new Coin(x, y, map, this, Constants.COINVALUE);
         coins.add(coin);                                
     }
     
@@ -319,7 +326,7 @@ public class EntityManager {
      */
     public void spawnTombstone(int x, int y)
     {
-        Tombstone tombstone = new Tombstone(x, y, new Vector2(0,0), map, this, mainPlayer.getCoins());
+        Tombstone tombstone = new Tombstone(x, y, map, this, mainPlayer.getCoins());
         tombs.add(tombstone);
     }
     
@@ -445,12 +452,12 @@ public class EntityManager {
         switch(bombType)
         {
             case "default":
-                Bomb defaultBomb = new Bomb(pos, direction, map, playerId, this);
+                Bomb defaultBomb = new Bomb(pos, direction, map, playerId, this, camera);
                 bombArrayEnemy.add(defaultBomb);
                 break;
             
             default:
-                Bomb defaultBomb1 = new Bomb(pos, direction, map, playerId, this);
+                Bomb defaultBomb1 = new Bomb(pos, direction, map, playerId, this, camera);
                 bombArray.add(defaultBomb1);
         }
     }
