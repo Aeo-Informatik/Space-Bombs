@@ -43,6 +43,12 @@ public class ClientSendThread implements Runnable {
             if(Constants.CLIENTDEBUG)
                 System.out.println("CLIENT: Send to server: " + dataToSend);
 
+            //WARNING Could be the source of a bug. It is a remedation against a bug in mainPlayer where stopEnemyPlayer would be send after move
+            if(dataToSend.startsWith("moveEnemyPlayer"))
+            {
+                Thread.sleep(10);
+            }
+            
             //Send string to server
             print.println(dataToSend);
             print.flush();
