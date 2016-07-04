@@ -26,7 +26,7 @@ public class BombUp extends Item{
         super(cellX, cellY, direction,TextureManager.bombUp, map, entityManager);
     }
    
-
+    @Override
     public void itemEffect()
     {
         if(entityManager.getMainPlayer() != null)

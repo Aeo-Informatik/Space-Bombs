@@ -41,7 +41,7 @@ public abstract class Item extends Entity{
         map.getItemLayer().setCell(cellX, cellY, cell);
     }
     
-    public void render(SpriteBatch renderObject)
+    public void render()
     {     
         //Check if main player is alive
         if(entityManager.getMainPlayer() != null)

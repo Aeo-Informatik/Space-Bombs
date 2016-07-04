@@ -55,8 +55,6 @@ public class YellowHeart extends Item{
         }else
         {
             return false;
-=======
->>>>>>> origin/master
         }
     }
 }
