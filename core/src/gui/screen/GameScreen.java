@@ -115,7 +115,7 @@ public class GameScreen implements Screen{
         renderServer.setProjectionMatrix(camera.combined);
         
         //Draw stage
-        //stage.act(Gdx.graphics.getDeltaTime());
+        stage.act(Constants.DELTATIME);
         stage.draw();
         
         mapManager.render();

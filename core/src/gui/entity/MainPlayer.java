@@ -19,7 +19,6 @@ import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
-import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
 import java.io.IOException;
@@ -56,6 +55,8 @@ public class MainPlayer extends Entity
     private int coins = 0;
     private int maxBombPlacing = 2;
     private int BombRange = 2;
+    private float maxZoomOut = 1.5f;
+    private float maxZoomIn = 0.5f;
     private float speed = 1.0f;
     
     //Constructor
@@ -69,6 +70,8 @@ public class MainPlayer extends Entity
         this.camera = camera;
         this.playerId = playerId;
         this.bombArray = bombArray;
+        
+        camera.zoom = 0.8f;
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -116,16 +119,19 @@ public class MainPlayer extends Entity
      * @param sb 
      */
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {
-        //Adding direction to position
-        pos.add(this.direction);
-        
-        //Keyboard interception
-        inputMovePlayer(renderObject);
-        inputDoPlayer(renderObject);
-        
-        hitByBomb(renderObject);
+        renderObject.setProjectionMatrix(camera.combined);
+        renderObject.begin();
+            //Adding direction to position
+            pos.add(this.direction);
+
+            //Keyboard interception
+            inputMovePlayer();
+            inputDoPlayer();
+
+            hitByBomb();
+        renderObject.end();
     }
     
     
@@ -144,7 +150,7 @@ public class MainPlayer extends Entity
      */
     Thread flashThread;
     long id = -1;
-    public void hitByBomb(SpriteBatch renderObject) 
+    public void hitByBomb() 
     {  
         //If player touches explosion
         if(touchesDeadlyBlock() && godmode == false)
@@ -196,7 +202,7 @@ public class MainPlayer extends Entity
      */
     
     
-    private void inputMovePlayer(SpriteBatch renderObject)
+    private void inputMovePlayer()
     {
         String moveCommand;
         float cameraSpeed = 2.51f * speed;
@@ -377,7 +383,7 @@ public class MainPlayer extends Entity
     /**
      * Action the player can make like placing a bomb
      */
-    private void inputDoPlayer(SpriteBatch renderObject)
+    private void inputDoPlayer()
     {        
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
@@ -400,7 +406,7 @@ public class MainPlayer extends Entity
         /*------------------ZOOM OUT GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.O))
         {
-            if(camera.zoom < 2.0)
+            if(camera.zoom < maxZoomOut)
             {
                 camera.zoom += 0.02;
                 camera.position.set(pos.x, pos.y, 0);
@@ -410,7 +416,7 @@ public class MainPlayer extends Entity
         /*------------------ZOOM INTO GAME------------------*/
         if (Gdx.input.isKeyPressed(Keys.I))
         {
-            if(camera.zoom > 0.5)
+            if(camera.zoom > maxZoomIn)
             {
                 camera.zoom -= 0.02;
                 camera.position.set(pos.x, pos.y, 0);
@@ -450,13 +456,30 @@ public class MainPlayer extends Entity
         }
     }
 
-    /*------------------ GETTER & SETTER ------------------*/    
+    /*------------------ GETTER & SETTER ------------------*/  
+    public float getMaxZoomIn()
+    {
+        return maxZoomIn;
+    }
+    
+    public void setMaxZoomIn(float maxZoomIn)
+    {
+        this.maxZoomIn = maxZoomIn;
+    }
+    
+    public float getMaxZoomOut()
+    {
+        return maxZoomIn;
+    }
+    
+    public void setMaxZoomOut(float maxZoomOut)
+    {
+        this.maxZoomOut = maxZoomOut;
+    }
+    
     public int getLife()
     { 
-    
         return this.life;
-        
-        
     }
     
     public void setLife(int life)

@@ -29,7 +29,7 @@ public class CoinBag extends Item{
         super(cellX, cellY, direction,TextureManager.coinBag, map, entityManager);
         this.value = value * 10;
     }
-       
+    
     @Override
     public void itemEffect()
     {

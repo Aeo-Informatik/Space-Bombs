@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -28,6 +29,7 @@ public class EnemyPlayer extends Entity
     private AnimEffects animEffects = new AnimEffects();
     private boolean godmode = false; //DO NOT CHANGE
     private float godModeTimer = 0;
+    private OrthographicCamera camera;
     
     //Server render variables
     private boolean executeMovePlayer = false;
@@ -47,12 +49,13 @@ public class EnemyPlayer extends Entity
     private float godModeDuration = 2f;
     
     //Constructor
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, OrthographicCamera camera) 
     {
         super(pos, direction, map, entityManager);
         
         //Save variables & objects as global
         this.playerId = playerId;
+        this.camera = camera;
         
         //Set player id textures
         switch(playerId)
@@ -96,20 +99,25 @@ public class EnemyPlayer extends Entity
 
     
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {
-        //System.out.println("Enemy player is existing");
-        if(this.executeStopPlayer)
-        {
-            stopPlayer(this.stopX, this.stopY, renderObject);
-        }
+        renderObject.setProjectionMatrix(camera.combined);
+        renderObject.begin();
         
-        if(this.executeMovePlayer)
-        {
-            movePlayer(this.moveDirection, renderObject);
-        }
-        
-        hitByBomb(renderObject);
+            //System.out.println("Enemy player is existing");
+            if(this.executeStopPlayer)
+            {
+                stopPlayer(this.stopX, this.stopY, renderObject);
+            }
+
+            if(this.executeMovePlayer)
+            {
+                movePlayer(this.moveDirection, renderObject);
+            }
+
+            hitByBomb(renderObject);
+            
+        renderObject.end();
     }
     
     

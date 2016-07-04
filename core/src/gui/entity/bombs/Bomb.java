@@ -290,7 +290,7 @@ public class Bomb extends Entity
     }
     
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {
         this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
         this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);

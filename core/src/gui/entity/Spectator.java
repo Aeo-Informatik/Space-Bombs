@@ -5,17 +5,14 @@
  */
 package gui.entity;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
-import gui.camera.OrthoCamera;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
 import java.io.IOException;
@@ -41,11 +38,12 @@ public class Spectator extends Entity
         this.blockLayer = map.getBlockLayer();
         this.camera = camera;
         this.enemies = enemies;
+        this.renderObject.setProjectionMatrix(camera.combined);
     }
 
     
     @Override
-    public void render(SpriteBatch renderObject)
+    public void render()
     {
         //Adding direction to position
         pos.add(this.direction);

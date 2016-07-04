@@ -30,7 +30,7 @@ public class YellowHeart extends Item{
     public YellowHeart(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(CellX, CellY, direction,TextureManager.yellowHeart, map, entityManager);
     }  
-    
+   
     @Override
     public void itemEffect()
     {
@@ -55,6 +55,8 @@ public class YellowHeart extends Item{
         }else
         {
             return false;
+=======
+>>>>>>> origin/master
         }
     }
 }

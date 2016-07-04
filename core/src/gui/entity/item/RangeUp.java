@@ -24,7 +24,7 @@ public class RangeUp extends Item{
     public RangeUp(int cellX, int cellY, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(cellX, cellY, direction,TextureManager.rangeUp, map, entityManager);
     }
-    
+   
     @Override
     public void itemEffect()
     {

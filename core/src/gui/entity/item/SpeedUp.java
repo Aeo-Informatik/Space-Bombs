@@ -26,7 +26,7 @@ public class SpeedUp extends Item{
     public SpeedUp(int CellX, int CellY, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(CellX, CellY, direction,TextureManager.speedUp, map, entityManager);
     }
-    
+   
     /**
      * do wahat the item does
      */
