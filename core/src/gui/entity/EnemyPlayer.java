@@ -132,6 +132,7 @@ public class EnemyPlayer extends Entity
      * Player gets hit by bomb
      */
     Thread flashThread;
+    long id = -1;
     public void hitByBomb(SpriteBatch renderObject) 
     {  
         //If player touches explosion
@@ -139,8 +140,11 @@ public class EnemyPlayer extends Entity
         {
             godmode = true;
             
-            long id = AudioManager.hit.play();
-            AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
+            if(id == -1)
+            {
+                id = AudioManager.hit.play();
+                AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
+            }
             
             if(Constants.CLIENTDEBUG)
             {
@@ -160,6 +164,7 @@ public class EnemyPlayer extends Entity
         {
             godmode = false;
             godModeTimer = 0;
+            id = -1;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
             flashThread.interrupt();

@@ -195,6 +195,7 @@ public class MainPlayer extends Entity
         {
             godMode = false;
             godModeTimer = 0;
+            id = -1;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
             if(flashThread != null)

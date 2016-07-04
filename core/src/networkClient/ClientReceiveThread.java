@@ -56,7 +56,6 @@ public class ClientReceiveThread implements Runnable {
 
                 //Adds the data to the BlockingQueue
                 queue.add(dataReceived);
-                Thread.sleep(100);
             }
             
         }catch(SocketException e)
@@ -64,7 +63,7 @@ public class ClientReceiveThread implements Runnable {
             System.out.println("CLIENT: Disconnecting from server...");
         
         //If server disconnects shutdown thread
-        }catch(IOException | InterruptedException e)
+        }catch(Exception e)
         {
             System.err.println("ERROR: Something went wrong in ClientReceiveDataThread " + e);
             e.printStackTrace();
