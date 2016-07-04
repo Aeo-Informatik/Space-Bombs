@@ -374,7 +374,7 @@ public class Bomb extends Entity
                 {
                     int randomNum = new Random().nextInt(3);//Possible output: 0, 1, 2
                     
-                    if(randomNum == 0)
+                    if(randomNum != 0)
                     {
                         entityManager.spawnCoin(x, y);
                     }

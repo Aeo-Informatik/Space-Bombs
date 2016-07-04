@@ -50,6 +50,8 @@ public class Coin extends Item{
             long id = AudioManager.singleCoin.play();
             AudioManager.singleCoin.setVolume(id, Constants.SOUNDVOLUME);
         }
+        
+        super.itemDeleteThroughBomb();
     }
     
     @Override

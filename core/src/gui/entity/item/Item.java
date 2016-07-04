@@ -54,6 +54,7 @@ public abstract class Item extends Entity{
                 }
             }
         }
+        itemDeleteThroughBomb();
     }
     
     /**
@@ -70,6 +71,16 @@ public abstract class Item extends Entity{
         return -1;
     }
     
+    
+    public void itemDeleteThroughBomb()
+    {
+        if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT) == true)
+        {
+            
+            collected = true;
+            System.out.println("BUM!");
+        }
+    }
     
     /**
      * Check if id is from main player.
