@@ -86,6 +86,7 @@ public class EntityManager {
     
     public void update()
     {
+        //Update Items
         itemManager.update();
         
         /**--------------------PLAYER UPDATE--------------------**/

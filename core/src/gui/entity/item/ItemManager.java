@@ -88,11 +88,14 @@ public class ItemManager
         //Spawn Items Randomly
         if(spawnTimer >= Constants.ITEMTIMER)
         {
+            //Delete all items
             for (int i=0; i < itemArray.size; i++)
             {
                 itemArray.get(i).deleteItem();
                 itemArray.removeIndex(i);
             }
+            
+            //One second after timer is done
             if(spawnTimer >= (Constants.ITEMTIMER + 1))
             {
                 spawnItem();
