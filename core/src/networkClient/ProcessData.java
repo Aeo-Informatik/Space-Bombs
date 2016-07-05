@@ -188,18 +188,54 @@ public class ProcessData
                                 System.out.println("Enemy player " + parameters[1] + " has been hit by bomb. Life counter: " + parameters[2]);
                             
                         }else
-                            System.err.println("ERROR: playerDied wrong number of parameters");
+                            System.err.println("ERROR: enemyPlayerLife wrong number of parameters");
                         break;
                         
                         
                     /**------------------ENEMY PLAYER BOMB RANGE------------------**/
+                    //General: enemyPlayerSetRange|playerId|range|target
                     case "enemyPlayerSetRange":
+                        if(parameters.length == 4)
+                        {
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.setBombRange(Integer.parseInt(parameters[2]));
+                                }
+                            }
+                        }else
+                            System.err.println("ERROR: enemyPlayerSetRange wrong number of parameters");
                         break;
                         
+                    //General: enemyPlayerSetSpeed|playerId|speed|target
                     case "enemyPlayerSetSpeed":
+                        if(parameters.length == 4)
+                        {
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.setEntitySpeed(Float.parseFloat(parameters[2]));
+                                }
+                            }
+                        }else
+                            System.err.println("ERROR: enemyPlayerSetSpeed wrong number of parameters");
                         break;
                     
+                    //General: enemyPlayerSetCoins|playerId|coins|target
                     case "enemyPlayerSetCoins":
+                        if(parameters.length == 4)
+                        {
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.setCoins(Integer.parseInt(parameters[2]));
+                                }
+                            }
+                        }else
+                            System.err.println("ERROR: enemyPlayerSetCoins wrong number of parameters");
                         break;
                         
                     default:
