@@ -265,23 +265,6 @@ public class EntityManager {
            return -1; 
     }
            
-    /**
-     * Set the live of an enemy player
-     * @param playerId
-     * @param life 
-     */
-    public void setLiveEnemyPlayer(int playerId, int life)
-    {
-        for(int i=0; i < enemies.size; i++)
-        {
-            if(enemies.get(i).getPlayerId() == playerId)
-            {
-                enemies.get(i).setLife(life);
-            }
-        }
-    }
-    
-    
     /**--------------------GETTER & SETTER--------------------**/
     public Array<EnemyPlayer> getEnemyArray()
     {

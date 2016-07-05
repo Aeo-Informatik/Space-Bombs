@@ -175,7 +175,13 @@ public class ProcessData
                     case "enemyPlayerLife":
                         if(parameters.length == 4)
                         {
-                            entityManager.setLiveEnemyPlayer(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]));
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.setLife(Integer.parseInt(parameters[2]));
+                                }
+                            }
                         
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
