@@ -141,12 +141,12 @@ public class EnemyPlayer extends Entity
         //If player touches explosion
         if(touchesDeadlyBlock() && godmode == false)
         {
-            //Reduce player life
-            life -= 1;
-            
             godmode = true;
             
-             System.out.println("Enemy life has been reduced to: " + life);
+            System.out.println("Enemy life: " + life);
+            System.out.println("Enemy coins: " + coins);
+            System.out.println("Enemy range: " + bombRange);
+            System.out.println("Enemy max bombs: " + maxBombPlacing);
             
             if(id == -1)
             {

@@ -5,11 +5,11 @@
  */
 package gui.entity.item;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.entity.MainPlayer;
 import gui.map.MapManager;
 
 
@@ -50,15 +50,20 @@ public class YellowHeart extends Item{
     @Override
     public void itemEffect()
     {
-        if(entityManager.getMainPlayer() != null)
-        {            
-            for(int i=0; i < 3; i++)
+        MainPlayer mainP = entityManager.getMainPlayer();
+        
+        for(int i=0; i < 3; i++)
+        {
+            //Check if main player is alive
+            if(mainP != null)
             {
-                if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
-                {
-                    entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
-                }
+                mainP.setLife((mainP.getLife() + 1));
             }
+        }
+        
+        if(mainP != null)
+        {
+            client.sendData("enemyPlayerLife|" + mainP.getPlayerId() + "|" + (mainP.getLife()) + "|*");        
         }
     }
 }

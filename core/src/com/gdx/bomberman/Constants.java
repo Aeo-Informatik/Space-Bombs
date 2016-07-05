@@ -46,7 +46,7 @@ public class Constants
     public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
-    public static boolean PROCESSDATADEBUG = false;
+    public static boolean PROCESSDATADEBUG = true;
     
     //Server config
     public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly

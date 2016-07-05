@@ -204,6 +204,11 @@ public class ProcessData
                                     enemy.setBombRange(Integer.parseInt(parameters[2]));
                                 }
                             }
+                            
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player range now: " + parameters[2]);
+                            
                         }else
                             System.err.println("ERROR: enemyPlayerSetRange wrong number of parameters");
                         break;
@@ -220,6 +225,11 @@ public class ProcessData
                                     enemy.setEntitySpeed(Float.parseFloat(parameters[2]));
                                 }
                             }
+                            
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player speed now: " + parameters[2]);
+                            
                         }else
                             System.err.println("ERROR: enemyPlayerSetSpeed wrong number of parameters");
                         break;
@@ -236,6 +246,10 @@ public class ProcessData
                                     enemy.setCoins(Integer.parseInt(parameters[2]));
                                 }
                             }
+                            
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player coins now: " + parameters[2]);
                         }else
                             System.err.println("ERROR: enemyPlayerSetCoins wrong number of parameters");
                         break;
@@ -252,6 +266,10 @@ public class ProcessData
                                     enemy.setMaxBombPlacing(Integer.parseInt(parameters[2]));
                                 }
                             }
+                            
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player max bombs now: " + parameters[2]);
                         }else
                             System.err.println("ERROR: enemyPlayerSetMaxBombs wrong number of parameters");
                         break;

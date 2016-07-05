@@ -46,12 +46,12 @@ public class BombUp extends Item{
     public void itemEffect()
     {
         
-         MainPlayer mainP = entityManager.getMainPlayer();
+        MainPlayer mainP = entityManager.getMainPlayer();
         
         //Check if main player is alive
         if(mainP != null)
         {
-            mainP.setBombRange((mainP.getMaxBombPlacing() + 1)); 
+            mainP.setMaxBombPlacing((mainP.getMaxBombPlacing() + 1)); 
             client.sendData("enemyPlayerSetMaxBombs|" + mainP.getPlayerId() + "|" + (mainP.getMaxBombPlacing()) + "|*");
         }
     }

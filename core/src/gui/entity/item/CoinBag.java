@@ -8,10 +8,12 @@ package gui.entity.item;
 
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import gui.AudioManager;
+import gui.entity.MainPlayer;
 
 
 /**
@@ -45,9 +47,13 @@ public class CoinBag extends Item{
     @Override
     public void itemEffect()
     {
-        if(entityManager.getMainPlayer() != null)
+        MainPlayer mainP = entityManager.getMainPlayer();
+        
+        //Check if main player is alive
+        if(mainP != null)
         {
-            entityManager.getMainPlayer().setCoins((entityManager.getMainPlayer().getCoins()+ value));
+            mainP.setCoins((mainP.getCoins() + value)); 
+            client.sendData("enemyPlayerSetCoins|" + mainP.getPlayerId() + "|" + (mainP.getCoins()) + "|*");
         }
     }
     
