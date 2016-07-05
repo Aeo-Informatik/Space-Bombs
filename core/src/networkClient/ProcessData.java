@@ -257,7 +257,7 @@ public class ProcessData
                     /**------------------ENEMY PLAYER MAX BOMBS------------------**/
                     //General: enemyPlayerSetMaxBombs|playerId|maxBombs|target
                     case "enemyPlayerSetMaxBombs":
-                         if(parameters.length == 4)
+                        if(parameters.length == 4)
                         {
                             for(EnemyPlayer enemy : entityManager.getEnemyArray())
                             {
@@ -274,6 +274,25 @@ public class ProcessData
                             System.err.println("ERROR: enemyPlayerSetMaxBombs wrong number of parameters");
                         break;
                     
+                    /**------------------SPAWN TOMB STONE------------------**/
+                    //General: enemyPlayerSpawnTombStone|playerId|cellX|cellY|target
+                    case "enemyPlayerSpawnTombStone":
+                        if(parameters.length == 5)
+                        {
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.spawnTombstone(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+                                }
+                            }
+                            
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player " + parameters[1] + " spawn tom stone at: X:" + parameters[2] + " Y:" + parameters[3]);
+                        }else
+                            System.err.println("ERROR: enemyPlayerSpawnTombStone wrong number of parameters");
+                        break;
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");

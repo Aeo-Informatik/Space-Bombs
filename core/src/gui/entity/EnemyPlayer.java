@@ -185,6 +185,12 @@ public class EnemyPlayer extends Entity
         }
     }
     
+    public void spawnTombstone(int cellX, int cellY)
+    {
+        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins);
+        entityManager.getItemManager().addTombToList(tombstone);
+    }
+    
     /**
      * Sets bomb on given position
      * @param pos
