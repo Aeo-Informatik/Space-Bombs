@@ -5,21 +5,13 @@
  */
 package gui.entity;
 
-import gui.item.SpeedUp;
-import gui.item.CoinBag;
-import gui.item.YellowHeart;
-import gui.item.LifeUp;
-import gui.item.BombUp;
-import gui.item.Tombstone;
-import gui.item.RangeUp;
-import gui.item.Coin;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.map.MapManager;
-import gui.item.Item;
+import gui.entity.item.ItemManager;
 
 /**
  *
@@ -29,10 +21,11 @@ public class EntityManager {
     
     //Variables & Objects
     private OrthographicCamera camera;
-    private float timer;
     private MapManager map;
+    private ItemManager itemManager;
     
-    //Array from libgdx is much faster in comparison to an arraylist
+    //NOTE: Array from libgdx is much faster in comparison to an arraylist
+    
     //Players
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
@@ -42,22 +35,20 @@ public class EntityManager {
     private Array <Bomb> bombArray = new Array<>();
     private Array <Bomb> bombArrayEnemy = new Array<>();
     
-    //Items
-    private Array <Item> itemArray = new Array<>();
-    private Array <Item> tombs = new Array<>();
-    private Array <Item> coins = new Array<>();
-    
     //Constructor
     public EntityManager(OrthographicCamera camera, MapManager map)
     {
         this.camera = camera;
         this.map = map;
+        this.itemManager = new ItemManager(map, this);
     }
     
 
     public void render()
     {
-
+        //Render Items
+        itemManager.render();
+        
         /**--------------------PLAYER RENDERER--------------------**/
         //Render every enemy object in list
         for(EnemyPlayer enemy: enemies)
@@ -76,7 +67,7 @@ public class EntityManager {
             spectator.render();
         }          
         
-        /**--------------------MAP OBJECTS RENDERER--------------------**/
+        /**--------------------BOMB RENDERER--------------------**/
         //Render bomb in main player list
         for (Bomb bomb: bombArray)
         {
@@ -90,26 +81,14 @@ public class EntityManager {
         {
             bomb.render();
         }                       
-
-        for(Item item: itemArray)
-        {
-            item.render();
-        }
-
-        for(Item item: tombs)
-        {
-            item.render();
-        }
-
-        for (Item item: coins)
-        {
-            item.render();
-        }
     }
     
     
     public void update()
     {
+        itemManager.update();
+        
+        /**--------------------PLAYER UPDATE--------------------**/
         //If enemy player died execute onDeath and delete Object
         for(int i=0; i < enemies.size; i++)
         {
@@ -118,66 +97,6 @@ public class EntityManager {
                 enemies.get(i).onDeath();
                 enemies.removeIndex(i);
             }
-        }
-        
-        //Deletes bomb texture and object if exploded
-        for (int i=0; i < bombArray.size; i++)
-        {
-            if(this.bombArray.get(i).isExploded())
-            {
-                bombArray.removeIndex(i);
-            }
-        }
-        
-        //Delete item if collected
-        for (int i=0; i < itemArray.size; i++)
-        {
-            if(this.itemArray.get(i).isCollected())
-            {
-                itemArray.get(i).deleteItem();
-                itemArray.removeIndex(i);
-            }
-        }
-        
-        //Delete tomb stone if collected
-        for (int i=0; i < tombs.size; i++)
-        {
-            if(this.tombs.get(i).isCollected())
-            {
-                tombs.get(i).deleteItem();
-                tombs.removeIndex(i);
-            }
-        }
-        
-        //Delete coins if collected
-        for (int i=0; i < coins.size; i++)
-        {
-            if(this.coins.get(i).isCollected())
-            {
-                coins.get(i).deleteItem();
-                coins.removeIndex(i);
-            }
-        }
-        
-        //Spawn Items Randomly
-        if(timer >= Constants.ITEMTIMER)
-        {
-            for (int i=0; i < itemArray.size; i++)
-            {
-                itemArray.get(i).deleteItem();
-                itemArray.removeIndex(i);
-            }
-            if(timer >= (Constants.ITEMTIMER + 1))
-            {
-                spawnItem();
-                timer = 0;
-            }else
-            {
-                timer += Constants.DELTATIME;
-            }
-        }else
-        {
-            timer += Constants.DELTATIME;
         }
         
         //If main player died spawn spectator and delete mainPlayer Object
@@ -193,6 +112,16 @@ public class EntityManager {
                 
                 //Delete main player
                 mainPlayer = null; 
+            }
+        }
+        
+        /**--------------------BOMB UPDATE--------------------**/
+        //Deletes bomb texture and object if exploded
+        for (int i=0; i < bombArray.size; i++)
+        {
+            if(this.bombArray.get(i).isExploded())
+            {
+                bombArray.removeIndex(i);
             }
         }
     }
@@ -226,110 +155,6 @@ public class EntityManager {
             }
         }
     }
-    
-    /**
-     * Spawns a random item in every block with the attribute "Item-Spawner"
-     */
-    public void spawnItem()
-    {
-        int i=0;
-        
-        for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
-        {
-            for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
-            {
-                try
-                {
-                    if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
-                    {
-                        int item;
-                        item = (int)(Math.random()*7);
-                        switch(item)
-                        {
-                        
-                            case(1):
-                            {
-                                
-                                LifeUp lifeup = new LifeUp(mapX, mapY, map, this);
-                                itemArray.add(lifeup);
-                                break;
-                            }
-                            
-                            case(2):
-                            {
-                                CoinBag coinBag = new CoinBag(mapX, mapY, map, this, Constants.COINVALUE);
-                                itemArray.add(coinBag);
-                                break;
-                            }
-                            
-                            case(3):
-                            {
-                                RangeUp rangeUp = new RangeUp(mapX, mapY, map, this);
-                                itemArray.add(rangeUp);
-                                break;
-                            }
-                            
-                            case(4):
-                            {
-                                BombUp bombUp = new BombUp(mapX, mapY, map, this);
-                                itemArray.add(bombUp);
-                                break;
-                            }
-                            
-                            case(5):
-                            {
-                                YellowHeart yellowHeart = new YellowHeart(mapX, mapY, map, this);
-                                itemArray.add(yellowHeart);
-                                break;
-                            }
-                            
-                            case(6):
-                            {
-                                SpeedUp speedUp = new SpeedUp(mapX, mapY, map, this);
-                                itemArray.add(speedUp);
-                                break;
-                            }
-                            
-                            default:
-                            {
-
-                            }
-                        
-                        }
-                        
-                    }
-                }catch(NullPointerException e)
-                {
-
-                }
-            }
-        }
-    }
-    
-    
-    /**
-     * Spawns a coin with a given value.
-     * @param x: Cell coordinates on x axis
-     * @param y: Cell coordinates on y axis
-     */
-    public void spawnCoin(int x, int y)
-    {
-        Coin coin = new Coin(x, y, map, this, Constants.COINVALUE);
-        coins.add(coin);                                
-    }
-    
-    
-    /**
-     * Spawns a tombstone with the remaining coins of the dead player.
-     * @param x: Cell coordinates on x axis
-     * @param y: Cell coordinates on y axis
-     */
-    public void spawnTombstone(int x, int y)
-    {
-        Tombstone tombstone = new Tombstone(x, y, map, this, mainPlayer.getCoins());
-        tombs.add(tombstone);
-    }
-    
     
     /**
      * Returns the Bomb Object from a bomb on the specified coordinates. If there is no bomb return null.
@@ -481,19 +306,11 @@ public class EntityManager {
     
     
     /**--------------------GETTER & SETTER--------------------**/
-    /**
-     * 
-     * @return Array<EnemyPlayer>
-     */
     public Array<EnemyPlayer> getEnemyArray()
     {
         return enemies;
     }
         
-    /**
-     * 
-     * @return MainPlayer
-     */
     public MainPlayer getMainPlayer()
     {
         return mainPlayer;
@@ -513,13 +330,9 @@ public class EntityManager {
     {
         return this.bombArray;
     }
-
-    public MapManager getMap() {
-        return map;
-    }
-
-    public void setMap(MapManager map) {
-        this.map = map;
-    }
-
+    
+    public ItemManager getItemManager()
+    {
+        return this.itemManager;
+    }    
 }

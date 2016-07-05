@@ -3,13 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.item;
+package gui.entity.item;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
+
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
@@ -22,11 +18,14 @@ import gui.map.MapManager;
 public class Tombstone extends Item{
     
     private int coins;
-
+    private ItemManager itemManager;
+    
     //Constructor
-    public Tombstone(int CellX, int CellY, MapManager map, EntityManager entityManager, int coins) {
+    public Tombstone(int CellX, int CellY, MapManager map, EntityManager entityManager, ItemManager itemManager, int coins) 
+    {
         super(CellX, CellY,TextureManager.tombstone, map, entityManager);
         this.coins = coins;
+        this.itemManager = itemManager;
     }
    
     @Override
@@ -44,6 +43,6 @@ public class Tombstone extends Item{
     @Override
     public void itemEffect()
     {
-        entityManager.spawnCoin(cellX, cellX);        
+        itemManager.spawnCoin(cellX, cellX);        
     }
 }

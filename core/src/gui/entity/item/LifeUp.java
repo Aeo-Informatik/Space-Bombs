@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.item;
+package gui.entity.item;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -17,35 +16,38 @@ import gui.map.MapManager;
  *
  * @author Christian
  */
-public class RangeUp extends Item{
+public class LifeUp extends Item{
     
-
+    
     //Constructor
-    public RangeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) {
-        super(cellX, cellY,TextureManager.rangeUp, map, entityManager);
+    public LifeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
+    {
+        super(cellX, cellY,TextureManager.lifeUp, map, entityManager);
     }
    
     @Override
     public void render()
-    {       
+    {     
+        //Check if main player is alive
         if(entityManager.getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer().getBombRange() < Constants.MAXBOMBRANGE)
+            if(entityManager.getMainPlayer().getLife() < Constants.MAXLIFE)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {
                     itemEffect();
                 }
             }
-        } 
+        }
     }
     
     @Override
     public void itemEffect()
     {
+        //Check if main player is alive
         if(entityManager.getMainPlayer() != null)
         {
-            entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));   
+            entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
         }
     }
 

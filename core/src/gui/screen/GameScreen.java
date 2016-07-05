@@ -20,6 +20,7 @@ import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.hud.CounterHud;
+import gui.entity.item.ItemManager;
 import java.util.Random;
 
 
@@ -129,15 +130,15 @@ public class GameScreen implements Screen{
         
         //Render entities
         entityManager.render();
+        entityManager.update();
         
         //Render CounterHud
         renderHud.setProjectionMatrix(counterHud.stage.getCamera().combined);
         counterHud.stage.draw();
         counterHud.update();
 
-        //Update functions
+        //Update camera
         camera.update();
-        entityManager.update();
     }
     
     

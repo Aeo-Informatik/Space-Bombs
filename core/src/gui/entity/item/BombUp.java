@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.item;
+package gui.entity.item;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -12,26 +13,26 @@ import gui.entity.EntityManager;
 import gui.map.MapManager;
 
 
+
 /**
  *
  * @author Christian
  */
-public class LifeUp extends Item{
-    
+public class BombUp extends Item{
     
     //Constructor
-    public LifeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
+    public BombUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
     {
-        super(cellX, cellY,TextureManager.lifeUp, map, entityManager);
+        super(cellX, cellY,TextureManager.bombUp, map, entityManager);
     }
    
     @Override
     public void render()
-    {     
-        //Check if main player is alive
+    {   
         if(entityManager.getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer().getLife() < Constants.MAXLIFE)
+            //Check if mainPlayer has reached item max 
+            if(entityManager.getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {
@@ -44,12 +45,10 @@ public class LifeUp extends Item{
     @Override
     public void itemEffect()
     {
-        //Check if main player is alive
         if(entityManager.getMainPlayer() != null)
         {
-            entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
+            entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
         }
     }
-
     
 }

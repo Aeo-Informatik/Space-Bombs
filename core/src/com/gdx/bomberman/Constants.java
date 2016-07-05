@@ -34,7 +34,7 @@ public class Constants
     public static float DEFAULTENTITYSPEED = 1.5f;
     
     //Item config
-    public static float ITEMTIMER = 9999999;
+    public static float ITEMTIMER = 5;
     public static int MAXBOMBS = 5;
     public static int MAXBOMBRANGE = 5;
     public static int MAXLIFE = 6;
@@ -48,7 +48,7 @@ public class Constants
     public static boolean PROCESSDATADEBUG = false;
     
     //Server config
-    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;

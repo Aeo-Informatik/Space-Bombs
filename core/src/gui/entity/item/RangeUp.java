@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.item;
+package gui.entity.item;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -17,48 +17,37 @@ import gui.map.MapManager;
  *
  * @author Christian
  */
-public class YellowHeart extends Item{
+public class RangeUp extends Item{
     
 
-    /**
-     * 
-     * @param pos the position of the Itemonly in int
-     * @param direction alwalys 0, 0
-     * @param map
-     * @param entityManager 
-     */
-    public YellowHeart(int CellX, int CellY, MapManager map, EntityManager entityManager) {
-        super(CellX, CellY,TextureManager.yellowHeart, map, entityManager);
+    //Constructor
+    public RangeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) {
+        super(cellX, cellY,TextureManager.rangeUp, map, entityManager);
     }
    
     @Override
     public void render()
-    {
+    {       
         if(entityManager.getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
+            if(entityManager.getMainPlayer().getBombRange() < Constants.MAXBOMBRANGE)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {
                     itemEffect();
                 }
             }
-        }
+        } 
     }
-    
     
     @Override
     public void itemEffect()
     {
         if(entityManager.getMainPlayer() != null)
-        {            
-            for(int i=0; i < 3; i++)
-            {
-                if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
-                {
-                    entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
-                }
-            }
+        {
+            entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));   
         }
     }
+
+    
 }

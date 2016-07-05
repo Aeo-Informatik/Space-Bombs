@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.item;
+package gui.entity.item;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
-import gui.AnimEffects;
 import gui.AudioManager;
 
 
@@ -20,24 +18,18 @@ import gui.AudioManager;
  *
  * @author Christian
  */
-public class Coin extends Item{
+public class CoinBag extends Item{
     
-    private AnimEffects animEffects = new AnimEffects();
     private int value;
 
-    public Coin(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
-        super(cellX, cellY,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
-        this.value = value;
+    public CoinBag(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
+        super(cellX, cellY,TextureManager.coinBag, map, entityManager);
+        this.value = value * 10;
     }
    
     @Override
     public void render()
     {
-        //Render item
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(new StaticTiledMapTile(animEffects.getFrame(TextureManager.coinAnim)));
-        map.getItemLayer().setCell(cellX, cellY, cell);
-        
         if(isMainPlayerCollectingItem() == true)
         {
             itemEffect();

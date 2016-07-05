@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.item;
+package gui.entity.item;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -13,26 +13,30 @@ import gui.entity.EntityManager;
 import gui.map.MapManager;
 
 
-
 /**
  *
  * @author Christian
  */
-public class BombUp extends Item{
+public class YellowHeart extends Item{
     
-    //Constructor
-    public BombUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
-    {
-        super(cellX, cellY,TextureManager.bombUp, map, entityManager);
+
+    /**
+     * 
+     * @param pos the position of the Itemonly in int
+     * @param direction alwalys 0, 0
+     * @param map
+     * @param entityManager 
+     */
+    public YellowHeart(int CellX, int CellY, MapManager map, EntityManager entityManager) {
+        super(CellX, CellY,TextureManager.yellowHeart, map, entityManager);
     }
    
     @Override
     public void render()
-    {   
+    {
         if(entityManager.getMainPlayer() != null)
         {
-            //Check if mainPlayer has reached item max 
-            if(entityManager.getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
+            if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {
@@ -42,13 +46,19 @@ public class BombUp extends Item{
         }
     }
     
+    
     @Override
     public void itemEffect()
     {
         if(entityManager.getMainPlayer() != null)
-        {
-            entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
+        {            
+            for(int i=0; i < 3; i++)
+            {
+                if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
+                {
+                    entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
+                }
+            }
         }
     }
-    
 }

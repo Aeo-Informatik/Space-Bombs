@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gui.item;
+package gui.entity.item;
 
 
 import com.badlogic.gdx.math.Vector2;

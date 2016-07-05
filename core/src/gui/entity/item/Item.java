@@ -4,38 +4,37 @@
  * and open the template in the editor.
  */
 
-package gui.item;
+package gui.entity.item;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
-import com.gdx.bomberman.Constants;
 import gui.TextureManager;
+import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 /**
  *
  * @author cb0703
  */
-public class Item 
+public class Item extends Entity
 {
     
     //Variables
     protected boolean collected = false;
     protected TextureRegion emptyBlock;
     protected int cellX, cellY;
-    protected EntityManager entityManager;
-    protected MapManager map;
     
     //Constructor
     public Item(int cellX, int cellY, TextureRegion itemTexture, MapManager map, EntityManager entityManager) 
     {
+        super(new Vector2(cellX, cellY), new Vector2(0,0), map, entityManager, new OrthographicCamera());
+        
         this.emptyBlock = TextureManager.emptyBlock;
         this.cellX = cellX;
         this.cellY = cellY;
-        this.entityManager = entityManager;
-        this.map = map;
         
         //Render Item once
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();

@@ -376,7 +376,7 @@ public class Bomb extends Entity
                     
                     if(randomNum != 0)
                     {
-                        entityManager.spawnCoin(x, y);
+                        entityManager.getItemManager().spawnCoin(x, y);
                     }
                 }
             }
