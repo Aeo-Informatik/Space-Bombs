@@ -121,25 +121,6 @@ public class ItemManager
         coins.add(coin);                                
     }
     
-    
-    /**
-     * Spawns a tombstone with the remaining coins of the dead player.
-     * @param x: Cell coordinates on x axis
-     * @param y: Cell coordinates on y axis
-     */
-    public void spawnTombstone(int x, int y)
-    {
-        if(entityManager.getMainPlayer() != null)
-        {
-            Tombstone tombstone = new Tombstone(x, y, map, entityManager, this, entityManager.getMainPlayer().getCoins());
-            tombs.add(tombstone);
-        }else
-        {
-            System.err.println("ERROR: Mainplayer is dead cannot spawn tombstone");
-        }
-    }
-    
-    
     /**
      * Spawns a random item in every block with the attribute "Item-Spawner"
      */
@@ -213,4 +194,12 @@ public class ItemManager
         }
     }
     
+    
+    /**--------------------GETTER & SETTER--------------------**/
+    public void addTombToList(Tombstone tombstone)
+    {
+        this.tombs.add(tombstone);
+    }
+    
 }
+

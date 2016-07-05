@@ -15,6 +15,7 @@ import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
+import gui.entity.item.Tombstone;
 import gui.map.MapManager;
 
 /**

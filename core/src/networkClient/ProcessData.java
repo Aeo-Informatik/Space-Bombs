@@ -185,7 +185,7 @@ public class ProcessData
                         
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player " + parameters[1] + " has been hit by bomb. Life counter: " + parameters[2]);
+                                System.out.println("Enemy player " + parameters[1] + " set life to: " + parameters[2]);
                             
                         }else
                             System.err.println("ERROR: enemyPlayerLife wrong number of parameters");
@@ -207,7 +207,7 @@ public class ProcessData
                             
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player range now: " + parameters[2]);
+                                System.out.println("Enemy player " + parameters[1] + " range now: " + parameters[2]);
                             
                         }else
                             System.err.println("ERROR: enemyPlayerSetRange wrong number of parameters");
@@ -228,7 +228,7 @@ public class ProcessData
                             
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player speed now: " + parameters[2]);
+                                System.out.println("Enemy player " + parameters[1] + " speed now: " + parameters[2]);
                             
                         }else
                             System.err.println("ERROR: enemyPlayerSetSpeed wrong number of parameters");
@@ -249,7 +249,7 @@ public class ProcessData
                             
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player coins now: " + parameters[2]);
+                                System.out.println("Enemy player " + parameters[1] + " coins now: " + parameters[2]);
                         }else
                             System.err.println("ERROR: enemyPlayerSetCoins wrong number of parameters");
                         break;
@@ -269,10 +269,11 @@ public class ProcessData
                             
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player max bombs now: " + parameters[2]);
+                                System.out.println("Enemy player " + parameters[1] + " max bombs now: " + parameters[2]);
                         }else
                             System.err.println("ERROR: enemyPlayerSetMaxBombs wrong number of parameters");
                         break;
+                    
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");
@@ -280,7 +281,7 @@ public class ProcessData
                 }  
             }
             
-        }catch(Exception e)
+        }catch(InterruptedException | NumberFormatException e)
         {
             System.err.println("ERROR: ProcessDataThread() Something went wrong " + e);
             e.printStackTrace();

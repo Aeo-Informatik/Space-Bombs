@@ -18,6 +18,7 @@ import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
+import gui.entity.item.Tombstone;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
 import java.io.IOException;
@@ -143,7 +144,13 @@ public class MainPlayer extends Entity
     public void onDeath()
     {
         System.out.println("YOU DIED!");
-        entityManager.getItemManager().spawnTombstone((int)(pos.x / Constants.MAPTEXTUREWIDTH),(int)(pos.y / Constants.MAPTEXTUREHEIGHT));
+        
+        int cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
+        int cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
+        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins);
+        entityManager.getItemManager().addTombToList(tombstone);
+        
+        client.sendData("");
     }
     
 
