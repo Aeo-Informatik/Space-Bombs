@@ -46,9 +46,10 @@ public class EnemyPlayer extends Entity
     private final Animation walkAnimLeft;
     
     //Player settings
-    private int life = 3;
     private float godModeDuration = 2f;
+    private int life = 3;
     private int bombRange = 2;
+    private int coins = 0;
     
     //Constructor
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, OrthographicCamera camera) 
@@ -336,5 +337,25 @@ public class EnemyPlayer extends Entity
     public void setLife(int life)
     {
         this.life = life;
+    }
+    
+    public int getBombRange()
+    {
+        return this.bombRange;
+    }
+    
+    public void setBombRange(int bombRange)
+    {
+        this.bombRange = bombRange;
+    }
+    
+    public int getCoins()
+    {
+        return this.coins;
+    }
+    
+    public void setCoins(int coins)
+    {
+        this.coins = coins;
     }
 }

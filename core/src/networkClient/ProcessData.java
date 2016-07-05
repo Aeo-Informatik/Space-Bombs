@@ -189,7 +189,17 @@ public class ProcessData
                             
                         }else
                             System.err.println("ERROR: playerDied wrong number of parameters");
-
+                        break;
+                        
+                        
+                    /**------------------ENEMY PLAYER BOMB RANGE------------------**/
+                    case "enemyPlayerSetRange":
+                        break;
+                        
+                    case "enemyPlayerSetSpeed":
+                        break;
+                    
+                    case "enemyPlayerSetCoins":
                         break;
                         
                     default:
