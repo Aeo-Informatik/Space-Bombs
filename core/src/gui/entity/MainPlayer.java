@@ -52,7 +52,7 @@ public class MainPlayer extends Entity
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
     private int coins = 0;
     private int maxBombPlacing = 2;
-    private int BombRange = 2;
+    private int bombRange = 2;
     private float maxZoomOut = 1.5f;
     private float maxZoomIn = 0.5f;
     
@@ -444,7 +444,7 @@ public class MainPlayer extends Entity
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId, BombRange, entityManager, camera); 
+                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId, bombRange, entityManager); 
                 bombArray.add(bomb);
             }
         }
@@ -568,12 +568,12 @@ public class MainPlayer extends Entity
 
     public int getBombRange() 
     {
-        return BombRange;
+        return bombRange;
     }
 
     public void setBombRange(int BombRange) 
     {
-        this.BombRange = BombRange;
+        this.bombRange = BombRange;
     }
 
     public void setCoins(int coins) 

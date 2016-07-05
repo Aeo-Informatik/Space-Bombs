@@ -48,6 +48,7 @@ public class EnemyPlayer extends Entity
     //Player settings
     private int life = 3;
     private float godModeDuration = 2f;
+    private int bombRange = 2;
     
     //Constructor
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, OrthographicCamera camera) 
@@ -174,6 +175,18 @@ public class EnemyPlayer extends Entity
                 System.out.println("Enemy " + playerId + ": Invulnerability deactivated");
             }
         }
+    }
+    
+    /**
+     * Sets bomb on given position
+     * @param pos
+     * @param direction
+     * @param bombType 
+     */
+    public void placeBomb(Vector2 pos, String bombType)
+    {
+        //Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
+        entityManager.addBombToEnemyArray(new Bomb(pos, new Vector2(0,0), map, playerId, bombRange, entityManager));
     }
     
     /**

@@ -157,6 +157,32 @@ public class EntityManager {
         }
     }
     
+    
+    /**
+     * Spawns mainPlayer with given playerId on the apropriate spawn field.
+     * @param playerId
+     * @throws Exception 
+     */
+    public void spawnMainPlayer(int playerId)
+    {
+        for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
+        {
+            for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
+            {
+                try
+                {
+                    if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
+                    {
+                        mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray, this);
+                    }
+                }catch(NullPointerException e)
+                {
+
+                }
+            }
+        }
+    }
+    
     /**
      * Returns the Bomb Object from a bomb on the specified coordinates. If there is no bomb return null.
      * @param x: Entity coordinates on x axis
@@ -239,56 +265,6 @@ public class EntityManager {
            return -1; 
     }
            
-    
-    /**
-     * Spawns mainPlayer with given playerId on the apropriate spawn field.
-     * @param playerId
-     * @throws Exception 
-     */
-    public void spawnMainPlayer(int playerId)
-    {
-        for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
-        {
-            for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
-            {
-                try
-                {
-                    if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
-                    {
-                        mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, bombArray, this);
-                    }
-                }catch(NullPointerException e)
-                {
-
-                }
-            }
-        }
-    }
-    
-
-    /**
-     * Places the specified bomb type into the map for enemy player
-     * @param pos
-     * @param direction
-     * @param playerId
-     * @param bombType 
-     */
-    public void placeEnemyBomb(Vector2 pos, Vector2 direction, int playerId, String bombType)
-    {
-        switch(bombType)
-        {
-            case "default":
-                Bomb defaultBomb = new Bomb(pos, direction, map, playerId, this, camera);
-                bombArrayEnemy.add(defaultBomb);
-                break;
-            
-            default:
-                Bomb defaultBomb1 = new Bomb(pos, direction, map, playerId, this, camera);
-                bombArray.add(defaultBomb1);
-        }
-    }
-
-    
     /**
      * Set the live of an enemy player
      * @param playerId
@@ -325,6 +301,11 @@ public class EntityManager {
     public Array <Bomb> getBombArrayEnemy()
     {
         return this.bombArrayEnemy;
+    }
+    
+    public void addBombToEnemyArray(Bomb bomb)
+    {
+        bombArrayEnemy.add(bomb);
     }
     
     public Array <Bomb> getBombArrayMain()
