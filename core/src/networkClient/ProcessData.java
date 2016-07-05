@@ -208,6 +208,7 @@ public class ProcessData
                             System.err.println("ERROR: enemyPlayerSetRange wrong number of parameters");
                         break;
                         
+                    /**------------------ENEMY PLAYER SPEED------------------**/
                     //General: enemyPlayerSetSpeed|playerId|speed|target
                     case "enemyPlayerSetSpeed":
                         if(parameters.length == 4)
@@ -223,6 +224,7 @@ public class ProcessData
                             System.err.println("ERROR: enemyPlayerSetSpeed wrong number of parameters");
                         break;
                     
+                    /**------------------ENEMY PLAYER COINS------------------**/
                     //General: enemyPlayerSetCoins|playerId|coins|target
                     case "enemyPlayerSetCoins":
                         if(parameters.length == 4)
