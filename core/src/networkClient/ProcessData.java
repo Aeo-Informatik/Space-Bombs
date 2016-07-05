@@ -289,7 +289,7 @@ public class ProcessData
                             
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player " + parameters[1] + " spawn tom stone at: X:" + parameters[2] + " Y:" + parameters[3]);
+                                System.out.println("Enemy player " + parameters[1] + " spawn tomb stone at: X:" + parameters[2] + " Y:" + parameters[3]);
                         }else
                             System.err.println("ERROR: enemyPlayerSpawnTombStone wrong number of parameters");
                         break;
