@@ -150,7 +150,7 @@ public class MainPlayer extends Entity
         Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins);
         entityManager.getItemManager().addTombToList(tombstone);
         
-        client.sendData("");
+        client.sendData("enemyPlayerSpawnTombStone|" + playerId + " |" + cellX + "|" + cellY + "|*");
     }
     
 
