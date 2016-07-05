@@ -12,6 +12,8 @@ import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
+import gui.entity.MainPlayer;
 
 /**
  *
@@ -44,9 +46,14 @@ public class SpeedUp extends Item{
     @Override
     public void itemEffect()
     {
-        if(entityManager.getMainPlayer() != null)//check if MAinplayer stil exsitst
+        
+        MainPlayer mainP = entityManager.getMainPlayer();
+        
+        //Check if main player is alive
+        if(mainP != null)
         {
-            entityManager.getMainPlayer().setEntitySpeed((entityManager.getMainPlayer().getEntitySpeed()+ 0.1f));
+            mainP.setEntitySpeed((mainP.getEntitySpeed() + 0.1f));
+            client.sendData("enemyPlayerSetSpeed|" + mainP.getPlayerId() + "|" + (mainP.getEntitySpeed()) + "|*");
         }
     }
 }

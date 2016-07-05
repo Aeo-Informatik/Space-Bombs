@@ -50,6 +50,7 @@ public class EnemyPlayer extends Entity
     private int life = 3;
     private int bombRange = 2;
     private int coins = 0;
+    private int maxBombPlacing = 2;
     
     //Constructor
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, OrthographicCamera camera) 
@@ -140,7 +141,12 @@ public class EnemyPlayer extends Entity
         //If player touches explosion
         if(touchesDeadlyBlock() && godmode == false)
         {
+            //Reduce player life
+            life -= 1;
+            
             godmode = true;
+            
+             System.out.println("Enemy life has been reduced to: " + life);
             
             if(id == -1)
             {
@@ -357,5 +363,15 @@ public class EnemyPlayer extends Entity
     public void setCoins(int coins)
     {
         this.coins = coins;
+    }
+    
+    public int getMaxBombPlacing() 
+    {
+        return maxBombPlacing;
+    }
+
+    public void setMaxBombPlacing(int maxBombPlacing) 
+    {
+        this.maxBombPlacing = maxBombPlacing;
     }
 }

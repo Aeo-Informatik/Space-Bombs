@@ -239,6 +239,22 @@ public class ProcessData
                         }else
                             System.err.println("ERROR: enemyPlayerSetCoins wrong number of parameters");
                         break;
+                    
+                    /**------------------ENEMY PLAYER MAX BOMBS------------------**/
+                    //General: enemyPlayerSetMaxBombs|playerId|maxBombs|target
+                    case "enemyPlayerSetMaxBombs":
+                         if(parameters.length == 4)
+                        {
+                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.setMaxBombPlacing(Integer.parseInt(parameters[2]));
+                                }
+                            }
+                        }else
+                            System.err.println("ERROR: enemyPlayerSetMaxBombs wrong number of parameters");
+                        break;
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");

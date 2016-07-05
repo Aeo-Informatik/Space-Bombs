@@ -7,8 +7,10 @@ package gui.entity.item;
 
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.entity.MainPlayer;
 import gui.map.MapManager;
 
 
@@ -44,10 +46,13 @@ public class LifeUp extends Item{
     @Override
     public void itemEffect()
     {
+        MainPlayer mainP = entityManager.getMainPlayer();
+        
         //Check if main player is alive
-        if(entityManager.getMainPlayer() != null)
+        if(mainP != null)
         {
-            entityManager.getMainPlayer().setLife((entityManager.getMainPlayer().getLife() + 1));
+            mainP.setLife((mainP.getLife() + 1));
+            client.sendData("enemyPlayerLife|" + mainP.getPlayerId() + "|" + (mainP.getLife()) + "|*");        
         }
     }
 

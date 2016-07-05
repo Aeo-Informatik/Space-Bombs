@@ -8,8 +8,10 @@ package gui.entity.item;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.entity.MainPlayer;
 import gui.map.MapManager;
 
 
@@ -43,9 +45,13 @@ public class RangeUp extends Item{
     @Override
     public void itemEffect()
     {
-        if(entityManager.getMainPlayer() != null)
+         MainPlayer mainP = entityManager.getMainPlayer();
+        
+        //Check if main player is alive
+        if(mainP != null)
         {
-            entityManager.getMainPlayer().setBombRange((entityManager.getMainPlayer().getBombRange() + 1));   
+            mainP.setBombRange((mainP.getBombRange() + 1)); 
+            client.sendData("enemyPlayerSetRange|" + mainP.getPlayerId() + "|" + (mainP.getBombRange()) + "|*");
         }
     }
 

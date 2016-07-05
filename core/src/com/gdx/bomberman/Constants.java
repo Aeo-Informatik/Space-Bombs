@@ -15,7 +15,7 @@ public class Constants
 {
     
     //Audio config
-    public static float MUSICVOLUME = 0.0f;
+    public static float MUSICVOLUME = 0.1f;
     public static float SOUNDVOLUME = 0.2f;
         
     //Window config
@@ -26,7 +26,7 @@ public class Constants
     public static String WINDOWICONPATH = "other/icon.png";
     
     //Game config
-    public static String MAPPATH = "maps/BasicMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
+    public static String MAPPATH = "maps/TestMap.tmx";//habe ne leere Map hinzugefügt, für normale Map "maps/BasicMap.tmx", für Testmap "maps/TestMap.tmx"
     public static float DEFAULTZOOM = 0.8f;
 
     //Entity config
@@ -49,7 +49,7 @@ public class Constants
     public static boolean PROCESSDATADEBUG = false;
     
     //Server config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int SERVERPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;

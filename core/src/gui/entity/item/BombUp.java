@@ -5,11 +5,11 @@
  */
 package gui.entity.item;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.entity.MainPlayer;
 import gui.map.MapManager;
 
 
@@ -45,9 +45,14 @@ public class BombUp extends Item{
     @Override
     public void itemEffect()
     {
-        if(entityManager.getMainPlayer() != null)
+        
+         MainPlayer mainP = entityManager.getMainPlayer();
+        
+        //Check if main player is alive
+        if(mainP != null)
         {
-            entityManager.getMainPlayer().setMaxBombPlacing((entityManager.getMainPlayer().getMaxBombPlacing() + 1));
+            mainP.setBombRange((mainP.getMaxBombPlacing() + 1)); 
+            client.sendData("enemyPlayerSetMaxBombs|" + mainP.getPlayerId() + "|" + (mainP.getMaxBombPlacing()) + "|*");
         }
     }
     
