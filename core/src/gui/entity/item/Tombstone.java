@@ -43,6 +43,7 @@ public class Tombstone extends Item{
     @Override
     public void itemEffect()
     {
+        System.out.println("COLLECTED BY MAIN PLAYER TOMB STONE!");
         itemManager.spawnCoin(cellX, cellX);        
     }
 }

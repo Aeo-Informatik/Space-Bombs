@@ -274,17 +274,15 @@ public class ProcessData
                             System.err.println("ERROR: enemyPlayerSetMaxBombs wrong number of parameters");
                         break;
                     
-                    /**------------------SPAWN TOMB STONE------------------**/
-                    //General: enemyPlayerSpawnTombStone|playerId|cellX|cellY|target
-                    case "enemyPlayerSpawnTombStone":
+                    /**------------------SPAWN TOMB STONE/ ON ENEMY PLAYER DEATH------------------**/
+                    //General: enemyPlayerDied|playerId|cellX|cellY|target
+                    case "enemyPlayerDied":
                         if(parameters.length == 5)
                         {
                             for(EnemyPlayer enemy : entityManager.getEnemyArray())
                             {
-                                System.out.println("Enemy with id: " + enemy.getPlayerId());
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
-                                    System.out.println("Enemy found: " + parameters[1]);
                                     enemy.onDeath(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
                                 }
                             }
