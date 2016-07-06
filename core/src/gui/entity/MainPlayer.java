@@ -147,7 +147,7 @@ public class MainPlayer extends Entity
         
         int cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
         int cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
-        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins);
+        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins, playerId);
         entityManager.getItemManager().addTombToList(tombstone);
         
         client.sendData("enemyPlayerDied|" + playerId + "|" + cellX + "|" + cellY + "|*");

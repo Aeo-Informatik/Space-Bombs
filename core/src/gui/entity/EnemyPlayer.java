@@ -132,7 +132,7 @@ public class EnemyPlayer extends Entity
         System.out.println("---------------------Player " + playerId + " died!-------------------");
         
         //Spawn tomb stone
-        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins);
+        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins, playerId);
         entityManager.getItemManager().addTombToList(tombstone);
         
         //Set death to true to delete object in entity manager 

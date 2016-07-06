@@ -201,5 +201,9 @@ public class ItemManager
         this.tombs.add(tombstone);
     }
     
+    public Array<Item> getTombList()
+    {
+        return this.tombs;
+    }
 }
 
