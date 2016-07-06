@@ -198,6 +198,7 @@ public class ItemManager
     /**--------------------GETTER & SETTER--------------------**/
     public void addTombToList(Tombstone tombstone)
     {
+        System.out.println("Add tombstone X:" + tombstone.cellX + " Y:" + tombstone.cellY);
         this.tombs.add(tombstone);
     }
     

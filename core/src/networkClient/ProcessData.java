@@ -281,15 +281,17 @@ public class ProcessData
                         {
                             for(EnemyPlayer enemy : entityManager.getEnemyArray())
                             {
+                                System.out.println("Enemy with id: " + enemy.getPlayerId());
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
-                                    enemy.spawnTombstone(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+                                    System.out.println("Enemy found: " + parameters[1]);
+                                    enemy.onDeath(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
                                 }
                             }
                             
                             //DEBUG
                             if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player " + parameters[1] + " spawn tomb stone at: X:" + parameters[2] + " Y:" + parameters[3]);
+                                System.out.println("Enemy player " + parameters[1] + " died and spawned tomb stone at: X:" + parameters[2] + " Y:" + parameters[3]);
                         }else
                             System.err.println("ERROR: enemyPlayerSpawnTombStone wrong number of parameters");
                         break;

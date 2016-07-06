@@ -32,6 +32,7 @@ public class EnemyPlayer extends Entity
     private boolean godmode = false;
     private float godModeTimer = 0;
     private int playerId = 0;
+    private boolean isEnemyPlayerDead = false;
     
     //Server render variables
     private boolean executeMovePlayer = false;
@@ -126,9 +127,16 @@ public class EnemyPlayer extends Entity
     
     
     //Execute on player death
-    public void onDeath()
+    public void onDeath(int cellX, int cellY)
     {
         System.out.println("---------------------Player " + playerId + " died!-------------------");
+        
+        //Spawn tomb stone
+        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins);
+        entityManager.getItemManager().addTombToList(tombstone);
+        
+        //Set death to true to delete object in entity manager 
+        isEnemyPlayerDead = true;
     }
     
     
@@ -143,12 +151,7 @@ public class EnemyPlayer extends Entity
         if(touchesDeadlyBlock() && godmode == false)
         {
             godmode = true;
-            
-            System.out.println("Enemy life: " + life);
-            System.out.println("Enemy coins: " + coins);
-            System.out.println("Enemy range: " + bombRange);
-            System.out.println("Enemy max bombs: " + maxBombPlacing);
-            
+
             if(id == -1)
             {
                 id = AudioManager.hit.play();
@@ -183,12 +186,6 @@ public class EnemyPlayer extends Entity
                 System.out.println("Enemy " + playerId + ": Invulnerability deactivated");
             }
         }
-    }
-    
-    public void spawnTombstone(int cellX, int cellY)
-    {
-        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, entityManager.getItemManager(), coins);
-        entityManager.getItemManager().addTombToList(tombstone);
     }
     
     /**
@@ -332,6 +329,11 @@ public class EnemyPlayer extends Entity
 
     
     /**--------------------GETTER & SETTER--------------------**/
+    public boolean isEnemyDead()
+    {
+        return this.isEnemyPlayerDead;
+    }
+    
     public int getPlayerId()
     {
         return this.playerId;

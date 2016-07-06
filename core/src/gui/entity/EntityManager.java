@@ -90,12 +90,11 @@ public class EntityManager {
         itemManager.update();
         
         /**--------------------PLAYER UPDATE--------------------**/
-        //If enemy player died execute onDeath and delete Object
+        //If enemy player received death message delete Object
         for(int i=0; i < enemies.size; i++)
         {
-            if(enemies.get(i).getLife() <= 0)
+            if(enemies.get(i).isEnemyDead())
             {
-                enemies.get(i).onDeath();
                 enemies.removeIndex(i);
             }
         }
