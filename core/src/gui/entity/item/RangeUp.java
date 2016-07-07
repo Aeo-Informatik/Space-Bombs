@@ -39,7 +39,10 @@ public class RangeUp extends Item{
                     itemEffect();
                 }
             }
-        } 
+        }else //To make it possible for other players to despawn an item even after main player death
+        {
+            getPlayerIdCollectingItem();
+        }
     }
     
     @Override

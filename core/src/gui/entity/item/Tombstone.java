@@ -43,7 +43,8 @@ public class Tombstone extends Item{
         //Check if player is on item cell
         if( currentPlayerId != -1)
         {
-            //If player standing on item isnt the same as who spawned it
+            //If player standing on item isnt the same as who spawned it. 
+            //This is to prevent the tomstone to despawn instantly because the dying player stands on it
             if(currentPlayerId != playerId)
             {
                 collected = true;
@@ -56,13 +57,16 @@ public class Tombstone extends Item{
     @Override
     public void render()
     {
-        System.out.println("Rendering Tombstone");
         if(entityManager.getMainPlayer() != null)
         {
             if(isMainPlayerCollectingItem() == true)
             {
                 itemEffect();
             }
+            
+        }else //To make it possible for other players to despawn an item even after main player death
+        {
+            getPlayerIdCollectingItem();
         }
     }
     
