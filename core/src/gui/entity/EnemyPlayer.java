@@ -15,7 +15,6 @@ import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
-import gui.entity.item.Tombstone;
 import gui.map.MapManager;
 
 /**
@@ -196,7 +195,7 @@ public class EnemyPlayer extends Entity
     public void placeBomb(Vector2 pos, String bombType)
     {
         //Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
-        entityManager.addBombToEnemyArray(new Bomb(pos, new Vector2(0,0), map, playerId, bombRange, entityManager));
+        entityManager.spawnNormalBomb(pos, playerId, bombRange);
     }
     
     /**

@@ -184,7 +184,7 @@ public class ItemManager
     }
     
     
-    /**--------------------GETTER & SETTER--------------------**/
+    /**--------------------SPAWN FUNCTIONS--------------------**/
     public void spawnYellowHeart(int CellX, int CellY)
     {
         YellowHeart item = new YellowHeart(CellX, CellY, map, entityManager);
@@ -234,5 +234,7 @@ public class ItemManager
         BombUp item = new BombUp(CellX, CellY, map, entityManager);
         this.itemArray.add(item);
     }
+    
+    /**--------------------GETTER & SETTER--------------------**/
 }
 
