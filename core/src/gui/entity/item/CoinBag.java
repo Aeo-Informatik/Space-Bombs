@@ -26,7 +26,7 @@ public class CoinBag extends Item{
 
     public CoinBag(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
         super(cellX, cellY,TextureManager.coinBag, map, entityManager);
-        this.value = value * 10;
+        this.value = value;
     }
    
     @Override

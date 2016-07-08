@@ -73,6 +73,6 @@ public class Tombstone extends Item{
     @Override
     public void itemEffect()
     {
-        itemManager.spawnCoin(cellX, cellX);        
+        itemManager.spawnCoinBag(cellX, cellY, coins);
     }
 }

@@ -25,8 +25,8 @@ public class ItemManager
     
     //Items
     private Array <Item> itemArray = new Array<>();
-    private Array <Item> tombs = new Array<>();
-    private Array <Item> coins = new Array<>();
+    private Array <Item> tombArray = new Array<>();
+    private Array <Item> coinArray = new Array<>();
     
     public ItemManager(MapManager map, EntityManager entityManager)
     {
@@ -42,12 +42,12 @@ public class ItemManager
             item.render();
         }
 
-        for(Item item: tombs)
+        for(Item item: tombArray)
         {
             item.render();
         }
 
-        for (Item item: coins)
+        for (Item item: coinArray)
         {
             item.render();
         }
@@ -66,22 +66,22 @@ public class ItemManager
         }
         
         //Delete tomb stone if collected
-        for (int i=0; i < tombs.size; i++)
+        for (int i=0; i < tombArray.size; i++)
         {
-            if(this.tombs.get(i).isCollected())
+            if(this.tombArray.get(i).isCollected())
             {
-                tombs.get(i).deleteItem();
-                tombs.removeIndex(i);
+                tombArray.get(i).deleteItem();
+                tombArray.removeIndex(i);
             }
         }
         
         //Delete coins if collected
-        for (int i=0; i < coins.size; i++)
+        for (int i=0; i < coinArray.size; i++)
         {
-            if(this.coins.get(i).isCollected())
+            if(this.coinArray.get(i).isCollected())
             {
-                coins.get(i).deleteItem();
-                coins.removeIndex(i);
+                coinArray.get(i).deleteItem();
+                coinArray.removeIndex(i);
             }
         }
         
@@ -98,7 +98,7 @@ public class ItemManager
             //One second after timer is done
             if(spawnTimer >= (Constants.ITEMTIMER + 1))
             {
-                spawnItem();
+                spawnRandomItemOnField();
                 spawnTimer = 0;
             }else
             {
@@ -111,20 +111,9 @@ public class ItemManager
     }
     
     /**
-     * Spawns a coin with a given value.
-     * @param x: Cell coordinates on x axis
-     * @param y: Cell coordinates on y axis
-     */
-    public void spawnCoin(int x, int y)
-    {
-        Coin coin = new Coin(x, y, map, entityManager, Constants.COINVALUE);
-        coins.add(coin);                                
-    }
-    
-    /**
      * Spawns a random item in every block with the attribute "Item-Spawner"
      */
-    public void spawnItem()
+    public void spawnRandomItemOnField()
     {
         int i=0;
         
@@ -151,7 +140,7 @@ public class ItemManager
                             
                             case(2):
                             {
-                                CoinBag coinBag = new CoinBag(mapX, mapY, map, entityManager, Constants.COINVALUE);
+                                CoinBag coinBag = new CoinBag(mapX, mapY, map, entityManager, Constants.COINVALUE * 10);
                                 itemArray.add(coinBag);
                                 break;
                             }
@@ -196,14 +185,54 @@ public class ItemManager
     
     
     /**--------------------GETTER & SETTER--------------------**/
-    public void addTombToList(Tombstone tombstone)
+    public void spawnYellowHeart(int CellX, int CellY)
     {
-        this.tombs.add(tombstone);
+        YellowHeart item = new YellowHeart(CellX, CellY, map, entityManager);
+        this.itemArray.add(item);
     }
     
-    public Array<Item> getTombList()
+    public void spawnTombstone(int cellX, int cellY, int coins, int playerId)
     {
-        return this.tombs;
+        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, this, coins, playerId);
+        this.tombArray.add(tombstone);
+    }
+    
+    public void spawnSpeedUp(int CellX, int CellY)
+    {
+        SpeedUp item = new SpeedUp(CellX,  CellY, map, entityManager);
+        this.itemArray.add(item);
+    }
+    
+    public void spawnRangeUp(int CellX, int CellY)
+    {
+        RangeUp item = new RangeUp(CellX, CellY, map, entityManager);
+        this.itemArray.add(item);
+    }
+    
+    public void spawnLifeUp(int CellX, int CellY)
+    {
+        LifeUp item = new LifeUp(CellX, CellY, map, entityManager);
+        this.itemArray.add(item);
+    }
+    
+    public void spawnCoinBag(int CellX, int CellY, int value)
+    {
+        CoinBag item = new CoinBag(CellX, CellY, map, entityManager, value);
+        this.itemArray.add(item);
+    }
+    
+
+    public void spawnCoin(int cellX, int cellY, int value)
+    {
+        Coin coin = new Coin(cellX, cellY, map, entityManager, value);
+        this.coinArray.add(coin);
+    }
+    
+
+    public void spawnBombUp(int CellX, int CellY)
+    {
+        BombUp item = new BombUp(CellX, CellY, map, entityManager);
+        this.itemArray.add(item);
     }
 }
 

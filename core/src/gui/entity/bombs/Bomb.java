@@ -6,7 +6,6 @@
 
 package gui.entity.bombs;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
@@ -230,8 +229,8 @@ public class Bomb extends Entity
             
     /**
      * If bomb explosion hits block delete it
-     * @param x: position on x axis
-     * @param y: position on y axis
+     * @param x: Cell position on x axis
+     * @param y: Cell position on y axis
      * @return boolean
      */ 
     public boolean deleteBlock(int x, int y)
@@ -250,7 +249,7 @@ public class Bomb extends Entity
                 //Delete block with empty texture
                 Cell cell = new Cell();
                 cell.setTile(new StaticTiledMapTile(emptyBlock));
-                map.getBlockLayer().setCell( x, y, cell);
+                map.getBlockLayer().setCell(x, y, cell);
                 
                 
                 /**---------------------RANDOM COIN---------------------**/
@@ -261,7 +260,7 @@ public class Bomb extends Entity
                     
                     if(randomNum != 0)
                     {
-                        entityManager.getItemManager().spawnCoin(x, y);
+                        entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                     }
                 }
             }
