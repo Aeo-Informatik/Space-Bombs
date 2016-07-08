@@ -4,16 +4,15 @@
  * and open the template in the editor.
  */
 
-package gui.entity.item;
+package gui.entity.items;
 
 
-import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
-import gui.entity.MainPlayer;
+import gui.entity.players.MainPlayer;
 
 /**
  *
@@ -28,9 +27,9 @@ public class SpeedUp extends Item{
     @Override
     public void render()
     {            
-        if(entityManager.getMainPlayer() != null)//check if MAinplayer stil exsitst
+        if(entityManager.getPlayerManager().getMainPlayer() != null)//check if MAinplayer stil exsitst
         {
-            if(entityManager.getMainPlayer().getEntitySpeed() < Constants.MAXSPEED)//check if item is usable for the mainplayer
+            if(entityManager.getPlayerManager().getMainPlayer().getEntitySpeed() < Constants.MAXSPEED)//check if item is usable for the mainplayer
             {
                 if(isMainPlayerCollectingItem() == true)//check if item is collected by the mainplayer
                 {
@@ -50,7 +49,7 @@ public class SpeedUp extends Item{
     public void itemEffect()
     {
         
-        MainPlayer mainP = entityManager.getMainPlayer();
+        MainPlayer mainP = entityManager.getPlayerManager().getMainPlayer();
         
         //Check if main player is alive
         if(mainP != null)

@@ -1,4 +1,4 @@
-package networkServer;
+package server;
 
 import com.gdx.bomberman.Constants;
 import java.net.ServerSocket;

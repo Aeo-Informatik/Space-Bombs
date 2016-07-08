@@ -31,8 +31,8 @@ import gui.TextureManager;
 import static gui.TextureManager.skin;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import networkClient.Client;
-import networkServer.Server;
+import client.Client;
+import server.Server;
 
 
 /**

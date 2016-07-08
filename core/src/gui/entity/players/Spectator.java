@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity;
+package gui.entity.players;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
+import gui.entity.Entity;
+import gui.entity.EntityManager;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.map.MapManager;

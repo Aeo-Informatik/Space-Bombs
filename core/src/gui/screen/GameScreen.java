@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
-import networkClient.ProcessData;
+import client.ProcessData;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -20,7 +20,7 @@ import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.hud.CounterHud;
-import gui.entity.item.ItemManager;
+import gui.entity.items.ItemManager;
 import java.util.Random;
 
 
@@ -157,13 +157,13 @@ public class GameScreen implements Screen{
        //If screen gets resized set camera to player position
        if(Constants.PLAYERSPAWNED)
        {
-           if(entityManager.getMainPlayer() != null)
+           if(entityManager.getPlayerManager().getMainPlayer() != null)
            {
-                camera.position.set(entityManager.getMainPlayer().getPosition().x, entityManager.getMainPlayer().getPosition().y, 0);
+                camera.position.set(entityManager.getPlayerManager().getMainPlayer().getPosition().x, entityManager.getPlayerManager().getMainPlayer().getPosition().y, 0);
            
-           }else if(entityManager.getSpectator() != null)
+           }else if(entityManager.getPlayerManager().getSpectator() != null)
            {
-               camera.position.set(entityManager.getSpectator().getPosition().x, entityManager.getSpectator().getPosition().y, 0);
+               camera.position.set(entityManager.getPlayerManager().getSpectator().getPosition().x, entityManager.getPlayerManager().getSpectator().getPosition().y, 0);
            }
        }
     }

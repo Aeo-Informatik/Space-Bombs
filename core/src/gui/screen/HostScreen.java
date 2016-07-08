@@ -28,8 +28,8 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import networkClient.Client;
-import networkServer.Server;
+import client.Client;
+import server.Server;
 
 
 /**

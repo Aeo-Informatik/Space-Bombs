@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gui.entity.item;
+package gui.entity.items;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -48,10 +48,10 @@ public class Item extends Entity
      */
     protected int getPlayerIdCollectingItem()
     {
-        if(entityManager.getPlayerIdOnCoordinates(cellX, cellY) != -1)
+        if(entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY) != -1)
         {
             collected = true;
-            return entityManager.getPlayerIdOnCoordinates(cellX, cellY);
+            return entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY);
         }
         return -1;
     }
@@ -64,9 +64,9 @@ public class Item extends Entity
      */
     protected boolean isMainPlayerCollectingItem()
     {
-        if(entityManager.getMainPlayer() != null)
+        if(entityManager.getPlayerManager().getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer().getPlayerId() == getPlayerIdCollectingItem())
+            if(entityManager.getPlayerManager().getMainPlayer().getPlayerId() == getPlayerIdCollectingItem())
             {
                 return true;
             }

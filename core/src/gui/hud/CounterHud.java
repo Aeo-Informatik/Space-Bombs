@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.entity.MainPlayer;
+import gui.entity.players.MainPlayer;
 
 /**
  *
@@ -157,7 +157,7 @@ public class CounterHud
             
         }else
         {
-            mainPlayer = entityManager.getMainPlayer();
+            mainPlayer = entityManager.getPlayerManager().getMainPlayer();
         }
     }
     

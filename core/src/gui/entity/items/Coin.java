@@ -3,35 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.item;
+package gui.entity.items;
 
-
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import gui.AnimEffects;
 import gui.AudioManager;
-import gui.entity.MainPlayer;
+import gui.entity.players.MainPlayer;
 
 
 /**
  *
  * @author Christian
  */
-public class CoinBag extends Item{
+public class Coin extends Item{
     
+    private AnimEffects animEffects = new AnimEffects();
     private int value;
 
-    public CoinBag(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
-        super(cellX, cellY,TextureManager.coinBag, map, entityManager);
+    public Coin(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
+        super(cellX, cellY,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
         this.value = value;
     }
    
     @Override
     public void render()
     {
+        //Render item
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+        cell.setTile(new StaticTiledMapTile(animEffects.getFrame(TextureManager.coinAnim)));
+        map.getItemLayer().setCell(cellX, cellY, cell);
+        
         if(isMainPlayerCollectingItem() == true)
         {
             itemEffect();
@@ -47,7 +54,7 @@ public class CoinBag extends Item{
     @Override
     public void itemEffect()
     {
-        MainPlayer mainP = entityManager.getMainPlayer();
+        MainPlayer mainP = entityManager.getPlayerManager().getMainPlayer();
         
         //Check if main player is alive
         if(mainP != null)

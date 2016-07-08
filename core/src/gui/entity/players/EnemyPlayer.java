@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity;
+package gui.entity.players;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
+import gui.entity.Entity;
+import gui.entity.EntityManager;
 import gui.map.MapManager;
 
 /**
@@ -195,7 +195,7 @@ public class EnemyPlayer extends Entity
     public void placeBomb(Vector2 pos, String bombType)
     {
         //Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
-        entityManager.spawnNormalBomb(pos, playerId, bombRange);
+        entityManager.getBombManager().spawnNormalBomb(pos, playerId, bombRange);
     }
     
     /**

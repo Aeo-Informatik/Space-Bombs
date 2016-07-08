@@ -127,7 +127,7 @@ public abstract class Entity
             if(leftRefBombId == -1)
             {
                 //Get bomb Id and save this Id for later
-                Bomb bomb = entityManager.getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
+                Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
                 if(bomb != null)
                 {
                     leftRefBombId =  bomb.getBombId();
@@ -140,7 +140,7 @@ public abstract class Entity
         if(map.isBombPlaced(pos.x - marginX, pos.y))
         {
             //Compare saved bomb id with current one if they dont match lock movement
-            Bomb bomb = entityManager.getBombObjectOnCoordinates(pos.x - marginX, pos.y);
+            Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x - marginX, pos.y);
             if(bomb != null && bomb.getBombId() != leftRefBombId)
             {
                 return true;
@@ -168,7 +168,7 @@ public abstract class Entity
             if(rightRefBombId == -1)
             {
                 //Get bomb Id and save this Id for later
-                Bomb bomb = entityManager.getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
+                Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
                 if(bomb != null)
                 {
                     rightRefBombId =  bomb.getBombId();
@@ -181,7 +181,7 @@ public abstract class Entity
         if(map.isBombPlaced(pos.x + Constants.PLAYERWIDTH + marginX, pos.y))
         {
             //Compare saved bomb id with current one if they dont match lock movement
-            Bomb bomb = entityManager.getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH + marginX, pos.y);
+            Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH + marginX, pos.y);
             if(bomb != null && bomb.getBombId() != rightRefBombId)
             {
                 return true;
@@ -210,7 +210,7 @@ public abstract class Entity
             if(topRefBombId == -1)
             {
                 //Get bomb Id and save this Id for later
-                Bomb bomb = entityManager.getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
+                Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
                 if(bomb != null)
                 {
                     topRefBombId =  bomb.getBombId();
@@ -223,8 +223,8 @@ public abstract class Entity
         if(map.isBombPlaced(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY) || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY))
         {
             //Compare saved bomb id with current one if they dont match lock movement
-            Bomb bomb1 = entityManager.getBombObjectOnCoordinates(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY);
-            Bomb bomb2 = entityManager.getBombObjectOnCoordinates(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY);
+            Bomb bomb1 = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x + marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY);
+            Bomb bomb2 = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x  + Constants.PLAYERWIDTH - marginX, pos.y + Constants.PLAYERHEIGHT / 2 + marginY);
             if((bomb1 != null && bomb1.getBombId() != topRefBombId) || (bomb2 != null && bomb2.getBombId() != topRefBombId))
             {
                 return true;
@@ -254,7 +254,7 @@ public abstract class Entity
             if(bottomRefBombId == -1)
             {
                 //Get bomb Id and save this Id for later
-                Bomb bomb = entityManager.getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
+                Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x + Constants.PLAYERWIDTH / 2, pos.y);
                 if(bomb != null)
                 {
                     bottomRefBombId =  bomb.getBombId();
@@ -267,8 +267,8 @@ public abstract class Entity
         if(map.isBombPlaced(pos.x + marginX, pos.y - marginY) || map.isBombPlaced(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY))
         {
             //Compare saved bomb id with current one if they dont match lock movement
-            Bomb bomb1 = entityManager.getBombObjectOnCoordinates(pos.x + marginX, pos.y - marginY);
-            Bomb bomb2 = entityManager.getBombObjectOnCoordinates(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY);
+            Bomb bomb1 = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x + marginX, pos.y - marginY);
+            Bomb bomb2 = entityManager.getBombManager().getBombObjectOnCoordinates(pos.x  + Constants.PLAYERWIDTH -marginX, pos.y - marginY);
             if((bomb1 != null && bomb1.getBombId() != bottomRefBombId) || (bomb2 != null && bomb2.getBombId() != bottomRefBombId))
             {
                 return true;

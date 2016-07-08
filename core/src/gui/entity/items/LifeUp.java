@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.item;
+package gui.entity.items;
+
 
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.entity.MainPlayer;
+import gui.entity.players.MainPlayer;
 import gui.map.MapManager;
 
 
@@ -17,26 +18,22 @@ import gui.map.MapManager;
  *
  * @author Christian
  */
-public class YellowHeart extends Item{
+public class LifeUp extends Item{
     
-
-    /**
-     * 
-     * @param pos the position of the Itemonly in int
-     * @param direction alwalys 0, 0
-     * @param map
-     * @param entityManager 
-     */
-    public YellowHeart(int CellX, int CellY, MapManager map, EntityManager entityManager) {
-        super(CellX, CellY,TextureManager.yellowHeart, map, entityManager);
+    
+    //Constructor
+    public LifeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
+    {
+        super(cellX, cellY,TextureManager.lifeUp, map, entityManager);
     }
    
     @Override
     public void render()
-    {
-        if(entityManager.getMainPlayer() != null)
+    {     
+        //Check if main player is alive
+        if(entityManager.getPlayerManager().getMainPlayer() != null)
         {
-            if(entityManager.getMainPlayer().getLife()< Constants.MAXLIFE)
+            if(entityManager.getPlayerManager().getMainPlayer().getLife() < Constants.MAXLIFE)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {
@@ -49,24 +46,18 @@ public class YellowHeart extends Item{
         }
     }
     
-    
     @Override
     public void itemEffect()
     {
-        MainPlayer mainP = entityManager.getMainPlayer();
+        MainPlayer mainP = entityManager.getPlayerManager().getMainPlayer();
         
-        for(int i=0; i < 3; i++)
-        {
-            //Check if main player is alive
-            if(mainP != null)
-            {
-                mainP.setLife((mainP.getLife() + 1));
-            }
-        }
-        
+        //Check if main player is alive
         if(mainP != null)
         {
+            mainP.setLife((mainP.getLife() + 1));
             client.sendData("enemyPlayerLife|" + mainP.getPlayerId() + "|" + (mainP.getLife()) + "|*");        
         }
     }
+
+    
 }

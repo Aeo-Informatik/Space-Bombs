@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package networkClient;
+package client;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
-import gui.entity.EnemyPlayer;
+import gui.entity.players.EnemyPlayer;
 import gui.entity.EntityManager;
 
 
@@ -87,7 +87,7 @@ public class ProcessData
                         if(parameters.length == 2)
                         {
                             //Spawn main player
-                            entityManager.spawnMainPlayer(Constants.PLAYERID);
+                            entityManager.getPlayerManager().spawnMainPlayer(Constants.PLAYERID);
 
                             //Spawn enemy players
                             for(int i=1; i <= Constants.AMOUNTPLAYERS ; i++)
@@ -100,7 +100,7 @@ public class ProcessData
                                 if(Constants.PROCESSDATADEBUG)
                                     System.out.println("Spawning enemy with player id: " + i);
                                 
-                                entityManager.spawnEnemyPlayer(i);
+                                entityManager.getPlayerManager().spawnEnemyPlayer(i);
                             }
 
                             Constants.PLAYERSPAWNED = true;
@@ -118,7 +118,7 @@ public class ProcessData
                     case "moveEnemyPlayer":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -136,7 +136,7 @@ public class ProcessData
                     case "stopEnemyPlayer":
                         if(parameters.length == 5)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -156,7 +156,7 @@ public class ProcessData
                         {   //Check if bomb is placed by own player
                             if(Integer.parseInt(parameters[3]) != Constants.PLAYERID)
                             {
-                                for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                                for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                                 {
                                     if(enemy.getPlayerId() == Integer.parseInt(parameters[3]))
                                     {
@@ -175,7 +175,7 @@ public class ProcessData
                     case "enemyPlayerLife":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -197,7 +197,7 @@ public class ProcessData
                     case "enemyPlayerSetRange":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -218,7 +218,7 @@ public class ProcessData
                     case "enemyPlayerSetSpeed":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -239,7 +239,7 @@ public class ProcessData
                     case "enemyPlayerSetCoins":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -259,7 +259,7 @@ public class ProcessData
                     case "enemyPlayerSetMaxBombs":
                         if(parameters.length == 4)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
@@ -279,7 +279,7 @@ public class ProcessData
                     case "enemyPlayerDied":
                         if(parameters.length == 5)
                         {
-                            for(EnemyPlayer enemy : entityManager.getEnemyArray())
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {

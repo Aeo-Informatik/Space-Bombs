@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.GL20;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
-import networkClient.Client;
+import client.Client;
 
 public class Main extends Game implements ApplicationListener {
     

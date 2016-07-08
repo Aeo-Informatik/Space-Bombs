@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity;
+package gui.entity.players;
 
-import gui.entity.bombs.Bomb;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
-import gui.entity.item.Tombstone;
+import gui.entity.Entity;
+import gui.entity.EntityManager;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
 import java.io.IOException;
@@ -442,13 +441,13 @@ public class MainPlayer extends Entity
             String bombType = "default";
             
             //Checks if there is already a bomb
-            if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombArrayMain().size)
+            if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
             {
                 //Send bomb command to server
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                entityManager.spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
+                entityManager.getBombManager().spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
             }
         }
         

@@ -3,36 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.item;
+package gui.entity.items;
 
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.entity.MainPlayer;
+import gui.entity.players.MainPlayer;
 import gui.map.MapManager;
-
 
 
 /**
  *
  * @author Christian
  */
-public class BombUp extends Item{
+public class RangeUp extends Item{
     
+
     //Constructor
-    public BombUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
-    {
-        super(cellX, cellY,TextureManager.bombUp, map, entityManager);
+    public RangeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) {
+        super(cellX, cellY,TextureManager.rangeUp, map, entityManager);
     }
    
     @Override
     public void render()
-    {   
-        if(entityManager.getMainPlayer() != null)
+    {       
+        if(entityManager.getPlayerManager().getMainPlayer() != null)
         {
-            //Check if mainPlayer has reached item max 
-            if(entityManager.getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
+            if(entityManager.getPlayerManager().getMainPlayer().getBombRange() < Constants.MAXBOMBRANGE)
             {
                 if(isMainPlayerCollectingItem() == true)
                 {
@@ -48,15 +46,15 @@ public class BombUp extends Item{
     @Override
     public void itemEffect()
     {
-        
-        MainPlayer mainP = entityManager.getMainPlayer();
+         MainPlayer mainP = entityManager.getPlayerManager().getMainPlayer();
         
         //Check if main player is alive
         if(mainP != null)
         {
-            mainP.setMaxBombPlacing((mainP.getMaxBombPlacing() + 1)); 
-            client.sendData("enemyPlayerSetMaxBombs|" + mainP.getPlayerId() + "|" + (mainP.getMaxBombPlacing()) + "|*");
+            mainP.setBombRange((mainP.getBombRange() + 1)); 
+            client.sendData("enemyPlayerSetRange|" + mainP.getPlayerId() + "|" + (mainP.getBombRange()) + "|*");
         }
     }
+
     
 }

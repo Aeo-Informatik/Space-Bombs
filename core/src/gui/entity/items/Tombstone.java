@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.item;
+package gui.entity.items;
 
 
 import gui.TextureManager;
@@ -38,7 +38,7 @@ public class Tombstone extends Item{
     @Override
     protected int getPlayerIdCollectingItem()
     {
-        int currentPlayerId = entityManager.getPlayerIdOnCoordinates(cellX, cellY);
+        int currentPlayerId = entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY);
         
         //Check if player is on item cell
         if( currentPlayerId != -1)
@@ -48,7 +48,7 @@ public class Tombstone extends Item{
             if(currentPlayerId != playerId)
             {
                 collected = true;
-                return entityManager.getPlayerIdOnCoordinates(cellX, cellY);
+                return entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY);
             }
         }
         return -1;
@@ -57,7 +57,7 @@ public class Tombstone extends Item{
     @Override
     public void render()
     {
-        if(entityManager.getMainPlayer() != null)
+        if(entityManager.getPlayerManager().getMainPlayer() != null)
         {
             if(isMainPlayerCollectingItem() == true)
             {
