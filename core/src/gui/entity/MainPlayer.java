@@ -30,7 +30,7 @@ import java.io.IOException;
 public class MainPlayer extends Entity
 {
     
-    //General Variables DO NOT CHANGE
+    //Variables DO NOT CHANGE
     private String lastMovementKeyPressed = "UP";
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
@@ -38,8 +38,7 @@ public class MainPlayer extends Entity
     private boolean godMode = false;
     private int playerId = 0;
     
-    //General objects
-    private Array <Bomb> bombArray;
+    //Objects
     private AnimEffects animEffects = new AnimEffects();
     
     //Player animation when he is moving around
@@ -58,7 +57,7 @@ public class MainPlayer extends Entity
     private float maxZoomIn = 0.5f;
     
     //Constructor
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapManager map, Array<Bomb> bombArray, EntityManager entityManager) 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapManager map, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager, camera);
 
@@ -67,7 +66,6 @@ public class MainPlayer extends Entity
         
         //Object setter
         this.playerId = playerId;
-        this.bombArray = bombArray;
         
         //Get apropriate player texture based on player id
         switch(playerId)
@@ -444,14 +442,13 @@ public class MainPlayer extends Entity
             String bombType = "default";
             
             //Checks if there is already a bomb
-            if(!map.isBombPlaced(x, y) && maxBombPlacing > bombArray.size)
+            if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombArrayMain().size)
             {
                 //Send bomb command to server
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                Bomb bomb = new Bomb(new Vector2(pos.x + Constants.PLAYERWIDTH / 2 , pos.y + Constants.PLAYERHEIGHT / 3), new Vector2(pos.x, pos.y), map, playerId, bombRange, entityManager); 
-                bombArray.add(bomb);
+                entityManager.spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
             }
         }
         

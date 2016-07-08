@@ -54,7 +54,7 @@ public class EnemyPlayer extends Entity
     private int maxBombPlacing = 2;
     
     //Constructor
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, Array<Bomb> bombArray, EntityManager entityManager, OrthographicCamera camera) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, EntityManager entityManager, OrthographicCamera camera) 
     {
         super(pos, direction, map, entityManager, camera);
         
