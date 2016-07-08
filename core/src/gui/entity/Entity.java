@@ -27,18 +27,17 @@ public abstract class Entity
     protected TiledMapTileLayer bombLayer;
     protected EntityManager entityManager;
     protected SpriteBatch renderObject;
-    protected OrthographicCamera camera;
+    
     
     protected float entitySpeed = Constants.DEFAULTENTITYSPEED;
-    protected float cameraSpeed = Constants.DEFAULTCAMERASPEED;
+    
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
-    public Entity(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, OrthographicCamera camera){
+    public Entity(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager){
         
         this.pos = pos;
         this.map = map;
-        this.camera = camera;
         this.direction = direction;
         this.blockLayer = map.getBlockLayer();
         this.bombLayer = map.getBombLayer();
@@ -296,18 +295,7 @@ public abstract class Entity
         return false;
     }
     
-    
-    /**
-     * Follows the entity with smooth camera movements.
-     */
-    protected void cameraFollowEntity()
-    {
-        Vector3 cameraPos = camera.position;
-        cameraPos.x += (pos.x - cameraPos.x) * cameraSpeed * Constants.DELTATIME;
-        cameraPos.y += (pos.y - cameraPos.y) * cameraSpeed * Constants.DELTATIME;
-    }
-    
-    
+
     /**
      * Sets the entity movement direction to left controlled from entitySpeed.
      */
@@ -371,16 +359,6 @@ public abstract class Entity
     public float getEntitySpeed()
     {
         return this.entitySpeed;
-    }
-    
-    public void setCameraFollowSpeed(float cameraSpeed)
-    {
-        this.cameraSpeed = cameraSpeed;
-    }
-    
-    public float getCameraFollowSpeed()
-    {
-        return this.cameraSpeed;
     }
 }
 

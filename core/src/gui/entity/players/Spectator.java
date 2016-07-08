@@ -23,7 +23,7 @@ import java.io.IOException;
  *
  * @author qubasa
  */
-public class Spectator extends Entity
+public class Spectator extends Player
 {
     //General objects and variables
     private boolean freeCam = true;

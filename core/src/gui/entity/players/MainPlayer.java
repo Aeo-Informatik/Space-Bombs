@@ -26,7 +26,7 @@ import java.io.IOException;
  *
  * @author qubasa
  */
-public class MainPlayer extends Entity
+public class MainPlayer extends Player
 {
     
     //Variables DO NOT CHANGE
@@ -121,7 +121,7 @@ public class MainPlayer extends Entity
             pos.add(this.direction);
             
             //Set the camera to follow the player
-            cameraFollowEntity();
+            cameraFollowPlayer();
             
             //Move player actions
             inputMovePlayer();

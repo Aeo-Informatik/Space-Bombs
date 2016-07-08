@@ -13,7 +13,6 @@ import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
-import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 
@@ -21,7 +20,7 @@ import gui.map.MapManager;
  *
  * @author qubasa
  */
-public class EnemyPlayer extends Entity
+public class EnemyPlayer extends Player
 {
     //Objects
     private AnimEffects animEffects = new AnimEffects();

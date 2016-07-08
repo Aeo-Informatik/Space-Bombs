@@ -29,7 +29,7 @@ public class Item extends Entity
     //Constructor
     public Item(int cellX, int cellY, TextureRegion itemTexture, MapManager map, EntityManager entityManager) 
     {
-        super(new Vector2(cellX, cellY), new Vector2(0,0), map, entityManager, null);
+        super(new Vector2(cellX, cellY), new Vector2(0,0), map, entityManager);
         
         this.emptyBlock = TextureManager.emptyBlock;
         this.cellX = cellX;

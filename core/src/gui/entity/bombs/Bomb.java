@@ -60,7 +60,7 @@ public class Bomb extends Entity
     //Constructor
     public Bomb(Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
     { 
-        super(pos, direction, map, entityManager, null);
+        super(pos, direction, map, entityManager);
         
         //Needed variables
         this.playerId = playerId;
