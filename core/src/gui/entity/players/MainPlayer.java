@@ -16,7 +16,6 @@ import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
-import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import gui.screen.MenuScreen;
@@ -121,7 +120,7 @@ public class MainPlayer extends Player
             pos.add(this.direction);
             
             //Set the camera to follow the player
-            cameraFollowPlayer();
+            cameraFollowPlayer(pos);
             
             //Move player actions
             inputMovePlayer();

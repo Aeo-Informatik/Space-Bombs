@@ -37,7 +37,7 @@ public class Player extends Entity
     /**
     * Follows the entity with smooth camera movements.
     */
-    protected void cameraFollowPlayer()
+    protected void cameraFollowPlayer(Vector2 pos)
     {
         Vector3 cameraPos = camera.position;
         cameraPos.x += (pos.x - cameraPos.x) * cameraSpeed * Constants.DELTATIME;

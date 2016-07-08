@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
-import gui.entity.Entity;
 import gui.entity.EntityManager;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
@@ -52,10 +51,11 @@ public class Spectator extends Player
         if(freeCam)
         {
             inputMoveSpectator();
+            cameraFollowPlayer(pos);
         }else
         {
             //Follow living enemie player
-            camera.position.set(this.currentEnemyPlayer.getPosition().x, this.currentEnemyPlayer.getPosition().y, 0);
+            cameraFollowPlayer(currentEnemyPlayer.getPosition());
         }
         
         //Keyboard interception
@@ -68,9 +68,6 @@ public class Spectator extends Player
      */
     private void inputMoveSpectator()
     {
-                
-        float cameraSpeed = 2.51f;
-        
         if((Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)))
         {
             if(!collidesLeft())
@@ -79,12 +76,8 @@ public class Spectator extends Player
                 //This will be added to the position every render cycle
                 goLeft();
 
-                //Move camera x,y
-                camera.translate( -1 * cameraSpeed,0);
-
             }else
             {
-                camera.translate(0, 0);
                 stopMoving();
             }
              
@@ -94,11 +87,9 @@ public class Spectator extends Player
             if(!collidesRight())
             {
                 goRight();
-                camera.translate(cameraSpeed,0);
-                
+
             }else
             {
-                camera.translate(0, 0);
                 stopMoving();
             }
             
@@ -108,11 +99,9 @@ public class Spectator extends Player
             if(!collidesTop())
             {
                 goUp();
-                camera.translate(0, cameraSpeed);
                 
             }else
             {
-                camera.translate(0, 0);
                 stopMoving();
             }
             
@@ -121,19 +110,16 @@ public class Spectator extends Player
         {
             if(!collidesBottom())
             {
-                camera.translate(0, -1 * cameraSpeed);
                 goDown();
                 
             }else
             {
-                camera.translate(0, 0);
                 stopMoving();
             }
             
         /*------------------NO MOVEMENT------------------*/    
         }else
         {
-            camera.translate(0, 0);
             stopMoving();
         }
     }
