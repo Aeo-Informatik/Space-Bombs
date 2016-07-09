@@ -228,5 +228,12 @@ public class ItemManager
     }
     
     /**--------------------GETTER & SETTER--------------------**/
+    public void clearAllItems()
+    {
+        itemArray.clear();
+        coinArray.clear();
+        tombArray.clear();
+    }
+    
 }
 

@@ -124,4 +124,9 @@ public class BombManager
         return this.bombArrayMainPlayer;
     }
     
+    public void clearAllBombs()
+    {
+        this.bombArrayEnemyPlayers.clear();
+        this.bombArrayMainPlayer.clear();
+    }
 }
