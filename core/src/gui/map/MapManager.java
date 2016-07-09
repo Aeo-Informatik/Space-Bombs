@@ -99,6 +99,8 @@ public class MapManager
     
     private void findAllItemFields()
     {
+        itemSpawnerPositions.clear();
+        
         for(int mapY=0; mapY < floorLayer.getHeight(); mapY++)
         {
             for(int mapX=0; mapX < floorLayer.getWidth(); mapX++)
