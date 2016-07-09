@@ -230,9 +230,9 @@ public class ItemManager
     /**--------------------GETTER & SETTER--------------------**/
     public void clearAllItems()
     {
-        itemArray.clear();
-        coinArray.clear();
-        tombArray.clear();
+        this.itemArray.clear();
+        this.coinArray.clear();
+        this.tombArray.clear();
     }
     
 }
