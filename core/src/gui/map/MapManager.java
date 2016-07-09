@@ -118,6 +118,22 @@ public class MapManager
     }
     
     /**-------------------Getter & Setter-------------------**/
+    public void setNewMap(String path)
+    {
+        this.tiledMap = new TmxMapLoader().load(path);
+        this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        
+        this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
+        this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
+        this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
+        this.itemLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Items");
+
+        Constants.MAPTEXTUREWIDTH = blockLayer.getTileWidth();
+        Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
+        
+        findAllItemFields();
+    }
+    
     public TiledMapTileLayer getBlockLayer()
     {
         return this.blockLayer;

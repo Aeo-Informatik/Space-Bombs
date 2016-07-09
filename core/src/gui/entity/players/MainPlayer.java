@@ -473,7 +473,7 @@ public class MainPlayer extends Player
         /*------------------CAMERA CENTERS PLAYER------------------*/
         if (Gdx.input.isKeyPressed(Keys.ENTER))
         {
-            camera.position.set(pos.x, pos.y, 0);
+            map.setNewMap("maps/TestMap.tmx");
         }
         
         /*------------------QUIT GAME------------------*/
