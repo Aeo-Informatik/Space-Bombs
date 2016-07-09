@@ -7,13 +7,13 @@ package gui.map;
 
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader.Parameters;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 
 
@@ -23,7 +23,7 @@ import com.gdx.bomberman.Constants;
  */
 public class MapManager
 {
-    //General Objects and variables
+    //Objects
     private TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
     private OrthographicCamera camera;
@@ -31,6 +31,9 @@ public class MapManager
     private TiledMapTileLayer floorLayer;
     private TiledMapTileLayer bombLayer;
     private TiledMapTileLayer itemLayer;
+    
+    //Variables
+    private Array<Vector2> itemSpawnerPositions = new Array<>(); // In entity positions
     
     //Constuctor
     public MapManager(OrthographicCamera camera)
@@ -42,10 +45,11 @@ public class MapManager
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
         this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
         this.itemLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Items");
-        
-        
+
         Constants.MAPTEXTUREWIDTH = blockLayer.getTileWidth();
         Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
+        
+        findAllItemFields();
     }
     
     public void render() 
@@ -93,6 +97,25 @@ public class MapManager
         return cell != null && cell.getTile().getProperties().containsKey("deadly");
     }
     
+    private void findAllItemFields()
+    {
+        for(int mapY=0; mapY < floorLayer.getHeight(); mapY++)
+        {
+            for(int mapX=0; mapX < floorLayer.getWidth(); mapX++)
+            {
+                try
+                {
+                    if(floorLayer.getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
+                    {
+                        itemSpawnerPositions.add(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT));
+                    }
+                }catch(NullPointerException e)
+                {
+
+                }
+            }
+        }
+    }
     
     /**-------------------Getter & Setter-------------------**/
     public TiledMapTileLayer getBlockLayer()
@@ -113,6 +136,11 @@ public class MapManager
     public TiledMapTileLayer getItemLayer()
     {
         return this.itemLayer;
+    }
+    
+    public Array<Vector2> getSpawnerPositionsArray()
+    {
+        return this.itemSpawnerPositions;
     }
     
 }

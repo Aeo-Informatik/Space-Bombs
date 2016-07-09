@@ -68,9 +68,11 @@ public class BombManager
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
         {
+            System.out.println("Add bomb from " + playerId + " to main bomb array");
             bombArrayMainPlayer.add(entity);
         }else
         {
+            System.out.println("Add bomb from " + playerId + " to enemy bomb array");
             bombArrayEnemyPlayers.add(entity);
         }
     }

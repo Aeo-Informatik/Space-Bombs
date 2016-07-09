@@ -5,10 +5,12 @@
  */
 package gui.entity.items;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import java.util.Random;
 
 /**
  *
@@ -115,74 +117,64 @@ public class ItemManager
      */
     public void spawnRandomItemOnField()
     {
-        int i=0;
-        
-        for(int mapY=0; mapY < map.getFloorLayer().getHeight(); mapY++)
+        for(Vector2 itemSpawner : map.getSpawnerPositionsArray())
         {
-            for(int mapX=0; mapX < map.getFloorLayer().getWidth(); mapX++)
+            int cellX = (int) (itemSpawner.x / Constants.MAPTEXTUREWIDTH);
+            int cellY = (int) (itemSpawner.y / Constants.MAPTEXTUREHEIGHT);
+            
+            int item = new Random().nextInt(7);
+            
+            switch(item)
             {
-                try
-                {
-                    if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
-                    {
-                        int item;
-                        item = (int)(Math.random()*7);
-                        switch(item)
-                        {
-                        
-                            case(1):
-                            {
-                                
-                                LifeUp lifeup = new LifeUp(mapX, mapY, map, entityManager);
-                                itemArray.add(lifeup);
-                                break;
-                            }
-                            
-                            case(2):
-                            {
-                                CoinBag coinBag = new CoinBag(mapX, mapY, map, entityManager, Constants.COINVALUE * 10);
-                                itemArray.add(coinBag);
-                                break;
-                            }
-                            
-                            case(3):
-                            {
-                                RangeUp rangeUp = new RangeUp(mapX, mapY, map, entityManager);
-                                itemArray.add(rangeUp);
-                                break;
-                            }
-                            
-                            case(4):
-                            {
-                                BombUp bombUp = new BombUp(mapX, mapY, map, entityManager);
-                                itemArray.add(bombUp);
-                                break;
-                            }
-                            
-                            case(5):
-                            {
-                                YellowHeart yellowHeart = new YellowHeart(mapX, mapY, map, entityManager);
-                                itemArray.add(yellowHeart);
-                                break;
-                            }
-                            
-                            case(6):
-                            {
-                                SpeedUp speedUp = new SpeedUp(mapX, mapY, map, entityManager);
-                                itemArray.add(speedUp);
-                                break;
-                            }
-                        }
-                        
-                    }
-                }catch(NullPointerException e)
+                case(0):
+                    //Do nothing o.O
+                    break;
+                
+                case(1):
                 {
 
+                    LifeUp lifeup = new LifeUp(cellX, cellY, map, entityManager);
+                    itemArray.add(lifeup);
+                    break;
+                }
+
+                case(2):
+                {
+                    CoinBag coinBag = new CoinBag(cellX, cellY, map, entityManager, Constants.COINVALUE * 10);
+                    itemArray.add(coinBag);
+                    break;
+                }
+
+                case(3):
+                {
+                    RangeUp rangeUp = new RangeUp(cellX, cellY, map, entityManager);
+                    itemArray.add(rangeUp);
+                    break;
+                }
+
+                case(4):
+                {
+                    BombUp bombUp = new BombUp(cellX, cellY, map, entityManager);
+                    itemArray.add(bombUp);
+                    break;
+                }
+
+                case(5):
+                {
+                    YellowHeart yellowHeart = new YellowHeart(cellX, cellY, map, entityManager);
+                    itemArray.add(yellowHeart);
+                    break;
+                }
+
+                case(6):
+                {
+                    SpeedUp speedUp = new SpeedUp(cellX, cellY, map, entityManager);
+                    itemArray.add(speedUp);
+                    break;
                 }
             }
         }
     }
-    
     
     /**--------------------SPAWN FUNCTIONS--------------------**/
     public void spawnYellowHeart(int CellX, int CellY)

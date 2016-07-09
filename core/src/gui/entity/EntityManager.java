@@ -5,14 +5,7 @@
  */
 package gui.entity;
 
-import gui.entity.players.EnemyPlayer;
-import gui.entity.players.Spectator;
-import gui.entity.players.MainPlayer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import gui.entity.bombs.Bomb;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import com.gdx.bomberman.Constants;
 import gui.entity.bombs.BombManager;
 import gui.map.MapManager;
 import gui.entity.items.ItemManager;
@@ -24,10 +17,7 @@ import gui.entity.players.PlayerManager;
  */
 public class EntityManager {
     
-    //Objects
     //NOTE: Array from libgdx is much faster in comparison to an arraylist
-    private OrthographicCamera camera;
-    private MapManager map;
     
     //Managers
     private ItemManager itemManager;
@@ -37,8 +27,6 @@ public class EntityManager {
     //Constructor
     public EntityManager(OrthographicCamera camera, MapManager map)
     {
-        this.camera = camera;
-        this.map = map;
         this.itemManager = new ItemManager(map, this);
         this.playerManager = new PlayerManager(camera, map, this);
         this.bombManager = new BombManager(map, this);
