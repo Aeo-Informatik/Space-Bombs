@@ -14,6 +14,7 @@ import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import com.gdx.bomberman.Constants;
 /**
  *
  * @author cb0703
@@ -41,6 +42,26 @@ public class Item extends Entity
         map.getItemLayer().setCell(cellX, cellY, cell);
     }
     
+    
+    public void render()
+    {
+        deleteItemThroughBomb();
+        
+        if(entityManager.getPlayerManager().getMainPlayer() != null)
+        {
+            //Check if mainPlayer has reached item max 
+            if(canGetCollectedByMainPlayer() == true)
+            {
+                if(isMainPlayerCollectingItem() == true)
+                {
+                    itemEffect();
+                }
+            }
+        }else //To make it possible for other players to despawn an item even after main player death
+        {
+            getPlayerIdCollectingItem();
+        }
+    }
     
     /**
      * Check if a player is on this item field.
@@ -85,15 +106,24 @@ public class Item extends Entity
         map.getItemLayer().setCell(cellX, cellY, cellCenter);
     }
     
+    public void deleteItemThroughBomb()
+    {
+        if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+        {
+            deleteItem();
+        }
+    }
+    
+    public boolean canGetCollectedByMainPlayer()
+    {
+        return true;
+    }
+    
     public void itemEffect()
     {
         
     }
 
-    public void render()
-    {
-        
-    }
     
     /**--------------------GETTER & SETTER--------------------**/
     public boolean isCollected() 

@@ -25,25 +25,6 @@ public class BombUp extends Item{
     {
         super(cellX, cellY,TextureManager.bombUp, map, entityManager);
     }
-   
-    @Override
-    public void render()
-    {   
-        if(entityManager.getPlayerManager().getMainPlayer() != null)
-        {
-            //Check if mainPlayer has reached item max 
-            if(entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
-            {
-                if(isMainPlayerCollectingItem() == true)
-                {
-                    itemEffect();
-                }
-            }
-        }else //To make it possible for other players to despawn an item even after main player death
-        {
-            getPlayerIdCollectingItem();
-        }
-    }
     
     @Override
     public void itemEffect()
@@ -57,6 +38,16 @@ public class BombUp extends Item{
             mainP.setMaxBombPlacing((mainP.getMaxBombPlacing() + 1)); 
             client.sendData("enemyPlayerSetMaxBombs|" + mainP.getPlayerId() + "|" + (mainP.getMaxBombPlacing()) + "|*");
         }
+    }
+    
+    @Override
+    public boolean canGetCollectedByMainPlayer ()
+    {
+        if(entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
+        {
+            return true;
+        }
+        return false;
     }
     
 }
