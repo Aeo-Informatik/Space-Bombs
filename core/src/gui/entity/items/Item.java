@@ -113,7 +113,7 @@ public class Item extends Entity
     {
         if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
         {
-            deleteItem();
+            collected = true;
         }
     }
     
