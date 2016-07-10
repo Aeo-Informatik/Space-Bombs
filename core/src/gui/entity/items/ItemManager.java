@@ -123,7 +123,6 @@ public class ItemManager
             int cellY = (int) (itemSpawner.y / Constants.MAPTEXTUREHEIGHT);
             
             int item = new Random().nextInt(7);
-            item = 4;
             
             switch(item)
             {
