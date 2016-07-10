@@ -23,24 +23,6 @@ public class SpeedUp extends Item{
     public SpeedUp(int CellX, int CellY, MapManager map, EntityManager entityManager) {
         super(CellX, CellY,TextureManager.speedUp, map, entityManager);
     }
-   
-    @Override
-    public void render()
-    {            
-        if(entityManager.getPlayerManager().getMainPlayer() != null)//check if MAinplayer stil exsitst
-        {
-            if(entityManager.getPlayerManager().getMainPlayer().getEntitySpeed() < Constants.MAXSPEED)//check if item is usable for the mainplayer
-            {
-                if(isMainPlayerCollectingItem() == true)//check if item is collected by the mainplayer
-                {
-                    itemEffect();
-                }
-            }
-        }else //To make it possible for other players to despawn an item even after main player death
-        {
-            getPlayerIdCollectingItem();
-        }
-    }
     
     /**
      * do wahat the item does
@@ -57,5 +39,15 @@ public class SpeedUp extends Item{
             mainP.setEntitySpeed((mainP.getEntitySpeed() + 0.1f));
             client.sendData("enemyPlayerSetSpeed|" + mainP.getPlayerId() + "|" + (mainP.getEntitySpeed()) + "|*");
         }
+    }
+    
+    @Override
+    public boolean canGetCollectedByMainPlayer ()
+    {
+        if(entityManager.getPlayerManager().getMainPlayer().getEntitySpeed() < Constants.MAXSPEED)
+        {
+            return true;
+        }
+        return false;
     }
 }

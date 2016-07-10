@@ -106,6 +106,9 @@ public class Item extends Entity
         map.getItemLayer().setCell(cellX, cellY, cellCenter);
     }
     
+    /**
+     * delete item if it is hit by a bomb
+     */
     public void deleteItemThroughBomb()
     {
         if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
@@ -114,11 +117,18 @@ public class Item extends Entity
         }
     }
     
+    /**
+     * check if item is usable for the player
+     * @return true if it is collectable
+     */
     public boolean canGetCollectedByMainPlayer()
     {
         return true;
     }
     
+    /**
+     * the effect of the item
+     */
     public void itemEffect()
     {
         

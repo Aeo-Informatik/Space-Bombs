@@ -24,24 +24,6 @@ public class RangeUp extends Item{
     public RangeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) {
         super(cellX, cellY,TextureManager.rangeUp, map, entityManager);
     }
-   
-    @Override
-    public void render()
-    {       
-        if(entityManager.getPlayerManager().getMainPlayer() != null)
-        {
-            if(entityManager.getPlayerManager().getMainPlayer().getBombRange() < Constants.MAXBOMBRANGE)
-            {
-                if(isMainPlayerCollectingItem() == true)
-                {
-                    itemEffect();
-                }
-            }
-        }else //To make it possible for other players to despawn an item even after main player death
-        {
-            getPlayerIdCollectingItem();
-        }
-    }
     
     @Override
     public void itemEffect()
@@ -55,6 +37,15 @@ public class RangeUp extends Item{
             client.sendData("enemyPlayerSetRange|" + mainP.getPlayerId() + "|" + (mainP.getBombRange()) + "|*");
         }
     }
-
+    
+    @Override
+    public boolean canGetCollectedByMainPlayer ()
+    {
+        if(entityManager.getPlayerManager().getMainPlayer().getBombRange() < Constants.MAXBOMBRANGE)
+        {
+            return true;
+        }
+        return false;
+    }
     
 }

@@ -27,21 +27,6 @@ public class CoinBag extends Item{
         super(cellX, cellY,TextureManager.coinBag, map, entityManager);
         this.value = value;
     }
-   
-    @Override
-    public void render()
-    {
-        if(isMainPlayerCollectingItem() == true)
-        {
-            itemEffect();
-        }
-        
-        if(getPlayerIdCollectingItem() != -1)
-        {
-            long id = AudioManager.singleCoin.play();
-            AudioManager.singleCoin.setVolume(id, Constants.SOUNDVOLUME);
-        }
-    }
     
     @Override
     public void itemEffect()

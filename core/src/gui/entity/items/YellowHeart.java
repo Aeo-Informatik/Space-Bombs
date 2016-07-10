@@ -29,26 +29,7 @@ public class YellowHeart extends Item{
      */
     public YellowHeart(int CellX, int CellY, MapManager map, EntityManager entityManager) {
         super(CellX, CellY,TextureManager.yellowHeart, map, entityManager);
-    }
-   
-    @Override
-    public void render()
-    {
-        if(entityManager.getPlayerManager().getMainPlayer() != null)
-        {
-            if(entityManager.getPlayerManager().getMainPlayer().getLife()< Constants.MAXLIFE)
-            {
-                if(isMainPlayerCollectingItem() == true)
-                {
-                    itemEffect();
-                }
-            }
-        }else //To make it possible for other players to despawn an item even after main player death
-        {
-            getPlayerIdCollectingItem();
-        }
-    }
-    
+    }    
     
     @Override
     public void itemEffect()
@@ -68,5 +49,15 @@ public class YellowHeart extends Item{
         {
             client.sendData("enemyPlayerLife|" + mainP.getPlayerId() + "|" + (mainP.getLife()) + "|*");        
         }
+    }
+    
+    @Override
+    public boolean canGetCollectedByMainPlayer ()
+    {
+        if(entityManager.getPlayerManager().getMainPlayer().getLife()< Constants.MAXLIFE)
+        {
+            return true;
+        }
+        return false;
     }
 }
