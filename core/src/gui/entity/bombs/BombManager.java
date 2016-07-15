@@ -57,6 +57,15 @@ public class BombManager
                 bombArrayMainPlayer.removeIndex(i);
             }
         }
+        
+        //Deletes enemy player bombs if exploded
+        for (int i=0; i < bombArrayEnemyPlayers.size; i++)
+        {
+            if(this.bombArrayEnemyPlayers.get(i).isExploded())
+            {
+                bombArrayEnemyPlayers.removeIndex(i);
+            }
+        }
     }
     
     
