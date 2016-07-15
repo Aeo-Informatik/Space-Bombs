@@ -26,7 +26,7 @@ public class Constants
     public static String WINDOWICONPATH = "other/icon.png";
     
     //Game config
-    public static String MAPPATH = "maps/26x26-Plain.tmx";
+    public static String DEFAULTMAPPATH = "maps/26x26-Plain.tmx";
     public static float DEFAULTZOOM = 0.8f;
 
     //Entity config

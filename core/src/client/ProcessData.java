@@ -26,7 +26,7 @@ public class ProcessData
     {
         this.entityManager = entityManager;
     }
-    
+
     /**
      * Renders incoming server calls has to be between the SpriteBatch.begin() tag.
      */

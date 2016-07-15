@@ -18,6 +18,7 @@ public class Server
     
     //Variables
     private int maxConnections;
+    private String mapPath = Constants.DEFAULTMAPPATH;
     
     //Constructor
     public Server(int port, int maxConnections)

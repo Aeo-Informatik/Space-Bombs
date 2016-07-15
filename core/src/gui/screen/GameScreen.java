@@ -20,7 +20,6 @@ import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.hud.CounterHud;
-import gui.entity.items.ItemManager;
 import java.util.Random;
 
 
