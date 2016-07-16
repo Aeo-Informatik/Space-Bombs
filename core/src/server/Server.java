@@ -100,6 +100,8 @@ public class Server
         {
             closeLobby();
 
+            processData.stopItemSpawnThread();
+            
             //Close all forward threads
             for(Thread thread: forwardThreadList)
             {

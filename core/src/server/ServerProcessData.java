@@ -21,6 +21,14 @@ public class ServerProcessData
         this.server = server;
     }
     
+    public void stopItemSpawnThread()
+    {
+        if(itemSpawnerThread != null)
+        {
+            itemSpawnerThread.interrupt();
+        }
+    }
+    
     public void executeInstruction(String [] parameters)
     {
         try
@@ -41,7 +49,7 @@ public class ServerProcessData
                                 itemFields = Integer.parseInt(parameters[1]);
                                 
                                 //Interrupt old thread
-                                if(itemSpawnerThread != null && itemSpawnerThread.isAlive())
+                                if(itemSpawnerThread != null)
                                 {
                                     itemSpawnerThread.interrupt();
                                 }

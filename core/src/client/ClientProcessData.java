@@ -52,6 +52,52 @@ public class ClientProcessData
             {
                 switch (parameters[0]) 
                 {
+                    
+                    /**------------------SPAWN ITEM------------------**/
+                    //General:spawnItem|itemType|itemField|target
+                    case "spawnItem":
+                        if(parameters.length == 4)
+                        { 
+                            try
+                            {
+                                Vector2 itemField = mapManager.getSpawnerPositionsArray().get(Integer.parseInt(parameters[2]));
+                                int cellX = (int) (itemField.x / Constants.MAPTEXTUREWIDTH);
+                                int cellY = (int) (itemField.y / Constants.MAPTEXTUREHEIGHT);
+                            
+                                switch(parameters[1])
+                                {
+                                    case "BombUp":
+                                        entityManager.getItemManager().spawnBombUp(cellX, cellY);
+                                        break;
+                                        
+                                    case "CoinBag":
+                                        entityManager.getItemManager().spawnCoinBag(cellX, cellY, Constants.COINVALUE * 10);
+                                        break;
+                                        
+                                    case "LifeUp":
+                                        entityManager.getItemManager().spawnLifeUp(cellX, cellY);
+                                        break;
+                                        
+                                    case "RangeUp":
+                                        entityManager.getItemManager().spawnRangeUp(cellX, cellY);
+                                        break;
+                                        
+                                    case "SpeedUp":
+                                        entityManager.getItemManager().spawnSpeedUp(cellX, cellY);
+                                        break;
+                                        
+                                    case "YellowHeart":
+                                        entityManager.getItemManager().spawnYellowHeart(cellX, cellY);
+                                        break;
+                                }
+                            }catch(IndexOutOfBoundsException e)
+                            {
+                                System.err.println("ERROR: spawnItem wrong itemField number " + e);
+                            }
+                        }else
+                            System.err.println("ERROR: spawnItem wrong number of parameters");
+                        break;
+                    
                     /**------------------SET MAP TO PLAY ON------------------**/
                     //General: setGameMap|mapPath|target
                     case "setGameMap":

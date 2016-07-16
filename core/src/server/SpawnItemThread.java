@@ -47,9 +47,39 @@ public class SpawnItemThread implements Runnable
                 
                 
                 //Select item to spawn
-                if(number <= 40)
+                if(number <= 30)
                 {
-                    itemSpawnCommands.add("");
+                    //Spawn nothing
+                    
+                }else if(number > 30 && number <= 40) //BOMBUP
+                {
+                    //General:spawnItem|itemType|itemField|target
+                    itemSpawnCommands.add("spawnItem|BombUp|" + i + "|*");
+                    
+                }else if(number > 40 && number <= 60) //COINBAG
+                {
+                    //General:spawnItem|itemType|itemField|target
+                    itemSpawnCommands.add("spawnItem|CoinBag|" + i + "|*");
+                    
+                }else if(number > 60 && number <= 70) //LIFEUP
+                {
+                    //General:spawnItem|itemType|itemField|target
+                    itemSpawnCommands.add("spawnItem|LifeUp|" + i + "|*");
+                    
+                }else if(number > 70 && number <= 80) //RANGEUP
+                {
+                    //General:spawnItem|itemType|itemField|target
+                    itemSpawnCommands.add("spawnItem|RangeUp|" + i + "|*");
+                    
+                }else if(number > 80 && number <= 95) //SPEEDUP
+                {
+                    //General:spawnItem|itemType|itemField|target
+                    itemSpawnCommands.add("spawnItem|SpeedUp|" + i + "|*");
+                    
+                }else if(number > 95 && number <= 100) //YELLOWHEART
+                {
+                    //General:spawnItem|itemType|itemField|target
+                    itemSpawnCommands.add("spawnItem|YellowHeart|" + i + "|*");
                 }
             }
             
@@ -72,6 +102,8 @@ public class SpawnItemThread implements Runnable
                
             }
         }
+        
+        System.out.println("EXITED SPAWN ITEM THREAD");
     }
     
 }
