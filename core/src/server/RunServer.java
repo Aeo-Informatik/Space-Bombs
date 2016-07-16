@@ -19,7 +19,7 @@ public class RunServer
         {
             
             //Initialise server object
-            Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);   
+            Server server = new Server(ServerConstants.SERVERPORT, ServerConstants.MAXPLAYERS);   
 
             server.OpenLobby();
             

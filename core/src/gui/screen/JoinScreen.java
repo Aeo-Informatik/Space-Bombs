@@ -139,7 +139,7 @@ public class JoinScreen implements Screen
                     //Create new Server object
                     if(Constants.TESTSERVEROBJ == null)
                     {
-                        Constants.TESTSERVEROBJ = new Server(Constants.SERVERPORT, 1);
+                        Constants.TESTSERVEROBJ = new Server(13199, 1);
                     }
                     
                     //Accept client connections

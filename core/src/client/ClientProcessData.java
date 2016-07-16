@@ -323,7 +323,7 @@ public class ClientProcessData
             
         }catch(InterruptedException | NumberFormatException e)
         {
-            System.err.println("ERROR: ProcessDataThread() Something went wrong " + e);
+            System.err.println("ERROR: ClientProcessData() Something went wrong " + e);
             e.printStackTrace();
             Gdx.app.exit();
         }

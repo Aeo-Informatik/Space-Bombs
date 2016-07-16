@@ -9,7 +9,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
@@ -68,7 +66,7 @@ public class HostScreen implements Screen
         Gdx.input.setInputProcessor(stage);
         maximumplayer = 1;
         hostButtonClickCounter = 0;
-        Constants.MAXPLAYERS = maximumplayer;
+        //Constants.MAXPLAYERS = maximumplayer;
      
 
         //Initialise Font
@@ -230,8 +228,8 @@ public class HostScreen implements Screen
                     hostButtonClickCounter++;
                 Constants.SERVERIP = "localhost";
                 //Add click musik
-                Constants.MAXPLAYERS = maximumplayer;
-                System.out.println( Constants.MAXPLAYERS);
+                //Constants.MAXPLAYERS = maximumplayer;
+                //System.out.println( Constants.MAXPLAYERS);
                 long id = AudioManager.clickSound.play();
                 AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);      
                 
@@ -239,10 +237,10 @@ public class HostScreen implements Screen
             {
                 // try to start the server and connect with it
                 
-                Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);
+                //Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);
                 client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                 client.connectToServer();
-                server.OpenLobby();
+                //server.OpenLobby();
                 game.setScreen(new GameScreen());
 
                 
@@ -251,7 +249,7 @@ public class HostScreen implements Screen
                if(  (clientsConnectionSize==maximumplayer))
                {
                    
-                   server.startGame();
+                   //server.startGame();
                } 
                 
                 

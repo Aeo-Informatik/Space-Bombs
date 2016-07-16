@@ -26,7 +26,6 @@ public class Constants
     public static String WINDOWICONPATH = "other/icon.png";
     
     //Game config
-    public static String DEFAULTMAPPATH = "maps/26x26-Plain.tmx";
     public static float DEFAULTZOOM = 0.8f;
 
     //Entity config
@@ -43,16 +42,11 @@ public class Constants
     public static float MAXSPEED = 2f;
     
     //Client config
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static String SERVERIP = "";
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     public static boolean PROCESSDATADEBUG = true;
-    
-    //Server config
-    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
-    public static int SERVERPORT = 13199;
-    public static int MAXPLAYERS = 4;
-    public static boolean SERVERDEBUG = false;
         
     //Ingame variables DO NOT CHANGE!
     public static Server TESTSERVEROBJ = null;

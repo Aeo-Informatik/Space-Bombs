@@ -18,7 +18,7 @@ public class Server
     
     //Variables
     private int maxConnections;
-    private String mapPath = Constants.DEFAULTMAPPATH;//"maps/TestMap.tmx"
+    private String mapPath = ServerConstants.DEFAULTMAPPATH;//"maps/TestMap.tmx"
     
     //Constructor
     public Server(int port, int maxConnections)
@@ -55,7 +55,7 @@ public class Server
                 for(int i = 0; i < Server.getClientList().size(); i++)
                 {
                     //Debug
-                    if(Constants.SERVERDEBUG)
+                    if(ServerConstants.SERVERDEBUG)
                         System.out.println("SERVER: ------Start Setup Game------");
 
                     //Player id as string

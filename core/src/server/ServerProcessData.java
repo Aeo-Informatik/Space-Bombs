@@ -15,16 +15,25 @@ public class ServerProcessData
 {
     public void checkForServerInstructions(String receivedData)
     {
-        //Split received data
-        String[] parameters = receivedData.split("\\|");
-
-        //Check if it targets this device with keyword SERVER
-        if (parameters[parameters.length - 1].equals("SERVER"))
+        try
         {
-            switch (parameters[0]) 
-            {
+            //Split received data
+            String[] parameters = receivedData.split("\\|");
 
+            //Check if it targets this device with keyword SERVER
+            if (parameters[parameters.length - 1].equals("SERVER"))
+            {
+                switch (parameters[0]) 
+                {
+                    case "registerItemFields":
+                        break;
+                }
             }
+            
+        }catch(Exception e)
+        {
+            System.err.println("ERROR: ServerProcessData() Something went wrong " + e);
+            e.printStackTrace();
         }
     }
 }

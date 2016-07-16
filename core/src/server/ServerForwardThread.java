@@ -58,7 +58,7 @@ public class ServerForwardThread implements Runnable
                 processData.checkForServerInstructions(dataReceived);
                 
                 //Debug
-                if(Constants.SERVERDEBUG)
+                if(ServerConstants.SERVERDEBUG)
                 {
                     System.out.println("SERVER: Received: " + dataReceived);
                     System.out.println("SERVER: From: " + socket.getInetAddress().getHostAddress());
@@ -76,7 +76,7 @@ public class ServerForwardThread implements Runnable
                     printWriter.flush();
 
                     //Debug
-                    if(Constants.SERVERDEBUG)
+                    if(ServerConstants.SERVERDEBUG)
                     {
                         System.out.println("SERVER: Send: " + dataReceived);
                         System.out.println("SERVER: To: " + Server.getClient(i).getInetAddress().getHostAddress()); 
