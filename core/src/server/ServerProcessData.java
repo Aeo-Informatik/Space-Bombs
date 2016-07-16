@@ -25,8 +25,10 @@ public class ServerProcessData
     {
         if(itemSpawnerThread != null)
         {
+            System.out.println("stop spawn item thread");
             itemSpawnerThread.interrupt();
-        }
+        }else
+            System.out.println("dont stop spawn item thread");
     }
     
     public void executeInstruction(String [] parameters)

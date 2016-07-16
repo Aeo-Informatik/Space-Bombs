@@ -99,8 +99,6 @@ public class Server
         try
         {
             closeLobby();
-
-            processData.stopSpawnItemThread();
             
             //Close all forward threads
             for(Thread thread: forwardThreadList)
@@ -108,6 +106,8 @@ public class Server
                 thread.interrupt();
             }
 
+            getServerProcessData().stopSpawnItemThread();
+            
             for(Socket client: Server.getClientList())
             {
                 client.close();

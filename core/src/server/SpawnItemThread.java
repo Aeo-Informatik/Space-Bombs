@@ -34,6 +34,8 @@ public class SpawnItemThread implements Runnable
         
         while(!Thread.currentThread().isInterrupted())
         {
+            System.out.println("Spawn item thread running");
+            
             ArrayList<String> itemSpawnCommands = new ArrayList<>();
             
             //Spawn an item for every field
