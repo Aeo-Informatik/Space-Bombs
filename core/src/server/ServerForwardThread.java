@@ -7,7 +7,6 @@ package server;
 
 
 
-import com.gdx.bomberman.Constants;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -25,7 +24,6 @@ public class ServerForwardThread implements Runnable
 {
     private Socket socket;  
     private int playerId;
-    private ServerProcessData processData = new ServerProcessData();
     
     public ServerForwardThread(Socket socket, int playerId)
     {
@@ -54,8 +52,21 @@ public class ServerForwardThread implements Runnable
                     break;
                 }
 
-                //Check if received data is an server instruction
-                processData.checkForServerInstructions(dataReceived);
+                try
+                {
+                    //Split received data
+                    String[] parameters = dataReceived.split("\\|");
+
+                    //Check if it targets this device with keyword SERVER
+                    if (parameters[parameters.length - 1].equals("SERVER"))
+                    {
+                        //Check if received data is an server instruction
+                        Server.getServerProcessData().executeInstruction(parameters);
+                    }
+                }catch(IndexOutOfBoundsException e)
+                {
+                    System.err.println("SERVER ERROR: Received faulty command that cant be split." );
+                }
                 
                 //Debug
                 if(ServerConstants.SERVERDEBUG)

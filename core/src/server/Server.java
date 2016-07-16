@@ -11,6 +11,7 @@ public class Server
     //Objects
     private ServerSocket serverSocket;
     private static ArrayList<Socket> clientConnections = new ArrayList<>();
+    private static ServerProcessData processData = new ServerProcessData();
     
     //Persistent Threads
     private Thread lobbyThread; //Till maxConnection has been reached or thread closed
@@ -228,5 +229,10 @@ public class Server
     public static synchronized ArrayList<Socket> getClientList()
     {
         return clientConnections;
+    }
+    
+    public static synchronized ServerProcessData getServerProcessData()
+    {
+        return processData;
     }
 }

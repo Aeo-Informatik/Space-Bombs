@@ -12,13 +12,10 @@ package server;
  */
 public class ServerProcessData 
 {
-    public void checkForServerInstructions(String receivedData)
+    public void executeInstruction(String [] parameters)
     {
         try
         {
-            //Split received data
-            String[] parameters = receivedData.split("\\|");
-
             //Check if it targets this device with keyword SERVER
             if (parameters[parameters.length - 1].equals("SERVER"))
             {
@@ -27,6 +24,9 @@ public class ServerProcessData
                     case "registerItemFields":
                         break;
                 }
+            }else
+            {
+                System.err.println("SERVER ERROR: Execute Instruction not meant to be for server");
             }
             
         }catch(Exception e)
