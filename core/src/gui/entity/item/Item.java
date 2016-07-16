@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gui.entity.items;
+package gui.entity.item;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;

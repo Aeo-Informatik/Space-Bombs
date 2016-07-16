@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.items;
+package gui.entity.item;
 
 
 import com.gdx.bomberman.Constants;
@@ -12,7 +12,7 @@ import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import gui.AudioManager;
-import gui.entity.players.MainPlayer;
+import gui.entity.player.MainPlayer;
 
 
 /**

@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.entity.players.MainPlayer;
+import gui.entity.player.MainPlayer;
 
 /**
  *

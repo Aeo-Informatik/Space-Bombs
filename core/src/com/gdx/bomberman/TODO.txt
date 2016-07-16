@@ -17,14 +17,14 @@ Add sound effects to the game & menu.
 
 //Items
 Add items to the game:
-Speed Upgrade
+
 
 //Screens
 Option Screen:
 fullscreen, music volume, sound volume
 
 Join Screen:
-ip address bar, join button, (optional) list of available servers
+ip address bar, join button, (optional) list of available servers, check if game is already in progress
 
 Host Screen:
 Map Selection, max player number, list of already connected users, start button
@@ -43,6 +43,5 @@ A font diplaying "Winner" or something like that
 2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
-Enemy player in online mode doesnt walk correctly
 //White bars when walking with player. The problem is called "bleeding".
 //Solution: Dont make 32x32 textures but 34x34 ones

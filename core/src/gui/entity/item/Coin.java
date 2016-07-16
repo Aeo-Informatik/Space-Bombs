@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.entity.items;
+package gui.entity.item;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
@@ -14,7 +14,7 @@ import gui.entity.EntityManager;
 import gui.map.MapManager;
 import gui.AnimEffects;
 import gui.AudioManager;
-import gui.entity.players.MainPlayer;
+import gui.entity.player.MainPlayer;
 
 
 /**

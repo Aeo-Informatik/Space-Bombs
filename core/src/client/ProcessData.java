@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
-import gui.entity.players.EnemyPlayer;
+import gui.entity.player.EnemyPlayer;
 import gui.entity.EntityManager;
 
 

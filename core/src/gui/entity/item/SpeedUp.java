@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gui.entity.items;
+package gui.entity.item;
 
 
 import gui.TextureManager;
@@ -12,7 +12,7 @@ import gui.entity.EntityManager;
 import gui.map.MapManager;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
-import gui.entity.players.MainPlayer;
+import gui.entity.player.MainPlayer;
 
 /**
  *

@@ -6,10 +6,10 @@
 package gui.entity;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import gui.entity.bombs.BombManager;
+import gui.entity.bomb.BombManager;
 import gui.map.MapManager;
-import gui.entity.items.ItemManager;
-import gui.entity.players.PlayerManager;
+import gui.entity.item.ItemManager;
+import gui.entity.player.PlayerManager;
 
 /**
  *
