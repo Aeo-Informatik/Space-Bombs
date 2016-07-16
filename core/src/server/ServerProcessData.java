@@ -12,6 +12,8 @@ package server;
  */
 public class ServerProcessData 
 {
+    private int itemFields = 0;
+    
     public void executeInstruction(String [] parameters)
     {
         try
