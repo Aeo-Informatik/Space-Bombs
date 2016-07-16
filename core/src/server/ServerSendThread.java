@@ -5,6 +5,7 @@ import com.gdx.bomberman.Constants;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 
@@ -87,6 +88,9 @@ class ServerSendThread implements Runnable
                     printWriter.flush();    
                 }
                     
+            }catch(SocketException e)
+            {
+                System.err.println("Send thread aborted because specified client socket closed");
             }catch(Exception e)
             {
                 System.err.println("ERROR: Unexpected error in sendThread " +e);

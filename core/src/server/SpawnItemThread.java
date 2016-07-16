@@ -29,6 +29,9 @@ public class SpawnItemThread implements Runnable
     @Override
     public void run() 
     {
+        System.out.println("OPEN SPAWN ITEM THREAD");
+        System.out.println("Item fields: " + itemFields);
+        
         while(!Thread.currentThread().isInterrupted())
         {
             ArrayList<String> itemSpawnCommands = new ArrayList<>();
@@ -37,8 +40,9 @@ public class SpawnItemThread implements Runnable
             for(int i=0; i < itemFields; i++)
             {
                 //Exit thread
-                if(Thread.currentThread().isInterrupted())
+                if(Thread.currentThread().isInterrupted() == true)
                 {
+                    System.out.println("Interrupted thread");
                     break;
                 }
                 
@@ -87,8 +91,9 @@ public class SpawnItemThread implements Runnable
             server.sendToAll(itemSpawnCommands);
             
             //Exit thread
-            if(Thread.currentThread().isInterrupted())
+            if(Thread.currentThread().isInterrupted() == true)
             {
+                System.out.println("Interrupted thread");
                 break;
             }
             

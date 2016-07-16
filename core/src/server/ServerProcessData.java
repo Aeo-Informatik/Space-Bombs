@@ -21,7 +21,7 @@ public class ServerProcessData
         this.server = server;
     }
     
-    public void stopItemSpawnThread()
+    public void stopSpawnItemThread()
     {
         if(itemSpawnerThread != null)
         {
