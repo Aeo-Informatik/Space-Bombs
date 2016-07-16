@@ -14,6 +14,12 @@ public class ServerProcessData
 {
     private Thread itemSpawnerThread;
     private int itemFields = 0;
+    private Server server;
+    
+    public ServerProcessData(Server server)
+    {
+        this.server = server;
+    }
     
     public void executeInstruction(String [] parameters)
     {
@@ -41,7 +47,7 @@ public class ServerProcessData
                                 }
                                 
                                 //Create new thread with correct number of fields
-                                itemSpawnerThread = new Thread(new SpawnItemThread(itemFields));
+                                itemSpawnerThread = new Thread(new SpawnItemThread(itemFields, server));
                                 itemSpawnerThread.start();
                             }
                         }else

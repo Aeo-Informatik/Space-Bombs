@@ -10,7 +10,7 @@ public class Server
     //Objects
     private ServerSocket serverSocket;
     private static ArrayList<Socket> clientConnections = new ArrayList<>();
-    private static ServerProcessData processData = new ServerProcessData();
+    private ServerProcessData processData = new ServerProcessData(this);
     
     //Persistent Threads
     private Thread lobbyThread; //Till maxConnection has been reached or thread closed
@@ -66,7 +66,7 @@ public class Server
                     sendToOne(Server.getClient(i), registerCommand);
 
                     //Open forward thread for every client
-                    ServerForwardThread receive = new ServerForwardThread(Server.getClient(i), i +1);
+                    ServerForwardThread receive = new ServerForwardThread(Server.getClient(i), i +1, this);
                     Thread forwardThread = new Thread(receive);
                     forwardThread.start();
 
@@ -77,7 +77,7 @@ public class Server
                 //Send to client the amount of players and the signal to spawn them
                 String setMapCommand = "setGameMap|" + mapPath + "|*";
                 String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(Server.getClientList().size()) + "|*";
-                sendToAll(Server.getClientList(), new ArrayList<String>(){{add(setMapCommand);add(registerPlayersCommand);add("spawnPlayers|*");}});
+                sendToAll(new ArrayList<String>(){{add(setMapCommand);add(registerPlayersCommand);add("spawnPlayers|*");}});
             }else
             {
                 System.err.println("Game already in progress!");
@@ -158,7 +158,7 @@ public class Server
      * @param socket
      * @param message 
      */
-    private void sendToOne(Socket socket, String message)
+    public synchronized void sendToOne(Socket socket, String message)
     {
         try
         {   
@@ -181,11 +181,11 @@ public class Server
      * @param socketList
      * @param dataToSend 
      */
-    private void sendToAll(ArrayList<Socket> socketList, ArrayList<String> dataToSend)
+    public synchronized void sendToAll(ArrayList<String> dataToSend)
     {
         try
         { 
-            ServerSendThread send = new ServerSendThread(socketList, dataToSend);
+            ServerSendThread send = new ServerSendThread(getClientList(), dataToSend);
             Thread thread = new Thread(send);
             thread.start();
             
@@ -230,7 +230,7 @@ public class Server
         return clientConnections;
     }
     
-    public static synchronized ServerProcessData getServerProcessData()
+    public synchronized ServerProcessData getServerProcessData()
     {
         return processData;
     }

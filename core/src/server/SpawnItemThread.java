@@ -5,6 +5,7 @@
  */
 package server;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -17,10 +18,12 @@ public class SpawnItemThread implements Runnable
     private int itemFields;
     private Random random = new Random();
     private long itemSpawnTime = ServerConstants.ITEMSPAWNTIME;
+    private Server server;
     
-    public SpawnItemThread(int numberOfItemFields)
+    public SpawnItemThread(int numberOfItemFields, Server server)
     {
         this.itemFields = numberOfItemFields;
+        this.server = server;
     }
     
     @Override
@@ -28,6 +31,8 @@ public class SpawnItemThread implements Runnable
     {
         while(!Thread.currentThread().isInterrupted())
         {
+            ArrayList<String> itemSpawnCommands = new ArrayList<>();
+            
             //Spawn an item for every field
             for(int i=0; i < itemFields; i++)
             {
@@ -38,15 +43,18 @@ public class SpawnItemThread implements Runnable
                 }
                 
                 //Generate random number
-                int number = random.nextInt(100);//0-99
-
+                int number = random.nextInt(100) +1;//1-100
+                
+                
                 //Select item to spawn
-                switch(number)
+                if(number <= 40)
                 {
-                    case 0:
-                        break;
+                    itemSpawnCommands.add("");
                 }
             }
+            
+            //Send to every client the item spawn commands
+            server.sendToAll(itemSpawnCommands);
             
             //Exit thread
             if(Thread.currentThread().isInterrupted())

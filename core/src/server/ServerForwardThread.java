@@ -24,11 +24,13 @@ public class ServerForwardThread implements Runnable
 {
     private Socket socket;  
     private int playerId;
+    private Server server;
     
-    public ServerForwardThread(Socket socket, int playerId)
+    public ServerForwardThread(Socket socket, int playerId, Server server)
     {
         this.socket = socket;
         this.playerId = playerId;
+        this.server = server;
     }
     
     @Override
@@ -61,7 +63,7 @@ public class ServerForwardThread implements Runnable
                     if (parameters[parameters.length - 1].equals("SERVER"))
                     {
                         //Check if received data is an server instruction
-                        Server.getServerProcessData().executeInstruction(parameters);
+                        server.getServerProcessData().executeInstruction(parameters);
                     }
                 }catch(IndexOutOfBoundsException e)
                 {
