@@ -5,7 +5,6 @@
  */
 package server;
 
-import com.gdx.bomberman.Constants;
 
 /**
  *
