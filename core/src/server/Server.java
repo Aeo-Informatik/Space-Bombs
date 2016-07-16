@@ -18,7 +18,7 @@ public class Server
     
     //Variables
     private int maxConnections;
-    private String mapPath = Constants.DEFAULTMAPPATH;
+    private String mapPath = Constants.DEFAULTMAPPATH;//"maps/TestMap.tmx"
     
     //Constructor
     public Server(int port, int maxConnections)
@@ -195,6 +195,17 @@ public class Server
             e.printStackTrace();
             System.exit(1);
         }
+    }
+    
+    /**-----------------------GETTER & SETTER-----------------------**/
+    public void setMap(String mapPath)
+    {
+        this.mapPath = mapPath;
+    }
+    
+    public String getMap()
+    {
+        return this.mapPath;
     }
     
     
