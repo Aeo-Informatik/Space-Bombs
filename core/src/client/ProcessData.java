@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.entity.player.EnemyPlayer;
 import gui.entity.EntityManager;
+import gui.map.MapManager;
 
 
 /**
@@ -20,11 +21,13 @@ import gui.entity.EntityManager;
 public class ProcessData
 {
     private EntityManager entityManager;
+    private MapManager mapManager;
     
     //Constructor
-    public ProcessData(EntityManager entityManager)
+    public ProcessData(EntityManager entityManager, MapManager mapManager)
     {
         this.entityManager = entityManager;
+        this.mapManager = mapManager;
     }
 
     /**
@@ -49,7 +52,24 @@ public class ProcessData
             {
                 switch (parameters[0]) 
                 {
-
+                    /**------------------SET MAP TO PLAY ON------------------**/
+                    //General: setGameMap|mapPath|target
+                    case "setGameMap":
+                        if(parameters.length == 3)
+                        { 
+                            try
+                            {
+                                mapManager.setNewMap(parameters[1]);
+                                
+                            }catch(Exception e)
+                            {
+                                System.err.println("ERROR: Something went wrong in setGameMap. Wrong path or missing layer: " + e);
+                            }
+                        }else
+                            System.err.println("ERROR: setGameMap wrong number of parameters");
+                        break;
+                    
+                    
                     /**------------------SAVE PLAYER ID------------------**/
                     //General: registerPlayerId|id|target
                     case "registerMainPlayerId":
@@ -293,6 +313,7 @@ public class ProcessData
                         }else
                             System.err.println("ERROR: enemyPlayerSpawnTombStone wrong number of parameters");
                         break;
+                        
                         
                     default:
                         System.err.println("ERROR: Command received from server is not valid");

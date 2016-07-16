@@ -75,8 +75,9 @@ public class Server
                 }
 
                 //Send to client the amount of players and the signal to spawn them
+                String setMapCommand = "setGameMap|" + mapPath + "|*";
                 String registerPlayersCommand = "registerAmountPlayers|" + Integer.toString(Server.getClientList().size()) + "|*";
-                sendToAll(Server.getClientList(), new ArrayList<String>(){{add(registerPlayersCommand);add("spawnPlayers|*");}});
+                sendToAll(Server.getClientList(), new ArrayList<String>(){{add(setMapCommand);add(registerPlayersCommand);add("spawnPlayers|*");}});
             }else
             {
                 System.err.println("Game already in progress!");

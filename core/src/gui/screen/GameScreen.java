@@ -57,7 +57,7 @@ public class GameScreen implements Screen{
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT, camera));
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
-        this.processData = new ProcessData(entityManager);
+        this.processData = new ProcessData(entityManager, mapManager);
         this.counterHud = new CounterHud(renderHud, entityManager);
         
         this.camera.zoom = Constants.DEFAULTZOOM;
