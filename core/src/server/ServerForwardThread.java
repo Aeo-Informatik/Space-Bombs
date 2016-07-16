@@ -25,6 +25,7 @@ public class ServerForwardThread implements Runnable
 {
     private Socket socket;  
     private int playerId;
+    private ServerProcessData processData = new ServerProcessData();
     
     public ServerForwardThread(Socket socket, int playerId)
     {
@@ -53,6 +54,9 @@ public class ServerForwardThread implements Runnable
                     break;
                 }
 
+                //Check if received data is an server instruction
+                processData.checkForServerInstructions(dataReceived);
+                
                 //Debug
                 if(Constants.SERVERDEBUG)
                 {
@@ -87,7 +91,7 @@ public class ServerForwardThread implements Runnable
             //Send death message of disconnecting player to everyone
             ArrayList<String> dataToSend = new ArrayList<>();
             dataToSend.add("enemyPlayerLife|" + playerId + "|0|*");
-            SendThread send = new SendThread(Server.getClientList(), dataToSend);
+            ServerSendThread send = new ServerSendThread(Server.getClientList(), dataToSend);
             Thread thread = new Thread(send);
             thread.start();
             

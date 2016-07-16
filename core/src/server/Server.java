@@ -147,7 +147,7 @@ public class Server
         resetServer();
         
         //Create thread
-        Lobby lobby = new Lobby(maxConnections, serverSocket);
+        ServerLobby lobby = new ServerLobby(maxConnections, serverSocket);
         lobbyThread = new Thread(lobby);
         lobbyThread.start();
     }
@@ -163,7 +163,7 @@ public class Server
         try
         {   
             //Open send thread with the second constructor 
-            SendThread send = new SendThread(socket, message);
+            ServerSendThread send = new ServerSendThread(socket, message);
             Thread thread = new Thread(send);
             thread.start();
             
@@ -185,7 +185,7 @@ public class Server
     {
         try
         { 
-            SendThread send = new SendThread(socketList, dataToSend);
+            ServerSendThread send = new ServerSendThread(socketList, dataToSend);
             Thread thread = new Thread(send);
             thread.start();
             

@@ -13,13 +13,13 @@ import java.net.SocketTimeoutException;
  *
  * @author qubasa
  */
-public class Lobby implements Runnable
+public class ServerLobby implements Runnable
 {
     //Variables
     private int maxConnections = -1;
     private ServerSocket serverSocket;
     
-    public Lobby(int maxConnections, ServerSocket serverSocket)
+    public ServerLobby(int maxConnections, ServerSocket serverSocket)
     {
         this.maxConnections = maxConnections;
         this.serverSocket = serverSocket;

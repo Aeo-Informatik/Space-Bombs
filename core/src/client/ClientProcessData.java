@@ -18,13 +18,13 @@ import gui.map.MapManager;
  *
  * @author qubasa
  */
-public class ProcessData
+public class ClientProcessData
 {
     private EntityManager entityManager;
     private MapManager mapManager;
     
     //Constructor
-    public ProcessData(EntityManager entityManager, MapManager mapManager)
+    public ClientProcessData(EntityManager entityManager, MapManager mapManager)
     {
         this.entityManager = entityManager;
         this.mapManager = mapManager;

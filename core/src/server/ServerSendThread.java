@@ -8,14 +8,14 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 
-class SendThread implements Runnable
+class ServerSendThread implements Runnable
 {       
         //Global variables & objects
         ArrayList<Socket> sock;
         ArrayList<String> dataToSend;
 	
         //Constructor
-	public SendThread(ArrayList<Socket> sock, ArrayList<String> dataToSend)
+	public ServerSendThread(ArrayList<Socket> sock, ArrayList<String> dataToSend)
 	{
                 this.sock = sock;
                 this.dataToSend = dataToSend;
@@ -27,7 +27,7 @@ class SendThread implements Runnable
         String message1;
         
         //Constructor 2
-        public SendThread(Socket socket1, String message1)
+        public ServerSendThread(Socket socket1, String message1)
         {
             this.oneClientOnly = true;
             this.socket1 = socket1;
