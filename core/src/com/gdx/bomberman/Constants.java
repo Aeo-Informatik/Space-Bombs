@@ -13,6 +13,12 @@ import server.Server;
  */
 public class Constants 
 {
+    //Client config
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
+    public static String SERVERIP = "";
+    public static int CONNECTIONPORT = 13199;
+    public static boolean CLIENTDEBUG = false;
+    public static boolean PROCESSDATADEBUG = false;
     
     //Audio config
     public static float MUSICVOLUME = 0.0f;
@@ -40,14 +46,7 @@ public class Constants
     public static int MAXLIFE = 6;
     public static int COINVALUE = 1;
     public static float MAXSPEED = 2f;
-    
-    //Client config
-    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
-    public static String SERVERIP = "";
-    public static int CONNECTIONPORT = 13199;
-    public static boolean CLIENTDEBUG = false;
-    public static boolean PROCESSDATADEBUG = true;
-        
+       
     //Ingame variables DO NOT CHANGE!
     public static Server TESTSERVEROBJ = null;
     public static int PLAYERID = 0;

@@ -12,7 +12,7 @@ package server;
 public class ServerConstants 
 {
     //Server config
-    public static int SERVERPORT = 13199;
+    public static int LISTENINGPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
     public static String DEFAULTMAPPATH = "maps/26x26-Plain.tmx";
