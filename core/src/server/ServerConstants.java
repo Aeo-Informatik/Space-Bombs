@@ -16,5 +16,5 @@ public class ServerConstants
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
     public static String DEFAULTMAPPATH = "maps/26x26-Plain.tmx";
-    
+    public static long ITEMSPAWNTIME = 5000;//Milliseconds
 }
