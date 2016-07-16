@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 
 
 /**
@@ -117,6 +118,9 @@ public class MapManager
                 }
             }
         }
+        
+        //Send to server the amount of item fields
+        client.sendData("registerItemFields|" + itemSpawnerPositions.size + "|SERVER");
     }
     
     /**-------------------Getter & Setter-------------------**/
