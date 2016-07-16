@@ -226,7 +226,7 @@ public class HostScreen implements Screen
                 
                 if(hostButtonClickCounter <1){
                     hostButtonClickCounter++;
-                Constants.SERVERIP = "localhost";
+                //Constants.SERVERIP = "localhost";
                 //Add click musik
                 //Constants.MAXPLAYERS = maximumplayer;
                 //System.out.println( Constants.MAXPLAYERS);
@@ -238,7 +238,7 @@ public class HostScreen implements Screen
                 // try to start the server and connect with it
                 
                 //Server server = new Server(Constants.SERVERPORT, Constants.MAXPLAYERS);
-                client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+                //client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
                 client.connectToServer();
                 //server.OpenLobby();
                 game.setScreen(new GameScreen());

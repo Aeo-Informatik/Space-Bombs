@@ -102,7 +102,7 @@ public class GameScreen implements Screen{
             //If client has been disconnected from server
             if(!client.isConnectedToServer())
             {
-                System.err.println("Server connection lost to: " + Constants.SERVERIP);
+                System.err.println("CLIENT: Connection lost to server.");
                 game.setScreen(new MenuScreen());
             }
             

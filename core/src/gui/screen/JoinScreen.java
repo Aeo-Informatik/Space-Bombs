@@ -46,6 +46,9 @@ public class JoinScreen implements Screen
     private Table rootTable;
     private Stack stack;
     
+    //Variables
+    private String connectionIp = "";
+    
     //Buttons
     private TextField ipTextField;
     private TextButton joinButton;
@@ -123,16 +126,16 @@ public class JoinScreen implements Screen
                 //Get the ip out of the textfield
                 if(!ipTextField.getText().equals(""))
                 {
-                    Constants.SERVERIP = ipTextField.getText();
+                    connectionIp = ipTextField.getText();
                 }else
                 {
-                    Constants.SERVERIP = "127.0.0.1";
+                    connectionIp = "127.0.0.1";
                 }
                 
                 //Starts local server for 1 Player
                 if(Constants.TESTSERVER)
                 {
-                    Constants.SERVERIP = "127.0.0.1";
+                    connectionIp = "127.0.0.1";
                     
                     System.out.println("CLIENT: Launching test server force IP to localhost");
                     
@@ -149,10 +152,10 @@ public class JoinScreen implements Screen
                 try 
                 {
                     //Check if ip is valid
-                    if(validateIPAddress(Constants.SERVERIP))
+                    if(validateIPAddress(connectionIp))
                     {     
                         //Connect to server
-                        client = new Client(Constants.SERVERIP, Constants.CONNECTIONPORT);
+                        client = new Client(connectionIp, Constants.CONNECTIONPORT);
                         client.connectToServer();
                         
 
@@ -163,7 +166,7 @@ public class JoinScreen implements Screen
                             Constants.TESTSERVEROBJ.startGame();
                         }
                         
-                        System.out.println("CLIENT: Connecting to server " + Constants.SERVERIP + ":" + Constants.CONNECTIONPORT);
+                        System.out.println("CLIENT: Connecting to server " + connectionIp + ":" + Constants.CONNECTIONPORT);
                         
                         AudioManager.menuMusic.stop();
 
