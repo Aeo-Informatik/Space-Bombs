@@ -15,8 +15,8 @@ public class Constants
 {
     
     //Audio config
-    public static float MUSICVOLUME = 0.1f;
-    public static float SOUNDVOLUME = 0.2f;
+    public static float MUSICVOLUME = 0.0f;
+    public static float SOUNDVOLUME = 0.0f;
         
     //Window config
     public static int SCREENWIDTH = 800;
