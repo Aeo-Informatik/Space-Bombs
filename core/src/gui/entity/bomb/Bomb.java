@@ -28,33 +28,33 @@ public class Bomb extends Entity
 {
 
     //General variables
-    private int playerId;
-    private boolean touchedDeadlyTile = false;
-    private AnimEffects animEffects = new AnimEffects();
+    protected int playerId;
+    protected boolean touchedDeadlyTile = false;
+    protected AnimEffects animEffects = new AnimEffects();
     
     //Bomb settings
     private float timer;
     private float timer2;
-    private float explosionTime;
-    private int explosionRange;
-    private float explosionDuration;
-    private boolean isExploded = false;
-    private float delayAfterHitByBomb;
-    private int bombId;
-    private int cellX, cellY;
+    protected float explosionTime;
+    protected int explosionRange;
+    protected float explosionDuration;
+    protected boolean isExploded = false;
+    protected float delayAfterHitByBomb;
+    protected int bombId;
+    protected int cellX, cellY;
     
     //Blocks
-    private TextureRegion emptyBlock;
+    protected TextureRegion emptyBlock;
     
     //Bomb Animation
-    private  Animation bombAnim;
-    private TextureRegion explosionYMiddle;
-    private TextureRegion explosionXMiddle;
-    private TextureRegion explosionCenter;
-    private TextureRegion explosionDownEnd;
-    private TextureRegion explosionUpEnd;
-    private TextureRegion explosionRightEnd;
-    private TextureRegion explosionLeftEnd;
+    protected  Animation bombAnim;
+    protected TextureRegion explosionYMiddle;
+    protected TextureRegion explosionXMiddle;
+    protected TextureRegion explosionCenter;
+    protected TextureRegion explosionDownEnd;
+    protected TextureRegion explosionUpEnd;
+    protected TextureRegion explosionRightEnd;
+    protected TextureRegion explosionLeftEnd;
     
     
     //Constructor
