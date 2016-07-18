@@ -64,27 +64,22 @@ public class SpawnItemThread implements Runnable
                     
                 }else if(number > 40 && number <= 60) //COINBAG
                 {
-                    //General:spawnItem|itemType|itemField|target
                     itemSpawnCommands.add("spawnItem|CoinBag|" + i + "|*");
                     
                 }else if(number > 60 && number <= 70) //LIFEUP
                 {
-                    //General:spawnItem|itemType|itemField|target
                     itemSpawnCommands.add("spawnItem|LifeUp|" + i + "|*");
                     
                 }else if(number > 70 && number <= 80) //RANGEUP
                 {
-                    //General:spawnItem|itemType|itemField|target
                     itemSpawnCommands.add("spawnItem|RangeUp|" + i + "|*");
                     
                 }else if(number > 80 && number <= 95) //SPEEDUP
                 {
-                    //General:spawnItem|itemType|itemField|target
                     itemSpawnCommands.add("spawnItem|SpeedUp|" + i + "|*");
                     
                 }else if(number > 95 && number <= 100) //YELLOWHEART
                 {
-                    //General:spawnItem|itemType|itemField|target
                     itemSpawnCommands.add("spawnItem|YellowHeart|" + i + "|*");
                 }
             }
