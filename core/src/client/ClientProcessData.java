@@ -53,6 +53,18 @@ public class ClientProcessData
                 switch (parameters[0]) 
                 {
                     
+                    /**------------------SPAWN COIN------------------**/
+                    //General:spawnCoin|CellX|CellY|target
+                    case "spawnCoin":
+                        if(parameters.length == 4)
+                        {
+                            //Spawn coin
+                            entityManager.getItemManager().spawnCoin(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]), Constants.COINVALUE);
+                        }else
+                            System.err.println("ERROR: spawnCoin wrong number of parameters");
+                        break;
+                            
+                    
                     /**------------------SPAWN ITEM------------------**/
                     //General:spawnItem|itemType|itemField|target
                     case "spawnItem":

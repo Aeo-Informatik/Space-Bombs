@@ -39,7 +39,6 @@ A font diplaying "Winner" or something like that
 
 //Client
 1) Scanning for open servers with port scan
-2) Items have to be synchronized on every client. Player 1 will be the "host". Coins too
 2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
