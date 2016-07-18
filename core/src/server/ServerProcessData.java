@@ -25,10 +25,11 @@ public class ServerProcessData
     {
         if(itemSpawnerThread != null)
         {
-            System.out.println("stop spawn item thread");
-            itemSpawnerThread.interrupt();
-        }else
-            System.out.println("dont stop spawn item thread");
+            while(itemSpawnerThread.isAlive())
+            {
+                itemSpawnerThread.interrupt();
+            }
+        }
     }
     
     public void executeInstruction(String [] parameters)
@@ -53,8 +54,10 @@ public class ServerProcessData
                                 //Interrupt old thread
                                 if(itemSpawnerThread != null)
                                 {
-                                    System.out.println("Interrupt old spawn thread");
-                                    itemSpawnerThread.interrupt();
+                                    while(itemSpawnerThread.isAlive())
+                                    {
+                                        itemSpawnerThread.interrupt();
+                                    }
                                 }
                                                                 
                                 //Create new thread with correct number of fields

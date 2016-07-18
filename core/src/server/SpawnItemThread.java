@@ -29,8 +29,7 @@ public class SpawnItemThread implements Runnable
     @Override
     public void run() 
     {
-        System.out.println("OPEN SPAWN ITEM THREAD");
-        System.out.println("Item fields: " + itemFields);
+        System.out.println("New Item thread with item fields: " + itemFields);
         
         while(!Thread.currentThread().isInterrupted())
         {            
@@ -42,7 +41,6 @@ public class SpawnItemThread implements Runnable
                 //Exit thread
                 if(Thread.currentThread().isInterrupted() == true)
                 {
-                    System.out.println("Interrupted thread");
                     break;
                 }
                 
@@ -88,7 +86,6 @@ public class SpawnItemThread implements Runnable
             //Exit thread
             if(Thread.currentThread().isInterrupted() == true)
             {
-                System.out.println("Interrupted thread");
                 break;
             }
             
@@ -102,8 +99,6 @@ public class SpawnItemThread implements Runnable
                
             }
         }
-        
-        System.out.println("EXITED SPAWN ITEM THREAD");
     }
     
 }
