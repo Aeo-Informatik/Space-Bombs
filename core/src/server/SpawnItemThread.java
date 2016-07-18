@@ -99,6 +99,8 @@ public class SpawnItemThread implements Runnable
                
             }
         }
+        
+        System.out.println("Item thread closed!");
     }
     
 }

@@ -29,10 +29,12 @@ public class ServerProcessData
             {
                 itemSpawnerThread.interrupt();
             }
+            
+            itemFields = 0;
         }
     }
     
-    public void executeInstruction(String [] parameters)
+    public synchronized void executeInstruction(String [] parameters)
     {
         try
         {
@@ -59,7 +61,7 @@ public class ServerProcessData
                                         itemSpawnerThread.interrupt();
                                     }
                                 }
-                                                                
+                            
                                 //Create new thread with correct number of fields
                                 SpawnItemThread spawnItem = new SpawnItemThread(itemFields, server); 
                                 itemSpawnerThread = new Thread(spawnItem);
