@@ -19,8 +19,6 @@ import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
