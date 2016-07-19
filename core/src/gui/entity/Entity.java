@@ -5,11 +5,9 @@
  */
 package gui.entity;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.gdx.bomberman.Constants;
 import gui.entity.bomb.Bomb;
 import gui.map.MapManager;
@@ -45,7 +43,7 @@ public abstract class Entity
         this.renderObject = new SpriteBatch();
     }
     
-    public void render(){}
+    public abstract void render();
     
 
     /**------------------COLLISION FUNCTIONS------------------**/

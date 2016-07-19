@@ -72,7 +72,7 @@ public class BombManager
     /**--------------------SPAWN FUNCTIONS--------------------**/
     public void spawnNormalBomb(Vector2 pos, int playerId, int bombRange)
     {
-        Bomb entity = new Bomb(pos, new Vector2(0,0), map, playerId, bombRange, entityManager);
+        NormalBomb entity = new NormalBomb(pos, new Vector2(0,0),bombRange, playerId, map, entityManager);
         
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)

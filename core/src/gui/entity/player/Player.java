@@ -17,7 +17,7 @@ import gui.map.MapManager;
  *
  * @author qubasa
  */
-public class Player extends Entity
+public abstract class Player extends Entity
 {
     //Objects
     protected OrthographicCamera camera;
@@ -32,6 +32,7 @@ public class Player extends Entity
         
         this.camera = camera;
     }
+    
     
     /**------------------FUNCTIONS------------------**/
     /**
@@ -55,4 +56,5 @@ public class Player extends Entity
     {
         return this.cameraSpeed;
     }
+
 }
