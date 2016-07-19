@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.client;
 import gui.AnimEffects;
 import gui.TextureManager;
 import gui.entity.Entity;
@@ -224,6 +225,9 @@ public abstract class Bomb extends Entity
                     if(randomNum != 0)
                     {
                         entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
+                        
+                        //General:spawnCoin|CellX|CellY|target
+                        client.sendData("spawnCoin|" + x + "|" + y + "|*");
                     }
                 }
             }
