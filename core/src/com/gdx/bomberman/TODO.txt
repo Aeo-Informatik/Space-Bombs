@@ -8,12 +8,11 @@ Add sound effects to the game & menu.
 6) A hub navigation bar a la minecraft for bomb/item selection
 
 //Textures
-(6) Adding an animation for the player standig still)
-11) Better bomb animation with fuse going down
 13) Hud texture à la minecraft for bomb selection
-15) Changing the error background texture in joinscreen
 16) different colored coins 
 17) Game Icon in 128x128 for mac
+18) 2 Blocks with cabels are missing
+
 
 //Items
 Add items to the game:
