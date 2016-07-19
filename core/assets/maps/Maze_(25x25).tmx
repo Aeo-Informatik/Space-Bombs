@@ -126,7 +126,7 @@
  </layer>
  <layer name="Floor" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt0zEKhEAUBcHBRXfvf2JNDAU3GIWmCl42yaeZMQAAAAAAAAAAAICq7dgyYd8nj+DSjLbneJ++bfq26dumb5u+bfq26dumb5u+bZ9xv9e/b3mf/9umb5u+bfq26dumb5u+bfq26dumb9s65rT9PXkEAAAAAAAAAFzYAb+bBDg=
+   eJzt0zEKhEAUBcHBRXfvf2JNDAU3GIWmCl42yaeZMQAAAAAAAAAAAICq77FlwtYnj+DSjLbneJ++bfq26dumb5u+bfq26dumb5u+bZ9xv9e/b3mf/9umb5u+bfq26dumb5u+bfq26dumb9s25rT9PXkEAAAAAAAAAFzYAZcLBDg=
   </data>
  </layer>
  <layer name="Blocks" width="120" height="60">
