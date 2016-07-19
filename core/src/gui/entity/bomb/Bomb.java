@@ -224,9 +224,9 @@ public abstract class Bomb extends Entity
                 {
                     System.out.println("Main player bomb has deleted block. Random coin!");
                     
-                    int randomNum = new Random().nextInt(3);//Possible output: 0, 1, 2
+                    int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
-                    if(randomNum != 0)
+                    if(randomNum > 4)
                     {
                         //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                         
