@@ -14,7 +14,7 @@ import server.Server;
 public class Constants 
 {
     //Client config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     public static boolean PROCESSDATADEBUG = false;
