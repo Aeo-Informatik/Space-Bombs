@@ -40,7 +40,7 @@ public class MapManager
     public MapManager(OrthographicCamera camera)
     {
         this.camera = camera;
-        this.tiledMap = new TmxMapLoader().load("maps/26x26-Plain.tmx");
+        this.tiledMap = new TmxMapLoader().load("maps/Empty-Map.tmx");
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");

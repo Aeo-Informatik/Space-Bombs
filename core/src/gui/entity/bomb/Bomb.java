@@ -19,6 +19,8 @@ import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -222,9 +224,9 @@ public abstract class Bomb extends Entity
                 {
                     int randomNum = new Random().nextInt(3);//Possible output: 0, 1, 2
                     
-                    if(randomNum != 0)
+                    if(randomNum != 0 && playerId == Constants.PLAYERID)
                     {
-                        entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
+                        //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                         
                         //General:spawnCoin|CellX|CellY|target
                         client.sendData("spawnCoin|" + x + "|" + y + "|*");

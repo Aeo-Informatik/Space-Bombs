@@ -15,6 +15,6 @@ public class ServerConstants
     public static int LISTENINGPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
-    public static String DEFAULTMAPPATH = "maps/26x26-Plain.tmx";
+    public static String DEFAULTMAPPATH = "maps/Maze_(25x25).tmx";
     public static long ITEMSPAWNTIME = 5000;//Milliseconds
 }
