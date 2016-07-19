@@ -220,8 +220,10 @@ public abstract class Bomb extends Entity
                 
                 /**---------------------RANDOM COIN---------------------**/
                 //Check for a bug
-                if(currentCell.getTile().getId() != cell.getTile().getId())
+                if(currentCell.getTile().getId() != cell.getTile().getId() && playerId == Constants.PLAYERID)
                 {
+                    System.out.println("Main player bomb has deleted block. Random coin!");
+                    
                     int randomNum = new Random().nextInt(3);//Possible output: 0, 1, 2
                     
                     if(randomNum != 0)

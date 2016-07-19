@@ -58,6 +58,8 @@ public class ClientProcessData
                     case "spawnCoin":
                         if(parameters.length == 4)
                         {
+                            System.out.println("Received spawnCoin command!");
+                            
                             //Spawn coin
                             entityManager.getItemManager().spawnCoin(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]), Constants.COINVALUE);
                         }else

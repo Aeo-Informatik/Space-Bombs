@@ -27,6 +27,13 @@ public class Item extends Entity
     protected TextureRegion emptyBlock;
     protected int cellX, cellY;
     
+    protected float itemDespawnTime = 30; //Seconds
+    protected float itemDespawnTimer = 0;
+    
+    protected float itemUndestroyableTime = 1f; //Seconds
+    protected float itemUndestroyableTimer = 0;
+    
+    
     //Constructor
     public Item(int cellX, int cellY, TextureRegion itemTexture, MapManager map, EntityManager entityManager) 
     {
@@ -43,6 +50,7 @@ public class Item extends Entity
     }
     
     
+    @Override
     public void render()
     {
         deleteItemThroughBomb();
@@ -60,6 +68,22 @@ public class Item extends Entity
         }else //To make it possible for other players to despawn an item even after main player death
         {
             getPlayerIdCollectingItem();
+        }
+    }
+    
+    /**
+     * Execute in render to let items despawn after some time.
+     */
+    protected void itemDespawnTimer()
+    {
+        if(itemDespawnTimer > itemDespawnTime)
+        {
+            //Delte item
+            collected = true;
+            
+        }else
+        {
+            itemDespawnTimer += Constants.DELTATIME;
         }
     }
     
@@ -111,9 +135,19 @@ public class Item extends Entity
      */
     public void deleteItemThroughBomb()
     {
-        if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+        //Make the item after spawn for some time invulnerable to bombs to prevent instant delete
+        if(itemUndestroyableTimer > itemUndestroyableTime)
         {
-            collected = true;
+            //Check if item has been hit by deadly tile
+            if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+            {
+                collected = true;
+            }
+            
+        }else
+        {
+            System.out.println("Item undestroyable");
+            itemUndestroyableTimer += Constants.DELTATIME;
         }
     }
     

@@ -29,6 +29,7 @@ public class Coin extends Item{
     public Coin(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
         super(cellX, cellY,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
         this.value = value;
+        
     }
    
     @Override
