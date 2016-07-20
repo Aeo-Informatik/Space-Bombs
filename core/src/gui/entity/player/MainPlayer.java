@@ -438,34 +438,92 @@ public class MainPlayer extends Player
         {
             float x = pos.x + Constants.PLAYERWIDTH / 2;
             float y = pos.y + Constants.PLAYERHEIGHT / 3;
-            String bombType = "default";
+            String bombType;
             
-            //Checks if there is already a bomb
-            if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
+            switch (chosenBomb)
             {
-                //Send bomb command to server
-                client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
+                case(1):
+
+                    bombType = "default";
+            
+                    //Checks if there is already a bomb
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
+                    {
+                        //Send bomb command to server
+                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
-                //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                entityManager.getBombManager().spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
+                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                        entityManager.getBombManager().spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
+                    }
+                    break;
+                case(2):
+                    bombType = "dynamite";
+            
+                    //Checks if there is already a bomb
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
+                    {
+                        //Send bomb command to server
+                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
+                            
+                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                        entityManager.getBombManager().spawnNDynamite(new Vector2(x, y), playerId, bombRange);
+                    }
+                    break;
+                default:
+                    System.out.println("no Bomb chosen");
             }
+ 
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.B))
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_0))
         {
-            float x = pos.x + Constants.PLAYERWIDTH / 2;
-            float y = pos.y + Constants.PLAYERHEIGHT / 3;
-            String bombType = "dynamite";
-            
-            //Checks if there is already a bomb
-            if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
-            {
-                //Send bomb command to server
-                client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
-                
-                //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                entityManager.getBombManager().spawnNDynamite(new Vector2(x, y), playerId, bombRange);
-            }
+            chosenBomb = 0;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_1))
+        {
+            chosenBomb = 1;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_2))
+        {
+            chosenBomb = 2;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_3))
+        {
+            chosenBomb = 3;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_4))
+        {
+            chosenBomb = 4;
+        }
+         
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_5))
+        {
+            chosenBomb = 5;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_6))
+        {
+            chosenBomb = 6;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_7))
+        {
+            chosenBomb = 7;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_8))
+        {
+            chosenBomb = 8;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_9))
+        {
+            chosenBomb = 9;
         }
         
         /*------------------ZOOM OUT OF GAME------------------*/
