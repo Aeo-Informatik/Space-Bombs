@@ -35,6 +35,7 @@ public class MainPlayer extends Player
     private float godModeTimer = 0;
     private boolean godMode = false;
     private int playerId = 0;
+    private int chosenBomb = 1;
     
     //Objects
     private AnimEffects animEffects = new AnimEffects();
@@ -447,6 +448,23 @@ public class MainPlayer extends Player
                 
                 //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                 entityManager.getBombManager().spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
+            }
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Keys.B))
+        {
+            float x = pos.x + Constants.PLAYERWIDTH / 2;
+            float y = pos.y + Constants.PLAYERHEIGHT / 3;
+            String bombType = "dynamite";
+            
+            //Checks if there is already a bomb
+            if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
+            {
+                //Send bomb command to server
+                client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
+                
+                //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                entityManager.getBombManager().spawnNDynamite(new Vector2(x, y), playerId, bombRange);
             }
         }
         

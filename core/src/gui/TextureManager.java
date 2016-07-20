@@ -190,6 +190,11 @@ public class TextureManager
     public static TextureRegion p4ExplosionRightEnd;
     public static TextureRegion p4ExplosionLeftEnd;
     
+    //special Bombs
+    
+    public static Texture dynamite;
+    public static Animation dynamiteAnim;
+    
     //TextureRegion(texture, int cutX, int cutY, int width, int height)
     
     public static void load() 
@@ -413,6 +418,12 @@ public class TextureManager
 
         Constants.PLAYERWIDTH = p1WalkingRightAnim.getKeyFrame(0).getRegionWidth();
         Constants.PLAYERHEIGHT = p1WalkingRightAnim.getKeyFrame(0).getRegionHeight();
+        
+        /*-----------------------------SpecialBombs--------------------------------------*/
+        float BombAnimTime = 0.25f;
+        dynamite = loadTexture("other/medal.png");
+        dynamiteAnim = new Animation(BombAnimTime, new TextureRegion(dynamite, 0, 0, 34, 34));
+        
     }
     
     

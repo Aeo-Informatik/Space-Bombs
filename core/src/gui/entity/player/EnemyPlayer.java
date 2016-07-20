@@ -194,7 +194,17 @@ public class EnemyPlayer extends Player
     public void placeBomb(Vector2 pos, String bombType)
     {
         //Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
-        entityManager.getBombManager().spawnNormalBomb(pos, playerId, bombRange);
+        switch(bombType)
+        {
+            case("default"):
+                entityManager.getBombManager().spawnNormalBomb(pos, playerId, bombRange);
+                break;
+            case("dynamite"):
+                entityManager.getBombManager().spawnNDynamite(pos, playerId, bombRange);
+                break;
+            default:
+                System.out.println("Unknown Bomb");
+        }
     }
     
     /**

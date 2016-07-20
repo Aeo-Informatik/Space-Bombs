@@ -147,7 +147,6 @@ public class Item extends Entity
             
         }else
         {
-            System.out.println("Item undestroyable");
             itemUndestroyableTimer += Constants.DELTATIME;
         }
     }

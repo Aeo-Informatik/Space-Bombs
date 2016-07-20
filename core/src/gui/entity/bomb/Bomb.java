@@ -123,6 +123,11 @@ public abstract class Bomb extends Entity
     
     protected abstract void explode();
     
+    public void setBombAnimation(Animation bomb)
+    {
+        this.bombAnim = bomb ;
+    }
+    
     
     /**
      * Sets apropriate bomb texture for the playerId.
@@ -195,6 +200,7 @@ public abstract class Bomb extends Entity
      * If it is undestructable nothing happens and false gets returned.
      * @param x: Cell position on x axis
      * @param y: Cell position on y axis
+     * @param coinchanche: chance that a coin drops
      * @return boolean
      */ 
     protected boolean deleteBlock(int x, int y)
@@ -387,4 +393,9 @@ public abstract class Bomb extends Entity
     {
         return cellY;
     }
+
+    public void setBombAnim(Animation bombAnim) {
+        this.bombAnim = bombAnim;
+    }
+    
 }

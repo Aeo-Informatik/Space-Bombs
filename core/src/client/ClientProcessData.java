@@ -241,10 +241,10 @@ public class ClientProcessData
                                     if(enemy.getPlayerId() == Integer.parseInt(parameters[3]))
                                     {
                                         //placeBomb(Vector2 pos, String bombType)
-                                        enemy.placeBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), parameters[4]);
+                                                enemy.placeBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), parameters[4]);
+                                        }
                                     }
                                 }
-                            }
                         }else
                             System.err.println("ERROR: placeBomb wrong number of parameters");
                         break;
