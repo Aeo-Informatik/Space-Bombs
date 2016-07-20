@@ -128,6 +128,7 @@ public class Item extends Entity
         TiledMapTileLayer.Cell cellCenter = new TiledMapTileLayer.Cell();
         cellCenter.setTile(new StaticTiledMapTile(emptyBlock));
         map.getItemLayer().setCell(cellX, cellY, cellCenter);
+        collected = true;
     }
     
     /**
