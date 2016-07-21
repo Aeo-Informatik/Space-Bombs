@@ -52,6 +52,12 @@ public class ClientProcessData
             {
                 switch (parameters[0]) 
                 {
+                    /**------------------Delete Items----------------**/
+                    //General:deleteItems
+                    case "deleteItems":
+                        entityManager.getItemManager().clearItems();
+                        System.out.println("dleteItems");
+                        break;
                     
                     /**------------------SPAWN COIN------------------**/
                     //General:spawnCoin|CellX|CellY|target
