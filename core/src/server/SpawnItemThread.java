@@ -34,6 +34,20 @@ public class SpawnItemThread implements Runnable
         while(!Thread.currentThread().isInterrupted())
         {            
             ArrayList<String> itemSpawnCommands = new ArrayList<>();
+            ArrayList<String> deleteCommand = new ArrayList<>();
+            
+            deleteCommand.add("deleteItems|*");
+            server.sendToAll(deleteCommand);
+        
+            try 
+                {
+                    
+                    Thread.sleep(1000); 
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
             
             //Spawn an item for every field
             for(int i=0; i < itemFields; i++)
