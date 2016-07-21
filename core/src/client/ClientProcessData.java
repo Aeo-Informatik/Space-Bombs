@@ -56,7 +56,6 @@ public class ClientProcessData
                     //General:deleteItems
                     case "deleteItems":
                         entityManager.getItemManager().clearItems();
-                        System.out.println("dleteItems");
                         break;
                     
                     /**------------------SPAWN COIN------------------**/
