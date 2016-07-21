@@ -16,5 +16,5 @@ public class ServerConstants
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
     public static String DEFAULTMAPPATH = "maps/Maze_(25x25).tmx"; // maps/Test-Map_(26x26).tmx // maps/Maze_(25x25).tmx
-    public static long ITEMSPAWNTIME = 30000; //Milliseconds
+    public static long ITEMSPAWNTIME = 15000; //Milliseconds
 }

@@ -43,7 +43,7 @@ public class Constants
     public static int MAXBOMBS = 5;
     public static int MAXBOMBRANGE = 5;
     public static int MAXLIFE = 6;
-    public static int COINVALUE = 1;
+    public static int COINVALUE = 10;
     public static float MAXSPEED = 2f;
        
     //Ingame variables DO NOT CHANGE!

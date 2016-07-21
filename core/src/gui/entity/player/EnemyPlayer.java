@@ -200,7 +200,10 @@ public class EnemyPlayer extends Player
                 entityManager.getBombManager().spawnNormalBomb(pos, playerId, bombRange);
                 break;
             case("dynamite"):
-                entityManager.getBombManager().spawnNDynamite(pos, playerId, bombRange);
+                entityManager.getBombManager().spawnDynamite(pos, playerId, bombRange);
+                break;
+            case("infinity"):
+                entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, 0);
                 break;
             default:
                 System.out.println("Unknown Bomb");

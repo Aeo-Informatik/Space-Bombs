@@ -46,6 +46,19 @@ public class MainPlayer extends Player
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
+    //BombCosts
+    private int bomb_0;
+    private int bomb_1 = 0;
+    private int bomb_2 = 5;
+    private int bomb_3 = 25;
+    private int bomb_4;
+    private int bomb_5;
+    private int bomb_6;
+    private int bomb_7;
+    private int bomb_8;
+    private int bomb_9;
+    
+    
     //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
@@ -447,8 +460,10 @@ public class MainPlayer extends Player
                     bombType = "default";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins >= bomb_1)
                     {
+                        coins -= bomb_1;
+                            
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                 
@@ -460,15 +475,34 @@ public class MainPlayer extends Player
                     bombType = "dynamite";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_2)
                     {
+                        coins -= bomb_2;
+                        
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                             
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnNDynamite(new Vector2(x, y), playerId, bombRange);
+                        entityManager.getBombManager().spawnDynamite(new Vector2(x, y), playerId, bombRange);
                     }
                     break;
+                    
+                    case(3):
+                    bombType = "infinity";
+            
+                    //Checks if there is already a bomb
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_3)
+                    {
+                        coins -= bomb_3;
+                        
+                        //Send bomb command to server
+                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
+                            
+                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                        entityManager.getBombManager().spawnInfinity(new Vector2(x, y), playerId, bombRange, 6);
+                    }
+                    break;
+                        
                 default:
                     System.out.println("no Bomb chosen");
             }

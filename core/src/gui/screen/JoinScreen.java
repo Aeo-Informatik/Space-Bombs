@@ -146,7 +146,7 @@ public class JoinScreen implements Screen
                     }
                     
                     //Set map to testmap
-                    Constants.TESTSERVEROBJ.setMap("maps/Test-Map_(26x26).tmx");
+                    //Constants.TESTSERVEROBJ.setMap("maps/Test-Map_(26x26).tmx");
                     
                     //Accept client connections
                     Constants.TESTSERVEROBJ.OpenLobby();

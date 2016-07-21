@@ -195,6 +195,9 @@ public class TextureManager
     public static Texture dynamite;
     public static Animation dynamiteAnim;
     
+    public static Texture infinity;
+    public static Animation infinityAnim;
+    
     //TextureRegion(texture, int cutX, int cutY, int width, int height)
     
     public static void load() 
@@ -423,6 +426,9 @@ public class TextureManager
         float BombAnimTime = 0.25f;
         dynamite = loadTexture("other/medal.png");
         dynamiteAnim = new Animation(BombAnimTime, new TextureRegion(dynamite, 0, 0, 34, 34));
+        
+        infinity = loadTexture("other/icon.png");
+        infinityAnim = new Animation(BombAnimTime, new TextureRegion(infinity, 0, 0, 34, 34));
         
     }
     
