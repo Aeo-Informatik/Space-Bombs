@@ -62,7 +62,7 @@ public class MainPlayer extends Player
     //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
-    private int coins = 100;
+    private int coins = 0;
     private int maxBombPlacing = 2;
     private int bombRange = 2;
     private float maxZoomOut = 1.5f;
