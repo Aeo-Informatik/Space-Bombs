@@ -47,7 +47,7 @@ public class MainPlayer extends Player
     private final Animation walkAnimLeft;
     
     //BombCosts
-    private int bomb_0;
+    private int bomb_0 = 250;
     private int bomb_1 = 0;
     private int bomb_2 = 5;
     private int bomb_3 = 25;
@@ -62,7 +62,7 @@ public class MainPlayer extends Player
     //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
-    private int coins = 0;
+    private int coins = 500;
     private int maxBombPlacing = 2;
     private int bombRange = 2;
     private float maxZoomOut = 1.5f;
@@ -455,6 +455,14 @@ public class MainPlayer extends Player
             
             switch (chosenBomb)
             {
+                case(0):
+                    if(coins >= bomb_0)
+                    {
+                        coins -= bomb_0;
+                        life += 1;
+                        break;
+                    }
+                
                 case(1):
 
                     bombType = "default";
