@@ -277,9 +277,9 @@ public class Dynamite extends Bomb{
                         
                         //General:spawnCoin|CellX|CellY|target
                         client.sendData("spawnCoin|" + x + "|" + y + "|*");
-                    }
                 }
             }
+        }
         }
         // If there is no block 
         return true;
