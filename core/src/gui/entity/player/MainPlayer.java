@@ -50,7 +50,7 @@ public class MainPlayer extends Player
     private int bomb_0 = 250;
     private int bomb_1 = 0;
     private int bomb_2 = 5;
-    private int bomb_3 = 25;
+    private int bomb_3 = 75;
     private int bomb_4;
     private int bomb_5;
     private int bomb_6;
@@ -62,7 +62,7 @@ public class MainPlayer extends Player
     //Player settings CAN BE CHANGED
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
-    private int coins = 500;
+    private int coins = 100;
     private int maxBombPlacing = 2;
     private int bombRange = 2;
     private float maxZoomOut = 1.5f;
@@ -458,10 +458,13 @@ public class MainPlayer extends Player
                 case(0):
                     if(coins >= bomb_0)
                     {
-                        coins -= bomb_0;
+                        if(life < Constants.MAXLIFE)
+                        {
+                            coins -= bomb_0;
                         life += 1;
-                        break;
+                        }                
                     }
+                    break;
                 
                 case(1):
 
