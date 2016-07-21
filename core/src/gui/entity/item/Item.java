@@ -32,6 +32,7 @@ public class Item extends Entity
     
     protected float itemUndestroyableTime = 1f; //Seconds
     protected float itemUndestroyableTimer = 0;
+    protected float timer;
     
     
     //Constructor
@@ -53,21 +54,27 @@ public class Item extends Entity
     @Override
     public void render()
     {
-        deleteItemThroughBomb();
+        if(2 <= timer && collected == false)
+        {
+            deleteItemThroughBomb();
         
-        if(entityManager.getPlayerManager().getMainPlayer() != null)
-        {
-            //Check if mainPlayer has reached item max 
-            if(canGetCollectedByMainPlayer() == true)
+            if(entityManager.getPlayerManager().getMainPlayer() != null)
             {
-                if(isMainPlayerCollectingItem() == true)
+                //Check if mainPlayer has reached item max 
+                if(canGetCollectedByMainPlayer() == true)
                 {
-                    itemEffect();
+                    if(isMainPlayerCollectingItem() == true)
+                    {
+                        itemEffect();
+                    }
                 }
+            }else //To make it possible for other players to despawn an item even after main player death
+            {
+                getPlayerIdCollectingItem();
             }
-        }else //To make it possible for other players to despawn an item even after main player death
+        }else
         {
-            getPlayerIdCollectingItem();
+           timer += Constants.DELTATIME; 
         }
     }
     
