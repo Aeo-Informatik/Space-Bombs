@@ -144,10 +144,26 @@ public class ItemManager
     /**--------------------GETTER & SETTER--------------------**/
     public void clearAllItems()
     {
-        this.itemArray.clear();
-        this.coinArray.clear();
-        this.tombArray.clear();
+        for (Item item: itemArray)
+        {
+            item.deleteItem();            
+        }
+        for (Item item: coinArray)
+        {
+            item.deleteItem();            
+        }
+        for (Item item: tombArray)
+        {
+            item.deleteItem();            
+        }
     }
     
+    public void clearItems()
+    {
+        for (Item item: itemArray)
+        {
+            item.deleteItem();            
+        }
+    }
 }
 
