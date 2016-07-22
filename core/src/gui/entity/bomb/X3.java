@@ -20,18 +20,17 @@ import java.util.Random;
  *
  * @author qubasa
  */
-public class Infinity extends Bomb
+public class X3 extends Bomb
 {
     
-    private int chance;
+    private int X;
     
-    public Infinity(Vector2 pos, Vector2 direction, int range, int playerId, int chance, MapManager map, EntityManager entityManager) 
+    public X3(Vector2 pos, Vector2 direction, int range, int playerId, int X, MapManager map, EntityManager entityManager) 
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
         //float delayExplodeAfterHitByBomb, int playerId, MapManager map, EntityManager entityManager
         super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
-        super.setBombAnimation(TextureManager.infinityAnim);
-        this.chance = chance;
+        this.X = X;
     }
     
     @Override
@@ -274,26 +273,28 @@ public class Infinity extends Bomb
                     
                     int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
-                    /*if(randomNum > 6)
-                    {                       
-                        //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
-                        
-                        //General:spawnCoin|CellX|CellY|target
-                        client.sendData("spawnCoin|" + x + "|" + y + "|*");
-                    }*/
-                    
-                    if(randomNum <=chance)
-                    {                       
-                        chance -= 1;
-                        
-                        if( entityManager.getPlayerManager().getMainPlayer() != null && !map.isBombPlaced(x, y) && entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() > entityManager.getBombManager().getBombArrayMain().size)
-                        {   
-                            //Send bomb command to server
-                            client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "infinity" + "|*");
+                    if( X == 3)
+                    {
+                        if(randomNum > 6 )
+                        {                       
+                            //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                             
-                            entityManager.getBombManager().spawnInfinity(new Vector2 ( x * Constants.MAPTEXTUREWIDTH, y * Constants.MAPTEXTUREHEIGHT), playerId, super.getRange(), chance);
+                            //General:spawnCoin|CellX|CellY|target
+                            client.sendData("spawnCoin|" + x + "|" + y + "|*");
                         }
                     }
+                    super.setRange(super.getRange() + 1);
+                    X += 1;
+                    
+                    
+                    if( entityManager.getPlayerManager().getMainPlayer() != null && X <= 3 && !map.isBombPlaced(x, y) && entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() > entityManager.getBombManager().getBombArrayMain().size)
+                    {   
+                        //Send bomb command to server
+                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "X3" + "|*");
+                          
+                        entityManager.getBombManager().spawnX3(pos, playerId, super.getRange(), X);
+                    }
+                    
                 }
             }
         }

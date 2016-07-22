@@ -226,7 +226,7 @@ public abstract class Bomb extends Entity
                 //Check for a bug and if main player placed that bomb
                 if(currentCell.getTile().getId() != cell.getTile().getId() && playerId == Constants.PLAYERID)
                 {
-                    System.out.println("Main player bomb has deleted block. Random coin!");
+                    //System.out.println("Main player bomb has deleted block. Random coin!");
                     
                     int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
@@ -382,6 +382,11 @@ public abstract class Bomb extends Entity
     public int getRange() 
     {
         return explosionRange;
+    }
+    
+    public void setRange(int range)
+    {
+        this.explosionRange = range;
     }
     
     public int getCellX()

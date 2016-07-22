@@ -113,6 +113,20 @@ public class BombManager
         }
     }
     
+    public void spawnX3(Vector2 pos, int playerId, int bombRange, int X)
+    {
+        X3 entity = new X3(pos, new Vector2(0,0),bombRange, playerId, X, map, entityManager);
+        
+        //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
+        if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
+        {
+            bombArrayMainPlayer.add(entity);
+        }else
+        {
+            bombArrayEnemyPlayers.add(entity);
+        }
+    }
+    
     /**--------------------GETTER & SETTER--------------------**/
     /**
      * Returns the Bomb Object from a bomb on the specified coordinates. If there is no bomb return null.

@@ -205,6 +205,9 @@ public class EnemyPlayer extends Player
             case("infinity"):
                 entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, 0);
                 break;
+            case("X3"):
+                entityManager.getBombManager().spawnX3(pos, playerId, bombRange, 1);
+                break;
             default:
                 System.out.println("Unknown Bomb");
         }
