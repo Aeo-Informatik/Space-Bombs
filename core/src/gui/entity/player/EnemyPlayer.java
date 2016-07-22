@@ -197,16 +197,28 @@ public class EnemyPlayer extends Player
         switch(bombType)
         {
             case("default"):
-                entityManager.getBombManager().spawnNormalBomb(pos, playerId, bombRange);
+                if(!map.isBombPlaced(pos.x, pos.y))
+                {        
+                    entityManager.getBombManager().spawnNormalBomb(pos, playerId, bombRange);
+                }
                 break;
             case("dynamite"):
-                entityManager.getBombManager().spawnDynamite(pos, playerId, bombRange);
+                if(!map.isBombPlaced(pos.x, pos.y))
+                {
+                    entityManager.getBombManager().spawnDynamite(pos, playerId, bombRange);
+                }
                 break;
             case("infinity"):
-                entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, 0);
+                if(!map.isBombPlaced(pos.x, pos.y))
+                {
+                    entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, 0);
+                }
                 break;
             case("X3"):
-                entityManager.getBombManager().spawnX3(pos, playerId, bombRange, 1);
+                if(!map.isBombPlaced(pos.x, pos.y))
+                {
+                    entityManager.getBombManager().spawnX3(pos, playerId, bombRange, 1);
+                }
                 break;
             default:
                 System.out.println("Unknown Bomb");
