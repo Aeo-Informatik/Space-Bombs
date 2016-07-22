@@ -456,12 +456,14 @@ public class MainPlayer extends Player
             switch (chosenBomb)
             {
                 case(0):
+                    
                     if(coins >= bomb_0)
                     {
                         if(life < Constants.MAXLIFE)
                         {
                             coins -= bomb_0;
-                        life += 1;
+                            life += 1;
+                            System.out.println("Heart");
                         }                
                     }
                     break;
@@ -469,7 +471,7 @@ public class MainPlayer extends Player
                 case(1):
 
                     bombType = "default";
-            
+                    
                     //Checks if there is already a bomb
                     if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins >= bomb_1)
                     {
@@ -480,11 +482,14 @@ public class MainPlayer extends Player
                 
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                         entityManager.getBombManager().spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
+                        System.out.println(bombType);
                     }
                     break;
+                    
                 case(2):
+                    
                     bombType = "dynamite";
-            
+                    
                     //Checks if there is already a bomb
                     if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_2)
                     {
@@ -495,12 +500,14 @@ public class MainPlayer extends Player
                             
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                         entityManager.getBombManager().spawnDynamite(new Vector2(x, y), playerId, bombRange);
+                        System.out.println(bombType);
                     }
                     break;
                     
-                    case(3):
+                case(3):
+                    
                     bombType = "infinity";
-            
+                    
                     //Checks if there is already a bomb
                     if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_3)
                     {
@@ -511,10 +518,12 @@ public class MainPlayer extends Player
                             
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                         entityManager.getBombManager().spawnInfinity(new Vector2(x, y), playerId, bombRange, 6);
+                        System.out.println(bombType);
                     }
                     break;
                         
-                    case(4):
+                case(4):
+                    
                     bombType = "X3";
             
                     //Checks if there is already a bomb
@@ -527,6 +536,7 @@ public class MainPlayer extends Player
                             
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                         entityManager.getBombManager().spawnX3(new Vector2(x, y), playerId, bombRange, 1);
+                        System.out.println(bombType);
                     }
                     break;
                         
@@ -540,51 +550,61 @@ public class MainPlayer extends Player
         if (Gdx.input.isKeyJustPressed(Keys.NUM_0))
         {
             chosenBomb = 0;
+            System.out.println("Now using Bomb_0");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_1))
         {
             chosenBomb = 1;
+            System.out.println("Now using Bomb_1");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_2))
         {
             chosenBomb = 2;
+            System.out.println("Now using Bomb_2");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_3))
         {
             chosenBomb = 3;
+            System.out.println("Now using Bomb_3");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_4))
         {
             chosenBomb = 4;
+            System.out.println("Now using Bomb_4");
         }
          
         if (Gdx.input.isKeyJustPressed(Keys.NUM_5))
         {
             chosenBomb = 5;
+            System.out.println("Now using Bomb_5");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_6))
         {
             chosenBomb = 6;
+            System.out.println("Now using Bomb_6");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_7))
         {
             chosenBomb = 7;
+            System.out.println("Now using Bomb_7");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_8))
         {
             chosenBomb = 8;
+            System.out.println("Now using Bomb_8");
         }
         
         if (Gdx.input.isKeyJustPressed(Keys.NUM_9))
         {
             chosenBomb = 9;
+            System.out.println("Now using Bomb_9");
         }
         
         /*------------------ZOOM OUT OF GAME------------------*/
