@@ -103,7 +103,13 @@ public class SpawnItemThread implements Runnable
             //Wait till next item spawn
             try 
             {
-                Thread.sleep(itemSpawnTime);
+                if(itemFields <= 3)
+                {
+                    Thread.sleep((int)(itemSpawnTime * 1.5f));
+                }else
+                {
+                    Thread.sleep((int)(itemSpawnTime * itemFields/2.0f));
+                }
                 
             } catch (InterruptedException ex) 
             {
