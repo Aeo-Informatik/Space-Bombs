@@ -542,52 +542,52 @@ public class MainPlayer extends Player
         }
         
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_0) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_0))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_0) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_0))
         {
             chosenBomb = 0;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_1) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_1))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_1) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_1))
         {
             chosenBomb = 1;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_2) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_2))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_2) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_2))
         {
             chosenBomb = 2;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_3) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_3))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_3) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_3))
         {
             chosenBomb = 3;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_4) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_4))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_4) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_4))
         {
             chosenBomb = 4;
         }
          
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_5) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_5))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_5) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_5))
         {
             chosenBomb = 5;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_6) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_6))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_6) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_6))
         {
             chosenBomb = 6;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_7) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_7))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_7) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_7))
         {
             chosenBomb = 7;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_8) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_8))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_8) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_8))
         {
             chosenBomb = 8;
         }
         
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_9) && Gdx.input.isKeyJustPressed(Keys.NUMPAD_9))
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_9) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_9))
         {
             chosenBomb = 9;
         }
