@@ -423,12 +423,13 @@ public class TextureManager
         Constants.PLAYERHEIGHT = p1WalkingRightAnim.getKeyFrame(0).getRegionHeight();
         
         /*-----------------------------SpecialBombs--------------------------------------*/
-        float BombAnimTime = 0.25f;
-        dynamite = loadTexture("other/medal.png");
-        dynamiteAnim = new Animation(BombAnimTime, new TextureRegion(dynamite, 0, 0, 34, 34));
+        float BombAnimTime = 0.4f;
+        dynamite = loadTexture("bombs/dynamite_anim.png");
+        dynamiteAnim = new Animation(BombAnimTime, new TextureRegion(dynamite, 0, 0, 33, 32), new TextureRegion(dynamite, 32, 0, 33, 32), new TextureRegion(dynamite, 64, 0, 33, 32));
         
+        float InfinityAnimTime = 0.70f;
         infinity = loadTexture("other/icon.png");
-        infinityAnim = new Animation(BombAnimTime, new TextureRegion(infinity, 0, 0, 34, 34));
+        infinityAnim = new Animation(InfinityAnimTime, new TextureRegion(infinity, 0, 0, 34, 34), new TextureRegion(dynamite, 0, 0, 34, 34), new TextureRegion(dynamite, 0, 0, 34, 34));
         
     }
     
