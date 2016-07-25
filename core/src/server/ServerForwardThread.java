@@ -38,7 +38,7 @@ public class ServerForwardThread implements Runnable
     {
         try
         {
-            //Set timeout exception after 15 seconds or 0 = never
+            // or 0 = never
             socket.setSoTimeout(0);
 
             //Get data from server and parse it into an Object BufferedReader
@@ -48,6 +48,7 @@ public class ServerForwardThread implements Runnable
             //Opens tcp session to client if client disconnects readLine() returns null
             while((dataReceived = receive.readLine())!= null)
             {   
+                
                 //Kill thread
                 if(Thread.currentThread().isInterrupted())
                 {
@@ -97,7 +98,7 @@ public class ServerForwardThread implements Runnable
                 }
 
             }
-
+            
              //If clients disconnects
             System.out.println("SERVER: Client " + socket.getInetAddress().getHostAddress() + " disconnected from server.");
 

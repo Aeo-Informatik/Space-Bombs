@@ -187,33 +187,6 @@ public class Spectator extends Player
                 freeCam = true;
             }
         }
-        
-        /*------------------QUIT GAME------------------*/
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
-        {
-            try 
-            {
-                client.closeConnection();
-                
-            } catch (IOException ex) 
-            {
-                System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
-            }
-            
-            game.setScreen(new MenuScreen());
-        }
-        
-        /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.F12))
-        {
-            if(Gdx.graphics.isFullscreen())
-            {
-                Gdx.graphics.setWindowedMode(Constants.SCREENWIDTH, Constants.SCREENHEIGHT);
-            }else
-            {
-                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-            }
-        }
     }
     
     
