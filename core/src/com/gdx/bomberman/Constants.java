@@ -20,8 +20,8 @@ public class Constants
     public static boolean PROCESSDATADEBUG = false;
     
     //Audio config
-    public static float MUSICVOLUME = 0.0f;
-    public static float SOUNDVOLUME = 0.0f;
+    public static float MUSICVOLUME = 0.01f;
+    public static float SOUNDVOLUME = 0.01f;
         
     //Window config
     public static int SCREENWIDTH = 800;
