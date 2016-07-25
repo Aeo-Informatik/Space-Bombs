@@ -7,7 +7,6 @@ package gui.hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
@@ -27,7 +26,7 @@ import gui.entity.player.MainPlayer;
  *
  * @author qubasa
  */
-public class CounterHud 
+public class LifeHud 
 {
     /**
      * How to use tables: https://github.com/libgdx/libgdx/wiki/Table#quickstart
@@ -53,7 +52,7 @@ public class CounterHud
     Label liveCounterLabel;
     
     //Constructor
-    public CounterHud(SpriteBatch renderObject, EntityManager entityManager)
+    public LifeHud(EntityManager entityManager)
     {
         //Initialise Objects
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));

@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
-import gui.hud.CounterHud;
+import gui.hud.LifeHud;
 import java.io.IOException;
 import java.util.Random;
 
@@ -46,8 +46,7 @@ public class GameScreen implements Screen{
     private float musicStart = 15; //Seconds after game start or after music is finished
     
     //Main Player HUD
-    private CounterHud counterHud;
-    private SpriteBatch renderHud = new SpriteBatch();
+    private LifeHud counterHud;
     
     /**
      * Constructor
@@ -60,7 +59,7 @@ public class GameScreen implements Screen{
         this.mapManager = new MapManager(camera);
         this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ClientProcessData(entityManager, mapManager);
-        this.counterHud = new CounterHud(renderHud, entityManager);
+        this.counterHud = new LifeHud(entityManager);
         
         this.camera.zoom = Constants.DEFAULTZOOM;
     }
@@ -133,8 +132,7 @@ public class GameScreen implements Screen{
         entityManager.render();
         entityManager.update();
         
-        //Render CounterHud
-        renderHud.setProjectionMatrix(counterHud.stage.getCamera().combined);
+        //Render LifeHud
         counterHud.stage.draw();
         counterHud.update();
 
