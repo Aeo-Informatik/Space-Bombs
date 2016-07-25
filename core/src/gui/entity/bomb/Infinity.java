@@ -292,7 +292,7 @@ public class Infinity extends Bomb
                             client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "infinity" + "|*");
                             
                             entityManager.getBombManager().spawnInfinity(new Vector2 ( x * Constants.MAPTEXTUREWIDTH, y * Constants.MAPTEXTUREHEIGHT), playerId, super.getRange(), chance);
-                        }
+                        }    
                     }
                 }
             }
