@@ -5,6 +5,8 @@
  */
 package server;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -27,6 +29,7 @@ public class ServerLobby implements Runnable
     
     
     @Override
+    @SuppressWarnings("null")
     public void run() 
     {
         //Debug
@@ -50,6 +53,39 @@ public class ServerLobby implements Runnable
                             break;
                         }
 
+                         //Check for clients that disconnect from lobby
+                        for(int b=0;Server.getClientList().size() > b; b++)
+                        {
+                            try
+                            {
+                                Socket checkSocket = Server.getClient(b);
+
+                                checkSocket.setSoTimeout(500); // Milliseconds
+                                
+                                BufferedReader receive = new BufferedReader(new InputStreamReader(checkSocket.getInputStream()));
+                                String dataReceived;
+
+                                //Opens tcp session to client if client disconnects readLine() returns null
+                                if((dataReceived = receive.readLine())!= null)
+                                {
+                                    continue;
+                                }
+                                
+                                System.out.println("-----Client Disconnected-----");
+                                System.out.println("Player Id: " + (b+1));
+                                System.out.println("IP: " + checkSocket.getInetAddress().getHostAddress());
+                                Server.removeClient(b);
+                                i -= 1;
+                                b = 0;
+                                
+                            }catch(SocketTimeoutException e)
+                            {
+                                
+                            }
+
+                        }
+                        
+                        
                         //Accept connection and set timeout
                         serverSocket.setSoTimeout(100); //milliseconds
                         clientSocket = serverSocket.accept();
@@ -67,14 +103,15 @@ public class ServerLobby implements Runnable
                 }
 
                 //Connection announcement
-                System.out.println("-----New Client-----");
+                System.out.println("-----Client Connected-----");
                 System.out.println("Player Id: " + (i+1));
                 System.out.println("IP: " + clientSocket.getInetAddress().getHostAddress());
-                System.out.println("--------------------");
 
                 //Add connection object to array list
                 Server.addClient(clientSocket);
-            }
+            }    
+                
+               
             
         }catch(Exception e)
         {
