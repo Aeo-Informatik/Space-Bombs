@@ -198,6 +198,8 @@ public class TextureManager
     public static Texture infinity;
     public static Animation infinityAnim;
     
+    public static Texture x3;
+    public static Animation x3Anim;
     //TextureRegion(texture, int cutX, int cutY, int width, int height)
     
     public static void load() 
@@ -431,6 +433,8 @@ public class TextureManager
         infinity = loadTexture("bombs/infinity_anim.png");
         infinityAnim = new Animation(BombAnimTime, new TextureRegion(infinity, 0, 0, 33, 32), new TextureRegion(infinity, 32, 0, 33, 32), new TextureRegion(infinity, 64, 0, 33, 32));
         
+        x3 = loadTexture("bombs/x3_anim.png");
+        x3Anim = new Animation(BombAnimTime, new TextureRegion(x3, 0, 0, 33, 32), new TextureRegion(x3, 32, 0, 33, 32), new TextureRegion(x3, 64, 0, 33, 32));
     }
     
     
