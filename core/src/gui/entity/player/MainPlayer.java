@@ -33,6 +33,7 @@ public class MainPlayer extends Player
     private boolean sendStopOnce = true;
     private String sendMoveOnce = "";
     private float godModeTimer = 0;
+    private float sendStopTimer = 0;
     private boolean godMode = false;
     private int playerId = 0;
     private int chosenBomb = 1;
@@ -60,6 +61,7 @@ public class MainPlayer extends Player
     
     
     //Player settings CAN BE CHANGED
+    private float sendStopTime = 2f;
     private int life = 3;
     private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
     private int coins = 0;
@@ -412,6 +414,18 @@ public class MainPlayer extends Player
                 sendMoveOnce = "";
             }
 
+            if(sendStopTimer >= sendStopTime)
+            {
+                //Send command again
+                sendStopOnce = true;
+                
+                //Reset timer
+                sendStopTimer = 0;
+            }else
+            {
+                sendStopTimer += Constants.DELTATIME;
+            }
+            
             //Sets moving direction to 0
             stopMoving();
             
@@ -609,41 +623,6 @@ public class MainPlayer extends Player
             {
                 camera.zoom -= 0.02;
                 camera.position.set(pos.x, pos.y, 0);
-            }
-        }
-        
-        /*------------------CAMERA CENTERS PLAYER------------------*/
-        if (Gdx.input.isKeyPressed(Keys.ENTER))
-        {
-            //map.setNewMap("maps/TestMap.tmx");
-        }
-        
-        /*------------------QUIT GAME------------------*/
-        if (Gdx.input.isKeyPressed(Keys.ESCAPE))
-        {
-            try 
-            {
-                //Close connection to server
-                client.closeConnection();
-                
-            } catch (IOException ex) 
-            {
-                System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
-            }
-            
-            //Go to menuscreen
-            game.setScreen(new MenuScreen());
-        }
-        
-        /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
-        if(Gdx.input.isKeyPressed(Keys.F12))
-        {
-            if(Gdx.graphics.isFullscreen())
-            {
-                Gdx.graphics.setWindowedMode(Constants.SCREENWIDTH, Constants.SCREENHEIGHT);
-            }else
-            {
-                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             }
         }
     }

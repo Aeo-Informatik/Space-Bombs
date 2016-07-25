@@ -13,6 +13,7 @@ import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
 import client.ClientProcessData;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -20,6 +21,7 @@ import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.hud.CounterHud;
+import java.io.IOException;
 import java.util.Random;
 
 
@@ -138,6 +140,36 @@ public class GameScreen implements Screen{
 
         //Update camera
         camera.update();
+        
+        
+        /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        {
+            try 
+            {
+                //Close connection to server
+                client.closeConnection();
+                
+            } catch (IOException ex) 
+            {
+                System.err.println("Unexpected exception in ESC Quit game in mainplayer on closing connetion with server.");
+            }
+            
+            //Go to menuscreen
+            game.setScreen(new MenuScreen());
+        }
+        
+        /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
+        if(Gdx.input.isKeyPressed(Input.Keys.F12))
+        {
+            if(Gdx.graphics.isFullscreen())
+            {
+                Gdx.graphics.setWindowedMode(Constants.SCREENWIDTH, Constants.SCREENHEIGHT);
+            }else
+            {
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+            }
+        }
     }
     
     

@@ -46,6 +46,3 @@ A font diplaying "Winner" or something like that
 3) You can walk on the side of blocks
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
-
-//White bars when walking with player. The problem is called "bleeding".
-//Solution: Dont make 32x32 textures but 34x34 ones
