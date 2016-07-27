@@ -4,7 +4,7 @@ import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.gdx.bomberman.Main;
-import com.gdx.bomberman.Constants;
+import com.gdx.bomberman.Constants; 
 
 
 
