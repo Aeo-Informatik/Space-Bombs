@@ -222,29 +222,34 @@ public abstract class Bomb extends Entity
                 map.getBlockLayer().setCell(x, y, cell);
                 
                 
-                /**---------------------RANDOM COIN---------------------**/
+        /**---------------------RANDOM COIN---------------------**/
                 //Check for a bug and if main player placed that bomb
                 if(currentCell.getTile().getId() != cell.getTile().getId() && playerId == Constants.PLAYERID)
                 {
                     //System.out.println("Main player bomb has deleted block. Random coin!");
                     
-                    int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
+                    dropFromBomb(x, y);
                     
-                    if(randomNum > 4)
-                    {
-                        //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
-                        
-                        //General:spawnCoin|CellX|CellY|target
-                        client.sendData("spawnCoin|" + x + "|" + y + "|*");
-                    }
                 }
             }
         }
-        
+    
         // If there is no block 
         return true;
     }
     
+    public void dropFromBomb (int x, int y)
+    {
+        int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
+                    
+            if(randomNum > 4)
+                {
+                    //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
+                        
+                    //General:spawnCoin|CellX|CellY|target
+                    client.sendData("spawnCoin|" + x + "|" + y + "|*");
+                }
+    }
     
     /**
      * Overwirtes in all 4 explosion directions the explosion tiles with empty tiles.
