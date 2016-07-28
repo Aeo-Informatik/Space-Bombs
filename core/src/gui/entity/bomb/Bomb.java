@@ -228,7 +228,7 @@ public abstract class Bomb extends Entity
                 {
                     //System.out.println("Main player bomb has deleted block. Random coin!");
                     
-                    dropFromBomb(x, y);
+                    dropFromBlock(x, y);
                     
                 }
             }
@@ -238,7 +238,7 @@ public abstract class Bomb extends Entity
         return true;
     }
     
-    public void dropFromBomb (int x, int y)
+    public void dropFromBlock (int x, int y)
     {
         int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     

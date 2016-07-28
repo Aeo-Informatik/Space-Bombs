@@ -244,32 +244,9 @@ public class Dynamite extends Bomb{
     }
     
     @Override
-    public boolean deleteBlock(int x, int y)
+    public void dropFromBlock (int x, int y)
     {
-        TiledMapTileLayer.Cell currentCell = blockLayer.getCell(x , y);
-        
-        if(currentCell != null)
-        {
-            //If block is undestructable
-            if(currentCell.getTile().getProperties().containsKey("undestructable"))
-            {
-                return false;
-                
-            }else
-            {
-                //Delete block with empty texture
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(new StaticTiledMapTile(emptyBlock));
-                map.getBlockLayer().setCell(x, y, cell);
-                
-                
-                /**---------------------RANDOM COIN---------------------**/
-                //Check for a bug and if main player placed that bomb
-                if(currentCell.getTile().getId() != cell.getTile().getId() && playerId == Constants.PLAYERID)
-                {
-                    //System.out.println("Main player bomb has deleted block. Random coin!");
-                    
-                    int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
+               int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
                     if(randomNum > 2)
                     {
@@ -277,11 +254,8 @@ public class Dynamite extends Bomb{
                         
                         //General:spawnCoin|CellX|CellY|target
                         client.sendData("spawnCoin|" + x + "|" + y + "|*");
-                }
-            }
-        }
-        }
-        // If there is no block 
-        return true;
+                    }
+            
+        
     }
 }

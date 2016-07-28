@@ -64,6 +64,17 @@ public class X3 extends Bomb
                     
                     //Object gets delete only set if everything is done.
                     this.isExploded = true;
+                    
+                    super.setRange(super.getRange() + 1);
+                    X += 1;                    
+                    
+                    if( entityManager.getPlayerManager().getMainPlayer() != null && X <= 3 && !map.isBombPlaced(pos.x, pos.y) )
+                    {   
+                        //Send bomb command to server
+                        client.sendData("placeEnemyBomb|" + Float.toString(pos.x) + "|" + Float.toString(pos.y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "X3" + "|*");
+                          
+                        entityManager.getBombManager().spawnX3(pos, playerId, super.getRange(), X);
+                    }
                 }else
                 {
                     //Add passed time to timer
@@ -246,33 +257,10 @@ public class X3 extends Bomb
         }
     }
     
-    @Override
-    public boolean deleteBlock(int x, int y)
-    {
-        TiledMapTileLayer.Cell currentCell = blockLayer.getCell(x , y);
-        
-        if(currentCell != null)
-        {
-            //If block is undestructable
-            if(currentCell.getTile().getProperties().containsKey("undestructable"))
-            {
-                return false;
-                
-            }else
-            {
-                //Delete block with empty texture
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(new StaticTiledMapTile(emptyBlock));
-                map.getBlockLayer().setCell(x, y, cell);
-                
-                
-                /**---------------------RANDOM COIN---------------------**/
-                //Check for a bug and if main player placed that bomb
-                if(currentCell.getTile().getId() != cell.getTile().getId() && playerId == Constants.PLAYERID)
-                {
-                    //System.out.println("Main player bomb has deleted block. Random coin!");
-                    
-                    int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
+   @Override
+   public void dropFromBlock (int x, int y)
+   {
+       int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
                     if( X == 3)
                     {
@@ -284,22 +272,6 @@ public class X3 extends Bomb
                             client.sendData("spawnCoin|" + x + "|" + y + "|*");
                         }
                     }
-                    super.setRange(super.getRange() + 1);
-                    X += 1;
                     
-                    
-                    if( entityManager.getPlayerManager().getMainPlayer() != null && X <= 3 && !map.isBombPlaced(x, y) && entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() > entityManager.getBombManager().getBombArrayMain().size)
-                    {   
-                        //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "X3" + "|*");
-                          
-                        entityManager.getBombManager().spawnX3(pos, playerId, super.getRange(), X);
-                    }
-                    
-                }
-            }
-        }
-        // If there is no block 
-        return true;
-    }
+   }
 }
