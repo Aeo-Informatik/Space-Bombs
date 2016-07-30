@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
 /**
@@ -56,6 +57,12 @@ public class ServerLobby implements Runnable
                          //Check for clients that disconnect from lobby
                         for(int b=0;Server.getClientList().size() > b; b++)
                         {
+                            //Stops thread
+                            if(Thread.currentThread().isInterrupted())
+                            {
+                                break;
+                            }
+                            
                             try
                             {
                                 Socket checkSocket = Server.getClient(b);
@@ -113,9 +120,12 @@ public class ServerLobby implements Runnable
                 
                
             
+        }catch(SocketException e)
+        {
+            System.out.println("Lobby has been shutdown");
         }catch(Exception e)
         {
-            System.err.println("ERROR: Something went wrong in accepting connections " + e);
+            System.err.println("ERROR: Something went wrong in ServerLobby " + e);
             e.printStackTrace();
             System.exit(1);
         }

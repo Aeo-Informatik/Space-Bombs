@@ -4,6 +4,7 @@ import client.Client;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
@@ -39,12 +41,18 @@ public class HostScreen implements Screen
     //Buttons
     private TextButton startbutton;
     
+    //Slider
+    private Container mapImage;
+    private Label mapName;
+    private TextButton slideLeft;
+    private TextButton slideRight;
+            
     //Players
     private int numPlayers = 0;
-    Container p1Field;
-    Container p2Field;
-    Container p3Field;
-    Container p4Field;
+    private Container p1Field;
+    private Container p2Field;
+    private Container p3Field;
+    private Container p4Field;
     
     /**------------------------CONSTRUCTOR------------------------**/
     public HostScreen()
@@ -68,6 +76,12 @@ public class HostScreen implements Screen
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
         
 
+        /**------------------------LABEL STYLE------------------------**/
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        fontOptions.size = 14;
+        labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
+        labelStyle.fontColor = Color.CYAN;
+        
         /**------------------------BUTTON STYLE------------------------**/
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
@@ -91,7 +105,7 @@ public class HostScreen implements Screen
             e.printStackTrace();
         }
         
-        /**------------------------JOIN PLAYER STACK------------------------**/
+        /**------------------------JOIN PLAYER GROUP------------------------**/
         //Table options
         Table table = new Table();
         table.setFillParent(true);
@@ -124,8 +138,25 @@ public class HostScreen implements Screen
         joinedPlayerGroup.setPosition(443, 74);
         stage.addActor(joinedPlayerGroup);
         
-        /**------------------------SLIDER STACK------------------------**/
-
+        /**------------------------SLIDER GROUP------------------------**/
+        //Table options
+        Table table1 = new Table();
+        table1.setFillParent(true);
+        
+        Table table2 = new Table();
+        table2.setFillParent(true);
+                
+        mapName = new Label("Maze Map", labelStyle);
+        table1.add(mapName).padBottom(190);
+        
+        mapImage = new Container();
+        table2.add(mapImage).width(400).height(210);
+        
+        //Stage & group options
+        sliderGroup.addActor(table1);
+        sliderGroup.addActor(table2);
+        sliderGroup.setPosition(400, 310);
+        stage.addActor(sliderGroup);
         
         /**------------------------OTHER BUTTONS------------------------**/
         //Start button
@@ -259,6 +290,12 @@ public class HostScreen implements Screen
             {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             }
+        }
+        
+        /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        {
+            game.setScreen(new MenuScreen());
         }
     }
     

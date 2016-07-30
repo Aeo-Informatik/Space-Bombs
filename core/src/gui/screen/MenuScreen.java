@@ -21,7 +21,6 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import server.Server;
 
 
 public class MenuScreen implements Screen
