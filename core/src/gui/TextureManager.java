@@ -21,12 +21,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class TextureManager 
 {
     
-    //Menu
+    
+    
+    //General Menu
     public static FreeTypeFontGenerator menuFont;
     public static Texture menuBackground;
+    public static Texture hostBackground;
     public static Skin skin;
     public static TextureAtlas textureAtlas;
-    
     
     //Hud
     public static Texture hudCounterFullLive;
@@ -205,9 +207,10 @@ public class TextureManager
     public static void load() 
     {
 
-        /*---------------------------------MENU---------------------------------*/
+        /*---------------------------------GENERAL MENU---------------------------------*/
         menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         menuBackground = loadTexture("menu/menu.png");
+        hostBackground = loadTexture("menu/menu-host.png");
         textureAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
         skin.addRegions(textureAtlas);

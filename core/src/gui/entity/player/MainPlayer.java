@@ -12,14 +12,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
-import static com.gdx.bomberman.Main.game;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
-import gui.screen.MenuScreen;
-import java.io.IOException;
 
 /**
  *

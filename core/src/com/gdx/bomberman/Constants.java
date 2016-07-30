@@ -14,14 +14,14 @@ import server.Server;
 public class Constants 
 {
     //Client config
-    public static boolean TESTSERVER = true; // Only for one player. Starts the game instantly
+    public static boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static int CONNECTIONPORT = 13199;
     public static boolean CLIENTDEBUG = false;
     public static boolean PROCESSDATADEBUG = false;
     
     //Audio config
-    public static float MUSICVOLUME = 0.01f;
-    public static float SOUNDVOLUME = 0.01f;
+    public static float MUSICVOLUME = 0.00f;
+    public static float SOUNDVOLUME = 0.00f;
         
     //Window config
     public static int SCREENWIDTH = 800;
