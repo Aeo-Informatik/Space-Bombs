@@ -47,7 +47,7 @@ public class Constants
     public static float MAXSPEED = 2f;
        
     //Ingame variables DO NOT CHANGE!
-    public static Server OWNSERVEROBJ = new Server(13199, 4);;
+    public static Server OWNSERVEROBJ = null;
     public static int PLAYERID = 0;
     public static int AMOUNTPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;

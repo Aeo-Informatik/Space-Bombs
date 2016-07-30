@@ -25,6 +25,7 @@ import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
 import server.Server;
+import server.ServerConstants;
 
 
 public class HostScreen implements Screen
@@ -51,6 +52,11 @@ public class HostScreen implements Screen
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
+        
+        if(Constants.OWNSERVEROBJ == null)
+        {
+           Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4); 
+        }
         
         //Set background
         rootTable.setFillParent(true);

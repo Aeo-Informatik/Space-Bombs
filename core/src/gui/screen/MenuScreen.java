@@ -46,7 +46,10 @@ public class MenuScreen implements Screen
         Gdx.input.setInputProcessor(stage);
      
         //Reset server
-        Constants.OWNSERVEROBJ.resetServer();
+        if(Constants.OWNSERVEROBJ != null)
+        {
+            Constants.OWNSERVEROBJ.resetServer();
+        }
         
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();

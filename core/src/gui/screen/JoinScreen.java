@@ -33,6 +33,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import client.Client;
 import server.Server;
+import server.ServerConstants;
 
 
 /**
@@ -138,7 +139,11 @@ public class JoinScreen implements Screen
                     connectionIp = "127.0.0.1";
                     
                     System.out.println("CLIENT: Launching test server force IP to localhost");
-
+                    
+                    if(Constants.OWNSERVEROBJ == null)
+                    {
+                        Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4); 
+                    }   
                     //Set map to testmap
                     //Constants.TESTSERVEROBJ.setMap("maps/Test-Map_(26x26).tmx");
                     
