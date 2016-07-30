@@ -35,9 +35,6 @@ public class HostScreen implements Screen
     private WidgetGroup sliderGroup = new WidgetGroup();
     private Table rootTable = new Table();
     
-    //Server
-    private Server server = new Server(13199, 4);
-    
     //Buttons
     private TextButton startbutton;
     
@@ -74,7 +71,7 @@ public class HostScreen implements Screen
         
         /**------------------------OPEN SERVER------------------------**/
         System.out.println("CLIENT: Launching server with 4 players...");
-        server.OpenLobby();
+        Constants.OWNSERVEROBJ.OpenLobby();
         
         try 
         {
@@ -123,9 +120,11 @@ public class HostScreen implements Screen
         
         /**------------------------SLIDER STACK------------------------**/
 
+        
+        /**------------------------OTHER BUTTONS------------------------**/
         //Start button
         startbutton = new TextButton("Start Game!", textButtonStyle);
-        startbutton.setPosition(340, 198);
+        startbutton.setPosition(340, 120);
         stage.addActor(startbutton);
 
         
@@ -150,7 +149,7 @@ public class HostScreen implements Screen
                     
                 }
                 
-                server.startGame();
+                Constants.OWNSERVEROBJ.startGame();
                 game.setScreen(new GameScreen());
             }
         });

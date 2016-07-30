@@ -138,18 +138,12 @@ public class JoinScreen implements Screen
                     connectionIp = "127.0.0.1";
                     
                     System.out.println("CLIENT: Launching test server force IP to localhost");
-                    
-                    //Create new Server object
-                    if(Constants.TESTSERVEROBJ == null)
-                    {
-                        Constants.TESTSERVEROBJ = new Server(13199, 1);
-                    }
-                    
+
                     //Set map to testmap
                     //Constants.TESTSERVEROBJ.setMap("maps/Test-Map_(26x26).tmx");
                     
                     //Accept client connections
-                    Constants.TESTSERVEROBJ.OpenLobby();
+                    Constants.OWNSERVEROBJ.OpenLobby();
                 }
                 
                 try 
@@ -166,7 +160,7 @@ public class JoinScreen implements Screen
                         if(Constants.TESTSERVER)
                         {
                             Thread.currentThread().sleep(100);
-                            Constants.TESTSERVEROBJ.startGame();
+                            Constants.OWNSERVEROBJ.startGame();
                         }
                         
                         System.out.println("CLIENT: Connecting to server " + connectionIp + ":" + Constants.CONNECTIONPORT);

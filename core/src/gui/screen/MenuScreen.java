@@ -21,6 +21,7 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
+import server.Server;
 
 
 public class MenuScreen implements Screen
@@ -43,6 +44,9 @@ public class MenuScreen implements Screen
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
+     
+        //Reset server
+        Constants.OWNSERVEROBJ.resetServer();
         
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
