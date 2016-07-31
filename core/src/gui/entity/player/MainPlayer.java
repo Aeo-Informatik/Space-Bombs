@@ -545,7 +545,7 @@ public class MainPlayer extends Player
                         entityManager.getBombManager().spawnX3(new Vector2(x, y), playerId, bombRange, 1);
                     }
                     break;
-                        
+                    
                 default:
                     System.out.println("no Bomb chosen");
             }

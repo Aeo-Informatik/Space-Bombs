@@ -17,13 +17,13 @@ import gui.map.MapManager;/**
  * @author Christian
  */
 public class Trap extends Entity{
-
+    
     public Trap(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
     }
     
     public void render()
     {
-        
+    
     }
 }

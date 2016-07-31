@@ -14,7 +14,7 @@ import gui.map.MapManager;
  * @author Christian
  */
 public class Mine extends Trap{
-
+    
     public Mine(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager) {
         super(pos, direction, map, entityManager);
     }

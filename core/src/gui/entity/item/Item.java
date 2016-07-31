@@ -17,7 +17,7 @@ import gui.map.MapManager;
 import com.gdx.bomberman.Constants;
 /**
  *
- * @author cb0703
+ * @author phinix
  */
 public class Item extends Entity
 {
