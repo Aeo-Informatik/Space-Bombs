@@ -200,7 +200,6 @@ public abstract class Bomb extends Entity
      * If it is undestructable nothing happens and false gets returned.
      * @param x: Cell position on x axis
      * @param y: Cell position on y axis
-     * @param coinchanche: chance that a coin drops
      * @return boolean
      */ 
     protected boolean deleteBlock(int x, int y)
@@ -238,6 +237,11 @@ public abstract class Bomb extends Entity
         return true;
     }
     
+    /**
+     * drops something when a block is destroyed
+     * @param x: Cell position on x axis
+     * @param y: Cell position on y axis
+     */
     public void dropFromBlock (int x, int y)
     {
         int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
