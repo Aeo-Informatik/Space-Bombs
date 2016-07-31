@@ -20,6 +20,8 @@ import gui.map.MapManager;
  */
 public class BombUp extends Item{
     
+    public String Discription = "You can hold more Bombs";
+    
     //Constructor
     public BombUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
     {

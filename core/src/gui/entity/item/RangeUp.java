@@ -19,6 +19,7 @@ import gui.map.MapManager;
  */
 public class RangeUp extends Item{
     
+    public String Discription = "You range expands";
 
     //Constructor
     public RangeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) {

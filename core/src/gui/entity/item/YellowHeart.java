@@ -19,7 +19,9 @@ import gui.map.MapManager;
  */
 public class YellowHeart extends Item{
     
-
+    
+    public String Discription = "You get three lives";
+    
     /**
      * 
      * @param pos the position of the Itemonly in int

@@ -23,6 +23,7 @@ import gui.entity.player.MainPlayer;
  */
 public class Coin extends Item{
     
+    public String Discription = "You get the coinvalue in coins (default 10)";
     private AnimEffects animEffects = new AnimEffects();
     private int value;
 

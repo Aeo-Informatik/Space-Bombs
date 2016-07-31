@@ -20,6 +20,7 @@ import gui.map.MapManager;
  */
 public class LifeUp extends Item{
     
+    public String Discription = "You get one more live";
     
     //Constructor
     public LifeUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 

@@ -21,6 +21,7 @@ import gui.entity.player.MainPlayer;
  */
 public class CoinBag extends Item{
     
+    public String Discription = "You get then times the coinvalue in coins (default 100)";
     private int value;
 
     public CoinBag(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {

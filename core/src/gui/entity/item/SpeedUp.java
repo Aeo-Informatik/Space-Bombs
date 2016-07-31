@@ -20,6 +20,8 @@ import gui.entity.player.MainPlayer;
  */
 public class SpeedUp extends Item{
 
+    public String Discription = "You get faster";
+    
     public SpeedUp(int CellX, int CellY, MapManager map, EntityManager entityManager) {
         super(CellX, CellY,TextureManager.speedUp, map, entityManager);
     }
