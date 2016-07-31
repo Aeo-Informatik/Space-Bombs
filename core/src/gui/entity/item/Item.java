@@ -27,11 +27,6 @@ public class Item extends Entity
     protected TextureRegion emptyBlock;
     protected int cellX, cellY;
     
-    protected float itemDespawnTime = 30; //Seconds
-    protected float itemDespawnTimer = 0;
-    
-    protected float itemUndestroyableTime = 1f; //Seconds
-    protected float itemUndestroyableTimer = 0;
     protected float timer;
     
     
@@ -75,22 +70,6 @@ public class Item extends Entity
         }else
         {
            timer += Constants.DELTATIME; 
-        }
-    }
-    
-    /**
-     * Execute in render to let items despawn after some time.
-     */
-    protected void itemDespawnTimer()
-    {
-        if(itemDespawnTimer > itemDespawnTime)
-        {
-            //Delte item
-            collected = true;
-            
-        }else
-        {
-            itemDespawnTimer += Constants.DELTATIME;
         }
     }
     
@@ -143,18 +122,10 @@ public class Item extends Entity
      */
     public void deleteItemThroughBomb()
     {
-        //Make the item after spawn for some time invulnerable to bombs to prevent instant delete
-        if(itemUndestroyableTimer > itemUndestroyableTime)
+        //Check if item has been hit by deadly tile
+        if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
         {
-            //Check if item has been hit by deadly tile
-            if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
-            {
-                collected = true;
-            }
-            
-        }else
-        {
-            itemUndestroyableTimer += Constants.DELTATIME;
+            collected = true;
         }
     }
     
