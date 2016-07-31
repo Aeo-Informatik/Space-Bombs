@@ -23,6 +23,7 @@ import java.util.Random;
  */
 public class Dynamite extends Bomb{
     
+    public String Discription = "More coins but less range";
     
     public Dynamite(Vector2 pos, Vector2 direction, int range, int playerId, MapManager map, EntityManager entityManager) 
     {

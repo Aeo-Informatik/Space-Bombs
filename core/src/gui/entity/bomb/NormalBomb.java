@@ -20,7 +20,7 @@ import gui.map.MapManager;
 public class NormalBomb extends Bomb
 {
     
-
+    public String Discription = "The normal Bomb";    
     
     public NormalBomb(Vector2 pos, Vector2 direction, int range, int playerId, MapManager map, EntityManager entityManager) 
     {

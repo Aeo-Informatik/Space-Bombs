@@ -22,6 +22,7 @@ import java.util.Random;
  */
 public class Infinity extends Bomb
 {
+    public String Discription = "No coins but sometimes it places itselves when a block gets destoyed";
     
     private int chance;
     
