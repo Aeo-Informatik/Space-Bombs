@@ -71,7 +71,7 @@ public class X3 extends Bomb
                     if( entityManager.getPlayerManager().getMainPlayer() != null && X <= 3 && !map.isBombPlaced(pos.x, pos.y) )
                     {   
                         //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(pos.x) + "|" + Float.toString(pos.y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "X3" + "|*");
+                        //client.sendData("placeEnemyBomb|" + Float.toString(pos.x) + "|" + Float.toString(pos.y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "X3" + "|*");
                           
                         entityManager.getBombManager().spawnX3(pos, playerId, super.getRange(), X);
                     }
