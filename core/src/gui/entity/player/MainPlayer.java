@@ -50,8 +50,8 @@ public class MainPlayer extends Player
     private int bomb_2 = 5;
     private int bomb_3 = 75;
     private int bomb_4 = 100;
-    private int bomb_5;
-    private int bomb_6;
+    private int bomb_5 = 50;
+    private int bomb_6 = 50;
     private int bomb_7;
     private int bomb_8;
     private int bomb_9;
@@ -546,6 +546,40 @@ public class MainPlayer extends Player
                     }
                     break;
                     
+                case(5):
+                    
+                    bombType = "Vertical";
+            
+                    //Checks if there is already a bomb
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_5)
+                    {
+                        coins -= bomb_5;
+                        
+                        //Send bomb command to server
+                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
+                            
+                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                        entityManager.getBombManager().spawnVertical(new Vector2(x, y), playerId, bombRange);
+                    }
+                    break;
+                    
+                case(6):
+                    
+                    bombType = "Horizontal";
+            
+                    //Checks if there is already a bomb
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_6)
+                    {
+                        coins -= bomb_6;
+                        
+                        //Send bomb command to server
+                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
+                            
+                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                        entityManager.getBombManager().spawnHorizontal(new Vector2(x, y), playerId, bombRange);
+                    }
+                    break;
+                
                 default:
                     System.out.println("no Bomb chosen");
             }

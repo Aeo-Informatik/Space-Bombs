@@ -127,6 +127,19 @@ public abstract class Bomb extends Entity
     {
         this.bombAnim = bomb ;
     }
+
+    public void setExplosionCenter(TextureRegion explosionCenter) {
+        this.explosionCenter = explosionCenter;
+    }
+
+    public TextureRegion getExplosionYMiddle() {
+        return explosionYMiddle;
+    }
+
+    public TextureRegion getExplosionXMiddle() {
+        return explosionXMiddle;
+    }
+    
     
     
     /**
