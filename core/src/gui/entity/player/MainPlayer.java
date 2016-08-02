@@ -17,6 +17,7 @@ import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapManager;
+import gui.entity.item.Teleport;
 
 /**
  *
@@ -54,7 +55,7 @@ public class MainPlayer extends Player
     private int bomb_6 = 50;
     private int bomb_7;
     private int bomb_8;
-    private int bomb_9;
+    private int bomb_9 = 125;
     
     
     //Player settings CAN BE CHANGED
@@ -577,6 +578,20 @@ public class MainPlayer extends Player
                             
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                         entityManager.getBombManager().spawnHorizontal(new Vector2(x, y), playerId, bombRange);
+                    }
+                    break;
+                    
+                case(9):
+                    
+                    bombType = "Teleport";
+            
+                    //Checks if there is already a bomb
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_9)
+                    {
+                        coins -= bomb_9;
+                        
+                        Teleport item = new Teleport(0,0,map,entityManager);
+                        item.itemEffect();
                     }
                     break;
                 
