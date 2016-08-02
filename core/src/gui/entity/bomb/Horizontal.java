@@ -20,7 +20,7 @@ import gui.map.MapManager;
 public class Horizontal extends Bomb
 {
     
-    public String Discription = "The normal Bomb";    
+    public String Discription = "Only eplodes horizontal but has twice the range";    
     
     public Horizontal(Vector2 pos, Vector2 direction, int range, int playerId, MapManager map, EntityManager entityManager) 
     {
