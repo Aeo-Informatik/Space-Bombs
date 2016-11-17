@@ -18,7 +18,7 @@ public class RunServer
         try
         {
             //Initialise server object
-            Server server = new Server(ServerConstants.LISTENINGPORT, ServerConstants.MAXPLAYERS, new AvailableMaps().getMapList().get(0));   
+            Server server = new Server(ServerConstants.LISTENINGPORT, ServerConstants.MAXPLAYERS, new AvailableMaps().getTestMap());   
 
             server.OpenLobby();
             

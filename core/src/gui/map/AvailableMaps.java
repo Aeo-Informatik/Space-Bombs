@@ -15,11 +15,14 @@ public class AvailableMaps
 {
     // Filled with the path of the maps
     private final ArrayList<String> mapList = new ArrayList<>();
+    private int currentMap = 0;
     
     public AvailableMaps()
     {
-        // First added Map is always the default map
+        // First added Map is always the test map
         addMap("Test-Map_(26x26)");
+        
+        // Normal maps
         addMap("The-Iron-Block_(25x25)");
     }
     
@@ -28,9 +31,44 @@ public class AvailableMaps
         mapList.add("maps/" + name + ".tmx");
     }
     
-    public ArrayList<String> getMapList()
+    public String nextMap()
     {
-        return mapList;
+        if(currentMap < mapList.size())
+        {
+            currentMap++;
+        }else
+        {
+            currentMap = 1;
+        }
+        
+        return mapList.get(currentMap);
     }
     
+    public String previousMap()
+    {
+        if(currentMap > 0)
+        {
+            currentMap++;
+        }else
+        {
+            currentMap = mapList.size() -1;
+        }
+        
+        return mapList.get(currentMap);
+    }
+    
+    public String getMap(int i)
+    {
+        return mapList.get(i);
+    }
+    
+    public int getNumberOfMaps()
+    {
+        return mapList.size();
+    }
+    
+    public String getTestMap()
+    {
+        return mapList.get(0);
+    }
 }

@@ -29,6 +29,7 @@ import static gui.TextureManager.dynamiteSkin;
 import static gui.TextureManager.roundSkin;
 import static gui.TextureManager.skin;
 import gui.map.AvailableMaps;
+import java.util.ArrayList;
 import server.Server;
 import server.ServerConstants;
 
@@ -61,12 +62,12 @@ public class HostScreen implements Screen
     public HostScreen()
     {
         //General Object initalisation
-        this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
+        stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
         
         if(Constants.OWNSERVEROBJ == null)
         {
-           Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getMapList().get(0)); 
+           Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getTestMap()); 
         }
         
         //Set background
@@ -230,6 +231,7 @@ public class HostScreen implements Screen
                 {
                     
                 }
+                
                 
                 //TODO
             }

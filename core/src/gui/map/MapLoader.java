@@ -40,7 +40,7 @@ public class MapLoader
     public MapLoader(OrthographicCamera camera)
     {
         this.camera = camera;
-        this.tiledMap = new TmxMapLoader().load(new AvailableMaps().getMapList().get(0));
+        this.tiledMap = new TmxMapLoader().load(new AvailableMaps().getTestMap());
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
