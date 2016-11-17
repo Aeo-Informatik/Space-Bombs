@@ -13,7 +13,7 @@ import static com.gdx.bomberman.Main.client;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import java.util.Random;
 
 /**
@@ -26,10 +26,10 @@ public class Infinity extends Bomb
     
     private int chance;
     
-    public Infinity(Vector2 pos, Vector2 direction, int range, int playerId, int chance, MapManager map, EntityManager entityManager) 
+    public Infinity(Vector2 pos, Vector2 direction, int range, int playerId, int chance, MapLoader map, EntityManager entityManager) 
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
-        //float delayExplodeAfterHitByBomb, int playerId, MapManager map, EntityManager entityManager
+        //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
         super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.infinityAnim);
         this.chance = chance;

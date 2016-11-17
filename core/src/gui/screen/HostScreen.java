@@ -28,6 +28,7 @@ import gui.TextureManager;
 import static gui.TextureManager.dynamiteSkin;
 import static gui.TextureManager.roundSkin;
 import static gui.TextureManager.skin;
+import gui.map.AvailableMaps;
 import server.Server;
 import server.ServerConstants;
 
@@ -65,7 +66,7 @@ public class HostScreen implements Screen
         
         if(Constants.OWNSERVEROBJ == null)
         {
-           Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4); 
+           Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getMapList().get(0)); 
         }
         
         //Set background
@@ -207,6 +208,54 @@ public class HostScreen implements Screen
                 AudioManager.menuMusic.stop();
                 Constants.OWNSERVEROBJ.startGame();
                 game.setScreen(new GameScreen());
+            }
+        });
+        
+        //Add click listener --> Slide right
+        slideRight.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) 
+            {   
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+                
+                //TODO
+            }
+        });
+        
+                //Add click listener --> Slide left
+        slideLeft.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) 
+            {   
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+                
+                //TODO
             }
         });
     }

@@ -18,15 +18,16 @@ public class Server
     
     //Variables
     private int maxConnections;
-    private String mapPath = ServerConstants.DEFAULTMAPPATH;//"maps/TestMap.tmx"
+    private String mapPath = "";
     
     //Constructor
-    public Server(int port, int maxConnections)
+    public Server(int port, int maxConnections, String mapPath)
     {
         try 
         {
             this.serverSocket = new ServerSocket(port);
             this.maxConnections = maxConnections;
+            this.mapPath = mapPath;
             
         }catch(Exception e) 
         {

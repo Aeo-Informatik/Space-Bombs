@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 /**
  *
@@ -23,9 +23,9 @@ public class BombManager
     
     //Objects
     private EntityManager entityManager;
-    private MapManager map;
+    private MapLoader map;
     
-    public BombManager(MapManager map, EntityManager entityManager)
+    public BombManager(MapLoader map, EntityManager entityManager)
     {
         this.entityManager = entityManager;
         this.map = map;

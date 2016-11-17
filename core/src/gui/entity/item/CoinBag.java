@@ -10,7 +10,7 @@ import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import gui.AudioManager;
 import gui.entity.player.MainPlayer;
 
@@ -24,7 +24,7 @@ public class CoinBag extends Item{
     public String Discription = "You get then times the coinvalue in coins (default 100)";
     private int value;
 
-    public CoinBag(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
+    public CoinBag(int cellX, int cellY, MapLoader map, EntityManager entityManager, int value) {
         super(cellX, cellY,TextureManager.coinBag, map, entityManager);
         this.value = value;
     }

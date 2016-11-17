@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.AudioManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 /**
  *
@@ -22,10 +22,10 @@ public class NormalBomb extends Bomb
     
     public String Discription = "The normal Bomb";    
     
-    public NormalBomb(Vector2 pos, Vector2 direction, int range, int playerId, MapManager map, EntityManager entityManager) 
+    public NormalBomb(Vector2 pos, Vector2 direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
-        //float delayExplodeAfterHitByBomb, int playerId, MapManager map, EntityManager entityManager
+        //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
         super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
     }
     

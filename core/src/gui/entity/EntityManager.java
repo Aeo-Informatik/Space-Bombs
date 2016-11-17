@@ -7,7 +7,7 @@ package gui.entity;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import gui.entity.bomb.BombManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import gui.entity.item.ItemManager;
 import gui.entity.player.PlayerManager;
 
@@ -25,7 +25,7 @@ public class EntityManager {
     private BombManager bombManager;
 
     //Constructor
-    public EntityManager(OrthographicCamera camera, MapManager map)
+    public EntityManager(OrthographicCamera camera, MapLoader map)
     {
         this.itemManager = new ItemManager(map, this);
         this.playerManager = new PlayerManager(camera, map, this);

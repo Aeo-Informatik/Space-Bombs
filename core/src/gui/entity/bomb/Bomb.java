@@ -17,7 +17,7 @@ import gui.AnimEffects;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import java.util.Random;
 
 /**
@@ -61,7 +61,7 @@ public abstract class Bomb extends Entity
     
     
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration,float delayExplodeAfterHitByBomb, int playerId, MapManager map, EntityManager entityManager)
+    public Bomb(Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration,float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager)
     { 
         super(pos, direction, map, entityManager);
         

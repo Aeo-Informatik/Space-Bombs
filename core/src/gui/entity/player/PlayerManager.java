@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 /**
  *
@@ -20,7 +20,7 @@ public class PlayerManager
 {
     //Objects
     private OrthographicCamera camera;
-    private MapManager map;
+    private MapLoader map;
     private EntityManager entityManager;
       
     //Players
@@ -29,7 +29,7 @@ public class PlayerManager
     private Spectator spectator;
     
     //Constructor
-    public PlayerManager(OrthographicCamera camera, MapManager map, EntityManager entityManager)
+    public PlayerManager(OrthographicCamera camera, MapLoader map, EntityManager entityManager)
     {
         this.camera = camera;
         this.map = map;

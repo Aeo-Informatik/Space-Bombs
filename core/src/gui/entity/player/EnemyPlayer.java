@@ -14,7 +14,7 @@ import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 /**
  *
@@ -53,7 +53,7 @@ public class EnemyPlayer extends Player
     private int maxBombPlacing = 2;
     
     //Constructor
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapManager map, EntityManager entityManager, OrthographicCamera camera) 
+    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapLoader map, EntityManager entityManager, OrthographicCamera camera) 
     {
         super(pos, direction, map, entityManager, camera);
         
@@ -193,7 +193,7 @@ public class EnemyPlayer extends Player
      */
     public void placeBomb(Vector2 pos, String bombType)
     {
-        //Vector2 pos, Vector2 direction, MapManager map, int playerId, int range,  EntityManager entityManager)
+        //Vector2 pos, Vector2 direction, MapLoader map, int playerId, int range,  EntityManager entityManager)
         switch(bombType)
         {
             case("default"):

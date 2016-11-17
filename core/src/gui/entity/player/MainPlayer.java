@@ -16,7 +16,7 @@ import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import gui.entity.item.Teleport;
 
 /**
@@ -69,7 +69,7 @@ public class MainPlayer extends Player
     private float maxZoomIn = 0.5f;
     
     //Constructor
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapManager map, EntityManager entityManager) 
+    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapLoader map, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager, camera);
 

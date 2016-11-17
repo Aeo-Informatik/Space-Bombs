@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import java.util.Random;
 
 /**
@@ -19,7 +19,7 @@ import java.util.Random;
 public class ItemManager 
 {
     //Objects
-    private MapManager map;
+    private MapLoader map;
     private EntityManager entityManager;
     
     //Variables
@@ -30,7 +30,7 @@ public class ItemManager
     private Array <Item> tombArray = new Array<>();
     private Array <Item> coinArray = new Array<>();
     
-    public ItemManager(MapManager map, EntityManager entityManager)
+    public ItemManager(MapLoader map, EntityManager entityManager)
     {
         this.map = map;
         this.entityManager = entityManager;

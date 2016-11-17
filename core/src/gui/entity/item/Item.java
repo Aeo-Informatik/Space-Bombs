@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import com.gdx.bomberman.Constants;
 /**
  *
@@ -31,7 +31,7 @@ public class Item extends Entity
     
     
     //Constructor
-    public Item(int cellX, int cellY, TextureRegion itemTexture, MapManager map, EntityManager entityManager) 
+    public Item(int cellX, int cellY, TextureRegion itemTexture, MapLoader map, EntityManager entityManager) 
     {
         super(new Vector2(cellX, cellY), new Vector2(0,0), map, entityManager);
         

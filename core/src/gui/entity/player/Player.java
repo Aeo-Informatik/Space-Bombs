@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.gdx.bomberman.Constants;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 /**
  *
@@ -26,7 +26,7 @@ public abstract class Player extends Entity
     protected float cameraSpeed = Constants.DEFAULTCAMERASPEED;
     
     //Constructor
-    public Player(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager, OrthographicCamera camera)
+    public Player(Vector2 pos, Vector2 direction, MapLoader map, EntityManager entityManager, OrthographicCamera camera)
     {
         super(pos, direction, map, entityManager);
         

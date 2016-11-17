@@ -13,7 +13,7 @@ import static com.gdx.bomberman.Main.client;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import java.util.Random;
 
 /**
@@ -25,10 +25,10 @@ public class X3 extends Bomb
     public String Discription = "Explodes three times coins only on the last time";
     private int X;
     
-    public X3(Vector2 pos, Vector2 direction, int range, int playerId, int X, MapManager map, EntityManager entityManager) 
+    public X3(Vector2 pos, Vector2 direction, int range, int playerId, int X, MapLoader map, EntityManager entityManager) 
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
-        //float delayExplodeAfterHitByBomb, int playerId, MapManager map, EntityManager entityManager
+        //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
         super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.x3Anim);
         this.X = X;

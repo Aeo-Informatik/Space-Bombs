@@ -22,7 +22,7 @@ import static com.gdx.bomberman.Main.client;
  *
  * @author qubasa
  */
-public class MapManager
+public class MapLoader
 {
     //Objects
     private TiledMap tiledMap;
@@ -37,10 +37,10 @@ public class MapManager
     private Array<Vector2> itemSpawnerPositions = new Array<>(); // In entity positions
     
     //Constuctor
-    public MapManager(OrthographicCamera camera)
+    public MapLoader(OrthographicCamera camera)
     {
         this.camera = camera;
-        this.tiledMap = new TmxMapLoader().load("maps/Empty-Map.tmx");
+        this.tiledMap = new TmxMapLoader().load(new AvailableMaps().getMapList().get(0));
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         this.blockLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Blocks");
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");

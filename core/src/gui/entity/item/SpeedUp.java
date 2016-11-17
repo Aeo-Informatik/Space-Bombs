@@ -9,7 +9,7 @@ package gui.entity.item;
 
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import gui.entity.player.MainPlayer;
@@ -22,7 +22,7 @@ public class SpeedUp extends Item{
 
     public String Discription = "You get faster";
     
-    public SpeedUp(int CellX, int CellY, MapManager map, EntityManager entityManager) {
+    public SpeedUp(int CellX, int CellY, MapLoader map, EntityManager entityManager) {
         super(CellX, CellY,TextureManager.speedUp, map, entityManager);
     }
     

@@ -11,7 +11,7 @@ import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 
 /**
@@ -23,7 +23,7 @@ public class Teleport extends Item{
     public String Discription = "You get Teleportet to your Spawn-Point";
 
     //Constructor
-    public Teleport(int cellX, int cellY, MapManager map, EntityManager entityManager) {
+    public Teleport(int cellX, int cellY, MapLoader map, EntityManager entityManager) {
         super(cellX, cellY,TextureManager.emptyBlock, map, entityManager);
     }
     

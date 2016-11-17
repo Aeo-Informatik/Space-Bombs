@@ -14,7 +14,7 @@ import static com.gdx.bomberman.Main.client;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import java.util.Random;
 
 /**
@@ -25,10 +25,10 @@ public class Dynamite extends Bomb{
     
     public String Discription = "More coins but less range";
     
-    public Dynamite(Vector2 pos, Vector2 direction, int range, int playerId, MapManager map, EntityManager entityManager) 
+    public Dynamite(Vector2 pos, Vector2 direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
-        //float delayExplodeAfterHitByBomb, int playerId, MapManager map, EntityManager entityManager
+        //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
         super(pos, direction, (range - 1), 2, 0.4f, 0.4f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.dynamiteAnim);
     }

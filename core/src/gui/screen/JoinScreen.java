@@ -32,6 +32,7 @@ import static gui.TextureManager.skin;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import client.Client;
+import gui.map.AvailableMaps;
 import server.Server;
 import server.ServerConstants;
 
@@ -142,7 +143,7 @@ public class JoinScreen implements Screen
                     
                     if(Constants.OWNSERVEROBJ == null)
                     {
-                        Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4); 
+                        Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getMapList().get(0)); 
                     }   
                     //Set map to testmap
                     //Constants.TESTSERVEROBJ.setMap("maps/Test-Map_(26x26).tmx");

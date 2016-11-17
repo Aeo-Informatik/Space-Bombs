@@ -14,7 +14,7 @@ import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import gui.screen.MenuScreen;
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class Spectator extends Player
     private Array <EnemyPlayer> enemies;
     
     //Constructor
-    public Spectator(Vector2 pos, Vector2 direction, OrthographicCamera camera, MapManager map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
+    public Spectator(Vector2 pos, Vector2 direction, OrthographicCamera camera, MapLoader map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager, camera);
         

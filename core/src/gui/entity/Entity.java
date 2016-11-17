@@ -10,7 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.entity.bomb.Bomb;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 /**
  *
@@ -20,7 +20,7 @@ public abstract class Entity
 {
     //General objects & variables
     protected Vector2 pos, direction;
-    protected MapManager map;
+    protected MapLoader map;
     protected TiledMapTileLayer blockLayer;
     protected TiledMapTileLayer bombLayer;
     protected EntityManager entityManager;
@@ -32,7 +32,7 @@ public abstract class Entity
     
     //The first parameter is the image that should be drawn the second one is the position x, y
     //and the third is the movement direction and speed in which the texture moves x,y.
-    public Entity(Vector2 pos, Vector2 direction, MapManager map, EntityManager entityManager){
+    public Entity(Vector2 pos, Vector2 direction, MapLoader map, EntityManager entityManager){
         
         this.pos = pos;
         this.map = map;

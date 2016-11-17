@@ -10,7 +10,7 @@ import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 
 /**
@@ -29,7 +29,7 @@ public class YellowHeart extends Item{
      * @param map
      * @param entityManager 
      */
-    public YellowHeart(int CellX, int CellY, MapManager map, EntityManager entityManager) {
+    public YellowHeart(int CellX, int CellY, MapLoader map, EntityManager entityManager) {
         super(CellX, CellY,TextureManager.yellowHeart, map, entityManager);
     }    
     

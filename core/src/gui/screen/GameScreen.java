@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import client.ClientProcessData;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,7 +34,7 @@ public class GameScreen implements Screen{
     //Objects 
     private OrthographicCamera camera;
     private EntityManager entityManager;
-    private MapManager mapManager;
+    private MapLoader mapManager;
     private ClientProcessData processData;
     private SpriteBatch renderServer = new SpriteBatch();
     private Random random = new Random();
@@ -56,7 +56,7 @@ public class GameScreen implements Screen{
     {
         this.camera = new OrthographicCamera();
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT, camera));
-        this.mapManager = new MapManager(camera);
+        this.mapManager = new MapLoader(camera);
         this.entityManager = new EntityManager(camera, mapManager);
         this.processData = new ClientProcessData(entityManager, mapManager);
         this.counterHud = new LifeHud(entityManager);

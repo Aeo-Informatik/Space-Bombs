@@ -8,7 +8,7 @@ package gui.entity.item;
 
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 
 /**
@@ -23,7 +23,7 @@ public class Tombstone extends Item{
     private int playerId;
     
     //Constructor
-    public Tombstone(int CellX, int CellY, MapManager map, EntityManager entityManager, ItemManager itemManager, int coins, int playerId) 
+    public Tombstone(int CellX, int CellY, MapLoader map, EntityManager entityManager, ItemManager itemManager, int coins, int playerId) 
     {
         super(CellX, CellY,TextureManager.tombstone, map, entityManager);
         this.coins = coins;

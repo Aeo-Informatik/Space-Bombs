@@ -11,7 +11,7 @@ import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.entity.player.MainPlayer;
@@ -27,7 +27,7 @@ public class Coin extends Item{
     private AnimEffects animEffects = new AnimEffects();
     private int value;
 
-    public Coin(int cellX, int cellY, MapManager map, EntityManager entityManager, int value) {
+    public Coin(int cellX, int cellY, MapLoader map, EntityManager entityManager, int value) {
         super(cellX, cellY,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
         this.value = value;
         

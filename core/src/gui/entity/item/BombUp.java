@@ -10,7 +10,7 @@ import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 
 
@@ -23,7 +23,7 @@ public class BombUp extends Item{
     public String Discription = "You can hold more Bombs";
     
     //Constructor
-    public BombUp(int cellX, int cellY, MapManager map, EntityManager entityManager) 
+    public BombUp(int cellX, int cellY, MapLoader map, EntityManager entityManager) 
     {
         super(cellX, cellY,TextureManager.bombUp, map, entityManager);
     }

@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.entity.player.EnemyPlayer;
 import gui.entity.EntityManager;
-import gui.map.MapManager;
+import gui.map.MapLoader;
 
 
 /**
@@ -21,10 +21,10 @@ import gui.map.MapManager;
 public class ClientProcessData
 {
     private EntityManager entityManager;
-    private MapManager mapManager;
+    private MapLoader mapManager;
     
     //Constructor
-    public ClientProcessData(EntityManager entityManager, MapManager mapManager)
+    public ClientProcessData(EntityManager entityManager, MapLoader mapManager)
     {
         this.entityManager = entityManager;
         this.mapManager = mapManager;
