@@ -27,15 +27,16 @@ import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.dynamiteSkin;
 import static gui.TextureManager.roundSkin;
-import static gui.TextureManager.skin;
 import gui.map.AvailableMaps;
-import java.util.ArrayList;
 import server.Server;
 import server.ServerConstants;
 
 
 public class HostScreen implements Screen
 {
+    // Map List
+    AvailableMaps maps = new AvailableMaps();
+    
     //Objects
     private Stage stage;
     private WidgetGroup joinedPlayerGroup = new WidgetGroup();
@@ -232,8 +233,8 @@ public class HostScreen implements Screen
                     
                 }
                 
-                
-                //TODO
+                maps.nextMap();
+                Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
             }
         });
         
@@ -257,7 +258,8 @@ public class HostScreen implements Screen
                     
                 }
                 
-                //TODO
+                maps.previousMap();
+                Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
             }
         });
     }

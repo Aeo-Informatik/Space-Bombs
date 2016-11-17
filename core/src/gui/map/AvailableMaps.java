@@ -31,7 +31,7 @@ public class AvailableMaps
         mapList.add("maps/" + name + ".tmx");
     }
     
-    public String nextMap()
+    public void nextMap()
     {
         if(currentMap < mapList.size())
         {
@@ -40,11 +40,9 @@ public class AvailableMaps
         {
             currentMap = 1;
         }
-        
-        return mapList.get(currentMap);
     }
     
-    public String previousMap()
+    public void previousMap()
     {
         if(currentMap > 0)
         {
@@ -53,7 +51,10 @@ public class AvailableMaps
         {
             currentMap = mapList.size() -1;
         }
-        
+    }
+    
+    public String getCurrentMap()
+    {
         return mapList.get(currentMap);
     }
     
