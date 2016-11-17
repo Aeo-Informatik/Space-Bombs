@@ -25,6 +25,8 @@ import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
+import static gui.TextureManager.dynamiteSkin;
+import static gui.TextureManager.roundSkin;
 import static gui.TextureManager.skin;
 import server.Server;
 import server.ServerConstants;
@@ -82,12 +84,21 @@ public class HostScreen implements Screen
         labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
         labelStyle.fontColor = Color.CYAN;
         
-        /**------------------------BUTTON STYLE------------------------**/
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up   = skin.getDrawable("button_up");
-        textButtonStyle.down = skin.getDrawable("button_down");
-        textButtonStyle.over = skin.getDrawable("button_checked");
+        
+        /**------------------------DYNAMITE BUTTON STYLE ------------------------**/
+        TextButton.TextButtonStyle dynamiteTextButtonStyle = new TextButton.TextButtonStyle();
+        dynamiteTextButtonStyle.font = font;
+        dynamiteTextButtonStyle.up   = dynamiteSkin.getDrawable("button_up");
+        dynamiteTextButtonStyle.down = dynamiteSkin.getDrawable("button_down");
+        dynamiteTextButtonStyle.over = dynamiteSkin.getDrawable("button_checked");
+        
+        
+        /**------------------------ROUND BUTTON------------------------**/
+        TextButton.TextButtonStyle textButtonStyleRound = new TextButton.TextButtonStyle();
+        textButtonStyleRound.font = font;
+        textButtonStyleRound.up   = roundSkin.getDrawable("button_up");
+        textButtonStyleRound.down = roundSkin.getDrawable("button_down");
+        textButtonStyleRound.over = roundSkin.getDrawable("button_checked");
         
         /**------------------------OPEN SERVER------------------------**/
         System.out.println("CLIENT: Launching server with 4 players...");
@@ -104,6 +115,7 @@ public class HostScreen implements Screen
             System.err.println("ERROR: Client couldnt connect to own server: " + e);
             e.printStackTrace();
         }
+        
         
         /**------------------------JOIN PLAYER GROUP------------------------**/
         //Table options
@@ -138,17 +150,14 @@ public class HostScreen implements Screen
         joinedPlayerGroup.setPosition(443, 74);
         stage.addActor(joinedPlayerGroup);
         
-        /**------------------------SLIDER GROUP------------------------**/
+        
+        /**------------------------MAP SLIDER GROUP------------------------**/
         //Table options
         Table table1 = new Table();
         table1.setFillParent(true);
-        
         Table table2 = new Table();
-        table2.setFillParent(true);
-                
-        mapName = new Label("Maze Map", labelStyle);
-        table1.add(mapName).padBottom(190);
-        
+
+        // Map Screenshot
         mapImage = new Container();
         table2.add(mapImage).width(400).height(210);
         
@@ -158,12 +167,21 @@ public class HostScreen implements Screen
         sliderGroup.setPosition(400, 310);
         stage.addActor(sliderGroup);
         
-        /**------------------------OTHER BUTTONS------------------------**/
-        //Start button
-        startbutton = new TextButton("Start Game!", textButtonStyle);
-        startbutton.setPosition(340, 120);
+        /**------------------------ALL BUTTONS------------------------**/
+        //Start game button
+        startbutton = new TextButton("Start Game!", dynamiteTextButtonStyle);
+        startbutton.setPosition(305, 125);
         stage.addActor(startbutton);
 
+        //Slide right button
+        slideRight = new TextButton(">>>", textButtonStyleRound);
+        slideRight.setPosition(610, 282);
+        stage.addActor(slideRight);
+        
+         //Slide right button
+        slideLeft = new TextButton("<<<", textButtonStyleRound);
+        slideLeft.setPosition(140, 282);
+        stage.addActor(slideLeft);
         
         /**------------------------BUTTON FUNCTIONS------------------------**/
         //Add click listener --> Start Game
@@ -186,6 +204,7 @@ public class HostScreen implements Screen
                     
                 }
                 
+                AudioManager.menuMusic.stop();
                 Constants.OWNSERVEROBJ.startGame();
                 game.setScreen(new GameScreen());
             }

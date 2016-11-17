@@ -27,8 +27,18 @@ public class TextureManager
     public static FreeTypeFontGenerator menuFont;
     public static Texture menuBackground;
     public static Texture hostBackground;
+    
+    // Standard bomb button
     public static Skin skin;
     public static TextureAtlas textureAtlas;
+    
+    // Standard dynamite button
+    public static Skin dynamiteSkin;
+    public static TextureAtlas dynamiteAtlas;
+    
+    // Round button
+    public static Skin roundSkin;
+    public static TextureAtlas roundAtlas;
     
     //Hud
     public static Texture hudCounterFullLive;
@@ -211,9 +221,21 @@ public class TextureManager
         menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         menuBackground = loadTexture("menu/menu.png");
         hostBackground = loadTexture("menu/menu-host.png");
+                
+        // Standard bomb button
         textureAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin = new Skin(Gdx.files.internal("menu/uiskin.json"));
         skin.addRegions(textureAtlas);
+        
+        // Standard dynamite button
+        dynamiteAtlas = new TextureAtlas(Gdx.files.internal("button/dynamite-button.pack"));
+        dynamiteSkin = new Skin(Gdx.files.internal("menu/uiskin.json"));
+        dynamiteSkin.addRegions(dynamiteAtlas);
+        
+        // Round button
+        roundAtlas = new TextureAtlas(Gdx.files.internal("button/round-button.pack"));
+        roundSkin = new Skin(Gdx.files.internal("menu/uiskin.json"));
+        roundSkin.addRegions(roundAtlas);
         
         /*---------------------------------HUD---------------------------------*/
         hudCounterFullLive = loadTexture("hud/hud2_full_live.png");
