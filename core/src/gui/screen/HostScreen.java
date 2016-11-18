@@ -178,7 +178,7 @@ public class HostScreen implements Screen
         mapName = new Label("I like trains", labelStyle);
         mapName.setText(maps.getCurrentMapName());
         mapName.setAlignment(Align.center);
-        mapName.setPosition(340, 430);
+        mapName.setPosition(310, 430);
         stage.addActor(mapName);
         
         // Map Screenshot
