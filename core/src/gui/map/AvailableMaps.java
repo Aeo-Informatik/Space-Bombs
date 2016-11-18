@@ -15,7 +15,7 @@ public class AvailableMaps
 {
     // Filled with the path of the maps
     private final ArrayList<String> mapList = new ArrayList<>();
-    private int currentMap = 0;
+    private int currentMap = 1;
     
     public AvailableMaps()
     {
@@ -33,7 +33,7 @@ public class AvailableMaps
     
     public void nextMap()
     {
-        if(currentMap < mapList.size())
+        if(currentMap < mapList.size()-1)
         {
             currentMap++;
         }else
@@ -44,23 +44,28 @@ public class AvailableMaps
     
     public void previousMap()
     {
-        if(currentMap > 0)
+        if(currentMap > 1)
         {
-            currentMap++;
+            currentMap--;
         }else
         {
             currentMap = mapList.size() -1;
         }
     }
     
+    public String getCurrentMapPreviewPath()
+    {
+        return "maps/preview/" + getCurrentMapName() + ".png";
+    }
+    
+    public String getCurrentMapName()
+    {
+        return mapList.get(currentMap).replaceAll("maps/", "").replaceAll(".tmx", "");
+    }
+    
     public String getCurrentMap()
     {
         return mapList.get(currentMap);
-    }
-    
-    public String getMap(int i)
-    {
-        return mapList.get(i);
     }
     
     public int getNumberOfMaps()

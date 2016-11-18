@@ -258,6 +258,7 @@ public class HostScreen implements Screen
                     
                 }
                 
+                
                 maps.previousMap();
                 Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
             }
@@ -348,6 +349,10 @@ public class HostScreen implements Screen
         //Set background image
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.hostBackground)));
 
+        // Set map preview
+         // Set current map as preview
+        mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
+        
         //Draw stage
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
