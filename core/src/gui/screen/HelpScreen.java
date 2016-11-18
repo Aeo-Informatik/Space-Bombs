@@ -18,87 +18,88 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.gdx.bomberman.Constants;
+import static com.gdx.bomberman.Main.game;
+import gui.AudioManager;
+import gui.TextureManager;
+import static gui.TextureManager.backSkin;
 
 /**
  *
- * @author JeJe
+ * @author qubasa
  */
 public class HelpScreen implements Screen{
-    
-
-
-
-
-
-
 
     //Objects
     private Stage stage;
-    private TextButton backbutton;
-    private TextButton.TextButtonStyle textButtonStyle;
-    private BitmapFont font;
-    private Skin skin;
-    private TextureAtlas buttonAtlas;
-    private Game game;
-    private Texture backgroundTexture;
-    private Sprite sprite;
-    private SpriteBatch batch;
+    private Table rootTable = new Table();
     
-
+    //Buttons
+    private TextButton forwardButton;
+    private TextButton previousButton;
+    private TextButton backButton;
+    
     /**------------------------CONSTRUCTOR------------------------**/
     public HelpScreen(Game game)
     {
-        this.game = game;
-        stage = new Stage();
+         //Set input and viewpoint
+        stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
-        font = new BitmapFont();
-        skin = new Skin();
-        batch = new SpriteBatch();
-        
-         //load the background texture
-        backgroundTexture = new Texture(Gdx.files.internal("menu/help1.png"));
-        sprite = new Sprite(backgroundTexture);
-        
-       
-       
-        
-        //Load button description into memory
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
-        skin.addRegions(buttonAtlas);
 
+        //Set background
+        rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.help1)));
+        rootTable.setFillParent(true);
+        stage.addActor(rootTable);
         
-        //Add button style
-        textButtonStyle = new TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("button_up");
-        textButtonStyle.down = skin.getDrawable("button_down");
-        textButtonStyle.over = skin.getDrawable("button_checked");
-
-       
-        textButtonStyle.pressedOffsetY = -3;
+        //Initialise Font
+        FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontOptions.size = 11;
+        BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
         
-
+        /**------------------------BACK BUTTON------------------------**/
+        TextButton.TextButtonStyle textButtonStyleBack = new TextButton.TextButtonStyle();
+        textButtonStyleBack.font = font;
+        textButtonStyleBack.up   = backSkin.getDrawable("button_up");
+        textButtonStyleBack.down = backSkin.getDrawable("button_down");
+        textButtonStyleBack.over = backSkin.getDrawable("button_checked");
         
-        //Add button to screen
-        backbutton = new TextButton("Back!", textButtonStyle);
-        backbutton.setPosition(Gdx.graphics.getWidth() / 2 , Gdx.graphics.getHeight() / 2 - 175); // Add to the center even after resize
-        stage.addActor(backbutton);
-         //Add click listener --> Start Game
-        backbutton.addListener(new ChangeListener() 
+        // Back button
+        backButton = new TextButton("", textButtonStyleBack);
+        backButton.setPosition(0, Constants.SCREENHEIGHT - backButton.getHeight() + 7);
+        stage.addActor(backButton);
+        
+        //Add click listener --> Back button
+        backButton.addListener(new ChangeListener() 
         {
-            public void changed (ChangeEvent event, Actor actor) 
-            {  //add click sound
-                Music music = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/click.wav"));  
-                music.play();
+            @Override
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            {   
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
                 
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+
                 game.setScreen(new MenuScreen());
             }
         });
-
         
-       
     }
     
     
@@ -108,18 +109,34 @@ public class HelpScreen implements Screen{
     @Override
     public void render(float f) 
     {
+        //Debug
+        //stage.setDebugAll(true);
+        
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
-        //Render stage
+         //Draw stage
         stage.act(Gdx.graphics.getDeltaTime());
-        batch.begin();
-        sprite.draw(batch);
-        sprite.setSize(800,480);
-        batch.end();
         stage.draw();
-       
+        
+        /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
+        if(Gdx.input.isKeyPressed(Input.Keys.F12))
+        {
+            if(Gdx.graphics.isFullscreen())
+            {
+                Gdx.graphics.setWindowedMode(Constants.SCREENWIDTH, Constants.SCREENHEIGHT);
+            }else
+            {
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+            }
+        }
+        
+        /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+        {
+            game.setScreen(new MenuScreen());
+        }
     }
     
     
@@ -135,10 +152,8 @@ public class HelpScreen implements Screen{
     @Override
     public void dispose() 
     {
-        buttonAtlas.dispose();
-        font.dispose();
         stage.dispose();
-        skin.dispose();
+        backSkin.dispose();
     }
 
     

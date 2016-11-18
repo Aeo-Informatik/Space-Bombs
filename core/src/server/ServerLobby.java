@@ -99,7 +99,6 @@ public class ServerLobby implements Runnable
 
                     }catch(SocketTimeoutException e)
                     {
-                        
                     }
                 }
 

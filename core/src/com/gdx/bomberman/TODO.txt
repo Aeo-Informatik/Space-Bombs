@@ -25,9 +25,6 @@ fullscreen, music volume, sound volume
 Join Screen:
 ip address bar, join button, (optional) list of available servers, check if game is already in progress
 
-Host Screen:
-Map Selection, max player number, list of already connected users, start button
-
 Help Screen:
 Button: Back, Button: Forward
 
@@ -46,3 +43,4 @@ A font diplaying "Winner" or something like that
 3) You can walk on the side of blocks
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
+6) If going to host going back and then join to localhost it connects to a non existing server.

@@ -28,6 +28,9 @@ public class TextureManager
     public static Texture menuBackground;
     public static Texture hostBackground;
     
+    // Help Menu
+    public static Texture help1;
+    
     // Standard bomb button
     public static Skin skin;
     public static TextureAtlas textureAtlas;
@@ -220,7 +223,9 @@ public class TextureManager
     
     public static void load() 
     {
-
+        /*---------------------------------HELP MENU---------------------------------*/
+        help1 = loadTexture("menu/help1.png");
+                
         /*---------------------------------GENERAL MENU---------------------------------*/
         menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         menuBackground = loadTexture("menu/menu.png");

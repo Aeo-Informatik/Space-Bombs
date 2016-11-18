@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
@@ -233,6 +232,7 @@ public class HostScreen implements Screen
                     
                 }
 
+                Constants.OWNSERVEROBJ.closeLobby();
                 game.setScreen(new MenuScreen());
             }
         });
@@ -418,6 +418,7 @@ public class HostScreen implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
+            Constants.OWNSERVEROBJ.closeLobby();
             game.setScreen(new MenuScreen());
         }
     }
