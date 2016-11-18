@@ -50,9 +50,6 @@ public class HelpScreen implements Screen{
     /**------------------------CONSTRUCTOR------------------------**/
     public HelpScreen(Game game)
     {
-       
-        
-        
         this.game = game;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);

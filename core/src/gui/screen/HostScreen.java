@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
@@ -47,7 +48,7 @@ public class HostScreen implements Screen
     private TextButton startbutton;
     
     //Slider
-    private Container mapImage;
+    private Container mapImage = new Container();
     private Label mapName;
     private TextButton slideLeft;
     private TextButton slideRight;
@@ -65,6 +66,10 @@ public class HostScreen implements Screen
         //General Object initalisation
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
+        
+        // Set map preview and background
+        rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.hostBackground)));
+        mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
         
         if(Constants.OWNSERVEROBJ == null)
         {
@@ -85,7 +90,7 @@ public class HostScreen implements Screen
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         fontOptions.size = 14;
         labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
-        labelStyle.fontColor = Color.CYAN;
+        labelStyle.fontColor = Color.BLACK;
         
         
         /**------------------------DYNAMITE BUTTON STYLE ------------------------**/
@@ -160,8 +165,14 @@ public class HostScreen implements Screen
         table1.setFillParent(true);
         Table table2 = new Table();
 
+        // Map Name Label
+        mapName = new Label("asdasdasd", labelStyle);
+        mapName.setText(maps.getCurrentMapName());
+        mapName.setAlignment(Align.center);
+        mapName.setPosition(340, 430);
+        stage.addActor(mapName);
+        
         // Map Screenshot
-        mapImage = new Container();
         table2.add(mapImage).width(400).height(210);
         
         //Stage & group options
@@ -234,11 +245,12 @@ public class HostScreen implements Screen
                 }
                 
                 maps.nextMap();
+                mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
                 Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
             }
         });
         
-                //Add click listener --> Slide left
+        //Add click listener --> Slide left
         slideLeft.addListener(new ChangeListener() 
         {
             @Override
@@ -260,6 +272,7 @@ public class HostScreen implements Screen
                 
                 
                 maps.previousMap();
+                mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
                 Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
             }
         });
@@ -271,7 +284,7 @@ public class HostScreen implements Screen
     public void render(float f) 
     {        
         //Debug
-        stage.setDebugAll(true);
+        //stage.setDebugAll(true);
         
         //Clear Screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
@@ -344,14 +357,6 @@ public class HostScreen implements Screen
             //Update saved num players
             numPlayers = currentNumPlayers;
         }
-        
-        
-        //Set background image
-        rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.hostBackground)));
-
-        // Set map preview
-         // Set current map as preview
-        mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
         
         //Draw stage
         stage.act(Gdx.graphics.getDeltaTime());

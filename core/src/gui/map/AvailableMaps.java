@@ -55,12 +55,12 @@ public class AvailableMaps
     
     public String getCurrentMapPreviewPath()
     {
-        return "maps/preview/" + getCurrentMapName() + ".png";
+        return "maps/preview/" + mapList.get(currentMap).replaceAll("maps/", "").replaceAll(".tmx", "") + ".png";
     }
     
     public String getCurrentMapName()
     {
-        return mapList.get(currentMap).replaceAll("maps/", "").replaceAll(".tmx", "");
+        return mapList.get(currentMap).replaceAll("maps/", "").replaceAll(".tmx", "").replaceAll("-", " ").replaceAll("_", " ");
     }
     
     public String getCurrentMap()
