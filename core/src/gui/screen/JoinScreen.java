@@ -71,14 +71,14 @@ public class JoinScreen implements Screen
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        /**------------------------BUTTON STYLE------------------------**/
-        
+        // Label style
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         fontOptions.size = 14;
         labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
-        labelStyle.fontColor = Color.RED;
+        labelStyle.fontColor = Color.BLACK;
         labelStyle.background = new TextureRegionDrawable(new TextureRegion(new Texture("menu/textBackground.png")));
         
+        /**------------------------BOMB BUTTON STYLE------------------------**/
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         fontOptions.size = 11;
         textButtonStyle.font = TextureManager.menuFont.generateFont(fontOptions);
@@ -109,6 +109,7 @@ public class JoinScreen implements Screen
         
         //Add Textfield to screen
         ipTextField = new TextField("", skin);
+        ipTextField.setMessageText("Server IP address...");
         stackTable.add(ipTextField).width(230).padTop(25);
         stackTable.row();
 
