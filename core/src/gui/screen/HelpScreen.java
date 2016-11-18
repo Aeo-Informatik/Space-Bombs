@@ -8,30 +8,27 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.backSkin;
+import static gui.TextureManager.loadTexture;
 import static gui.TextureManager.roundSkin;
+import java.util.ArrayList;
 
 /**
  *
@@ -48,16 +45,32 @@ public class HelpScreen implements Screen{
     private TextButton slideLeft;
     private TextButton backButton;
     
+    private ArrayList<Texture> helpScreens = new ArrayList<>();
+    private int currentBackground = 0;
+    
     /**------------------------CONSTRUCTOR------------------------**/
     public HelpScreen(Game game)
     {
+        /**------------------------GET HELP BACKGROUND INTO ARRAY------------------------**/
+        // Indexes all help backgrounds till not found exception
+        try
+        {
+            for(int i=1;true;i++)
+            {
+                helpScreens.add(loadTexture("menu/help"+ i +".png"));
+            }
+        }catch(GdxRuntimeException e)
+        {
+            
+        }
+        
         /**------------------------SETUP------------------------**/
         //Set input and viewpoint
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
 
         //Set background
-        rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.help1)));
+        rootTable.background(new TextureRegionDrawable(new TextureRegion(helpScreens.get(0))));
         rootTable.setFillParent(true);
         stage.addActor(rootTable);
         
@@ -65,7 +78,7 @@ public class HelpScreen implements Screen{
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontOptions.size = 11;
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
-        
+
         /**------------------------BACK BUTTON------------------------**/
         TextButton.TextButtonStyle textButtonStyleBack = new TextButton.TextButtonStyle();
         textButtonStyleBack.font = font;
@@ -141,6 +154,7 @@ public class HelpScreen implements Screen{
                     
                 }
 
+                nextBackground();
             }
         });
         
@@ -164,14 +178,30 @@ public class HelpScreen implements Screen{
                     
                 }
                 
-               
+                previousBackground();
             }
         });
     
     }
     
     
+    private void nextBackground()
+    {
+        if(currentBackground < this.helpScreens.size() -1)
+        {
+            currentBackground++;
+            rootTable.background(new TextureRegionDrawable(new TextureRegion(helpScreens.get(currentBackground))));
+        }
+    }
     
+    private void previousBackground()
+    {
+        if(currentBackground +1 > 1)
+        {
+            currentBackground--;
+            rootTable.background(new TextureRegionDrawable(new TextureRegion(helpScreens.get(currentBackground))));
+        }
+    }
     
     /**------------------------RENDER------------------------**/
     @Override

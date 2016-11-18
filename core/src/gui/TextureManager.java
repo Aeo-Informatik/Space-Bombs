@@ -20,16 +20,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 public class TextureManager 
 {
-    
-    
-    
     //General Menu
     public static FreeTypeFontGenerator menuFont;
     public static Texture menuBackground;
     public static Texture hostBackground;
-    
-    // Help Menu
-    public static Texture help1;
     
     // Standard bomb button
     public static Skin skin;
@@ -222,10 +216,7 @@ public class TextureManager
     //TextureRegion(texture, int cutX, int cutY, int width, int height)
     
     public static void load() 
-    {
-        /*---------------------------------HELP MENU---------------------------------*/
-        help1 = loadTexture("menu/help1.png");
-                
+    {        
         /*---------------------------------GENERAL MENU---------------------------------*/
         menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         menuBackground = loadTexture("menu/menu.png");
