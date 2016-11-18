@@ -20,10 +20,11 @@ public class AvailableMaps
     public AvailableMaps()
     {
         // First added Map is always the test map
-        addMap("Test-Map_(26x26)");
+        addMap("Test-Map_(24x24)");
         
         // Normal maps
-        addMap("The-Iron-Block_(25x25)");
+        addMap("The-Iron-Block_(23x23)");
+        addMap("Center-Brawl_(21x25)");
     }
     
     public final void addMap(String name)

@@ -166,7 +166,7 @@ public class HostScreen implements Screen
         Table table2 = new Table();
 
         // Map Name Label
-        mapName = new Label("asdasdasd", labelStyle);
+        mapName = new Label("I like trains", labelStyle);
         mapName.setText(maps.getCurrentMapName());
         mapName.setAlignment(Align.center);
         mapName.setPosition(340, 430);
@@ -246,6 +246,7 @@ public class HostScreen implements Screen
                 
                 maps.nextMap();
                 mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
+                mapName.setText(maps.getCurrentMapName());
                 Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
             }
         });
@@ -273,6 +274,7 @@ public class HostScreen implements Screen
                 
                 maps.previousMap();
                 mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
+                mapName.setText(maps.getCurrentMapName());
                 Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
             }
         });
