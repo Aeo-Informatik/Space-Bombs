@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
@@ -26,6 +27,7 @@ import static com.gdx.bomberman.Main.client;
 import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
+import static gui.TextureManager.backSkin;
 import static gui.TextureManager.dynamiteSkin;
 import static gui.TextureManager.roundSkin;
 import gui.map.AvailableMaps;
@@ -46,6 +48,7 @@ public class HostScreen implements Screen
     
     //Buttons
     private TextButton startbutton;
+    private TextButton backbutton;
     
     //Slider
     private Container mapImage = new Container();
@@ -107,6 +110,13 @@ public class HostScreen implements Screen
         textButtonStyleRound.up   = roundSkin.getDrawable("button_up");
         textButtonStyleRound.down = roundSkin.getDrawable("button_down");
         textButtonStyleRound.over = roundSkin.getDrawable("button_checked");
+        
+        /**------------------------BACK BUTTON------------------------**/
+        TextButton.TextButtonStyle textButtonStyleBack = new TextButton.TextButtonStyle();
+        textButtonStyleBack.font = font;
+        textButtonStyleBack.up   = backSkin.getDrawable("button_up");
+        textButtonStyleBack.down = backSkin.getDrawable("button_down");
+        textButtonStyleBack.over = backSkin.getDrawable("button_checked");
         
         /**------------------------OPEN SERVER------------------------**/
         System.out.println("CLIENT: Launching server with 4 players...");
@@ -196,6 +206,12 @@ public class HostScreen implements Screen
         slideLeft = new TextButton("<<<", textButtonStyleRound);
         slideLeft.setPosition(140, 282);
         stage.addActor(slideLeft);
+        
+        // Back button
+        backbutton = new TextButton("", textButtonStyleBack);
+        backbutton.setPosition(0, Constants.SCREENHEIGHT - backbutton.getHeight() + 7);
+        //table.add(backbutton).width(148).height(62).spaceBottom(100);
+        stage.addActor(backbutton);
         
         /**------------------------BUTTON FUNCTIONS------------------------**/
         //Add click listener --> Start Game

@@ -40,6 +40,10 @@ public class TextureManager
     public static Skin roundSkin;
     public static TextureAtlas roundAtlas;
     
+    // Back button
+    public static Skin backSkin;
+    public static TextureAtlas backAtlas;
+    
     //Hud
     public static Texture hudCounterFullLive;
     public static Texture hudCounterTwoThirdLive;
@@ -236,6 +240,11 @@ public class TextureManager
         roundAtlas = new TextureAtlas(Gdx.files.internal("button/round-button.pack"));
         roundSkin = new Skin(Gdx.files.internal("menu/uiskin.json"));
         roundSkin.addRegions(roundAtlas);
+        
+        // Back button
+        backAtlas = new TextureAtlas(Gdx.files.internal("button/back-button.pack"));
+        backSkin = new Skin(Gdx.files.internal("menu/uiskin.json"));
+        backSkin.addRegions(backAtlas);
         
         /*---------------------------------HUD---------------------------------*/
         hudCounterFullLive = loadTexture("hud/hud2_full_live.png");
