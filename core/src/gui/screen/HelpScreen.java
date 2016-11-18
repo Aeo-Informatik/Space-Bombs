@@ -31,6 +31,7 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.backSkin;
+import static gui.TextureManager.roundSkin;
 
 /**
  *
@@ -43,14 +44,15 @@ public class HelpScreen implements Screen{
     private Table rootTable = new Table();
     
     //Buttons
-    private TextButton forwardButton;
-    private TextButton previousButton;
+    private TextButton slideRight;
+    private TextButton slideLeft;
     private TextButton backButton;
     
     /**------------------------CONSTRUCTOR------------------------**/
     public HelpScreen(Game game)
     {
-         //Set input and viewpoint
+        /**------------------------SETUP------------------------**/
+        //Set input and viewpoint
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
 
@@ -71,13 +73,56 @@ public class HelpScreen implements Screen{
         textButtonStyleBack.down = backSkin.getDrawable("button_down");
         textButtonStyleBack.over = backSkin.getDrawable("button_checked");
         
+        /**------------------------ROUND BUTTON------------------------**/
+        TextButton.TextButtonStyle textButtonStyleRound = new TextButton.TextButtonStyle();
+        textButtonStyleRound.font = font;
+        textButtonStyleRound.up   = roundSkin.getDrawable("button_up");
+        textButtonStyleRound.down = roundSkin.getDrawable("button_down");
+        textButtonStyleRound.over = roundSkin.getDrawable("button_checked");
+        
+        /**------------------------ALL BUTTONS------------------------**/
         // Back button
         backButton = new TextButton("", textButtonStyleBack);
         backButton.setPosition(0, Constants.SCREENHEIGHT - backButton.getHeight() + 7);
         stage.addActor(backButton);
         
+        //Slide right button
+        slideRight = new TextButton(">>>", textButtonStyleRound);
+        slideRight.setPosition(420, 45);
+        stage.addActor(slideRight);
+        
+         //Slide right button
+        slideLeft = new TextButton("<<<", textButtonStyleRound);
+        slideLeft.setPosition(340, 45);
+        stage.addActor(slideLeft);
+        
+        
         //Add click listener --> Back button
         backButton.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            {   
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                
+                // Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+
+                game.setScreen(new MenuScreen());
+            }
+        });
+        
+        //Add click listener --> Slide right
+        slideRight.addListener(new ChangeListener() 
         {
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
@@ -96,10 +141,33 @@ public class HelpScreen implements Screen{
                     
                 }
 
-                game.setScreen(new MenuScreen());
             }
         });
         
+        //Add click listener --> Slide left
+        slideLeft.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            {   
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+                
+               
+            }
+        });
+    
     }
     
     
