@@ -32,6 +32,8 @@ import static gui.TextureManager.skin;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import client.Client;
+import static com.gdx.bomberman.Main.game;
+import static gui.TextureManager.backSkin;
 import gui.map.AvailableMaps;
 import server.Server;
 import server.ServerConstants;
@@ -84,6 +86,13 @@ public class JoinScreen implements Screen
         textButtonStyle.down = skin.getDrawable("button_down");
         textButtonStyle.over = skin.getDrawable("button_checked");
         
+        /**------------------------BACK BUTTON------------------------**/
+        TextButton.TextButtonStyle textButtonStyleBack = new TextButton.TextButtonStyle();
+        textButtonStyleBack.font = TextureManager.menuFont.generateFont(fontOptions);
+        textButtonStyleBack.up   = backSkin.getDrawable("button_up");
+        textButtonStyleBack.down = backSkin.getDrawable("button_down");
+        textButtonStyleBack.over = backSkin.getDrawable("button_checked");
+        
         /**------------------------BUTTON POSITION------------------------**/
         rootTable = new Table();
         rootTable.setFillParent(true);
@@ -115,6 +124,35 @@ public class JoinScreen implements Screen
         stage.addActor(rootTable);
         stage.addActor(stack);
         stack.add(stackTable);
+        
+        // Back button
+        backButton = new TextButton("", textButtonStyleBack);
+        backButton.setPosition(0, Constants.SCREENHEIGHT - backButton.getHeight() + 7);
+        stage.addActor(backButton);
+        
+        //Add click listener --> Back button
+        backButton.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeListener.ChangeEvent event, Actor actor) 
+            {   
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+
+                game.setScreen(new MenuScreen());
+            }
+        });
         
         //Add click listener --> Start Game
         joinButton.addListener(new ChangeListener() 

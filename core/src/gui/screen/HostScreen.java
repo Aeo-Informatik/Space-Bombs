@@ -210,10 +210,33 @@ public class HostScreen implements Screen
         // Back button
         backbutton = new TextButton("", textButtonStyleBack);
         backbutton.setPosition(0, Constants.SCREENHEIGHT - backbutton.getHeight() + 7);
-        //table.add(backbutton).width(148).height(62).spaceBottom(100);
         stage.addActor(backbutton);
         
         /**------------------------BUTTON FUNCTIONS------------------------**/
+        //Add click listener --> Back button
+        backbutton.addListener(new ChangeListener() 
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) 
+            {   
+                //Add click musik
+                long id = AudioManager.clickSound.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                
+                //Wait till sound is done
+                try 
+                {
+                    Thread.sleep(100);
+                    
+                } catch (InterruptedException ex) 
+                {
+                    
+                }
+
+                game.setScreen(new MenuScreen());
+            }
+        });
+        
         //Add click listener --> Start Game
         startbutton.addListener(new ChangeListener() 
         {
