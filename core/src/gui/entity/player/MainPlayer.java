@@ -48,13 +48,13 @@ public class MainPlayer extends Player
     
     //BombCosts
     private int bomb_1 = 0;
-    private int bomb_2 = 5;
-    private int bomb_3 = 75;
-    private int bomb_4 = 100;
-    private int bomb_5 = 50;
-    private int bomb_6 = 50;
-    private int bomb_7;
-    private int bomb_8;
+    private int bomb_2 = 20;
+    private int bomb_3 = 50;
+    private int bomb_4 = 70;
+    private int bomb_5 = 80;
+    private int bomb_6 = 100;
+    private int bomb_7 = 100;
+    private int bomb_8 = 100;
     private int bomb_9 = 125;
     private int[] bombPrices = {bomb_1, bomb_2, bomb_3, bomb_4, bomb_5, bomb_6, bomb_7, bomb_8, bomb_9};
     

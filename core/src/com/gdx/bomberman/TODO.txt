@@ -2,10 +2,8 @@
 1) To be able to push the bomb
 
 //Textures
-13) Hud texture à la minecraft for bomb selection
 16) different colored coins 
 17) Game Icon in 128x128 for mac
-18) 2 Blocks with cabels are missing
 
 //Screens
 Option Screen:
