@@ -231,15 +231,6 @@ public class MenuScreen implements Screen
         stage.act(Constants.DELTATIME);
         stage.draw();
         
-        if(Gdx.input.isKeyPressed(Input.Keys.C))
-        {
-            ArrayList<Integer> winners = new ArrayList<>();
-            winners.add(1);
-            winners.add(4);
-            winners.add(2);
-            winners.add(3);
-            game.setScreen(new WinnerScreen(winners));
-        }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
         if(Gdx.input.isKeyPressed(Input.Keys.F12))
