@@ -41,7 +41,8 @@ public class TextureManager
     public static Skin backSkin;
     public static TextureAtlas backAtlas;
     
-    //Hud
+    /*-------------------HUD MAIN PLAYER--------------------*/
+    // Life
     public static Texture hudCounterFullLive;
     public static Texture hudCounterTwoThirdLive;
     public static Texture hudCounterOneThirdLive;
@@ -50,6 +51,19 @@ public class TextureManager
     public static Texture hudCounterFiveLive;
     public static Texture hudCounterSixLive;
     
+    //Bomb inventory
+    public static Texture hudInventory;
+    public static TextureRegion hudInventoryHiglighted1;
+    public static TextureRegion hudInventoryHiglighted2;
+    public static TextureRegion hudInventoryHiglighted3;
+    public static TextureRegion hudInventoryHiglighted4;
+    public static TextureRegion hudInventoryHiglighted5;
+    public static TextureRegion hudInventoryHiglighted6;
+    public static TextureRegion hudInventoryHiglighted7;
+    public static TextureRegion hudInventoryHiglighted8;
+    public static TextureRegion hudInventoryHiglighted9;
+    
+    /*-------------------END--------------------*/
     //Items
     public static Texture speedup;
     public static TextureRegion speedUp;
@@ -251,7 +265,17 @@ public class TextureManager
         hudCounterFiveLive = loadTexture("hud/hud2_5_live.png");
         hudCounterSixLive = loadTexture("hud/hud2_6_live.png");
         
-        
+        // Bomb Inventory
+        hudInventory = loadTexture("hud/bomb_hud.png");
+        hudInventoryHiglighted1 = new TextureRegion(hudInventory, 0,0, 280, 32);
+        hudInventoryHiglighted2 = new TextureRegion(hudInventory, 0,32, 280, 32);
+        hudInventoryHiglighted3 = new TextureRegion(hudInventory, 0,64, 280, 32);
+        hudInventoryHiglighted4 = new TextureRegion(hudInventory, 0,96, 280, 32);
+        hudInventoryHiglighted5 = new TextureRegion(hudInventory, 0,128, 280, 32);
+        hudInventoryHiglighted6 = new TextureRegion(hudInventory, 0,160, 280, 32);
+        hudInventoryHiglighted7 = new TextureRegion(hudInventory, 0,192, 280, 32);
+        hudInventoryHiglighted8 = new TextureRegion(hudInventory, 0,224, 280, 32);
+        hudInventoryHiglighted9 = new TextureRegion(hudInventory, 0,256, 280, 32);
         
         /*------------------------------ITEMS--------------------------------*/
         float coinAnimTime = 0.25f;

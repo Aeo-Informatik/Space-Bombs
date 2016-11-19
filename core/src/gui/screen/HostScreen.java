@@ -72,10 +72,17 @@ public class HostScreen implements Screen
         // Set map preview and background
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.hostBackground)));
         mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
-        
+
+        // Create server object
         if(Constants.OWNSERVEROBJ == null)
         {
            Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getTestMap()); 
+        }
+        
+        // Setting default map
+        if(!Constants.TESTSERVER)
+        {
+            Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
         }
         
         //Set background

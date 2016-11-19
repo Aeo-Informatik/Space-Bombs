@@ -1,6 +1,3 @@
-//General
-Add sound effects to the game & menu.
-
 //Bomb
 1) To be able to push the bomb
 
@@ -13,20 +10,12 @@ Add sound effects to the game & menu.
 17) Game Icon in 128x128 for mac
 18) 2 Blocks with cabels are missing
 
-
-//Items
-Add items to the game:
-
-
 //Screens
 Option Screen:
 fullscreen, music volume, sound volume
 
 Join Screen:
 ip address bar, join button, (optional) list of available servers, check if game is already in progress
-
-Help Screen:
-Button: Back, Button: Forward
 
 Winner Screen:
 Winning player gets displayed with a medal on a podest

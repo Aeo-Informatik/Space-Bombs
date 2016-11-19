@@ -26,33 +26,34 @@ import gui.entity.player.MainPlayer;
  *
  * @author qubasa
  */
-public class LifeHud 
+public class MainPlayerHud 
 {
     /**
      * How to use tables: https://github.com/libgdx/libgdx/wiki/Table#quickstart
      * How to use elements in table: https://github.com/libgdx/libgdx/wiki/Scene2d.ui#stack
      */
-    //Objects
+    //General Objects
     public Stage stage;
     private Stack stack;
     private MainPlayer mainPlayer;
     private EntityManager entityManager;
-    private Image uiCounterImage;
     
     //Font import
     private FreeTypeFontGenerator generator;
     private FreeTypeFontParameter parameter;
     
-    //Variables
+    //Life & Counter Hud
+    private Image uiCounterImage;
+    private Label bombCounterLabel;
+    private Label coinCounterLabel;
     private int live = -1;
     
-    //Labels
-    Label bombCounterLabel;
-    Label coinCounterLabel;
-    Label liveCounterLabel;
+    // Bomb Inventory Hud
+    private Image uiInventoryImage;
     
+
     //Constructor
-    public LifeHud(EntityManager entityManager)
+    public MainPlayerHud(EntityManager entityManager)
     {
         //Initialise Objects
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -68,20 +69,17 @@ public class LifeHud
         Table backgroundTable = new Table();
         backgroundTable.top();
         backgroundTable.setFillParent(true);
-        //backgroundTable.debugAll();
         
         //Table settings 2
         Table foregroundTable = new Table();
         foregroundTable.top();
         foregroundTable.setFillParent(true);
-        //foregroundTable.debugAll();
         
+        /*-------------------------LIFE & COUNTER HUD--------------------------*/
         //Labels (textfields)
         bombCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
         coinCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
-        
-        generator.dispose();
-        
+
         //Live & coins display image
         uiCounterImage = new Image(TextureManager.hudCounterFullLive);
         
@@ -106,6 +104,15 @@ public class LifeHud
         stack.add(backgroundTable);
         stack.add(foregroundTable);
         stage.addActor(stack);
+        
+        /*-------------------------BOMB INVENTORY HUD--------------------------*/
+        uiInventoryImage = new Image(TextureManager.hudInventoryHiglighted9);
+        uiInventoryImage.setWidth(420);// 1,5x bigger
+        uiInventoryImage.setHeight(48);
+        uiInventoryImage.setPosition((Constants.SCREENWIDTH - uiInventoryImage.getWidth()) / 2, 5);
+        stage.addActor(uiInventoryImage);
+        
+        generator.dispose();
     }
     
     public void update()
