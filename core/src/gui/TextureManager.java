@@ -175,6 +175,7 @@ public class TextureManager
     public static TextureRegion p1ExplosionYMiddle;
     public static TextureRegion p1ExplosionXMiddle;
     public static TextureRegion p1ExplosionCenter;
+    public static TextureRegion p1ExplosionCubic;
     
     public static TextureRegion p1ExplosionDownEnd;
     public static TextureRegion p1ExplosionUpEnd;
@@ -416,6 +417,7 @@ public class TextureManager
         p1ExplosionYMiddle = new TextureRegion(p1Explosion, 0, 32, 32, 32);
         p1ExplosionCenter = new TextureRegion(p1Explosion, 128, 0, 32, 32);
         p1ExplosionXMiddle = new TextureRegion(p1Explosion, 32, 32, 32, 32);
+        p1ExplosionCubic = new TextureRegion(p1Explosion,129,33,32,32);
         
         p1ExplosionDownEnd = new TextureRegion(p1Explosion, 64, 0, 32, 32);
         p1ExplosionUpEnd = new TextureRegion(p1Explosion, 0, 0, 32, 32);

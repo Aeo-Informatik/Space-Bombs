@@ -5,17 +5,14 @@
  */
 package gui.entity.bomb;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
-import java.util.Random;
 
 /**
  *
@@ -23,7 +20,7 @@ import java.util.Random;
  */
 public class Dynamite extends Bomb{
     
-    public String Discription = "More coins but less range";
+    public String Discription = "Cubic explosion";
     
     public Dynamite(Vector2 pos, Vector2 direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
     {
