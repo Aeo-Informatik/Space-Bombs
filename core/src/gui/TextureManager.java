@@ -266,16 +266,16 @@ public class TextureManager
         hudCounterSixLive = loadTexture("hud/hud2_6_live.png");
         
         // Bomb Inventory
-        hudInventory = loadTexture("hud/bomb_hud.png");
+        hudInventory = loadTexture("hud/bomb_hud2.png");
         hudInventoryHiglighted1 = new TextureRegion(hudInventory, 0,0, 280, 32);
-        hudInventoryHiglighted2 = new TextureRegion(hudInventory, 0,32, 280, 32);
-        hudInventoryHiglighted3 = new TextureRegion(hudInventory, 0,64, 280, 32);
-        hudInventoryHiglighted4 = new TextureRegion(hudInventory, 0,96, 280, 32);
-        hudInventoryHiglighted5 = new TextureRegion(hudInventory, 0,128, 280, 32);
-        hudInventoryHiglighted6 = new TextureRegion(hudInventory, 0,160, 280, 32);
-        hudInventoryHiglighted7 = new TextureRegion(hudInventory, 0,192, 280, 32);
-        hudInventoryHiglighted8 = new TextureRegion(hudInventory, 0,224, 280, 32);
-        hudInventoryHiglighted9 = new TextureRegion(hudInventory, 0,256, 280, 32);
+        hudInventoryHiglighted2 = new TextureRegion(hudInventory, 0,40, 280, 32);
+        hudInventoryHiglighted3 = new TextureRegion(hudInventory, 0,81, 280, 32);
+        hudInventoryHiglighted4 = new TextureRegion(hudInventory, 0,121, 280, 32);
+        hudInventoryHiglighted5 = new TextureRegion(hudInventory, 0,162, 280, 32);
+        hudInventoryHiglighted6 = new TextureRegion(hudInventory, 0,202, 280, 32);
+        hudInventoryHiglighted7 = new TextureRegion(hudInventory, 0,242, 280, 32);
+        hudInventoryHiglighted8 = new TextureRegion(hudInventory, 0,283, 280, 32);
+        hudInventoryHiglighted9 = new TextureRegion(hudInventory, 0,323, 280, 32);
         
         /*------------------------------ITEMS--------------------------------*/
         float coinAnimTime = 0.25f;

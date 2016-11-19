@@ -123,7 +123,7 @@ public class MainPlayerHud
         uiInventoryImage = new Image(TextureManager.hudInventoryHiglighted1);
         uiInventoryImage.setWidth(280*scalingImage);// 1,5x bigger
         uiInventoryImage.setHeight(32*scalingImage);
-        uiInventoryImage.setPosition((Constants.SCREENWIDTH - uiInventoryImage.getWidth()) / 2, 5);
+        uiInventoryImage.setPosition((Constants.SCREENWIDTH - uiInventoryImage.getWidth()) / 2 -2, 5);
         stage.addActor(uiInventoryImage);
         
         // Price labels
