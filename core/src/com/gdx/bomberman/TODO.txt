@@ -3,24 +3,22 @@
 
 //Audio
 - Add for each item a pickup sound
-
+- Add for the winner and for the looser a sound
 
 //Textures
 16) different colored coins 
-17) Game Icon in 128x128 for mac
 
 //Screens
 Option Screen:
 fullscreen, music volume, sound volume
 
 Winner Screen:
-Winning player gets displayed with a medal on a podest
-A font diplaying "Winner" or something like that
+- Highlight your own character
+- The position numbers have different colors.
 
 
 //Client
 1) Scanning for open servers with port scan
-2) (optional) Implementing delay calculator with ping requests
 
 //Bugs
 1) At times one client gets IndexOutofBounds because of itemFields in ProcessData
