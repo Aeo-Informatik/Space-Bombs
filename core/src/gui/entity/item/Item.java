@@ -28,7 +28,7 @@ public class Item extends Entity
     protected int cellX, cellY;
     
     protected float timer;
-    
+    protected float spawnProtection = 0.5f;
     
     //Constructor
     public Item(int cellX, int cellY, TextureRegion itemTexture, MapLoader map, EntityManager entityManager) 
@@ -49,7 +49,7 @@ public class Item extends Entity
     @Override
     public void render()
     {
-        if(2 <= timer && collected == false)
+        if(spawnProtection <= timer && collected == false)
         {
             deleteItemThroughBomb();
         

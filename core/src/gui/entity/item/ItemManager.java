@@ -5,12 +5,10 @@
  */
 package gui.entity.item;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
-import java.util.Random;
+
 
 /**
  *
@@ -21,9 +19,6 @@ public class ItemManager
     //Objects
     private MapLoader map;
     private EntityManager entityManager;
-    
-    //Variables
-    private float spawnTimer;
     
     //Items
     private Array <Item> itemArray = new Array<>();

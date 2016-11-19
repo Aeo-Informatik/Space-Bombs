@@ -1,9 +1,6 @@
 //Bomb
 1) To be able to push the bomb
 
-//Player
-6) A hub navigation bar a la minecraft for bomb/item selection
-
 //Textures
 13) Hud texture à la minecraft for bomb selection
 16) different colored coins 
