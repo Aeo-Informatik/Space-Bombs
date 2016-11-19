@@ -7,6 +7,7 @@ package gui.entity.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
@@ -589,7 +590,6 @@ public class MainPlayer extends Player
  
         }
         
-
         if (Gdx.input.isKeyJustPressed(Keys.NUM_1) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_1))
         {
             chosenBomb = 1;
@@ -654,6 +654,30 @@ public class MainPlayer extends Player
                 camera.position.set(pos.x, pos.y, 0);
             }
         }
+        
+        // Scroll wheel with anonymous event listener
+        Gdx.input.setInputProcessor(new InputAdapter () 
+        {
+            @Override
+            public boolean scrolled(int i) 
+            {
+                if(i == 1)
+                {
+                    if(chosenBomb < 9)
+                    {
+                        chosenBomb++;
+                    }
+                }else if(i == -1)
+                {
+                    if(chosenBomb > 1)
+                    {
+                        chosenBomb--;
+                    }
+                }
+
+                return false;
+            }
+        });
     }
 
     /*------------------ GETTER & SETTER ------------------*/  
