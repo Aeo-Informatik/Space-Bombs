@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
@@ -49,8 +50,18 @@ public class MainPlayerHud
     private int live = -1;
     
     // Bomb Inventory Hud
+    private WidgetGroup pricesLabelGroup = new WidgetGroup();
     private Image uiInventoryImage;
     private int choosenBomb = -1;
+    private Label bombPrice1;
+    private Label bombPrice2;
+    private Label bombPrice3;
+    private Label bombPrice4;
+    private Label bombPrice5;
+    private Label bombPrice6;
+    private Label bombPrice7;
+    private Label bombPrice8;
+    private Label bombPrice9;
 
     //Constructor
     public MainPlayerHud(EntityManager entityManager)
@@ -106,19 +117,54 @@ public class MainPlayerHud
         stage.addActor(stack);
         
         /*-------------------------BOMB INVENTORY HUD--------------------------*/
+        float scalingImage = 1.5f;
+        
+        // Inventory Image
         uiInventoryImage = new Image(TextureManager.hudInventoryHiglighted1);
-        uiInventoryImage.setWidth(420);// 1,5x bigger
-        uiInventoryImage.setHeight(48);
+        uiInventoryImage.setWidth(280*scalingImage);// 1,5x bigger
+        uiInventoryImage.setHeight(32*scalingImage);
         uiInventoryImage.setPosition((Constants.SCREENWIDTH - uiInventoryImage.getWidth()) / 2, 5);
         stage.addActor(uiInventoryImage);
+        
+        // Price labels
+        bombPrice1 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice2 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice3 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice4 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice5 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice6 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice7 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice8 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+        bombPrice9 = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.GOLD));
+
+        Table pricesTable = new Table();
+        pricesTable.setFillParent(true);
+        
+        //31x31
+        pricesTable.add(bombPrice1).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice2).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice3).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice4).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice5).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice6).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice7).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice8).width(31*scalingImage).height(31*scalingImage);
+        pricesTable.add(bombPrice9).width(31*scalingImage).height(31*scalingImage);
+        
+        pricesLabelGroup.addActor(pricesTable);
+        pricesLabelGroup.setPosition((Constants.SCREENWIDTH - pricesLabelGroup.getWidth()) / 2, 15);
+        stage.addActor(pricesLabelGroup);
         
         generator.dispose();
     }
     
     public void update()
     {
-        stage.getCamera().update();
+                
+        //Debug
+        //stage.setDebugAll(true);
         
+        stage.getCamera().update();
         
         if(mainPlayer != null)
         {
@@ -164,6 +210,16 @@ public class MainPlayerHud
             }
             
             /*---------------------INVENTORY HUD----------------------*/
+            bombPrice1.setText(Integer.toString(mainPlayer.getBombPrice(1)));
+            bombPrice2.setText(Integer.toString(mainPlayer.getBombPrice(2)));
+            bombPrice3.setText(Integer.toString(mainPlayer.getBombPrice(3)));
+            bombPrice4.setText(Integer.toString(mainPlayer.getBombPrice(4)));
+            bombPrice5.setText(Integer.toString(mainPlayer.getBombPrice(5)));
+            bombPrice6.setText(Integer.toString(mainPlayer.getBombPrice(6)));
+            bombPrice7.setText(Integer.toString(mainPlayer.getBombPrice(7)));
+            bombPrice8.setText(Integer.toString(mainPlayer.getBombPrice(8)));
+            bombPrice9.setText(Integer.toString(mainPlayer.getBombPrice(9)));
+            
             //If first time choosenBomb is set
             if(choosenBomb == -1)
             {

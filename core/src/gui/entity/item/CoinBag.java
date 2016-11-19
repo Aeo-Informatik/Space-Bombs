@@ -6,7 +6,6 @@
 package gui.entity.item;
 
 
-import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;

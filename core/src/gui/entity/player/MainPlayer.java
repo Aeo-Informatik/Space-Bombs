@@ -47,7 +47,6 @@ public class MainPlayer extends Player
     private final Animation walkAnimLeft;
     
     //BombCosts
-    private int bomb_0 = 250;
     private int bomb_1 = 0;
     private int bomb_2 = 5;
     private int bomb_3 = 75;
@@ -57,7 +56,7 @@ public class MainPlayer extends Player
     private int bomb_7;
     private int bomb_8;
     private int bomb_9 = 125;
-    
+    private int[] bombPrices = {bomb_1, bomb_2, bomb_3, bomb_4, bomb_5, bomb_6, bomb_7, bomb_8, bomb_9};
     
     //Player settings CAN BE CHANGED
     private float sendStopTime = 2f;
@@ -681,6 +680,11 @@ public class MainPlayer extends Player
     }
 
     /*------------------ GETTER & SETTER ------------------*/  
+    public int getBombPrice(int bombNumber)
+    {
+        return bombPrices[bombNumber -1];
+    }
+    
     public float getMaxZoomIn()
     {
         return maxZoomIn;
