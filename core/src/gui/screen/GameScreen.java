@@ -97,7 +97,7 @@ public class GameScreen implements Screen{
             musicTimer = 0;
         }else if ((AudioManager.currentIngameMusic == null || !AudioManager.currentIngameMusic.isPlaying()))
         {
-            musicTimer += Gdx.graphics.getDeltaTime();
+            musicTimer += Constants.DELTATIME;
         }
         
         //Check if client is connected to server

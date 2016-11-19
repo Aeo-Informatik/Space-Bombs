@@ -215,7 +215,7 @@ public class HelpScreen implements Screen{
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
          //Draw stage
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act(Constants.DELTATIME);
         stage.draw();
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

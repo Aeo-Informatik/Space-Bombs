@@ -246,7 +246,7 @@ public class JoinScreen implements Screen
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.menuBackground)));
         
         //Render stage
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act(Constants.DELTATIME);
         stage.draw();
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

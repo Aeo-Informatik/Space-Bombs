@@ -407,7 +407,7 @@ public class HostScreen implements Screen
         }
         
         //Draw stage
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act(Constants.DELTATIME);
         stage.draw();
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

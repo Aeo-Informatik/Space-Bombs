@@ -1,6 +1,10 @@
 //Bomb
 1) To be able to push the bomb
 
+//Audio
+- Add for each item a pickup sound
+
+
 //Textures
 16) different colored coins 
 17) Game Icon in 128x128 for mac
@@ -8,9 +12,6 @@
 //Screens
 Option Screen:
 fullscreen, music volume, sound volume
-
-Join Screen:
-ip address bar, join button, (optional) list of available servers, check if game is already in progress
 
 Winner Screen:
 Winning player gets displayed with a medal on a podest
