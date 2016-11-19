@@ -62,6 +62,7 @@ public class GameScreen implements Screen{
         this.counterHud = new MainPlayerHud(entityManager);
         
         this.camera.zoom = Constants.DEFAULTZOOM;
+        Gdx.input.setCursorCatched(true);
     }
     
     

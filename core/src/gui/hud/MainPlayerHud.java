@@ -50,7 +50,7 @@ public class MainPlayerHud
     
     // Bomb Inventory Hud
     private Image uiInventoryImage;
-    
+    private int choosenBomb = -1;
 
     //Constructor
     public MainPlayerHud(EntityManager entityManager)
@@ -119,8 +119,10 @@ public class MainPlayerHud
     {
         stage.getCamera().update();
         
+        
         if(mainPlayer != null)
         {
+            /*---------------------LIFE HUD----------------------*/
             bombCounterLabel.setText(String.format("%03d", mainPlayer.getMaxBombs()));
             coinCounterLabel.setText(String.format("%03d", mainPlayer.getCoins()));
             
@@ -134,7 +136,7 @@ public class MainPlayerHud
             {
                 live = mainPlayer.getLife();
                 
-                //Change heard texture
+                //Change heart texture
                 switch (live) 
                 {
                     case 6:
@@ -161,6 +163,57 @@ public class MainPlayerHud
                 }
             }
             
+            /*---------------------INVENTORY HUD----------------------*/
+            //If first time choosenBomb is set
+            if(choosenBomb == -1)
+            {
+                choosenBomb = mainPlayer.getChoosenBomb();
+                
+            //If mainPlayer choosenBomb changed
+            }else if(choosenBomb != mainPlayer.getChoosenBomb())
+            {
+                choosenBomb = mainPlayer.getChoosenBomb();
+                
+                //Change inventory texture
+                switch (choosenBomb) 
+                {
+                    case 1:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted1)));
+                        break;
+                        
+                    case 2:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted2)));
+                        break;    
+                        
+                    case 3:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted3)));
+                        break;
+                        
+                    case 4:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted4)));
+                        break;
+                        
+                    case 5:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted5)));
+                        break;
+                        
+                    case 6:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted6)));
+                        break;
+                        
+                    case 7:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted7)));
+                        break;
+                        
+                    case 8:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted8)));
+                        break;
+                        
+                    case 9:
+                        uiInventoryImage.setDrawable(new TextureRegionDrawable(new TextureRegion(TextureManager.hudInventoryHiglighted9)));
+                        break;
+                }
+            }
         }else
         {
             mainPlayer = entityManager.getPlayerManager().getMainPlayer();

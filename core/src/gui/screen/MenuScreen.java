@@ -43,7 +43,9 @@ public class MenuScreen implements Screen
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
         Gdx.input.setInputProcessor(stage);
-     
+        Gdx.input.setCursorCatched(false);
+  
+        
         //Reset server
         if(Constants.OWNSERVEROBJ != null)
         {

@@ -467,18 +467,6 @@ public class MainPlayer extends Player
             
             switch (chosenBomb)
             {
-                case(0):
-                    
-                    if(coins >= bomb_0)
-                    {
-                        if(life < Constants.MAXLIFE)
-                        {
-                            coins -= bomb_0;
-                            life += 1;
-                        }                
-                    }
-                    break;
-                
                 case(1):
 
                     bombType = "default";
@@ -601,12 +589,7 @@ public class MainPlayer extends Player
  
         }
         
-        
-        if (Gdx.input.isKeyJustPressed(Keys.NUM_0) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_0))
-        {
-            chosenBomb = 0;
-        }
-        
+
         if (Gdx.input.isKeyJustPressed(Keys.NUM_1) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_1))
         {
             chosenBomb = 1;
@@ -747,5 +730,10 @@ public class MainPlayer extends Player
     public void setCoins(int coins) 
     {
         this.coins = coins;
+    }
+    
+    public int getChoosenBomb()
+    {
+        return this.chosenBomb;
     }
 }
