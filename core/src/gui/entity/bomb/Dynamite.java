@@ -243,20 +243,4 @@ public class Dynamite extends Bomb{
             }
         }
     }
-    
-    @Override
-    public void dropFromBlock (int x, int y)
-    {
-               int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
-                    
-                    if(randomNum > 2)
-                    {
-                        //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
-                        
-                        //General:spawnCoin|CellX|CellY|target
-                        client.sendData("spawnCoin|" + x + "|" + y + "|*");
-                    }
-            
-        
-    }
 }

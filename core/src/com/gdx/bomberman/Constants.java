@@ -45,7 +45,8 @@ public class Constants
     public static int MAXLIFE = 6;
     public static int COINVALUE = 10;
     public static float MAXSPEED = 2f;
-       
+    public static int COINDROPCHANCE = 4; // 40%
+    
     //Ingame variables DO NOT CHANGE!
     public static Server OWNSERVEROBJ = null;
     public static int PLAYERID = 0;

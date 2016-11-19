@@ -259,7 +259,7 @@ public abstract class Bomb extends Entity
     {
         int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
-            if(randomNum > 4)
+            if(randomNum <= Constants.COINDROPCHANCE)
                 {
                     //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                         
