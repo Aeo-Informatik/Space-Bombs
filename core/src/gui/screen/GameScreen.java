@@ -22,6 +22,7 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.hud.MainPlayerHud;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -142,6 +143,22 @@ public class GameScreen implements Screen{
         //Update camera
         camera.update();
         
+         /*------------------DISPLAY WINNER SCREEN------------------*/
+        ArrayList<Integer> deadPlayers = entityManager.getPlayerManager().getDeadPlayersArray();
+        
+        // If number of dead players is equals as the amount of playing players -1
+        if(deadPlayers.size() == Constants.AMOUNTPLAYERS -1 && Constants.AMOUNTPLAYERS != 1)
+        {
+            // Add main Player as last "dead" player if he is the last one alive
+            if(entityManager.getPlayerManager().getMainPlayer() != null)
+            {
+                deadPlayers.add(Constants.PLAYERID);
+            }else
+            {
+                deadPlayers.add(entityManager.getPlayerManager().getEnemyArray().get(0).getPlayerId());
+            }
+            game.setScreen(new WinnerScreen(deadPlayers));
+        }
         
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))

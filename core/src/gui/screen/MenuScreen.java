@@ -238,7 +238,7 @@ public class MenuScreen implements Screen
             winners.add(4);
             winners.add(2);
             winners.add(3);
-            game.setScreen(new WinnerScreen(winners, 2));
+            game.setScreen(new WinnerScreen(winners));
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

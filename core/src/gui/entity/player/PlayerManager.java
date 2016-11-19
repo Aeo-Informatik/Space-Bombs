@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,6 +28,7 @@ public class PlayerManager
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
     private Spectator spectator;
+    private ArrayList<Integer> deadPlayers = new ArrayList<>();
     
     //Constructor
     public PlayerManager(OrthographicCamera camera, MapLoader map, EntityManager entityManager)
@@ -65,6 +67,7 @@ public class PlayerManager
         {
             if(enemies.get(i).isEnemyDead())
             {
+                deadPlayers.add(enemies.get(i).getPlayerId());
                 enemies.removeIndex(i);
             }
         }
@@ -74,6 +77,8 @@ public class PlayerManager
         {
             if(mainPlayer.getLife() <= 0)
             {
+                deadPlayers.add(mainPlayer.getPlayerId());
+                
                 //Create new spectator
                 spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies, entityManager);
                 
@@ -208,4 +213,8 @@ public class PlayerManager
         return this.spectator;
     }
     
+    public ArrayList<Integer> getDeadPlayersArray()
+    {
+        return this.deadPlayers;
+    }
 }

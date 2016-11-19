@@ -43,7 +43,6 @@ public class WinnerScreen implements Screen
     
     // Player positions
     ArrayList<Integer> playerPositions = new ArrayList<>();
-    private int ownPlayerId = -1;
     
     // Buttons
     private TextButton backButton;
@@ -63,14 +62,17 @@ public class WinnerScreen implements Screen
     private Container p3Field;
     private Container p4Field;
     
-    public WinnerScreen(ArrayList<Integer> playerPositions, int ownPlayerId) 
+    public WinnerScreen(ArrayList<Integer> playerPositions) 
     {
         
         //Set input and viewpoint
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
+        
+        // Unhides the cursor
+        Gdx.input.setCursorCatched(false);
+        
         this.playerPositions = playerPositions;
-        this.ownPlayerId = ownPlayerId;
         
         //Set background
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.hostBackground)));
@@ -130,7 +132,7 @@ public class WinnerScreen implements Screen
         stage.addActor(titel);
 
         // If you are the winner
-        if(ownPlayerId == playerPositions.get(0))
+        if(Constants.PLAYERID == playerPositions.get(playerPositions.size() -1))
         {
             titel.setText("YOU WON!");
         }else
@@ -211,46 +213,22 @@ public class WinnerScreen implements Screen
             switch(playerPositions.get(i))
             {
                 case 1:
-                    p1Position.setText(Integer.toString(i +1));
+                    p1Position.setText(Integer.toString(playerPositions.size() -i));
                     p1Field.setVisible(true);
-                    
-                    if(1 == ownPlayerId)
-                    {
-                    }
-                    
                     break;
 
                 case 2:
-                    p2Position.setText(Integer.toString(i+1));
+                    p2Position.setText(Integer.toString(playerPositions.size() -i));
                     p2Field.setVisible(true);
-                    
-                    if(2 == ownPlayerId)
-                    {
-                    
-                    }
-                    
                     break;
 
                 case 3:
-                    p3Position.setText(Integer.toString(i+1));
+                    p3Position.setText(Integer.toString(playerPositions.size() -i));
                     p3Field.setVisible(true);
-                    
-                    if(3 == ownPlayerId)
-                    {
-                    
-                    }
-                    
                     break;
 
                 case 4:
-                    
-                    if(4 == ownPlayerId)
-                    {
-                        p4Field.setBackground(new TextureRegionDrawable(new TextureRegion(TextureManager.playerMarker)));
-                    
-                    }
-                    
-                    p4Position.setText(Integer.toString(i+1));
+                    p4Position.setText(Integer.toString(playerPositions.size() -i));
                     p4Field.setVisible(true);
                     break;
             }
