@@ -106,7 +106,7 @@ public class MainPlayerHud
         stage.addActor(stack);
         
         /*-------------------------BOMB INVENTORY HUD--------------------------*/
-        uiInventoryImage = new Image(TextureManager.hudInventoryHiglighted9);
+        uiInventoryImage = new Image(TextureManager.hudInventoryHiglighted1);
         uiInventoryImage.setWidth(420);// 1,5x bigger
         uiInventoryImage.setHeight(48);
         uiInventoryImage.setPosition((Constants.SCREENWIDTH - uiInventoryImage.getWidth()) / 2, 5);
