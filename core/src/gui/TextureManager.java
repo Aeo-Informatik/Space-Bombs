@@ -41,6 +41,9 @@ public class TextureManager
     public static Skin backSkin;
     public static TextureAtlas backAtlas;
     
+    // Winner Screen
+    public static Texture playerMarker;
+    
     /*-------------------HUD MAIN PLAYER--------------------*/
     // Life
     public static Texture hudCounterFullLive;
@@ -218,8 +221,7 @@ public class TextureManager
     public static TextureRegion p4ExplosionRightEnd;
     public static TextureRegion p4ExplosionLeftEnd;
     
-    //special Bombs
-    
+    //Special bombs
     public static Texture dynamite;
     public static Animation dynamiteAnim;
     
@@ -237,6 +239,9 @@ public class TextureManager
         menuBackground = loadTexture("menu/menu.png");
         hostBackground = loadTexture("menu/menu-host.png");
                 
+        // Winner screen
+        playerMarker = loadTexture("other/playerMarker.png");
+        
         // Standard bomb button
         textureAtlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin = new Skin(Gdx.files.internal("menu/uiskin.json"));

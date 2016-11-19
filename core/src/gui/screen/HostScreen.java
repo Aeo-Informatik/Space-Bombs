@@ -38,11 +38,9 @@ public class HostScreen implements Screen
 {
     // Map List
     AvailableMaps maps = new AvailableMaps();
-    
-    //Objects
+
+    // Objects
     private Stage stage;
-    private WidgetGroup joinedPlayerGroup = new WidgetGroup();
-    private WidgetGroup sliderGroup = new WidgetGroup();
     private Table rootTable = new Table();
     
     //Buttons
@@ -50,12 +48,14 @@ public class HostScreen implements Screen
     private TextButton backbutton;
     
     //Slider
+    private WidgetGroup sliderGroup = new WidgetGroup();
     private Container mapImage = new Container();
     private Label mapName;
     private TextButton slideLeft;
     private TextButton slideRight;
             
     //Players
+    private WidgetGroup joinedPlayerGroup = new WidgetGroup();
     private int numPlayers = 0;
     private Container p1Field;
     private Container p2Field;
