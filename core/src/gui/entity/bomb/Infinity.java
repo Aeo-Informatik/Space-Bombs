@@ -22,7 +22,7 @@ import java.util.Random;
  */
 public class Infinity extends Bomb
 {
-    public String Discription = "No coins but sometimes it places itselves when a block gets destoyed";
+    public String Discription = "No coins but sometimes reproduces itselves when a block gets destoyed";
     
     private int chance;
     
@@ -253,8 +253,6 @@ public class Infinity extends Bomb
     public void dropFromBlock(int x, int y)
     {
         int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
-
-        System.out.println("Drop from block");
 
         if(randomNum <= chance)
         {    
