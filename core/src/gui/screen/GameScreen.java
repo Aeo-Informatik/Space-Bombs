@@ -48,7 +48,7 @@ public class GameScreen implements Screen{
     
     //Display winner screen timer
     private float winnerTimer = 0;
-    private float winnerStart = 5; // After 5 seconds the screen wll be displayed
+    private float winnerStart = 4; // After 4 seconds the screen wll be displayed
     
     //Main Player HUD
     private MainPlayerHud counterHud;

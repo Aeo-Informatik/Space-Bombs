@@ -7,9 +7,13 @@ package client;
 
 
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 
 
 /**
@@ -82,5 +86,30 @@ public class Client {
         }
         
         return true;
+    }
+    
+    public InetAddress getCurrentIp() throws SocketException
+    {
+        try {
+            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) 
+            {
+                NetworkInterface ni = (NetworkInterface) networkInterfaces.nextElement();
+                Enumeration<InetAddress> nias = ni.getInetAddresses();
+                
+                while(nias.hasMoreElements()) 
+                {
+                    InetAddress ia= (InetAddress) nias.nextElement();
+                    if (!ia.isLinkLocalAddress() && !ia.isLoopbackAddress() && ia instanceof Inet4Address) 
+                    {
+                        return ia;
+                    }
+                }
+            }
+        } catch (SocketException e) 
+        {
+            throw e;
+        }
+        return null;
     }
 }

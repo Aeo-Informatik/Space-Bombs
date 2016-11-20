@@ -17,7 +17,6 @@ public class DesktopLauncher {
                 config.title = Constants.WINDOWTITEL;
                 config.addIcon(Constants.WINDOWICONPATH, Files.FileType.Internal);
 
-                
 		new LwjglApplication(new Main(), config);
 	}
 }

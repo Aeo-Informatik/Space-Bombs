@@ -30,6 +30,10 @@ import static gui.TextureManager.backSkin;
 import static gui.TextureManager.dynamiteSkin;
 import static gui.TextureManager.roundSkin;
 import gui.map.AvailableMaps;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import server.Server;
 import server.ServerConstants;
 
@@ -46,6 +50,9 @@ public class HostScreen implements Screen
     //Buttons
     private TextButton startbutton;
     private TextButton backbutton;
+    
+    // Ip label
+    private Label ipLabel;
     
     //Slider
     private WidgetGroup sliderGroup = new WidgetGroup();
@@ -117,8 +124,8 @@ public class HostScreen implements Screen
         fontOptions.size = 14;
         labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
         labelStyle.fontColor = Color.BLACK;
-        
-        
+       
+         
         /**------------------------DYNAMITE BUTTON STYLE ------------------------**/
         TextButton.TextButtonStyle dynamiteTextButtonStyle = new TextButton.TextButtonStyle();
         dynamiteTextButtonStyle.font = font;
@@ -140,6 +147,21 @@ public class HostScreen implements Screen
         textButtonStyleBack.up   = backSkin.getDrawable("button_up");
         textButtonStyleBack.down = backSkin.getDrawable("button_down");
         textButtonStyleBack.over = backSkin.getDrawable("button_checked");
+        
+        /**------------------------IP LABEL------------------------**/
+        ipLabel = new Label("", labelStyle);
+        ipLabel.setAlignment(Align.left);
+        ipLabel.setPosition(10, 10);
+        try 
+        {
+            ipLabel.setText("Your local IP: " + client.getCurrentIp().getHostAddress());
+        } catch (Exception ex) 
+        {
+            ipLabel.setText("Error on reading local IP!");
+            ex.printStackTrace();
+        }
+        
+        stage.addActor(ipLabel);
         
         /**------------------------JOIN PLAYER GROUP------------------------**/
         //Table options

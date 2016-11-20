@@ -19,7 +19,6 @@ fullscreen, music volume, sound volume
 Winner Screen:
 - Highlight your own character
 - The position numbers have different colors.
-- After death wait 5 seconds till displaying the winnerscreen
 
 Host Screen:
 - Add in the bottom corner your local ip address
