@@ -46,6 +46,10 @@ public class GameScreen implements Screen{
     private float musicTimer = 0;
     private float musicStart = 15; //Seconds after game start or after music is finished
     
+    //Display winner screen timer
+    private float winnerTimer = 0;
+    private float winnerStart = 5; // After 5 seconds the screen wll be displayed
+    
     //Main Player HUD
     private MainPlayerHud counterHud;
     
@@ -149,15 +153,21 @@ public class GameScreen implements Screen{
         // If number of dead players is equals as the amount of playing players -1
         if(deadPlayers.size() == Constants.AMOUNTPLAYERS -1 && Constants.AMOUNTPLAYERS != 1)
         {
-            // Add main Player as last "dead" player if he is the last one alive
-            if(entityManager.getPlayerManager().getMainPlayer() != null)
+            if(this.winnerTimer >= this.winnerStart)
             {
-                deadPlayers.add(Constants.PLAYERID);
+                // Add main Player as last "dead" player if he is the last one alive
+                if(entityManager.getPlayerManager().getMainPlayer() != null)
+                {
+                    deadPlayers.add(Constants.PLAYERID);
+                }else
+                {
+                    deadPlayers.add(entityManager.getPlayerManager().getEnemyArray().get(0).getPlayerId());
+                }
+                game.setScreen(new WinnerScreen(deadPlayers));
             }else
             {
-                deadPlayers.add(entityManager.getPlayerManager().getEnemyArray().get(0).getPlayerId());
+                winnerTimer += Constants.DELTATIME;
             }
-            game.setScreen(new WinnerScreen(deadPlayers));
         }
         
         /*------------------QUIT GAME------------------*/
