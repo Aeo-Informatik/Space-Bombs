@@ -171,6 +171,18 @@ public class GameScreen implements Screen{
         }
         
         /*------------------QUIT GAME------------------*/
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT))
+        {
+            if( Gdx.input.isCursorCatched())
+            {
+                Gdx.input.setCursorCatched(false);
+            }else
+            {
+                Gdx.input.setCursorCatched(true);
+            }
+        }
+        
+        /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             try 
@@ -188,7 +200,7 @@ public class GameScreen implements Screen{
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.F12))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F12))
         {
             if(Gdx.graphics.isFullscreen())
             {

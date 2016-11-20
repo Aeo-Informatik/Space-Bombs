@@ -1,6 +1,8 @@
 //Bomb
 1) To be able to push the bomb
-- The dynamte should make a cubic explosion
+- The dynamite should make a cubic explosion
+- Range of all bombs scale with range item
+- Frag granade explodes quicker
 
 //Audio
 - Add for each item a pickup sound
@@ -26,3 +28,4 @@ fullscreen, music volume, sound volume
 3) You can walk on the side of blocks
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
+6) If server gets shut down while playing the connected clients freeze

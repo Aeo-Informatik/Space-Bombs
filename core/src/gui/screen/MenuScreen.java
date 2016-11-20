@@ -229,11 +229,11 @@ public class MenuScreen implements Screen
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.menuBackground)));
 
         //Draw stage
-        stage.act(Constants.DELTATIME);
+        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.F12))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F12))
         {
             if(Gdx.graphics.isFullscreen())
             {

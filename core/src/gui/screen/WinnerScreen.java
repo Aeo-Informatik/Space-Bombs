@@ -316,7 +316,7 @@ public class WinnerScreen implements Screen
         stage.draw();
 
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.F12))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F12))
         {
             if(Gdx.graphics.isFullscreen())
             {
