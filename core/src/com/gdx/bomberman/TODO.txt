@@ -5,14 +5,13 @@
 //Audio
 - Add for each item a pickup sound
 - Add for the winner and for the looser a sound
-- If you have not enough money to buy a bomb play sound.
+- If you have not enough money to buy a bomb play a sound.
 
 // Ingame
-- Balance the game. More Coins, bigger explosion radius, faster gameplay
 - Add to the Life bar the collected items.
 
 //Textures
-16) different colored coins 
+16) blue coins which give x2 and red coins which give x3
 
 //Screens
 Option Screen:

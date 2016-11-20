@@ -49,6 +49,18 @@ public class Constants
     public static int COINBONUS = 10; // Coins
     public static int COINBAGVALUE = 50; // Coins
     
+    // Bomb Cost
+    public static int BOMB1 = 0;
+    public static int BOMB2 = 30;
+    public static int BOMB3 = 50;
+    public static int BOMB4 = 70;
+    public static int BOMB5 = 80;
+    public static int BOMB6 = 100;
+    public static int BOMB7 = 120;
+    public static int BOMB8 = 140;
+    public static int BOMB9 = 200;
+    
+    
     //Ingame variables DO NOT CHANGE!
     public static Server OWNSERVEROBJ = null;
     public static int PLAYERID = 0;

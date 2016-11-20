@@ -47,16 +47,7 @@ public class MainPlayer extends Player
     private final Animation walkAnimLeft;
     
     //BombCosts
-    private int bomb_1 = 0;
-    private int bomb_2 = 20;
-    private int bomb_3 = 50;
-    private int bomb_4 = 70;
-    private int bomb_5 = 80;
-    private int bomb_6 = 100;
-    private int bomb_7 = 100;
-    private int bomb_8 = 100;
-    private int bomb_9 = 125;
-    private int[] bombPrices = {bomb_1, bomb_2, bomb_3, bomb_4, bomb_5, bomb_6, bomb_7, bomb_8, bomb_9};
+    private int[] bombPrices = {Constants.BOMB1, Constants.BOMB2, Constants.BOMB3, Constants.BOMB4, Constants.BOMB5, Constants.BOMB6, Constants.BOMB7, Constants.BOMB8, Constants.BOMB9};
     
     //Coin timer
     private float coinTimer = 0;
@@ -490,9 +481,9 @@ public class MainPlayer extends Player
                     bombType = "default";
                     
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins >= bomb_1)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins >= Constants.BOMB1)
                     {
-                        coins -= bomb_1;
+                        coins -= Constants.BOMB1;
                             
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
@@ -507,9 +498,9 @@ public class MainPlayer extends Player
                     bombType = "dynamite";
                     
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_2)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB2)
                     {
-                        coins -= bomb_2;
+                        coins -= Constants.BOMB2;
                         
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
@@ -524,9 +515,9 @@ public class MainPlayer extends Player
                     bombType = "infinity";
                     
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_3)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB3)
                     {
-                        coins -= bomb_3;
+                        coins -= Constants.BOMB3;
                         
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
@@ -541,9 +532,9 @@ public class MainPlayer extends Player
                     bombType = "X3";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_4)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB4)
                     {
-                        coins -= bomb_4;
+                        coins -= Constants.BOMB4;
                         
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
@@ -558,9 +549,9 @@ public class MainPlayer extends Player
                     bombType = "Vertical";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_5)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB5)
                     {
-                        coins -= bomb_5;
+                        coins -= Constants.BOMB5;
                         
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
@@ -575,9 +566,9 @@ public class MainPlayer extends Player
                     bombType = "Horizontal";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_6)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB6)
                     {
-                        coins -= bomb_6;
+                        coins -= Constants.BOMB6;
                         
                         //Send bomb command to server
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
@@ -592,9 +583,9 @@ public class MainPlayer extends Player
                     bombType = "Teleport";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= bomb_9)
+                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB9)
                     {
-                        coins -= bomb_9;
+                        coins -= Constants.BOMB9;
                         
                         Teleport item = new Teleport(0,0,map,entityManager);
                         item.itemEffect();
