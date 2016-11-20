@@ -49,7 +49,7 @@ public class MenuScreen implements Screen
         //Close Server
         if(Constants.OWNSERVEROBJ != null)
         {
-            Constants.OWNSERVEROBJ.closeLobby();
+            Constants.OWNSERVEROBJ.stopServer();
             Constants.OWNSERVEROBJ = null;
         }
         

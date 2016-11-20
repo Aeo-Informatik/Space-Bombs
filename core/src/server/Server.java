@@ -1,5 +1,6 @@
 package server;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class Server
     
     
     /**
-     * Resets server completly.
+     * Resets server completly. New lobby can be started from this point on.
      */
     public void resetServer()
     {
@@ -127,6 +128,18 @@ public class Server
         }
     }
     
+    //Shuts down the server and unbinds port. Server objects should be set to null.
+    public void stopServer()
+    {
+        resetServer();
+        try 
+        {
+            this.serverSocket.close();
+        } catch (IOException ex) 
+        {
+            ex.printStackTrace();
+        }
+    }
     
     /**
      * Closes lobby thread. Nobody can connect anymore afterwards.

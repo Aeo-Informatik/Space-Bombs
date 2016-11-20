@@ -77,7 +77,7 @@ public class WinnerScreen implements Screen
         /**------------------------DEACTIVATE SERVER------------------------**/
         if(Constants.OWNSERVEROBJ != null)
         {
-            Constants.OWNSERVEROBJ.closeLobby();
+            Constants.OWNSERVEROBJ.stopServer();
             Constants.OWNSERVEROBJ = null;
         }
         

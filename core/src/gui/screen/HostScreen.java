@@ -239,7 +239,7 @@ public class HostScreen implements Screen
                     
                 }
 
-                Constants.OWNSERVEROBJ.closeLobby();
+                Constants.OWNSERVEROBJ.stopServer();
                 Constants.OWNSERVEROBJ = null;
                 game.setScreen(new MenuScreen());
             }
@@ -426,7 +426,7 @@ public class HostScreen implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            Constants.OWNSERVEROBJ.closeLobby();
+            Constants.OWNSERVEROBJ.stopServer();
             Constants.OWNSERVEROBJ = null;
             game.setScreen(new MenuScreen());
         }
