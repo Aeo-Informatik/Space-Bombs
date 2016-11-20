@@ -1,8 +1,6 @@
 //Bomb
 1) To be able to push the bomb
 - The dynamite should make a cubic explosion
-- Range of all bombs scale with range item
-- Frag granade explodes quicker
 
 //Audio
 - Add for each item a pickup sound
@@ -10,7 +8,7 @@
 - If you have not enough money to buy a bomb play a sound.
 
 // Ingame
-- Add to the Life bar the collected items.
+- Add to the Life bar the till now collected items.
 
 //Textures
 16) blue coins which give x2 and red coins which give x3
