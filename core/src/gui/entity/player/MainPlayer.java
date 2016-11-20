@@ -58,6 +58,9 @@ public class MainPlayer extends Player
     private int bomb_9 = 125;
     private int[] bombPrices = {bomb_1, bomb_2, bomb_3, bomb_4, bomb_5, bomb_6, bomb_7, bomb_8, bomb_9};
     
+    //Coin timer
+    private float coinTimer = 0;
+    
     //Player settings CAN BE CHANGED
     private float sendStopTime = 2f;
     private int life = 3;
@@ -130,6 +133,9 @@ public class MainPlayer extends Player
         renderObject.setProjectionMatrix(camera.combined);
         renderObject.begin();
             
+            // Gives out every couple of seconds some coins to the player
+            coinBonus();
+        
             //Adding direction to position
             pos.add(this.direction);
             
@@ -147,6 +153,18 @@ public class MainPlayer extends Player
         renderObject.end();
     }
     
+    public void coinBonus()
+    {
+        if(this.coinTimer >= Constants.COINBONUSTIMER)
+        {
+            coins += Constants.COINBONUS;
+            client.sendData("enemyPlayerSetCoins|" + playerId + "|" + coins + "|*");
+            coinTimer = 0;
+        }else
+        {
+            coinTimer += Constants.DELTATIME;
+        }
+    }
     
     /**
      * Execute on player death

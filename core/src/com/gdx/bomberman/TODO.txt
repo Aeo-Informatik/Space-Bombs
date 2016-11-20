@@ -5,7 +5,7 @@
 //Audio
 - Add for each item a pickup sound
 - Add for the winner and for the looser a sound
-- If you have not enough money display sound.
+- If you have not enough money to buy a bomb play sound.
 
 // Ingame
 - Balance the game. More Coins, bigger explosion radius, faster gameplay

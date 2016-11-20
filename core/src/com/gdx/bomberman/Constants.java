@@ -35,6 +35,7 @@ public class Constants
     public static float DEFAULTCAMERASPEED = 10.0f;
     public static float DEFAULTENTITYSPEED = 1.5f;
     public static int DEFAULTBOMBRANGE = 2;
+     public static boolean DELETEITEMSTHROUGHBOMB = false;
     
     //Item config
     public static long ITEMTIMER = 5; // Seconds
@@ -44,7 +45,9 @@ public class Constants
     public static int COINVALUE = 10; // Coins
     public static float MAXSPEED = 2f;
     public static int COINDROPCHANCE = 5; // 50% (1-10)
-    public static boolean DELETEITEMSTHROUGHBOMB = false;
+    public static float COINBONUSTIMER = 5; // Seconds
+    public static int COINBONUS = 10; // Coins
+    
     
     //Ingame variables DO NOT CHANGE!
     public static Server OWNSERVEROBJ = null;
