@@ -15,5 +15,4 @@ public class ServerConstants
     public static int LISTENINGPORT = 13199;
     public static int MAXPLAYERS = 4;
     public static boolean SERVERDEBUG = false;
-    public static long ITEMSPAWNTIME = 5000; //Milliseconds
 }

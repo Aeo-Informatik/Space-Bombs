@@ -5,9 +5,11 @@
 //Audio
 - Add for each item a pickup sound
 - Add for the winner and for the looser a sound
+- If you have not enough money display sound.
 
 // Ingame
 - Balance the game. More Coins, bigger explosion radius, faster gameplay
+- Add to the Life bar the collected items.
 
 //Textures
 16) different colored coins 
@@ -15,10 +17,6 @@
 //Screens
 Option Screen:
 fullscreen, music volume, sound volume
-
-Winner Screen:
-- Highlight your own character
-- The position numbers have different colors.
 
 //Client
 1) (optional) Scanning for open servers with port scan
@@ -29,4 +27,3 @@ Winner Screen:
 3) You can walk on the side of blocks
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
-6) If going to host going back and then join to localhost it connects to a non existing server.

@@ -122,10 +122,13 @@ public class Item extends Entity
      */
     public void deleteItemThroughBomb()
     {
-        //Check if item has been hit by deadly tile
-        if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+        if(Constants.DELETEITEMSTHROUGHBOMB)
         {
-            collected = true;
+            //Check if item has been hit by deadly tile
+            if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+            {
+                collected = true;
+            }
         }
     }
     

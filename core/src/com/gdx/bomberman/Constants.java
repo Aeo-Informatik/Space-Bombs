@@ -29,23 +29,22 @@ public class Constants
     public static boolean FULLSCREEN = false;
     public static String WINDOWTITEL = "Aeo Bombs";
     public static String WINDOWICONPATH = "other/icon.png";
-    
-    //Game config
     public static float DEFAULTZOOM = 0.8f;
-
+    
     //Entity config
     public static float DEFAULTCAMERASPEED = 10.0f;
     public static float DEFAULTENTITYSPEED = 1.5f;
     public static int DEFAULTBOMBRANGE = 2;
     
     //Item config
-    public static float ITEMTIMER = 5;
+    public static long ITEMTIMER = 5; // Seconds
     public static int MAXBOMBS = 5;
-    public static int MAXBOMBRANGE = 5;
+    public static int MAXBOMBRANGE = 5; // Cells
     public static int MAXLIFE = 6;
-    public static int COINVALUE = 10;
+    public static int COINVALUE = 10; // Coins
     public static float MAXSPEED = 2f;
-    public static int COINDROPCHANCE = 4; // 40%
+    public static int COINDROPCHANCE = 5; // 50% (1-10)
+    public static boolean DELETEITEMSTHROUGHBOMB = false;
     
     //Ingame variables DO NOT CHANGE!
     public static Server OWNSERVEROBJ = null;

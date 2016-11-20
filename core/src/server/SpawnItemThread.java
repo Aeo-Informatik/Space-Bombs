@@ -5,6 +5,7 @@
  */
 package server;
 
+import com.gdx.bomberman.Constants;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,7 +18,7 @@ public class SpawnItemThread implements Runnable
 
     private int itemFields;
     private Random random = new Random();
-    private long itemSpawnTime = ServerConstants.ITEMSPAWNTIME;
+    private long itemSpawnTime = Constants.ITEMTIMER * 1000;
     private Server server;
     
     public SpawnItemThread(int numberOfItemFields, Server server)
@@ -63,28 +64,28 @@ public class SpawnItemThread implements Runnable
                 
                 
                 //Select item to spawn
-                if(number <= 30)
+                if(number <= 30) // 30%
                 {
                     //Spawn nothing
                     
-                }else if(number > 30 && number <= 40) //BOMBUP
+                }else if(number > 30 && number <= 40) //BOMBUP 10%
                 {
                     //General:spawnItem|itemType|itemField|target
                     itemSpawnCommands.add("spawnItem|BombUp|" + i + "|*");
                     
-                }else if(number > 40 && number <= 65) //COINBAG
+                }else if(number > 40 && number <= 65) //COINBAG 25%
                 {
                     itemSpawnCommands.add("spawnItem|CoinBag|" + i + "|*");
                     
-                }else if(number > 65 && number <= 70) //LIFEUP
+                }else if(number > 65 && number <= 70) //LIFEUP 5%
                 {
                     itemSpawnCommands.add("spawnItem|LifeUp|" + i + "|*");
                     
-                }else if(number > 70 && number <= 80) //RANGEUP
+                }else if(number > 70 && number <= 80) //RANGEUP 10%
                 {
                     itemSpawnCommands.add("spawnItem|RangeUp|" + i + "|*");
                     
-                }else if(number > 80 && number <= 100) //SPEEDUP
+                }else if(number > 80 && number <= 100) //SPEEDUP 20%
                 {
                     itemSpawnCommands.add("spawnItem|SpeedUp|" + i + "|*");
                     
