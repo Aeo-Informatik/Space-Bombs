@@ -1,9 +1,13 @@
 //Bomb
 1) To be able to push the bomb
+- The dynamte should make a cubic explosion
 
 //Audio
 - Add for each item a pickup sound
 - Add for the winner and for the looser a sound
+
+// Ingame
+- Balance the game. More Coins, bigger explosion radius, faster gameplay
 
 //Textures
 16) different colored coins 
@@ -15,10 +19,13 @@ fullscreen, music volume, sound volume
 Winner Screen:
 - Highlight your own character
 - The position numbers have different colors.
+- After death wait 5 seconds till displaying the winnerscreen
 
+Host Screen:
+- Add in the bottom corner your local ip address
 
 //Client
-1) Scanning for open servers with port scan
+1) (optional) Scanning for open servers with port scan
 
 //Bugs
 1) At times one client gets IndexOutofBounds because of itemFields in ProcessData
