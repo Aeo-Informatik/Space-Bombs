@@ -102,6 +102,8 @@ public class BombManager
     {
         Infinity entity = new Infinity(pos, new Vector2(0,0),bombRange, playerId, chance, map, entityManager);
         
+        System.out.println("Infinity reproduction chance: " + chance);
+        
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
         {

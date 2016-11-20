@@ -254,18 +254,20 @@ public class Infinity extends Bomb
     {
         int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
 
+        System.out.println("Drop from block");
+        
         if(randomNum <= chance)
         {    
-            System.out.println("Chance" + chance);
-            chance -= 1;
+            chance -= Constants.INFINITYREPRODUCTIONDECREASE;
             
+            // Gucke ob der main Player nicht tot ist und ob dort schon eine Bombe ist und ob eine weitere bombe der Spieler überhaupt legen kann
             if( entityManager.getPlayerManager().getMainPlayer() != null && !map.isBombPlaced(x, y) && entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() > entityManager.getBombManager().getBombArrayMain().size)
             {   
                 //Send bomb command to server
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "infinity" + "|*");
 
                 entityManager.getBombManager().spawnInfinity(new Vector2 ( x * Constants.MAPTEXTUREWIDTH, y * Constants.MAPTEXTUREHEIGHT), playerId, super.getRange(), chance);
-            }    
+            }
         }
     }
 }

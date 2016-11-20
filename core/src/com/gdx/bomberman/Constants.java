@@ -48,7 +48,8 @@ public class Constants
     public static int COINBAGVALUE = 50; // Coins
     public static int DEFAULTBOMBRANGE = 2;
     public static boolean DELETEITEMSTHROUGHBOMB = false;
-    public static int INFINITYREPRODUCTIONCHANCE = 10; // 100%
+    public static int INFINITYREPRODUCTIONCHANCE = 10; // 8% // Decreases every time
+    public static int INFINITYREPRODUCTIONDECREASE = 2; // After every copy - 20%
     
     // Bomb Cost
     public static int BOMB1 = 0;

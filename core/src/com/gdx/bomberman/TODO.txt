@@ -29,3 +29,4 @@ fullscreen, music volume, sound volume
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
 6) If server gets shut down while playing the connected clients freeze
+7) Infinity checks for mainPlayer and for the mainPlayer bombarray size even if the enemy player placed it.
