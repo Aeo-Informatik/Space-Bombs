@@ -47,7 +47,7 @@ public class Constants
     public static int COINDROPCHANCE = 5; // 50% (1-10)
     public static float COINBONUSTIMER = 5; // Seconds
     public static int COINBONUS = 10; // Coins
-    
+    public static int COINBAGVALUE = 50; // Coins
     
     //Ingame variables DO NOT CHANGE!
     public static Server OWNSERVEROBJ = null;

@@ -90,7 +90,7 @@ public class ClientProcessData
                                         break;
                                         
                                     case "CoinBag":
-                                        entityManager.getItemManager().spawnCoinBag(cellX, cellY, Constants.COINVALUE * 10);
+                                        entityManager.getItemManager().spawnCoinBag(cellX, cellY, Constants.COINBAGVALUE);
                                         break;
                                         
                                     case "LifeUp":

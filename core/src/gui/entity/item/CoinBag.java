@@ -20,7 +20,7 @@ import gui.entity.player.MainPlayer;
  */
 public class CoinBag extends Item{
     
-    public String Discription = "You get 10 times the coinvalue in coins (default 100)";
+    public String Discription = "You get 5 times the coinvalue in coins";
     private int value;
 
     public CoinBag(int cellX, int cellY, MapLoader map, EntityManager entityManager, int value) {
