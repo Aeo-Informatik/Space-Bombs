@@ -22,7 +22,7 @@ import java.util.Random;
  */
 public class X3 extends Bomb
 {
-    public String Discription = "Explodes three times coins only on the last time";
+    public String Discription = "Explodes three times with increasing range";
     private int X;
     
     public X3(Vector2 pos, Vector2 direction, int range, int playerId, int X, MapLoader map, EntityManager entityManager) 
