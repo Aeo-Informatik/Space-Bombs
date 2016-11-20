@@ -21,6 +21,7 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
+import java.util.ArrayList;
 
 
 public class MenuScreen implements Screen
@@ -231,6 +232,16 @@ public class MenuScreen implements Screen
         stage.act(Constants.DELTATIME);
         stage.draw();
         
+        if(Gdx.input.isKeyPressed(Input.Keys.C))
+        {
+            ArrayList<Integer> asd = new ArrayList<>();
+            asd.add(1);
+            asd.add(3);
+            asd.add(2);
+            asd.add(4);
+            Constants.PLAYERID = 4;
+            game.setScreen(new WinnerScreen(asd));
+        }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
         if(Gdx.input.isKeyPressed(Input.Keys.F12))

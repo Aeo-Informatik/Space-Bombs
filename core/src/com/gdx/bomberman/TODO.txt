@@ -20,9 +20,6 @@ Winner Screen:
 - Highlight your own character
 - The position numbers have different colors.
 
-Host Screen:
-- Add in the bottom corner your local ip address
-
 //Client
 1) (optional) Scanning for open servers with port scan
 

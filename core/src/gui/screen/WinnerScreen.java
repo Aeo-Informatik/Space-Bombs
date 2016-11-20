@@ -62,6 +62,13 @@ public class WinnerScreen implements Screen
     private Container p3Field;
     private Container p4Field;
     
+    //Player highlight
+    private WidgetGroup playerhighlightWidget = new WidgetGroup();
+    private Container p1FieldHighlight;
+    private Container p2FieldHighlight;
+    private Container p3FieldHighlight;
+    private Container p4FieldHighlight;
+    
     public WinnerScreen(ArrayList<Integer> playerPositions) 
     {
         
@@ -122,6 +129,40 @@ public class WinnerScreen implements Screen
         joinedPlayerGroup.addActor(table);
         joinedPlayerGroup.setPosition(443, 150);
         stage.addActor(joinedPlayerGroup);
+        
+        /**------------------------PLAYER HIGHLIGHT WIDGET------------------------**/
+        //Table options
+        Table table2 = new Table();
+        table2.setFillParent(true);
+
+        //P1 spawn field
+        p1FieldHighlight = new Container();
+        p1FieldHighlight.setVisible(false);
+        p1FieldHighlight.background(new TextureRegionDrawable(new TextureRegion(TextureManager.playerMarker)));
+        table2.add(p1FieldHighlight).width(80).height(77);
+        
+        //P2 spawn field
+        p2FieldHighlight = new Container();
+        p2FieldHighlight.setVisible(false);
+        p2FieldHighlight.background(new TextureRegionDrawable(new TextureRegion(TextureManager.playerMarker)));
+        table2.add(p2FieldHighlight).width(80).height(77).padLeft(80);
+        
+        //P3 spawn field
+        p3FieldHighlight = new Container();
+        p3FieldHighlight.setVisible(false);
+        p3FieldHighlight.background(new TextureRegionDrawable(new TextureRegion(TextureManager.playerMarker)));
+        table2.add(p3FieldHighlight).width(80).height(77).padLeft(80);
+        
+        //P4 spawn field
+        p4FieldHighlight = new Container();
+        p4FieldHighlight.setVisible(false);
+        p4FieldHighlight.background(new TextureRegionDrawable(new TextureRegion(TextureManager.playerMarker)));
+        table2.add(p4FieldHighlight).width(80).height(77).padLeft(80);
+        
+        //Stage & group options
+        playerhighlightWidget.addActor(table2);
+        playerhighlightWidget.setPosition(442, 152);
+        stage.addActor(playerhighlightWidget);
         
         /**------------------------LABELS------------------------**/     
         
@@ -215,21 +256,45 @@ public class WinnerScreen implements Screen
                 case 1:
                     p1Position.setText(Integer.toString(playerPositions.size() -i));
                     p1Field.setVisible(true);
+                    
+                    if(1 == Constants.PLAYERID)
+                    {
+                        p1FieldHighlight.setVisible(true);
+                    }
+                    
                     break;
 
                 case 2:
                     p2Position.setText(Integer.toString(playerPositions.size() -i));
                     p2Field.setVisible(true);
+                    
+                    if(2 == Constants.PLAYERID)
+                    {
+                        p2FieldHighlight.setVisible(true);
+                    }
+                    
                     break;
 
                 case 3:
                     p3Position.setText(Integer.toString(playerPositions.size() -i));
                     p3Field.setVisible(true);
+                    
+                    if(3 == Constants.PLAYERID)
+                    {
+                        p3FieldHighlight.setVisible(true);
+                    }
+                    
                     break;
 
                 case 4:
                     p4Position.setText(Integer.toString(playerPositions.size() -i));
                     p4Field.setVisible(true);
+                    
+                    if(4 == Constants.PLAYERID)
+                    {
+                        p4FieldHighlight.setVisible(true);
+                    }
+                    
                     break;
             }
         }
