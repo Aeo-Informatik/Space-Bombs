@@ -74,13 +74,6 @@ public class WinnerScreen implements Screen
         
         this.playerPositions = playerPositions;
         
-        /**------------------------DEACTIVATE SERVER------------------------**/
-        if(Constants.OWNSERVEROBJ != null)
-        {
-            Constants.OWNSERVEROBJ.stopServer();
-            Constants.OWNSERVEROBJ = null;
-        }
-        
         //Set background
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.hostBackground)));
         rootTable.setFillParent(true);
