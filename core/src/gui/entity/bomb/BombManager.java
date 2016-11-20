@@ -98,10 +98,9 @@ public class BombManager
         }
     }
     
-    public void spawnInfinity(Vector2 pos, int playerId, int bombRange, int chance)
+    public void spawnInfinity(Vector2 pos, int playerId, int bombRange)
     {
-        Infinity entity = new Infinity(pos, new Vector2(0,0),bombRange, playerId, chance, map, entityManager);
-        System.out.println(chance);
+        Infinity entity = new Infinity(pos, new Vector2(0,0),bombRange, playerId, map, entityManager);
         
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
