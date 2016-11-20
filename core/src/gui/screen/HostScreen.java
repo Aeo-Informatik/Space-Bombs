@@ -73,6 +73,18 @@ public class HostScreen implements Screen
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.hostBackground)));
         mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
 
+                
+        //Set background
+        rootTable.setFillParent(true);
+        stage.addActor(rootTable);
+        
+        //Initialise Font
+        FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontOptions.size = 11;
+        BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
+        
+        
+        /**------------------------OPEN SERVER------------------------**/
         // Create server object
         if(Constants.OWNSERVEROBJ == null)
         {
@@ -84,16 +96,21 @@ public class HostScreen implements Screen
         {
             Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
         }
+            
+        System.out.println("CLIENT: Launching server with 4 players...");
+        Constants.OWNSERVEROBJ.OpenLobby();
         
-        //Set background
-        rootTable.setFillParent(true);
-        stage.addActor(rootTable);
-        
-        //Initialise Font
-        FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        fontOptions.size = 11;
-        BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
-        
+        try 
+        {
+            //Connect to server
+            client = new Client("127.0.0.1", Constants.CONNECTIONPORT);
+            client.connectToServer();
+            
+        } catch (Exception e) 
+        {
+            System.err.println("ERROR: Client couldnt connect to own server: " + e);
+            e.printStackTrace();
+        }
 
         /**------------------------LABEL STYLE------------------------**/
         Label.LabelStyle labelStyle = new Label.LabelStyle();
@@ -123,23 +140,6 @@ public class HostScreen implements Screen
         textButtonStyleBack.up   = backSkin.getDrawable("button_up");
         textButtonStyleBack.down = backSkin.getDrawable("button_down");
         textButtonStyleBack.over = backSkin.getDrawable("button_checked");
-        
-        /**------------------------OPEN SERVER------------------------**/
-        System.out.println("CLIENT: Launching server with 4 players...");
-        Constants.OWNSERVEROBJ.OpenLobby();
-        
-        try 
-        {
-            //Connect to server
-            client = new Client("127.0.0.1", Constants.CONNECTIONPORT);
-            client.connectToServer();
-            
-        } catch (Exception e) 
-        {
-            System.err.println("ERROR: Client couldnt connect to own server: " + e);
-            e.printStackTrace();
-        }
-        
         
         /**------------------------JOIN PLAYER GROUP------------------------**/
         //Table options
@@ -240,6 +240,7 @@ public class HostScreen implements Screen
                 }
 
                 Constants.OWNSERVEROBJ.closeLobby();
+                Constants.OWNSERVEROBJ = null;
                 game.setScreen(new MenuScreen());
             }
         });
@@ -426,6 +427,7 @@ public class HostScreen implements Screen
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
             Constants.OWNSERVEROBJ.closeLobby();
+            Constants.OWNSERVEROBJ = null;
             game.setScreen(new MenuScreen());
         }
     }

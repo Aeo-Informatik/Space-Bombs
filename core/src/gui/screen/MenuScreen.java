@@ -21,7 +21,6 @@ import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import java.util.ArrayList;
 
 
 public class MenuScreen implements Screen
@@ -47,10 +46,11 @@ public class MenuScreen implements Screen
         Gdx.input.setCursorCatched(false);
   
         
-        //Reset server
+        //Close Server
         if(Constants.OWNSERVEROBJ != null)
         {
-            Constants.OWNSERVEROBJ.resetServer();
+            Constants.OWNSERVEROBJ.closeLobby();
+            Constants.OWNSERVEROBJ = null;
         }
         
         //Initialise Font
