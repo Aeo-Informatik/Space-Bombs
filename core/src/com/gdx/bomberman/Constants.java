@@ -34,8 +34,6 @@ public class Constants
     //Entity config
     public static float DEFAULTCAMERASPEED = 10.0f;
     public static float DEFAULTENTITYSPEED = 1.5f;
-    public static int DEFAULTBOMBRANGE = 2;
-     public static boolean DELETEITEMSTHROUGHBOMB = false;
     
     //Item config
     public static long ITEMTIMER = 5; // Seconds
@@ -48,6 +46,9 @@ public class Constants
     public static float COINBONUSTIMER = 5; // Seconds
     public static int COINBONUS = 10; // Coins
     public static int COINBAGVALUE = 50; // Coins
+    public static int DEFAULTBOMBRANGE = 2;
+    public static boolean DELETEITEMSTHROUGHBOMB = false;
+    public static int INFINITYREPRODUCTIONCHANCE = 10; // 100%
     
     // Bomb Cost
     public static int BOMB1 = 0;

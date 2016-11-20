@@ -22,14 +22,17 @@ import java.util.Random;
  */
 public class Infinity extends Bomb
 {
-    public String Discription = "Reproduces and attaches itself to a new block";
+    public String Discription = "No coins but sometimes it places itselves when a block gets destoyed";
     
-    public Infinity(Vector2 pos, Vector2 direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
+    private int chance;
+    
+    public Infinity(Vector2 pos, Vector2 direction, int range, int playerId, int chance, MapLoader map, EntityManager entityManager) 
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
         //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
         super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.infinityAnim);
+        this.chance = chance;
     }
     
     @Override
@@ -241,6 +244,28 @@ public class Infinity extends Bomb
                 
                 map.getBombLayer().setCell(cellX - x, cellY, cellLeft);
             }
+        }
+    }
+    
+ 
+    
+    @Override
+    public void dropFromBlock(int x, int y)
+    {
+        int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
+
+        if(randomNum <= chance)
+        {    
+            System.out.println("Chance" + chance);
+            chance -= 1;
+            
+            if( entityManager.getPlayerManager().getMainPlayer() != null && !map.isBombPlaced(x, y) && entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() > entityManager.getBombManager().getBombArrayMain().size)
+            {   
+                //Send bomb command to server
+                client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "infinity" + "|*");
+
+                entityManager.getBombManager().spawnInfinity(new Vector2 ( x * Constants.MAPTEXTUREWIDTH, y * Constants.MAPTEXTUREHEIGHT), playerId, super.getRange(), chance);
+            }    
         }
     }
 }

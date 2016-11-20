@@ -211,7 +211,7 @@ public class EnemyPlayer extends Player
             case("infinity"):
                 if(!map.isBombPlaced(pos.x, pos.y))
                 {
-                    entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange);
+                    entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, 0);
                 }
                 break;
             case("X3"):
