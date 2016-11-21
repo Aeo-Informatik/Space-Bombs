@@ -16,11 +16,15 @@
 - Show how much money and life everyone has.
 
 //Textures
-16) blue coins which give x2 and red coins which give x3
+- blue coins which give x2 and red coins which give x3
+- cubic explosion in different colors.
 
 //Screens
 Option Screen:
 fullscreen, music volume, sound volume
+
+Help Screen: 
+Add tutorial backgrounds
 
 MenuScreen:
 - Add a hidden message box that pops up for errors 
