@@ -36,6 +36,7 @@ public class MainPlayer extends Player
     private boolean godMode = false;
     private int playerId = 0;
     private int chosenBomb = 1;
+    private float coinTimer = 0;
     
     //Objects
     private AnimEffects animEffects = new AnimEffects();
@@ -46,13 +47,11 @@ public class MainPlayer extends Player
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
-    //BombCosts
+    // Bomb prices
     private int[] bombPrices = {Constants.BOMB1, Constants.BOMB2, Constants.BOMB3, Constants.BOMB4, Constants.BOMB5, Constants.BOMB6, Constants.BOMB7, Constants.BOMB8, Constants.BOMB9};
     
-    //Coin timer
-    private float coinTimer = 0;
-    
-    //Player settings CAN BE CHANGED
+
+    // Player settings CAN BE CHANGED
     private float sendStopTime = 2f; // How often, if the player doesnt move, his position gets send, in seconds.
     private int life = Constants.DEFAULTLIFE;
     private float godModeDuration = Constants.GODMODEDURATION; // How long the player is invulnerable after beeing hit by a bomb
@@ -162,8 +161,6 @@ public class MainPlayer extends Player
      */
     public void onDeath()
     {
-        System.out.println("YOU DIED!");
-        
         int cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
         int cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
         entityManager.getItemManager().spawnTombstone(cellX, cellY, coins, playerId);
@@ -190,10 +187,8 @@ public class MainPlayer extends Player
             godMode = true;
             
             //Send playerLife command to server
-            client.sendData("enemyPlayerLife|" + Constants.PLAYERID + "|" + life + "|*");
+            client.sendData("enemyPlayerLife|" + playerId + "|" + life + "|*");
             
-            System.out.println("Life has been reduced to: " + life);
-          
             //Execute hit sound
             if(id == -1)
             {
@@ -591,13 +586,11 @@ public class MainPlayer extends Player
                         item.itemEffect();
                     }
                     break;
-                
-                default:
-                    System.out.println("no Bomb chosen");
             }
  
         }
         
+        /*------------------CHOOSE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.NUM_1) || Gdx.input.isKeyJustPressed(Keys.NUMPAD_1))
         {
             chosenBomb = 1;
@@ -644,7 +637,7 @@ public class MainPlayer extends Player
         }
         
         /*------------------ZOOM OUT OF GAME------------------*/
-        if (Gdx.input.isKeyPressed(Keys.O))
+        if (Gdx.input.isKeyPressed(Keys.O) || Gdx.input.isKeyPressed(Keys.MINUS))
         {
             if(camera.zoom < maxZoomOut)
             {
@@ -654,7 +647,7 @@ public class MainPlayer extends Player
         }
 
         /*------------------ZOOM INTO GAME------------------*/
-        if (Gdx.input.isKeyPressed(Keys.I))
+        if (Gdx.input.isKeyPressed(Keys.I) || Gdx.input.isKeyPressed(Keys.PLUS))
         {
             if(camera.zoom > maxZoomIn)
             {
