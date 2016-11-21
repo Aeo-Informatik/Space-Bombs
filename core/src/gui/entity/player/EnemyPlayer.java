@@ -220,20 +220,6 @@ public class EnemyPlayer extends Player
                     entityManager.getBombManager().spawnX3(pos, playerId, bombRange, 1);
                 }
                 break;
-            case("Vertical"):
-                if(!map.isBombPlaced(pos.x, pos.y))
-                {        
-                    entityManager.getBombManager().spawnVertical(pos, playerId, bombRange);
-                }
-                break;
-            case("Horizontal"):
-                if(!map.isBombPlaced(pos.x, pos.y))
-                {        
-                    entityManager.getBombManager().spawnHorizontal(pos, playerId, bombRange);
-                }
-                break;
-            default:
-                System.out.println("Unknown Bomb");
         }
     }
     

@@ -552,7 +552,6 @@ public class MainPlayer extends Player
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                             
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnVertical(new Vector2(x, y), playerId, bombRange);
                     }
                     break;
                     
@@ -569,7 +568,6 @@ public class MainPlayer extends Player
                         client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
                             
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnHorizontal(new Vector2(x, y), playerId, bombRange);
                     }
                     break;
                     
