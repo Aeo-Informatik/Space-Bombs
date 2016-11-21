@@ -127,7 +127,7 @@ public class Spectator extends Player
     private void inputDoSpectator()
     {
         /*------------------ZOOM OUT GAME------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.O))
+        if(Gdx.input.isKeyPressed(Input.Keys.O) || Gdx.input.isKeyPressed(Input.Keys.MINUS))
         {
             if(camera.zoom < 2.0)
             {
@@ -144,7 +144,7 @@ public class Spectator extends Player
         }
 
         /*------------------ZOOM INTO GAME------------------*/
-        if(Gdx.input.isKeyPressed(Input.Keys.I))
+        if(Gdx.input.isKeyPressed(Input.Keys.I) || Gdx.input.isKeyPressed(Input.Keys.PLUS))
         {
             if(camera.zoom > 0.5)
             {
