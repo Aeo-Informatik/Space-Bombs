@@ -22,35 +22,35 @@ import gui.map.MapLoader;
  */
 public class EnemyPlayer extends Player
 {
-    //Objects
+    // General objects
     private AnimEffects animEffects = new AnimEffects();
     
-    //Variables
+    // Variables DO NOT CHANGE!
     private String lastMovementKeyPressed = "UP";
     private boolean godmode = false;
     private float godModeTimer = 0;
     private int playerId = 0;
     private boolean isEnemyPlayerDead = false;
     
-    //Server render variables
+    // Server render variables
     private boolean executeMovePlayer = false;
     private boolean executeStopPlayer = true;
     private String moveDirection = "";
     private float stopX = pos.x; 
     private float stopY = pos.y;
     
-    //Player animation when he is moving around
+    // Player animation when he is moving around
     private final Animation walkAnimUp;
     private final Animation walkAnimDown;
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
     //Player settings
-    private float godModeDuration = 2f;
-    private int life = 3;
-    private int bombRange = 2;
-    private int coins = 0;
-    private int maxBombPlacing = 2;
+    private int life = Constants.DEFAULTLIFE;
+    private float godModeDuration = Constants.GODMODEDURATION; // How long the player is invulnerable after beeing hit by a bomb
+    private int coins = Constants.STARTCOINS;
+    private int maxBombPlacing = Constants.DEFAULTBOMBPLACE;
+    private int bombRange = Constants.DEFAULTBOMBRANGE;
     
     //Constructor
     public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapLoader map, EntityManager entityManager, OrthographicCamera camera) 

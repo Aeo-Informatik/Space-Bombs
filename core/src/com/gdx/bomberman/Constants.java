@@ -14,10 +14,14 @@ import server.Server;
 public class Constants 
 {
     // Client settings
-    public static final boolean TESTSERVER = false; // Only for one player. Starts the game instantly
     public static final int CONNECTIONPORT = 13199;
     public static final boolean CLIENTDEBUG = false;
     public static final boolean PROCESSDATADEBUG = false;
+    
+    // Server settings
+    public static final int LISTENINGPORT = 13199;
+    public static final int MAXPLAYERS = 4;
+    public static final boolean SERVERDEBUG = false;
     
     // Audio settings
     public static float MUSICVOLUME = 0.05f;
@@ -74,6 +78,7 @@ public class Constants
     public static final int BOMB7 = 120;
     public static final int BOMB8 = 140;
     public static final int BOMB9 = 200;
+    
     
     
     // Ingame variables DO NOT CHANGE!

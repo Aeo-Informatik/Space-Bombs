@@ -30,12 +30,7 @@ import static gui.TextureManager.backSkin;
 import static gui.TextureManager.dynamiteSkin;
 import static gui.TextureManager.roundSkin;
 import gui.map.AvailableMaps;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import server.Server;
-import server.ServerConstants;
 
 
 public class HostScreen implements Screen
@@ -95,13 +90,7 @@ public class HostScreen implements Screen
         // Create server object
         if(Constants.OWNSERVEROBJ == null)
         {
-           Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getTestMap()); 
-        }
-        
-        // Setting default map
-        if(!Constants.TESTSERVER)
-        {
-            Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
+           Constants.OWNSERVEROBJ = new Server(Constants.LISTENINGPORT, 4, new AvailableMaps().getTestMap()); 
         }
             
         System.out.println("CLIENT: Launching server with 4 players...");

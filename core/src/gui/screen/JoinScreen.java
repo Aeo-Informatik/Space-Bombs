@@ -25,7 +25,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import static com.gdx.bomberman.Main.client;
-import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
@@ -34,9 +33,7 @@ import java.net.UnknownHostException;
 import client.Client;
 import static com.gdx.bomberman.Main.game;
 import static gui.TextureManager.backSkin;
-import gui.map.AvailableMaps;
-import server.Server;
-import server.ServerConstants;
+
 
 
 /**
@@ -166,26 +163,7 @@ public class JoinScreen implements Screen
 
                 //Get the ip out of the textfield
                 connectionIp = ipTextField.getText();
-                
-                
-                //Starts local server for 1 Player
-                if(Constants.TESTSERVER)
-                {
-                    connectionIp = "127.0.0.1";
-                    
-                    System.out.println("CLIENT: Launching test server force IP to localhost");
-                    
-                    if(Constants.OWNSERVEROBJ == null)
-                    {
-                        Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getTestMap()); 
-                    }   
-                    //Set map to testmap
-                    //Constants.TESTSERVEROBJ.setMap("maps/Test-Map_(26x26).tmx");
-                    
-                    //Accept client connections
-                    Constants.OWNSERVEROBJ.OpenLobby();
-                }
-                
+                 
                 try 
                 {
                     //Check if ip is valid
@@ -194,14 +172,6 @@ public class JoinScreen implements Screen
                         //Connect to server
                         client = new Client(connectionIp, Constants.CONNECTIONPORT);
                         client.connectToServer();
-                        
-
-                        //Start game on server
-                        if(Constants.TESTSERVER)
-                        {
-                            Thread.currentThread().sleep(100);
-                            Constants.OWNSERVEROBJ.startGame();
-                        }
                         
                         System.out.println("CLIENT: Connecting to server " + connectionIp + ":" + Constants.CONNECTIONPORT);
                         

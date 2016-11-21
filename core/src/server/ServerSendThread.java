@@ -48,7 +48,7 @@ class ServerSendThread implements Runnable
                     for(String msgToClient : dataToSend)
                     {
                         //Debug
-                        if(ServerConstants.SERVERDEBUG)
+                        if(Constants.SERVERDEBUG)
                             System.out.println("SERVER: Send: " + msgToClient);
 
                         //Iterate through connected client list
@@ -56,7 +56,7 @@ class ServerSendThread implements Runnable
                         {
 
                             //Debug
-                            if(ServerConstants.SERVERDEBUG)
+                            if(Constants.SERVERDEBUG)
                                 System.out.println("SERVER: To: " + sock.get(i).getInetAddress().getHostAddress());
 
                             //Create object to send data
@@ -74,7 +74,7 @@ class ServerSendThread implements Runnable
                 {
 
                     //Debug
-                    if(ServerConstants.SERVERDEBUG)
+                    if(Constants.SERVERDEBUG)
                     {
                         System.out.println("SERVER: Send: " + message1);
                         System.out.println("SERVER: To: " + socket1.getInetAddress().getHostAddress());

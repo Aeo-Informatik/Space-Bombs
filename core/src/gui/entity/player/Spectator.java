@@ -12,11 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
-import static com.gdx.bomberman.Main.client;
-import static com.gdx.bomberman.Main.game;
 import gui.map.MapLoader;
-import gui.screen.MenuScreen;
-import java.io.IOException;
 
 /**
  *
@@ -24,13 +20,13 @@ import java.io.IOException;
  */
 public class Spectator extends Player
 {
-    //General objects and variables
+    // General objects
     private boolean freeCam = true;
     private int currentPlayerIndex = 0;
     private EnemyPlayer currentEnemyPlayer;
     private Array <EnemyPlayer> enemies;
     
-    //Constructor
+    // Constructor
     public Spectator(Vector2 pos, Vector2 direction, OrthographicCamera camera, MapLoader map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager, camera);

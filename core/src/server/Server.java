@@ -1,5 +1,6 @@
 package server;
 
+import com.gdx.bomberman.Constants;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -57,7 +58,7 @@ public class Server
                 for(int i = 0; i < Server.getClientList().size(); i++)
                 {
                     //Debug
-                    if(ServerConstants.SERVERDEBUG)
+                    if(Constants.SERVERDEBUG)
                         System.out.println("SERVER: ------Start Setup Game------");
 
                     //Player id as string
