@@ -53,14 +53,14 @@ public class MainPlayer extends Player
     private float coinTimer = 0;
     
     //Player settings CAN BE CHANGED
-    private float sendStopTime = 2f;
-    private int life = 3;
-    private float godModeDuration = 2f; // How long the player is invulnerable after beeing hit by a bomb
-    private int coins = 0;
-    private int maxBombPlacing = 2;
-    private int bombRange = 2;
-    private float maxZoomOut = 1.5f;
-    private float maxZoomIn = 0.5f;
+    private float sendStopTime = 2f; // How often, if the player doesnt move, his position gets send, in seconds.
+    private int life = Constants.DEFAULTLIFE;
+    private float godModeDuration = Constants.GODMODEDURATION; // How long the player is invulnerable after beeing hit by a bomb
+    private int coins = Constants.STARTCOINS;
+    private int maxBombPlacing = Constants.DEFAULTBOMBPLACE;
+    private int bombRange = Constants.DEFAULTBOMBRANGE;
+    private float maxZoomOut = Constants.DEFAULTMAXZOOMOUT;
+    private float maxZoomIn = Constants.DEFAULTMAXZOOMIN;
     
     //Constructor
     public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapLoader map, EntityManager entityManager) 

@@ -28,7 +28,7 @@ public class Item extends Entity
     protected int cellX, cellY;
     
     protected float timer;
-    protected float spawnProtection = 0.5f;
+    protected float spawnProtection = Constants.SPAWNPROTECTION;
     
     //Constructor
     public Item(int cellX, int cellY, TextureRegion itemTexture, MapLoader map, EntityManager entityManager) 

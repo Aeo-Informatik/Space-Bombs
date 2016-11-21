@@ -13,7 +13,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
                 config.width = Constants.SCREENWIDTH;
                 config.height = Constants.SCREENHEIGHT;
-                config.fullscreen = Constants.FULLSCREEN;
+                config.fullscreen = Constants.DEFAULTFULLSCREEN;
                 config.title = Constants.WINDOWTITEL;
                 config.addIcon(Constants.WINDOWICONPATH, Files.FileType.Internal);
 
