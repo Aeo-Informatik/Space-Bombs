@@ -1,6 +1,9 @@
 //Bomb
-1) To be able to push the bomb
 - The dynamite should make a cubic explosion
+- Charge - remotly detonable bomb. You can walk over them and place multiple ones.
+- Barrel - An item you can place if it gets hit it explodes in a cubic manner. Scales with range.
+- Teleport
+- Rocket - Moves forward from cell to cell till it hits something (wall/bomb or player)
 
 //Audio
 - Add for each item a pickup sound
@@ -19,7 +22,7 @@ Option Screen:
 fullscreen, music volume, sound volume
 
 MenuScreen:
-- Add a hidden message box for error that pops up
+- Add a hidden message box that pops up for errors 
 
 //Client
 1) (optional) Scanning for open servers with port scan

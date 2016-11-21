@@ -261,7 +261,7 @@ public class Infinity extends Bomb
             // Gucke ob der main Player nicht tot ist und ob dort schon eine Bombe ist und ob eine weitere bombe der Spieler überhaupt legen kann
             if( entityManager.getPlayerManager().getMainPlayer() != null && !map.isBombPlaced(x, y) )
             {   
-                //Send bomb command to server
+                // Send bomb command to server
                 client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "infinity" + "|*");
                 entityManager.getBombManager().spawnInfinity(new Vector2 ( x * Constants.MAPTEXTUREWIDTH, y * Constants.MAPTEXTUREHEIGHT), playerId, super.getRange(), chance);
             }
