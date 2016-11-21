@@ -4,6 +4,7 @@
 - Barrel - An item you can place if it gets hit it explodes in a cubic manner. Scales with range.
 - Teleport
 - Rocket - Moves forward from cell to cell till it hits something (wall/bomb or player)
+1 remaining
 
 //Audio
 - Add for each item a pickup sound
