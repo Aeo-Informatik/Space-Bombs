@@ -277,6 +277,7 @@ public class HostScreen implements Screen
                 }
                 
                 AudioManager.menuMusic.stop();
+                Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
                 Constants.OWNSERVEROBJ.startGame();
                 game.setScreen(new GameScreen());
             }
