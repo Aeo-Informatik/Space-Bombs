@@ -65,14 +65,13 @@ public class X3 extends Bomb
                     //Object gets delete only set if everything is done.
                     this.isExploded = true;
                     
+                    /**-------------------CHANGED-------------------**/
+                    // Increase range by 1
                     super.setRange(super.getRange() + 1);
                     X += 1;                    
                     
-                    if( entityManager.getPlayerManager().getMainPlayer() != null && X <= 3 && !map.isBombPlaced(pos.x, pos.y) )
+                    if(X <= 3 && !map.isBombPlaced(pos.x, pos.y) )
                     {   
-                        //Send bomb command to server
-                        //client.sendData("placeEnemyBomb|" + Float.toString(pos.x) + "|" + Float.toString(pos.y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + "X3" + "|*");
-                          
                         entityManager.getBombManager().spawnX3(pos, playerId, super.getRange(), X);
                     }
                 }else
@@ -256,22 +255,4 @@ public class X3 extends Bomb
             }
         }
     }
-    
-   @Override
-   public void dropFromBlock (int x, int y)
-   {
-       int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
-                    
-                    if( X == 3)
-                    {
-                        if(randomNum > 6 )
-                        {                       
-                            //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
-                            
-                            //General:spawnCoin|CellX|CellY|target
-                            client.sendData("spawnCoin|" + x + "|" + y + "|*");
-                        }
-                    }
-                    
-   }
 }
