@@ -46,7 +46,7 @@ public class Constants
     public static final int COINDROPCHANCE = 5; // 50% (1-10)
     public static final float COINBONUSTIMER = 5; // Seconds
     public static final int COINBONUS = 10; // Coins
-    public static final int STARTCOINS = 0;
+    public static final int STARTCOINS = 100;
     
     // Item settings
     public static final long ITEMTIMER = 5; // Seconds
@@ -64,7 +64,7 @@ public class Constants
     public static final int MAXBOMBPLACE = 5;
     public static final int MAXBOMBRANGE = 5; // Cells
     public static final int DEFAULTBOMBRANGE = 2;
-    public static final int DEFAULTBOMBPLACE = 2;
+    public static final int DEFAULTBOMBPLACE = 5;
     public static final int INFINITYREPRODUCTIONCHANCE = 10; // Decreases every time
     public static final int INFINITYREPRODUCTIONDECREASE = 2; // After every copy - 20%
     
