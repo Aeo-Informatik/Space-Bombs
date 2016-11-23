@@ -6,12 +6,13 @@
 package gui.entity.item;
 
 
+import client.SendCommand;
 import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
-import gui.AudioManager;
 import gui.entity.player.MainPlayer;
+import gui.map.MapCellCoordinates;
 
 
 /**
@@ -23,8 +24,8 @@ public class CoinBag extends Item{
     public String Discription = "You get 5 times the coinvalue in coins";
     private int value;
 
-    public CoinBag(int cellX, int cellY, MapLoader map, EntityManager entityManager, int value) {
-        super(cellX, cellY,TextureManager.coinBag, map, entityManager);
+    public CoinBag(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager, int value) {
+        super(cellPos,TextureManager.coinBag, map, entityManager);
         this.value = value;
     }
     
@@ -37,10 +38,7 @@ public class CoinBag extends Item{
         if(mainP != null)
         {
             mainP.setCoins((mainP.getCoins() + value)); 
-            client.sendData("enemyPlayerSetCoins|" + mainP.getPlayerId() + "|" + (mainP.getCoins()) + "|*");
+            SendCommand.setPlayerCoins(mainP.getPlayerId(), mainP.getCoins());
         }
     }
-    
-
-    
 }

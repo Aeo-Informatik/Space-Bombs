@@ -11,7 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.entity.player.EnemyPlayer;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 
 
 /**
@@ -66,7 +68,7 @@ public class ClientProcessData
                             //System.out.println("Received spawnCoin command!");
                             
                             //Spawn coin
-                            entityManager.getItemManager().spawnCoin(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]), Constants.COINVALUE);
+                            entityManager.getItemManager().spawnCoin(new MapCellCoordinates(Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2])), Constants.COINVALUE);
                         }else
                             System.err.println("ERROR: spawnCoin wrong number of parameters");
                         break;
@@ -79,34 +81,33 @@ public class ClientProcessData
                         { 
                             try
                             {
-                                Vector2 itemField = mapManager.getSpawnerPositionsArray().get(Integer.parseInt(parameters[2]));
-                                int cellX = (int) (itemField.x / Constants.MAPTEXTUREWIDTH);
-                                int cellY = (int) (itemField.y / Constants.MAPTEXTUREHEIGHT);
-                            
+                                ThinGridCoordinates itemField = mapManager.getSpawnerPositionsArray().get(Integer.parseInt(parameters[2]));
+                                MapCellCoordinates itemFieldCellPos = new MapCellCoordinates(itemField);
+                                
                                 switch(parameters[1])
                                 {
                                     case "BombUp":
-                                        entityManager.getItemManager().spawnBombUp(cellX, cellY);
+                                        entityManager.getItemManager().spawnBombUp(itemFieldCellPos);
                                         break;
                                         
                                     case "CoinBag":
-                                        entityManager.getItemManager().spawnCoinBag(cellX, cellY, Constants.COINBAGVALUE);
+                                        entityManager.getItemManager().spawnCoinBag(itemFieldCellPos, Constants.COINBAGVALUE);
                                         break;
                                         
                                     case "LifeUp":
-                                        entityManager.getItemManager().spawnLifeUp(cellX, cellY);
+                                        entityManager.getItemManager().spawnLifeUp(itemFieldCellPos);
                                         break;
                                         
                                     case "RangeUp":
-                                        entityManager.getItemManager().spawnRangeUp(cellX, cellY);
+                                        entityManager.getItemManager().spawnRangeUp(itemFieldCellPos);
                                         break;
                                         
                                     case "SpeedUp":
-                                        entityManager.getItemManager().spawnSpeedUp(cellX, cellY);
+                                        entityManager.getItemManager().spawnSpeedUp(itemFieldCellPos);
                                         break;
                                         
                                     case "YellowHeart":
-                                        entityManager.getItemManager().spawnYellowHeart(cellX, cellY);
+                                        entityManager.getItemManager().spawnYellowHeart(itemFieldCellPos);
                                         break;
                                 }
                             }catch(IndexOutOfBoundsException e)
@@ -246,7 +247,7 @@ public class ClientProcessData
                                     if(enemy.getPlayerId() == Integer.parseInt(parameters[3]))
                                     {
                                         //placeBomb(Vector2 pos, String bombType)
-                                                enemy.placeBomb(new Vector2(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), parameters[4]);
+                                                enemy.placeBomb(new ThinGridCoordinates(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), parameters[4]);
                                         }
                                     }
                                 }
@@ -368,7 +369,7 @@ public class ClientProcessData
                             {
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
-                                    enemy.onDeath(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+                                    enemy.onDeath(new MapCellCoordinates(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3])));
                                 }
                             }
                             

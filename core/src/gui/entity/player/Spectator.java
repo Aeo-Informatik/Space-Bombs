@@ -12,7 +12,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 
 /**
  *
@@ -27,7 +29,7 @@ public class Spectator extends Player
     private Array <EnemyPlayer> enemies;
     
     // Constructor
-    public Spectator(Vector2 pos, Vector2 direction, OrthographicCamera camera, MapLoader map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
+    public Spectator(ThinGridCoordinates pos, ThinGridCoordinates direction, OrthographicCamera camera, MapLoader map, Array <EnemyPlayer> enemies, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager, camera);
         
@@ -135,10 +137,10 @@ public class Spectator extends Player
                 
                 if(freeCam)
                 {
-                    camera.position.set(pos.x, pos.y, 0);
+                    camera.position.set(pos.getX(), pos.getY(), 0);
                 }else
                 {
-                    camera.position.set(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y, 0);
+                    camera.position.set(currentEnemyPlayer.getPosition().getX(), currentEnemyPlayer.getPosition().getY(), 0);
                 }
             }
         }
@@ -152,10 +154,10 @@ public class Spectator extends Player
                 
                 if(freeCam)
                 {
-                    camera.position.set(pos.x, pos.y, 0);
+                    camera.position.set(pos.getX(), pos.getY(), 0);
                 }else
                 {
-                    camera.position.set(currentEnemyPlayer.getPosition().x, currentEnemyPlayer.getPosition().y, 0);
+                    camera.position.set(currentEnemyPlayer.getPosition().getX(), currentEnemyPlayer.getPosition().getY(), 0);
                 }
             }
         }
@@ -163,7 +165,7 @@ public class Spectator extends Player
         /*------------------FREE MOVING CAMERA FOR SPECTATOR------------------*/
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
         {
-            camera.position.set(pos.x, pos.y, 0);
+            camera.position.set(pos.getX(), pos.getY(), 0);
             freeCam = true;
         }
         
@@ -190,7 +192,7 @@ public class Spectator extends Player
     @Override
     protected boolean collidesLeft()
     {
-        if(map.isCellGhostBlocked(pos.x - 2, pos.y))
+        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() - 2, pos.getY())))
             return true;
 
         return false;
@@ -199,7 +201,7 @@ public class Spectator extends Player
     @Override
     protected boolean collidesRight()
     {
-        if(map.isCellGhostBlocked(pos.x + Constants.PLAYERWIDTH + 2, pos.y))
+        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() + Constants.PLAYERWIDTH + 2, pos.getY())))
             return true;
 
         return false;
@@ -208,7 +210,7 @@ public class Spectator extends Player
     @Override
     protected boolean collidesTop()
     {
-        if(map.isCellGhostBlocked(pos.x + 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3) || map.isCellGhostBlocked(pos.x  + Constants.PLAYERWIDTH - 3, pos.y + Constants.PLAYERHEIGHT / 2 + 3))
+        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() + 3, pos.getY() + Constants.PLAYERHEIGHT / 2 + 3)) || map.isCellGhostBlocked(new MapCellCoordinates(pos.getX()  + Constants.PLAYERWIDTH - 3, pos.getY() + Constants.PLAYERHEIGHT / 2 + 3)))
             return true;
 
         return false;
@@ -218,7 +220,7 @@ public class Spectator extends Player
     protected boolean collidesBottom()
     {
         //Checks at the players feet on the left if there is a block and on the right
-        if(map.isCellGhostBlocked(pos.x + 3, pos.y - 3) || map.isCellGhostBlocked(pos.x  + Constants.PLAYERWIDTH -3, pos.y - 3))
+        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() + 3, pos.getY() - 3)) || map.isCellGhostBlocked(new MapCellCoordinates(pos.getX()  + Constants.PLAYERWIDTH -3, pos.getY() - 3)))
             return true;
 
         return false;

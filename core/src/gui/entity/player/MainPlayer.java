@@ -5,6 +5,7 @@
  */
 package gui.entity.player;
 
+import client.SendCommand;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -12,13 +13,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
 import gui.entity.item.Teleport;
+import gui.map.MapCellCoordinates;
+import gui.map.ThinGridCoordinates;
 
 /**
  *
@@ -62,12 +64,12 @@ public class MainPlayer extends Player
     private float maxZoomIn = Constants.DEFAULTMAXZOOMIN;
     
     //Constructor
-    public MainPlayer(Vector2 pos, Vector2 direction, int playerId, OrthographicCamera camera, MapLoader map, EntityManager entityManager) 
+    public MainPlayer(ThinGridCoordinates pos, ThinGridCoordinates direction, int playerId, OrthographicCamera camera, MapLoader map, EntityManager entityManager) 
     {
         super(pos, direction, map, entityManager, camera);
 
         //Set camera position to player
-        camera.position.set(pos.x, pos.y, 0);
+        camera.position.set(pos.getX(), pos.getY(), 0);
         
         //Object setter
         this.playerId = playerId;
@@ -148,7 +150,7 @@ public class MainPlayer extends Player
         if(this.coinTimer >= Constants.COINBONUSTIMER)
         {
             coins += Constants.COINBONUS;
-            client.sendData("enemyPlayerSetCoins|" + playerId + "|" + coins + "|*");
+            SendCommand.setPlayerCoins(playerId, coins);
             coinTimer = 0;
         }else
         {
@@ -161,11 +163,9 @@ public class MainPlayer extends Player
      */
     public void onDeath()
     {
-        int cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
-        int cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
-        entityManager.getItemManager().spawnTombstone(cellX, cellY, coins, playerId);
+        entityManager.getItemManager().spawnTombstone(new MapCellCoordinates(pos), coins, playerId);
         
-        client.sendData("enemyPlayerDied|" + playerId + "|" + cellX + "|" + cellY + "|*");
+        SendCommand.playerDied(playerId, new MapCellCoordinates(pos.getX(), pos.getY()));
     }
     
 
@@ -187,7 +187,7 @@ public class MainPlayer extends Player
             godMode = true;
             
             //Send playerLife command to server
-            client.sendData("enemyPlayerLife|" + playerId + "|" + life + "|*");
+            SendCommand.setPlayerLife(playerId, life);
             
             //Execute hit sound
             if(id == -1)
@@ -248,13 +248,13 @@ public class MainPlayer extends Player
                 goLeft();
 
                 //Draw the player with animation
-                renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.getX(), pos.getY());
 
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("LEFT") == false)
                 {
                     //Send current player position to reduce lag
-                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    SendCommand.stopMoving(playerId, pos);
                     
                     //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "LEFT";
@@ -263,7 +263,7 @@ public class MainPlayer extends Player
                     sendStopOnce = true;
 
                     //Send data to server
-                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|LEFT|*");
+                    SendCommand.movePlayer(playerId, "LEFT");
                 }
 
                 //Ensures that walk command gets send only once
@@ -277,7 +277,7 @@ public class MainPlayer extends Player
                 stopMoving();
                 
                 //Draw the player with animation
-                renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.getX(), pos.getY());
             }
              
         /*------------------WALKING RIGHT------------------*/
@@ -289,13 +289,13 @@ public class MainPlayer extends Player
                 goRight();
                 
                 //Draw the player with animation
-                renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimRight), pos.getX(), pos.getY());
                 
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("RIGHT") == false)
                 {
                     //Send current player position to reduce lag
-                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    SendCommand.stopMoving(playerId, pos);
                     
                     //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "RIGHT";
@@ -304,7 +304,7 @@ public class MainPlayer extends Player
                     sendStopOnce = true;
                     
                     //Send walk command to server
-                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|RIGHT|*");
+                    SendCommand.movePlayer(playerId, "RIGHT");
                 }
                 
                 //Ensures that walk command gets send only once
@@ -318,7 +318,7 @@ public class MainPlayer extends Player
                 stopMoving();
                 
                 //Draw the player with animation
-                renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimRight), pos.getX(), pos.getY());
             }
             
         /*------------------WALKING UP------------------*/
@@ -330,13 +330,13 @@ public class MainPlayer extends Player
                 goUp();
 
                 //Draw the player with animation
-                renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimUp), pos.getX(), pos.getY());
 
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("UP") == false)
                 {
                     //Send current player position to reduce lag
-                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    SendCommand.stopMoving(playerId, pos);
                     
                     //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "UP";
@@ -345,7 +345,7 @@ public class MainPlayer extends Player
                     sendStopOnce = true;
 
                     //Send walk command to server
-                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|UP|*");
+                    SendCommand.movePlayer(playerId, "UP");
                 }
                 
                 //Ensures that walk command gets send only once
@@ -359,7 +359,7 @@ public class MainPlayer extends Player
                 stopMoving();
                 
                 //Draw the player with animation
-                renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimUp), pos.getX(), pos.getY());
             }
             
         /*------------------WALKING DOWN------------------*/
@@ -369,13 +369,13 @@ public class MainPlayer extends Player
             {
                 goDown();
                 
-                renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimDown), pos.getX(), pos.getY());
                 
                 //Block of code that gets executed just once upon button press
                 if(sendMoveOnce.equals("DOWN") == false)
                 {
                     //Send current player position to reduce lag
-                    client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                    SendCommand.stopMoving(playerId, pos);
                     
                     //Saves position so that the static image looks in the correct direction if player stands still
                     lastMovementKeyPressed = "DOWN";
@@ -384,7 +384,7 @@ public class MainPlayer extends Player
                     sendStopOnce = true;
                     
                     //Send walk command to server
-                    client.sendData("moveEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|DOWN|*");
+                    SendCommand.movePlayer(playerId, "DOWN");
                 }
                 
                 //Ensures that walk command gets send only once
@@ -398,7 +398,7 @@ public class MainPlayer extends Player
                 stopMoving();
                 
                 //Draw the player with animation
-                renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
+                renderObject.draw(animEffects.getFrame(walkAnimDown), pos.getX(), pos.getY());
             }
             
         /*------------------NO MOVEMENT------------------*/    
@@ -407,7 +407,7 @@ public class MainPlayer extends Player
             if(sendStopOnce == true)
             {
                 //Send stop command to server
-                client.sendData("stopEnemyPlayer|" + Integer.toString(Constants.PLAYERID) + "|" + pos.x + "|" + pos.y + "|*");
+                SendCommand.stopMoving(playerId, pos);
                 
                 //Ensures that stop command gets send only once
                 sendStopOnce = false;
@@ -435,19 +435,19 @@ public class MainPlayer extends Player
             switch(lastMovementKeyPressed)
             {
                 case "LEFT":
-                    renderObject.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimLeft.getKeyFrame(0), pos.getX(), pos.getY());
                     break;
 
                 case "RIGHT":
-                    renderObject.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimRight.getKeyFrame(0), pos.getX(), pos.getY());
                 break;
 
                 case "UP":
-                    renderObject.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimUp.getKeyFrame(0), pos.getX(), pos.getY());
                     break;
 
                 case "DOWN":
-                    renderObject.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
+                    renderObject.draw(walkAnimDown.getKeyFrame(0), pos.getX(), pos.getY());
                     break;
                 
                 default:
@@ -465,8 +465,7 @@ public class MainPlayer extends Player
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
-            float x = pos.x + Constants.PLAYERWIDTH / 2;
-            float y = pos.y + Constants.PLAYERHEIGHT / 3;
+            ThinGridCoordinates feetPosition = new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2, pos.getY() + Constants.PLAYERHEIGHT / 3);
             String bombType;
             
             switch (chosenBomb)
@@ -476,15 +475,15 @@ public class MainPlayer extends Player
                     bombType = "default";
                     
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins >= Constants.BOMB1)
+                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins >= Constants.BOMB1)
                     {
                         coins -= Constants.BOMB1;
                             
                         //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
+                        SendCommand.placeBomb(playerId, feetPosition, bombType);
                 
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnNormalBomb(new Vector2(x, y), playerId, bombRange);
+                        entityManager.getBombManager().spawnNormalBomb(feetPosition, playerId, bombRange);
                     }
                     break;
                     
@@ -493,15 +492,15 @@ public class MainPlayer extends Player
                     bombType = "dynamite";
                     
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB2)
+                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB2)
                     {
                         coins -= Constants.BOMB2;
                         
                         //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
-                            
+                        SendCommand.placeBomb(playerId, feetPosition, bombType);
+                         
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnDynamite(new Vector2(x, y), playerId, bombRange);
+                        entityManager.getBombManager().spawnDynamite(feetPosition, playerId, bombRange);
                     }
                     break;
                     
@@ -510,15 +509,15 @@ public class MainPlayer extends Player
                     bombType = "infinity";
                     
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB3)
+                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB3)
                     {
                         coins -= Constants.BOMB3;
                         
                         //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
-                            
+                        SendCommand.placeBomb(playerId, feetPosition, bombType);
+                         
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnInfinity(new Vector2(x, y), playerId, bombRange, Constants.INFINITYREPRODUCTIONCHANCE);
+                        entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange, Constants.INFINITYREPRODUCTIONCHANCE);
                     }
                     break;
                         
@@ -527,47 +526,15 @@ public class MainPlayer extends Player
                     bombType = "X3";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB4)
+                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB4)
                     {
                         coins -= Constants.BOMB4;
                         
                         //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
-                            
-                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnX3(new Vector2(x, y), playerId, bombRange, 1);
-                    }
-                    break;
-                    
-                case(5):
-                    
-                    bombType = "Vertical";
-            
-                    //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB5)
-                    {
-                        coins -= Constants.BOMB5;
+                        SendCommand.placeBomb(playerId, feetPosition, bombType);
                         
-                        //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
-                            
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                    }
-                    break;
-                    
-                case(6):
-                    
-                    bombType = "Horizontal";
-            
-                    //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB6)
-                    {
-                        coins -= Constants.BOMB6;
-                        
-                        //Send bomb command to server
-                        client.sendData("placeEnemyBomb|" + Float.toString(x) + "|" + Float.toString(y) + "|" + Integer.toString(Constants.PLAYERID) + "|" + bombType + "|*");
-                            
-                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                        entityManager.getBombManager().spawnX3(feetPosition, playerId, bombRange, 1);
                     }
                     break;
                     
@@ -576,11 +543,11 @@ public class MainPlayer extends Player
                     bombType = "Teleport";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(x, y) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB9)
+                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB9)
                     {
                         coins -= Constants.BOMB9;
                         
-                        Teleport item = new Teleport(0,0,map,entityManager);
+                        Teleport item = new Teleport(new MapCellCoordinates(feetPosition),map,entityManager);
                         item.itemEffect();
                     }
                     break;
@@ -640,7 +607,7 @@ public class MainPlayer extends Player
             if(camera.zoom < maxZoomOut)
             {
                 camera.zoom += 0.02;
-                camera.position.set(pos.x, pos.y, 0);
+                camera.position.set(pos.getX(), pos.getY(), 0);
             }
         }
 
@@ -650,7 +617,7 @@ public class MainPlayer extends Player
             if(camera.zoom > maxZoomIn)
             {
                 camera.zoom -= 0.02;
-                camera.position.set(pos.x, pos.y, 0);
+                camera.position.set(pos.getX(), pos.getY(), 0);
             }
         }
         

@@ -9,7 +9,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 
 /**
  *
@@ -70,9 +72,9 @@ public class BombManager
     
     
     /**--------------------SPAWN FUNCTIONS--------------------**/
-    public void spawnNormalBomb(Vector2 pos, int playerId, int bombRange)
+    public void spawnNormalBomb(ThinGridCoordinates pos, int playerId, int bombRange)
     {
-        NormalBomb entity = new NormalBomb(pos, new Vector2(0,0),bombRange, playerId, map, entityManager);
+        NormalBomb entity = new NormalBomb(pos, new ThinGridCoordinates(0,0),bombRange, playerId, map, entityManager);
         
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
@@ -84,9 +86,9 @@ public class BombManager
         }
     }
     
-    public void spawnDynamite(Vector2 pos, int playerId, int bombRange)
+    public void spawnDynamite(ThinGridCoordinates pos, int playerId, int bombRange)
     {
-        Dynamite entity = new Dynamite(pos, new Vector2(0,0),bombRange, playerId, map, entityManager);
+        Dynamite entity = new Dynamite(pos, new ThinGridCoordinates(0,0),bombRange, playerId, map, entityManager);
         
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
@@ -98,9 +100,9 @@ public class BombManager
         }
     }
     
-    public void spawnInfinity(Vector2 pos, int playerId, int bombRange, int chance)
+    public void spawnInfinity(ThinGridCoordinates pos, int playerId, int bombRange, int chance)
     {
-        Infinity entity = new Infinity(pos, new Vector2(0,0),bombRange, playerId, chance, map, entityManager);
+        Infinity entity = new Infinity(pos, new ThinGridCoordinates(0,0),bombRange, playerId, chance, map, entityManager);
                 
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
@@ -112,9 +114,9 @@ public class BombManager
         }
     }
     
-    public void spawnX3(Vector2 pos, int playerId, int bombRange, int X)
+    public void spawnX3(ThinGridCoordinates pos, int playerId, int bombRange, int X)
     {
-        X3 entity = new X3(pos, new Vector2(0,0),bombRange, playerId, X, map, entityManager);
+        X3 entity = new X3(pos, new ThinGridCoordinates(0,0),bombRange, playerId, X, map, entityManager);
         
         //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
         if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)

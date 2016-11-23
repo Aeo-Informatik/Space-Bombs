@@ -23,8 +23,8 @@ import java.util.Enumeration;
 public class Client {
     
     //Objects
-    private Socket socket;
-    private final Thread receiveThread;
+    private Socket socket = null;
+    private Thread receiveThread = null;
     
     //Constructor
     public Client(String host, int port) throws Exception
@@ -44,9 +44,9 @@ public class Client {
         ClientReceiveThread recieve = new ClientReceiveThread(socket);
         receiveThread = new Thread(recieve);
     }
-        
+    
     //Start temporary thread to send some data to server
-    public void sendData(String dataToSend)
+    protected void sendData(String dataToSend)
     {
         ClientSendThread sendThread = new ClientSendThread(socket, dataToSend);
         Thread send = new Thread(sendThread);

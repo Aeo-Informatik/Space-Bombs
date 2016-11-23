@@ -10,7 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 import java.util.ArrayList;
 
 /**
@@ -80,7 +82,7 @@ public class PlayerManager
                 deadPlayers.add(mainPlayer.getPlayerId());
                 
                 //Create new spectator
-                spectator = new Spectator(mainPlayer.getPosition(), new Vector2(0, 0), camera, map, enemies, entityManager);
+                spectator = new Spectator(mainPlayer.getPosition(), new ThinGridCoordinates(0, 0), camera, map, enemies, entityManager);
                 
                 //On death
                 mainPlayer.onDeath();
@@ -110,7 +112,7 @@ public class PlayerManager
                     //If cell has attribute Spawn-P + playerId spawn enemy player there
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
-                        EnemyPlayer enemyPlayer = new EnemyPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, map, entityManager, camera);
+                        EnemyPlayer enemyPlayer = new EnemyPlayer(new ThinGridCoordinates(mapX, mapY), new ThinGridCoordinates(0,0), playerId, map, entityManager, camera);
                         enemies.add(enemyPlayer);
                     }
                 }catch(NullPointerException e)
@@ -137,7 +139,7 @@ public class PlayerManager
                 {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
-                        mainPlayer = new MainPlayer(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT), new Vector2(0,0), playerId, camera, map, entityManager);
+                        mainPlayer = new MainPlayer(new ThinGridCoordinates(mapX, mapY), new ThinGridCoordinates(0,0), playerId, camera, map, entityManager);
                     }
                 }catch(NullPointerException e)
                 {
@@ -155,7 +157,7 @@ public class PlayerManager
      * @param y: Cell coordinates on y axis
      * @return playerId or -1
      */
-    public int getPlayerIdOnCoordinates(int x, int y)
+    public int getPlayerIdOnCoordinates(MapCellCoordinates localCellPos)
     {
             //Iterate through the enemy list
             for(EnemyPlayer enemy : enemies)
@@ -163,11 +165,11 @@ public class PlayerManager
                 try
                 {
                     //Calculate enemy position in cell coordinates
-                    int enemyCellX = (int) ((enemy.getPosition().x + Constants.PLAYERWIDTH / 2) / Constants.MAPTEXTUREWIDTH);
-                    int enemyCellY = (int) ((enemy.getPosition().y + Constants.PLAYERHEIGHT / 2) / Constants.MAPTEXTUREWIDTH);
+                    int enemyCellX = (int) ((enemy.getPosition().getX() + Constants.PLAYERWIDTH / 2) / Constants.MAPTEXTUREWIDTH);
+                    int enemyCellY = (int) ((enemy.getPosition().getY() + Constants.PLAYERHEIGHT / 2) / Constants.MAPTEXTUREWIDTH);
                     
                     //If enemy player found on given position
-                    if(enemyCellX == x && enemyCellY == y)
+                    if(enemyCellX == localCellPos.getX() && enemyCellY == localCellPos.getY())
                     {
                         return enemy.getPlayerId();
                     }
@@ -181,11 +183,11 @@ public class PlayerManager
             try
             {
                 //Calculate main position in cell coordinates
-                int mainCellX = (int)(mainPlayer.getPosition().x / Constants.MAPTEXTUREWIDTH);
-                int mainCellY = (int)(mainPlayer.getPosition().y / Constants.MAPTEXTUREHEIGHT);
+                int mainCellX = (int)(mainPlayer.getPosition().getX() / Constants.MAPTEXTUREWIDTH);
+                int mainCellY = (int)(mainPlayer.getPosition().getY() / Constants.MAPTEXTUREHEIGHT);
                 
                 //If main player found on given position
-                if(mainCellX == x && mainCellY == y)
+                if(mainCellX == localCellPos.getX() && mainCellY == localCellPos.getY())
                 {
                     return mainPlayer.getPlayerId();
                 }

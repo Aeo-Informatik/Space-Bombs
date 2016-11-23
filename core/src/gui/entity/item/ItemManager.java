@@ -7,6 +7,7 @@ package gui.entity.item;
 
 import com.badlogic.gdx.utils.Array;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 
 
@@ -86,53 +87,53 @@ public class ItemManager
     
     
     /**--------------------SPAWN FUNCTIONS--------------------**/
-    public void spawnYellowHeart(int CellX, int CellY)
+    public void spawnYellowHeart(MapCellCoordinates localCellPos)
     {
-        YellowHeart item = new YellowHeart(CellX, CellY, map, entityManager);
+        YellowHeart item = new YellowHeart(localCellPos, map, entityManager);
         this.itemArray.add(item);
     }
     
-    public void spawnTombstone(int cellX, int cellY, int coins, int playerId)
+    public void spawnTombstone(MapCellCoordinates localCellPos, int coins, int playerId)
     {
-        Tombstone tombstone = new Tombstone(cellX, cellY, map, entityManager, this, coins, playerId);
+        Tombstone tombstone = new Tombstone(localCellPos, map, entityManager, this, coins, playerId);
         this.tombArray.add(tombstone);
     }
     
-    public void spawnSpeedUp(int CellX, int CellY)
+    public void spawnSpeedUp(MapCellCoordinates localCellPos)
     {
-        SpeedUp item = new SpeedUp(CellX,  CellY, map, entityManager);
+        SpeedUp item = new SpeedUp(localCellPos, map, entityManager);
         this.itemArray.add(item);
     }
     
-    public void spawnRangeUp(int CellX, int CellY)
+    public void spawnRangeUp(MapCellCoordinates localCellPos)
     {
-        RangeUp item = new RangeUp(CellX, CellY, map, entityManager);
+        RangeUp item = new RangeUp(localCellPos, map, entityManager);
         this.itemArray.add(item);
     }
     
-    public void spawnLifeUp(int CellX, int CellY)
+    public void spawnLifeUp(MapCellCoordinates localCellPos)
     {
-        LifeUp item = new LifeUp(CellX, CellY, map, entityManager);
+        LifeUp item = new LifeUp(localCellPos, map, entityManager);
         this.itemArray.add(item);
     }
     
-    public void spawnCoinBag(int CellX, int CellY, int value)
+    public void spawnCoinBag(MapCellCoordinates localCellPos, int value)
     {
-        CoinBag item = new CoinBag(CellX, CellY, map, entityManager, value);
+        CoinBag item = new CoinBag(localCellPos, map, entityManager, value);
         this.itemArray.add(item);
     }
     
 
-    public void spawnCoin(int cellX, int cellY, int value)
+    public void spawnCoin(MapCellCoordinates localCellPos, int value)
     {
-        Coin coin = new Coin(cellX, cellY, map, entityManager, value);
+        Coin coin = new Coin(localCellPos, map, entityManager, value);
         this.coinArray.add(coin);
     }
     
 
-    public void spawnBombUp(int CellX, int CellY)
+    public void spawnBombUp(MapCellCoordinates localCellPos)
     {
-        BombUp item = new BombUp(CellX, CellY, map, entityManager);
+        BombUp item = new BombUp(localCellPos, map, entityManager);
         this.itemArray.add(item);
     }
     

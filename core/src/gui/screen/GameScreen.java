@@ -230,11 +230,11 @@ public class GameScreen implements Screen{
        {
            if(entityManager.getPlayerManager().getMainPlayer() != null)
            {
-                camera.position.set(entityManager.getPlayerManager().getMainPlayer().getPosition().x, entityManager.getPlayerManager().getMainPlayer().getPosition().y, 0);
+                camera.position.set(entityManager.getPlayerManager().getMainPlayer().getPosition().getX(), entityManager.getPlayerManager().getMainPlayer().getPosition().getY(), 0);
            
            }else if(entityManager.getPlayerManager().getSpectator() != null)
            {
-               camera.position.set(entityManager.getPlayerManager().getSpectator().getPosition().x, entityManager.getPlayerManager().getSpectator().getPosition().y, 0);
+               camera.position.set(entityManager.getPlayerManager().getSpectator().getPosition().getX(), entityManager.getPlayerManager().getSpectator().getPosition().getY(), 0);
            }
        }
     }

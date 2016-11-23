@@ -7,12 +7,13 @@ package gui.entity.bomb;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 
 /**
  *
@@ -22,25 +23,22 @@ public class Dynamite extends Bomb{
     
     public String Discription = "Cubic explosion";
     
-    public Dynamite(Vector2 pos, Vector2 direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
+    public Dynamite(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
         //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
-        super(pos, direction, (range - 1), 2, 0.4f, 0.4f, playerId, map, entityManager);
+        super(pos, direction, range, 2, 0.4f, 0.4f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.dynamiteAnim);
     }
     
     @Override
     public void render()
     {
-        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
-        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
-        
         //To make sure no bomb gets placed into wall
-        if(!map.isCellBlocked(pos.x, pos.y) && !isExploded)
+        if(!map.isCellBlocked(new MapCellCoordinates(pos.getX(), pos.getY())) && !isExploded)
         {
             //Check if bomb has been hit by deadly tile
-            if(map.isCellDeadly(pos.x, pos.y) && hasBombTouchedDeadlyTile == false && timerTillExplosion < explosionTime)
+            if(map.isCellDeadly(new MapCellCoordinates(pos.getX(), pos.getY())) && hasBombTouchedDeadlyTile == false && timerTillExplosion < explosionTime)
             {
                 //To delay the explosion after beeing hit from another bomb
                 timerTillExplosion = explosionTime - delayExplodeAfterHitByBomb;
@@ -74,7 +72,7 @@ public class Dynamite extends Bomb{
                 cell.getTile().getProperties().put("bomb", null);
 
                 //Set bomb into bomb layer
-                map.getBombLayer().setCell(cellX, cellY, cell);
+                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY(), cell);
             }
 
             //Add passed time to timer
@@ -103,20 +101,20 @@ public class Dynamite extends Bomb{
         cellCenter.getTile().getProperties().put("deadly", null);
         
         //Explosion center, replaces bomb texture
-        map.getBombLayer().setCell(cellX, cellY, cellCenter);
+        map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY(), cellCenter);
         
         //Explode DOWN
         for(int y=1; y <= explosionRange; y++)
         {   
             //If explosion hits block
-            if(map.isCellBlocked(cellX * Constants.MAPTEXTUREWIDTH, (cellY - y) * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates(super.cellPos.getX(), super.cellPos.getY() - y)))
             {
                 //Set ending texture and break out of loop
                 TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
                 cellDown.setTile(new StaticTiledMapTile(explosionDownEnd));
                 cellDown.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX, cellY - y, cellDown);
+                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY()- y, cellDown);
                 break;
             }
            
@@ -127,14 +125,14 @@ public class Dynamite extends Bomb{
                 cell.setTile(new StaticTiledMapTile(explosionYMiddle));
                 cell.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX, cellY - y, cell);
+                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() - y, cell);
             }else
             {
                 TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
                 cellDown.setTile(new StaticTiledMapTile(explosionDownEnd));
                 cellDown.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX, cellY - y, cellDown);
+                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() - y, cellDown);
             }
         }
         
@@ -142,14 +140,14 @@ public class Dynamite extends Bomb{
         for(int y=1; y <= explosionRange; y++)
         {
             //If explosion hits block
-            if(map.isCellBlocked(cellX * Constants.MAPTEXTUREWIDTH, (cellY + y) * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y )))
             {
                 //Set ending texture and break out of loop
                 TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
                 cellDown.setTile(new StaticTiledMapTile(explosionUpEnd));
                 cellDown.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX, cellY + y, cellDown);
+                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() + y, cellDown);
                 break;
             }
             
@@ -159,7 +157,7 @@ public class Dynamite extends Bomb{
                 cell.setTile(new StaticTiledMapTile(explosionYMiddle));
                 cell.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX, cellY + y, cell);
+                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() + y, cell);
             }else
             {
                 //Set end of explosion
@@ -167,7 +165,7 @@ public class Dynamite extends Bomb{
                 cellUp.setTile(new StaticTiledMapTile(explosionUpEnd));
                 cellUp.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX, cellY + y, cellUp);
+                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() + y, cellUp);
             }
         }
         
@@ -175,14 +173,14 @@ public class Dynamite extends Bomb{
         for(int x=1; x <= explosionRange; x++)
         {
             //If explosion hits block
-            if(map.isCellBlocked((cellX +x) * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX() +x, cellPos.getY())))
             {
                 //Set ending texture and break out of loop
                 TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
                 cellDown.setTile(new StaticTiledMapTile(explosionRightEnd));
                 cellDown.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX +x, cellY, cellDown);
+                map.getBombLayer().setCell(super.cellPos.getX() +x, super.cellPos.getY(), cellDown);
                 break;
             }
             
@@ -193,7 +191,7 @@ public class Dynamite extends Bomb{
                 cell.setTile(new StaticTiledMapTile(explosionXMiddle));
                 cell.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX + x, cellY, cell);
+                map.getBombLayer().setCell(super.cellPos.getX() +x, super.cellPos.getY(), cell);
                 
             }else
             {
@@ -202,7 +200,7 @@ public class Dynamite extends Bomb{
                 cellRight.setTile(new StaticTiledMapTile(explosionRightEnd));
                 cellRight.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX + x, cellY, cellRight);
+                map.getBombLayer().setCell(super.cellPos.getX() +x, super.cellPos.getY(), cellRight);
             }
         }
         
@@ -210,14 +208,14 @@ public class Dynamite extends Bomb{
         for(int x=1; x <= explosionRange; x++)
         {
             //If explosion hits block
-            if(map.isCellBlocked((cellX -x) * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX() -x, cellPos.getY())))
             {
                 //Set ending texture and break out of loop
                 TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
                 cellDown.setTile(new StaticTiledMapTile(explosionLeftEnd));
                 cellDown.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX -x, cellY, cellDown);
+                map.getBombLayer().setCell(super.cellPos.getX() -x, super.cellPos.getY(), cellDown);
                 break;
             }
             
@@ -228,7 +226,7 @@ public class Dynamite extends Bomb{
                 cell.setTile(new StaticTiledMapTile(explosionXMiddle));
                 cell.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX - x, cellY, cell);
+                map.getBombLayer().setCell(super.cellPos.getX() -x, super.cellPos.getY(), cell);
                 
             }else
             {
@@ -236,7 +234,7 @@ public class Dynamite extends Bomb{
                 cellLeft.setTile(new StaticTiledMapTile(explosionLeftEnd));
                 cellLeft.getTile().getProperties().put("deadly", null);
                 
-                map.getBombLayer().setCell(cellX - x, cellY, cellLeft);
+                map.getBombLayer().setCell(super.cellPos.getX() -x, super.cellPos.getY(), cellLeft);
             }
         }
     }
