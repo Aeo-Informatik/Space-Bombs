@@ -31,12 +31,13 @@ public class MapLoader
     private TiledMapTileLayer floorLayer;
     private TiledMapTileLayer bombLayer;
     private TiledMapTileLayer itemLayer;
+    private SendCommand sendCommand;
     
     //Variables
     private Array<ThinGridCoordinates> itemSpawnerPositions = new Array<>(); // In entity positions
     
     //Constuctor
-    public MapLoader(OrthographicCamera camera)
+    public MapLoader(OrthographicCamera camera, SendCommand sendCommand)
     {
         this.camera = camera;
         this.tiledMap = new TmxMapLoader().load(new AvailableMaps().getTestMap());
@@ -45,7 +46,8 @@ public class MapLoader
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
         this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
         this.itemLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Items");
-
+        this.sendCommand = sendCommand;
+        
         Constants.MAPTEXTUREWIDTH = blockLayer.getTileWidth();
         Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
         
@@ -116,7 +118,7 @@ public class MapLoader
         }
         
         //Send to server the amount of item fields
-        SendCommand.registerItemFields(itemSpawnerPositions.size);
+        sendCommand.registerItemFields(itemSpawnerPositions.size);
     }
     
     /**-------------------Getter & Setter-------------------**/

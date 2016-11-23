@@ -1,6 +1,7 @@
 package gui.screen;
 
 import client.Client;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -22,8 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
-import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.backSkin;
@@ -33,7 +32,7 @@ import gui.map.AvailableMaps;
 import server.Server;
 
 
-public class HostScreen implements Screen
+public class HostScreen extends Screens implements Screen
 {
     // Map List
     AvailableMaps maps = new AvailableMaps();
@@ -65,8 +64,10 @@ public class HostScreen implements Screen
     private Container p4Field;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public HostScreen()
+    public HostScreen(Game game, Client client)
     {
+        super(game, client);
+        
         //General Object initalisation
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         Gdx.input.setInputProcessor(stage);
@@ -99,7 +100,7 @@ public class HostScreen implements Screen
         try 
         {
             //Connect to server
-            client = new Client("127.0.0.1", Constants.CONNECTIONPORT);
+            client.setHost("127.0.0.1", Constants.CONNECTIONPORT);
             client.connectToServer();
             
         } catch (Exception e) 
@@ -252,7 +253,7 @@ public class HostScreen implements Screen
 
                 Constants.OWNSERVEROBJ.stopServer();
                 Constants.OWNSERVEROBJ = null;
-                game.setScreen(new MenuScreen());
+                game.setScreen(new MenuScreen(game, client));
             }
         });
         
@@ -279,7 +280,7 @@ public class HostScreen implements Screen
                 AudioManager.menuMusic.stop();
                 Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
                 Constants.OWNSERVEROBJ.startGame();
-                game.setScreen(new GameScreen());
+                game.setScreen(new GameScreen(game, client));
             }
         });
         
@@ -440,7 +441,7 @@ public class HostScreen implements Screen
         {
             Constants.OWNSERVEROBJ.stopServer();
             Constants.OWNSERVEROBJ = null;
-            game.setScreen(new MenuScreen());
+            game.setScreen(new MenuScreen(game, client));
         }
     }
     

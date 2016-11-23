@@ -37,6 +37,7 @@ public abstract class Bomb extends Entity
     protected long ExplodeAudioId = -1;
     protected float timerTillExplosion;
     protected float timerTillExplosionDelete;
+    protected SendCommand sendCommand;
     
     //Objects
     protected AnimEffects animEffects = new AnimEffects();
@@ -69,6 +70,7 @@ public abstract class Bomb extends Entity
         this.playerId = playerId;
         this.emptyBlock = TextureManager.emptyBlock;
         this.cellPos = new MapCellCoordinates(pos);
+        this.sendCommand = entityManager.getSendCommand();
         
         //Bomb settings
         this.explosionRange = range; // In blocks
@@ -261,7 +263,7 @@ public abstract class Bomb extends Entity
                     //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                         
                     //General:spawnCoin|CellX|CellY|target
-                    SendCommand.spawnCoin(localCellPos);
+                    sendCommand.spawnCoin(localCellPos);
                 }
     }
     

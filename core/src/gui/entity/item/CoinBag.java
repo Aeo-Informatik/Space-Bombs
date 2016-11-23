@@ -7,7 +7,6 @@ package gui.entity.item;
 
 
 import client.SendCommand;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
@@ -38,7 +37,7 @@ public class CoinBag extends Item{
         if(mainP != null)
         {
             mainP.setCoins((mainP.getCoins() + value)); 
-            SendCommand.setPlayerCoins(mainP.getPlayerId(), mainP.getCoins());
+            sendCommand.setPlayerCoins(mainP.getPlayerId(), mainP.getCoins());
         }
     }
 }

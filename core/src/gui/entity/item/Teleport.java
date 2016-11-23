@@ -5,6 +5,7 @@
  */
 package gui.entity.item;
 
+import client.SendCommand;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;

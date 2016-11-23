@@ -5,8 +5,8 @@
  */
 package gui.entity.player;
 
+import client.SendCommand;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
@@ -24,8 +24,8 @@ public class PlayerManager
     //Objects
     private OrthographicCamera camera;
     private MapLoader map;
-    private EntityManager entityManager;
-      
+    private EntityManager entityManager; 
+    
     //Players
     private Array <EnemyPlayer> enemies = new Array<>();
     private MainPlayer mainPlayer;
@@ -139,7 +139,7 @@ public class PlayerManager
                 {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + playerId))
                     {
-                        mainPlayer = new MainPlayer(new ThinGridCoordinates(mapX, mapY), new ThinGridCoordinates(0,0), playerId, camera, map, entityManager);
+                        mainPlayer = new MainPlayer(new ThinGridCoordinates(mapX, mapY), new ThinGridCoordinates(0,0), playerId, camera, map, entityManager, entityManager.getSendCommand());
                     }
                 }catch(NullPointerException e)
                 {

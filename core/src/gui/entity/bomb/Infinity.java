@@ -6,9 +6,7 @@
 package gui.entity.bomb;
 
 import client.SendCommand;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
@@ -47,7 +45,7 @@ public class Infinity extends NormalBomb
                 entityManager.getBombManager().spawnInfinity(new ThinGridCoordinates(localCellPos), playerId, super.getRange(), chance);
                 
                 // Send bomb command to server
-                SendCommand.placeBomb(playerId, pos, "infinity");
+                sendCommand.placeBomb(playerId, pos, "infinity");
             }
         }
     }

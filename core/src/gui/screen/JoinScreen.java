@@ -24,14 +24,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import client.Client;
-import static com.gdx.bomberman.Main.game;
+import com.badlogic.gdx.Game;
 import static gui.TextureManager.backSkin;
 
 
@@ -40,7 +39,7 @@ import static gui.TextureManager.backSkin;
  *
  * @author pl0614
  */
-public class JoinScreen implements Screen
+public class JoinScreen extends Screens implements Screen 
 {
     //Objects
     private Stage stage;
@@ -58,8 +57,10 @@ public class JoinScreen implements Screen
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
-    public JoinScreen()
+    public JoinScreen(Game game, Client client)
     {
+        super(game, client);
+        
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
@@ -148,7 +149,7 @@ public class JoinScreen implements Screen
                     
                 }
 
-                game.setScreen(new MenuScreen());
+                game.setScreen(new MenuScreen(game, client));
             }
         });
         
@@ -170,14 +171,14 @@ public class JoinScreen implements Screen
                     if(validateIPAddress(connectionIp))
                     {     
                         //Connect to server
-                        client = new Client(connectionIp, Constants.CONNECTIONPORT);
+                        client.setHost(connectionIp, Constants.CONNECTIONPORT);
                         client.connectToServer();
                         
                         System.out.println("CLIENT: Connecting to server " + connectionIp + ":" + Constants.CONNECTIONPORT);
                         
                         AudioManager.menuMusic.stop();
 
-                        game.setScreen(new GameScreen());
+                        game.setScreen(new GameScreen(game, client));
                     }else
                     {
                         //Create error message on screen
@@ -234,7 +235,7 @@ public class JoinScreen implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            game.setScreen(new MenuScreen());
+            game.setScreen(new MenuScreen(game, client));
         }
     }
     

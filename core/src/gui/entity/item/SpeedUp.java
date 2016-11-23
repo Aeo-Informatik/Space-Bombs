@@ -12,7 +12,6 @@ import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.entity.player.MainPlayer;
 import gui.map.MapCellCoordinates;
 
@@ -41,7 +40,7 @@ public class SpeedUp extends Item{
         if(mainP != null)
         {
             mainP.setEntitySpeed((mainP.getEntitySpeed() + 0.1f));
-            SendCommand.setPlayerSpeed(mainP.getPlayerId(), mainP.getEntitySpeed());
+            sendCommand.setPlayerSpeed(mainP.getPlayerId(), mainP.getEntitySpeed());
         }
     }
     

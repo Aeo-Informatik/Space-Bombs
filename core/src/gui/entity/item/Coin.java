@@ -9,7 +9,6 @@ import client.SendCommand;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
@@ -66,7 +65,7 @@ public class Coin extends Item{
         if(mainP != null)
         {
             mainP.setCoins((mainP.getCoins() + value)); 
-            SendCommand.setPlayerCoins(mainP.getPlayerId(), mainP.getCoins());
+            sendCommand.setPlayerCoins(mainP.getPlayerId(), mainP.getCoins());
         }
     }
     

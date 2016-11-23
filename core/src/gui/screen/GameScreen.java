@@ -5,6 +5,7 @@
  */
 package gui.screen;
 
+import client.Client;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
@@ -13,12 +14,12 @@ import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
 import client.ClientProcessData;
+import client.SendCommand;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import static com.gdx.bomberman.Main.client;
-import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.hud.MainPlayerHud;
 import java.io.IOException;
@@ -30,7 +31,7 @@ import java.util.Random;
  *
  * @author qubasa
  */
-public class GameScreen implements Screen{
+public class GameScreen extends Screens implements Screen{
     
     //Objects 
     private OrthographicCamera camera;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen{
     private SpriteBatch renderServer = new SpriteBatch();
     private Random random = new Random();
     private Stage stage;
+    private SendCommand sendCommand;
     
     //Variables
     private int previousMusicIndex = -1;
@@ -57,16 +59,20 @@ public class GameScreen implements Screen{
      * Constructor
      * @param game 
      */
-    public GameScreen()
+    public GameScreen(Game game, Client client)
     {
+        super(game, client);
+        
+        this.sendCommand = client.getSendCommand();
         this.camera = new OrthographicCamera();
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT, camera));
-        this.mapManager = new MapLoader(camera);
-        this.entityManager = new EntityManager(camera, mapManager);
+        this.mapManager = new MapLoader(camera, sendCommand);
+        this.entityManager = new EntityManager(camera, mapManager, sendCommand);
         this.processData = new ClientProcessData(entityManager, mapManager);
         this.counterHud = new MainPlayerHud(entityManager);
-        
+        this.client = client;
         this.camera.zoom = Constants.DEFAULTZOOM;
+
         
         // Hides the cursor
         Gdx.input.setCursorCatched(true);
@@ -112,12 +118,12 @@ public class GameScreen implements Screen{
             if(!client.isConnectedToServer())
             {
                 System.err.println("CLIENT: Connection lost to server.");
-                game.setScreen(new MenuScreen());
+                game.setScreen(new MenuScreen(game, client));
             }
             
         }else //If error occured on creating connection to server
         {
-            game.setScreen(new MenuScreen());
+            game.setScreen(new MenuScreen(game, client));
         }
         
 
@@ -163,7 +169,7 @@ public class GameScreen implements Screen{
                 {
                     deadPlayers.add(entityManager.getPlayerManager().getEnemyArray().get(0).getPlayerId());
                 }
-                game.setScreen(new WinnerScreen(deadPlayers));
+                game.setScreen(new WinnerScreen(deadPlayers, game, client));
             }else
             {
                 winnerTimer += Constants.DELTATIME;
@@ -196,7 +202,7 @@ public class GameScreen implements Screen{
             }
             
             //Go to menuscreen
-            game.setScreen(new MenuScreen());
+            game.setScreen(new MenuScreen(game, client));
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

@@ -5,11 +5,9 @@
  */
 package gui.entity.bomb;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
-import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
 

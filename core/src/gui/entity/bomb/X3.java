@@ -7,7 +7,6 @@ package gui.entity.bomb;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.AudioManager;
 import gui.TextureManager;

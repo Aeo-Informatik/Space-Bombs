@@ -6,6 +6,7 @@
 
 package gui.entity.item;
 
+import client.SendCommand;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
@@ -27,6 +28,7 @@ public class Item extends Entity
     protected boolean collected = false;
     protected TextureRegion emptyBlock;
     protected MapCellCoordinates cellPos;
+    protected SendCommand sendCommand;
     
     protected float timer;
     protected float spawnProtection = Constants.SPAWNPROTECTION;
@@ -38,6 +40,7 @@ public class Item extends Entity
         
         this.emptyBlock = TextureManager.emptyBlock;
         this.cellPos = cellPos;
+        this.sendCommand = entityManager.getSendCommand();
         
         //Render Item once
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();

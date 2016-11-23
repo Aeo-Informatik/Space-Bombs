@@ -20,14 +20,20 @@ import java.util.Enumeration;
  *
  * @author qubasa
  */
-public class Client {
+public class Client 
+{
     
     //Objects
     private Socket socket = null;
     private Thread receiveThread = null;
+    private SendCommand sendCommand;
     
-    //Constructor
-    public Client(String host, int port) throws Exception
+    public Client()
+    {
+        this.sendCommand = new SendCommand(this);
+    }
+    
+    public void setHost(String host, int port) throws Exception
     {
         InetAddress address = InetAddress.getByName(host);
         
@@ -44,6 +50,8 @@ public class Client {
         ClientReceiveThread recieve = new ClientReceiveThread(socket);
         receiveThread = new Thread(recieve);
     }
+    
+    
     
     //Start temporary thread to send some data to server
     protected void sendData(String dataToSend)
@@ -111,5 +119,12 @@ public class Client {
             throw e;
         }
         return null;
+    }
+
+    /**
+     * @return the sendCommand
+     */
+    public SendCommand getSendCommand() {
+        return sendCommand;
     }
 }

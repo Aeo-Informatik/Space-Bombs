@@ -7,7 +7,6 @@ package gui.entity.item;
 
 import client.SendCommand;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
@@ -37,7 +36,7 @@ public class RangeUp extends Item{
         if(mainP != null)
         {
             mainP.setBombRange((mainP.getBombRange() + 1));
-            SendCommand.setPlayerRange(mainP.getPlayerId(), mainP.getBombRange());
+            sendCommand.setPlayerRange(mainP.getPlayerId(), mainP.getBombRange());
         }
     }
     

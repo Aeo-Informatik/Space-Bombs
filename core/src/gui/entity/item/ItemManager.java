@@ -5,6 +5,7 @@
  */
 package gui.entity.item;
 
+import client.SendCommand;
 import com.badlogic.gdx.utils.Array;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
@@ -20,16 +21,18 @@ public class ItemManager
     //Objects
     private MapLoader map;
     private EntityManager entityManager;
+    private SendCommand sendCommand;
     
     //Items
     private Array <Item> itemArray = new Array<>();
     private Array <Item> tombArray = new Array<>();
     private Array <Item> coinArray = new Array<>();
     
-    public ItemManager(MapLoader map, EntityManager entityManager)
+    public ItemManager(MapLoader map, EntityManager entityManager, SendCommand sendCommand)
     {
         this.map = map;
         this.entityManager = entityManager;
+        this.sendCommand = sendCommand;
     }
     
     

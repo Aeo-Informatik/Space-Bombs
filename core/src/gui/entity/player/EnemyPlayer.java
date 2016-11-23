@@ -8,7 +8,6 @@ package gui.entity.player;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
