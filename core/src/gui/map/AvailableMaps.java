@@ -25,6 +25,7 @@ public class AvailableMaps
         // Normal maps
         addMap("The-Iron-Block_(23x23)");
         addMap("Center-Brawl_(21x25)");
+        addMap("TriangleMap_(43x21)");
     }
     
     public final void addMap(String name)
