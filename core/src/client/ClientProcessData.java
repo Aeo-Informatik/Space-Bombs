@@ -7,7 +7,6 @@ package client;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.entity.player.EnemyPlayer;
 import gui.entity.EntityManager;
@@ -61,7 +60,7 @@ public class ClientProcessData
                         break;
                     
                     /**------------------SPAWN COIN------------------**/
-                    //General:spawnCoin|CellX|CellY|target
+                    //General: "spawnCoin|" + cellPos.getX() + "|" + cellPos.getY() + "|*"
                     case "spawnCoin":
                         if(parameters.length == 4)
                         {
@@ -204,7 +203,7 @@ public class ClientProcessData
 
 
                     /**------------------MOVE ENEMY PLAYER------------------**/
-                    //General: moveEnemyPlayer|playerId|direction|target
+                    //General: "moveEnemyPlayer|" + playerId + "|DIRECTION|*"
                     case "moveEnemyPlayer":
                         if(parameters.length == 4)
                         {
@@ -222,7 +221,7 @@ public class ClientProcessData
 
 
                     /**------------------STOP ENEMY PLAYER------------------**/
-                    //General: stopEnemyPlayer|playerId|x|y|target
+                    //General: stopEnemyPlayer|" + playerId + "|" + pos.getX() + "|" + pos.getY() + "|*"
                     case "stopEnemyPlayer":
                         if(parameters.length == 5)
                         {
@@ -240,7 +239,7 @@ public class ClientProcessData
 
                         
                     /**------------------ENEMY PLAYER PLACES BOMB------------------**/
-                    //General: placeBomb|x|y|playerId|bombType|target
+                    //General: placeEnemyBomb|" + pos.getX() + "|" + pos.getY() + "|" + playerId + "|" + bombType + "|*"
                     case "placeEnemyBomb":
                         if(parameters.length == 6)
                         {   //Check if bomb is placed by own player
@@ -259,9 +258,28 @@ public class ClientProcessData
                             System.err.println("ERROR: placeBomb wrong number of parameters");
                         break;
                         
+                                        /**------------------ENEMY PLAYER PLACES BOMB------------------**/
+                    //General: "placeInfinityBomb|" + pos.getX() + "|" + pos.getY() + "|" + playerId + "|" + explodePath + "|*"
+                    case "placeInfinityBomb":
+                        if(parameters.length == 6)
+                        {   //Check if bomb is placed by own player
+                            if(Integer.parseInt(parameters[3]) != Constants.PLAYERID)
+                            {
+                                for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
+                                {
+                                    if(enemy.getPlayerId() == Integer.parseInt(parameters[3]))
+                                    {
+                                        //placeBomb(Vector2 pos, String bombType)
+                                                enemy.placeInfinityBomb(new ThinGridCoordinates(Float.parseFloat(parameters[1]), Float.parseFloat(parameters[2])), Integer.parseInt(parameters[4]));
+                                        }
+                                    }
+                                }
+                        }else
+                            System.err.println("ERROR: placeBomb wrong number of parameters");
+                        break;
                         
                     /**------------------ENEMY PLAYER GETS HIT------------------**/   
-                    //General: enemyPlayerLife|playerId|life|target
+                    //General: "enemyPlayerLife|" + playerId + "|" + life + "|*"
                     case "enemyPlayerLife":
                         if(parameters.length == 4)
                         {
@@ -283,7 +301,7 @@ public class ClientProcessData
                         
                         
                     /**------------------ENEMY PLAYER BOMB RANGE------------------**/
-                    //General: enemyPlayerSetRange|playerId|range|target
+                    //General: "enemyPlayerSetRange|" + playerId + "|" + bombRange + "|*"
                     case "enemyPlayerSetRange":
                         if(parameters.length == 4)
                         {
@@ -303,8 +321,8 @@ public class ClientProcessData
                             System.err.println("ERROR: enemyPlayerSetRange wrong number of parameters");
                         break;
                     
-                    /**------------------ENEMY PLAYER CUBICEXPLOSION---------**/ 
-                    //General:
+                    /**------------------ENEMY PLAYER CUBIC RANGE---------**/ 
+                    //General: "enemyPlayerSetCubicRange|" + playerId + "|" + cubicRange + "|*"
                         case "enemyPlayerSetCubicRange":
                         if(parameters.length == 4)
                         {
@@ -325,7 +343,7 @@ public class ClientProcessData
                         break;
                         
                     /**------------------ENEMY PLAYER SPEED------------------**/
-                    //General: enemyPlayerSetSpeed|playerId|speed|target
+                    //General: "enemyPlayerSetSpeed|" + playerId + "|" + speed + "|*"
                     case "enemyPlayerSetSpeed":
                         if(parameters.length == 4)
                         {
@@ -346,7 +364,7 @@ public class ClientProcessData
                         break;
                     
                     /**------------------ENEMY PLAYER COINS------------------**/
-                    //General: enemyPlayerSetCoins|playerId|coins|target
+                    //General: "enemyPlayerSetCoins|" + playerId + "|" + coins + "|*"
                     case "enemyPlayerSetCoins":
                         if(parameters.length == 4)
                         {
@@ -366,7 +384,7 @@ public class ClientProcessData
                         break;
                     
                     /**------------------ENEMY PLAYER MAX BOMBS------------------**/
-                    //General: enemyPlayerSetMaxBombs|playerId|maxBombs|target
+                    //General: "enemyPlayerSetMaxBombs|" + playerId + "|" + maxBombPlace + "|*"
                     case "enemyPlayerSetMaxBombs":
                         if(parameters.length == 4)
                         {

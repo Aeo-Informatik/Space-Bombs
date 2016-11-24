@@ -193,6 +193,14 @@ public class EnemyPlayer extends Player
         }
     }
     
+    public void placeInfinityBomb(ThinGridCoordinates pos, int explodePath)
+    {
+        if(!map.isBombPlaced(new MapCellCoordinates(pos)))
+        {
+            entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, explodePath);
+        }
+    }
+    
     /**
      * Sets bomb on given position
      * @param pos
@@ -214,12 +222,6 @@ public class EnemyPlayer extends Player
                 if(!map.isBombPlaced(new MapCellCoordinates(pos)))
                 {
                     entityManager.getBombManager().spawnDynamite(pos, playerId, bombRange);
-                }
-                break;
-            case("infinity"):
-                if(!map.isBombPlaced(new MapCellCoordinates(pos)))
-                {
-                    entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange);
                 }
                 break;
             case("X3"):

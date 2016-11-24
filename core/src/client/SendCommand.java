@@ -66,6 +66,11 @@ public class SendCommand
         client.sendData("placeEnemyBomb|" + pos.getX() + "|" + pos.getY() + "|" + playerId + "|" + bombType + "|*");
     }
     
+    public void placeInfinityBomb(int playerId, ThinGridCoordinates pos, int explodePath)
+    {
+        client.sendData("placeInfinityBomb|" + pos.getX() + "|" + pos.getY() + "|" + playerId + "|" + explodePath + "|*");
+    }
+    
     public void spawnCoin(MapCellCoordinates cellPos)
     {
         client.sendData("spawnCoin|" + cellPos.getX() + "|" + cellPos.getY() + "|*");
@@ -88,6 +93,6 @@ public class SendCommand
     
     public void setPlayerCubicRange(int playerId, int cubicRange)
     {
-        client.sendData("enemyPlayerSetRange|" + playerId + "|" + cubicRange + "|*");
+        client.sendData("enemyPlayerSetCubicRange|" + playerId + "|" + cubicRange + "|*");
     }
 }

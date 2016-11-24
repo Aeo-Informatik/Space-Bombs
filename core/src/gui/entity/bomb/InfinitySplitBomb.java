@@ -13,6 +13,8 @@ import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -21,10 +23,25 @@ import gui.map.ThinGridCoordinates;
 public class InfinitySplitBomb extends Infinity
 {
     // Down, Up, Left, Right
-    private MapCellCoordinates[] nextBombPos = new MapCellCoordinates[4];
+    private ArrayList<MapCellCoordinates> nextBombPos = new ArrayList<>();
     
     public InfinitySplitBomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) {
-        super(pos, direction, range, playerId, map, entityManager);
+        super(pos, direction, range, playerId, map, entityManager, -1);
+    }
+    
+    
+    @Override
+    public void dropFromBlock (MapCellCoordinates localCellPos)
+    {
+        int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
+                    
+            if(randomNum <= Constants.COINDROPCHANCE / 4)
+                {
+                    //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
+                        
+                    //General:spawnCoin|CellX|CellY|target
+                    sendCommand.spawnCoin(localCellPos);
+                }
     }
     
     @Override
@@ -36,43 +53,6 @@ public class InfinitySplitBomb extends Infinity
             
         //Explosion center replaces bomb texture
         map.getBombLayer().setCell(cellPos.getX(), cellPos.getY(), cellCenter);
-        
-        //Explode DOWN
-        for(int y=1; y <= cellsDown; y++)
-        {
-            TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-            cell.setTile(new StaticTiledMapTile(emptyBlock));
-
-            //If explosion hits block
-            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y)))
-            {
-                //Delete explosion effect
-                map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() - y, cell);
-                
-                //Delete block
-                boolean isDestroyed = deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
-                
-                // If bomb could destory the block add to possible bomb position
-                if(isDestroyed)
-                {
-                    nextBombPos[0] = new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y);
-                }
-                
-                break;
-            }
-            
-            // If explosion has reached is maximum range without touching a block add that to possible bomb positions
-            if(y == cellsDown)
-            {
-                nextBombPos[0] = new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y);
-            }
-            
-            //Explosion down
-            map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() - y, cell);
-            deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
-        }
-        
-        
         
         //Explode UP 
         for(int y=1; y <= cellsUp; y++)
@@ -92,7 +72,7 @@ public class InfinitySplitBomb extends Infinity
                 // If bomb could destory the block add to possible bomb position
                 if(isDestroyed)
                 {
-                    nextBombPos[1] = new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y);
+                    nextBombPos.add(0, new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y));
                 }
                 
                 break;
@@ -101,12 +81,47 @@ public class InfinitySplitBomb extends Infinity
             // If explosion has reached is maximum range without touching a block add that to possible bomb positions
             if(y == cellsUp)
             {
-                nextBombPos[1] = new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y);
+                nextBombPos.add(new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y));
             }
             
             //Delete explosion effect
             map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() + y, cell);
             deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y));
+        }
+        
+        //Explode DOWN
+        for(int y=1; y <= cellsDown; y++)
+        {
+            TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+            cell.setTile(new StaticTiledMapTile(emptyBlock));
+
+            //If explosion hits block
+            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y)))
+            {
+                //Delete explosion effect
+                map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() - y, cell);
+                
+                //Delete block
+                boolean isDestroyed = deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
+                
+                // If bomb could destory the block add to possible bomb position
+                if(isDestroyed)
+                {
+                    nextBombPos.add(0, new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
+                }
+                
+                break;
+            }
+            
+            // If explosion has reached is maximum range without touching a block add that to possible bomb positions
+            if(y == cellsDown)
+            {
+                nextBombPos.add(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
+            }
+            
+            //Explosion down
+            map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() - y, cell);
+            deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
         }
         
         //Explode LEFT
@@ -127,7 +142,7 @@ public class InfinitySplitBomb extends Infinity
                 // If bomb could destory the block add to possible bomb position
                 if(isDestroyed)
                 {
-                    nextBombPos[2] = new MapCellCoordinates(cellPos.getX() -x, cellPos.getY());
+                    nextBombPos.add(0, new MapCellCoordinates(cellPos.getX() -x, cellPos.getY()));
                 }
                 
                 break;
@@ -136,7 +151,7 @@ public class InfinitySplitBomb extends Infinity
             // If explosion has reached is maximum range without touching a block add that to possible bomb positions
             if(x == cellsLeft)
             {
-                nextBombPos[2] = new MapCellCoordinates(cellPos.getX() -x, cellPos.getY());
+                nextBombPos.add(new MapCellCoordinates(cellPos.getX() -x, cellPos.getY()));
             }
             
             //Explosion left
@@ -162,7 +177,7 @@ public class InfinitySplitBomb extends Infinity
                 // If bomb could destory the block add to possible bomb position
                 if(isDestroyed)
                 {
-                    nextBombPos[3] = new MapCellCoordinates(cellPos.getX() +x, cellPos.getY());
+                    nextBombPos.add(0,new MapCellCoordinates(cellPos.getX() +x, cellPos.getY()));
                 }
                 
                 break;
@@ -171,7 +186,7 @@ public class InfinitySplitBomb extends Infinity
             // If explosion has reached is maximum range without touching a block add that to possible bomb positions
             if(x == cellsRight)
             {
-                nextBombPos[3] = new MapCellCoordinates(cellPos.getX() +x, cellPos.getY());
+                nextBombPos.add(new MapCellCoordinates(cellPos.getX() +x, cellPos.getY()));
             }
             
             //Explosion right
@@ -391,7 +406,7 @@ public class InfinitySplitBomb extends Infinity
     /**
      * @return the nextBombPos
      */
-    public MapCellCoordinates[] getNextBombPosArray() {
+    public ArrayList<MapCellCoordinates> getNextBombPosArray() {
         return nextBombPos;
     }
     

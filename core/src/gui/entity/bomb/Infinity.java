@@ -12,6 +12,7 @@ import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -26,12 +27,13 @@ public class Infinity extends Bomb
     //Variables
     private int wave = 0;
     
-    public Infinity(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
+     protected String description = "Replicates itself randomly but has a 4 times lower coin drop rate"; 
+    
+    public Infinity(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager, int explodePath) 
     {
         super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.infinityAnim);
-        this.explodePath = new Random().nextInt(6) +1; // From 1 .. 6
-        explodePath = 1;
+        this.explodePath = explodePath;
     }
     
     
@@ -58,39 +60,72 @@ public class Infinity extends Bomb
         }
 
         // First possible explosion path
-        if(explodePath == 1)
+        switch (explodePath) 
         {
-            if(wave < 5)
-            {
-                 // Check if one bomb exploded and get its explosion coordinate endings
-                MapCellCoordinates[] cellCoordinates = getExplosionEndings();
-                
-                // Check if position array is empty
-                if (cellCoordinates != null) 
+            case 1:
+                if(wave < 4) 
                 {
-                    for (MapCellCoordinates cellCoordinate : cellCoordinates) 
+                    // Get bombs explosion coordinate endings
+                    ArrayList<MapCellCoordinates> cellCoordinates = getExplosionEndings();
+                    
+                    // Check if bomb didn't explode till now
+                    if (cellCoordinates != null)
                     {
-                        // Check if current position in array has no coordinate
-                        if(cellCoordinate != null)
+                        // Go through all possible bomb pos coordiantes
+                        for (MapCellCoordinates cellCoordinate : cellCoordinates)
+                        {
+                            // Spawn new bomb
+                            splittedExplosion.add(new InfinitySplitBomb(new ThinGridCoordinates(cellCoordinate), direction, explosionRange, playerId, map, entityManager));
+                            break;
+                        }
+                        wave++;
+                    }
+                }else
+                {
+                    updateSplitBombs();
+                }   
+                break;
+            case 2:
+                if(wave < 2) 
+                {
+                    // Check if one bomb exploded and get its explosion coordinate endings
+                    ArrayList<MapCellCoordinates> cellCoordinates = getExplosionEndings();
+                    
+                    // Check if bomb didn't explode till now
+                    if (cellCoordinates != null)
+                    {
+                        for (MapCellCoordinates cellCoordinate : cellCoordinates)
                         {
                             // The first coordinate found will spawn a bomb at that position
                             splittedExplosion.add(new InfinitySplitBomb(new ThinGridCoordinates(cellCoordinate), direction, explosionRange, playerId, map, entityManager));
-                            wave++;
                             break;
                         }
+                        wave++;
                     }
-                }
-            }else
-            {
-                updateSplitBombs();
-                
-                if(splittedExplosion.size == 0)
+                }else if(wave < 6) 
                 {
-                    this.isExploded = true;
+                     // Get bombs explosion coordinate endings
+                    ArrayList<MapCellCoordinates> cellCoordinates = getExplosionEndings();
+                    
+                    // Check if bomb didn't explode till now
+                    if (cellCoordinates != null)
+                    {
+                        // Go through all possible bomb pos coordiantes
+                        for (MapCellCoordinates cellCoordinate : cellCoordinates)
+                        {
+                            // Only set new bomb if there aren't more than 2 bombs already there
+                            if(splittedExplosion.size < 3)
+                            {
+                                splittedExplosion.add(new InfinitySplitBomb(new ThinGridCoordinates(cellCoordinate), direction, explosionRange, playerId, map, entityManager));
+                            }
+                        }
+                        wave++;
+                    }
+                }else
+                {
+                    updateSplitBombs();
                 }
-            }
         }
-        
     }
     
     private void updateSplitBombs()
@@ -103,16 +138,21 @@ public class Infinity extends Bomb
                 splittedExplosion.removeIndex(i);
             }
         }
+       
+        if(splittedExplosion.size == 0)
+        {
+            this.isExploded = true;
+        } 
     }
     
-    private MapCellCoordinates[] getExplosionEndings()
+    private ArrayList<MapCellCoordinates> getExplosionEndings()
     {
         //Deletes bombs if exploded
         for (int i=0; i < splittedExplosion.size; i++)
         {
             if(this.splittedExplosion.get(i).isExploded())
             {
-                MapCellCoordinates[] cellCoordinates = splittedExplosion.get(i).getNextBombPosArray();
+                ArrayList<MapCellCoordinates> cellCoordinates = splittedExplosion.get(i).getNextBombPosArray();
                 splittedExplosion.removeIndex(i);
                 
                 return cellCoordinates;

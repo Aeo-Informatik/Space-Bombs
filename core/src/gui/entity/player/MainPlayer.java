@@ -20,6 +20,7 @@ import gui.map.MapLoader;
 import gui.entity.item.Teleport;
 import gui.map.MapCellCoordinates;
 import gui.map.ThinGridCoordinates;
+import java.util.Random;
 
 /**
  *
@@ -519,7 +520,9 @@ public class MainPlayer extends Player
                         sendCommand.placeBomb(playerId, feetPosition, bombType);
                          
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange);
+                        int explodePath = new Random().nextInt(2) +1;
+                        entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange, explodePath);
+                        sendCommand.placeInfinityBomb(playerId, feetPosition, explodePath);
                     }
                     break;
                         
