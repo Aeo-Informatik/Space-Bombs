@@ -221,7 +221,7 @@ public class EnemyPlayer extends Player
             case("dynamite"):
                 if(!map.isBombPlaced(new MapCellCoordinates(pos)))
                 {
-                    entityManager.getBombManager().spawnDynamite(pos, playerId, bombRange);
+                    entityManager.getBombManager().spawnDynamite(pos, playerId, cubicRange);
                 }
                 break;
             case("X3"):
