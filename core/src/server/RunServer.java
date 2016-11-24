@@ -19,8 +19,10 @@ public class RunServer
         try
         {
             //Initialise server object
-            Server server = new Server(Constants.LISTENINGPORT, Constants.MAXPLAYERS, new AvailableMaps().getTestMap());   
+            Server server = new Server(Constants.LISTENINGPORT, Constants.MAXPLAYERS);   
 
+            server.startServer();
+            server.setMap(new AvailableMaps().getTestMap());
             server.OpenLobby();
             
             Scanner reader = new Scanner(System.in);  // Reading from System.in

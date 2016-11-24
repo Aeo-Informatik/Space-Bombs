@@ -25,6 +25,7 @@ import gui.hud.MainPlayerHud;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import server.Server;
 
 
 /**
@@ -59,9 +60,9 @@ public class GameScreen extends Screens implements Screen{
      * Constructor
      * @param game 
      */
-    public GameScreen(Game game, Client client)
+    public GameScreen(Game game, Client client, Server server)
     {
-        super(game, client);
+        super(game, client, server);
         
         this.sendCommand = client.getSendCommand();
         this.camera = new OrthographicCamera();
@@ -70,7 +71,6 @@ public class GameScreen extends Screens implements Screen{
         this.entityManager = new EntityManager(camera, mapManager, sendCommand);
         this.processData = new ClientProcessData(entityManager, mapManager);
         this.counterHud = new MainPlayerHud(entityManager);
-        this.client = client;
         this.camera.zoom = Constants.DEFAULTZOOM;
 
         
@@ -118,12 +118,12 @@ public class GameScreen extends Screens implements Screen{
             if(!client.isConnectedToServer())
             {
                 System.err.println("CLIENT: Connection lost to server.");
-                game.setScreen(new MenuScreen(game, client));
+                game.setScreen(new MenuScreen(game, client, server));
             }
             
         }else //If error occured on creating connection to server
         {
-            game.setScreen(new MenuScreen(game, client));
+            game.setScreen(new MenuScreen(game, client, server));
         }
         
 
@@ -169,7 +169,7 @@ public class GameScreen extends Screens implements Screen{
                 {
                     deadPlayers.add(entityManager.getPlayerManager().getEnemyArray().get(0).getPlayerId());
                 }
-                game.setScreen(new WinnerScreen(deadPlayers, game, client));
+                game.setScreen(new WinnerScreen(deadPlayers, game, client, server));
             }else
             {
                 winnerTimer += Constants.DELTATIME;
@@ -202,7 +202,7 @@ public class GameScreen extends Screens implements Screen{
             }
             
             //Go to menuscreen
-            game.setScreen(new MenuScreen(game, client));
+            game.setScreen(new MenuScreen(game, client, server));
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/

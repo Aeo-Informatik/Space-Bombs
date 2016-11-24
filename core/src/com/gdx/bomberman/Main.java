@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.GL20;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
+import server.Server;
 
 public class Main extends Game implements ApplicationListener {
     
@@ -25,13 +26,15 @@ public class Main extends Game implements ApplicationListener {
     * texture can be described and sent to the GPU all at once. 
     * This is what the SpriteBatch class does.
     */
-    private Client client;
+    private final Client client;
+    private final Server server;
     
     //Constructor
     public Main()
     {
         //Objects
         client = new Client();
+        server = new Server(Constants.LISTENINGPORT, Constants.MAXPLAYERS);
     }
     
     /**
@@ -44,7 +47,7 @@ public class Main extends Game implements ApplicationListener {
         TextureManager.load();
         AudioManager.load();
         
-        this.setScreen(new MenuScreen(this, client));
+        this.setScreen(new MenuScreen(this, client, server));
     }
     
         
@@ -107,5 +110,19 @@ public class Main extends Game implements ApplicationListener {
     public void resume() 
     {
         super.resume();
+    }
+
+    /**
+     * @return the client
+     */
+    public Client getClient() {
+        return client;
+    }
+
+    /**
+     * @return the server
+     */
+    public Server getServer() {
+        return server;
     }
 }

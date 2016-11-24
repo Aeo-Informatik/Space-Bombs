@@ -64,9 +64,10 @@ public class HostScreen extends Screens implements Screen
     private Container p4Field;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public HostScreen(Game game, Client client)
+    public HostScreen(Game game, Client client, Server server)
     {
-        super(game, client);
+        super(game, client, server);
+        
         
         //General Object initalisation
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -88,14 +89,9 @@ public class HostScreen extends Screens implements Screen
         
         
         /**------------------------OPEN SERVER------------------------**/
-        // Create server object
-        if(Constants.OWNSERVEROBJ == null)
-        {
-           Constants.OWNSERVEROBJ = new Server(Constants.LISTENINGPORT, 4, new AvailableMaps().getTestMap()); 
-        }
-            
         System.out.println("CLIENT: Launching server with 4 players...");
-        Constants.OWNSERVEROBJ.OpenLobby();
+        server.startServer();
+        server.OpenLobby();
         
         try 
         {
@@ -251,9 +247,8 @@ public class HostScreen extends Screens implements Screen
                     
                 }
 
-                Constants.OWNSERVEROBJ.stopServer();
-                Constants.OWNSERVEROBJ = null;
-                game.setScreen(new MenuScreen(game, client));
+                server.stopServer();
+                game.setScreen(new MenuScreen(game, client, server));
             }
         });
         
@@ -278,9 +273,9 @@ public class HostScreen extends Screens implements Screen
                 }
                 
                 AudioManager.menuMusic.stop();
-                Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
-                Constants.OWNSERVEROBJ.startGame();
-                game.setScreen(new GameScreen(game, client));
+                server.setMap(maps.getCurrentMap());
+                server.startGame();
+                game.setScreen(new GameScreen(game, client, server));
             }
         });
         
@@ -307,7 +302,7 @@ public class HostScreen extends Screens implements Screen
                 maps.nextMap();
                 mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
                 mapName.setText(maps.getCurrentMapName());
-                Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
+                server.setMap(maps.getCurrentMap());
             }
         });
         
@@ -335,7 +330,7 @@ public class HostScreen extends Screens implements Screen
                 maps.previousMap();
                 mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
                 mapName.setText(maps.getCurrentMapName());
-                Constants.OWNSERVEROBJ.setMap(maps.getCurrentMap());
+                server.setMap(maps.getCurrentMap());
             }
         });
     }
@@ -439,9 +434,8 @@ public class HostScreen extends Screens implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
         {
-            Constants.OWNSERVEROBJ.stopServer();
-            Constants.OWNSERVEROBJ = null;
-            game.setScreen(new MenuScreen(game, client));
+            server.stopServer();
+            game.setScreen(new MenuScreen(game, client, server));
         }
     }
     

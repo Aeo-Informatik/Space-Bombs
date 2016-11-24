@@ -29,6 +29,7 @@ import static gui.TextureManager.backSkin;
 import static gui.TextureManager.loadTexture;
 import static gui.TextureManager.roundSkin;
 import java.util.ArrayList;
+import server.Server;
 
 /**
  *
@@ -51,9 +52,9 @@ public class HelpScreen extends Screens implements Screen
     private int currentBackground = 0;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public HelpScreen(Game game, Client client)
+    public HelpScreen(Game game, Client client, Server server)
     {
-        super(game, client);
+        super(game, client, server);
         
         /**------------------------GET HELP BACKGROUND INTO ARRAY------------------------**/
         // Indexes all help backgrounds till not found exception
@@ -134,7 +135,7 @@ public class HelpScreen extends Screens implements Screen
                     
                 }
 
-                game.setScreen(new MenuScreen(game, client));
+                game.setScreen(new MenuScreen(game, client, server));
             }
         });
         
@@ -237,7 +238,7 @@ public class HelpScreen extends Screens implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            game.setScreen(new MenuScreen(game, client));
+            game.setScreen(new MenuScreen(game, client, server));
         }
     }
     

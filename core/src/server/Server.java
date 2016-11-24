@@ -2,6 +2,7 @@ package server;
 
 import com.gdx.bomberman.Constants;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,15 +22,16 @@ public class Server
     //Variables
     private int maxConnections;
     private String mapPath = "";
+    private int port = -1;
     
     //Constructor
-    public Server(int port, int maxConnections, String mapPath)
+    public Server(int port, int maxConnections)
     {
         try 
         {
-            this.serverSocket = new ServerSocket(port);
+            this.serverSocket = new ServerSocket();
             this.maxConnections = maxConnections;
-            this.mapPath = mapPath;
+            this.port = port;
             
         }catch(Exception e) 
         {
@@ -39,7 +41,6 @@ public class Server
         }
     }
     
-    
     /**
      * Starts the forward thread which will receive & send back the data. 
      * Before that happens every client gets a unique player id.
@@ -47,6 +48,12 @@ public class Server
      */
     public void startGame()
     {
+        if(mapPath.equals(""))
+        {
+            System.err.println("ERROR: Something went wrong on creating the server: No map set!");
+            System.exit(1);
+        }
+        
         try
         {
             if(forwardThreadList.size() == 0)
@@ -136,9 +143,28 @@ public class Server
         try 
         {
             this.serverSocket.close();
+            this.serverSocket = new ServerSocket();
         } catch (IOException ex) 
         {
+            System.out.println("ERROR: Something went wrong in stopServer() " + ex);
             ex.printStackTrace();
+            System.exit(1);
+        }
+    }
+    
+    public void startServer()
+    {
+        try 
+        {
+            if(!serverSocket.isBound())
+            {
+                this.serverSocket.bind(new InetSocketAddress("127.0.0.1", port), maxConnections);
+            }
+        } catch (IOException ex) 
+        {
+            System.out.println("ERROR: Something went wrong in startServer() " + ex);
+            ex.printStackTrace();
+            System.exit(1);
         }
     }
     
@@ -251,4 +277,5 @@ public class Server
     {
         return processData;
     }
+
 }

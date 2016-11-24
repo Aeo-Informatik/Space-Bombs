@@ -7,6 +7,7 @@ package gui.screen;
 
 import client.Client;
 import com.badlogic.gdx.Game;
+import server.Server;
 
 /**
  *
@@ -14,14 +15,19 @@ import com.badlogic.gdx.Game;
  */
 public class Screens 
 {
-    protected Game game;
-    protected Client client;
+    protected final Game game;
+    protected final Server server;
+    protected final Client client;
     
-    public Screens(Game game, Client client)
+    public Screens(Game game, Client client, Server server)
     {
         this.game = game;
+        this.server = server;
         this.client = client;
+        
+        if(client == null || server == null)
+        {
+            throw new NullPointerException("Server or Client object are empty!");
+        }
     }
-    
-    
 }

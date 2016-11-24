@@ -22,6 +22,7 @@ import com.gdx.bomberman.Constants;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
+import server.Server;
 
 
 public class MenuScreen extends Screens implements Screen
@@ -38,9 +39,9 @@ public class MenuScreen extends Screens implements Screen
     private TextButton helpbutton;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public MenuScreen(Game game, Client client)
+    public MenuScreen(Game game, Client client, Server server)
     {
-        super(game, client);
+        super(game, client, server);
         
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -48,13 +49,6 @@ public class MenuScreen extends Screens implements Screen
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCursorCatched(false);
   
-        
-        //Close Server
-        if(Constants.OWNSERVEROBJ != null)
-        {
-            Constants.OWNSERVEROBJ.stopServer();
-            Constants.OWNSERVEROBJ = null;
-        }
         
         //Initialise Font
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -138,7 +132,7 @@ public class MenuScreen extends Screens implements Screen
                     
                 }
                 
-                game.setScreen(new HostScreen(game, client)); 
+                game.setScreen(new HostScreen(game, client, server)); 
             }
         });
         
@@ -162,7 +156,7 @@ public class MenuScreen extends Screens implements Screen
                     
                 }
                 
-                game.setScreen(new JoinScreen(game, client));
+                game.setScreen(new JoinScreen(game, client, server));
             }
         });
         
@@ -210,7 +204,7 @@ public class MenuScreen extends Screens implements Screen
                     
                 }
                 
-                game.setScreen(new HelpScreen(game, client)); 
+                game.setScreen(new HelpScreen(game, client, server)); 
             }
         });
     }

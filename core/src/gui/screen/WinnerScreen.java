@@ -31,6 +31,7 @@ import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.backSkin;
 import java.util.ArrayList;
+import server.Server;
 
 /**
  *
@@ -70,9 +71,9 @@ public class WinnerScreen extends Screens implements Screen
     private Container p3FieldHighlight;
     private Container p4FieldHighlight;
     
-    public WinnerScreen(ArrayList<Integer> playerPositions, Game game, Client client) 
+    public WinnerScreen(ArrayList<Integer> playerPositions, Game game, Client client, Server server) 
     {
-        super(game, client);
+        super(game, client, server);
         
         //Set input and viewpoint
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -243,7 +244,7 @@ public class WinnerScreen extends Screens implements Screen
                     
                 }
 
-                game.setScreen(new MenuScreen(game, client));
+                game.setScreen(new MenuScreen(game, client, server));
             }
         });  
     }
@@ -332,7 +333,7 @@ public class WinnerScreen extends Screens implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            game.setScreen(new MenuScreen(game, client));
+            game.setScreen(new MenuScreen(game, client, server));
         }
     }
 

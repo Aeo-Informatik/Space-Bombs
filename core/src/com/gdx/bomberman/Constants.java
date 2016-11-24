@@ -82,7 +82,7 @@ public class Constants
     
     
     // Ingame variables DO NOT CHANGE!
-    public static Server OWNSERVEROBJ = null;
+    //public static Server OWNSERVEROBJ = null;
     public static int PLAYERID = 0;
     public static int AMOUNTPLAYERS = 0;
     public static volatile boolean PLAYERSPAWNED = false;

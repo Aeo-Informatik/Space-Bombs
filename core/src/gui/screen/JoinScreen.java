@@ -32,6 +32,7 @@ import java.net.UnknownHostException;
 import client.Client;
 import com.badlogic.gdx.Game;
 import static gui.TextureManager.backSkin;
+import server.Server;
 
 
 
@@ -57,9 +58,9 @@ public class JoinScreen extends Screens implements Screen
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
-    public JoinScreen(Game game, Client client)
+    public JoinScreen(Game game, Client client, Server server)
     {
-        super(game, client);
+        super(game, client, server);
         
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -149,7 +150,7 @@ public class JoinScreen extends Screens implements Screen
                     
                 }
 
-                game.setScreen(new MenuScreen(game, client));
+                game.setScreen(new MenuScreen(game, client, server));
             }
         });
         
@@ -178,7 +179,7 @@ public class JoinScreen extends Screens implements Screen
                         
                         AudioManager.menuMusic.stop();
 
-                        game.setScreen(new GameScreen(game, client));
+                        game.setScreen(new GameScreen(game, client, server));
                     }else
                     {
                         //Create error message on screen
@@ -235,7 +236,7 @@ public class JoinScreen extends Screens implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            game.setScreen(new MenuScreen(game, client));
+            game.setScreen(new MenuScreen(game, client, server));
         }
     }
     
