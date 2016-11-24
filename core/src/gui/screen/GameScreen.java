@@ -195,6 +195,7 @@ public class GameScreen extends Screens implements Screen{
             {
                 //Close connection to server
                 client.closeConnection();
+                server.stopServer();
                 
             } catch (IOException ex) 
             {
