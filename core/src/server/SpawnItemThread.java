@@ -64,9 +64,14 @@ public class SpawnItemThread implements Runnable
                 
                 
                 //Select item to spawn
-                if(number <= 30) // 30%
+                if(number <= 25) // 30%
                 {
                     //Spawn nothing
+                    
+                }else if(number > 25 && number <= 30) //BOMBUP 10%
+                {
+                    //General:spawnItem|itemType|itemField|target
+                    itemSpawnCommands.add("spawnItem|CubicRangeUp|" + i + "|*");
                     
                 }else if(number > 30 && number <= 40) //BOMBUP 10%
                 {

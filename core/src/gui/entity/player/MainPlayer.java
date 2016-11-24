@@ -503,7 +503,6 @@ public class MainPlayer extends Player
                          
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                         entityManager.getBombManager().spawnDynamite(feetPosition, playerId, cubicRange);
-                        System.out.println("dynamite placed!");
                     }
                     break;
                     
@@ -734,4 +733,14 @@ public class MainPlayer extends Player
     {
         return this.chosenBomb;
     }
+
+    public int getCubicRange() {
+        return cubicRange;
+    }
+
+    public void setCubicRange(int cubicRange) {
+        this.cubicRange = cubicRange;
+    }
+    
+    
 }

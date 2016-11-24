@@ -52,6 +52,7 @@ public class EnemyPlayer extends Player
     private int coins = Constants.STARTCOINS;
     private int maxBombPlacing = Constants.DEFAULTBOMBPLACE;
     private int bombRange = Constants.DEFAULTBOMBRANGE;
+    private int cubicRange = Constants.DEFAULTCUBICRANGE;
     
     //Constructor
     public EnemyPlayer(ThinGridCoordinates pos, ThinGridCoordinates direction, int playerId, MapLoader map, EntityManager entityManager, OrthographicCamera camera) 
@@ -412,5 +413,13 @@ public class EnemyPlayer extends Player
     public void setMaxBombPlacing(int maxBombPlacing) 
     {
         this.maxBombPlacing = maxBombPlacing;
+    }
+    
+    public int getCubicRange() {
+        return cubicRange;
+    }
+
+    public void setCubicRange(int cubicRange) {
+        this.cubicRange = cubicRange;
     }
 }

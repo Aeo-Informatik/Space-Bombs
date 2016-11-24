@@ -86,6 +86,10 @@ public class ClientProcessData
                                 
                                 switch(parameters[1])
                                 {
+                                    case "CubicRangeUp":
+                                        entityManager.getItemManager().spawnCubicRangeUp(itemFieldCellPos);
+                                        break;
+                                    
                                     case "BombUp":
                                         entityManager.getItemManager().spawnBombUp(itemFieldCellPos);
                                         break;
@@ -288,6 +292,27 @@ public class ClientProcessData
                                 if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
                                 {
                                     enemy.setBombRange(Integer.parseInt(parameters[2]));
+                                }
+                            }
+                            
+                            //DEBUG
+                            if(Constants.PROCESSDATADEBUG)
+                                System.out.println("Enemy player " + parameters[1] + " range now: " + parameters[2]);
+                            
+                        }else
+                            System.err.println("ERROR: enemyPlayerSetRange wrong number of parameters");
+                        break;
+                    
+                    /**------------------ENEMY PLAYER CUBICEXPLOSION---------**/ 
+                    //General:
+                        case "enemyPlayerSetCubicRange":
+                        if(parameters.length == 4)
+                        {
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
+                            {
+                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
+                                {
+                                    enemy.setCubicRange(Integer.parseInt(parameters[2]));
                                 }
                             }
                             

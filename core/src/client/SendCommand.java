@@ -85,4 +85,9 @@ public class SendCommand
     {
         client.sendData("enemyPlayerSetRange|" + playerId + "|" + bombRange + "|*");
     }
+    
+    public void setPlayerCubicRange(int playerId, int cubicRange)
+    {
+        client.sendData("enemyPlayerSetRange|" + playerId + "|" + cubicRange + "|*");
+    }
 }

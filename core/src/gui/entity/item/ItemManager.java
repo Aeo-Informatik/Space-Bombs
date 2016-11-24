@@ -96,6 +96,12 @@ public class ItemManager
         this.itemArray.add(item);
     }
     
+    public void spawnCubicRangeUp(MapCellCoordinates localCellPos){
+        CubicRangeUp item = new CubicRangeUp(localCellPos, map, entityManager);
+        this.itemArray.add(item);
+    }
+    
+    
     public void spawnTombstone(MapCellCoordinates localCellPos, int coins, int playerId)
     {
         Tombstone tombstone = new Tombstone(localCellPos, map, entityManager, this, coins, playerId);
