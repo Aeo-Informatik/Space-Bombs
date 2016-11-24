@@ -6,7 +6,11 @@
 package gui.entity.bomb;
 
 import client.SendCommand;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
+import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
@@ -18,35 +22,109 @@ import java.util.Random;
  *
  * @author qubasa
  */
-public class Infinity extends NormalBomb
+public class Infinity extends Bomb
 {
-    private int chance;
+    private int explodePath = -1;
+    private Array <InfinitySplitBomb> splittedExplosion = new Array<>();
     
-    public Infinity(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, int chance, MapLoader map, EntityManager entityManager) 
+    //Variables
+    private int wave = 0;
+    
+    public Infinity(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
     {
-        super(pos, direction, range, playerId, map, entityManager);
+        super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.infinityAnim);
-        this.chance = chance;
-        super.description = "No coins but sometimes reproduces itselves when a block gets destoyed";
+        this.explodePath = new Random().nextInt(6) +1; // From 1 .. 6
+        explodePath = 1;
     }
     
+    
     @Override
-    public void dropFromBlock(MapCellCoordinates localCellPos)
+    protected void explode() 
     {
-        int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10  
+        // Nothing to do here o.O
+    }
+    
+    
+     @Override
+    public void render()
+    {
+        if(wave == 0)
+        {
+            splittedExplosion.add(new InfinitySplitBomb(pos, direction, explosionRange, playerId, map, entityManager));
+            wave++;
+        }
         
-        if(randomNum <= chance)
-        {    
-            chance -= Constants.INFINITYREPRODUCTIONDECREASE;
+        //Render bomb 
+        for (Bomb bomb: splittedExplosion)
+        {
+            bomb.render();
+        }
 
-            // Gucke ob der main Player nicht tot ist und ob dort schon eine Bombe ist und ob eine weitere bombe der Spieler überhaupt legen kann
-            if( entityManager.getPlayerManager().getMainPlayer() != null && !map.isBombPlaced(localCellPos) )
-            {   
-                entityManager.getBombManager().spawnInfinity(new ThinGridCoordinates(localCellPos), playerId, super.getRange(), chance);
+        // First possible explosion path
+        if(explodePath == 1)
+        {
+            if(wave < 5)
+            {
+                 // Check if one bomb exploded and get its explosion coordinate endings
+                MapCellCoordinates[] cellCoordinates = getExplosionEndings();
                 
-                // Send bomb command to server
-                sendCommand.placeBomb(playerId, pos, "infinity");
+                // Check if position array is empty
+                if (cellCoordinates != null) 
+                {
+                    for (MapCellCoordinates cellCoordinate : cellCoordinates) 
+                    {
+                        // Check if current position in array has no coordinate
+                        if(cellCoordinate != null)
+                        {
+                            // The first coordinate found will spawn a bomb at that position
+                            splittedExplosion.add(new InfinitySplitBomb(new ThinGridCoordinates(cellCoordinate), direction, explosionRange, playerId, map, entityManager));
+                            wave++;
+                            break;
+                        }
+                    }
+                }
+            }else
+            {
+                updateSplitBombs();
+                
+                if(splittedExplosion.size == 0)
+                {
+                    this.isExploded = true;
+                }
+            }
+        }
+        
+    }
+    
+    private void updateSplitBombs()
+    {
+        //Deletes bombs if exploded
+        for (int i=0; i < splittedExplosion.size; i++)
+        {
+            if(this.splittedExplosion.get(i).isExploded())
+            {
+                splittedExplosion.removeIndex(i);
             }
         }
     }
+    
+    private MapCellCoordinates[] getExplosionEndings()
+    {
+        //Deletes bombs if exploded
+        for (int i=0; i < splittedExplosion.size; i++)
+        {
+            if(this.splittedExplosion.get(i).isExploded())
+            {
+                MapCellCoordinates[] cellCoordinates = splittedExplosion.get(i).getNextBombPosArray();
+                splittedExplosion.removeIndex(i);
+                
+                return cellCoordinates;
+            }
+        }
+        return null;
+    }
+   
+
 }
+

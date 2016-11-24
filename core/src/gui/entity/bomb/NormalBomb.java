@@ -5,7 +5,6 @@
  */
 package gui.entity.bomb;
 
-import client.SendCommand;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;

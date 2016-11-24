@@ -219,7 +219,7 @@ public class EnemyPlayer extends Player
             case("infinity"):
                 if(!map.isBombPlaced(new MapCellCoordinates(pos)))
                 {
-                    entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, 0);
+                    entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange);
                 }
                 break;
             case("X3"):

@@ -519,7 +519,7 @@ public class MainPlayer extends Player
                         sendCommand.placeBomb(playerId, feetPosition, bombType);
                          
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange, Constants.INFINITYREPRODUCTIONCHANCE);
+                        entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange);
                     }
                     break;
                         
