@@ -6,11 +6,12 @@
 package gui.entity.item;
 
 
+import client.SendCommand;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 
 
@@ -23,9 +24,9 @@ public class LifeUp extends Item{
     public String Discription = "You get one more live";
     
     //Constructor
-    public LifeUp(int cellX, int cellY, MapLoader map, EntityManager entityManager) 
+    public LifeUp(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager) 
     {
-        super(cellX, cellY,TextureManager.lifeUp, map, entityManager);
+        super(cellPos,TextureManager.lifeUp, map, entityManager);
     }
     
     @Override
@@ -37,7 +38,7 @@ public class LifeUp extends Item{
         if(mainP != null)
         {
             mainP.setLife((mainP.getLife() + 1));
-            client.sendData("enemyPlayerLife|" + mainP.getPlayerId() + "|" + (mainP.getLife()) + "|*");        
+            sendCommand.setPlayerLife(mainP.getPlayerId(), mainP.getLife());
         }
     }
     

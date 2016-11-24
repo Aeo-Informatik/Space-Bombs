@@ -5,6 +5,7 @@
  */
 package gui.entity;
 
+import client.SendCommand;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import gui.entity.bomb.BombManager;
 import gui.map.MapLoader;
@@ -23,13 +24,15 @@ public class EntityManager {
     private ItemManager itemManager;
     private PlayerManager playerManager;
     private BombManager bombManager;
-
+    private SendCommand sendCommand;
+    
     //Constructor
-    public EntityManager(OrthographicCamera camera, MapLoader map)
+    public EntityManager(OrthographicCamera camera, MapLoader map, SendCommand sendCommand)
     {
-        this.itemManager = new ItemManager(map, this);
+        this.itemManager = new ItemManager(map, this, sendCommand);
         this.playerManager = new PlayerManager(camera, map, this);
         this.bombManager = new BombManager(map, this);
+        this.sendCommand = sendCommand;
     }
     
 
@@ -73,5 +76,12 @@ public class EntityManager {
     public BombManager getBombManager()
     {
         return this.bombManager;
+    }
+
+    /**
+     * @return the sendCommand
+     */
+    public SendCommand getSendCommand() {
+        return sendCommand;
     }
 }

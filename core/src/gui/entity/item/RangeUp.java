@@ -5,11 +5,12 @@
  */
 package gui.entity.item;
 
+import client.SendCommand;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 
 
@@ -22,8 +23,8 @@ public class RangeUp extends Item{
     public String Discription = "You range expands";
 
     //Constructor
-    public RangeUp(int cellX, int cellY, MapLoader map, EntityManager entityManager) {
-        super(cellX, cellY,TextureManager.rangeUp, map, entityManager);
+    public RangeUp(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager) {
+        super(cellPos,TextureManager.rangeUp, map, entityManager);
     }
     
     @Override
@@ -34,8 +35,8 @@ public class RangeUp extends Item{
         //Check if main player is alive
         if(mainP != null)
         {
-            mainP.setBombRange((mainP.getBombRange() + 1)); 
-            client.sendData("enemyPlayerSetRange|" + mainP.getPlayerId() + "|" + (mainP.getBombRange()) + "|*");
+            mainP.setBombRange((mainP.getBombRange() + 1));
+            sendCommand.setPlayerRange(mainP.getPlayerId(), mainP.getBombRange());
         }
     }
     

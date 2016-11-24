@@ -1,5 +1,7 @@
 package gui.screen;
 
+import client.Client;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -17,14 +19,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
-import java.util.ArrayList;
 
 
-public class MenuScreen implements Screen
+public class MenuScreen extends Screens implements Screen
 {
     //Objects
     private Stage stage;
@@ -38,8 +38,10 @@ public class MenuScreen implements Screen
     private TextButton helpbutton;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public MenuScreen()
+    public MenuScreen(Game game, Client client)
     {
+        super(game, client);
+        
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
@@ -136,7 +138,7 @@ public class MenuScreen implements Screen
                     
                 }
                 
-                game.setScreen(new HostScreen()); 
+                game.setScreen(new HostScreen(game, client)); 
             }
         });
         
@@ -160,7 +162,7 @@ public class MenuScreen implements Screen
                     
                 }
                 
-                game.setScreen(new JoinScreen());
+                game.setScreen(new JoinScreen(game, client));
             }
         });
         
@@ -208,7 +210,7 @@ public class MenuScreen implements Screen
                     
                 }
                 
-                game.setScreen(new HelpScreen(game)); 
+                game.setScreen(new HelpScreen(game, client)); 
             }
         });
     }

@@ -8,13 +8,14 @@ package gui.entity.player;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 
 /**
  *
@@ -22,38 +23,38 @@ import gui.map.MapLoader;
  */
 public class EnemyPlayer extends Player
 {
-    //Objects
+    // General objects
     private AnimEffects animEffects = new AnimEffects();
     
-    //Variables
+    // Variables DO NOT CHANGE!
     private String lastMovementKeyPressed = "UP";
     private boolean godmode = false;
     private float godModeTimer = 0;
     private int playerId = 0;
     private boolean isEnemyPlayerDead = false;
     
-    //Server render variables
+    // Server render variables
     private boolean executeMovePlayer = false;
     private boolean executeStopPlayer = true;
     private String moveDirection = "";
-    private float stopX = pos.x; 
-    private float stopY = pos.y;
+    private float stopX = pos.getX(); 
+    private float stopY = pos.getY();
     
-    //Player animation when he is moving around
+    // Player animation when he is moving around
     private final Animation walkAnimUp;
     private final Animation walkAnimDown;
     private final Animation walkAnimRight;
     private final Animation walkAnimLeft;
     
     //Player settings
-    private float godModeDuration = 2f;
-    private int life = 3;
-    private int bombRange = 2;
-    private int coins = 0;
-    private int maxBombPlacing = 2;
+    private int life = Constants.DEFAULTLIFE;
+    private float godModeDuration = Constants.GODMODEDURATION; // How long the player is invulnerable after beeing hit by a bomb
+    private int coins = Constants.STARTCOINS;
+    private int maxBombPlacing = Constants.DEFAULTBOMBPLACE;
+    private int bombRange = Constants.DEFAULTBOMBRANGE;
     
     //Constructor
-    public EnemyPlayer(Vector2 pos, Vector2 direction, int playerId, MapLoader map, EntityManager entityManager, OrthographicCamera camera) 
+    public EnemyPlayer(ThinGridCoordinates pos, ThinGridCoordinates direction, int playerId, MapLoader map, EntityManager entityManager, OrthographicCamera camera) 
     {
         super(pos, direction, map, entityManager, camera);
         
@@ -125,12 +126,12 @@ public class EnemyPlayer extends Player
     
     
     //Execute on player death
-    public void onDeath(int cellX, int cellY)
+    public void onDeath(MapCellCoordinates localCellPos)
     {
         System.out.println("---------------------Player " + playerId + " died!-------------------");
         
         //Spawn tomb stone
-        entityManager.getItemManager().spawnTombstone(cellX, cellY, coins, playerId);
+        entityManager.getItemManager().spawnTombstone(localCellPos, coins, playerId);
         
         //Set death to true to delete object in entity manager 
         isEnemyPlayerDead = true;
@@ -191,49 +192,35 @@ public class EnemyPlayer extends Player
      * @param direction
      * @param bombType 
      */
-    public void placeBomb(Vector2 pos, String bombType)
+    public void placeBomb(ThinGridCoordinates pos, String bombType)
     {
         //Vector2 pos, Vector2 direction, MapLoader map, int playerId, int range,  EntityManager entityManager)
         switch(bombType)
         {
             case("default"):
-                if(!map.isBombPlaced(pos.x, pos.y))
+                if(!map.isBombPlaced(new MapCellCoordinates(pos)))
                 {        
                     entityManager.getBombManager().spawnNormalBomb(pos, playerId, bombRange);
                 }
                 break;
             case("dynamite"):
-                if(!map.isBombPlaced(pos.x, pos.y))
+                if(!map.isBombPlaced(new MapCellCoordinates(pos)))
                 {
                     entityManager.getBombManager().spawnDynamite(pos, playerId, bombRange);
                 }
                 break;
             case("infinity"):
-                if(!map.isBombPlaced(pos.x, pos.y))
+                if(!map.isBombPlaced(new MapCellCoordinates(pos)))
                 {
                     entityManager.getBombManager().spawnInfinity(pos, playerId, bombRange, 0);
                 }
                 break;
             case("X3"):
-                if(!map.isBombPlaced(pos.x, pos.y))
+                if(!map.isBombPlaced(new MapCellCoordinates(pos)))
                 {
                     entityManager.getBombManager().spawnX3(pos, playerId, bombRange, 1);
                 }
                 break;
-            case("Vertical"):
-                if(!map.isBombPlaced(pos.x, pos.y))
-                {        
-                    entityManager.getBombManager().spawnVertical(pos, playerId, bombRange);
-                }
-                break;
-            case("Horizontal"):
-                if(!map.isBombPlaced(pos.x, pos.y))
-                {        
-                    entityManager.getBombManager().spawnHorizontal(pos, playerId, bombRange);
-                }
-                break;
-            default:
-                System.out.println("Unknown Bomb");
         }
     }
     
@@ -262,7 +249,7 @@ public class EnemyPlayer extends Player
                     goLeft();
 
                     //Draw the walking animation
-                    renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.getX(), pos.getY());
 
                     //Sets the direction in which the still standing image will be rendered
                     lastMovementKeyPressed = "LEFT";
@@ -270,7 +257,7 @@ public class EnemyPlayer extends Player
                 {
                     //Stop player
                     stopMoving();
-                    renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimLeft), pos.getX(), pos.getY());
                     lastMovementKeyPressed = "LEFT";
                 }
             break;
@@ -279,13 +266,13 @@ public class EnemyPlayer extends Player
                 if(!collidesRight() && !collidesRightBomb())
                 {
                     goRight();
-                    renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimRight), pos.getX(), pos.getY());
                     lastMovementKeyPressed = "RIGHT";
                 }else
                 {
                     //Stop player
                     stopMoving();
-                    renderObject.draw(animEffects.getFrame(walkAnimRight), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimRight), pos.getX(), pos.getY());
                     lastMovementKeyPressed = "RIGHT";
                 }
             break;
@@ -294,13 +281,13 @@ public class EnemyPlayer extends Player
                 if(!collidesTop() && !collidesTopBomb())
                 {
                     goUp();
-                    renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimUp), pos.getX(), pos.getY());
                     lastMovementKeyPressed = "UP";
                 }else
                 {
                     //Stop player
                     stopMoving();
-                    renderObject.draw(animEffects.getFrame(walkAnimUp), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimUp), pos.getX(), pos.getY());
                     lastMovementKeyPressed = "UP";
                 }
             break;
@@ -309,13 +296,13 @@ public class EnemyPlayer extends Player
                 if(!collidesBottom() && !collidesBottomBomb())
                 {
                     goDown();
-                    renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimDown), pos.getX(), pos.getY());
                     lastMovementKeyPressed = "DOWN";
                 }else
                 {
                     //Stop player
                     stopMoving();
-                    renderObject.draw(animEffects.getFrame(walkAnimDown), pos.x, pos.y);
+                    renderObject.draw(animEffects.getFrame(walkAnimDown), pos.getX(), pos.getY());
                     lastMovementKeyPressed = "DOWN";
                 }
             break;
@@ -347,19 +334,19 @@ public class EnemyPlayer extends Player
         switch(lastMovementKeyPressed)
         {
             case "LEFT":
-                renderObject.draw(walkAnimLeft.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimLeft.getKeyFrame(0), pos.getX(), pos.getY());
                 break;
 
             case "RIGHT":
-                renderObject.draw(walkAnimRight.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimRight.getKeyFrame(0), pos.getX(), pos.getY());
             break;
 
             case "UP":
-                renderObject.draw(walkAnimUp.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimUp.getKeyFrame(0), pos.getX(), pos.getY());
                 break;
 
             case "DOWN":
-                renderObject.draw(walkAnimDown.getKeyFrame(0), pos.x, pos.y);
+                renderObject.draw(walkAnimDown.getKeyFrame(0), pos.getX(), pos.getY());
                 break;
         } 
     }

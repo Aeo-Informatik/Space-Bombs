@@ -6,8 +6,10 @@
 package gui.entity.item;
 
 
+import client.SendCommand;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 
 
@@ -23,9 +25,9 @@ public class Tombstone extends Item{
     private int playerId;
     
     //Constructor
-    public Tombstone(int CellX, int CellY, MapLoader map, EntityManager entityManager, ItemManager itemManager, int coins, int playerId) 
+    public Tombstone(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager, ItemManager itemManager, int coins, int playerId) 
     {
-        super(CellX, CellY,TextureManager.tombstone, map, entityManager);
+        super(cellPos,TextureManager.tombstone, map, entityManager);
         this.coins = coins;
         this.itemManager = itemManager;
         this.playerId = playerId;
@@ -39,7 +41,7 @@ public class Tombstone extends Item{
     @Override
     protected int getPlayerIdCollectingItem()
     {
-        int currentPlayerId = entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY);
+        int currentPlayerId = entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellPos);
         
         //Check if player is on item cell
         if( currentPlayerId != -1)
@@ -49,7 +51,7 @@ public class Tombstone extends Item{
             if(currentPlayerId != playerId)
             {
                 collected = true;
-                return entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY);
+                return entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellPos);
             }
         }
         return -1;
@@ -74,6 +76,6 @@ public class Tombstone extends Item{
     @Override
     public void itemEffect()
     {
-        itemManager.spawnCoinBag(cellX, cellY, coins);
+        itemManager.spawnCoinBag(cellPos, coins);
     }
 }

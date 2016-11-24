@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package gui.screen;
+import client.Client;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
@@ -22,7 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.backSkin;
@@ -34,8 +34,10 @@ import java.util.ArrayList;
  *
  * @author qubasa
  */
-public class HelpScreen implements Screen{
-
+public class HelpScreen extends Screens implements Screen
+{
+    
+    
     //Objects
     private Stage stage;
     private Table rootTable = new Table();
@@ -49,8 +51,10 @@ public class HelpScreen implements Screen{
     private int currentBackground = 0;
     
     /**------------------------CONSTRUCTOR------------------------**/
-    public HelpScreen(Game game)
+    public HelpScreen(Game game, Client client)
     {
+        super(game, client);
+        
         /**------------------------GET HELP BACKGROUND INTO ARRAY------------------------**/
         // Indexes all help backgrounds till not found exception
         try
@@ -130,7 +134,7 @@ public class HelpScreen implements Screen{
                     
                 }
 
-                game.setScreen(new MenuScreen());
+                game.setScreen(new MenuScreen(game, client));
             }
         });
         
@@ -233,7 +237,7 @@ public class HelpScreen implements Screen{
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            game.setScreen(new MenuScreen());
+            game.setScreen(new MenuScreen(game, client));
         }
     }
     

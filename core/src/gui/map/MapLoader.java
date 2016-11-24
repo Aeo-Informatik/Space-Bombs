@@ -6,16 +6,15 @@
 package gui.map;
 
 
+import client.SendCommand;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 
 
 /**
@@ -32,12 +31,13 @@ public class MapLoader
     private TiledMapTileLayer floorLayer;
     private TiledMapTileLayer bombLayer;
     private TiledMapTileLayer itemLayer;
+    private SendCommand sendCommand;
     
     //Variables
-    private Array<Vector2> itemSpawnerPositions = new Array<>(); // In entity positions
+    private Array<ThinGridCoordinates> itemSpawnerPositions = new Array<>(); // In entity positions
     
     //Constuctor
-    public MapLoader(OrthographicCamera camera)
+    public MapLoader(OrthographicCamera camera, SendCommand sendCommand)
     {
         this.camera = camera;
         this.tiledMap = new TmxMapLoader().load(new AvailableMaps().getTestMap());
@@ -46,7 +46,8 @@ public class MapLoader
         this.floorLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Floor");
         this.bombLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Bombs");
         this.itemLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Items");
-
+        this.sendCommand = sendCommand;
+        
         Constants.MAPTEXTUREWIDTH = blockLayer.getTileWidth();
         Constants.MAPTEXTUREHEIGHT = blockLayer.getTileWidth();
         
@@ -71,30 +72,27 @@ public class MapLoader
     
     
     /**-------------------MAP FUNCTIONS-------------------**/
-    public boolean isCellBlocked(float x, float y)
+    public boolean isCellBlocked(MapCellCoordinates cellCoordiantes)
     {
-        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH ), (int) (y / Constants.MAPTEXTUREHEIGHT));
-        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        TiledMapTileLayer.Cell cell = blockLayer.getCell(cellCoordiantes.getX(), cellCoordiantes.getY());
         return cell != null && cell.getTile().getProperties().containsKey("blocked");
     }
     
-    public boolean isCellGhostBlocked(float x, float y)
+    public boolean isCellGhostBlocked(MapCellCoordinates cellCoordiantes)
     {
-        TiledMapTileLayer.Cell cell = blockLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH), (int) (y / Constants.MAPTEXTUREHEIGHT));
-        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        TiledMapTileLayer.Cell cell = blockLayer.getCell(cellCoordiantes.getX(), cellCoordiantes.getY());
         return cell != null && cell.getTile().getProperties().containsKey("ghost-blocked");
     }
     
-    public boolean isBombPlaced(float x, float y)
+    public boolean isBombPlaced(MapCellCoordinates cellCoordiantes)
     {
-        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH), (int) (y / Constants.MAPTEXTUREHEIGHT));
-        //System.out.println("X: " + (int) (x / blockLayer.getTileWidth()) + " Y: " + (int) (y / blockLayer.getTileHeight()));
+        TiledMapTileLayer.Cell cell = bombLayer.getCell(cellCoordiantes.getX(), cellCoordiantes.getY());
         return cell != null && cell.getTile().getProperties().containsKey("bomb");
     }
     
-    public boolean isCellDeadly(float x, float y)
+    public boolean isCellDeadly(MapCellCoordinates cellCoordiantes)
     {
-        TiledMapTileLayer.Cell cell = bombLayer.getCell((int) (x / Constants.MAPTEXTUREWIDTH), (int) (y / Constants.MAPTEXTUREHEIGHT));
+        TiledMapTileLayer.Cell cell = bombLayer.getCell(cellCoordiantes.getX(), cellCoordiantes.getY());
         return cell != null && cell.getTile().getProperties().containsKey("deadly");
     }
     
@@ -110,7 +108,7 @@ public class MapLoader
                 {
                     if(floorLayer.getCell(mapX, mapY).getTile().getProperties().containsKey("Item-Spawner"))
                     {
-                        itemSpawnerPositions.add(new Vector2(mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT));
+                        itemSpawnerPositions.add(new ThinGridCoordinates(mapX, mapY));
                     }
                 }catch(NullPointerException e)
                 {
@@ -120,7 +118,7 @@ public class MapLoader
         }
         
         //Send to server the amount of item fields
-        client.sendData("registerItemFields|" + itemSpawnerPositions.size + "|SERVER");
+        sendCommand.registerItemFields(itemSpawnerPositions.size);
     }
     
     /**-------------------Getter & Setter-------------------**/
@@ -160,7 +158,7 @@ public class MapLoader
         return this.itemLayer;
     }
     
-    public Array<Vector2> getSpawnerPositionsArray()
+    public Array<ThinGridCoordinates> getSpawnerPositionsArray()
     {
         return this.itemSpawnerPositions;
     }

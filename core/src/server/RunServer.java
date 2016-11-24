@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package server;
+import com.gdx.bomberman.Constants;
 import gui.map.AvailableMaps;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class RunServer
         try
         {
             //Initialise server object
-            Server server = new Server(ServerConstants.LISTENINGPORT, ServerConstants.MAXPLAYERS, new AvailableMaps().getTestMap());   
+            Server server = new Server(Constants.LISTENINGPORT, Constants.MAXPLAYERS, new AvailableMaps().getTestMap());   
 
             server.OpenLobby();
             

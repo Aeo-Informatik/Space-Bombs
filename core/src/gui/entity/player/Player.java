@@ -12,6 +12,7 @@ import com.gdx.bomberman.Constants;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 
 /**
  *
@@ -26,7 +27,7 @@ public abstract class Player extends Entity
     protected float cameraSpeed = Constants.DEFAULTCAMERASPEED;
     
     //Constructor
-    public Player(Vector2 pos, Vector2 direction, MapLoader map, EntityManager entityManager, OrthographicCamera camera)
+    public Player(ThinGridCoordinates pos, ThinGridCoordinates direction, MapLoader map, EntityManager entityManager, OrthographicCamera camera)
     {
         super(pos, direction, map, entityManager);
         
@@ -38,11 +39,11 @@ public abstract class Player extends Entity
     /**
     * Follows the entity with smooth camera movements.
     */
-    protected void cameraFollowPlayer(Vector2 pos)
+    protected void cameraFollowPlayer(ThinGridCoordinates pos)
     {
         Vector3 cameraPos = camera.position;
-        cameraPos.x += (pos.x - cameraPos.x) * cameraSpeed * Constants.DELTATIME;
-        cameraPos.y += (pos.y - cameraPos.y) * cameraSpeed * Constants.DELTATIME;
+        cameraPos.x += (pos.getX() - cameraPos.x) * cameraSpeed * Constants.DELTATIME;
+        cameraPos.y += (pos.getY() - cameraPos.y) * cameraSpeed * Constants.DELTATIME;
     }
     
     

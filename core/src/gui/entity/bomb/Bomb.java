@@ -6,18 +6,19 @@
 
 package gui.entity.bomb;
 
+import client.SendCommand;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.AnimEffects;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 import java.util.Random;
 
 /**
@@ -30,12 +31,13 @@ public abstract class Bomb extends Entity
     //Variables
     protected int playerId;
     protected int bombId;
-    protected int cellX, cellY;
+    protected MapCellCoordinates cellPos;
     protected boolean hasBombTouchedDeadlyTile = false;
     protected boolean isExploded = false;
     protected long ExplodeAudioId = -1;
     protected float timerTillExplosion;
     protected float timerTillExplosionDelete;
+    protected SendCommand sendCommand;
     
     //Objects
     protected AnimEffects animEffects = new AnimEffects();
@@ -61,14 +63,14 @@ public abstract class Bomb extends Entity
     
     
     //Constructor
-    public Bomb(Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration,float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager)
+    public Bomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int explosionTime, float explosionDuration,float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager)
     { 
         super(pos, direction, map, entityManager);
         
         this.playerId = playerId;
         this.emptyBlock = TextureManager.emptyBlock;
-        this.cellX = (int) (pos.x / Constants.MAPTEXTUREWIDTH);
-        this.cellY = (int) (pos.y / Constants.MAPTEXTUREHEIGHT);
+        this.cellPos = new MapCellCoordinates(pos);
+        this.sendCommand = entityManager.getSendCommand();
         
         //Bomb settings
         this.explosionRange = range; // In blocks
@@ -215,9 +217,9 @@ public abstract class Bomb extends Entity
      * @param y: Cell position on y axis
      * @return boolean
      */ 
-    protected boolean deleteBlock(int x, int y)
+    protected boolean deleteBlock(MapCellCoordinates localCellPos)
     {
-        Cell currentCell = blockLayer.getCell(x , y);
+        Cell currentCell = blockLayer.getCell(localCellPos.getX() , localCellPos.getY());
         
         if(currentCell != null)
         {
@@ -231,14 +233,14 @@ public abstract class Bomb extends Entity
                 //Delete block with empty texture
                 Cell cell = new Cell();
                 cell.setTile(new StaticTiledMapTile(emptyBlock));
-                map.getBlockLayer().setCell(x, y, cell);
+                map.getBlockLayer().setCell(localCellPos.getX(), localCellPos.getY(), cell);
                 
                 
                 /**---------------------RANDOM COIN---------------------**/
                 //Check for a bug and if main player placed that bomb
                 if(currentCell.getTile().getId() != cell.getTile().getId() && playerId == Constants.PLAYERID)
                 {
-                    dropFromBlock(x, y);
+                    dropFromBlock(localCellPos);
                 }
             }
         }
@@ -252,7 +254,7 @@ public abstract class Bomb extends Entity
      * @param x: Cell position on x axis
      * @param y: Cell position on y axis
      */
-    public void dropFromBlock (int x, int y)
+    public void dropFromBlock (MapCellCoordinates localCellPos)
     {
         int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
@@ -261,7 +263,7 @@ public abstract class Bomb extends Entity
                     //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                         
                     //General:spawnCoin|CellX|CellY|target
-                    client.sendData("spawnCoin|" + x + "|" + y + "|*");
+                    sendCommand.spawnCoin(localCellPos);
                 }
     }
     
@@ -279,7 +281,7 @@ public abstract class Bomb extends Entity
         cellCenter.setTile(new StaticTiledMapTile(emptyBlock));
             
         //Explosion center replaces bomb texture
-        map.getBombLayer().setCell(cellX, cellY, cellCenter);
+        map.getBombLayer().setCell(cellPos.getX(), cellPos.getY(), cellCenter);
         
         //Explode DOWN
         for(int y=1; y <= cellsDown; y++)
@@ -288,20 +290,20 @@ public abstract class Bomb extends Entity
             cell.setTile(new StaticTiledMapTile(emptyBlock));
 
             //If explosion hits block
-            if(map.isCellBlocked(cellX * Constants.MAPTEXTUREWIDTH, (cellY - y) * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y)))
             {
                 //Delete explosion effect
-                map.getBombLayer().setCell(cellX, cellY - y, cell);
+                map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() - y, cell);
                 
                 //Delete block
-                deleteBlock(cellX, cellY - y);
+                deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
                 
                 break;
             }
             
             //Explosion down
-            map.getBombLayer().setCell(cellX, cellY - y, cell);
-            deleteBlock(cellX, cellY - y);
+            map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() - y, cell);
+            deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() - y));
         }
         
         //Explode UP 
@@ -311,20 +313,20 @@ public abstract class Bomb extends Entity
             cell.setTile(new StaticTiledMapTile(emptyBlock));
             
             //If explosion hits block
-            if(map.isCellBlocked(cellX * Constants.MAPTEXTUREWIDTH, (cellY + y) * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y )))
             {
                 //Delete explosion effect
-                map.getBombLayer().setCell(cellX, cellY + y, cell);
+                map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() + y, cell);
                 
                 //Delete block
-                deleteBlock(cellX, cellY + y);
+                deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y));
                 
                 break;
             }
 
             //Delete explosion effect
-            map.getBombLayer().setCell(cellX, cellY + y, cell);
-            deleteBlock(cellX, cellY + y);
+            map.getBombLayer().setCell(cellPos.getX(), cellPos.getY() + y, cell);
+            deleteBlock(new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y));
         }
         
         //Explode LEFT
@@ -335,18 +337,18 @@ public abstract class Bomb extends Entity
             cell.setTile(new StaticTiledMapTile(emptyBlock));
             
             //If explosion hits block
-            if(map.isCellBlocked((cellX -x) * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates((cellPos.getX() -x), cellPos.getY())))
             {
 
                 //Explosion left
-                map.getBombLayer().setCell(cellX - x, cellY, cell);
-                deleteBlock(cellX -x, cellY);
+                map.getBombLayer().setCell(cellPos.getX() - x, cellPos.getY(), cell);
+                deleteBlock(new MapCellCoordinates(cellPos.getX() -x, cellPos.getY()));
                 break;
             }
             
             //Explosion left
-            map.getBombLayer().setCell(cellX - x, cellY, cell);
-            deleteBlock(cellX -x, cellY);
+            map.getBombLayer().setCell(cellPos.getX() - x, cellPos.getY(), cell);
+            deleteBlock(new MapCellCoordinates(cellPos.getX() -x, cellPos.getY()));
         }
         
         //Explode RIGHT
@@ -357,17 +359,17 @@ public abstract class Bomb extends Entity
             cell.setTile(new StaticTiledMapTile(emptyBlock));
             
             //If explosion hits block
-            if(map.isCellBlocked((cellX + x) * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellBlocked(new MapCellCoordinates((cellPos.getX() + x), cellPos.getY())))
             {
                 //Explosion right
-                map.getBombLayer().setCell(cellX + x, cellY, cell);
-                deleteBlock(cellX +x, cellY);
+                map.getBombLayer().setCell(cellPos.getX() + x, cellPos.getY(), cell);
+                deleteBlock(new MapCellCoordinates(cellPos.getX() +x, cellPos.getY()));
                 break;
             }
             
             //Explosion right
-            map.getBombLayer().setCell(cellX + x, cellY, cell);
-            deleteBlock(cellX +x, cellY);
+            map.getBombLayer().setCell(cellPos.getX() + x, cellPos.getY(), cell);
+            deleteBlock(new MapCellCoordinates(cellPos.getX() +x, cellPos.getY()));
         }
     }
     
@@ -410,12 +412,12 @@ public abstract class Bomb extends Entity
     
     public int getCellX()
     {
-        return cellX;
+        return cellPos.getX();
     }
     
     public int getCellY()
     {
-        return cellY;
+        return cellPos.getY();
     }
 
     public void setBombAnim(Animation bombAnim) {

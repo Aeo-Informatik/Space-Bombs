@@ -5,11 +5,12 @@
  */
 package gui.entity.item;
 
+import client.SendCommand;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 
 
@@ -23,9 +24,9 @@ public class BombUp extends Item{
     public String Discription = "You can hold more Bombs";
     
     //Constructor
-    public BombUp(int cellX, int cellY, MapLoader map, EntityManager entityManager) 
+    public BombUp(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager) 
     {
-        super(cellX, cellY,TextureManager.bombUp, map, entityManager);
+        super(cellPos,TextureManager.bombUp, map, entityManager);
     }
     
     @Override
@@ -38,14 +39,14 @@ public class BombUp extends Item{
         if(mainP != null)
         {
             mainP.setMaxBombPlacing((mainP.getMaxBombPlacing() + 1)); 
-            client.sendData("enemyPlayerSetMaxBombs|" + mainP.getPlayerId() + "|" + (mainP.getMaxBombPlacing()) + "|*");
+            sendCommand.setMaxPlaceBombs(mainP.getPlayerId(), mainP.getMaxBombPlacing());
         }
     }
     
     @Override
     public boolean canGetCollectedByMainPlayer ()
     {
-        if(entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBS)
+        if(entityManager.getPlayerManager().getMainPlayer().getMaxBombPlacing() < Constants.MAXBOMBPLACE)
         {
             return true;
         }

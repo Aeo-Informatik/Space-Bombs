@@ -5,6 +5,8 @@
  */
 package gui.screen;
 
+import client.Client;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -25,7 +27,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.backSkin;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
  *
  * @author qubasa
  */
-public class WinnerScreen implements Screen
+public class WinnerScreen extends Screens implements Screen
 {
     //Objects
     private Stage stage;
@@ -69,8 +70,9 @@ public class WinnerScreen implements Screen
     private Container p3FieldHighlight;
     private Container p4FieldHighlight;
     
-    public WinnerScreen(ArrayList<Integer> playerPositions) 
+    public WinnerScreen(ArrayList<Integer> playerPositions, Game game, Client client) 
     {
+        super(game, client);
         
         //Set input and viewpoint
         stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
@@ -241,7 +243,7 @@ public class WinnerScreen implements Screen
                     
                 }
 
-                game.setScreen(new MenuScreen());
+                game.setScreen(new MenuScreen(game, client));
             }
         });  
     }
@@ -330,7 +332,7 @@ public class WinnerScreen implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            game.setScreen(new MenuScreen());
+            game.setScreen(new MenuScreen(game, client));
         }
     }
 

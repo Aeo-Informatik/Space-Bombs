@@ -6,15 +6,17 @@
 
 package gui.entity.item;
 
+import client.SendCommand;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
 import gui.TextureManager;
 import gui.entity.Entity;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
 import com.gdx.bomberman.Constants;
+import gui.map.MapCellCoordinates;
+import gui.map.ThinGridCoordinates;
 /**
  *
  * @author phinix
@@ -25,24 +27,25 @@ public class Item extends Entity
     //Variables
     protected boolean collected = false;
     protected TextureRegion emptyBlock;
-    protected int cellX, cellY;
+    protected MapCellCoordinates cellPos;
+    protected SendCommand sendCommand;
     
     protected float timer;
-    protected float spawnProtection = 0.5f;
+    protected float spawnProtection = Constants.SPAWNPROTECTION;
     
     //Constructor
-    public Item(int cellX, int cellY, TextureRegion itemTexture, MapLoader map, EntityManager entityManager) 
+    public Item(MapCellCoordinates cellPos, TextureRegion itemTexture, MapLoader map, EntityManager entityManager) 
     {
-        super(new Vector2(cellX, cellY), new Vector2(0,0), map, entityManager);
+        super(new ThinGridCoordinates(cellPos.getX(), cellPos.getY()), new ThinGridCoordinates(0,0), map, entityManager);
         
         this.emptyBlock = TextureManager.emptyBlock;
-        this.cellX = cellX;
-        this.cellY = cellY;
+        this.cellPos = cellPos;
+        this.sendCommand = entityManager.getSendCommand();
         
         //Render Item once
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(itemTexture));
-        map.getItemLayer().setCell(cellX, cellY, cell);
+        map.getItemLayer().setCell(cellPos.getX(), cellPos.getY(), cell);
     }
     
     
@@ -79,10 +82,10 @@ public class Item extends Entity
      */
     protected int getPlayerIdCollectingItem()
     {
-        if(entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY) != -1)
+        if(entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellPos) != -1)
         {
             collected = true;
-            return entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellX, cellY);
+            return entityManager.getPlayerManager().getPlayerIdOnCoordinates(cellPos);
         }
         return -1;
     }
@@ -113,7 +116,7 @@ public class Item extends Entity
     {
         TiledMapTileLayer.Cell cellCenter = new TiledMapTileLayer.Cell();
         cellCenter.setTile(new StaticTiledMapTile(emptyBlock));
-        map.getItemLayer().setCell(cellX, cellY, cellCenter);
+        map.getItemLayer().setCell(cellPos.getX(), cellPos.getY(), cellCenter);
         collected = true;
     }
     
@@ -125,7 +128,7 @@ public class Item extends Entity
         if(Constants.DELETEITEMSTHROUGHBOMB)
         {
             //Check if item has been hit by deadly tile
-            if(map.isCellDeadly(cellX * Constants.MAPTEXTUREWIDTH, cellY * Constants.MAPTEXTUREHEIGHT))
+            if(map.isCellDeadly(cellPos))
             {
                 collected = true;
             }
@@ -161,23 +164,11 @@ public class Item extends Entity
         this.collected = collected;
     }
     
-    public int getCellX() {
-        return cellX;
+    public MapCellCoordinates getCellPos() {
+        return this.cellPos;
     }
 
-    public void setCellX(int cellX) {
-        this.cellX = cellX;
+    public void setCellX(MapCellCoordinates cellPos) {
+        this.cellPos = cellPos;
     }
-
-    public int getCellY() {
-        return cellY;
-    }
-
-    public void setCellY(int cellY) {
-        this.cellY = cellY;
-    }
-    
-    
-    
-    
 }

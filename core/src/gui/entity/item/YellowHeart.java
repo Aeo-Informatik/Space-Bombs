@@ -5,11 +5,12 @@
  */
 package gui.entity.item;
 
+import client.SendCommand;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 
 
@@ -29,8 +30,8 @@ public class YellowHeart extends Item{
      * @param map
      * @param entityManager 
      */
-    public YellowHeart(int CellX, int CellY, MapLoader map, EntityManager entityManager) {
-        super(CellX, CellY,TextureManager.yellowHeart, map, entityManager);
+    public YellowHeart(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager) {
+        super(cellPos,TextureManager.yellowHeart, map, entityManager);
     }    
     
     @Override
@@ -49,7 +50,7 @@ public class YellowHeart extends Item{
         
         if(mainP != null)
         {
-            client.sendData("enemyPlayerLife|" + mainP.getPlayerId() + "|" + (mainP.getLife()) + "|*");        
+            sendCommand.setPlayerLife(mainP.getPlayerId(), mainP.getLife());
         }
     }
     

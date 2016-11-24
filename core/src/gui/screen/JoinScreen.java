@@ -24,26 +24,22 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
-import static com.gdx.bomberman.Main.game;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import client.Client;
-import static com.gdx.bomberman.Main.game;
+import com.badlogic.gdx.Game;
 import static gui.TextureManager.backSkin;
-import gui.map.AvailableMaps;
-import server.Server;
-import server.ServerConstants;
+
 
 
 /**
  *
  * @author pl0614
  */
-public class JoinScreen implements Screen
+public class JoinScreen extends Screens implements Screen 
 {
     //Objects
     private Stage stage;
@@ -61,8 +57,10 @@ public class JoinScreen implements Screen
     
     /**------------------------CONSTRUCTOR-----------------------
      * @param game-**/
-    public JoinScreen()
+    public JoinScreen(Game game, Client client)
     {
+        super(game, client);
+        
         //General Object initalisation
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack();
@@ -151,7 +149,7 @@ public class JoinScreen implements Screen
                     
                 }
 
-                game.setScreen(new MenuScreen());
+                game.setScreen(new MenuScreen(game, client));
             }
         });
         
@@ -166,48 +164,21 @@ public class JoinScreen implements Screen
 
                 //Get the ip out of the textfield
                 connectionIp = ipTextField.getText();
-                
-                
-                //Starts local server for 1 Player
-                if(Constants.TESTSERVER)
-                {
-                    connectionIp = "127.0.0.1";
-                    
-                    System.out.println("CLIENT: Launching test server force IP to localhost");
-                    
-                    if(Constants.OWNSERVEROBJ == null)
-                    {
-                        Constants.OWNSERVEROBJ = new Server(ServerConstants.LISTENINGPORT, 4, new AvailableMaps().getTestMap()); 
-                    }   
-                    //Set map to testmap
-                    //Constants.TESTSERVEROBJ.setMap("maps/Test-Map_(26x26).tmx");
-                    
-                    //Accept client connections
-                    Constants.OWNSERVEROBJ.OpenLobby();
-                }
-                
+                 
                 try 
                 {
                     //Check if ip is valid
                     if(validateIPAddress(connectionIp))
                     {     
                         //Connect to server
-                        client = new Client(connectionIp, Constants.CONNECTIONPORT);
+                        client.setHost(connectionIp, Constants.CONNECTIONPORT);
                         client.connectToServer();
-                        
-
-                        //Start game on server
-                        if(Constants.TESTSERVER)
-                        {
-                            Thread.currentThread().sleep(100);
-                            Constants.OWNSERVEROBJ.startGame();
-                        }
                         
                         System.out.println("CLIENT: Connecting to server " + connectionIp + ":" + Constants.CONNECTIONPORT);
                         
                         AudioManager.menuMusic.stop();
 
-                        game.setScreen(new GameScreen());
+                        game.setScreen(new GameScreen(game, client));
                     }else
                     {
                         //Create error message on screen
@@ -264,7 +235,7 @@ public class JoinScreen implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
-            game.setScreen(new MenuScreen());
+            game.setScreen(new MenuScreen(game, client));
         }
     }
     

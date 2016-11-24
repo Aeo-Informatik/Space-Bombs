@@ -5,16 +5,17 @@
  */
 package gui.entity.item;
 
+import client.SendCommand;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
 import gui.AnimEffects;
 import gui.AudioManager;
 import gui.entity.player.MainPlayer;
+import gui.map.MapCellCoordinates;
 
 
 /**
@@ -27,8 +28,8 @@ public class Coin extends Item{
     private AnimEffects animEffects = new AnimEffects();
     private int value;
 
-    public Coin(int cellX, int cellY, MapLoader map, EntityManager entityManager, int value) {
-        super(cellX, cellY,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
+    public Coin(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager, int value) {
+        super(cellPos,TextureManager.coinAnim.getKeyFrame(0), map, entityManager);
         this.value = value;
         
     }
@@ -39,7 +40,7 @@ public class Coin extends Item{
         //Render item
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(new StaticTiledMapTile(animEffects.getFrame(TextureManager.coinAnim)));
-        map.getItemLayer().setCell(cellX, cellY, cell);
+        map.getItemLayer().setCell(cellPos.getX(), cellPos.getY(), cell);
         
         super.deleteItemThroughBomb();
         
@@ -64,7 +65,7 @@ public class Coin extends Item{
         if(mainP != null)
         {
             mainP.setCoins((mainP.getCoins() + value)); 
-            client.sendData("enemyPlayerSetCoins|" + mainP.getPlayerId() + "|" + (mainP.getCoins()) + "|*");
+            sendCommand.setPlayerCoins(mainP.getPlayerId(), mainP.getCoins());
         }
     }
     

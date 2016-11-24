@@ -6,6 +6,7 @@
 package com.gdx.bomberman;
 
 
+import client.Client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,7 +14,6 @@ import com.badlogic.gdx.graphics.GL20;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
-import client.Client;
 
 public class Main extends Game implements ApplicationListener {
     
@@ -25,15 +25,13 @@ public class Main extends Game implements ApplicationListener {
     * texture can be described and sent to the GPU all at once. 
     * This is what the SpriteBatch class does.
     */
-    public static Game game;
-    public static Client client;
-    
+    private Client client;
     
     //Constructor
     public Main()
     {
         //Objects
-        Main.game = this;
+        client = new Client();
     }
     
     /**
@@ -46,7 +44,7 @@ public class Main extends Game implements ApplicationListener {
         TextureManager.load();
         AudioManager.load();
         
-        game.setScreen(new MenuScreen());
+        this.setScreen(new MenuScreen(this, client));
     }
     
         

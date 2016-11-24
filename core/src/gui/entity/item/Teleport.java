@@ -5,13 +5,13 @@
  */
 package gui.entity.item;
 
-import com.badlogic.gdx.math.Vector2;
-import com.gdx.bomberman.Constants;
-import static com.gdx.bomberman.Main.client;
+import client.SendCommand;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.entity.player.MainPlayer;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 
 
 /**
@@ -23,8 +23,8 @@ public class Teleport extends Item{
     public String Discription = "You get Teleportet to your Spawn-Point";
 
     //Constructor
-    public Teleport(int cellX, int cellY, MapLoader map, EntityManager entityManager) {
-        super(cellX, cellY,TextureManager.emptyBlock, map, entityManager);
+    public Teleport(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager) {
+        super(cellPos,TextureManager.emptyBlock, map, entityManager);
     }
     
     @Override
@@ -43,7 +43,7 @@ public class Teleport extends Item{
                 {
                     if(map.getFloorLayer().getCell(mapX, mapY).getTile().getProperties().containsKey("Spawn-P" + mainP.getPlayerId()))
                     {
-                        mainP.setPosition(new Vector2 (mapX * Constants.MAPTEXTUREWIDTH, mapY * Constants.MAPTEXTUREHEIGHT ));
+                        mainP.setPosition(new ThinGridCoordinates(mapX, mapY));
                     }
                 }catch(NullPointerException e)
                 {
