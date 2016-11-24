@@ -38,7 +38,6 @@ MenuScreen:
 3) You can walk on the side of blocks
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
-6) If server gets shut down while playing the connected clients freeze
 7) If player disconnects he doesn't die
 8) Infinity bomb doesn't reproduce on other clients
 9) Check if player is out of map.

@@ -108,6 +108,12 @@ public class EnemyPlayer extends Player
         renderObject.setProjectionMatrix(camera.combined);
         renderObject.begin();
         
+            // If enemy player is dead
+            if(life == 0)
+            {
+                onDeath(new MapCellCoordinates(pos));
+            }
+        
             //System.out.println("Enemy player is existing");
             if(this.executeStopPlayer)
             {
