@@ -77,6 +77,9 @@ public class TextureManager
     public static Texture rangeup;
     public static TextureRegion rangeUp;
     
+    public static Texture cubicRangeup;
+    public static TextureRegion cubicRangeUp;
+    
     public static Texture coin;
     public static Animation coinAnim;
     
@@ -294,6 +297,9 @@ public class TextureManager
         
         rangeup = loadTexture("items/range_upgrade.png");
         rangeUp = new TextureRegion(rangeup,0,0,32,32);
+        
+        cubicRangeup = loadTexture("items/cubicRange_upgrade.png");
+        cubicRangeUp = new TextureRegion(cubicRangeup,0,0,32,32);
         
         coin = loadTexture("items/coin.png");
         coinAnim = new Animation(coinAnimTime, new TextureRegion(coin,5,0,28,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32), new TextureRegion(coin,45,0,20,32), new TextureRegion(coin,26,0,20,32));

@@ -23,7 +23,7 @@ public class CubicRangeUp extends Item {
 
     //Constructor
     public CubicRangeUp(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager) {
-        super(cellPos,TextureManager.rangeUp, map, entityManager);
+        super(cellPos,TextureManager.cubicRangeUp, map, entityManager);
     }
     
     @Override
