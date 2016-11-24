@@ -111,18 +111,4 @@ public class Main extends Game implements ApplicationListener {
     {
         super.resume();
     }
-
-    /**
-     * @return the client
-     */
-    public Client getClient() {
-        return client;
-    }
-
-    /**
-     * @return the server
-     */
-    public Server getServer() {
-        return server;
-    }
 }

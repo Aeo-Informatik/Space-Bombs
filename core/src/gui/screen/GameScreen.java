@@ -110,22 +110,6 @@ public class GameScreen extends Screens implements Screen{
         {
             musicTimer += Constants.DELTATIME;
         }
-        
-        //Check if client is connected to server
-        if(client != null)
-        {
-            //If client has been disconnected from server
-            if(!client.isConnectedToServer())
-            {
-                System.err.println("CLIENT: Connection lost to server.");
-                game.setScreen(new MenuScreen(game, client, server));
-            }
-            
-        }else //If error occured on creating connection to server
-        {
-            game.setScreen(new MenuScreen(game, client, server));
-        }
-        
 
         //Lets spriteBatch use the coordinate system specified by camera instead of the default one. This is because 
         //both of the coordinate systems are different and the camera.combined will do the maths for you.
@@ -176,7 +160,15 @@ public class GameScreen extends Screens implements Screen{
             }
         }
         
-        /*------------------QUIT GAME------------------*/
+        //If client has been disconnected from server
+        if(!client.isConnectedToServer())
+        {
+            System.err.println("CLIENT: Connection lost to server.");
+            //Go to menuscreen
+            game.setScreen(new MenuScreen(game, client, server));
+        }
+        
+        /*------------------SHOW CURSOR------------------*/
         if (Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT))
         {
             if( Gdx.input.isCursorCatched())
