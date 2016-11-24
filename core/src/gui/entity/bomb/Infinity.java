@@ -5,12 +5,8 @@
  */
 package gui.entity.bomb;
 
-import client.SendCommand;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+
 import com.badlogic.gdx.utils.Array;
-import com.gdx.bomberman.Constants;
-import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
