@@ -67,12 +67,7 @@ public class Constants
     public static final int DEFAULTBOMBPLACE = 5;
     public static final int DEFAULTCUBICRANGE = 1;
     public static final int MAXCUBICRANGE = 3;
-    /*  33333
-        32223
-        32123
-        32223
-        33333
-    */
+
     
     // Bomb cost settings
     public static final int BOMB1 = 0;

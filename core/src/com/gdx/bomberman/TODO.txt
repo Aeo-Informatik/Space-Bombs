@@ -1,5 +1,4 @@
 //Bomb
-- The dynamite should make a cubic explosion
 - Charge - remotly detonable bomb. You can walk over them and place multiple ones.
 - Barrel - An item you can place if it gets hit it explodes in a cubic manner. Scales with range.
 - Teleport
@@ -38,5 +37,4 @@ MenuScreen:
 3) You can walk on the side of blocks
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
-8) Infinity bomb doesn't reproduce on other clients
 9) Check if player is out of map.
