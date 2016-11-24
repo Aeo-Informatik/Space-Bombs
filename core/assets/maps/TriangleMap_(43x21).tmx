@@ -131,17 +131,17 @@
  </tileset>
  <layer name="Background" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJztw0ENAAAMA6Grf9OzsQckrJqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr6+gENgRwh
+   eJztziEBAAAMBKFb/9Kr8QKB56oDAAAAAAAAAAAAAAAAAAAY0sABAAAAAAAAAAAAAAAA1jzZ+hwg
   </data>
  </layer>
  <layer name="Floor" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt2EEKwyAQQFGxpPT+J+5KcBWaxnE0vAcDWYn4mU1KAQAAAAAAAAAAGKtmX4AwtRuepXX9FI2fpp4Meztrq/Hefmmr8Z6utNV4L/+01XgPd9pqvLYRbTVe08i2Gq+l9XiVMV37c8gVsbf2eA0z2mqcY2ZbjefKaKvxHJltNY6V3VXjONk9NY6T3VHjONn9NI7T3u9dxnQY9X+rzdF9c032TtpjAAAAAAAAAADu+AKR9gQz
+   eJzt2FEKwyAURUGxtHT/K+6X4FeoRn0aZkAoBELo4RJISgAAAAAAAAAAAGPl6AdgmlwdnqV0/SaNnyZfHM521Vbjs/3TVuMztbTV+Cw9bTU+w522Gu9tRFuN9zSyrcZ7KT1eaUzX+j7EmrFbO95D6xZ7rmscY8VuNY7R+y69s1+N14jYrcZrRHfVeJ7onhrPE91R43mi+2k8T/n/PmlMh1Hft8p5V79pE71JOwYAAAAAAAAA4I4fWKUENw==
   </data>
  </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt2WFvgkAMgOEm+yQmbiKbcfD/f+dodg1dPQ7YdKB5n+RSOOBCaGpRRQAAAAAAAAAAAAAAAADgtqq1bwB3U4WI5xFzSo6fh+ZyH+b2Qo6fgeaw68cu7fvYCTl+ZFa3H/04y1DDGus0b+fhsWjOtEb3I7ELcZdfBhtkdVsap360/WjcHHW8fZbbXL+dE8nxdlluj/Ldb+u07eMlnXNI11jtiovkeHssJ2P9dW60NcjxdvhcWD2+/zK+uXXI8fosB/7dWEJc2o/9+eR4PXPek1/kZ4/VvtyG43U6Fnsx/Xg9vt/6cUzxLEMu63AsN2dR3HYt5HgNY7mN78FWn104Hus3rhFrnBz/H33GWl9L+m0T5mOM15XWJcf3o89WPzNPMnx25npmroeq18x1cbSZNdqwT45vT5+p/h9gtThVkwfJ12I3Mh9jqZbJ8W35ftvOjE1hXtx+7LV++yzX9eu3yfHfxWfoa6kO+0cp1+BU311y3dj9Yb747PS3Y/2dqU3Dtj/lum5L79ax39p3KdvPnRfru3SfmFY94AAAAAAAAAAAAAAAAADMFwiqFm4=
+   eJzt2e1ugkAQheH5Kya2oC1p4f6vs0y6EyfjsmCr8pH3STazbIEYTsZVKwIAAAAAAAAAAAAAAAAAj1Ut/QLwNFWo2I+YKRnvh2Z5DGtHIeM90Az7YRzSsa+9kPGWWd9+DqOVaw9rbdK6nYdt0cy0R48jtQ/1kL8NVsj6tjTOw+iGcXFr9PH6Wba5/XZOJeP1smxr+d1vmzT39Sudc0rXWO+Kq2S8PpbJ2P46t9o9yHg9fBbWjx9/rO/uPmS8PMvAfzaWUO/dj/35ZLycOZ+TJcx1X+7CWpM5z8/J+PX8futHnWor1yyb8LfcmlVx80bIeAlj2cbPwVb78PfYv/EescfJ+HX0GWt/3bPfXsJ6rPG60n3J+Hn02ep75lmu751jfShhrt4y18WR6+0uHJPx4+kz1f8HWC9O9eRJ8r3Yj6zHWuplMn4sv992M+ulsC7uOO61ft7Kbf/6ORn/X3yGvpeacFxLuQen9t17rht7fZgvPjv97Vh/Z+rSsPm33Pbt1Hdh36/2XcqOc+fF/i69TkyrNjgAAAAAAAAAAAAAAAAA8wO0nRZi
   </data>
  </layer>
  <layer name="Items" width="120" height="60">
