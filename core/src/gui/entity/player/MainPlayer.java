@@ -60,6 +60,7 @@ public class MainPlayer extends Player
     private int coins = Constants.STARTCOINS;
     private int maxBombPlacing = Constants.DEFAULTBOMBPLACE;
     private int bombRange = Constants.DEFAULTBOMBRANGE;
+    private int cubicRange = Constants.DEFAULTCUBICRANGE;
     private float maxZoomOut = Constants.DEFAULTMAXZOOMOUT;
     private float maxZoomIn = Constants.DEFAULTMAXZOOMIN;
     
@@ -501,7 +502,8 @@ public class MainPlayer extends Player
                         sendCommand.placeBomb(playerId, feetPosition, bombType);
                          
                         //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnDynamite(feetPosition, playerId, bombRange);
+                        entityManager.getBombManager().spawnDynamite(feetPosition, playerId, cubicRange);
+                        System.out.println("dynamite placed!");
                     }
                     break;
                     

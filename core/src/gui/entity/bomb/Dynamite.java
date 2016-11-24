@@ -20,16 +20,19 @@ import gui.map.ThinGridCoordinates;
  *
  * @author Christian
  */
-public class Dynamite extends Bomb{
+public class Dynamite extends CubicBomb{
     
     public String Discription = "Cubic explosion";
     
-    public Dynamite(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
+    public Dynamite(ThinGridCoordinates pos, ThinGridCoordinates direction, int cubicRange, int playerId, MapLoader map, EntityManager entityManager) 
     {
-        //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
+        //Vector2 pos, Vector2 direction, int cubicRange, int explosionTime, float explosionDuration, 
         //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
-        super(pos, direction, range, 2, 0.4f, 0.4f, playerId, map, entityManager);
+        super(pos, direction, cubicRange, 2, 0.4f, 0.4f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.dynamiteAnim);
+        if(cubicRange > 2){
+            super.setCubicRange(2);
+        }
     }
     
     @Override
@@ -55,7 +58,7 @@ public class Dynamite extends Bomb{
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)
                 {
-                    deleteExplosionEffect(explosionRange, explosionRange, explosionRange, explosionRange);
+                    deleteCubicExplosionEffect();
                     
                     //Object gets delete only set if everything is done.
                     this.isExploded = true;
@@ -86,157 +89,5 @@ public class Dynamite extends Bomb{
         }
     }
     
-    @Override
-    public void explode()
-    {
-        //To Execute the sound only once
-        if(ExplodeAudioId == -1)
-        {
-            ExplodeAudioId = AudioManager.normalExplosion.play();
-            AudioManager.normalExplosion.setVolume(ExplodeAudioId, Constants.SOUNDVOLUME);
-        }
-        
-        //Create new cell and set texture
-        TiledMapTileLayer.Cell cellCenter = new TiledMapTileLayer.Cell();
-        cellCenter.setTile(new StaticTiledMapTile(explosionCenter));
-        cellCenter.getTile().getProperties().put("deadly", null);
-        
-        //Explosion center, replaces bomb texture
-        map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY(), cellCenter);
-        
-        //Explode DOWN
-        for(int y=1; y <= explosionRange; y++)
-        {   
-            //If explosion hits block
-            if(map.isCellBlocked(new MapCellCoordinates(super.cellPos.getX(), super.cellPos.getY() - y)))
-            {
-                //Set ending texture and break out of loop
-                TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
-                cellDown.setTile(new StaticTiledMapTile(explosionDownEnd));
-                cellDown.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY()- y, cellDown);
-                break;
-            }
-           
-                
-            if(y != explosionRange) // If not end of explosion
-            {
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(new StaticTiledMapTile(explosionYMiddle));
-                cell.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() - y, cell);
-            }else
-            {
-                TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
-                cellDown.setTile(new StaticTiledMapTile(explosionDownEnd));
-                cellDown.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() - y, cellDown);
-            }
-        }
-        
-        //Explode UP
-        for(int y=1; y <= explosionRange; y++)
-        {
-            //If explosion hits block
-            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX(), cellPos.getY() + y )))
-            {
-                //Set ending texture and break out of loop
-                TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
-                cellDown.setTile(new StaticTiledMapTile(explosionUpEnd));
-                cellDown.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() + y, cellDown);
-                break;
-            }
-            
-            if(y != explosionRange) // If not end of explosion
-            {
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(new StaticTiledMapTile(explosionYMiddle));
-                cell.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() + y, cell);
-            }else
-            {
-                //Set end of explosion
-                TiledMapTileLayer.Cell cellUp = new TiledMapTileLayer.Cell();
-                cellUp.setTile(new StaticTiledMapTile(explosionUpEnd));
-                cellUp.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX(), super.cellPos.getY() + y, cellUp);
-            }
-        }
-        
-        //Explode RIGHT
-        for(int x=1; x <= explosionRange; x++)
-        {
-            //If explosion hits block
-            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX() +x, cellPos.getY())))
-            {
-                //Set ending texture and break out of loop
-                TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
-                cellDown.setTile(new StaticTiledMapTile(explosionRightEnd));
-                cellDown.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX() +x, super.cellPos.getY(), cellDown);
-                break;
-            }
-            
-            if(x != explosionRange)  // If not end of explosion
-            {
-                //Set cell with middle explosion texture
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(new StaticTiledMapTile(explosionXMiddle));
-                cell.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX() +x, super.cellPos.getY(), cell);
-                
-            }else
-            {
-                //Set end of explosion
-                TiledMapTileLayer.Cell cellRight = new TiledMapTileLayer.Cell();
-                cellRight.setTile(new StaticTiledMapTile(explosionRightEnd));
-                cellRight.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX() +x, super.cellPos.getY(), cellRight);
-            }
-        }
-        
-        //Explode LEFT
-        for(int x=1; x <= explosionRange; x++)
-        {
-            //If explosion hits block
-            if(map.isCellBlocked(new MapCellCoordinates(cellPos.getX() -x, cellPos.getY())))
-            {
-                //Set ending texture and break out of loop
-                TiledMapTileLayer.Cell cellDown = new TiledMapTileLayer.Cell();
-                cellDown.setTile(new StaticTiledMapTile(explosionLeftEnd));
-                cellDown.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX() -x, super.cellPos.getY(), cellDown);
-                break;
-            }
-            
-            if(x != explosionRange)  // If not end of explosion
-            {
-                //Set cell with middle explosion texture
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(new StaticTiledMapTile(explosionXMiddle));
-                cell.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX() -x, super.cellPos.getY(), cell);
-                
-            }else
-            {
-                TiledMapTileLayer.Cell cellLeft = new TiledMapTileLayer.Cell();
-                cellLeft.setTile(new StaticTiledMapTile(explosionLeftEnd));
-                cellLeft.getTile().getProperties().put("deadly", null);
-                
-                map.getBombLayer().setCell(super.cellPos.getX() -x, super.cellPos.getY(), cellLeft);
-            }
-        }
-    }
+    
 }
