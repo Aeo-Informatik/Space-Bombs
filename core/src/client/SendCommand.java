@@ -34,11 +34,6 @@ public class SendCommand
         client.sendData("enemyPlayerSetCoins|" + playerId + "|" + coins + "|*");
     }
     
-    public void playerDied(int playerId, MapCellCoordinates cell)
-    {
-        client.sendData("enemyPlayerDied|" + playerId + "|" + cell.getX() + "|" + cell.getY() + "|*");
-    }
-    
     public void setPlayerLife(int playerId, int life)
     {
         client.sendData("enemyPlayerLife|" + playerId + "|" + life + "|*");

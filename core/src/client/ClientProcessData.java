@@ -359,28 +359,7 @@ public class ClientProcessData
                         }else
                             System.err.println("ERROR: enemyPlayerSetMaxBombs wrong number of parameters");
                         break;
-                    
-                    /**------------------SPAWN TOMB STONE/ ON ENEMY PLAYER DEATH------------------**/
-                    //General: enemyPlayerDied|playerId|cellX|cellY|target
-                    case "enemyPlayerDied":
-                        if(parameters.length == 5)
-                        {
-                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
-                            {
-                                if(enemy.getPlayerId() == Integer.parseInt(parameters[1]))
-                                {
-                                    enemy.onDeath(new MapCellCoordinates(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3])));
-                                }
-                            }
-                            
-                            //DEBUG
-                            if(Constants.PROCESSDATADEBUG)
-                                System.out.println("Enemy player " + parameters[1] + " died and spawned tomb stone at: X:" + parameters[2] + " Y:" + parameters[3]);
-                        }else
-                            System.err.println("ERROR: enemyPlayerSpawnTombStone wrong number of parameters");
-                        break;
-                        
-                        
+
                     default:
                         System.err.println("ERROR: Command received from server is not valid");
                         System.err.println(receivedData);

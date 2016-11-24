@@ -167,7 +167,7 @@ public class MainPlayer extends Player
     {
         entityManager.getItemManager().spawnTombstone(new MapCellCoordinates(pos), coins, playerId);
         
-        sendCommand.playerDied(playerId, new MapCellCoordinates(pos.getX(), pos.getY()));
+        sendCommand.setPlayerLife(playerId, 0);
     }
     
 
