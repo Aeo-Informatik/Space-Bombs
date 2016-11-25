@@ -34,7 +34,7 @@ public class CubicRangeUp extends Item {
         //Check if main player is alive
         if(mainP != null)
         {
-            mainP.setCubicRange((mainP.getBombRange() + 1));
+            mainP.setCubicRange((mainP.getCubicRange() + 1));
             sendCommand.setPlayerCubicRange(mainP.getPlayerId(), mainP.getCubicRange());
         }
     }
