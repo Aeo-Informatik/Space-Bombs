@@ -548,9 +548,9 @@ public class MainPlayer extends Player
                     bombType = "Barrel";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB8)
+                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing - 1 > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB8)
                     {
-                        coins -= Constants.BOMB4;
+                        coins -= Constants.BOMB8;
                         
                         //Send bomb command to server
                         sendCommand.placeBomb(playerId, feetPosition, bombType);
