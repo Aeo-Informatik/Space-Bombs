@@ -28,7 +28,7 @@ public class Dynamite extends CubicBomb{
     {
         //Vector2 pos, Vector2 direction, int cubicRange, int explosionTime, float explosionDuration, 
         //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
-        super(pos, direction, cubicRange, 2, 0.4f, 0.4f, playerId, map, entityManager);
+        super(pos, direction, cubicRange, Constants.DYNAMITEBOMBEXPLOSIONTIME, Constants.DYNAMITEBOMBEXPLOSIONDURATION, Constants.DYNAMITEBOMBDELAYEXPLODEAFTERHITBYBOMB, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.dynamiteAnim);
         if(cubicRange > 2){
             super.setCubicRange(2);

@@ -7,6 +7,7 @@ package gui.entity.bomb;
 
 
 import com.badlogic.gdx.utils.Array;
+import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
@@ -31,7 +32,7 @@ public class Infinity extends Bomb
     
     public Infinity(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager, int explodePath) 
     {
-        super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
+        super(pos, direction, range, Constants.INFINITYBOMBEXPLOSIONTIME, Constants.INFINITYBOMBEXPLOSIONDURATION, Constants.INFINITYBOMBDELAYEXPLODEAFTERHITBYBOMB, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.infinityAnim);
         this.explodePath = explodePath;
     }

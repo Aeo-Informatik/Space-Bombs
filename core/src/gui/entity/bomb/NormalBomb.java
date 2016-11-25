@@ -25,9 +25,7 @@ public class NormalBomb extends Bomb
     
     public NormalBomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
     {
-        //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
-        //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
-        super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
+        super(pos, direction, range, Constants.NORMALBOMBEXPLOSIONTIME, Constants.NORMALBOMBEXPLOSIONDURATION, Constants.NORMALBOMBDELAYEXPLODEAFTERHITBYBOMB, playerId, map, entityManager);
     }
     
      @Override

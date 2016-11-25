@@ -33,8 +33,7 @@ MenuScreen:
 
 //Bugs
 1) At times one client gets IndexOutofBounds because of itemFields in ProcessData
-2) Tombstone spawns in blocks
-3) You can walk on the side of blocks
+2) Rarely Tombstone spawns in blocks
 4) Enemy Bomb can override main player bomb
 5) Player can be stuck between bombs
 9) Check if player is out of map.

@@ -69,6 +69,24 @@ public class Constants
     public static final int MAXCUBICRANGE = 3;
 
     
+    // Bomb timers
+    public static final int NORMALBOMBEXPLOSIONTIME = 2;
+    public static final float NORMALBOMBEXPLOSIONDURATION = 0.5f;
+    public static final float NORMALBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
+    
+    public static final int INFINITYBOMBEXPLOSIONTIME = 2;
+    public static final float INFINITYBOMBEXPLOSIONDURATION = 0.5f;
+    public static final float INFINITYBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
+    
+    public static final int DYNAMITEBOMBEXPLOSIONTIME = 2;
+    public static final float  DYNAMITEBOMBEXPLOSIONDURATION = 0.4f;
+    public static final float  DYNAMITEBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.4f;
+    
+    public static final int X3BOMBEXPLOSIONTIME = 2;
+    public static final float  X3BOMBEXPLOSIONDURATION = 0.5f;
+    public static final float  X3BOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
+    
+    
     // Bomb cost settings
     public static final int BOMB1 = 0;
     public static final int BOMB2 = 30;

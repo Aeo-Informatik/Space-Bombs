@@ -28,7 +28,7 @@ public class X3 extends Bomb
     {
         //Vector2 pos, Vector2 direction, int range, int explosionTime, float explosionDuration, 
         //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
-        super(pos, direction, range, 2, 0.5f, 0.5f, playerId, map, entityManager);
+        super(pos, direction, range, Constants.X3BOMBEXPLOSIONTIME, Constants.X3BOMBEXPLOSIONDURATION, Constants.X3BOMBDELAYEXPLODEAFTERHITBYBOMB, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.x3Anim);
         this.X = X;
     }

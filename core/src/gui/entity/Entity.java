@@ -87,7 +87,6 @@ public abstract class Entity
         if(map.isCellBlocked(new MapCellCoordinates(pos.getX() + marginX,pos.getY() + Constants.PLAYERHEIGHT / 2 + marginY)) 
                 || map.isCellBlocked(new MapCellCoordinates(pos.getX()  + Constants.PLAYERWIDTH - marginX,pos.getY() + Constants.PLAYERHEIGHT / 2 + marginY)))
             return true;
-        //else
         return false;
     }
     

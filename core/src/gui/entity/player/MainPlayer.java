@@ -127,7 +127,7 @@ public class MainPlayer extends Player
     {
         renderObject.setProjectionMatrix(camera.combined);
         renderObject.begin();
-            
+
             // Gives out every couple of seconds some coins to the player
             coinBonus();
         
@@ -242,6 +242,8 @@ public class MainPlayer extends Player
      */
     private void inputMovePlayer()
     {
+
+        
         /*------------------WALKING LEFT------------------*/
         if((Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)))
         {
