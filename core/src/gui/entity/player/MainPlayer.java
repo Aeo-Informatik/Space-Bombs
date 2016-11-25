@@ -565,7 +565,7 @@ public class MainPlayer extends Player
                     bombType = "Teleport";
             
                     //Checks if there is already a bomb
-                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB9)
+                    if(coins>= Constants.BOMB9)
                     {
                         coins -= Constants.BOMB9;
                         
