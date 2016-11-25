@@ -473,108 +473,112 @@ public class MainPlayer extends Player
             ThinGridCoordinates feetPosition = new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2, pos.getY() + Constants.PLAYERHEIGHT / 3);
             String bombType;
             
-            switch (chosenBomb)
+            //Checks if there is already a bomb
+            if(entityManager.getPlayerManager().getPlayerIdOnCoordinates(new MapCellCoordinates(feetPosition)) == playerId && !map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size )
             {
-                case(1):
+                switch (chosenBomb)
+                {
+                    case(1):
 
-                    bombType = "default";
-                    
-                    //Checks if there is already a bomb
-                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins >= Constants.BOMB1)
-                    {
-                        coins -= Constants.BOMB1;
-                            
-                        //Send bomb command to server
-                        sendCommand.placeBomb(playerId, feetPosition, bombType);
-                
-                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnNormalBomb(feetPosition, playerId, bombRange);
-                    }
-                    break;
-                    
-                case(2):
-                    
-                    bombType = "dynamite";
-                    
-                    //Checks if there is already a bomb
-                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB2)
-                    {
-                        coins -= Constants.BOMB2;
-                        
-                        //Send bomb command to server
-                        sendCommand.placeBomb(playerId, feetPosition, bombType);
-                         
-                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnDynamite(feetPosition, playerId, cubicRange);
-                    }
-                    break;
-                    
-                case(3):
-                    
-                    bombType = "infinity";
-                    
-                    //Checks if there is already a bomb
-                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB3)
-                    {
-                        coins -= Constants.BOMB3;
-                        
-                        //Send bomb command to server
-                        sendCommand.placeBomb(playerId, feetPosition, bombType);
-                         
-                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        int explodePath = new Random().nextInt(2) +1;
-                        entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange, explodePath);
-                        sendCommand.placeInfinityBomb(playerId, feetPosition, explodePath);
-                    }
-                    break;
-                        
-                case(4):
-                    
-                    bombType = "X3";
-            
-                    //Checks if there is already a bomb
-                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB4)
-                    {
-                        coins -= Constants.BOMB4;
-                        
-                        //Send bomb command to server
-                        sendCommand.placeBomb(playerId, feetPosition, bombType);
-                        
-                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnX3(feetPosition, playerId, bombRange, 1);
-                    }
-                    break;
-                    
-                case(8):
-                    
-                    bombType = "Barrel";
-            
-                    //Checks if there is already a bomb
-                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing - 1 > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB8)
-                    {
-                        coins -= Constants.BOMB8;
-                        
-                        //Send bomb command to server
-                        sendCommand.placeBomb(playerId, feetPosition, bombType);
-                        
-                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                        entityManager.getBombManager().spawnBarrel(feetPosition, playerId, cubicRange);
-                    }
-                    break;
-                    
-                case(9):
-                    
-                    bombType = "Teleport";
-            
-                    //Checks if there is already a bomb
-                    if(coins>= Constants.BOMB9)
-                    {
-                        coins -= Constants.BOMB9;
-                        
-                        Teleport item = new Teleport(new MapCellCoordinates(feetPosition),map,entityManager);
-                        item.itemEffect();
-                    }
-                    break;
+                        bombType = "default";
+
+                        // Check if you have enough coins
+                        if(coins >= Constants.BOMB1)
+                        {
+                            coins -= Constants.BOMB1;
+
+                            //Send bomb command to server
+                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+
+                            //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                            entityManager.getBombManager().spawnNormalBomb(feetPosition, playerId, bombRange);
+                        }
+                        break;
+
+                    case(2):
+
+                        bombType = "dynamite";
+
+                        //Checks if there is already a bomb
+                        if(coins>= Constants.BOMB2)
+                        {
+                            coins -= Constants.BOMB2;
+
+                            //Send bomb command to server
+                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+
+                            //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                            entityManager.getBombManager().spawnDynamite(feetPosition, playerId, cubicRange);
+                        }
+                        break;
+
+                    case(3):
+
+                        bombType = "infinity";
+
+                        //Checks if there is already a bomb
+                        if(coins>= Constants.BOMB3)
+                        {
+                            coins -= Constants.BOMB3;
+
+                            //Send bomb command to server
+                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+
+                            //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                            int explodePath = new Random().nextInt(2) +1;
+                            entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange, explodePath);
+                            sendCommand.placeInfinityBomb(playerId, feetPosition, explodePath);
+                        }
+                        break;
+
+                    case(4):
+
+                        bombType = "X3";
+
+                        //Checks if there is already a bomb
+                        if(coins>= Constants.BOMB4)
+                        {
+                            coins -= Constants.BOMB4;
+
+                            //Send bomb command to server
+                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+
+                            //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                            entityManager.getBombManager().spawnX3(feetPosition, playerId, bombRange, 1);
+                        }
+                        break;
+
+                    case(8):
+
+                        bombType = "Barrel";
+
+                        //Checks if there is already a bomb
+                        if(coins>= Constants.BOMB8)
+                        {
+                            coins -= Constants.BOMB8;
+
+                            //Send bomb command to server
+                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+
+                            //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                            entityManager.getBombManager().spawnBarrel(feetPosition, playerId, cubicRange);
+                        }
+                        break;
+
+                    case(9):
+
+                        bombType = "Teleport";
+
+                        //Checks if there is already a bomb
+                        if(coins>= Constants.BOMB9)
+                        {
+                            coins -= Constants.BOMB9;
+
+                            Teleport item = new Teleport(new MapCellCoordinates(feetPosition),map,entityManager);
+                            item.itemEffect();
+                        }
+                        break;
+                }
             }
  
         }

@@ -109,6 +109,78 @@ public abstract class Entity
 
     
     /**--------------------------COLLIDES WITH BOMB--------------------------**/
+    private boolean abilityToWalkOverOwnBombs = false;
+    private boolean stuckBetweenBombsBug(String direction)
+    {
+        float marginX,marginY = 0;
+        
+        // If player stands on a bomb
+        if(map.isBombPlaced(new MapCellCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2,pos.getY())))
+        {
+            // If that bomb doesn't have the same playerId aka. isn't the players own bomb
+            if(entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2,pos.getY()).getPlayerId() != Constants.PLAYERID)
+            {
+                // As long as the player stands on a bomb he will be granted with this feature
+                abilityToWalkOverOwnBombs = true;
+            }
+        }else
+        {
+            abilityToWalkOverOwnBombs = false;
+        }
+        
+        if(abilityToWalkOverOwnBombs == true)
+        {
+            switch(direction)
+            {
+                case "LEFT":
+                    marginX = 2;
+                    // If that bomb does have the same playerId aka. is the players own bomb
+                    if(entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX() - marginX,pos.getY()).getPlayerId() == Constants.PLAYERID)
+                    {
+                        // Let the player walk over his own bombs even if he walked away from them. 
+                        // This prevents the player to be stuck between an enemy bomb and his own.
+                        return true;
+                    }
+                    break;
+                case "RIGHT":
+                    marginX = 2;
+                    // If that bomb does have the same playerId aka. is the players own bomb
+                    if(entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX() + Constants.PLAYERWIDTH + marginX,pos.getY()).getPlayerId() == Constants.PLAYERID)
+                    {
+                        // Let the player walk over his own bombs even if he walked away from them. 
+                        // This prevents the player to be stuck between an enemy bomb and his own.
+                        return true;
+                    }
+                    break;
+                case "TOP":
+                    marginX = 3;
+                    marginY = 3;
+                    // If that bomb does have the same playerId aka. is the players own bomb
+                    if(map.isBombPlaced(new MapCellCoordinates(pos.getX() + marginX,pos.getY() + Constants.PLAYERHEIGHT / 2 + marginY)) || map.isBombPlaced(new MapCellCoordinates(pos.getX()  + Constants.PLAYERWIDTH - marginX,pos.getY() + Constants.PLAYERHEIGHT / 2 + marginY)))
+                    {
+                        // Let the player walk over his own bombs even if he walked away from them. 
+                        // This prevents the player to be stuck between an enemy bomb and his own.
+                        return true;
+                    }
+                    break;
+                case "BOTTOM":
+                    marginX = 3;
+                    marginY = 3;
+                    // If that bomb does have the same playerId aka. is the players own bomb
+                    if(map.isBombPlaced(new MapCellCoordinates(pos.getX() + marginX,pos.getY() - marginY)) || map.isBombPlaced(new MapCellCoordinates(pos.getX()  + Constants.PLAYERWIDTH -marginX,pos.getY() - marginY)))
+                    {
+                        // Let the player walk over his own bombs even if he walked away from them. 
+                        // This prevents the player to be stuck between an enemy bomb and his own.
+                        return true;
+                    }
+                    
+                    break;
+            }
+        }
+        return false;
+    }
+    
+    
     /**
      * Checks if entity collides with a bomb on his left if so it returns true
      * @return boolean
@@ -127,7 +199,10 @@ public abstract class Entity
                 Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2,pos.getY());
                 if(bomb != null)
                 {
+                    // Save the current bomb id
                     leftRefBombId =  bomb.getBombId();
+                    
+                    // Let the player walk normally
                     return false;
                 }
             }
@@ -138,8 +213,19 @@ public abstract class Entity
         {
             //Compare saved bomb id with current one if they dont match lock movement
             Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX() - marginX,pos.getY());
+            
+            // Check if it is the same bomb on which you previously standed on
             if(bomb != null && bomb.getBombId() != leftRefBombId)
             {
+                /* 
+                Now check if it is an enemy bomb you are colliding with.
+                If so give the player the ability to walk over his own bombs
+                even if he hasn't the apropriate id for it.
+                */
+                if(stuckBetweenBombsBug("LEFT"))
+                {
+                    return false;
+                }
                 return true;
             }
         }
@@ -181,6 +267,15 @@ public abstract class Entity
             Bomb bomb = entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX() + Constants.PLAYERWIDTH + marginX,pos.getY());
             if(bomb != null && bomb.getBombId() != rightRefBombId)
             {
+                /* 
+                Now check if it is an enemy bomb you are colliding with.
+                If so give the player the ability to walk over his own bombs
+                even if he hasn't the apropriate id for it.
+                */
+                if(stuckBetweenBombsBug("RIGHT"))
+                {
+                    return false;
+                }
                 return true;
             }
         }
@@ -224,6 +319,15 @@ public abstract class Entity
             Bomb bomb2 = entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX()  + Constants.PLAYERWIDTH - marginX,pos.getY() + Constants.PLAYERHEIGHT / 2 + marginY);
             if((bomb1 != null && bomb1.getBombId() != topRefBombId) || (bomb2 != null && bomb2.getBombId() != topRefBombId))
             {
+                /* 
+                Now check if it is an enemy bomb you are colliding with.
+                If so give the player the ability to walk over his own bombs
+                even if he hasn't the apropriate id for it.
+                */
+                if(stuckBetweenBombsBug("TOP"))
+                {
+                    return false;
+                }
                 return true;
             }
         }
@@ -268,6 +372,15 @@ public abstract class Entity
             Bomb bomb2 = entityManager.getBombManager().getBombObjectOnCoordinates(pos.getX()  + Constants.PLAYERWIDTH -marginX,pos.getY() - marginY);
             if((bomb1 != null && bomb1.getBombId() != bottomRefBombId) || (bomb2 != null && bomb2.getBombId() != bottomRefBombId))
             {
+                /* 
+                Now check if it is an enemy bomb you are colliding with.
+                If so give the player the ability to walk over his own bombs
+                even if he hasn't the apropriate id for it.
+                */
+                if(stuckBetweenBombsBug("BOTTOM"))
+                {
+                    return false;
+                }
                 return true;
             }
         }
