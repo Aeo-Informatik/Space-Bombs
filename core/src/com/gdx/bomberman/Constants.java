@@ -46,7 +46,7 @@ public class Constants
     public static final int COINDROPCHANCE = 5; // 50% (1-10)
     public static final float COINBONUSTIMER = 5; // Seconds
     public static final int COINBONUS = 10; // Coins
-    public static final int STARTCOINS = 100;
+    public static final int STARTCOINS = 500;
     
     // Item settings
     public static final long ITEMTIMER = 5; // Seconds
@@ -70,7 +70,7 @@ public class Constants
 
     
     // Bomb timers
-    public static final int NORMALBOMBEXPLOSIONTIME = 15;
+    public static final int NORMALBOMBEXPLOSIONTIME = 2;
     public static final float NORMALBOMBEXPLOSIONDURATION = 0.5f;
     public static final float NORMALBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
     

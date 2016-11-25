@@ -31,8 +31,13 @@ MenuScreen:
 //Client
 1) (optional) Scanning for open servers with port scan
 
+//Optimisation
+Remove redundant code in the Manager classes
+Change in the entityManager class the method parameters to objects
+Save as global variable collision points in the players texture
+Move some code from entity to player class
+Improve texture animations to go quicker as the time default explosion time reduces.
+
 //Bugs
 1) At times one client gets IndexOutofBounds because of itemFields in ProcessData
 2) Rarely Tombstone spawns in blocks if player walks on the edge of these blocks.
-3) Remove redundant code
-4) Move some code from entity to player class
