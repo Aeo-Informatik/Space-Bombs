@@ -194,6 +194,7 @@ public class TextureManager
     public static TextureRegion p2ExplosionYMiddle;
     public static TextureRegion p2ExplosionXMiddle;
     public static TextureRegion p2ExplosionCenter;
+    public static TextureRegion p2ExplosionCubic;
     
     public static TextureRegion p2ExplosionDownEnd;
     public static TextureRegion p2ExplosionUpEnd;
@@ -206,6 +207,7 @@ public class TextureManager
     public static TextureRegion p3ExplosionYMiddle;
     public static TextureRegion p3ExplosionXMiddle;
     public static TextureRegion p3ExplosionCenter;
+    public static TextureRegion p3ExplosionCubic;
     
     public static TextureRegion p3ExplosionDownEnd;
     public static TextureRegion p3ExplosionUpEnd;
@@ -218,6 +220,7 @@ public class TextureManager
     public static TextureRegion p4ExplosionYMiddle;
     public static TextureRegion p4ExplosionXMiddle;
     public static TextureRegion p4ExplosionCenter;
+    public static TextureRegion p4ExplosionCubic;
     
     public static TextureRegion p4ExplosionDownEnd;
     public static TextureRegion p4ExplosionUpEnd;
@@ -447,6 +450,7 @@ public class TextureManager
         p2ExplosionYMiddle = new TextureRegion(p2Explosion, 0, 32, 32, 32);
         p2ExplosionCenter = new TextureRegion(p2Explosion, 128, 0, 32, 32);
         p2ExplosionXMiddle = new TextureRegion(p2Explosion, 32, 32, 32, 32);
+        p2ExplosionCubic = new TextureRegion(p2Explosion,129,33,32,32);
         
         p2ExplosionDownEnd = new TextureRegion(p2Explosion, 64, 0, 32, 32);
         p2ExplosionUpEnd = new TextureRegion(p2Explosion, 0, 0, 32, 32);
@@ -464,6 +468,7 @@ public class TextureManager
         p3ExplosionYMiddle = new TextureRegion(p3Explosion, 0, 32, 32, 32);
         p3ExplosionCenter = new TextureRegion(p3Explosion, 128, 0, 32, 32);
         p3ExplosionXMiddle = new TextureRegion(p3Explosion, 32, 32, 32, 32);
+        p3ExplosionCubic = new TextureRegion(p3Explosion,129,33,32,32);
         
         p3ExplosionDownEnd = new TextureRegion(p3Explosion, 64, 0, 32, 32);
         p3ExplosionUpEnd = new TextureRegion(p3Explosion, 0, 0, 32, 32);
@@ -481,6 +486,7 @@ public class TextureManager
         p4ExplosionYMiddle = new TextureRegion(p4Explosion, 0, 32, 32, 32);
         p4ExplosionCenter = new TextureRegion(p4Explosion, 128, 0, 32, 32);
         p4ExplosionXMiddle = new TextureRegion(p4Explosion, 32, 32, 32, 32);
+        p4ExplosionCubic = new TextureRegion(p4Explosion,129,33,32,32);
         
         p4ExplosionDownEnd = new TextureRegion(p4Explosion, 64, 0, 32, 32);
         p4ExplosionUpEnd = new TextureRegion(p4Explosion, 0, 0, 32, 32);

@@ -44,7 +44,6 @@ public abstract class CubicBomb extends Bomb{
                 this.bombAnim = TextureManager.p1NormalBombAnim;
                 this.explosionCubic = TextureManager.p1ExplosionCubic;
                 break;
-            /*
             case 2:
                 this.bombAnim = TextureManager.p2NormalBombAnim;
                 this.explosionCubic = TextureManager.p2ExplosionCubic;
@@ -57,7 +56,6 @@ public abstract class CubicBomb extends Bomb{
                 this.bombAnim = TextureManager.p4NormalBombAnim;
                 this.explosionCubic = TextureManager.p4ExplosionCubic;
                 break;
-            */
             default:
                 System.err.println("ERROR: Wrong playerId in bomb defined " + playerId + " using default p1 textures.");
                 this.bombAnim = TextureManager.p1NormalBombAnim;
