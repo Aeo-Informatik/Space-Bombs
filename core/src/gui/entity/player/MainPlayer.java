@@ -543,6 +543,23 @@ public class MainPlayer extends Player
                     }
                     break;
                     
+                case(8):
+                    
+                    bombType = "Barrel";
+            
+                    //Checks if there is already a bomb
+                    if(!map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size && coins>= Constants.BOMB8)
+                    {
+                        coins -= Constants.BOMB4;
+                        
+                        //Send bomb command to server
+                        sendCommand.placeBomb(playerId, feetPosition, bombType);
+                        
+                        //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                        entityManager.getBombManager().spawnBarrel(feetPosition, playerId, cubicRange);
+                    }
+                    break;
+                    
                 case(9):
                     
                     bombType = "Teleport";

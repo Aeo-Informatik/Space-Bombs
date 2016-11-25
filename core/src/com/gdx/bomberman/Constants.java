@@ -82,7 +82,7 @@ public class Constants
     public static final int BOMB5 = 80;
     public static final int BOMB6 = 100;
     public static final int BOMB7 = 120;
-    public static final int BOMB8 = 140;
+    public static final int BOMB8 = 50;
     public static final int BOMB9 = 200;
     
     
