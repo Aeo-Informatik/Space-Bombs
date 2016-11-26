@@ -63,7 +63,7 @@ public abstract class Bomb extends Entity
     
     
     //Constructor
-    public Bomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int explosionTime, float explosionDuration,float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager)
+    public Bomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, float explosionTime, float explosionDuration,float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager)
     { 
         super(pos, direction, map, entityManager);
         

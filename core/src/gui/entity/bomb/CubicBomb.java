@@ -26,7 +26,7 @@ public abstract class CubicBomb extends Bomb{
     protected TextureRegion explosionCubic;
     protected int cubicRange;
     
-    public CubicBomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int cubicRange, int explosionTime, float explosionDuration, float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager) {
+    public CubicBomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int cubicRange, float explosionTime, float explosionDuration, float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager) {
         super(pos, direction, 0, explosionTime, explosionDuration, delayExplodeAfterHitByBomb, playerId, map, entityManager);
         this.cubicRange = cubicRange;
         setBombTexture();
