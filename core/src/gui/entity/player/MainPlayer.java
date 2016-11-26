@@ -126,7 +126,12 @@ public class MainPlayer extends Player
     public void render()
     {
         renderObject.setProjectionMatrix(camera.combined);
-        collisionTest();
+        
+        if(Constants.COLLIISIONDETECTIONDEBUG)
+        {
+            collisionTest();
+        }
+        
         renderObject.begin();
 
             // Gives out every couple of seconds some coins to the player

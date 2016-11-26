@@ -15,6 +15,7 @@ public class Constants
     public static final int CONNECTIONPORT = 13199;
     public static final boolean CLIENTDEBUG = false;
     public static final boolean PROCESSDATADEBUG = false;
+    public static final boolean COLLIISIONDETECTIONDEBUG = false;
     
     // Server settings
     public static final int LISTENINGPORT = 13199;
