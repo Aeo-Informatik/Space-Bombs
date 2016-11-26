@@ -92,20 +92,6 @@ public abstract class Player extends Entity
         cameraPos.y += (pos.getY() - cameraPos.y) * cameraSpeed * Constants.DELTATIME;
     }
     
-    
-    /**
-     * Checks if entity is standing on a deadly field if so it returns true
-     * @return boolean
-     */
-    protected boolean touchesDeadlyBlock()
-    {
-        //Checks from the walking right texture a collision on the down left, down right
-        if(map.isCellDeadly(new MapCellCoordinates(getCollisionPosDownLeft())) || map.isCellDeadly(new MapCellCoordinates(getCollisionPosDownRight())))
-            return true;
-        
-        return false;
-    }
-    
     /**------------------BLOCKED COLLISION FUNCTIONS------------------**/
     /**
      * Checks if entity collides with a blocked field on his left if so it returns true
@@ -430,16 +416,32 @@ public abstract class Player extends Entity
         return false;
     }
     
+        
+    /**
+     * Checks if entity is standing on a deadly field if so it returns true
+     * @return boolean
+     */
+    protected boolean touchesDeadlyBlock()
+    {
+        //Checks from the walking right texture a collision on the down left, down right
+        if(map.isCellDeadly(new MapCellCoordinates(this.getFeetLocation())))
+            return true;
+        
+        return false;
+    }
+    
     /**------------------GET COLLISION COORDINATES------------------**/
     public ThinGridCoordinates getFeetLocation()
     {
-        return new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2,pos.getY());
+        float marginY = 3f;
+        
+        return new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2,pos.getY() + Constants.PLAYERHEIGHT / 4);
     }
     
     public ThinGridCoordinates getCollisionPosMiddleRight()
     {
         float marginX = 2f;
-        float marginY = 3f;
+        float marginY = 0f;
         
         return new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH + marginX,pos.getY() + Constants.PLAYERHEIGHT / 4 + marginY);
     }
@@ -447,7 +449,7 @@ public abstract class Player extends Entity
     public ThinGridCoordinates getCollisionPosMiddleLeft()
     {
         float marginX = 2f;
-        float marginY = 3f;
+        float marginY = 0f;
         
         return new ThinGridCoordinates(pos.getX() - marginX,pos.getY() + Constants.PLAYERHEIGHT / 4 + marginY);
     }
