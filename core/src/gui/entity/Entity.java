@@ -8,8 +8,6 @@ package gui.entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.gdx.bomberman.Constants;
-import gui.entity.bomb.Bomb;
-import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
 
