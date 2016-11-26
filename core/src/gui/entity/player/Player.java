@@ -433,8 +433,6 @@ public abstract class Player extends Entity
     /**------------------GET COLLISION COORDINATES------------------**/
     public ThinGridCoordinates getFeetLocation()
     {
-        float marginY = 3f;
-        
         return new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2,pos.getY() + Constants.PLAYERHEIGHT / 4);
     }
     
