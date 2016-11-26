@@ -5,8 +5,6 @@
  */
 package com.gdx.bomberman;
 
-import server.Server;
-
 /**
  *
  * @author qubasa
