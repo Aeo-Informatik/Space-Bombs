@@ -126,6 +126,7 @@ public class MainPlayer extends Player
     public void render()
     {
         renderObject.setProjectionMatrix(camera.combined);
+        collisionTest();
         renderObject.begin();
 
             // Gives out every couple of seconds some coins to the player
@@ -145,8 +146,10 @@ public class MainPlayer extends Player
 
             //Hit detection
             hitByBomb();
+
         renderObject.end();
     }
+
     
     public void coinBonus()
     {

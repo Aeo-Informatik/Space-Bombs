@@ -6,11 +6,10 @@
 package gui.entity.bomb;
 
 import com.badlogic.gdx.utils.Array;
-import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
+import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
-import java.util.Random;
 
 /**
  *
@@ -149,16 +148,15 @@ public class BombManager
      * @param y: Entity coordinates on y axis
      * @return Bomb Object or Null
      */
-    public Bomb getBombObjectOnCoordinates(float posX, float posY)
+    public Bomb getBombObjectOnCoordinates(ThinGridCoordinates pos)
     {
        //Calculate cell coordiantes
-       int cellX = (int) (posX / Constants.MAPTEXTUREWIDTH);
-       int cellY = (int) (posY / Constants.MAPTEXTUREHEIGHT);
-        
+       MapCellCoordinates cell = new MapCellCoordinates(pos);
+
         //Check if mainPlayer has a bomb on given position
         for(Bomb mainP : this.bombArrayMainPlayer)
         {
-            if(mainP.getCellX() == cellX && mainP.getCellY() == cellY)
+            if(mainP.getCellX() == cell.getX() && mainP.getCellY() == cell.getY())
             {
                 return mainP;
             }
@@ -167,7 +165,7 @@ public class BombManager
         //Check if enemyPlayer has a bomb on given position
         for(Bomb enemyP : this.bombArrayEnemyPlayers)
         {
-            if(enemyP.getCellX() == cellX && enemyP.getCellY() == cellY)
+            if(enemyP.getCellX() == cell.getX() && enemyP.getCellY() == cell.getY())
             {
                 return enemyP;
             }

@@ -5,10 +5,8 @@
  */
 package gui.entity.player;
 
-import client.SendCommand;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
-import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
@@ -165,11 +163,10 @@ public class PlayerManager
                 try
                 {
                     //Calculate enemy position in cell coordinates
-                    int enemyCellX = (int) ((enemy.getPosition().getX() + Constants.PLAYERWIDTH / 2) / Constants.MAPTEXTUREWIDTH);
-                    int enemyCellY = (int) ((enemy.getPosition().getY() + Constants.PLAYERHEIGHT / 2) / Constants.MAPTEXTUREWIDTH);
+                    MapCellCoordinates enemyCell = new MapCellCoordinates(enemy.getFeetLocation());
                     
                     //If enemy player found on given position
-                    if(enemyCellX == localCellPos.getX() && enemyCellY == localCellPos.getY())
+                    if(enemyCell.getX() == localCellPos.getX() && enemyCell.getY() == localCellPos.getY())
                     {
                         return enemy.getPlayerId();
                     }
@@ -183,11 +180,10 @@ public class PlayerManager
             try
             {
                 //Calculate main position in cell coordinates
-                int mainCellX = (int)(mainPlayer.getPosition().getX() / Constants.MAPTEXTUREWIDTH);
-                int mainCellY = (int)(mainPlayer.getPosition().getY() / Constants.MAPTEXTUREHEIGHT);
-                
+                MapCellCoordinates mainCell = new MapCellCoordinates(mainPlayer.getFeetLocation());
+
                 //If main player found on given position
-                if(mainCellX == localCellPos.getX() && mainCellY == localCellPos.getY())
+                if(mainCell.getX() == localCellPos.getX() && mainCell.getY() == localCellPos.getY())
                 {
                     return mainPlayer.getPlayerId();
                 }

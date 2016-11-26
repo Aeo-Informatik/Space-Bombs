@@ -70,7 +70,7 @@ public class Constants
 
     
     // Bomb timers
-    public static final int NORMALBOMBEXPLOSIONTIME = 2;
+    public static final int NORMALBOMBEXPLOSIONTIME = 20;
     public static final float NORMALBOMBEXPLOSIONDURATION = 0.5f;
     public static final float NORMALBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
     
