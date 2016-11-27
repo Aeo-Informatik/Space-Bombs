@@ -88,10 +88,10 @@ public class Constants
     
     // Bomb cost settings
     public static final int BOMB1 = 0;
-    public static final int BOMB2 = 30;
-    public static final int BOMB3 = 50;
+    public static final int BOMB2 = 50;
+    public static final int BOMB3 = 100;
     public static final int BOMB4 = 70;
-    public static final int BOMB5 = 80;
+    public static final int BOMB5 = 100;
     public static final int BOMB6 = 100;
     public static final int BOMB7 = 120;
     public static final int BOMB8 = 50;
