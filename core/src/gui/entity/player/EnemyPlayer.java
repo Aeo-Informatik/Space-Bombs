@@ -13,6 +13,7 @@ import gui.AnimEffects;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.hud.MainPlayerHud;
 import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
@@ -135,7 +136,7 @@ public class EnemyPlayer extends Player
     //Execute on player death
     public void onDeath(MapCellCoordinates localCellPos)
     {
-        System.out.println("---------------------Player " + playerId + " died!-------------------");
+        MainPlayerHud.printToScreen("Player " + playerId + " died!");
         
         //Spawn tomb stone
         entityManager.getItemManager().spawnTombstone(localCellPos, coins, playerId);

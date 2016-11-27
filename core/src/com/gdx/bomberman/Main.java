@@ -13,7 +13,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import gui.AudioManager;
 import gui.TextureManager;
-import gui.screen.MenuScreen;
 import gui.screen.StartScreen;
 import server.Server;
 

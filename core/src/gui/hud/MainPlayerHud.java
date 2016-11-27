@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -48,6 +49,12 @@ public class MainPlayerHud
     private Label bombCounterLabel;
     private Label coinCounterLabel;
     private int live = -1;
+    
+    // Print to screen
+    private static Label deathMessageLabel;
+    private float printToScreenTimer;
+    private float printToScreenEndTimer = 5;
+    private static boolean activated = false;
     
     // Bomb Inventory Hud
     private WidgetGroup pricesLabelGroup = new WidgetGroup();
@@ -86,7 +93,19 @@ public class MainPlayerHud
         foregroundTable.top();
         foregroundTable.setFillParent(true);
         
+        /*-------------------------DEATH MESSAGE--------------------------*/
+        Table rootTable = new Table();
+        rootTable.setFillParent(true);
+        
+        parameter.size = 18;
+        deathMessageLabel = new Label("", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
+        deathMessageLabel.setAlignment(Align.center);
+        deathMessageLabel.setFillParent(true);
+        rootTable.add(deathMessageLabel).padRight(30).padTop(800);
+        stage.addActor(rootTable);
+        
         /*-------------------------LIFE & COUNTER HUD--------------------------*/
+        parameter.size = 12;
         //Labels (textfields)
         bombCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
         coinCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
@@ -164,6 +183,17 @@ public class MainPlayerHud
         //Debug
         //stage.setDebugAll(true);
         
+        if(printToScreenTimer >= printToScreenEndTimer && activated == true)
+        {
+            deathMessageLabel.setVisible(false);
+            printToScreenTimer = 0;
+            activated = false;
+            
+        }else if(activated)
+        {
+            printToScreenTimer += Constants.DELTATIME;
+        }
+        
         stage.getCamera().update();
         
         if(mainPlayer != null)
@@ -229,7 +259,6 @@ public class MainPlayerHud
             }else if(choosenBomb != mainPlayer.getChoosenBomb())
             {
                 choosenBomb = mainPlayer.getChoosenBomb();
-                
                 //Change inventory texture
                 switch (choosenBomb) 
                 {
@@ -279,5 +308,13 @@ public class MainPlayerHud
     public void resize(int width, int height)
     {
         stage.getViewport().update(width, height, false);
+    }
+    
+    public static void printToScreen(String message)
+    {
+        deathMessageLabel.setVisible(true);
+        activated = true;
+        
+        deathMessageLabel.setText(message);
     }
 }

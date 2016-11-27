@@ -15,7 +15,7 @@ public class Constants
     public static final int CONNECTIONPORT = 13199;
     public static final boolean CLIENTDEBUG = false;
     public static final boolean PROCESSDATADEBUG = false;
-    public static final boolean COLLIISIONDETECTIONDEBUG = true;
+    public static final boolean COLLIISIONDETECTIONDEBUG = false;
     
     // Server settings
     public static final int LISTENINGPORT = 13199;
@@ -29,7 +29,7 @@ public class Constants
     // Window settings
     public static final int SCREENWIDTH = 800;
     public static final int SCREENHEIGHT = 480;
-    public static final boolean DEFAULTFULLSCREEN = true;
+    public static final boolean DEFAULTFULLSCREEN = false;
     public static final String WINDOWTITEL = "Space Bombs";
     public static final String WINDOWICONPATH = "other/icon.png";
     public static final float DEFAULTZOOM = 0.8f;
