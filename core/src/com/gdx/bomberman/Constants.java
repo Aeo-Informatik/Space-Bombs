@@ -77,7 +77,7 @@ public class Constants
     public static final float INFINITYBOMBEXPLOSIONDURATION = 0.5f;
     public static final float INFINITYBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
     
-    public static final float DYNAMITEBOMBEXPLOSIONTIME = 2;
+    public static final float DYNAMITEBOMBEXPLOSIONTIME = 4f;
     public static final float  DYNAMITEBOMBEXPLOSIONDURATION = 0.4f;
     public static final float  DYNAMITEBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.4f;
     
