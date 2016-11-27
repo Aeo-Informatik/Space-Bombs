@@ -5,6 +5,7 @@
  */
 package gui.entity.bomb;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
@@ -46,7 +47,7 @@ public class NormalBomb extends Bomb
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
-                explode();
+                explode(AudioManager.normalExplosion);
 
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)
@@ -83,13 +84,13 @@ public class NormalBomb extends Bomb
     }
     
     @Override
-    public void explode()
+    public void explode(Sound sound)
     {
         //To Execute the sound only once
         if(ExplodeAudioId == -1)
         {
-            ExplodeAudioId = AudioManager.normalExplosion.play();
-            AudioManager.normalExplosion.setVolume(ExplodeAudioId, Constants.SOUNDVOLUME);
+            ExplodeAudioId = sound.play();
+            sound.setVolume(ExplodeAudioId, Constants.SOUNDVOLUME);
         }
         
         //Create new cell and set texture

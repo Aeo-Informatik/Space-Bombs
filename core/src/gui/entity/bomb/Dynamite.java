@@ -5,11 +5,11 @@
  */
 package gui.entity.bomb;
 
-import client.SendCommand;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
 import gui.AudioManager;
+import static gui.AudioManager.bigBombExplosion;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
@@ -23,6 +23,7 @@ import gui.map.ThinGridCoordinates;
 public class Dynamite extends CubicBomb{
     
     public String Discription = "Cubic explosion";
+    private long soundId = -1;
     
     public Dynamite(ThinGridCoordinates pos, ThinGridCoordinates direction, int cubicRange, int playerId, MapLoader map, EntityManager entityManager) 
     {
@@ -38,6 +39,13 @@ public class Dynamite extends CubicBomb{
     @Override
     public void render()
     {
+        //Execute hit sound
+        if(soundId == -1)
+        {
+            soundId = AudioManager.bombFuse.play();
+            AudioManager.hit.setVolume(soundId, Constants.SOUNDVOLUME * 1.5f);
+        }
+        
         //To make sure no bomb gets placed into wall
         if(!map.isCellBlocked(new MapCellCoordinates(pos.getX(), pos.getY())) && !isExploded)
         {
@@ -53,7 +61,8 @@ public class Dynamite extends CubicBomb{
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
-                explode();
+                AudioManager.bombFuse.stop();
+                explode(AudioManager.bigBombExplosion);
 
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)

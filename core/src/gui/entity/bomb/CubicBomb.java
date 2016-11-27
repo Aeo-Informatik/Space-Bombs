@@ -6,6 +6,7 @@
 
 package gui.entity.bomb;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
@@ -25,6 +26,7 @@ public abstract class CubicBomb extends Bomb{
     
     protected TextureRegion explosionCubic;
     protected int cubicRange;
+    
     
     public CubicBomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int cubicRange, float explosionTime, float explosionDuration, float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager) {
         super(pos, direction, 0, explosionTime, explosionDuration, delayExplodeAfterHitByBomb, playerId, map, entityManager);
@@ -64,7 +66,7 @@ public abstract class CubicBomb extends Bomb{
     }
           
     @Override
-    public void explode(){
+    public void explode(Sound sound){
         //cubic explosion for barrel and dynamite
         //own constant cubic explosion range [1,2,3]
         //dynamite max 2
@@ -73,8 +75,8 @@ public abstract class CubicBomb extends Bomb{
         //To Execute the sound only once
         if(ExplodeAudioId == -1)
         {
-            ExplodeAudioId = AudioManager.normalExplosion.play();
-            AudioManager.normalExplosion.setVolume(ExplodeAudioId, Constants.SOUNDVOLUME);
+            ExplodeAudioId = sound.play();
+            sound.setVolume(ExplodeAudioId, Constants.SOUNDVOLUME);
         }
         
         

@@ -6,6 +6,7 @@
 package gui.entity.bomb;
 
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -39,7 +40,7 @@ public class Infinity extends Bomb
     
     
     @Override
-    protected void explode() 
+    protected void explode(Sound sound) 
     {
         // Nothing to do here o.O
     }

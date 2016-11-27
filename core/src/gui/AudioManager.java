@@ -23,6 +23,8 @@ public class AudioManager
     public static Sound hit;
     public static Sound singleCoin;
     public static Sound gameOver;
+    public static Sound bombFuse;
+    public static Sound bigBombExplosion;
     
     //Menu Music
     public static Music menuMusic;
@@ -49,6 +51,8 @@ public class AudioManager
         hit = loadSound("audio/sounds/hit.wav");
         singleCoin = loadSound("audio/sounds/coin.wav");
         gameOver = loadSound("audio/sounds/game-over.wav");
+        bombFuse = loadSound("audio/sounds/bomb-fuse.ogg");
+        bigBombExplosion = loadSound("audio/sounds/big-bomb-explosion.wav");
         
         //Menu Music
         menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");

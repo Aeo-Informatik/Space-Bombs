@@ -7,6 +7,7 @@
 package gui.entity.bomb;
 
 import client.SendCommand;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
@@ -123,7 +124,7 @@ public abstract class Bomb extends Entity
     }
     
     
-    protected abstract void explode();
+    protected abstract void explode(Sound sound);
     
     public void setBombAnimation(Animation bomb)
     {

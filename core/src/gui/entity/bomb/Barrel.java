@@ -8,6 +8,7 @@ package gui.entity.bomb;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
+import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
@@ -48,7 +49,7 @@ public class Barrel extends CubicBomb {
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
-                explode();
+                explode(AudioManager.normalExplosion);
 
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)
