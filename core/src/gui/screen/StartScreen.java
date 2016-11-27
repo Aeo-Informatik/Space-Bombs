@@ -65,6 +65,17 @@ public class StartScreen extends Screens implements Screen
         fontOptions.size = 11;
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
         
+        /**------------------------AUDIO------------------------**/
+        if(AudioManager.currentIngameMusic != null)
+        {
+            AudioManager.currentIngameMusic.dispose();
+        }
+        
+        AudioManager.startScreenMusic.setLooping(true);
+        AudioManager.startScreenMusic.play();
+        AudioManager.startScreenMusic.setVolume(Constants.MUSICVOLUME);  
+
+        
         /**------------------------LABEL STYLE------------------------**/
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         fontOptions.size = 70;
@@ -112,6 +123,7 @@ public class StartScreen extends Screens implements Screen
         
         if(timer >= endTimer)
         {
+            AudioManager.startScreenMusic.dispose();
             //Add click sound
             long id = AudioManager.normalExplosion.play();
             AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
@@ -125,7 +137,6 @@ public class StartScreen extends Screens implements Screen
             {
 
             }
-            
             game.setScreen(new MenuScreen(game, client, server));
         }else
         {
@@ -150,6 +161,7 @@ public class StartScreen extends Screens implements Screen
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) || hideTimer != 0)
         {
             pressAnyKey.setVisible(false);
+            AudioManager.startScreenMusic.dispose();
             
             if(hideTimer == 0)
             {

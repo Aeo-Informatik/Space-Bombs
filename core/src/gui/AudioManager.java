@@ -26,6 +26,7 @@ public class AudioManager
     
     //Menu Music
     public static Music menuMusic;
+    public static Music startScreenMusic;
     
     //Ingame Music
     public static Music currentIngameMusic;
@@ -48,7 +49,8 @@ public class AudioManager
         
         //Menu Music
         menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
-
+        startScreenMusic = loadMusic("audio/music/8-bit-King.mp3");
+        
         //Ingame Music
         Amys_Toxic_Cave = loadMusic("audio/music/The_Briggs_Effect/Amys_Toxic_Cave.mp3");
         Flight_of_the_Battery = loadMusic("audio/music/The_Briggs_Effect/Flight_of_the Battery.mp3");

@@ -12,7 +12,6 @@
 
 // Ingame
 - Add to the Life bar the till now collected items.
-- Show how much money and life everyone has.
 
 //Textures
 - blue coins which give x2 and red coins which give x3
