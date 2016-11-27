@@ -60,10 +60,18 @@ public abstract class Player extends Entity
         // Collide left
         ThinGridCoordinates point5 = this.getCollisionPosMiddleLeft();
         Player.DrawDebugLine(point5, point5, 5, Color.RED, camera.combined);
+        // Collide left 2
+        ThinGridCoordinates point9 = this.getCollisionPosMiddleLeft2();
+        Player.DrawDebugLine(point9, point9, 5, Color.RED, camera.combined);
+        
         
         // Collide right
         ThinGridCoordinates point6 = this.getCollisionPosMiddleRight();
         Player.DrawDebugLine(point6, point6, 5, Color.RED, camera.combined);
+        // Collide right 2
+        ThinGridCoordinates point8 = this.getCollisionPosMiddleRight2();
+        Player.DrawDebugLine(point8, point8, 5, Color.RED, camera.combined);
+        
         
         // Stand on block
         ThinGridCoordinates point7 = this.getFeetLocation();
@@ -99,7 +107,7 @@ public abstract class Player extends Entity
      */
     protected boolean collidesLeft()
     {
-        if(map.isCellBlocked(new MapCellCoordinates(this.getCollisionPosMiddleLeft())))
+        if(map.isCellBlocked(new MapCellCoordinates(this.getCollisionPosMiddleLeft())) || map.isCellBlocked(new MapCellCoordinates(getCollisionPosMiddleLeft2())))
             return true;
 
         return false;
@@ -111,7 +119,7 @@ public abstract class Player extends Entity
      */
     protected boolean collidesRight()
     {
-        if(map.isCellBlocked(new MapCellCoordinates(this.getCollisionPosMiddleRight())))
+        if(map.isCellBlocked(new MapCellCoordinates(this.getCollisionPosMiddleRight())) || map.isCellBlocked(new MapCellCoordinates(getCollisionPosMiddleRight2())))
             return true;
 
         return false;
@@ -441,7 +449,15 @@ public abstract class Player extends Entity
         float marginX = 2f;
         float marginY = 0f;
         
-        return new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH + marginX,pos.getY() + Constants.PLAYERHEIGHT / 4 + marginY);
+        return new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH + marginX,pos.getY() + Constants.PLAYERHEIGHT / 3 + marginY);
+    }
+    
+    public ThinGridCoordinates getCollisionPosMiddleRight2()
+    {
+        float marginX = 2f;
+        float marginY = 0f;
+        
+        return new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH + marginX,pos.getY() + Constants.PLAYERHEIGHT / 8 + marginY);
     }
     
     public ThinGridCoordinates getCollisionPosMiddleLeft()
@@ -449,7 +465,15 @@ public abstract class Player extends Entity
         float marginX = 2f;
         float marginY = 0f;
         
-        return new ThinGridCoordinates(pos.getX() - marginX,pos.getY() + Constants.PLAYERHEIGHT / 4 + marginY);
+        return new ThinGridCoordinates(pos.getX() - marginX,pos.getY() + Constants.PLAYERHEIGHT / 3 + marginY);
+    }
+    
+    public ThinGridCoordinates getCollisionPosMiddleLeft2()
+    {
+        float marginX = 2f;
+        float marginY = 0f;
+        
+        return new ThinGridCoordinates(pos.getX() - marginX,pos.getY() + Constants.PLAYERHEIGHT / 8 + marginY);
     }
     
     public ThinGridCoordinates getCollisionPosTopHalfRight()
