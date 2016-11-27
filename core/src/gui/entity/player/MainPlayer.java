@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
+import static gui.AudioManager.gameOver;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
@@ -172,9 +173,17 @@ public class MainPlayer extends Player
     /**
      * Execute on player death
      */
+    long id2 = -1;
     public void onDeath()
     {
         entityManager.getItemManager().spawnTombstone(new MapCellCoordinates(pos), coins, playerId);
+        
+         //Execute hit sound
+        if(id2 == -1)
+        {
+            id2 = AudioManager.gameOver.play();
+            AudioManager.gameOver.setVolume(id2, Constants.SOUNDVOLUME);
+        }
         
         sendCommand.setPlayerLife(playerId, 0);
     }
@@ -197,11 +206,12 @@ public class MainPlayer extends Player
             //Set invulnerability to true
             godMode = true;
             
+            
             //Send playerLife command to server
             sendCommand.setPlayerLife(playerId, life);
             
             //Execute hit sound
-            if(id == -1)
+            if(id == -1 && life > 1)
             {
                 id = AudioManager.hit.play();
                 AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);

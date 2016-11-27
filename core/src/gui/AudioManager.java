@@ -22,7 +22,7 @@ public class AudioManager
     public static Sound normalExplosion;
     public static Sound hit;
     public static Sound singleCoin;
-    
+    public static Sound gameOver;
     
     //Menu Music
     public static Music menuMusic;
@@ -43,11 +43,12 @@ public class AudioManager
     //His music is available under this license: https://creativecommons.org/licenses/by/3.0/
     public static void load() 
     {      
-        //Menu Sounds
+        //Sounds
         clickSound = loadSound("audio/sounds/click.wav");
         normalExplosion = loadSound("audio/sounds/8-bit-explosion-stakkato.wav");
         hit = loadSound("audio/sounds/hit.wav");
         singleCoin = loadSound("audio/sounds/coin.wav");
+        gameOver = loadSound("audio/sounds/game-over.wav");
         
         //Menu Music
         menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
