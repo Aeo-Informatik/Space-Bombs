@@ -44,6 +44,10 @@ public class StartScreen extends Screens implements Screen
     private float flashingTimer = 0;
     private float endFlashingTimer = 0.7f;
     
+    // Hide label after button press
+    private float hideTimer = 0;
+    private float endHideTimer = 0.7f;
+    
     // Label
     private Label gameTitel;
     private Label pressAnyKey;
@@ -143,25 +147,24 @@ public class StartScreen extends Screens implements Screen
             flashingTimer += Constants.DELTATIME;
         }
         
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) || hideTimer != 0)
         {
             pressAnyKey.setVisible(false);
             
-            //Add click sound
-            long id = AudioManager.normalExplosion.play();
-            AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
-
-            //Wait till sound is done
-            try 
+            if(hideTimer == 0)
             {
-                Thread.sleep(750);
-
-            } catch (InterruptedException ex) 
-            {
-
+                //Add click sound
+                long id = AudioManager.normalExplosion.play();
+                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
             }
-            
-            game.setScreen(new MenuScreen(game, client, server));
+
+            if(hideTimer >= endHideTimer)
+            {
+                game.setScreen(new MenuScreen(game, client, server));
+            }else
+            {
+                hideTimer += Constants.DELTATIME;
+            }
         }
         
         /*------------------SWITCH TO FULLSCREEN AND BACK------------------*/
