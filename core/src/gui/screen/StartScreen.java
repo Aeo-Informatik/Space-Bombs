@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
+import gui.AudioManager;
 import gui.TextureManager;
 import server.Server;
 
@@ -107,6 +108,20 @@ public class StartScreen extends Screens implements Screen
         
         if(timer >= endTimer)
         {
+            //Add click sound
+            long id = AudioManager.normalExplosion.play();
+            AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+
+            //Wait till sound is done
+            try 
+            {
+                Thread.sleep(300);
+
+            } catch (InterruptedException ex) 
+            {
+
+            }
+            
             game.setScreen(new MenuScreen(game, client, server));
         }else
         {
@@ -130,6 +145,22 @@ public class StartScreen extends Screens implements Screen
         
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
         {
+            pressAnyKey.setVisible(false);
+            
+            //Add click sound
+            long id = AudioManager.normalExplosion.play();
+            AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+
+            //Wait till sound is done
+            try 
+            {
+                Thread.sleep(750);
+
+            } catch (InterruptedException ex) 
+            {
+
+            }
+            
             game.setScreen(new MenuScreen(game, client, server));
         }
         
