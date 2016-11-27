@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
 import gui.AudioManager;
-import static gui.AudioManager.gameOver;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
@@ -193,7 +192,6 @@ public class MainPlayer extends Player
      * Player gets hit by bomb
      */
     Thread flashThread;
-    long id = -1;
     public void hitByBomb() 
     {  
         //If player touches explosion
@@ -202,20 +200,12 @@ public class MainPlayer extends Player
             
             //Reduce player life
             life -= 1;
-            
             //Set invulnerability to true
             godMode = true;
             
             
             //Send playerLife command to server
             sendCommand.setPlayerLife(playerId, life);
-            
-            //Execute hit sound
-            if(id == -1 && life > 1)
-            {
-                id = AudioManager.hit.play();
-                AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
-            }
                
             //Debug
             if(Constants.CLIENTDEBUG)
@@ -236,7 +226,6 @@ public class MainPlayer extends Player
         {
             godMode = false;
             godModeTimer = 0;
-            id = -1;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
             if(flashThread != null)

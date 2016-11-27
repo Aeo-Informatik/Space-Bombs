@@ -9,7 +9,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
 import gui.AudioManager;
-import static gui.AudioManager.bigBombExplosion;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapCellCoordinates;
@@ -43,7 +42,7 @@ public class Dynamite extends CubicBomb{
         if(soundId == -1)
         {
             soundId = AudioManager.bombFuse.play();
-            AudioManager.hit.setVolume(soundId, Constants.SOUNDVOLUME * 1.5f);
+            AudioManager.bombFuse.setVolume(soundId, Constants.SOUNDVOLUME);
         }
         
         //To make sure no bomb gets placed into wall

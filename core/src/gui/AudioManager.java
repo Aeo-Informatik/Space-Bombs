@@ -20,7 +20,6 @@ public class AudioManager
     //Menu Sounds
     public static Sound clickSound;
     public static Sound normalExplosion;
-    public static Sound hit;
     public static Sound singleCoin;
     public static Sound gameOver;
     public static Sound bombFuse;
@@ -48,7 +47,6 @@ public class AudioManager
         //Sounds
         clickSound = loadSound("audio/sounds/click.wav");
         normalExplosion = loadSound("audio/sounds/8-bit-explosion-stakkato.wav");
-        hit = loadSound("audio/sounds/hit.wav");
         singleCoin = loadSound("audio/sounds/coin.wav");
         gameOver = loadSound("audio/sounds/game-over.wav");
         bombFuse = loadSound("audio/sounds/bomb-fuse.ogg");

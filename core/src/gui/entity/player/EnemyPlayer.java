@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gdx.bomberman.Constants;
 import gui.AnimEffects;
-import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.hud.MainPlayerHud;
@@ -150,7 +149,6 @@ public class EnemyPlayer extends Player
      * Player gets hit by bomb
      */
     Thread flashThread;
-    long id = -1;
     public void hitByBomb(SpriteBatch renderObject) 
     {  
         //If player touches explosion
@@ -158,12 +156,6 @@ public class EnemyPlayer extends Player
         {
             godmode = true;
 
-            if(id == -1)
-            {
-                id = AudioManager.hit.play();
-                AudioManager.hit.setVolume(id, Constants.SOUNDVOLUME);
-            }
-            
             if(Constants.CLIENTDEBUG)
             {
                 System.out.println("Enemy " + playerId + ": Invulnerability activated");
@@ -182,7 +174,6 @@ public class EnemyPlayer extends Player
         {
             godmode = false;
             godModeTimer = 0;
-            id = -1;
             
             //Stops the blinkAnimation thread, it is more precise than using only the godModeDuration
             flashThread.interrupt();
