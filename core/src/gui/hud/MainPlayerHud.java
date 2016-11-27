@@ -259,6 +259,7 @@ public class MainPlayerHud
             }else if(choosenBomb != mainPlayer.getChoosenBomb())
             {
                 choosenBomb = mainPlayer.getChoosenBomb();
+                
                 //Change inventory texture
                 switch (choosenBomb) 
                 {
@@ -315,6 +316,9 @@ public class MainPlayerHud
         deathMessageLabel.setVisible(true);
         activated = true;
         
+//        String previousMessages[] = deathMessageLabel.getText().toString().split("\n");
+//        String lastMessage = previousMessages[previousMessages.length -1];
+//        
         deathMessageLabel.setText(message);
     }
 }
