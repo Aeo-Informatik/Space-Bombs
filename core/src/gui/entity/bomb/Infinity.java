@@ -14,7 +14,7 @@ import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
 import java.util.ArrayList;
-import java.util.Random;
+
 
 /**
  *
@@ -28,7 +28,7 @@ public class Infinity extends Bomb
     //Variables
     private int wave = 0;
     
-     protected String description = "Replicates itself randomly but has a 4 times lower coin drop rate"; 
+     protected String description = "Replicates itself randomly but has a 2 times lower coin drop rate"; 
     
     public Infinity(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager, int explodePath) 
     {

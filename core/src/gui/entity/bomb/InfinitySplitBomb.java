@@ -35,7 +35,7 @@ public class InfinitySplitBomb extends Infinity
     {
         int randomNum = new Random().nextInt(10) +1;//Possible output: 1, 2...10
                     
-            if(randomNum <= Constants.COINDROPCHANCE / 4)
+            if(randomNum <= Constants.COINDROPCHANCE / 2)
                 {
                     //entityManager.getItemManager().spawnCoin(x, y, Constants.COINVALUE);
                         
