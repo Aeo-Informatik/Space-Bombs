@@ -27,6 +27,8 @@ public class AudioManager
     //Menu Music
     public static Music menuMusic;
     public static Music startScreenMusic;
+    public static Music looserMusic;
+    public static Music winnerMusic;
     
     //Ingame Music
     public static Music currentIngameMusic;
@@ -50,6 +52,8 @@ public class AudioManager
         //Menu Music
         menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
         startScreenMusic = loadMusic("audio/music/8-bit-King.mp3");
+        looserMusic = loadMusic("audio/music/Sneaky-Cat.mp3");
+        winnerMusic = loadMusic("audio/music/The-Hard-Luck-Gang.mp3");
         
         //Ingame Music
         Amys_Toxic_Cave = loadMusic("audio/music/The_Briggs_Effect/Amys_Toxic_Cave.mp3");

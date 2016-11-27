@@ -45,6 +45,7 @@ public class WinnerScreen extends Screens implements Screen
     
     // Player positions
     ArrayList<Integer> playerPositions = new ArrayList<>();
+    private boolean isWinner;
     
     // Buttons
     private TextButton backButton;
@@ -93,7 +94,7 @@ public class WinnerScreen extends Screens implements Screen
         FreeTypeFontGenerator.FreeTypeFontParameter fontOptions = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontOptions.size = 11;
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
-        
+
         /**------------------------LABEL STYLE------------------------**/
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         fontOptions.size = 60;
@@ -179,8 +180,10 @@ public class WinnerScreen extends Screens implements Screen
         if(Constants.PLAYERID == playerPositions.get(playerPositions.size() -1))
         {
             titel.setText("YOU WON!");
+            isWinner = true;
         }else
         {
+            isWinner = false;
             titel.setText("YOU LOOSE!");
             titel.setColor(Color.RED);
         }
@@ -210,6 +213,24 @@ public class WinnerScreen extends Screens implements Screen
         positionPlayerWidget.setPosition(443, 230);
         stage.addActor(positionPlayerWidget);
 
+        /**------------------------MUSIC------------------------**/
+        if(AudioManager.currentIngameMusic != null)
+        {
+            AudioManager.currentIngameMusic.dispose();
+        }
+        
+        if(isWinner == false)
+        {
+            AudioManager.looserMusic.setLooping(true);
+            AudioManager.looserMusic.play();
+            AudioManager.looserMusic.setVolume(Constants.MUSICVOLUME * 4);  
+        }else
+        {
+            AudioManager.winnerMusic.setLooping(true);
+            AudioManager.winnerMusic.play();
+            AudioManager.winnerMusic.setVolume(Constants.MUSICVOLUME * 6);  
+        }
+        
         /**------------------------BUTTONS------------------------**/
         TextButton.TextButtonStyle textButtonStyleBack = new TextButton.TextButtonStyle();
         textButtonStyleBack.font = font;
@@ -242,6 +263,14 @@ public class WinnerScreen extends Screens implements Screen
                 } catch (InterruptedException ex) 
                 {
                     
+                }
+                
+                if(isWinner)
+                {
+                    AudioManager.winnerMusic.stop();
+                }else
+                {
+                    AudioManager.looserMusic.stop();
                 }
 
                 game.setScreen(new MenuScreen(game, client, server));
@@ -333,6 +362,14 @@ public class WinnerScreen extends Screens implements Screen
         /*------------------QUIT GAME------------------*/
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
         {
+            if(isWinner)
+            {
+                AudioManager.winnerMusic.stop();
+            }else
+            {
+                AudioManager.looserMusic.stop();
+            }
+            
             game.setScreen(new MenuScreen(game, client, server));
         }
     }

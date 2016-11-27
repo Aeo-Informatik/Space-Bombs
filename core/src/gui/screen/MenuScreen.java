@@ -22,6 +22,7 @@ import com.gdx.bomberman.Constants;
 import gui.AudioManager;
 import gui.TextureManager;
 import static gui.TextureManager.skin;
+import java.util.ArrayList;
 import server.Server;
 
 
@@ -239,6 +240,16 @@ public class MenuScreen extends Screens implements Screen
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             }
         }
+        
+//        if(Gdx.input.isKeyJustPressed(Input.Keys.C))
+//        {
+//            ArrayList<Integer> asd = new ArrayList<>();
+//            asd.add(1);
+//            asd.add(2);
+//            Constants.PLAYERID = 1;
+//            AudioManager.menuMusic.stop();
+//            game.setScreen(new WinnerScreen(asd, game, client, server));
+//        }
     }
     
     
