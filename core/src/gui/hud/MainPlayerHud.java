@@ -105,7 +105,7 @@ public class MainPlayerHud
         stage.addActor(rootTable);
         
         /*-------------------------LIFE & COUNTER HUD--------------------------*/
-        parameter.size = 12;
+        parameter.size = 15;
         //Labels (textfields)
         bombCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
         coinCounterLabel = new Label("000", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
