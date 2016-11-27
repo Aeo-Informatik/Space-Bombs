@@ -8,7 +8,6 @@ package gui.entity.player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gdx.bomberman.Constants;
 import gui.entity.EntityManager;
@@ -188,41 +187,59 @@ public class Spectator extends Player
     }
     
     
-    /*------------------GHOST MOVEMENT------------------*/
+    /**------------------GHOST MOVEMENT------------------**/
+    /**
+     * Checks if entity collides with a blocked field on his left if so it returns true
+     * @return boolean
+     */
     @Override
     protected boolean collidesLeft()
     {
-        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() - 2, pos.getY())))
+        if(map.isCellGhostBlocked(new MapCellCoordinates(this.getCollisionPosMiddleLeft())))
             return true;
 
         return false;
     }
     
+    /**
+     * Checks if entity collides with a blocked field on his right if so it returns true
+     * @return boolean
+     */
     @Override
     protected boolean collidesRight()
     {
-        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() + Constants.PLAYERWIDTH + 2, pos.getY())))
+        if(map.isCellGhostBlocked(new MapCellCoordinates(this.getCollisionPosMiddleRight())))
             return true;
 
         return false;
     }
     
+    /**
+     * Checks if entity collides with a blocked field on his top if so it returns true
+     * @return boolean
+     */
     @Override
     protected boolean collidesTop()
     {
-        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() + 3, pos.getY() + Constants.PLAYERHEIGHT / 2 + 3)) || map.isCellGhostBlocked(new MapCellCoordinates(pos.getX()  + Constants.PLAYERWIDTH - 3, pos.getY() + Constants.PLAYERHEIGHT / 2 + 3)))
+        //Checks at players half on the left and right if there is a block or bomb located
+        if(map.isCellGhostBlocked(new MapCellCoordinates(getCollisionPosTopHalfLeft())) 
+                || map.isCellGhostBlocked(new MapCellCoordinates(getCollisionPosTopHalfRight())))
             return true;
-
         return false;
     }
     
+    /**
+     * Checks if entity collides with a blocked field on his bottom if so it returns true
+     * @return boolean
+     */
     @Override
     protected boolean collidesBottom()
     {
-        //Checks at the players feet on the left if there is a block and on the right
-        if(map.isCellGhostBlocked(new MapCellCoordinates(pos.getX() + 3, pos.getY() - 3)) || map.isCellGhostBlocked(new MapCellCoordinates(pos.getX()  + Constants.PLAYERWIDTH -3, pos.getY() - 3)))
+        //Checks at players feet on the left if there is a block and on the right
+        if(map.isCellGhostBlocked(new MapCellCoordinates(getCollisionPosDownLeft())) 
+                || map.isCellGhostBlocked(new MapCellCoordinates(getCollisionPosDownRight())))
             return true;
-
+        //else
         return false;
     }
     

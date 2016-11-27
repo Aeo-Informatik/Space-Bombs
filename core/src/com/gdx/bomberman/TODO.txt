@@ -32,7 +32,9 @@ MenuScreen:
 1) (optional) Scanning for open servers with port scan
 
 //Optimisation
-Improve texture animations to go quicker as the time default explosion time reduces.
+- Improve texture animations to go quicker as the time default explosion time reduces.
+- The server decides over the players settings
+
 
 //Bugs
 1) At times one client gets IndexOutofBounds because of itemFields in ProcessData
