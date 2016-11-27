@@ -24,6 +24,7 @@ public class TextureManager
     public static FreeTypeFontGenerator menuFont;
     public static Texture menuBackground;
     public static Texture hostBackground;
+    public static Texture startBackground;
     
     // Standard bomb button
     public static Skin skin;
@@ -244,7 +245,8 @@ public class TextureManager
         menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         menuBackground = loadTexture("menu/menu.png");
         hostBackground = loadTexture("menu/menu-host.png");
-                
+        startBackground = loadTexture("menu/start_picture.png");        
+        
         // Winner screen
         playerMarker = loadTexture("other/playerMarker.png");
         

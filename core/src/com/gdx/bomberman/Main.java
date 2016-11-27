@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.GL20;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.screen.MenuScreen;
+import gui.screen.StartScreen;
 import server.Server;
 
 public class Main extends Game implements ApplicationListener {
@@ -47,7 +48,7 @@ public class Main extends Game implements ApplicationListener {
         TextureManager.load();
         AudioManager.load();
         
-        this.setScreen(new MenuScreen(this, client, server));
+        this.setScreen(new StartScreen(this, client, server));
     }
     
         
