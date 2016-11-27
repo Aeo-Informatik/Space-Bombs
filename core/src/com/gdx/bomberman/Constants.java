@@ -29,8 +29,8 @@ public class Constants
     // Window settings
     public static final int SCREENWIDTH = 800;
     public static final int SCREENHEIGHT = 480;
-    public static final boolean DEFAULTFULLSCREEN = false;
-    public static final String WINDOWTITEL = "Aeo Bombs";
+    public static final boolean DEFAULTFULLSCREEN = true;
+    public static final String WINDOWTITEL = "Space Bombs";
     public static final String WINDOWICONPATH = "other/icon.png";
     public static final float DEFAULTZOOM = 0.8f;
     public static final float DEFAULTMAXZOOMIN = 0.5f;

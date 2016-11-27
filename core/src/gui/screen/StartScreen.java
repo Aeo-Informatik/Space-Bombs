@@ -10,13 +10,16 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
@@ -31,9 +34,19 @@ public class StartScreen extends Screens implements Screen
     //Objects
     private Stage stage;
     private Table rootTable;
-    private float timer = 0;
-    private float endTimer = 3;
     
+    // Go to next screen timer
+    private float timer = 0;
+    private float endTimer = 60;
+    
+    //Press any key flashing timer
+    private float flashingTimer = 0;
+    private float endFlashingTimer = 0.7f;
+    
+    // Label
+    private Label gameTitel;
+    private Label pressAnyKey;
+
     public StartScreen(Game game, Client client, Server server) 
     {
         super(game, client, server);
@@ -47,9 +60,32 @@ public class StartScreen extends Screens implements Screen
         fontOptions.size = 11;
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
         
+        /**------------------------LABEL STYLE------------------------**/
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        fontOptions.size = 70;
+        labelStyle.font = TextureManager.menuFont.generateFont(fontOptions);
+        labelStyle.fontColor = Color.GOLD;
+        
         rootTable = new Table();
         rootTable.setFillParent(true);
         stage.addActor(rootTable);
+        
+        gameTitel = new Label("I like trains", labelStyle);
+        gameTitel.setText(Constants.WINDOWTITEL);
+        gameTitel.setAlignment(Align.center);
+        gameTitel.setPosition((Constants.SCREENWIDTH - gameTitel.getWidth()) / 2, Constants.SCREENHEIGHT - gameTitel.getHeight() - 10);
+        stage.addActor(gameTitel);
+        
+        /**------------------------LABEL STYLE------------------------**/
+        Label.LabelStyle labelStyle2 = new Label.LabelStyle();
+        fontOptions.size = 30;
+        labelStyle2.font = TextureManager.menuFont.generateFont(fontOptions);
+        labelStyle2.fontColor = Color.GOLDENROD;
+        
+        pressAnyKey = new Label("Press any key...", labelStyle2);
+        pressAnyKey.setAlignment(Align.center);
+        pressAnyKey.setPosition((Constants.SCREENWIDTH - pressAnyKey.getWidth()) / 2, Constants.SCREENHEIGHT - gameTitel.getHeight() - pressAnyKey.getHeight() - 40);
+        stage.addActor(pressAnyKey);
         
         //Set background image
         rootTable.background(new TextureRegionDrawable(new TextureRegion(TextureManager.startBackground)));
@@ -75,6 +111,21 @@ public class StartScreen extends Screens implements Screen
         }else
         {
             timer += Constants.DELTATIME;
+        }
+        
+        if(flashingTimer >= endFlashingTimer)
+        {
+            if(pressAnyKey.isVisible())
+            {
+                pressAnyKey.setVisible(false);
+            }else
+            {
+                pressAnyKey.setVisible(true);
+            }
+            flashingTimer = 0;
+        }else
+        {
+            flashingTimer += Constants.DELTATIME;
         }
         
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
