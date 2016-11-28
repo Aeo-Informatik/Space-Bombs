@@ -64,7 +64,7 @@ public class Constants
     public static final int MAXBOMBPLACE = 5;
     public static final int MAXBOMBRANGE = 5; // Cells
     public static final int DEFAULTBOMBRANGE = 2;
-    public static final int DEFAULTBOMBPLACE = 2;
+    public static final int DEFAULTBOMBPLACE = 5;
     public static final int DEFAULTCUBICRANGE = 1;
     public static final int MAXCUBICRANGE = 2;
 
@@ -89,7 +89,7 @@ public class Constants
     
     // Bomb cost settings
     public static final int BOMB1 = 0; // Normal Bomb
-    public static final int BOMB2 = 70; // Dynamite
+    public static final int BOMB2 = 100; // Dynamite
     public static final int BOMB3 = 100; // Granade
     public static final int BOMB4 = 50; // X3
     public static final int BOMB5 = 100;
