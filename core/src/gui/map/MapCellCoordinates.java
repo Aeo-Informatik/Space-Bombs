@@ -34,6 +34,15 @@ public class MapCellCoordinates {
         this.y = (int) (a.getY() / Constants.MAPTEXTUREHEIGHT);
     }
     
+    public boolean equalCoordinates(MapCellCoordinates e)
+    {
+        if(e.getX() == x && e.getY() == y)
+        {
+            return true;
+        }else
+            return false;
+    }
+    
     /**
      * @return the x
      */

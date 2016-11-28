@@ -68,6 +68,19 @@ public class BombManager
         }
     }
     
+    public void spawnTeleporter(ThinGridCoordinates pos, int playerId)
+    {
+        Teleport entity = new Teleport(pos, new ThinGridCoordinates(0,0), playerId, map, entityManager);
+        
+        //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
+        if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
+        {
+            bombArrayMainPlayer.add(entity);
+        }else
+        {
+            bombArrayEnemyPlayers.add(entity);
+        }
+    }
     
     /**--------------------SPAWN FUNCTIONS--------------------**/
     public void spawnNormalBomb(ThinGridCoordinates pos, int playerId, int bombRange)

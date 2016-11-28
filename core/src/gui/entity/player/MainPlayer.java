@@ -17,7 +17,6 @@ import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
 import gui.map.MapLoader;
-import gui.entity.item.Teleport;
 import gui.map.MapCellCoordinates;
 import gui.map.ThinGridCoordinates;
 import java.util.Random;
@@ -477,11 +476,10 @@ public class MainPlayer extends Player
         /*------------------PLACE BOMB------------------*/
         if (Gdx.input.isKeyJustPressed(Keys.SPACE))
         {
-            ThinGridCoordinates feetPosition = new ThinGridCoordinates(pos.getX() + Constants.PLAYERWIDTH / 2, pos.getY() + Constants.PLAYERHEIGHT / 3);
             String bombType;
             
             //Checks if there is already a bomb
-            if(entityManager.getPlayerManager().getPlayerIdOnCoordinates(new MapCellCoordinates(feetPosition)) == playerId && !map.isBombPlaced(new MapCellCoordinates(feetPosition)) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size )
+            if(entityManager.getPlayerManager().getPlayerIdOnCoordinates(new MapCellCoordinates(this.getFeetLocation())) == playerId && !map.isBombPlaced(new MapCellCoordinates(this.getFeetLocation())) && maxBombPlacing > entityManager.getBombManager().getBombArrayMain().size )
             {
                 switch (chosenBomb)
                 {
@@ -495,10 +493,10 @@ public class MainPlayer extends Player
                             coins -= Constants.BOMB1;
 
                             //Send bomb command to server
-                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+                            sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
 
                             //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                            entityManager.getBombManager().spawnNormalBomb(feetPosition, playerId, bombRange);
+                            entityManager.getBombManager().spawnNormalBomb(this.getFeetLocation(), playerId, bombRange);
                         }
                         break;
 
@@ -512,10 +510,10 @@ public class MainPlayer extends Player
                             coins -= Constants.BOMB2;
 
                             //Send bomb command to server
-                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+                            sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
 
                             //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                            entityManager.getBombManager().spawnDynamite(feetPosition, playerId, cubicRange);
+                            entityManager.getBombManager().spawnDynamite(this.getFeetLocation(), playerId, cubicRange);
                         }
                         break;
 
@@ -529,12 +527,12 @@ public class MainPlayer extends Player
                             coins -= Constants.BOMB3;
 
                             //Send bomb command to server
-                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+                            sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
 
                             //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
                             int explodePath = new Random().nextInt(2) +1;
-                            entityManager.getBombManager().spawnInfinity(feetPosition, playerId, bombRange, explodePath);
-                            sendCommand.placeInfinityBomb(playerId, feetPosition, explodePath);
+                            entityManager.getBombManager().spawnInfinity(this.getFeetLocation(), playerId, bombRange, explodePath);
+                            sendCommand.placeInfinityBomb(playerId, this.getFeetLocation(), explodePath);
                         }
                         break;
 
@@ -548,10 +546,10 @@ public class MainPlayer extends Player
                             coins -= Constants.BOMB4;
 
                             //Send bomb command to server
-                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+                            sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
 
                             //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                            entityManager.getBombManager().spawnX3(feetPosition, playerId, bombRange, 1);
+                            entityManager.getBombManager().spawnX3(this.getFeetLocation(), playerId, bombRange, 1);
                         }
                         break;
 
@@ -565,10 +563,10 @@ public class MainPlayer extends Player
                             coins -= Constants.BOMB8;
 
                             //Send bomb command to server
-                            sendCommand.placeBomb(playerId, feetPosition, bombType);
+                            sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
 
                             //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
-                            entityManager.getBombManager().spawnBarrel(feetPosition, playerId, cubicRange);
+                            entityManager.getBombManager().spawnBarrel(this.getFeetLocation(), playerId, cubicRange);
                         }
                         break;
 
@@ -581,8 +579,7 @@ public class MainPlayer extends Player
                         {
                             coins -= Constants.BOMB9;
 
-                            Teleport item = new Teleport(new MapCellCoordinates(feetPosition),map,entityManager);
-                            item.itemEffect();
+                            entityManager.getBombManager().spawnTeleporter(this.getFeetLocation(), playerId);
                         }
                         break;
                 }
