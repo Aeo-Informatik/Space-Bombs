@@ -30,7 +30,7 @@ public class Barrel extends CubicBomb {
         //Vector2 pos, Vector2 direction, int cubicRange, 
         //int explosionTime,  float explosionDuration, float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
         super(pos, direction, cubicRange, 2, 0.4f, 0.4f, playerId, map, entityManager);
-        super.setBombAnimation(TextureManager.dynamiteAnim);
+        super.setBombAnimation(TextureManager.barrelAnim);
         
     }
     

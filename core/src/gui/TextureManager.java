@@ -237,6 +237,9 @@ public class TextureManager
     
     public static Texture x3;
     public static Animation x3Anim;
+    
+    public static Texture barrel;
+    public static Animation barrelAnim;
     //TextureRegion(texture, int cutX, int cutY, int width, int height)
     
     public static void load() 
@@ -509,6 +512,9 @@ public class TextureManager
         
         x3 = loadTexture("bombs/x3_anim.png");
         x3Anim = new Animation(BombAnimTime, new TextureRegion(x3, 0, 0, 33, 32), new TextureRegion(x3, 32, 0, 33, 32), new TextureRegion(x3, 64, 0, 33, 32));
+    
+        barrel = loadTexture("bombs/barrel.png");
+        barrelAnim = new Animation(BombAnimTime,  new TextureRegion(barrel, 0, 0, 33, 32), new TextureRegion(barrel, 32, 0, 33, 32), new TextureRegion(barrel, 64, 0, 33, 32));
     }
     
     
