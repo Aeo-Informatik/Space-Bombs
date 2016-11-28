@@ -64,6 +64,7 @@ public class Teleport extends Bomb{
                 }
             }
         }
+        this.isExploded = true;
     }
 
     @Override
@@ -85,7 +86,11 @@ public class Teleport extends Bomb{
             }else
             {
                 MainPlayerHud.printToScreen("Teleportation aborted. Don't move!");
+                this.isExploded = true;
             }
+        }else
+        {
+            this.isExploded = true;
         }
         
     }
