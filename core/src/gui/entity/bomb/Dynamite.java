@@ -47,7 +47,7 @@ public class Dynamite extends CubicBomb{
         {
             fuseSound = AudioManager.getBombFuse();
             soundId = fuseSound.play();
-            fuseSound.setVolume(soundId, Constants.SOUNDVOLUME / 2);
+            fuseSound.setVolume(soundId, Constants.SOUNDVOLUME);
         }
         
         //To make sure no bomb gets placed into wall
