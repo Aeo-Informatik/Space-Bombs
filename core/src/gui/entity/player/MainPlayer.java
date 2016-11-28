@@ -558,7 +558,7 @@ public class MainPlayer extends Player
                         bombType = "Barrel";
 
                         //Checks if there is already a bomb
-                        if(coins>= Constants.BOMB8)
+                        if(coins>= Constants.BOMB8 && entityManager.getBombManager().getBombArrayMain().size + 2 <= maxBombPlacing )
                         {
                             coins -= Constants.BOMB8;
 
