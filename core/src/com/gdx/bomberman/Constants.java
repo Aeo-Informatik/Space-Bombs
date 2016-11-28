@@ -63,9 +63,9 @@ public class Constants
     public static final int MAXBOMBPLACE = 5;
     public static final int MAXBOMBRANGE = 5; // Cells
     public static final int DEFAULTBOMBRANGE = 2;
-    public static final int DEFAULTBOMBPLACE = 5;
-    public static final int DEFAULTCUBICRANGE = 2;
-    public static final int MAXCUBICRANGE = 3;
+    public static final int DEFAULTBOMBPLACE = 2;
+    public static final int DEFAULTCUBICRANGE = 1;
+    public static final int MAXCUBICRANGE = 2;
 
     
     // Bomb timers
