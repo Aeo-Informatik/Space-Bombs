@@ -1,0 +1,9 @@
+{
+  "classPath": [
+    "desktop-1.0.jar"
+  ],
+  "mainClass": "com.gdx.bomberman.Main",
+  "vmArgs": [
+    "-Xmx1G"
+  ]
+}

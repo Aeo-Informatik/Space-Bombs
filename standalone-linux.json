@@ -1,0 +1,14 @@
+{
+    "platform": "linux64",
+    "jdk": "/usr/lib/jvm/java-8-openjdk-amd64/jre",
+    "executable": "SpaceBombs",
+    "classpath": [
+        "/home/qubasa/Schreibtisch/Coding/Java-Projects/Bomberman/desktop/build/libs/desktop-1.0.jar"
+    ],
+    "mainclass": "com.gdx.bomberman.Main",
+    "vmargs": [
+       "Xmx1G"
+    ],
+    "minimizejre": "soft",
+    "output": "out-linux"
+}
