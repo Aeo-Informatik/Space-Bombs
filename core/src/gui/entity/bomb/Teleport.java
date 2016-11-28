@@ -23,11 +23,10 @@ public class Teleport extends Bomb{
 
     //Sound
     private long soundId = -1;
-    private Sound itemSound;
     
     //Item
     private float teleportTimer = 0;
-    private float teleportTimerEnd = 2;
+    private float teleportTimerEnd = 2f;
     
     //Objects
     MainPlayer mainP;
@@ -82,10 +81,18 @@ public class Teleport extends Bomb{
                 }else
                 {
                     teleportTimer += Constants.DELTATIME;
+                    float printCountdown = teleportTimerEnd - teleportTimer;
+                    if(printCountdown >= 0)
+                    {
+                        if(String.format("%.2f", printCountdown).equalsIgnoreCase("0,01"))
+                            MainPlayerHud.printToScreen(("Don't move! : 0,00"));
+                        else
+                            MainPlayerHud.printToScreen(("Don't move! : " + String.format("%.2f", printCountdown)));
+                    }
                 }
             }else
             {
-                MainPlayerHud.printToScreen("Teleportation aborted. Don't move!");
+                MainPlayerHud.printToScreen("Teleportation aborted.");
                 this.isExploded = true;
             }
         }else
