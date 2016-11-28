@@ -7,6 +7,8 @@ package gui.entity.player;
 
 import client.SendCommand;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -474,7 +476,7 @@ public class MainPlayer extends Player
     private void inputDoPlayer()
     {        
         /*------------------PLACE BOMB------------------*/
-        if (Gdx.input.isKeyJustPressed(Keys.SPACE))
+        if (Gdx.input.isKeyJustPressed(Keys.SPACE) || Gdx.input.isTouched(Buttons.LEFT))
         {
             String bombType;
             

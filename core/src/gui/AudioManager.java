@@ -27,6 +27,7 @@ public class AudioManager
     private static Sound alienTimerSound;
     private static Sound granadeClipDrop;
     private static Sound teleport;
+    private static Sound barrelPlace;
     
     //Menu Music
     private static Music menuMusic;
@@ -56,6 +57,7 @@ public class AudioManager
         alienTimerSound = loadSound("audio/sounds/alien-bomb-timer.wav");
         granadeClipDrop = loadSound("audio/sounds/granade-clip-drop.wav");
         teleport = loadSound("audio/sounds/teleport.wav");
+        barrelPlace = loadSound("audio/sounds/barrel-place.wav");
         
         //Menu Music
         menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
@@ -241,6 +243,13 @@ public class AudioManager
      */
     public static Sound getTeleport() {
         return teleport;
+    }
+
+    /**
+     * @return the barrelPlace
+     */
+    public static Sound getBarrelPlace() {
+        return barrelPlace;
     }
     
 }

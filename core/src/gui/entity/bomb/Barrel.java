@@ -5,6 +5,7 @@
  */
 package gui.entity.bomb;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
@@ -21,11 +22,14 @@ import gui.map.ThinGridCoordinates;
  */
 public class Barrel extends CubicBomb {
     
+    private long soundId = -1;
+    private Sound placeSound;
+    
     public Barrel(ThinGridCoordinates pos, ThinGridCoordinates direction, int cubicRange, int playerId, MapLoader map, EntityManager entityManager) 
     {
-        //Vector2 pos, Vector2 direction, int cubicRange, int explosionTime, float explosionDuration, 
-        //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
-        super(pos, direction, cubicRange, 2, 0.4f, 0.4f, playerId, map, entityManager);
+        //Vector2 pos, Vector2 direction, int cubicRange, 
+        //int explosionTime,  float explosionDuration, float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
+        super(pos, direction, cubicRange +1, 2, 0.4f, 0f, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.dynamiteAnim);
         
     }
@@ -34,6 +38,14 @@ public class Barrel extends CubicBomb {
     @Override
     public void render()
     {
+        //Execute fuse sound
+        if(soundId == -1)
+        {
+            placeSound = AudioManager.getBarrelPlace();
+            soundId = placeSound.play();
+            placeSound.setVolume(soundId, Constants.SOUNDVOLUME * 2);
+        }
+        
         //To make sure no bomb gets placed into wall
         if(!map.isCellBlocked(new MapCellCoordinates(pos.getX(), pos.getY())) && !isExploded)
         {
@@ -49,7 +61,8 @@ public class Barrel extends CubicBomb {
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
-                explode(AudioManager.getNormalExplosion());
+                placeSound.stop();
+                explode(AudioManager.getBigBombExplosion());
 
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)
