@@ -167,9 +167,11 @@ public class GameScreen extends Screens implements Screen{
         //If client has been disconnected from server
         if(!client.isConnectedToServer())
         {
-            //Stop music
-            currentGameMusic.dispose();
-            
+            if(currentGameMusic != null)
+            {
+                //Stop music
+                currentGameMusic.stop();
+            }
             System.err.println("CLIENT: Connection lost to server.");
             //Go to menuscreen
             game.setScreen(new MenuScreen(game, client, server));
@@ -192,9 +194,12 @@ public class GameScreen extends Screens implements Screen{
         {
             try 
             {
-                //Stop music
-                currentGameMusic.dispose();
-                
+                if(currentGameMusic != null)
+                {
+                    //Stop music
+                    currentGameMusic.stop();
+                }
+                    
                 //Close connection to server
                 client.closeConnection();
                 server.stopServer();

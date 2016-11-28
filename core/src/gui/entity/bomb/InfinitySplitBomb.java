@@ -26,6 +26,10 @@ public class InfinitySplitBomb extends Infinity
     // Down, Up, Left, Right
     private ArrayList<MapCellCoordinates> nextBombPos = new ArrayList<>();
     
+        //Sound
+    private long soundId = -1;
+    private Sound fuseSound;
+    
     public InfinitySplitBomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) {
         super(pos, direction, range, playerId, map, entityManager, -1);
     }
@@ -353,6 +357,14 @@ public class InfinitySplitBomb extends Infinity
     @Override
     public void render()
     {
+        //Execute fuse sound
+        if(soundId == -1)
+        {
+            fuseSound = AudioManager.getGranadeClipDrop();
+            soundId = fuseSound.play();
+            fuseSound.setVolume(soundId, Constants.SOUNDVOLUME);
+        }
+        
         //To make sure no bomb gets placed into wall
         if(!map.isCellBlocked(new MapCellCoordinates(pos.getX(), pos.getY())) && !isExploded)
         {
@@ -368,6 +380,7 @@ public class InfinitySplitBomb extends Infinity
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
+                fuseSound.stop();
                 explode(AudioManager.getNormalExplosion());
 
                 //Delete explosion effect after a while

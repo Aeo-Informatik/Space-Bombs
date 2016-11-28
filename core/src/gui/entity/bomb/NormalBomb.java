@@ -24,6 +24,10 @@ public class NormalBomb extends Bomb
     
     protected String description = "The normal Bomb";    
     
+    //Sound
+    private Sound fuseSound;
+    private long soundId = -1;
+    
     public NormalBomb(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, MapLoader map, EntityManager entityManager) 
     {
         super(pos, direction, range, Constants.NORMALBOMBEXPLOSIONTIME, Constants.NORMALBOMBEXPLOSIONDURATION, Constants.NORMALBOMBDELAYEXPLODEAFTERHITBYBOMB, playerId, map, entityManager);
@@ -32,6 +36,14 @@ public class NormalBomb extends Bomb
      @Override
     public void render()
     {
+//        //Execute fuse sound
+//        if(soundId == -1)
+//        {
+//            fuseSound = AudioManager.getBombFuse();
+//            soundId = fuseSound.play();
+//            fuseSound.setVolume(soundId, Constants.SOUNDVOLUME);
+//        }
+        
         //To make sure no bomb gets placed into wall
         if(!map.isCellBlocked(new MapCellCoordinates(pos.getX(), pos.getY())) && !isExploded)
         {
@@ -47,6 +59,7 @@ public class NormalBomb extends Bomb
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
+//                fuseSound.stop();
                 explode(AudioManager.getNormalExplosion());
 
                 //Delete explosion effect after a while
