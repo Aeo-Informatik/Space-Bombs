@@ -34,9 +34,6 @@ public class Dynamite extends CubicBomb{
         //float delayExplodeAfterHitByBomb, int playerId, MapLoader map, EntityManager entityManager
         super(pos, direction, cubicRange, Constants.DYNAMITEBOMBEXPLOSIONTIME, Constants.DYNAMITEBOMBEXPLOSIONDURATION, Constants.DYNAMITEBOMBDELAYEXPLODEAFTERHITBYBOMB, playerId, map, entityManager);
         super.setBombAnimation(TextureManager.dynamiteAnim);
-        if(cubicRange > 2){
-            super.setCubicRange(2);
-        }
     }
     
     @Override
