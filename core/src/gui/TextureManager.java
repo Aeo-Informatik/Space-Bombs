@@ -514,7 +514,7 @@ public class TextureManager
         x3Anim = new Animation(BombAnimTime, new TextureRegion(x3, 0, 0, 33, 32), new TextureRegion(x3, 32, 0, 33, 32), new TextureRegion(x3, 64, 0, 33, 32));
     
         barrel = loadTexture("bombs/barrel.png");
-        barrelAnim = new Animation(BombAnimTime,  new TextureRegion(barrel, 0, 0, 33, 32), new TextureRegion(barrel, 32, 0, 33, 32), new TextureRegion(barrel, 64, 0, 33, 32));
+        barrelAnim = new Animation(BombAnimTime,  new TextureRegion(barrel, 0, 0, 33, 32), new TextureRegion(barrel, 0, 0, 33, 32), new TextureRegion(barrel, 0, 0, 33, 32));
     }
     
     
