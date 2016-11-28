@@ -98,7 +98,7 @@ public class MainPlayerHud
         rootTable.setFillParent(true);
         
         parameter.size = 18;
-        deathMessageLabel = new Label("", new Label.LabelStyle(generator.generateFont(parameter), Color.WHITE));
+        deathMessageLabel = new Label("", new Label.LabelStyle(generator.generateFont(parameter), Color.FIREBRICK));
         deathMessageLabel.setAlignment(Align.center);
         deathMessageLabel.setFillParent(true);
         rootTable.add(deathMessageLabel).padRight(30).padTop(800);
