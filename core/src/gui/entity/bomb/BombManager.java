@@ -20,6 +20,7 @@ public class BombManager
     //Bomb Arrays
     private Array <Bomb> bombArrayMainPlayer = new Array<>();
     private Array <Bomb> bombArrayEnemyPlayers = new Array<>();
+    private Array <RemoteBomb> remoteArray = new Array<>();
     
     //Objects
     private EntityManager entityManager;
@@ -82,6 +83,24 @@ public class BombManager
         }
     }
     
+    /**
+     * 
+     * @param playerId
+     * @return true if sucsesfull
+     */
+    public boolean activateRemoteOfPlayer(int playerId){
+        for(int i = 0; i <= remoteArray.size -1 ;i++){
+           if(remoteArray.get(i).getPlayerId() == playerId){
+               remoteArray.get(i).setActivated(true);
+               remoteArray.removeIndex(i);
+               return true;
+           }
+        }
+        return false;
+        
+    }
+    
+    
     /**--------------------SPAWN FUNCTIONS--------------------**/
     public void spawnNormalBomb(ThinGridCoordinates pos, int playerId, int bombRange)
     {
@@ -136,6 +155,24 @@ public class BombManager
         }else
         {
             bombArrayEnemyPlayers.add(entity);
+        }
+    }
+    
+    public void spawnRemote(ThinGridCoordinates pos, int playerId, int bombRange)
+    {
+        RemoteBomb entity = new RemoteBomb(pos, new ThinGridCoordinates(0,0),bombRange, playerId, map, entityManager);
+             
+        if(!activateRemoteOfPlayer(playerId)){
+            //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
+            if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
+            {
+                bombArrayMainPlayer.add(entity);
+                remoteArray.add(entity);
+            }else
+            {
+                bombArrayEnemyPlayers.add(entity);
+                remoteArray.add(entity);
+            }
         }
     }
     

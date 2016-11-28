@@ -52,7 +52,7 @@ public class MainPlayer extends Player
     // Bomb prices
     private int[] bombPrices = {Constants.BOMB1, Constants.BOMB2, Constants.BOMB3, Constants.BOMB4, Constants.BOMB5, Constants.BOMB6, Constants.BOMB7, Constants.BOMB8, Constants.BOMB9};
     
-
+   
     // Player settings CAN BE CHANGED
     private float sendStopTime = 2f; // How often, if the player doesnt move, his position gets send, in seconds.
     private int life = Constants.DEFAULTLIFE;
@@ -552,7 +552,29 @@ public class MainPlayer extends Player
                             entityManager.getBombManager().spawnX3(this.getFeetLocation(), playerId, bombRange, 1);
                         }
                         break;
+                        
+                    case(7):
 
+                        bombType = "Remote";
+                        
+
+                        //Checks if there is already a bomb
+                            if(coins>= Constants.BOMB7)
+                            {
+                                coins -= Constants.BOMB7;
+
+                                //Send bomb command to server
+                                sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
+
+                                //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                                entityManager.getBombManager().spawnRemote(this.getFeetLocation(), playerId, bombRange);
+                                
+
+                            }
+                            
+                       
+                        break;    
+                        
                     case(8):
 
                         bombType = "Barrel";

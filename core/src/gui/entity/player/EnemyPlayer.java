@@ -221,6 +221,17 @@ public class EnemyPlayer extends Player
                 {
                     entityManager.getBombManager().spawnX3(pos, playerId, bombRange, 1);
                 }
+            case("Remote"):
+                if(!map.isBombPlaced(new MapCellCoordinates(pos)))
+                {
+                    entityManager.getBombManager().spawnRemote(pos, playerId, bombRange);
+                } 
+                break;
+            case("Barrel"):
+                if(!map.isBombPlaced(new MapCellCoordinates(pos)))
+                {
+                    entityManager.getBombManager().spawnBarrel(pos, playerId, cubicRange);
+                }
                 break;
         }
     }
