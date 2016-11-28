@@ -16,7 +16,7 @@ public class Constants
     public static final boolean CLIENTDEBUG = false;
     public static final boolean PROCESSDATADEBUG = false;
     public static final boolean COLLIISIONDETECTIONDEBUG = false;
-    public static final int CONNECTIONTIMEOUT = 60; // Seconds
+    public static final int CONNECTIONTIMEOUT = 20; // Seconds
     
     // Server settings
     public static final int LISTENINGPORT = 13199;
@@ -88,15 +88,15 @@ public class Constants
     
     
     // Bomb cost settings
-    public static final int BOMB1 = 0;
-    public static final int BOMB2 = 50;
-    public static final int BOMB3 = 100;
-    public static final int BOMB4 = 70;
+    public static final int BOMB1 = 0; // Normal Bomb
+    public static final int BOMB2 = 70; // Dynamite
+    public static final int BOMB3 = 100; // Granade
+    public static final int BOMB4 = 50; // X3
     public static final int BOMB5 = 100;
     public static final int BOMB6 = 100;
     public static final int BOMB7 = 120;
-    public static final int BOMB8 = 50;
-    public static final int BOMB9 = 200;
+    public static final int BOMB8 = 50; // Barrel
+    public static final int BOMB9 = 200; // Teleport
     
     
     
