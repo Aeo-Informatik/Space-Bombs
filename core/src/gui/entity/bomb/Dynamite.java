@@ -5,6 +5,7 @@
  */
 package gui.entity.bomb;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.gdx.bomberman.Constants;
@@ -22,7 +23,10 @@ import gui.map.ThinGridCoordinates;
 public class Dynamite extends CubicBomb{
     
     public String Discription = "Cubic explosion";
+    
+    //Sound
     private long soundId = -1;
+    private Sound fuseSound;
     
     public Dynamite(ThinGridCoordinates pos, ThinGridCoordinates direction, int cubicRange, int playerId, MapLoader map, EntityManager entityManager) 
     {
@@ -41,8 +45,9 @@ public class Dynamite extends CubicBomb{
         //Execute fuse sound
         if(soundId == -1)
         {
-            soundId = AudioManager.bombFuse.play();
-            AudioManager.bombFuse.setVolume(soundId, Constants.SOUNDVOLUME);
+            fuseSound = AudioManager.getBombFuse();
+            soundId = fuseSound.play();
+            fuseSound.setVolume(soundId, Constants.SOUNDVOLUME / 2);
         }
         
         //To make sure no bomb gets placed into wall
@@ -60,8 +65,8 @@ public class Dynamite extends CubicBomb{
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
-                AudioManager.bombFuse.stop();
-                explode(AudioManager.bigBombExplosion);
+                fuseSound.stop();
+                explode(AudioManager.getBigBombExplosion());
 
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)

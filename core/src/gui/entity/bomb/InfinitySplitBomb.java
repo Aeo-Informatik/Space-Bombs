@@ -368,7 +368,7 @@ public class InfinitySplitBomb extends Infinity
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
-                explode(AudioManager.normalExplosion);
+                explode(AudioManager.getNormalExplosion());
 
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)

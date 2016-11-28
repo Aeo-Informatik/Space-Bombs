@@ -17,6 +17,7 @@ import client.ClientProcessData;
 import client.SendCommand;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -46,6 +47,7 @@ public class GameScreen extends Screens implements Screen{
     
     //Variables
     private int previousMusicIndex = -1;
+    private Music currentGameMusic = null;
     private float musicTimer = 0;
     private float musicStart = 15; //Seconds after game start or after music is finished
     
@@ -72,7 +74,6 @@ public class GameScreen extends Screens implements Screen{
         this.processData = new ClientProcessData(entityManager, mapManager);
         this.counterHud = new MainPlayerHud(entityManager);
         this.camera.zoom = Constants.DEFAULTZOOM;
-
         
         // Hides the cursor
         Gdx.input.setCursorCatched(true);
@@ -91,7 +92,7 @@ public class GameScreen extends Screens implements Screen{
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         
         //Play next music title after last one finished and make sure the next one is unequal the last one
-        if((AudioManager.currentIngameMusic == null || !AudioManager.currentIngameMusic.isPlaying()) && musicStart < musicTimer)
+        if((currentGameMusic == null || !currentGameMusic.isPlaying()) && musicStart < musicTimer)
         {
             int nextMusic = random.nextInt(6);
             while(nextMusic == previousMusicIndex)
@@ -101,12 +102,12 @@ public class GameScreen extends Screens implements Screen{
             
             previousMusicIndex = nextMusic;
             
-            AudioManager.currentIngameMusic = AudioManager.nextIngameMusic(nextMusic);
-            AudioManager.currentIngameMusic.play();
-            AudioManager.currentIngameMusic.setVolume(Constants.MUSICVOLUME);
+            currentGameMusic = AudioManager.nextIngameMusic(nextMusic);
+            currentGameMusic.play();
+            currentGameMusic.setVolume(Constants.MUSICVOLUME);
             
             musicTimer = 0;
-        }else if ((AudioManager.currentIngameMusic == null || !AudioManager.currentIngameMusic.isPlaying()))
+        }else if ((currentGameMusic == null || !currentGameMusic.isPlaying()))
         {
             musicTimer += Constants.DELTATIME;
         }
@@ -153,6 +154,9 @@ public class GameScreen extends Screens implements Screen{
                 {
                     deadPlayers.add(entityManager.getPlayerManager().getEnemyArray().get(0).getPlayerId());
                 }
+                
+                //Stop music
+                currentGameMusic.dispose();
                 game.setScreen(new WinnerScreen(deadPlayers, game, client, server));
             }else
             {
@@ -163,6 +167,9 @@ public class GameScreen extends Screens implements Screen{
         //If client has been disconnected from server
         if(!client.isConnectedToServer())
         {
+            //Stop music
+            currentGameMusic.dispose();
+            
             System.err.println("CLIENT: Connection lost to server.");
             //Go to menuscreen
             game.setScreen(new MenuScreen(game, client, server));
@@ -185,6 +192,9 @@ public class GameScreen extends Screens implements Screen{
         {
             try 
             {
+                //Stop music
+                currentGameMusic.dispose();
+                
                 //Close connection to server
                 client.closeConnection();
                 server.stopServer();

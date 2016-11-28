@@ -24,7 +24,10 @@ public class X3 extends Bomb
 {
     public String Discription = "Explodes three times with increasing range";
     private int X;
+    
+    //Sound
     private long soundId = -1;
+    private Sound fuseSound;
     
     public X3(ThinGridCoordinates pos, ThinGridCoordinates direction, int range, int playerId, int X, MapLoader map, EntityManager entityManager) 
     {
@@ -41,8 +44,9 @@ public class X3 extends Bomb
         //Execute fuse sound
         if(soundId == -1)
         {
-            soundId = AudioManager.alienTimerSound.play();
-            AudioManager.alienTimerSound.setVolume(soundId, Constants.SOUNDVOLUME);
+            fuseSound = AudioManager.getAlienTimerSound();
+            soundId = fuseSound.play();
+            fuseSound.setVolume(soundId, Constants.SOUNDVOLUME / 2);
         }
         
         //To make sure no bomb gets placed into wall
@@ -60,8 +64,8 @@ public class X3 extends Bomb
             //If time to explode or deadly tile has been touched
             if(timerTillExplosion >= explosionTime)
             {
-                AudioManager.alienTimerSound.stop();
-                explode(AudioManager.normalExplosion);
+                fuseSound.stop();
+                explode(AudioManager.getNormalExplosion());
 
                 //Delete explosion effect after a while
                 if(timerTillExplosionDelete >= explosionDuration)

@@ -234,8 +234,8 @@ public class HostScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -259,8 +259,8 @@ public class HostScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -272,7 +272,7 @@ public class HostScreen extends Screens implements Screen
                     
                 }
                 
-                AudioManager.menuMusic.stop();
+                AudioManager.getMenuMusic().stop();
                 server.setMap(maps.getCurrentMap());
                 server.startGame();
                 game.setScreen(new GameScreen(game, client, server));
@@ -286,8 +286,8 @@ public class HostScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -313,8 +313,8 @@ public class HostScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 

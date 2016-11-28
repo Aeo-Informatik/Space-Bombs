@@ -180,8 +180,8 @@ public class MainPlayer extends Player
          //Execute hit sound
         if(id2 == -1)
         {
-            id2 = AudioManager.gameOver.play();
-            AudioManager.gameOver.setVolume(id2, Constants.SOUNDVOLUME);
+            id2 = AudioManager.getGameOver().play();
+            AudioManager.getGameOver().setVolume(id2, Constants.SOUNDVOLUME);
         }
         
         sendCommand.setPlayerLife(playerId, 0);

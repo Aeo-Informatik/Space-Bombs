@@ -50,8 +50,8 @@ public class Coin extends Item{
         
         if(getPlayerIdCollectingItem() != -1)
         {
-            long id = AudioManager.singleCoin.play();
-            AudioManager.singleCoin.setVolume(id, Constants.SOUNDVOLUME);
+            long id = AudioManager.getSingleCoin().play();
+            AudioManager.getSingleCoin().setVolume(id, Constants.SOUNDVOLUME);
         }
     }
     

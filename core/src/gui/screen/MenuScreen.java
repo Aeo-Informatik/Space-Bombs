@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,6 +34,9 @@ public class MenuScreen extends Screens implements Screen
     private Stack stack;
     private Table rootTable;
     
+    //Music
+    private Music menuMusic;
+    
     //Buttons
     private TextButton startbutton;
     private TextButton hostButton;
@@ -58,14 +62,10 @@ public class MenuScreen extends Screens implements Screen
         
         
         /**------------------------AUDIO------------------------**/
-        if(AudioManager.currentIngameMusic != null)
-        {
-            AudioManager.currentIngameMusic.dispose();
-        }
-        
-        AudioManager.menuMusic.setLooping(true);
-        AudioManager.menuMusic.play();
-        AudioManager.menuMusic.setVolume(Constants.MUSICVOLUME);  
+        menuMusic = AudioManager.getMenuMusic();
+        menuMusic.setLooping(true);
+        menuMusic.play();
+        menuMusic.setVolume(Constants.MUSICVOLUME);  
 
         /**------------------------BUTTON STYLE------------------------**/
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -120,8 +120,8 @@ public class MenuScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -144,8 +144,8 @@ public class MenuScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -168,8 +168,8 @@ public class MenuScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -192,8 +192,8 @@ public class MenuScreen extends Screens implements Screen
             public void changed (ChangeEvent event, Actor actor) 
             {   
                 //Add click sound
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                
                 //Wait till sound is done
                 try 

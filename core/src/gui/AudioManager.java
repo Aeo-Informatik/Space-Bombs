@@ -18,28 +18,27 @@ public class AudioManager
     //Generate Sounds with: http://www.bfxr.net/
     
     //Menu Sounds
-    public static Sound clickSound;
-    public static Sound normalExplosion;
-    public static Sound singleCoin;
-    public static Sound gameOver;
-    public static Sound bombFuse;
-    public static Sound bigBombExplosion;
-    public static Sound alienTimerSound;
+    private static Sound clickSound;
+    private static Sound normalExplosion;
+    private static Sound singleCoin;
+    private static Sound gameOver;
+    private static Sound bombFuse;
+    private static Sound bigBombExplosion;
+    private static Sound alienTimerSound;
     
     //Menu Music
-    public static Music menuMusic;
-    public static Music startScreenMusic;
-    public static Music looserMusic;
-    public static Music winnerMusic;
+    private static Music menuMusic;
+    private static Music startScreenMusic;
+    private static Music looserMusic;
+    private static Music winnerMusic;
     
     //Ingame Music
-    public static Music currentIngameMusic;
-    public static Music Amys_Toxic_Cave;
-    public static Music Flight_of_the_Battery;
-    public static Music Disregard_Farm;      
-    public static Music Moshua_Jorse;
-    public static Music Bit_Shifted;
-    public static Music Mr_Smilez_Theme;
+    private static Music Amys_Toxic_Cave;
+    private static Music Flight_of_the_Battery;
+    private static Music Disregard_Farm;      
+    private static Music Moshua_Jorse;
+    private static Music Bit_Shifted;
+    private static Music Mr_Smilez_Theme;
             
     //Look for ben briggs music!http://benbriggs.net/
     //His music is available under this license: https://creativecommons.org/licenses/by/3.0/
@@ -86,25 +85,144 @@ public class AudioManager
         switch(index)
         {
             case 0:
-                return Amys_Toxic_Cave;
+                return getAmys_Toxic_Cave();
                 
             case 1:
-                return Flight_of_the_Battery;
+                return getFlight_of_the_Battery();
                 
             case 2:
-                return Disregard_Farm;
+                return getDisregard_Farm();
                 
             case 3:
-                return Moshua_Jorse;
+                return getMoshua_Jorse();
                 
             case 4:
-                return Bit_Shifted;
+                return getBit_Shifted();
                 
             case 5:
-                return Mr_Smilez_Theme;
+                return getMr_Smilez_Theme();
         }
         
         return null;
+    }
+
+    /**
+     * @return the clickSound
+     */
+    public static Sound getClickSound() {
+        return clickSound;
+    }
+
+    /**
+     * @return the normalExplosion
+     */
+    public static Sound getNormalExplosion() {
+        return normalExplosion;
+    }
+
+    /**
+     * @return the singleCoin
+     */
+    public static Sound getSingleCoin() {
+        return singleCoin;
+    }
+
+    /**
+     * @return the gameOver
+     */
+    public static Sound getGameOver() {
+        return gameOver;
+    }
+
+    /**
+     * @return the bombFuse
+     */
+    public static Sound getBombFuse() {
+        return bombFuse;
+    }
+
+    /**
+     * @return the bigBombExplosion
+     */
+    public static Sound getBigBombExplosion() {
+        return bigBombExplosion;
+    }
+
+    /**
+     * @return the alienTimerSound
+     */
+    public static Sound getAlienTimerSound() {
+        return alienTimerSound;
+    }
+
+    /**
+     * @return the menuMusic
+     */
+    public static Music getMenuMusic() {
+        return menuMusic;
+    }
+
+    /**
+     * @return the startScreenMusic
+     */
+    public static Music getStartScreenMusic() {
+        return startScreenMusic;
+    }
+
+    /**
+     * @return the looserMusic
+     */
+    public static Music getLooserMusic() {
+        return looserMusic;
+    }
+
+    /**
+     * @return the winnerMusic
+     */
+    public static Music getWinnerMusic() {
+        return winnerMusic;
+    }
+
+    /**
+     * @return the Amys_Toxic_Cave
+     */
+    public static Music getAmys_Toxic_Cave() {
+        return Amys_Toxic_Cave;
+    }
+
+    /**
+     * @return the Flight_of_the_Battery
+     */
+    public static Music getFlight_of_the_Battery() {
+        return Flight_of_the_Battery;
+    }
+
+    /**
+     * @return the Disregard_Farm
+     */
+    public static Music getDisregard_Farm() {
+        return Disregard_Farm;
+    }
+
+    /**
+     * @return the Moshua_Jorse
+     */
+    public static Music getMoshua_Jorse() {
+        return Moshua_Jorse;
+    }
+
+    /**
+     * @return the Bit_Shifted
+     */
+    public static Music getBit_Shifted() {
+        return Bit_Shifted;
+    }
+
+    /**
+     * @return the Mr_Smilez_Theme
+     */
+    public static Music getMr_Smilez_Theme() {
+        return Mr_Smilez_Theme;
     }
     
 }

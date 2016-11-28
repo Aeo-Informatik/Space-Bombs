@@ -10,6 +10,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -46,6 +47,9 @@ public class WinnerScreen extends Screens implements Screen
     // Player positions
     ArrayList<Integer> playerPositions = new ArrayList<>();
     private boolean isWinner;
+    
+    //Music
+    private Music winnerScreenMusic;
     
     // Buttons
     private TextButton backButton;
@@ -214,21 +218,19 @@ public class WinnerScreen extends Screens implements Screen
         stage.addActor(positionPlayerWidget);
 
         /**------------------------MUSIC------------------------**/
-        if(AudioManager.currentIngameMusic != null)
-        {
-            AudioManager.currentIngameMusic.dispose();
-        }
         
         if(isWinner == false)
         {
-            AudioManager.looserMusic.setLooping(true);
-            AudioManager.looserMusic.play();
-            AudioManager.looserMusic.setVolume(Constants.MUSICVOLUME * 4);  
+            winnerScreenMusic = AudioManager.getLooserMusic();
+            winnerScreenMusic.setLooping(true);
+            winnerScreenMusic.play();
+            winnerScreenMusic.setVolume(Constants.MUSICVOLUME * 4);  
         }else
         {
-            AudioManager.winnerMusic.setLooping(true);
-            AudioManager.winnerMusic.play();
-            AudioManager.winnerMusic.setVolume(Constants.MUSICVOLUME * 6);  
+            winnerScreenMusic = AudioManager.getWinnerMusic();
+            winnerScreenMusic.setLooping(true);
+            winnerScreenMusic.play();
+            winnerScreenMusic.setVolume(Constants.MUSICVOLUME * 6);  
         }
         
         /**------------------------BUTTONS------------------------**/
@@ -252,8 +254,8 @@ public class WinnerScreen extends Screens implements Screen
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 // Wait till sound is done
                 try 
@@ -267,10 +269,10 @@ public class WinnerScreen extends Screens implements Screen
                 
                 if(isWinner)
                 {
-                    AudioManager.winnerMusic.stop();
+                    winnerScreenMusic.stop();
                 }else
                 {
-                    AudioManager.looserMusic.stop();
+                    winnerScreenMusic.stop();
                 }
 
                 game.setScreen(new MenuScreen(game, client, server));
@@ -364,10 +366,10 @@ public class WinnerScreen extends Screens implements Screen
         {
             if(isWinner)
             {
-                AudioManager.winnerMusic.stop();
+                winnerScreenMusic.stop();
             }else
             {
-                AudioManager.looserMusic.stop();
+                winnerScreenMusic.stop();
             }
             
             game.setScreen(new MenuScreen(game, client, server));

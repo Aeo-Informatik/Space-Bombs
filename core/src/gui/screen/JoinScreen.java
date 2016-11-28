@@ -137,8 +137,8 @@ public class JoinScreen extends Screens implements Screen
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -160,8 +160,8 @@ public class JoinScreen extends Screens implements Screen
             @Override
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
 
                 //Get the ip out of the textfield
                 if(!ipTextField.getText().equals(""))
@@ -183,7 +183,7 @@ public class JoinScreen extends Screens implements Screen
                         
                         System.out.println("CLIENT: Connecting to server " + connectionIp + ":" + Constants.CONNECTIONPORT);
                         
-                        AudioManager.menuMusic.stop();
+                        AudioManager.getMenuMusic().stop();
 
                         game.setScreen(new GameScreen(game, client, server));
                     }else

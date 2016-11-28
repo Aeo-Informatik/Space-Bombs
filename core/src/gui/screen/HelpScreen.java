@@ -122,8 +122,8 @@ public class HelpScreen extends Screens implements Screen
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 // Wait till sound is done
                 try 
@@ -146,8 +146,8 @@ public class HelpScreen extends Screens implements Screen
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 
@@ -170,8 +170,8 @@ public class HelpScreen extends Screens implements Screen
             public void changed (ChangeListener.ChangeEvent event, Actor actor) 
             {   
                 //Add click musik
-                long id = AudioManager.clickSound.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getClickSound().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
                 
                 //Wait till sound is done
                 try 

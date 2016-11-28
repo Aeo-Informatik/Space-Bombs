@@ -10,6 +10,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -36,9 +37,8 @@ public class StartScreen extends Screens implements Screen
     private Stage stage;
     private Table rootTable;
     
-    // Go to next screen timer
-    private float timer = 0;
-    private float endTimer = 60;
+    //Music
+    private Music startMusic;
     
     //Press any key flashing timer
     private float flashingTimer = 0;
@@ -66,14 +66,11 @@ public class StartScreen extends Screens implements Screen
         BitmapFont font = TextureManager.menuFont.generateFont(fontOptions);
         
         /**------------------------AUDIO------------------------**/
-        if(AudioManager.currentIngameMusic != null)
-        {
-            AudioManager.currentIngameMusic.dispose();
-        }
         
-        AudioManager.startScreenMusic.setLooping(true);
-        AudioManager.startScreenMusic.play();
-        AudioManager.startScreenMusic.setVolume(Constants.MUSICVOLUME);  
+        startMusic = AudioManager.getStartScreenMusic();
+        startMusic.setLooping(true);
+        startMusic.play();
+        startMusic.setVolume(Constants.MUSICVOLUME);  
 
         
         /**------------------------LABEL STYLE------------------------**/
@@ -121,28 +118,6 @@ public class StartScreen extends Screens implements Screen
         stage.act(Constants.DELTATIME);
         stage.draw();
         
-        if(timer >= endTimer)
-        {
-            AudioManager.startScreenMusic.dispose();
-            //Add click sound
-            long id = AudioManager.normalExplosion.play();
-            AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
-
-            //Wait till sound is done
-            try 
-            {
-                Thread.sleep(300);
-
-            } catch (InterruptedException ex) 
-            {
-
-            }
-            game.setScreen(new MenuScreen(game, client, server));
-        }else
-        {
-            timer += Constants.DELTATIME;
-        }
-        
         if(flashingTimer >= endFlashingTimer)
         {
             if(pressAnyKey.isVisible())
@@ -161,13 +136,13 @@ public class StartScreen extends Screens implements Screen
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) || hideTimer != 0)
         {
             pressAnyKey.setVisible(false);
-            AudioManager.startScreenMusic.dispose();
+            startMusic.dispose();
             
             if(hideTimer == 0)
             {
                 //Add click sound
-                long id = AudioManager.normalExplosion.play();
-                AudioManager.clickSound.setVolume(id, Constants.SOUNDVOLUME);
+                long id = AudioManager.getNormalExplosion().play();
+                AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
             }
 
             if(hideTimer >= endHideTimer)
