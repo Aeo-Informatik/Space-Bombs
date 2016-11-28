@@ -38,7 +38,7 @@ public class Dynamite extends CubicBomb{
     @Override
     public void render()
     {
-        //Execute hit sound
+        //Execute fuse sound
         if(soundId == -1)
         {
             soundId = AudioManager.bombFuse.play();

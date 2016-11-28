@@ -504,7 +504,6 @@ public class TextureManager
         dynamite = loadTexture("bombs/dynamite_anim.png");
         dynamiteAnim = new Animation(BombAnimTime, new TextureRegion(dynamite, 0, 0, 33, 32), new TextureRegion(dynamite, 32, 0, 33, 32), new TextureRegion(dynamite, 64, 0, 33, 32));
         
-        
         infinity = loadTexture("bombs/infinity_anim.png");
         infinityAnim = new Animation(BombAnimTime, new TextureRegion(infinity, 0, 0, 33, 32), new TextureRegion(infinity, 32, 0, 33, 32), new TextureRegion(infinity, 64, 0, 33, 32));
         

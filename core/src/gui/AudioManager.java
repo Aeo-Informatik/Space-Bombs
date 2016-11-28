@@ -24,6 +24,7 @@ public class AudioManager
     public static Sound gameOver;
     public static Sound bombFuse;
     public static Sound bigBombExplosion;
+    public static Sound alienTimerSound;
     
     //Menu Music
     public static Music menuMusic;
@@ -51,6 +52,7 @@ public class AudioManager
         gameOver = loadSound("audio/sounds/game-over.wav");
         bombFuse = loadSound("audio/sounds/bomb-fuse.ogg");
         bigBombExplosion = loadSound("audio/sounds/big-bomb-explosion.wav");
+        alienTimerSound = loadSound("audio/sounds/alien-bomb-timer.wav");
         
         //Menu Music
         menuMusic = loadMusic("audio/music/The_Briggs_Effect/Mystery_Gift_1.mp3");
