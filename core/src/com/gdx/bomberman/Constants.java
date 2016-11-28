@@ -24,7 +24,7 @@ public class Constants
     public static final boolean SERVERDEBUG = false;
     
     // Audio settings
-    public static float MUSICVOLUME = 0;//0.05f;
+    public static float MUSICVOLUME = 0.05f;
     public static float SOUNDVOLUME = 0.20f;
         
     // Window settings

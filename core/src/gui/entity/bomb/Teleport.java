@@ -52,7 +52,7 @@ public class Teleport extends Bomb{
                         if(soundId == -1)
                         {
                             soundId = sound.play();
-                            sound.setVolume(soundId, Constants.SOUNDVOLUME);
+                            sound.setVolume(soundId, Constants.SOUNDVOLUME * 2);
                         }
 
                         mainP.setPosition(new ThinGridCoordinates(mapX, mapY));
