@@ -37,6 +37,7 @@ public class Client
     public void setHost(String host, int port) throws Exception
     {
         InetAddress address = InetAddress.getByName(host);
+        //InetAddress address = InetAddress.getByAddress(host, bytes)
         
         //Check if host ip is up and running else it creates a loop on creating the socket object
         if(address.isReachable(Constants.CONNECTIONTIMEOUT*1000))

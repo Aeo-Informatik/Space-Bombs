@@ -664,12 +664,18 @@ public class MainPlayer extends Player
                     if(chosenBomb < 9)
                     {
                         chosenBomb++;
+                    }else
+                    {
+                        chosenBomb = 1;
                     }
                 }else if(i == -1)
                 {
                     if(chosenBomb > 1)
                     {
                         chosenBomb--;
+                    }else
+                    {
+                        chosenBomb = 9;
                     }
                 }
 
