@@ -16,6 +16,7 @@ public class Constants
     public static final boolean CLIENTDEBUG = false;
     public static final boolean PROCESSDATADEBUG = false;
     public static final boolean COLLIISIONDETECTIONDEBUG = false;
+    public static final int CONNECTIONTIMEOUT = 60; // Seconds
     
     // Server settings
     public static final int LISTENINGPORT = 13199;
