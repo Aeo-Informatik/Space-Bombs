@@ -7,7 +7,6 @@ package gui.entity.player;
 
 import client.SendCommand;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -582,7 +581,7 @@ public class MainPlayer extends Player
                         bombType = "Barrel";
 
                         //Checks if there is already a bomb
-                        if(coins>= Constants.BOMB8 && entityManager.getBombManager().getBombArrayMain().size + 2 <= maxBombPlacing )
+                        if(coins >= Constants.BOMB8 && entityManager.getBombManager().getBombArrayMain().size + 2<= maxBombPlacing )
                         {
                             coins -= Constants.BOMB8;
 

@@ -43,7 +43,7 @@ public class Barrel extends CubicBomb {
         {
             placeSound = AudioManager.getBarrelPlace();
             soundId = placeSound.play();
-            placeSound.setVolume(soundId, Constants.SOUNDVOLUME * 2);
+            placeSound.setVolume(soundId, Constants.SOUNDVOLUME * 4);
         }
         
         //To make sure no bomb gets placed into wall
