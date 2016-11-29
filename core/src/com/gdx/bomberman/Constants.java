@@ -19,7 +19,7 @@ public class Constants
     public static final int CONNECTIONTIMEOUT = 20; // Seconds
     
     //Test Map
-    public static final boolean TESTMAP = true;
+    public static final boolean TESTMAP = false;
     
     // Server settings
     public static final int LISTENINGPORT = 13199;
@@ -49,7 +49,7 @@ public class Constants
     public static final int COINDROPCHANCE = 5; // 50% (1-10)
     public static final float COINBONUSTIMER = 5; // Seconds
     public static final int COINBONUS = 10; // Coins
-    public static final int STARTCOINS = 500;
+    public static final int STARTCOINS = 100;
     
     // Item settings
     public static final long ITEMTIMER = 5; // Seconds
@@ -92,7 +92,7 @@ public class Constants
     
     // Default bomb cost settings
     public static final int BOMB1 = 0; // Normal Bomb
-    public static final int BOMB2 = 30; // Dynamite
+    public static final int BOMB2 = 50; // Dynamite
     public static final int BOMB3 = 100; // Granade
     public static final int BOMB4 = 70; // X3
     public static final int BOMB5 = 100;

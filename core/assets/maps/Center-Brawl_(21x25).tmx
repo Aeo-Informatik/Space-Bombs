@@ -45,6 +45,11 @@
     <property name="blocked" value=""/>
    </properties>
   </tile>
+  <tile id="11">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
   <tile id="12">
    <properties>
     <property name="blocked" value=""/>
@@ -141,7 +146,7 @@
  </layer>
  <layer name="Blocks" width="120" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt2ssKgzAQBdBs210fu/b/v7MdUHATkKJJuZwDgyCSwAwXF0lrAAAAAAAAAAAAfdeBxXjbvt++9Tqw7p19GGfb90c7dr7Pzj6MU32v3FbWLsu7I5/r2uY7R/X9vdQZ1rXNd47tfM/Ir/nOJb/Z5Deb/GaT32zym+2X/Lad38nvfPKbzf83m/xmk99s8ptNfrPJb7bqe53r11n8Gfld1zbfOdzPyeZ+Tjb3JwEAAAAAAAAA+Fcfz4UW7w==
+   eJzt2ssKwjAQBdBsFTc+dvr/36kDLXRTEEkTuZwDQ6GUBGa4dJG0BgAAAAAAAAAAsO88sBhv2/frp54d67azD+Ns+35vfef72NmHcarvldvK2ml51/O5rm2+c1TfX0uVS+fnurb5zrGd7xH5Nd+55Deb/GaT32zym01+s/2S3/bld/I7n/xm8//NJr/Z5Deb/GaT32zym636Xuf6dRZ/RH7Xtc13Dvdzsrmfk839SQAAAAAAAAAA/tUbKbUarw==
   </data>
  </layer>
  <layer name="Items" width="120" height="60">
