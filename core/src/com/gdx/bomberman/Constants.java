@@ -92,14 +92,14 @@ public class Constants
     
     // Default bomb cost settings
     public static final int BOMB1 = 0; // Normal Bomb
-    public static final int BOMB2 = 50; // Dynamite
+    public static final int BOMB2 = 30; // Dynamite
     public static final int BOMB3 = 100; // Granade
     public static final int BOMB4 = 70; // X3
     public static final int BOMB5 = 100;
     public static final int BOMB6 = 100;
     public static final int BOMB7 = 120;
     public static final int BOMB8 = 50; // Barrel
-    public static final int BOMB9 = 120; // Teleport
+    public static final int BOMB9 = 100; // Teleport
     
     //After cubic range upgrade
     public static final int DYNAMITEPRICEUPGRADE = 100;
