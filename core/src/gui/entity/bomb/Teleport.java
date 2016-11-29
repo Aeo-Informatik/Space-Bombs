@@ -26,7 +26,7 @@ public class Teleport extends Bomb{
     
     //Item
     private float teleportTimer = 0;
-    private float teleportTimerEnd = 2f;
+    private float teleportTimerEnd = 1f;
     
     //Objects
     MainPlayer mainP;
