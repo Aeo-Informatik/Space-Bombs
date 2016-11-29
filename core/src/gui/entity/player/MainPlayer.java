@@ -489,9 +489,9 @@ public class MainPlayer extends Player
                         bombType = "default";
 
                         // Check if you have enough coins
-                        if(coins >= Constants.BOMB1)
+                        if(coins >= getBombPrice(1))
                         {
-                            coins -= Constants.BOMB1;
+                            coins -= getBombPrice(1);
 
                             //Send bomb command to server
                             sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
@@ -506,9 +506,9 @@ public class MainPlayer extends Player
                         bombType = "dynamite";
 
                         //Checks if there is already a bomb
-                        if(coins>= Constants.BOMB2)
+                        if(coins>= getBombPrice(2))
                         {
-                            coins -= Constants.BOMB2;
+                            coins -= getBombPrice(2);
 
                             //Send bomb command to server
                             sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
@@ -523,9 +523,9 @@ public class MainPlayer extends Player
                         bombType = "infinity";
 
                         //Checks if there is already a bomb
-                        if(coins>= Constants.BOMB3)
+                        if(coins >= getBombPrice(3))
                         {
-                            coins -= Constants.BOMB3;
+                            coins -= getBombPrice(3);
 
                             //Send bomb command to server
                             sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
@@ -542,9 +542,9 @@ public class MainPlayer extends Player
                         bombType = "X3";
 
                         //Checks if there is already a bomb
-                        if(coins>= Constants.BOMB4)
+                        if(coins >= getBombPrice(4))
                         {
-                            coins -= Constants.BOMB4;
+                            coins -= getBombPrice(4);
 
                             //Send bomb command to server
                             sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
@@ -560,9 +560,9 @@ public class MainPlayer extends Player
                         
 
                         //Checks if there is already a bomb
-                            if(coins>= Constants.BOMB7)
+                            if(coins>= getBombPrice(7))
                             {
-                                coins -= Constants.BOMB7;
+                                coins -= getBombPrice(7);
 
                                 //Send bomb command to server
                                 sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
@@ -581,9 +581,9 @@ public class MainPlayer extends Player
                         bombType = "Barrel";
 
                         //Checks if there is already a bomb
-                        if(coins >= Constants.BOMB8 && entityManager.getBombManager().getBombArrayMain().size + 2<= maxBombPlacing )
+                        if(coins >= getBombPrice(8) && entityManager.getBombManager().getBombArrayMain().size + 2 <= maxBombPlacing )
                         {
-                            coins -= Constants.BOMB8;
+                            coins -= getBombPrice(8);
 
                             //Send bomb command to server
                             sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
@@ -598,9 +598,9 @@ public class MainPlayer extends Player
                         bombType = "Teleport";
 
                         //Checks if there is already a bomb
-                        if(coins>= Constants.BOMB9)
+                        if(coins >= getBombPrice(9))
                         {
-                            coins -= Constants.BOMB9;
+                            coins -= getBombPrice(9);
 
                             entityManager.getBombManager().spawnTeleporter(this.getFeetLocation(), playerId);
                         }
@@ -708,9 +708,14 @@ public class MainPlayer extends Player
     }
 
     /*------------------ GETTER & SETTER ------------------*/  
-    public int getBombPrice(int bombNumber)
+    public int getBombPrice(int bombNumber) // Used by main player hud
     {
         return bombPrices[bombNumber -1];
+    }
+    
+    public void setBombPrice(int bombNumber, int price)
+    {
+        bombPrices[bombNumber -1] = price;
     }
     
     public float getMaxZoomIn()

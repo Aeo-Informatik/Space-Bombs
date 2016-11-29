@@ -272,8 +272,16 @@ public class HostScreen extends Screens implements Screen
                     
                 }
                 
+                if(Constants.TESTMAP)
+                {
+                    System.out.println("Ignoring user settings and loading test map. This is defined in CONSTANTS!");
+                    server.setMap(maps.getTestMap());
+                }else
+                {
+                    server.setMap(maps.getCurrentMap());
+                }
+                
                 AudioManager.getMenuMusic().stop();
-                server.setMap(maps.getCurrentMap());
                 server.startGame();
                 game.setScreen(new GameScreen(game, client, server));
             }

@@ -18,6 +18,9 @@ public class Constants
     public static final boolean COLLIISIONDETECTIONDEBUG = false;
     public static final int CONNECTIONTIMEOUT = 20; // Seconds
     
+    //Test Map
+    public static final boolean TESTMAP = true;
+    
     // Server settings
     public static final int LISTENINGPORT = 13199;
     public static final int MAXPLAYERS = 4;
@@ -87,9 +90,9 @@ public class Constants
     public static final float  X3BOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
     
     
-    // Bomb cost settings
+    // Default bomb cost settings
     public static final int BOMB1 = 0; // Normal Bomb
-    public static final int BOMB2 = 70; // Dynamite
+    public static final int BOMB2 = 50; // Dynamite
     public static final int BOMB3 = 100; // Granade
     public static final int BOMB4 = 70; // X3
     public static final int BOMB5 = 100;
@@ -98,7 +101,9 @@ public class Constants
     public static final int BOMB8 = 50; // Barrel
     public static final int BOMB9 = 120; // Teleport
     
-    
+    //After cubic range upgrade
+    public static final int DYNAMITEPRICEUPGRADE = 100;
+    public static final int BARRELPRICEUPGRADE = 70;
     
     // Ingame variables DO NOT CHANGE!
     public static int PLAYERID = 0;

@@ -5,7 +5,7 @@
  */
 package gui.entity.item;
 
-import client.SendCommand;
+
 import com.gdx.bomberman.Constants;
 import gui.TextureManager;
 import gui.entity.EntityManager;
@@ -19,7 +19,7 @@ import gui.map.MapLoader;
  */
 public class CubicRangeUp extends Item {
     
-    public String Discription = "You cubicRange expands";
+    public String Discription = "Your cubicRange expands";
 
     //Constructor
     public CubicRangeUp(MapCellCoordinates cellPos, MapLoader map, EntityManager entityManager) {
@@ -35,6 +35,8 @@ public class CubicRangeUp extends Item {
         if(mainP != null)
         {
             mainP.setCubicRange((mainP.getCubicRange() + 1));
+            mainP.setBombPrice(2, Constants.DYNAMITEPRICEUPGRADE);
+            mainP.setBombPrice(8, Constants.BARRELPRICEUPGRADE);
             sendCommand.setPlayerCubicRange(mainP.getPlayerId(), mainP.getCubicRange());
         }
     }
