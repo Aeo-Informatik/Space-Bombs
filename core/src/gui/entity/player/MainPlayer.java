@@ -553,6 +553,22 @@ public class MainPlayer extends Player
                             entityManager.getBombManager().spawnX3(this.getFeetLocation(), playerId, bombRange, 1);
                         }
                         break;
+                    
+                    case (5):
+                         bombType = "Rocket";
+
+                        //Checks if there is already a bomb
+                        if(coins >= getBombPrice(5))
+                        {
+                            coins -= getBombPrice(5);
+
+                            //Send bomb command to server
+                            //sendCommand.placeBomb(playerId, this.getFeetLocation(), bombType);
+
+                            //Create Bomb Object (Add always a new Vector2 object or else it will constantly update the position to the player position)
+                            entityManager.getBombManager().spawnRocket(this.getFeetLocation(), playerId, bombRange);
+                        }
+                        break;
                         
                     case(7):
 

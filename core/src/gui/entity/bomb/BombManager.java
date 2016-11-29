@@ -116,6 +116,20 @@ public class BombManager
         }
     }
     
+    public void spawnRocket(ThinGridCoordinates pos, int playerId, int bombRange)
+    {
+        Rocket entity = new Rocket(pos, new ThinGridCoordinates(0,0),bombRange, playerId, map, entityManager);
+        
+        //If id is from main player add to mainPlayer bomb array if not to enemy bomb array
+        if(entityManager.getPlayerManager().getMainPlayer() != null && entityManager.getPlayerManager().getMainPlayer().getPlayerId() == playerId)
+        {
+            bombArrayMainPlayer.add(entity);
+        }else
+        {
+            bombArrayEnemyPlayers.add(entity);
+        }
+    }
+    
     public void spawnDynamite(ThinGridCoordinates pos, int playerId, int bombRange)
     {
         Dynamite entity = new Dynamite(pos, new ThinGridCoordinates(0,0),bombRange, playerId, map, entityManager);

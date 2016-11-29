@@ -77,6 +77,14 @@ public class Constants
     public static final float NORMALBOMBEXPLOSIONDURATION = 0.5f;
     public static final float NORMALBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
     
+    public static final float ROCKETEXPLOSIONTIME = 2f;
+    public static final float ROCKETEXPLOSIONDURATION = 0.5f;
+    public static final float ROCKETDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
+    
+    public static final float  BARRELEXPLOSIONDURATION = 0.4f;
+    public static final float  BARRELDELAYEXPLODEAFTERHITBYBOMB = 0.4f;
+    
+    
     public static final float INFINITYBOMBEXPLOSIONTIME = 2;
     public static final float INFINITYBOMBEXPLOSIONDURATION = 0.5f;
     public static final float INFINITYBOMBDELAYEXPLODEAFTERHITBYBOMB = 0.5f;
@@ -92,12 +100,12 @@ public class Constants
     
     // Default bomb cost settings
     public static final int BOMB1 = 0; // Normal Bomb
-    public static final int BOMB2 = 50; // Dynamite
+    public static final int BOMB2 = 30; // Dynamite
     public static final int BOMB3 = 100; // Granade
     public static final int BOMB4 = 70; // X3
-    public static final int BOMB5 = 100;
-    public static final int BOMB6 = 100;
-    public static final int BOMB7 = 120;
+    public static final int BOMB5 = 100; // Rocket
+    public static final int BOMB6 = 100; // ?
+    public static final int BOMB7 = 120; // Charge
     public static final int BOMB8 = 50; // Barrel
     public static final int BOMB9 = 100; // Teleport
     
