@@ -724,6 +724,11 @@ public class MainPlayer extends Player
     }
 
     /*------------------ GETTER & SETTER ------------------*/  
+    public String getLastMovementKeyPressed()
+    {
+        return this.lastMovementKeyPressed;
+    }
+    
     public int getBombPrice(int bombNumber) // Used by main player hud
     {
         return bombPrices[bombNumber -1];
