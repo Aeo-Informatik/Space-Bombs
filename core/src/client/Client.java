@@ -6,7 +6,6 @@
 package client;
 
 
-import com.gdx.bomberman.Constants;
 import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -40,9 +39,9 @@ public class Client
         //InetAddress address = InetAddress.getByAddress(host, bytes)
         
         //Check if host ip is up and running else it creates a loop on creating the socket object
-        if(address.isReachable(Constants.CONNECTIONTIMEOUT*1000))
+        if(address.isReachable(2000))
         {
-            this.socket = new Socket(host, 13199);
+            this.socket = new Socket(host, port);
         }else
         {
             throw new UnknownHostException("Connection refused");
