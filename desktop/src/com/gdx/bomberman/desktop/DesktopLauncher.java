@@ -6,7 +6,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.gdx.bomberman.Main;
 import com.gdx.bomberman.Constants; 
 
-
+//asd
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
