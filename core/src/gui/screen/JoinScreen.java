@@ -164,13 +164,13 @@ public class JoinScreen extends Screens implements Screen
                 AudioManager.getClickSound().setVolume(id, Constants.SOUNDVOLUME);
 
                 //Get the ip out of the textfield
-                if(!ipTextField.getText().equals(""))
-                {
+//                if(!ipTextField.getText().equals(""))
+//                {
                     connectionIp = ipTextField.getText();
-                }else
-                {
-                    connectionIp = "127.0.0.1";
-                }
+//                }else
+//                {
+//                    connectionIp = "127.0.0.1";
+//                }
                  
                 try 
                 {
