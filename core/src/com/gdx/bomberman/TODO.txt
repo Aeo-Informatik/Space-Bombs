@@ -1,7 +1,6 @@
 //Bomb
-- Charge - remotly detonable bomb. You can walk over them and place multiple ones.
 - Rocket - Moves forward from cell to cell till it hits something (wall/bomb or player)
-1 remaining (maybe gas type bomb ?)
+- gas-bomb - spread gas, gas will burn after touching an explosion(maybe hurt player that are in the gas)
 
 //Audio
 - Add for each item a pickup sound
@@ -10,17 +9,30 @@
 
 // Ingame
 - Add to the Life bar the till now collected items.
+- after x min gas will spread out so the field getting smaller
+- shield in the shop that protect a player for x sek 
+- barrel-spawner, gas-spawner
+- display that a bomb is to expansive and play a sound
+- magnet-item that pulls coins to you in a bigger range for x sek
 
 //Textures
 - blue coins which give x2 and red coins which give x3
 - cubic explosion in different colors.
+- new maptiles with a different theme
+- barrel textures after upgrades
+- gas
+- remote bomb
+- fire
+- shield
+- barrel spawner
+- magnet
 
 //Screens
 Option Screen:
 fullscreen, music volume, sound volume
 
 Help Screen: 
-Add tutorial backgrounds
+game mechanics, credits
 
 MenuScreen:
 - Add a hidden message box that pops up for errors 
@@ -35,3 +47,5 @@ MenuScreen:
 
 //Bugs
 1) At times one client gets IndexOutofBounds because of itemFields in ProcessData
+2) tombstone that spwans in a block, maybe destroy the block or spwan on the player spawn
+3) player outside the map get teleportet back
