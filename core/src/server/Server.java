@@ -158,7 +158,7 @@ public class Server
         {
             if(!serverSocket.isBound())
             {
-                this.serverSocket.bind(new InetSocketAddress("127.0.0.1", port), maxConnections);
+                this.serverSocket.bind(new InetSocketAddress("0.0.0.0", port), maxConnections);
             }
         } catch (IOException ex) 
         {
