@@ -16,7 +16,7 @@ Speaking of items there are item spawner on each map which will periodically spa
 range upgrades, coin bags, speed upgrade ecc. These are the "hot points" where players gather and fight.
 But these item spawners can also spawn some bombs so that players have to move away and give enemies a chance to grab some items.
 
-##[Download Here](http://aeo-informatik.github.io/Space-Bombs/ "Download Page")
+## [Download Here](http://aeo-informatik.github.io/Space-Bombs/ "Download Page")
 
 ![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/screenshots/X3-bomb.png "X3 Bomb")
 ![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/screenshots/black-hole.png "Black Hole")
