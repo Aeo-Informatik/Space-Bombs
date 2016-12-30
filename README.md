@@ -5,9 +5,6 @@ It is available on Mac OSX, Linux, Windows and Android 4.4+. It can be played ac
 but it is encouraged to play it on a computer as it was primarily developed for it.
 
 ![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/screenshots/server-menu.png "Server Menu")
-![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/screenshots/X3-bomb.png "X3 Bomb")
-![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/screenshots/black-hole.png "Black Hole")
-
 
 ## Gameplay
 With at least two human players one hosts the game session and the other connects to it.
@@ -20,6 +17,10 @@ range upgrades, coin bags, speed upgrade ecc. These are the "hot points" where p
 But these item spawners can also spawn some bombs so that players have to move away and give enemies a chance to grab some items.
 
 ##[Download Here](http://aeo-informatik.github.io/Space-Bombs/ "Download Page")
+
+![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/screenshots/X3-bomb.png "X3 Bomb")
+![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/screenshots/black-hole.png "Black Hole")
+
 
 ## Bomb Types
 | Bomb        | Description           | Cost in Coins   |
