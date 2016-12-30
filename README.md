@@ -4,6 +4,9 @@ Space Bombs is a Bomberman inspired PVP game written in Java with the libgdx lib
 It is available on Mac OSX, Linux, Windows and Android 4.4+. It can be played across all devices
 but it is encouraged to play it on a computer as it was primarily developed for it.
 
+![Space Bombs](https://github.com/Aeo-Informatik/Space-Bombs/blob/master/android/assets/menu/start_picture.png "Start Page")
+
+
 ## Gameplay
 With at least two human players one hosts the game session and the other connects to it.
 The game instantly starts and follows the standard last man standing pattern BUT you can choose between
