@@ -54,11 +54,7 @@ public class Server
         }
     }
     
-    /**
-     * Starts the forward thread which will receive & send back the data. 
-     * Before that happens every client gets a unique player id.
-     * @param socketList 
-     */
+
     public void startGame()
     {
         if(mapPath.equals(""))
@@ -263,7 +259,6 @@ public class Server
     
     /**
      * Send one message to one client. Temporary thread.
-     * @param socket
      * @param message 
      */
     public synchronized void sendToOne(ClientConnection clientconnection, String message)
@@ -286,7 +281,6 @@ public class Server
     
     /**
      * Send multiple messages in an arraylist to everyone. Temporary thread.
-     * @param socketList
      * @param dataToSend 
      */
     public synchronized void sendToAll(ArrayList<String> dataToSend)
