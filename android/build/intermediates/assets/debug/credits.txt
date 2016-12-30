@@ -1,0 +1,86 @@
+Music
+=====
+Creativ Common License. Commercial use.
+
+Made by: Ben Briggs
+Name: Amys_Toxic_Cave, Bit_Shifted, Disregard_Farm, Flight_of_the Battery, Moshua_Jorse, Mr_Smilez_Theme, Mystery_Gift_1
+Link: http://benbriggs.net/
+
+Made by: Eric Matyas
+Name: 8-bit-King, Sneaky-Cat, The-Hard-Luck-Gang
+Link: http://soundimage.org/
+
+Sound
+=====
+Creativ Common License. Commercial use.
+
+Made by: thehorriblejoke
+Name: 8-bit-explosion-stakkato.wav
+Link: https://www.freesound.org/people/thehorriblejoke/sounds/259962/
+
+Made by: ProjectsU012
+Name: coin.wav
+Link: https://www.freesound.org/people/ProjectsU012/sounds/341695/
+
+Made by: AnthonyChan0
+Name: granade-clip-drop
+Link: http://www.freesound.org/people/AnthonyChan0/sounds/209645/
+
+Made by: mitchelk
+Name: big-bomb-explosion
+Link: http://www.freesound.org/people/mitchelk/sounds/136765/
+
+Made by: 18hiltc
+Name: alien-bomb-timer
+Link: http://www.freesound.org/people/18hiltc/sounds/208532/
+
+Made by: apolloaiello
+Name: bomb-fuse
+Link: http://www.freesound.org/people/apolloaiello/sounds/329045/
+
+Made by: snakebarney
+Name: bomb-arming
+Link: http://www.freesound.org/people/snakebarney/sounds/138101/
+
+Made by: fins
+Name: teleport
+Link: http://www.freesound.org/people/fins/sounds/146728/
+
+Made by: Autistic Lucario
+Name: error
+Link: http://www.freesound.org/people/Autistic%20Lucario/sounds/142608/
+
+Made by: Peter Lustig
+Name: barrel-place
+Link: http://www.freesound.org/people/Peter%20Lustig/sounds/150094/
+
+Made by: djfroyd
+Name: big-imploding-bomb
+Link: http://www.freesound.org/people/djfroyd/sounds/353421/
+
+Made by: LittleRobotSoundFactory
+Name: black-hole
+Link: http://www.freesound.org/people/LittleRobotSoundFactory/sounds/270526/
+
+Textures
+========
+# Teleport texture
+http://opengameart.org/content/teleportportal
+
+# Some blocks
+http://opengameart.org/content/platformer-art-complete-pack-often-updated
+
+# Player texture
+https://github.com/gabrielsr/bomberman-libgdx
+
+
+Font
+====
+Creativ Common License. Commercial use.
+
+Made by: codeman38
+Name: Lunchtime Doubly So, Press-Start
+Link: http://www.1001fonts.com/lunchtime-doubly-so-font.html
+
+
+

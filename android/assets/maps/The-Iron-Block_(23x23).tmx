@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="120" height="60" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="map_tiles" tilewidth="34" tileheight="34" tilecount="28" columns="4">
+  <image source="../blocks/map_tiles.png" width="136" height="256"/>
+  <tile id="2">
+   <properties>
+    <property name="Item-Spawner" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="Spawn-P2" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="Spawn-P3" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Spawn-P4" value=""/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="Spawn-P1" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="ghost-blocked" value=""/>
+    <property name="undestructable" value=""/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="29" name="background-credits" tilewidth="34" tileheight="34" tilecount="28" columns="4">
+  <image source="../blocks/background-credits.png" width="136" height="256"/>
+ </tileset>
+ <layer name="Background" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6Grf9OzsQckrJqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr6+gENgRwh
+  </data>
+ </layer>
+ <layer name="Floor" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEKhEAUBcHBRXfvf2JNDAU3GIWmCl42yaeZMQAAAAAAAAAAAICq77FlwtYnj+DSjLbneJ++bfq26dumb5u+bfq26dumb5u+bZ9xv9e/b3mf/9umb5u+bfq26dumb5u+bfq26dumb9s25rT9PXkEAAAAAAAAAFzYAZcLBDg=
+  </data>
+ </layer>
+ <layer name="Blocks" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt2ttqwkAUheF94Y2Vao21Kn3/92yGZmC5yGgCIVva/4OwyfFihsVMJokAAAAAAAAAAAAAAAAAAPxXbytsyKPtf+y3737r+u3Qb5dhv9SPmefHno/11fbf9ttt4arPR47S/jV3u6Fe4zefn1Z3cl3J68nqlz2nC/o3W2n/Vv72VueevwX9m620f8lfyds57vOnudV8Xu34ye47y/30b67S/q0c1v33J7V13z7o32ya35pLH391nuzV86s5J7/5NL+t8bXue25b1+lx+jdXaf+aNx1/PYdj77ueex9/r0H/ZtP589QczzlO/+bS8Vdz61Xnx/6e7FXn3/RvrtL+m5i+LrWZeN12uJb+zeXrV0vml/WrfDr++rx4ieP0by6dP9f5sc+f6/eiOi8+x/33Is/tJZg/v4rS/lPz2VrnenQ//ZtLx9+x8dNz61VzPJZ7+jeX5tdz6OvLrdq6j/zm0/zq+Kv5ffb9yL8fX4L8vopH339buZ56nvlzPl+/0nx2Vv3/jaNVf09m/Sof/1/9bdr+Ncf1e5HPk+ecH3s+1sf/zwAAAAAAAAAAAAAQ8QPYpidI
+  </data>
+ </layer>
+ <layer name="Items" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
+  </data>
+ </layer>
+ <layer name="Bombs" width="120" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAdwNwgAAB
+  </data>
+ </layer>
+</map>

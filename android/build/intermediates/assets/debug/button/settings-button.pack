@@ -1,0 +1,26 @@
+
+settings-button.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+button_up
+  rotate: false
+  xy: 170, 0
+  size: 142,62
+  orig: 142,62
+  offset: 0, 0
+  index: -1
+button_checked
+  rotate: false
+  xy: 170, 68
+  size: 142,62
+  orig: 142,62
+  offset: 0, 0
+  index: -1
+button_down
+  rotate: false
+  xy: 170, 136
+  size: 142,62
+  orig: 142,62
+  offset: 0, 0
+  index: -1

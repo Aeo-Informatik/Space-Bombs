@@ -1,0 +1,61 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:2:1-28:12
+	package
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:3:5-32
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+	android:versionName
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:5:5-30
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+	android:versionCode
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:4:5-28
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:2:11-69
+uses-sdk
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:7:5-74
+	android:targetSdkVersion
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:7:42-71
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:7:15-41
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+		INJECTED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:9:5-66
+	android:name
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:9:22-64
+application
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:11:5-26:19
+	android:label
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:14:9-41
+	android:allowBackup
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:12:9-35
+	android:icon
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:13:9-38
+	android:theme
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:15:9-40
+activity#com.gdx.bomberman.AndroidLauncher
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:16:9-25:20
+	android:screenOrientation
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:19:13-50
+	android:label
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:18:13-45
+	android:configChanges
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:20:13-83
+	android:name
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:17:13-61
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:21:13-24:29
+action#android.intent.action.MAIN
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:22:17-69
+	android:name
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:22:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from /home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/AndroidManifest.xml:23:27-74

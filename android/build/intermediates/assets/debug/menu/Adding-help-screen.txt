@@ -1,0 +1,1 @@
+Just add your png file with increasing numbers. help1.png, help2.png, help3.png etc.

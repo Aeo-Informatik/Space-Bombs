@@ -1,0 +1,34 @@
+// Bomb
+- turret welcher spieler anwisiert und Strahlen abschießt
+- nuke welche speziell gekennzeichnete Plätze auslässt
+
+// Extras
+- barrel-spawner, gas-spawner
+- ((magnet-item that pulls coins to you in a bigger range for x sec))
+- scanning for open servers with port scan
+- teleport field
+- consumables spawn out of blocks.
+- shield
+- event wo ein kobold spawnt coins einsammelt und verschwindet. Wird er getötet spawn er ganz viele coins.
+
+// In game
+- after x min gas will spread out so the field getting smaller. 
+- shield in the shop that protect a player for x sec
+- blend granade that has the features of a remote bomb with cubic range
+- block that can only be removed with coins
+
+// Textures
+- fire
+- shield
+- barrel spawner, gas spawner
+
+MenuScreen:
+- Add a hidden message box that pops up for errors 
+
+// Optimisation
+- Erschütternder Bildschirm
+- adding controller support
+- adding mine, turret and homingbomb sound
+- adding phone support
+
+// Bugs
