@@ -26,7 +26,7 @@ But these item spawners can also spawn some bombs so that players have to move a
 | Barrel | Explodes with a huge cubic radius after getting hit by a bomb | 50 |
 | Remote      | Explodes after receiving a detonation signal      | 70 |
 | X3 | Explodes multiple times in a row each time increasing the range     | 70 |
-| Frag Grenade | Explodes and reproduces itself on the end of some explosion tiles | 150 |
+| Frag Grenade | Explodes and reproduces itself at the end of some explosion tiles | 150 |
 | Black Hole | Creates a black hole pulling every player inside and exploding afterwards | 200 |
 
 
@@ -40,3 +40,21 @@ But these item spawners can also spawn some bombs so that players have to move a
 | Speed Up | Increases player speed by 10% |
 | Tombstone      | Spawns after player death and holds all coins from dead player |
 | Coin | Adds 10 coins to players balance|
+
+## Developers
+Dominik Plonis:
+- Illustrator
+- Map Design
+
+Christian Bugge:
+- Developer
+
+Luis Hebendanz:
+- Main Developer
+- Team-Management
+
+Pascal Langer:
+- Developer
+
+Leon Jemain Jäger:
+- Testing
