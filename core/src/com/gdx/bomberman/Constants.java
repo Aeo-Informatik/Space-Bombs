@@ -19,8 +19,8 @@ public class Constants
     public static final int CONNECTIONTIMEOUT = 2000; // Milliseconds
 
     // Test settings
-    public static final boolean TESTMAP = true;
-    public static final boolean TINYWINDOWS = true;
+    public static final boolean TESTMAP = false;
+    public static final boolean TINYWINDOWS = false;
     public static final boolean CONTROLLERKEYDEBUG = false;
     public static final String TESTMAPPATH = "maps/Test-Map_(24x24).tmx";
     
