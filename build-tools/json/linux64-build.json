@@ -1,9 +1,9 @@
 {
     "platform": "linux64",
-    "jdk": "/usr/lib/jvm/java-8-openjdk-amd64/jre",
+    "jdk": "C:\\Program Files\\Java\\jdk1.8.0_111",
     "executable": "SpaceBombs",
     "classpath": [
-        "/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/desktop/build/libs/desktop-1.0.jar"
+        "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\desktop\\build\\libs\\desktop-1.0.jar"
     ],
     "mainclass": "com.gdx.bomberman.desktop.DesktopLauncher",
     "vmargs": [
@@ -12,3 +12,4 @@
     "minimizejre": "soft",
     "output": "linux64-build"
 }
+

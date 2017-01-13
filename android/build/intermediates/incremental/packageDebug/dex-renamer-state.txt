@@ -1,7 +1,0 @@
-#Thu Dec 29 22:11:44 CET 2016
-base.0=/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ef08083f6220921582a990d153edd0e72f012087
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_31c2191b478cbc60adb1cc2cf47db418ebfe4b5e/classes.dex
-base.1=/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_31c2191b478cbc60adb1cc2cf47db418ebfe4b5e
-file.0=/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ef08083f6220921582a990d153edd0e72f012087/classes.dex

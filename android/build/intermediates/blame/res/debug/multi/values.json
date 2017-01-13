@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+        "outputFile": "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\android\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 99
                 },
                 "from": {
-                    "file": "/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/res/values/strings.xml",
+                    "file": "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\android\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -31,7 +31,7 @@
                     "endOffset": 562
                 },
                 "from": {
-                    "file": "/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/res/values/styles.xml",
+                    "file": "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\android\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

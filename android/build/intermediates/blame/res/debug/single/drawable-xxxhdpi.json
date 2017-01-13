@@ -1,6 +1,10 @@
 [
     {
-        "merged": "/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/build/intermediates/res/merged/debug/drawable-xxxhdpi/icon.png",
-        "source": "/home/qubasa/Schreibtisch/Coding/Java-Projects/SpaceBombs/android/res/drawable-xxxhdpi/icon.png"
+        "merged": "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\android\\res\\drawable-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\android\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi\\icon.png",
+        "source": "C:\\Users\\Qubasa\\Desktop\\Coding\\Java-Projects\\SpaceBombs\\android\\res\\drawable-xxxhdpi\\icon.png"
     }
 ]
