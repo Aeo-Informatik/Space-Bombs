@@ -27,13 +27,13 @@ But these item spawners can also spawn some bombs so that players have to move a
 | ------------- |:-------------:| -----:|
 | Normal      | Explodes in a cross shaped way after 2s | 0 |
 | Dynamite      |  Explodes in a cubic radius after 2s      |   30 |
-| Mine | Explodes after detecting a player     |    50 |
-| Turret | Explodes with double range spinning around | 50 |
-| Barrel | Explodes with a huge cubic radius after getting hit by a bomb | 50 |
-| Remote      | Explodes after receiving a detonation signal      | 70 |
-| X3 | Explodes multiple times in a row each time increasing the range     | 70 |
 | Frag Grenade | Explodes and reproduces itself at the end of some explosion tiles | 150 |
+| X3 | Explodes multiple times in a row each time increasing the range     | 70 |
+| Mine | Explodes after detecting a player     |    50 |
 | Black Hole | Creates a black hole pulling every player inside and exploding afterwards | 200 |
+| Remote      | Explodes after receiving a detonation signal      | 70 |
+| Barrel | Explodes with a huge cubic radius after getting hit by a bomb | 50 |
+| Turret | Explodes with double range spinning around | 50 |
 
 
 ## Items
