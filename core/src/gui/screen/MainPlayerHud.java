@@ -212,9 +212,14 @@ public class MainPlayerHud extends Screens implements Screen
 
                     if(player != null)
                     {
+                        // Calculate correct world position
                         ThinGridCoordinates aim = new ThinGridCoordinates(player.getPosition().getX() + (x - touchTable.getWidth() / 2f), player.getPosition().getY() + (y - touchTable.getHeight()  / 2f));
-
                         aim = new ThinGridCoordinates(aim.getX() - (x - touchTable.getWidth() / 2f) / 3.5f, aim.getY() - (y - touchTable.getHeight() / 2f) / 3.5f);
+
+                        // Change to block center
+                        ThinGridCoordinates blockCenter = new ThinGridCoordinates(new MapCellCoordinates(aim));
+                        aim.setX(blockCenter.getX() + (Constants.MAPTEXTUREWIDTH - Constants.PLAYERWIDTH) / 2);
+                        aim.setY(blockCenter.getY() + (Constants.MAPTEXTUREHEIGHT - Constants.PLAYERHEIGHT / 4 )/ 2);
 
                         goToCoordiantes = aim;
                     }
@@ -467,7 +472,7 @@ public class MainPlayerHud extends Screens implements Screen
         backgroundTable.add(uiCounterImage).width(scaledCounterX).height(scaledCounterY);
         
         //Add label to foreground messageLabel
-        foregroundTable.row().expandX().padTop(9 * scaleCounterHud);
+        foregroundTable.row().expandX().padTop(8 * scaleCounterHud);
         foregroundTable.add(bombCounterLabel).padLeft(40 * scaleCounterHud);
         foregroundTable.add(coinCounterLabel).padLeft(16 * scaleCounterHud);
         foregroundTable.add(rangeCounterLabel).padLeft(13 * scaleCounterHud);
@@ -564,10 +569,10 @@ public class MainPlayerHud extends Screens implements Screen
         }
 
 
-//        if(goToCoordiantes != null)
-//        {
-//            MainPlayerHud.DrawDebugLine(goToCoordiantes, goToCoordiantes, 5, Color.RED, camera.combined);
-//        }
+        /*if(goToCoordiantes != null)
+        {
+            MainPlayerHud.DrawDebugLine(goToCoordiantes, goToCoordiantes, 5, Color.RED, camera.combined);
+        }*/
 
         if(Constants.ISRUNNINGONSMARTPHONE && Constants.TOUCHSCREEN && goToCoordiantes != null)
         {
@@ -576,9 +581,9 @@ public class MainPlayerHud extends Screens implements Screen
             if(player != null)
             {
                 if(player.goToCoordinates(goToCoordiantes))
-            {
-                goToCoordiantes = null;
-            }
+                {
+                    goToCoordiantes = null;
+                }
             }
         }
     }

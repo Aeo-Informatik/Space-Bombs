@@ -275,22 +275,16 @@ public abstract class Player extends Entity
         if(Math.abs(abstandX) <= 5)
         {
             pos.setX(aim.getX());
+            goXTillEnd = false;
         }
 
         if(Math.abs(abstandY) <= 5)
         {
             pos.setY(aim.getY());
-        }
-
-        if(aim.getY() == pos.getY())
-        {
             goYTillEnd = false;
         }
 
-        if(aim.getX() == pos.getX())
-        {
-            goXTillEnd = false;
-        }
+
 
         if(goYTillEnd)
         {
