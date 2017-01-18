@@ -385,6 +385,14 @@ public class InputHandler implements InputProcessor
         InputHandler.slot9Key = slot9Key;
     }
 
+    public static void resetMovementKeys()
+    {
+        InputHandler.goDownKey = false;
+        InputHandler.goUpKey = false;
+        InputHandler.goRightKey = false;
+        InputHandler.goLeftKey = false;
+    }
+
     @Override
     public boolean keyTyped(char character) {
        return false;

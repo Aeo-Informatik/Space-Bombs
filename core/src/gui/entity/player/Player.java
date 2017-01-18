@@ -22,6 +22,7 @@ import gui.entity.bomb.Bomb;
 import gui.map.MapCellCoordinates;
 import gui.map.MapLoader;
 import gui.map.ThinGridCoordinates;
+import inputHandling.InputHandler;
 
 /**
  *
@@ -234,8 +235,93 @@ public abstract class Player extends Entity
         return false;
     }
     
-    /**--------------------------MOVE PLAYER BOMB--------------------------**/
-    protected void goLeft()
+    /**--------------------------MOVE PLAYER--------------------------**/
+    private boolean goXTillEnd = false;
+    private boolean goYTillEnd = false;
+    public boolean goToCoordinates(ThinGridCoordinates aim)
+    {
+        InputHandler.resetMovementKeys();
+
+        if(pos.getX() == aim.getX() && pos.getY() == aim.getY())
+        {
+            return true;
+        }
+
+        if(map.isBombPlaced(new MapCellCoordinates(aim)) || map.isCellBlocked(new MapCellCoordinates(aim)))
+        {
+            return true;
+        }
+
+        // Den Abstand von deinem jetzigen Punkt bis zum gravitations punkt berechnen
+        float abstandX = Math.abs(aim.getX()) - Math.abs(pos.getX());
+        float abstandY = Math.abs(aim.getY()) - Math.abs(pos.getY());
+
+        // Berechnen des Vorzeichens
+        float richtungX = abstandX / Math.abs(abstandX);
+        float richtungY = abstandY / Math.abs(abstandY);
+
+        if(!goYTillEnd && !goXTillEnd)
+        {
+            // Ist Y Achsen Abstand größer
+            if (Math.abs(abstandY) > Math.abs(abstandX))
+            {
+                goYTillEnd = true;
+            } else
+            {
+                goXTillEnd = true;
+            }
+        }
+
+        if(Math.abs(abstandX) <= 5)
+        {
+            pos.setX(aim.getX());
+        }
+
+        if(Math.abs(abstandY) <= 5)
+        {
+            pos.setY(aim.getY());
+        }
+
+        if(aim.getY() == pos.getY())
+        {
+            goYTillEnd = false;
+        }
+
+        if(aim.getX() == pos.getX())
+        {
+            goXTillEnd = false;
+        }
+
+        if(goYTillEnd)
+        {
+            // Wenn negativ gehe nach unten
+            if (richtungY < 0)
+            {
+                InputHandler.setGoDownKey(true);
+            } else if (richtungY > 0) {
+                InputHandler.setGoUpKey(true);
+            }
+        }
+
+
+        if(goXTillEnd)
+        {
+            // Wenn negativ gehe nach links
+            if (richtungX < 0)
+            {
+                InputHandler.setGoLeftKey(true);
+
+            } else if (richtungX > 0)
+            {
+                InputHandler.setGoRightKey(true);
+            }
+        }
+
+        return false;
+    }
+
+
+    protected boolean goLeft()
     {
         direction.set(-Constants.ITEMSPEEDINCREASE * Constants.DELTATIME, 0);
         
@@ -244,16 +330,21 @@ public abstract class Player extends Entity
             if(!collidesLeft() && !collidesLeftBomb() && !isHardLockMovement())
             {
                 pos.add(direction);
+            }else
+            {
+                playerOrientation = Constants.LEFT;
+                return false;
             }
         }
         playerOrientation = Constants.LEFT;
+        return true;
     }
     
     
     /**
     * Sets the entity movement direction to right controlled from entitySpeed.
     */
-    protected void goRight()
+    protected boolean goRight()
     {
         direction.set(Constants.ITEMSPEEDINCREASE * Constants.DELTATIME, 0);
         for(int i=0; i < entitySpeed; i++)
@@ -261,16 +352,21 @@ public abstract class Player extends Entity
             if(!collidesRight() && !collidesRightBomb() && !isHardLockMovement())
             {
                 pos.add(direction);
+            }else
+            {
+                playerOrientation = Constants.RIGHT;
+                return false;
             }
         }
         playerOrientation = Constants.RIGHT;
+        return false;
     }
     
     
     /**
     * Sets the entity movement direction to up controlled from entitySpeed.
     */
-    protected void goUp()
+    protected boolean goUp()
     {
         direction.set(0, Constants.ITEMSPEEDINCREASE * Constants.DELTATIME);
         for(int i=0; i < entitySpeed; i++)
@@ -278,16 +374,21 @@ public abstract class Player extends Entity
             if(!collidesTop() && !collidesTopBomb() && !isHardLockMovement())
             {
                 pos.add(direction);
+            }else
+            {
+                playerOrientation = Constants.UP;
+                return false;
             }
         }
         playerOrientation = Constants.UP;
+        return true;
     }
     
     
     /**
     * Sets the entity movement direction to down controlled from entitySpeed.
     */
-    protected void goDown()
+    protected boolean goDown()
     {
         direction.set(0, -Constants.ITEMSPEEDINCREASE * Constants.DELTATIME);
         for(int i=0; i < entitySpeed; i++)
@@ -295,9 +396,14 @@ public abstract class Player extends Entity
             if(!collidesBottom() && !collidesBottomBomb() && !isHardLockMovement())
             {
                 pos.add(direction);
+            }else
+            {
+                playerOrientation = Constants.DOWN;
+                return false;
             }
         }
         playerOrientation = Constants.DOWN;
+        return true;
     }
     
     /**

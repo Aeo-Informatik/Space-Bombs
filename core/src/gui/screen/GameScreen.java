@@ -12,6 +12,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
@@ -71,7 +73,7 @@ public class GameScreen extends Screens implements Screen{
         this.mapManager = new MapLoader(camera, sendCommand);
         this.entityManager = new EntityManager(camera, mapManager, sendCommand, inputHandler);
         this.processData = new ClientProcessData(entityManager, mapManager);
-        this.mainPlayerHud = new MainPlayerHud(entityManager, game, server, client);
+        this.mainPlayerHud = new MainPlayerHud(entityManager, game, server, client, mapManager, camera);
         this.camera.zoom = Constants.DEFAULTZOOM;
 
         // Controls
@@ -270,5 +272,7 @@ public class GameScreen extends Screens implements Screen{
     }
  
     
-    /**------------------------GETTER & SETTER-----------------------**/    
+    /**------------------------GETTER & SETTER-----------------------**/
+
+
 }

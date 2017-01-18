@@ -9,19 +9,28 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -34,8 +43,13 @@ import client.Client;
 import gui.AudioManager;
 import gui.TextureManager;
 import gui.entity.EntityManager;
+import gui.entity.bomb.NormalBomb;
 import gui.entity.player.EnemyPlayer;
 import gui.entity.player.MainPlayer;
+import gui.entity.player.Player;
+import gui.map.MapCellCoordinates;
+import gui.map.MapLoader;
+import gui.map.ThinGridCoordinates;
 import inputHandling.InputHandler;
 import server.Server;
 
@@ -55,6 +69,10 @@ public class MainPlayerHud extends Screens implements Screen
     private MainPlayer mainPlayer;
     private EnemyPlayer currentSpectatedPlayer;
     private EntityManager entityManager;
+
+    //Debug
+    private static ShapeRenderer debugRenderer = new ShapeRenderer();
+    private OrthographicCamera camera;
 
     //Font import
     private FreeTypeFontGenerator generator;
@@ -102,11 +120,15 @@ public class MainPlayerHud extends Screens implements Screen
     private Dialog exitDialog;
     
     // Touchpad for phone
-    private int buttonSize = 70;
-    private Image buttonUp = new Image(new Texture("hud/buttonUp.png"));
-    private Image buttonDown = new Image(new Texture("hud/buttonDown.png"));
-    private Image buttonRight = new Image(new Texture("hud/buttonRight.png"));
-    private Image buttonLeft = new Image(new Texture("hud/buttonLeft.png"));
+    private Touchpad touchpad;
+    private Touchpad.TouchpadStyle touchpadStyle;
+    private Skin touchpadSkin;
+    private Drawable touchBackground;
+    private Drawable touchKnob;
+
+    // Touchcoordinates
+    private ThinGridCoordinates goToCoordiantes = null;
+    private Table touchTable = new Table();
 
     // Action touchpad
     private Image placeBombButton = new Image(new Texture("hud/placeBombButton.png"));
@@ -117,7 +139,7 @@ public class MainPlayerHud extends Screens implements Screen
     private Image goToMenuButton = new Image(new Texture("hud/goToMenuButton.png"));
 
     /*-------------------------CONSTRUCTOR--------------------------*/
-    public MainPlayerHud(EntityManager entityManager, Game game, Server server, Client client)
+    public MainPlayerHud(final EntityManager entityManager, Game game, Server server, Client client, final MapLoader map, OrthographicCamera camera)
     {
         super(game, client, server);
         
@@ -127,8 +149,12 @@ public class MainPlayerHud extends Screens implements Screen
         //Initialise Objects
         this.stage = new Stage(new StretchViewport(Constants.SCREENWIDTH, Constants.SCREENHEIGHT));
         this.stack = new Stack(); //A container in wich you can place multiple widgets to "stack" them
-        this.entityManager = entityManager;       
-        
+        this.touchTable.setSize(stage.getWidth(), stage.getHeight());
+        this.camera = camera;
+        touchTable.setTouchable(Touchable.enabled);
+        stage.addActor(touchTable);
+        this.entityManager = entityManager;
+
         //Initialise Font
         this.generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/lunchtime-doubly-so/lunchds.ttf"));
         this.parameter = new FreeTypeFontParameter();
@@ -168,137 +194,98 @@ public class MainPlayerHud extends Screens implements Screen
         exitDialog.button("Yes", true); //sends "true" as the result
         exitDialog.button("No", false);  //sends "false" as the result
 
-        /*-------------------------MOVEMENT TOUCHPAD--------------------------*/
-        if(Constants.ISRUNNINGONSMARTPHONE)
+        if(Constants.ISRUNNINGONSMARTPHONE && Constants.TOUCHSCREEN)
         {
-            Table table = new Table();
-            table.left().bottom();
-
-            /*-------------------------GO LEFT--------------------------*/
-            buttonLeft.addListener(new InputListener()
+            touchTable.addListener(new InputListener()
             {
                 @Override
-                public boolean touchDown(InputEvent event, float screenX, float screenY, int pointer, int buttonCode) {
-
-                    InputHandler.setAnyKey(true);
-                    InputHandler.setGoLeftKey(true);
+                public boolean touchDown(InputEvent event, float screenX, float screenY, int pointer, int buttonCode)
+                {
 
                     return true;
                 }
 
                 @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    InputHandler.setAnyKey(false);
-                    InputHandler.setGoLeftKey(false);
-                }
-
-                @Override
-                public void touchDragged(InputEvent event, float screenX, float screenY, int pointer)
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button)
                 {
+                    Player player = entityManager.getPlayerManager().getCurrentPlayerObject();
 
+                    if(player != null)
+                    {
+                        ThinGridCoordinates aim = new ThinGridCoordinates(player.getPosition().getX() + (x - touchTable.getWidth() / 2f), player.getPosition().getY() + (y - touchTable.getHeight()  / 2f));
+
+                        aim = new ThinGridCoordinates(aim.getX() - (x - touchTable.getWidth() / 2f) / 3.5f, aim.getY() - (y - touchTable.getHeight() / 2f) / 3.5f);
+
+                        goToCoordiantes = aim;
+                    }
                 }
-            });
 
-            buttonLeft.setSize(buttonSize, buttonSize);
+                });
+        }
 
-            /*-------------------------GO RIGHT--------------------------*/
-            buttonRight.addListener(new InputListener()
+
+
+        /*-------------------------MOVEMENT TOUCHPAD--------------------------*/
+        if(Constants.ISRUNNINGONSMARTPHONE && Constants.TOUCHPAD) {
+            //Create a touchpad skin
+            touchpadSkin = new Skin();
+            //Set background image
+            touchpadSkin.add("touchBackground", new Texture("hud/touchBackground.png"));
+            //Set knob image
+            touchpadSkin.add("touchKnob", new Texture("hud/touchKnob.png"));
+            //Create TouchPad Style
+            touchpadStyle = new Touchpad.TouchpadStyle();
+            //Create Drawable's from TouchPad skin
+            touchBackground = touchpadSkin.getDrawable("touchBackground");
+            touchKnob = touchpadSkin.getDrawable("touchKnob");
+            //Apply the Drawables to the TouchPad Style
+            touchpadStyle.background = touchBackground;
+            touchpadStyle.knob = touchKnob;
+            //Create new TouchPad with the created style
+            touchpad = new Touchpad(10, touchpadStyle);
+            //setBounds(x,y,width,height)
+            touchpad.setBounds(15, 15, 150, 150);
+
+            stage.addActor(touchpad);
+
+            touchpad.addListener(new InputListener()
             {
                 @Override
                 public boolean touchDown(InputEvent event, float screenX, float screenY, int pointer, int buttonCode) {
-
-                    InputHandler.setAnyKey(true);
-                    InputHandler.setGoRightKey(true);
 
                     return true;
                 }
 
                 @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
-                    InputHandler.setAnyKey(false);
-                    InputHandler.setGoRightKey(false);
-                }
-
-                @Override
-                public void touchDragged(InputEvent event, float screenX, float screenY, int pointer)
+                public void touchDragged(InputEvent event, float x, float y, int pointer)
                 {
-
-                }
-            });
-
-            buttonRight.setSize(buttonSize, buttonSize);
-
-            /*-------------------------GO UP--------------------------*/
-            buttonUp.addListener(new InputListener()
-            {
-                @Override
-                public boolean touchDown(InputEvent event, float screenX, float screenY, int pointer, int buttonCode) {
-
                     InputHandler.setAnyKey(true);
-                    InputHandler.setGoUpKey(true);
+                    InputHandler.resetMovementKeys();
 
-                    return true;
+                    if(touchpad.getKnobPercentX() < -0.5)
+                    {
+                        InputHandler.setGoLeftKey(true);
+                    }else if(touchpad.getKnobPercentX() > 0.5)
+                    {
+                        InputHandler.setGoRightKey(true);
+                    }
+
+                    if(touchpad.getKnobPercentY() < -0.5)
+                    {
+                        InputHandler.setGoDownKey(true);
+                    }else if(touchpad.getKnobPercentY() > 0.5)
+                    {
+                        InputHandler.setGoUpKey(true);
+                    }
                 }
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
                     InputHandler.setAnyKey(false);
-                    InputHandler.setGoUpKey(false);
-                }
-
-                @Override
-                public void touchDragged(InputEvent event, float screenX, float screenY, int pointer)
-                {
+                    InputHandler.resetMovementKeys();
 
                 }
             });
-
-            buttonUp.setSize(buttonSize, buttonSize);
-
-            /*-------------------------GO DOWN--------------------------*/
-            buttonDown.addListener(new InputListener()
-            {
-                @Override
-                public boolean touchDown(InputEvent event, float screenX, float screenY, int pointer, int buttonCode) {
-
-                    InputHandler.setAnyKey(true);
-                    InputHandler.setGoDownKey(true);
-
-                    return true;
-                }
-
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
-                    InputHandler.setAnyKey(false);
-                    InputHandler.setGoDownKey(false);
-                }
-
-                @Override
-                public void touchDragged(InputEvent event, float screenX, float screenY, int pointer)
-                {
-
-                }
-            });
-
-            buttonDown.setSize(buttonSize, buttonSize);
-
-
-            table.add();
-            table.add(buttonUp).size(buttonUp.getWidth(), buttonUp.getHeight());
-            table.add();
-            table.row().pad(5, 5, 5, 5);
-            table.add(buttonLeft).size(buttonLeft.getWidth(), buttonLeft.getHeight());
-            table.add();
-            table.add(buttonRight).size(buttonRight.getWidth(), buttonRight.getHeight());
-            table.row().padBottom(5);
-            table.add();
-            table.add(buttonDown).size(buttonDown.getWidth(), buttonDown.getHeight());
-            table.add();
-
-            stage.addActor(table);
         }
 
         /*-------------------------ACTION TOUCHPAD--------------------------*/
@@ -430,12 +417,12 @@ public class MainPlayerHud extends Screens implements Screen
                 }
             });
 
-            goToMenuButton.setSize(80, 80);
+            goToMenuButton.setSize(70, 70);
 
             table.add(goToMenuButton).size(goToMenuButton.getWidth(), goToMenuButton.getHeight());
             table.setSize(goToMenuButton.getWidth(), goToMenuButton.getHeight());
-            table.padTop(9 * scaleCounterHud);
-            table.padRight(70);
+            table.padTop(40);
+            table.padRight(40);
             table.setPosition(Constants.SCREENWIDTH - table.getWidth(), Constants.SCREENHEIGHT - table.getHeight());
 
             stage.addActor(table);
@@ -471,11 +458,11 @@ public class MainPlayerHud extends Screens implements Screen
         
         //Live & coins display image
         uiCounterImage = new Image(TextureManager.hudCounterFullLive);
-        
+
         //Calculate image width (scaledCounterX) and image height (scaleY)
         float scaledCounterX = TextureManager.hudCounterFullLive.getWidth() * scaleCounterHud;
         float scaledCounterY = TextureManager.hudCounterFullLive.getHeight() * scaleCounterHud;
-        
+
         //Add image to background messageLabel
         backgroundTable.add(uiCounterImage).width(scaledCounterX).height(scaledCounterY);
         
@@ -485,12 +472,12 @@ public class MainPlayerHud extends Screens implements Screen
         foregroundTable.add(coinCounterLabel).padLeft(16 * scaleCounterHud);
         foregroundTable.add(rangeCounterLabel).padLeft(13 * scaleCounterHud);
         foregroundTable.add(speedCounterLabel).padLeft(18 * scaleCounterHud);
-        
+
         //Set container to the height of the image and position it on the top left
         stack.setWidth(scaledCounterX);
         stack.setHeight(scaledCounterY);
         stack.setPosition(0, 470 - scaledCounterY);
-        
+
         //End messageLabel and container (stack)
         stack.add(backgroundTable);
         stack.add(foregroundTable);
@@ -575,7 +562,25 @@ public class MainPlayerHud extends Screens implements Screen
         {
             showSpectator();
         }
-                
+
+
+//        if(goToCoordiantes != null)
+//        {
+//            MainPlayerHud.DrawDebugLine(goToCoordiantes, goToCoordiantes, 5, Color.RED, camera.combined);
+//        }
+
+        if(Constants.ISRUNNINGONSMARTPHONE && Constants.TOUCHSCREEN && goToCoordiantes != null)
+        {
+            Player player = entityManager.getPlayerManager().getCurrentPlayerObject();
+
+            if(player != null)
+            {
+                if(player.goToCoordinates(goToCoordiantes))
+            {
+                goToCoordiantes = null;
+            }
+            }
+        }
     }
     
     private void renderDeathMessagesOnScreen()
@@ -939,8 +944,6 @@ public class MainPlayerHud extends Screens implements Screen
 
                 InputHandler.setAnyKey(true);
 
-                System.err.println("-------------CONTAINER HAS BEEN PRESSED!!!!!----------------");
-
                 switch(bombId)
                 {
                     case 1:
@@ -1041,5 +1044,31 @@ public class MainPlayerHud extends Screens implements Screen
             textMessageArray.add(message);
         }
     }
+
+    private ThinGridCoordinates hudCoordinatesToWorldCoordinates(float x, float y)
+    {
+        Player player = entityManager.getPlayerManager().getCurrentPlayerObject();
+
+        if(player != null)
+        {
+            ThinGridCoordinates aim = new ThinGridCoordinates(player.getPosition().getX() + (x - stage.getCamera().viewportWidth / 2), player.getPosition().getY() + (y - stage.getCamera().viewportHeight / 2));
+
+           return aim;
+        }
+
+        return null;
+    }
+
+    private static void DrawDebugLine(ThinGridCoordinates start, ThinGridCoordinates end, int lineWidth, Color color, Matrix4 projectionMatrix)
+    {
+        Gdx.gl.glLineWidth(lineWidth);
+        debugRenderer.setProjectionMatrix(projectionMatrix);
+        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
+        debugRenderer.setColor(color);
+        debugRenderer.line(new Vector2(start.getX(), start.getY()), new Vector2(end.getX() +5, end.getY() +1));
+        debugRenderer.end();
+        Gdx.gl.glLineWidth(1);
+    }
+
 }
 

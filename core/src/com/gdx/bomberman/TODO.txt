@@ -28,7 +28,6 @@ MenuScreen:
 // Optimisation
 - Erschütternder Bildschirm
 - adding controller support
-- adding mine, turret and homingbomb sound
-- adding phone support
 
 // Bugs
+- Android sound bug: AUDIO_OUTPUT_FLAG_FAST denied by client; transfer 4, track 44100 Hz, output 48000 Hz
