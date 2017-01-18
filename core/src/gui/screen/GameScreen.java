@@ -77,10 +77,12 @@ public class GameScreen extends Screens implements Screen{
         this.camera.zoom = Constants.DEFAULTZOOM;
 
         // Controls
-        if(Gdx.app.getType().equals(ApplicationType.Android))
+        if(Constants.ISRUNNINGONSMARTPHONE)
         {
             Gdx.input.setInputProcessor(mainPlayerHud.stage);
-        }else {
+            camera.zoom = Constants.SMARTPHONEZOOM;
+        }else
+        {
             inputHandler.setInputSource(mainPlayerHud.stage);
             Gdx.input.setCursorCatched(true);
         }

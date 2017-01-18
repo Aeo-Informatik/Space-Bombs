@@ -19,7 +19,7 @@ public class Constants
     public static final int CONNECTIONTIMEOUT = 2000; // Milliseconds
 
     // Test settings
-    public static final boolean TESTMAP = true;
+    public static final boolean TESTMAP = false;
     public static final boolean TINYWINDOWS = false;
     public static final boolean CONTROLLERKEYDEBUG = false;
     public static final String TESTMAPPATH = "maps/Test-Map_(24x24).tmx";
@@ -65,6 +65,7 @@ public class Constants
     public static final String WINDOWTITEL = "Space Bombs";
     public static final String WINDOWICONPATH = "other/icon.png";
     public static float DEFAULTZOOM = 1f;
+    public static float SMARTPHONEZOOM = 0.5f;
     public static final float DEFAULTMAXZOOMIN = 0.5f;
     public static final float DEFAULTMAXZOOMOUT = 1.5f;
     

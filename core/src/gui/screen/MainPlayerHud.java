@@ -199,15 +199,9 @@ public class MainPlayerHud extends Screens implements Screen
             touchTable.addListener(new InputListener()
             {
                 @Override
-                public boolean touchDown(InputEvent event, float screenX, float screenY, int pointer, int buttonCode)
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttonCode)
                 {
 
-                    return true;
-                }
-
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button)
-                {
                     Player player = entityManager.getPlayerManager().getCurrentPlayerObject();
 
                     if(player != null)
@@ -221,11 +215,44 @@ public class MainPlayerHud extends Screens implements Screen
                         aim.setX(blockCenter.getX() + (Constants.MAPTEXTUREWIDTH - Constants.PLAYERWIDTH) / 2);
                         aim.setY(blockCenter.getY() + (Constants.MAPTEXTUREHEIGHT - Constants.PLAYERHEIGHT / 4 )/ 2);
 
+                        System.out.println("X: " + x + " Y: " + y);
+
                         goToCoordiantes = aim;
                     }
+
+                    return true;
                 }
 
-                });
+                @Override
+                public void touchDragged(InputEvent event, float x, float y, int pointer)
+                {
+                    Player player = entityManager.getPlayerManager().getCurrentPlayerObject();
+
+                    if(player != null)
+                    {
+                        // Calculate correct world position
+                        ThinGridCoordinates aim = new ThinGridCoordinates(player.getPosition().getX() + (x - touchTable.getWidth() / 2f), player.getPosition().getY() + (y - touchTable.getHeight()  / 2f));
+                        aim = new ThinGridCoordinates(aim.getX() - (x - touchTable.getWidth() / 2f) / 3.5f, aim.getY() - (y - touchTable.getHeight() / 2f) / 3.5f);
+
+
+
+                        // Change to block center
+                        ThinGridCoordinates blockCenter = new ThinGridCoordinates(new MapCellCoordinates(aim));
+                        aim.setX(blockCenter.getX() + (Constants.MAPTEXTUREWIDTH - Constants.PLAYERWIDTH) / 2);
+                        aim.setY(blockCenter.getY() + (Constants.MAPTEXTUREHEIGHT - Constants.PLAYERHEIGHT / 4 )/ 2);
+
+                        goToCoordiantes = aim;
+                    }
+
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+                {
+
+                }
+
+            });
         }
 
 
@@ -262,25 +289,64 @@ public class MainPlayerHud extends Screens implements Screen
                 }
 
                 @Override
-                public void touchDragged(InputEvent event, float x, float y, int pointer)
+                public void touchDragged(InputEvent event, float screenX, float screenY, int pointer)
                 {
-                    InputHandler.setAnyKey(true);
-                    InputHandler.resetMovementKeys();
+                    ThinGridCoordinates aim = null;
 
-                    if(touchpad.getKnobPercentX() < -0.5)
-                    {
-                        InputHandler.setGoLeftKey(true);
-                    }else if(touchpad.getKnobPercentX() > 0.5)
-                    {
-                        InputHandler.setGoRightKey(true);
-                    }
+                    Player player = entityManager.getPlayerManager().getCurrentPlayerObject();
 
-                    if(touchpad.getKnobPercentY() < -0.5)
-                    {
-                        InputHandler.setGoDownKey(true);
-                    }else if(touchpad.getKnobPercentY() > 0.5)
-                    {
-                        InputHandler.setGoUpKey(true);
+                    if(player != null) {
+
+                        // Left
+                        if (touchpad.getKnobPercentX() < -0.5)
+                        {
+                            float x = 370;
+                            float y = 250;
+
+                            // Calculate correct world position
+                            aim = new ThinGridCoordinates(player.getPosition().getX() + (x - touchTable.getWidth() / 2f), player.getPosition().getY() + (y - touchTable.getHeight() / 2f));
+                            aim = new ThinGridCoordinates(aim.getX() - (x - touchTable.getWidth() / 2f) / 3.5f, aim.getY() - (y - touchTable.getHeight() / 2f) / 3.5f);
+
+                            //Right
+                        } else if (touchpad.getKnobPercentX() > 0.5)
+                        {
+                            float x = 460;
+                            float y = 250;
+
+                            // Calculate correct world position
+                            aim = new ThinGridCoordinates(player.getPosition().getX() + (x - touchTable.getWidth() / 2f), player.getPosition().getY() + (y - touchTable.getHeight() / 2f));
+                            aim = new ThinGridCoordinates(aim.getX() - (x - touchTable.getWidth() / 2f) / 3.5f, aim.getY() - (y - touchTable.getHeight() / 2f) / 3.5f);
+                        }
+
+                        // Down
+                        if (touchpad.getKnobPercentY() < -0.5)
+                        {
+                            float x = 415;
+                            float y = 200;
+
+                            // Calculate correct world position
+                            aim = new ThinGridCoordinates(player.getPosition().getX() + (x - touchTable.getWidth() / 2f), player.getPosition().getY() + (y - touchTable.getHeight() / 2f));
+                            aim = new ThinGridCoordinates(aim.getX() - (x - touchTable.getWidth() / 2f) / 3.5f, aim.getY() - (y - touchTable.getHeight() / 2f) / 3.5f);
+
+                            // Up
+                        } else if (touchpad.getKnobPercentY() > 0.5) {
+
+                            float x = 415;
+                            float y = 300;
+
+                            // Calculate correct world position
+                            aim = new ThinGridCoordinates(player.getPosition().getX() + (x - touchTable.getWidth() / 2f), player.getPosition().getY() + (y - touchTable.getHeight() / 2f));
+                            aim = new ThinGridCoordinates(aim.getX() - (x - touchTable.getWidth() / 2f) / 3.5f, aim.getY() - (y - touchTable.getHeight() / 2f) / 3.5f);
+                        }
+
+                        if (aim != null) {
+                            // Change to block center
+                            ThinGridCoordinates blockCenter = new ThinGridCoordinates(new MapCellCoordinates(aim));
+                            aim.setX(blockCenter.getX() + (Constants.MAPTEXTUREWIDTH - Constants.PLAYERWIDTH) / 2);
+                            aim.setY(blockCenter.getY() + (Constants.MAPTEXTUREHEIGHT - Constants.PLAYERHEIGHT / 4) / 2);
+                        }
+
+                        goToCoordiantes = aim;
                     }
                 }
 
