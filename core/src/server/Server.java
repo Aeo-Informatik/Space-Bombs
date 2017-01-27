@@ -33,6 +33,7 @@ public class Server
     private int startLives = Constants.DEFAULTLIFE;
     private int coinBonus = Constants.COINBONUS;
     private int startRange = Constants.DEFAULTBOMBRANGE;
+    private int startCubicRange = Constants.DEFAULTCUBICRANGE;
     private int startBombPlace = Constants.DEFAULTBOMBPLACE;
     private int startSpeed = Constants.DEFAULTENTITYSPEED;
     private int gameTimer = 0;
@@ -111,6 +112,7 @@ public class Server
                 preGameCommands.add("registerStartSpeed|" + startSpeed + "|*");
                 preGameCommands.add("registerStartBombPlace|" + startBombPlace + "|*");
                 preGameCommands.add("registerStartRange|" + startRange + "|*");
+                preGameCommands.add("registerStartCubicRange|" + startCubicRange + "|*");
                 
                 sendToAll(preGameCommands);
             }else
@@ -529,6 +531,16 @@ public class Server
      */
     public boolean isIsLobbyOpen() {
         return isLobbyOpen;
+    }
+
+    public int getStartCubicRange()
+    {
+        return startCubicRange;
+    }
+
+    public void setStartCubicRange(int startCubicRange)
+    {
+        this.startCubicRange = startCubicRange;
     }
 
 }

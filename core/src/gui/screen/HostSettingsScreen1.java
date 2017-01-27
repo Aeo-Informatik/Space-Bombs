@@ -20,12 +20,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.gdx.bomberman.Constants;
 
+import java.util.Locale;
+
 import client.Client;
 import gui.AudioManager;
 import gui.TextureManager;
 import inputHandling.InputHandler;
 import server.Server;
 
+import static com.badlogic.gdx.Files.FileType.Local;
 import static gui.TextureManager.backSkin;
 import static gui.TextureManager.dynamiteSkin;
 import static gui.TextureManager.roundSkin;
@@ -58,7 +61,13 @@ public class HostSettingsScreen1 extends Screens implements Screen
     private WidgetGroup startRangeWidget = new WidgetGroup();
     private TextButton startRangeUp;
     private TextButton startRangeDown;
-    
+
+    // Cubic range settings
+    private Label cubicRangeLabel;
+    private WidgetGroup cubicRangeWidget = new WidgetGroup();
+    private TextButton cubicRangeUp;
+    private TextButton cubicRangeDown;
+
     // Slide screen button
     private TextButton slideRight;
     private TextButton slideLeft;
@@ -67,7 +76,8 @@ public class HostSettingsScreen1 extends Screens implements Screen
     private int startBombPlace = server.getStartBombPlace();
     private int startSpeed = server.getStartSpeed();
     private int startRange = server.getStartRange();
-    
+    private int startCubicRange = server.getStartCubicRange();
+
     /**------------------------CONSTRUCTOR------------------------**/
     public HostSettingsScreen1(final Game game, final Client client, final Server server)
     {
@@ -125,7 +135,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
         /**------------------------START BOMB PLACE SETTINGS------------------------**/
         Table table1 = new Table();
         
-        startBombPlaceLabel = new Label("Start Bombs: " + String.format("%03d",startBombPlace), labelStyle);
+        startBombPlaceLabel = new Label("Start Bombs: " + String.format(Locale.US, "%03d",startBombPlace), labelStyle);
         table1.add(startBombPlaceLabel).width(224);
         
         
@@ -149,7 +159,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
         /**------------------------START SPEED SETTINGS------------------------**/
         Table table3 = new Table();
         
-        startSpeedLabel = new Label( "Start Speed: " + String.format("%03d", server.getStartSpeed()) + "%", labelStyle);
+        startSpeedLabel = new Label( "Start Speed: " + String.format(Locale.US, "%03d", server.getStartSpeed()) + "%", labelStyle);
         table3.add(startSpeedLabel).width(224);
         
         // Coin down button
@@ -170,7 +180,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
         /**------------------------START RANGE SETTINGS------------------------**/
         Table table4 = new Table();
         
-        startRangeLabel = new Label("Start Range: " + String.format("%03d", startRange), labelStyle);
+        startRangeLabel = new Label("Start Range: " + String.format(Locale.US, "%03d", startRange), labelStyle);
         table4.add(startRangeLabel).width(224);
         
         // Coin down button
@@ -187,7 +197,28 @@ public class HostSettingsScreen1 extends Screens implements Screen
         
         // Add widget to screen
         stage.addActor(startRangeWidget);
-        
+
+        /**------------------------START CUBIC RANGE SETTINGS------------------------**/
+        Table table5 = new Table();
+
+        cubicRangeLabel = new Label("Cubic Range: " + String.format(Locale.US, "%03d", startCubicRange), labelStyle);
+        table5.add(cubicRangeLabel).width(224);
+
+        // Coin down button
+        cubicRangeDown = new TextButton("-",textButtonStyleRound);
+        table5.add(cubicRangeDown).padLeft(100);
+
+        // Coin up button
+        cubicRangeUp = new TextButton("+",textButtonStyleRound);
+        table5.add(cubicRangeUp).padLeft(35);
+
+        //Add table to widget
+        cubicRangeWidget.addActor(table5);
+        cubicRangeWidget.setPosition(320, 150);
+
+        // Add widget to screen
+        stage.addActor(cubicRangeWidget);
+
         /**------------------------OTHER BUTTONS------------------------**/
         // Back button
         backbutton = new TextButton("", textButtonStyleBack);
@@ -260,7 +291,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
                if(startRange < Constants.MAXBOMBRANGE)
                { 
                     startRange += 1;
-                    startRangeLabel.setText("Start Range: " + String.format("%03d",startRange));
+                    startRangeLabel.setText("Start Range: " + String.format(Locale.US, "%03d",startRange));
                     server.setStartRange(startRange);
                }
             }
@@ -275,9 +306,39 @@ public class HostSettingsScreen1 extends Screens implements Screen
                if(startRange > 1)
                { 
                     startRange -= 1;
-                    startRangeLabel.setText("Start Range: " + String.format("%03d",startRange));
+                    startRangeLabel.setText("Start Range: " + String.format(Locale.US, "%03d",startRange));
                     server.setStartRange(startRange);
                }
+            }
+        });
+
+        //Add click listener --> Coin bonus up
+        cubicRangeUp.addListener(new ChangeListener()
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor)
+            {
+                if(startCubicRange < Constants.MAXCUBICRANGE)
+                {
+                    startCubicRange += 1;
+                    cubicRangeLabel.setText("Cubic Range: " + String.format(Locale.US, "%03d",startCubicRange));
+                    server.setStartCubicRange(startCubicRange);
+                }
+            }
+        });
+
+        // Coin bonus down
+        cubicRangeDown.addListener(new ChangeListener()
+        {
+            @Override
+            public void changed (ChangeEvent event, Actor actor)
+            {
+                if(startCubicRange > 1)
+                {
+                    startCubicRange -= 1;
+                    cubicRangeLabel.setText("Cubic Range: " + String.format(Locale.US, "%03d",startCubicRange));
+                    server.setStartCubicRange(startCubicRange);
+                }
             }
         });
 
@@ -291,7 +352,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
                { 
                     startSpeed += 10;
                    
-                    startSpeedLabel.setText("Start Speed: " + String.format("%03d", startSpeed) + "%");
+                    startSpeedLabel.setText("Start Speed: " + String.format(Locale.US, "%03d", startSpeed) + "%");
                     server.setStartSpeed(startSpeed);
                }
             }
@@ -307,7 +368,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
                { 
                     startSpeed -= 10;
 
-                    startSpeedLabel.setText("Start Speed: " + String.format("%03d", startSpeed) + "%");
+                    startSpeedLabel.setText("Start Speed: " + String.format(Locale.US, "%03d", startSpeed) + "%");
                     server.setStartSpeed(startSpeed);
                }
             }
@@ -322,7 +383,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
                if(startBombPlace < Constants.MAXBOMBPLACE)
                { 
                     startBombPlace += 1;
-                    startBombPlaceLabel.setText("Start Bombs: " + String.format("%03d",startBombPlace));
+                    startBombPlaceLabel.setText("Start Bombs: " + String.format(Locale.US, "%03d",startBombPlace));
                     server.setStartBombPlace(startBombPlace);
                }
             }
@@ -337,7 +398,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
                if(startBombPlace > 1)
                {
                     startBombPlace -= 1;
-                    startBombPlaceLabel.setText("Start Bombs: " + String.format("%03d",startBombPlace));
+                    startBombPlaceLabel.setText("Start Bombs: " + String.format(Locale.US, "%03d",startBombPlace));
                     server.setStartBombPlace(startBombPlace);
                }
             }
@@ -360,7 +421,7 @@ public class HostSettingsScreen1 extends Screens implements Screen
                     
                 } catch (InterruptedException ex) 
                 {
-                    
+
                 }
 
                 game.setScreen(new HostScreen(game, client, server));

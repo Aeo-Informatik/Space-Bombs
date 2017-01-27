@@ -154,8 +154,22 @@ public class ClientProcessData
                             }
                         }else
                             System.err.println("ERROR: start range wrong number of parameters");
-                        break;         
-                        
+                        break;
+
+                    case "registerStartCubicRange":
+                        if(parameters.length == 3)
+                        {
+                            //Set start bombs
+                            entityManager.getPlayerManager().getMainPlayer().setCubicRange(Integer.parseInt(parameters[1]));
+
+                            for(EnemyPlayer enemy : entityManager.getPlayerManager().getEnemyArray())
+                            {
+                                enemy.setCubicRange(Integer.parseInt(parameters[1]));
+                            }
+                        }else
+                            System.err.println("ERROR: start cubic range wrong number of parameters");
+                        break;
+
                     /**------------------COIN BONUS------------------**/    
                     //General: "registerCoinBonus|amount|senderId"    
                     case "registerCoinBonus":
