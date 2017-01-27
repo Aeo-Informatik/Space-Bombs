@@ -17,8 +17,7 @@ import gui.map.MapLoader;
  * @author Christian
  */
 public class Tombstone extends Item{
-    
-    public String Discription = "You are dead youre enemy cancollect youre coins";
+
     private int coins;
     private ItemManager itemManager;
     private int playerId;

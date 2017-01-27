@@ -1,5 +1,4 @@
 // Bomb
-- turret welcher spieler anwisiert und Strahlen abschießt
 - nuke welche speziell gekennzeichnete Plätze auslässt
 
 // Extras

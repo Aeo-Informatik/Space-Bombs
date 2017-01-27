@@ -110,6 +110,12 @@ public class HostScreen extends Screens implements Screen
         }else
         {
             int index = maps.searchMapByName(server.getMap());
+
+            if(index == -1)
+            {
+                System.err.println("Map by name + "+ server.getMap() + " not found using default");
+                index = 0;
+            }
             maps.setCurrentMap(index);
             mapImage.background(new TextureRegionDrawable(new TextureRegion(TextureManager.loadTexture(maps.getCurrentMapPreviewPath()))));
         }
