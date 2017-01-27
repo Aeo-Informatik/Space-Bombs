@@ -25,8 +25,8 @@ public class Constants
     public static final String TESTMAPPATH = "maps/Test-Map_(24x24).tmx";
     
     // Controll settings
-    public static final boolean TOUCHPAD = false;
-    public static final boolean TOUCHSCREEN = true;
+    public static final boolean TOUCHPAD = true;
+    public static final boolean TOUCHSCREEN = false;
 
     // Server settings
     public static final int LISTENINGPORT = 13199;

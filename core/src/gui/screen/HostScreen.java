@@ -458,6 +458,9 @@ public class HostScreen extends Screens implements Screen
         {
             ipTextField.setText("ERROR");
             ex.printStackTrace();
+        } catch (NullPointerException e)
+        {
+            ipTextField.setText("No network");
         }
         
         checkCurrentPlayerCompatibility();

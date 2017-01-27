@@ -247,11 +247,6 @@ public abstract class Player extends Entity
             return true;
         }
 
-        if(map.isBombPlaced(new MapCellCoordinates(aim)) || map.isCellBlocked(new MapCellCoordinates(aim)))
-        {
-            return true;
-        }
-
         // Den Abstand von deinem jetzigen Punkt bis zum gravitations punkt berechnen
         float abstandX = Math.abs(aim.getX()) - Math.abs(pos.getX());
         float abstandY = Math.abs(aim.getY()) - Math.abs(pos.getY());
