@@ -290,9 +290,19 @@ public class TextureManager
     //Remote Bomb Animation Player 4
     public static Texture p4RemoteBomb;
     public static Animation p4RemoteBombAnim;
-    
+
+    /*-------------------SPECIAL BLOCKS--------------------*/
+    public static Texture poisonGas;
+    public static Animation poisonGasAnim;
+
     public static void load() 
-    {        
+    {
+
+        /*---------------------------------SPECIAL BLOCKS---------------------------------*/
+        poisonGas = loadTexture("blocks/gas_explosion.png");
+        poisonGasAnim = new Animation(0.3f, new TextureRegion(poisonGas,0,0,32,32));
+
+
         /*---------------------------------GENERAL MENU---------------------------------*/
         menuFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstartk.ttf"));
         menuBackground = loadTexture("menu/menu.png");
